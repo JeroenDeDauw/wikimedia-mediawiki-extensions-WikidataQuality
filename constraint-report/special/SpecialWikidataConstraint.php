@@ -15,76 +15,65 @@ class SpecialWikidataConstraint extends SpecialPage {
 	}
  
 	function execute( $par ) {
-		global $wgRequest;
+		global $wgRequest, $wgOut;
 		$this->setHeaders();
 
 		$out = $this->getContext()->getOutput();
 
-		$out->addWikiMsg( 'wikidataconstraint-summary' );
-        $out->addHTML( '<p>Just enter an entity you want to be checked against the constraint templates.<br/>'
-            . 'Try for example <i>Qxx</i> (John Lennon) and <i>Qxx</i> (Imagine)'
-            . ' and look at the results.</p>'
-        );
-        $out->addHTML( "<form name='ItemIdForm' action='" . $_SERVER['PHP_SELF'] . "' method='post'>" );
-        $out->addHTML( "<input placeholder='Qxx' name='itemId' id='item-input'>" );
-        $out->addHTML( "<input type='submit' value='Cross-check' id='check-item-btn' />" );
-        $out->addHTML( "</form>" );
-        /*$out->addHTML( "<p/>" );
-        $out->addHTML( "<ul id='results-list'></ul>" );
-        $out->addHTML( "<p/>" );
-        $out->addHTML( "<div id='result'></div>" );*/
+		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
 
-        if (isset($_POST['itemId'])) {
-            $id = new ItemId( $_POST['itemId'] );
-            $lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
-            $entity = $lookup->getEntity($id);
-            doStuff()
-        }
+		switch(strtoupper($par[0])) {
+			case 'Q':
+				$entity = $lookup->getEntity(new ItemId($par));
+				break;
+			case 'P':
+				$entity = $lookup->getEntity(new PropertyId($par));
+				break;
+			default:
+				//error case
+				break;
+		}
 
-		
+		$entityStatements = $entity->getStatements();
 
-		function doStuff() {
-			$entityStatements = $entity->getStatements();
+		$dbr = wfGetDB( DB_SLAVE );
 
-			$dbr = wfGetDB( DB_SLAVE );
+		foreach( $entityStatements as $statement ) {
 
-			foreach( $entityStatements as $statement ) {
+			$claim = $statement->getClaim();
 
-				$claim = $statement->getClaim();
+			$propertyId = $claim->getPropertyId();
+			$numericPropertyId = $propertyId->getNumericId();
 
-				$propertyId = $claim->getPropertyId();
-				$numericPropertyId = $propertyId->getNumericId();
+			$dataValue= $claim->getMainSnak()->getDataValue();
 
-				$dataValue= $claim->getMainSnak()->getDataValue();
+			$res = $dbr->select(
+				'constraints_from_templates',							// $table
+				array( 'pid', 'constraint_name', 'min', 'max' ),		// $vars (columns of the table)
+				("pid = $numericPropertyId"),							// $conds
+				__METHOD__,												// $fname = 'Database::select',
+				array( '' )												// $options = array()
+			);
 
-				$res = $dbr->select(
-					'constraints_from_templates',							// $table
-					array( 'pid', 'constraint_name', 'min', 'max' ),		// $vars (columns of the table)
-					("pid = $numericPropertyId"),							// $conds
-					__METHOD__,												// $fname = 'Database::select',
-					array( '' )												// $options = array()
-				);
+			foreach( $res as $row ) {
 
-				foreach( $res as $row ) {
-
-					switch( $row->constraint_name ) {
-						case 'Single value':
-							checkSingleValueConstraint( $propertyId, $dataValue );
-							break;
-						case 'Range':
-							checkRangeConstraint( $propertyId, $dataValue, $row->min, $row->max );
-							break;
-						case 'Symmetric':
-							checkSymmetricConstraint( $propertyId, $dataValue );
-							break;
-						default:
-							//not yet implemented cases, also error case
-							break;
-					}
-
+				switch( $row->constraint_name ) {
+					case 'Single value':
+						checkSingleValueConstraint( $propertyId, $dataValue );
+						break;
+					case 'Range':
+						checkRangeConstraint( $propertyId, $dataValue, $row->min, $row->max );
+						break;
+					case 'Symmetric':
+						checkSymmetricConstraint( $propertyId, $dataValue );
+						break;
+					default:
+						//not yet implemented cases, also error case
+						break;
 				}
 
 			}
+
 		}
 
 		function checkSingleValueConstraint( $propertyId, $dataValue ) {

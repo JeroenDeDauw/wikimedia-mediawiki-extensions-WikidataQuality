@@ -24,7 +24,7 @@ $wgExtensionCredits['specialpage'][] = array(
 $wgMessagesDirs['WikidataQuality'] = __DIR__ . "/i18n"; # Location of localization files (Tell MediaWiki to load them)
 $wgExtensionMessagesFiles['WikidataQualityAlias'] = __DIR__ . '/WikidataQuality.alias.php'; # Location of an aliases file (Tell MediaWiki to load it)
 
-$wgAutoloadClasses['SpecialWikidataConstraint'] = __DIR__ . 'constraint-report/special/SpecialWikidataConstraint.php'; # Location of the SpecialWikidataConstraint class (Tell MediaWiki to load this file)
+$wgAutoloadClasses['SpecialWikidataConstraint'] = __DIR__ . '/constraint-report/special/SpecialWikidataConstraint.php'; # Location of the SpecialWikidataConstraint class (Tell MediaWiki to load this file)
 $wgSpecialPages['WikidataConstraint'] = 'SpecialWikidataConstraint'; # Tell MediaWiki about the new special page and its class name
 global $wgHooks;
 $wgHooks['LoadExtensionSchemaUpdates'][] = 'WikidataQualityHooks::onCreateSchema';
