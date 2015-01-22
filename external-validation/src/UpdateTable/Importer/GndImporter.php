@@ -10,6 +10,7 @@ class GndImporter extends Importer
     const DUMP_URL_FORMAT = "http://datendienst.dnb.de/cgi-bin/mabit.pl?cmd=fetch&userID=GNDxml&pass=gndmarcxml143&mabheft=Tpgesamt%d%dgndmrc.xml.gz";
     const DUMP_FILE_NAME = "gnd.xml.gz";
     const DUMP_DATA_FORMAT = "xml";
+    const DUMP_LANGUAGE = "de";
     const WD_PROPERTY_ID = "227";
     const ENTITY_ID_XPATH = "/RECORD/CONTROLFIELD[@TAG=\"001\"]/text()";
     const BUFFER_SIZE = 4096;
@@ -38,7 +39,7 @@ class GndImporter extends Importer
      */
     function __construct( $importContext )
     {
-        parent::__construct( self::DUMP_FILE_NAME, self::DUMP_DATA_FORMAT, $importContext );
+        parent::__construct( self::DUMP_FILE_NAME, self::DUMP_DATA_FORMAT, self::DUMP_LANGUAGE, $importContext );
 
         // Create XML SAX parser
         $this->parser = xml_parser_create();

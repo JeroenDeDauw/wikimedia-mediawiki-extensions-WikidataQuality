@@ -26,6 +26,12 @@ abstract class Importer
     protected $dumpDataFormat;
 
     /**
+     * Language of the dump for the current database
+     * @var string
+     */
+    protected $dumpLanguage;
+
+    /**
      * @var ImportContext
      */
     protected $importContext;
@@ -34,12 +40,14 @@ abstract class Importer
     /**
      * @param string $dumpFile
      * @param string $dumpDataFormat
+     * @param string $dumpLanguage
      * @param \ImportContext $importContext
      */
-    function __construct( $dumpFileName, $dumpDataFormat, $importContext )
+    function __construct( $dumpFileName, $dumpDataFormat, $dumpLanguage, $importContext )
     {
         $this->dumpFile = __DIR__ . "/../../../dumps/$dumpFileName";
         $this->dumpDataFormat = $dumpDataFormat;
+        $this->dumpLanguage = $dumpLanguage;
         $this->importContext = $importContext;
     }
 
