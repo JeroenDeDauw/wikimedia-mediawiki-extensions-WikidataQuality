@@ -27,5 +27,6 @@ $wgExtensionMessagesFiles['WikidataQualityAlias'] = __DIR__ . '/WikidataQuality.
 $wgAutoloadClasses['SpecialWikidataConstraintReport'] = __DIR__ . '/constraint-report/special/SpecialWikidataConstraintReport.php'; # Location of the SpecialWikidataConstraintReport class (Tell MediaWiki to load this file)
 $wgSpecialPages['WikidataConstraintReport'] = 'SpecialWikidataConstraintReport'; # Tell MediaWiki about the new special page and its class name
 $wgSpecialPageGroups['WikidataConstraintReport'] = 'Wikidata';
+
 global $wgHooks;
 $wgHooks['LoadExtensionSchemaUpdates'][] = 'WikidataQualityHooks::onCreateSchema';
