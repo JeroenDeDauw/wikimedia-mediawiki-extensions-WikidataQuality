@@ -21,19 +21,13 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 		$out = $this->getContext()->getOutput();
 
 		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
-
-		switch(strtoupper($par[0])) {
-			case 'Q':
-				$entity = $lookup->getEntity(new ItemId($par));
-				break;
-			case 'P':
-				$entity = $lookup->getEntity(new PropertyId($par));
-				break;
-			default:
-				//error case
-				break;
+		
+		$entity = entityFromPar($par[0]);
+		if ($entity == -1) {
+			$out->addWikiText("No valid entityID given. Usage: .../Q42 or .../P42");
+			exit(1);
 		}
-
+		
 		$entityStatements = $entity->getStatements();
 
 		$dbr = wfGetDB( DB_SLAVE );
@@ -76,6 +70,17 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 
 		}
 
+		function entityFromPar($parameter){
+			switch(strtoupper($par[0])) {
+			case 'Q':
+				return = $lookup->getEntity(new ItemId($par));
+			case 'P':
+				return $lookup->getEntity(new PropertyId($par));
+			default:
+				return -1;
+			}
+		}
+		
 		function checkSingleValueConstraint( $propertyId, $dataValue ) {
 			//todo
 			/*
@@ -109,11 +114,11 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 				default:
 					//error case
 			}
-			$numericId = $propertyId->getNumericId();
+			
 			if( $value < $min || $value > $max ) {
-				$output .= "\'\'VIOLATION:\'\' The claim {{Property:P$numericId}}: $value violates the {{tl|Range Constraint}}: min $min, max $max\n\n";
+				$output .= "\'\'VIOLATION:\'\' The claim {{Property:$propertyId}}: $value violates the {{tl|Range Constraint}}: min $min, max $max\n\n";
 			} else {
-				$output .= "The claim {{Property:P$numericId}}: $value complies with the {{tl|Range Constraint}}: min $min, max $max\n\n";
+				$output .= "The claim {{Property:$propertyId}}: $value complies with the {{tl|Range Constraint}}: min $min, max $max\n\n";
 			}
 			$out->addWikiText($output);
 		}
