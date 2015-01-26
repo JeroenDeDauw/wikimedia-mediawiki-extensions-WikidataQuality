@@ -18,7 +18,7 @@ $wgExtensionCredits['specialpage'][] = array(
 	'name' => 'WikidataQuality',
 	'author' => 'BP2014N1',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:WikidataQuality',
-	'descriptionmsg' => 'wikidataQuality-desc',
+	'descriptionmsg' => 'WikidataQuality-desc',
 	'version' => '0.0.0',
 );
 
@@ -35,5 +35,6 @@ DEFINE("DUMP_META_TABLE", "wdq_dump_information");
 $wgMessagesDirs['WikidataQuality'] = __DIR__ . "/i18n"; # Location of localization files (Tell MediaWiki to load them)
 $wgExtensionMessagesFiles['WikidataQualityAlias'] = __DIR__ . '/WikidataQuality.alias.php'; # Location of an aliases file (Tell MediaWiki to load it)
 
-$wgAutoloadClasses['SpecialWikidataConstraint'] = __DIR__ . '/constraint-report/special/SpecialWikidataConstraint.php'; # Location of the SpecialWikidataConstraint class (Tell MediaWiki to load this file)
-$wgSpecialPages['WikidataConstraint'] = 'SpecialWikidataConstraint'; # Tell MediaWiki about the new special page and its class name
+$wgAutoloadClasses['SpecialWikidataConstraintReport'] = __DIR__ . '/constraint-report/special/SpecialWikidataConstraintReport.php'; # Location of the SpecialWikidataConstraintReport class (Tell MediaWiki to load this file)
+$wgSpecialPages['WikidataConstraintReport'] = 'SpecialWikidataConstraintReport'; # Tell MediaWiki about the new special page and its class name
+$wgSpecialPageGroups['WikidataConstraintReport'] = 'Wikidata';
