@@ -9,9 +9,9 @@ use Wikibase\Repo\Store;
 use Wikibase\DataModel\Statement;
 use Wikibase\DataModel\Snak;
 
-class SpecialWikidataConstraint extends SpecialPage {
+class SpecialWikidataConstraintReport extends SpecialPage {
 	function __construct() {
-		parent::__construct( 'WikidataConstraint' );
+		parent::__construct( 'WikidataConstraintReport' );
 	}
  
 	function execute( $par ) {
@@ -48,7 +48,7 @@ class SpecialWikidataConstraint extends SpecialPage {
 			$dataValue= $claim->getMainSnak()->getDataValue();
 
 			$res = $dbr->select(
-				'constraints_from_templates',							// $table
+				'wbq_constraints_from_templates',						// $table
 				array( 'pid', 'constraint_name', 'min', 'max' ),		// $vars (columns of the table)
 				("pid = $numericPropertyId"),							// $conds
 				__METHOD__,												// $fname = 'Database::select',
