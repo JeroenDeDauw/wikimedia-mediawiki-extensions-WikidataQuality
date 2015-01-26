@@ -8,4 +8,4 @@ CREATE TABLE IF NOT EXISTS wdq_external_data (
 
 ALTER TABLE wdq_external_data ADD FOREIGN KEY(dump_id) REFERENCES wdq_dump_information(row_id);
 
-CREATE INDEX external_data_pid_entity_id ON wbq_external_data (pid, entity_id);
+CREATE INDEX external_data_pid_external_id ON wdq_external_data (pid, external_id);
