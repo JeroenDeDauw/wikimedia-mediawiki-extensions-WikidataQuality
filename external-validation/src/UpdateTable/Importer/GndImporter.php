@@ -7,10 +7,12 @@ use SimpleXMLElement;
 
 class GndImporter extends Importer
 {
-    const DUMP_URL_FORMAT = "http://datendienst.dnb.de/cgi-bin/mabit.pl?cmd=fetch&userID=GNDxml&pass=gndmarcxml143&mabheft=Tpgesamt%d%dgndmrc.xml.gz";
-    const DUMP_FILE_NAME = "gnd.xml.gz";
+    const DATABASE_NAME = "GND";
     const DUMP_DATA_FORMAT = "xml";
     const DUMP_LANGUAGE = "de";
+    const DUMP_URL_FORMAT = "http://datendienst.dnb.de/cgi-bin/mabit.pl?cmd=fetch&userID=GNDxml&pass=gndmarcxml143&mabheft=Tpgesamt%d%dgndmrc.xml.gz";
+    const DUMP_LICENSE = "CC-0 1.0";
+    const DUMP_FILE_NAME = "gnd.xml.gz";
     const WD_PROPERTY_ID = "227";
     const ENTITY_ID_XPATH = "/RECORD/CONTROLFIELD[@TAG=\"001\"]/text()";
     const BUFFER_SIZE = 4096;
@@ -63,18 +65,27 @@ class GndImporter extends Importer
     function import()
     {
         // Download dump
-        $this->downloadDump( $this->buildDumpUrl() );
+        $dumpUrl = $this->buildDumpUrl();
+        $this->downloadDump( $dumpUrl );
+
 
         // Connect to database and delete old entried
         $db = $this->establishDbConnection();
+
+        // Insert meta information
+        $dumpSize = filesize( $this->dumpFile );
+        $this->insertMetaInformation( $db, self::DATABASE_NAME, self::DUMP_DATA_FORMAT, self::DUMP_LANGUAGE, $dumpUrl, $dumpSize, self::DUMP_LICENSE);
+        $dumpId = $this->getDumpId( $db, self::DATABASE_NAME );
+
+        // Delete old entries
         $this->deleteOldDatabaseEntries( $db, self::WD_PROPERTY_ID );
 
         // Parse dump and insert entities
         xml_set_element_handler(
             $this->parser,
             "startElement",
-            function ( $parser, $name ) use ( $db ) {
-                $this->endElement( $db, $name );
+            function ( $parser, $name ) use ( $db, $dumpId ) {
+                $this->endElement( $db, $dumpId, $name );
             }
         );
         xml_set_character_data_handler( $this->parser, "characterData" );
@@ -147,11 +158,11 @@ class GndImporter extends Importer
      * @param \DatabaseBase $db - database connection, that should be used to insert element
      * @param string $name - name of the ending element
      */
-    private function endElement( $db, $name )
+    private function endElement( $db, $dumpId, $name )
     {
         $this->tempRecord .= "</$name>";
         if ( $name == "RECORD" ) {
-            $this->insertEntity( $db, self::WD_PROPERTY_ID, $this->getEntityId( $this->tempRecord ), $this->tempRecord );
+            $this->insertEntity( $db, $dumpId, self::WD_PROPERTY_ID, $this->getEntityId( $this->tempRecord ), $this->tempRecord );
             $this->numberOfImportedEntites++;
             if ( !$this->importContext->isQuiet() ) {
                 print "\r\033[K";

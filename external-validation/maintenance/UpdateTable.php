@@ -14,11 +14,6 @@ require_once $basePath . "/maintenance/Maintenance.php";
 class UpdateTable extends Maintenance
 {
     /**
-     * Name of the database table used for external data
-     */
-    const TABLE_NAME = "wbq_external_data";
-
-    /**
      * @var array - array of importers to run
      */
     private $importers = array( 'WikidataQuality\ExternalValidation\UpdateTable\Importer\GndImporter' );
@@ -39,7 +34,7 @@ class UpdateTable extends Maintenance
         $loadBalancer = wfGetLB();
 
         // Run each selected importer
-        $context = new ImportContext( $loadBalancer, self::TABLE_NAME, $this->mBatchSize, $this->isQuiet() );
+        $context = new ImportContext( $loadBalancer, DUMP_DATA_TABLE, DUMP_META_TABLE, $this->mBatchSize, $this->isQuiet() );
         foreach ( $this->importers as $class ) {
             $namespaceExp = explode( '\\', $class );
             $className = array_pop( $namespaceExp );

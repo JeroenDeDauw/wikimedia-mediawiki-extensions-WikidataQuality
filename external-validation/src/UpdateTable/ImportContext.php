@@ -21,6 +21,12 @@ class ImportContext
     private $targetTableName = "";
 
     /**
+     * table name of the table with dump meta information
+     * @var string
+     */
+    private $metaTableName = "";
+
+    /**
      * @var LoadBalancer
      */
     private $loadBalancer = null;
@@ -37,14 +43,16 @@ class ImportContext
 
     /**
      * @param LoadBalancer $loadBalancer
-     * @param string $tableName
+     * @param string $targetTableName
+     * @param string $metaTableName
      * @param int $batchSize
      * @param boolean $quiet
      */
-    function __construct( $loadBalancer, $tableName, $batchSize, $quiet )
+    function __construct( $loadBalancer, $targetTableName, $metaTableName, $batchSize, $quiet )
     {
         $this->setLoadBalancer( $loadBalancer );
-        $this->setTargetTableName( $tableName );
+        $this->setTargetTableName( $targetTableName );
+        $this->setMetaTableName( $metaTableName );
         $this->setBatchSize( $batchSize );
         $this->setQuiet( $quiet );
     }
@@ -79,6 +87,22 @@ class ImportContext
     public function setTargetTableName( $tableName )
     {
         $this->targetTableName = $tableName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMetaTableName()
+    {
+        return $this->metaTableName;
+    }
+
+    /**
+     * @param string $tableName
+     */
+    public function setMetaTableName( $tableName )
+    {
+        $this->metaTableName = $tableName;
     }
 
     /**

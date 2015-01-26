@@ -179,14 +179,69 @@ abstract class Importer
     }
 
     /**
-     * @param \DatabaseBase $db - database in which data object should be inserted
-     * @param int $pid - property id of the external identifier
-     * @param string $entityId - external identifier
-     * @param string $entityData - external entity for the identifier
+     * Inserts given meta information of the current dump
+     * @param \DatabaseBase $db
+     * @param string $name
+     * @param string $format
+     * @param string $language
+     * @param string $source
+     * @param int $size
+     * @param string $license
      */
-    protected function insertEntity( $db, $pid, $entityId, $entityData )
+    protected function insertMetaInformation( $db, $name, $format, $language, $source, $size, $license ) {
+        $accumulator = array(
+            "name" => $name,
+            "date" => null,
+            "format" => $format,
+            "language" => $language,
+            "source" => $source,
+            "size" => $size,
+            "license" => $license
+        );
+
+        $db->commit( __METHOD__, "flush" );
+        wfWaitForSlaves();
+
+        $rowCount = $db->selectRowCount( $this->importContext->getMetaTableName(), "*", "name=\"$name\"" );
+        if ( $rowCount == 0 ) {
+            $db->insert( $this->importContext->getMetaTableName(), $accumulator );
+        }
+        else {
+            $db->update( $this->importContext->getMetaTableName(), $accumulator, array( "name=\"$name\"" ) );
+        }
+    }
+
+    /**
+     * Get id of the dump
+     * @param \DatabaseBase $db
+     * @param string $name
+     * @return bool
+     */
+    protected function getDumpId( $db, $name ) {
+        $result = $db->selectRow( $this->importContext->getMetaTableName(), "row_id", "name=\"$name\"" );
+        if ( $result == false ) {
+            return false;
+        }
+        else {
+            return $result->row_id;
+        }
+    }
+
+    /**
+     * @param \DatabaseBase $db - database in which data object should be inserted
+     * @param string $dumpId - dump id
+     * @param int $pid - property id of the external identifier
+     * @param string $externalId - external identifier
+     * @param string $externalData - external entity for the identifier
+     */
+    protected function insertEntity( $db, $dumpId, $pid, $externalId, $externalData )
     {
-        $accumulator = array( "pid" => $pid, "entity_id" => $entityId, "entity_format" => $this->dumpDataFormat, "entity_data" => $entityData );
+        $accumulator = array(
+            "dump_id" => $dumpId,
+            "pid" => $pid,
+            "external_id" => $externalId,
+            "external_data" => $externalData
+        );
 
         $db->commit( __METHOD__, "flush" );
         wfWaitForSlaves();

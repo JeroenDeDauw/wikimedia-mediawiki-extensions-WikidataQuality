@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS wdq_dump_information (
+  row_id     BIGINT UNSIGNED  NOT NULL,
+  name       VARBINARY(50)    NOT NULL,
+  date       TIMESTAMP        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  format     VARBINARY(30)    NOT NULL,
+  language   VARBINARY(10)    NOT NULL,
+  source     VARBINARY(300)   NOT NULL,
+  size       INT UNSIGNED     NOT NULL,
+  license    VARBINARY(30)    NOT NULL
+);

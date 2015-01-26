@@ -8,6 +8,7 @@ EOT;
 	exit( 1 );
 }
 
+// Enable autoload
 if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 	require_once __DIR__ . '/vendor/autoload.php';
 }
@@ -20,11 +21,19 @@ $wgExtensionCredits['specialpage'][] = array(
 	'descriptionmsg' => 'wikidataQuality-desc',
 	'version' => '0.0.0',
 );
- 
+
+// Initalize hooks for creating database tables
+require_once( __DIR__ . '/WikidataQualityHooks.php' );
+global $wgHooks;
+$wgHooks['LoadExtensionSchemaUpdates'][] = 'WikidataQualityHooks::onCreateSchema';
+
+// Define database table names
+DEFINE("DUMP_DATA_TABLE", "wdq_external_data");
+DEFINE("DUMP_META_TABLE", "wdq_dump_information");
+
+// Initialize special pages
 $wgMessagesDirs['WikidataQuality'] = __DIR__ . "/i18n"; # Location of localization files (Tell MediaWiki to load them)
 $wgExtensionMessagesFiles['WikidataQualityAlias'] = __DIR__ . '/WikidataQuality.alias.php'; # Location of an aliases file (Tell MediaWiki to load it)
 
 $wgAutoloadClasses['SpecialWikidataConstraint'] = __DIR__ . '/constraint-report/special/SpecialWikidataConstraint.php'; # Location of the SpecialWikidataConstraint class (Tell MediaWiki to load this file)
 $wgSpecialPages['WikidataConstraint'] = 'SpecialWikidataConstraint'; # Tell MediaWiki about the new special page and its class name
-global $wgHooks;
-$wgHooks['LoadExtensionSchemaUpdates'][] = 'WikidataQualityHooks::onCreateSchema';
