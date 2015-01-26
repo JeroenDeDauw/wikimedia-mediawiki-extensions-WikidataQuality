@@ -96,7 +96,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 	function entityFromPar($parameter){
 			switch(strtoupper($par[0])) {
 			case 'Q':
-				return = $lookup->getEntity(new ItemId($par));
+				return $lookup->getEntity(new ItemId($par));
 			case 'P':
 				return $lookup->getEntity(new PropertyId($par));
 			default:
