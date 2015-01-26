@@ -18,6 +18,7 @@
     "files" : [
     ],
     "classmap": [
+      "WikidataQualityHooks.php",
       "external-validation/maintenance/UpdateTable.php"
     ]
   }

@@ -23,7 +23,6 @@ $wgExtensionCredits['specialpage'][] = array(
 );
 
 // Initalize hooks for creating database tables
-require_once( __DIR__ . '/WikidataQualityHooks.php' );
 global $wgHooks;
 $wgHooks['LoadExtensionSchemaUpdates'][] = 'WikidataQualityHooks::onCreateSchema';
 
