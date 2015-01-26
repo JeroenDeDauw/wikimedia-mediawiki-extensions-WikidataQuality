@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS wbq_external_data (
+CREATE TABLE IF NOT EXISTS wdq_external_data (
   row_id            BIGINT UNSIGNED  NOT NULL PRIMARY KEY AUTO_INCREMENT,
   dump_id           BIGINT UNSIGNED  NOT NULL,
   pid               INT unsigned     NOT NULL,
