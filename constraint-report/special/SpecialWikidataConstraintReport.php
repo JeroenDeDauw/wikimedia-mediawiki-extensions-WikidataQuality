@@ -55,8 +55,8 @@ class SpecialWikidataConstraintReport extends SpecialPage {
         $out->addHTML( "<input type='submit' value='Check' />" );
         $out->addHTML( "</form><br/><br/>" );
 		
-		if (!isset($_POST['entityId'])) {
-			exit();
+		if (!isset($_POST['entityID'])) {
+			exit(0);
 		}
 		
 		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
@@ -81,11 +81,11 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 			$dataValue = $claim->getMainSnak()->getDataValue();
 
 			$res = $dbr->select(
-				'wbq_constraints_from_templates',                        // $table
+				'wbq_constraints_from_templates',                     // $table
 				array('pid', 'constraint_name', 'min', 'max'),        // $vars (columns of the table)
-				("pid = $numericPropertyId"),                            // $conds
-				__METHOD__,                                                // $fname = 'Database::select',
-				array('')                                                // $options = array()
+				("pid = $numericPropertyId"),                         // $conds
+				__METHOD__,                                           // $fname = 'Database::select',
+				array('')                                             // $options = array()
 			);
 
 			foreach ($res as $row) {
