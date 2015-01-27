@@ -23,7 +23,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 
 		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
 		
-		$entity = $this->entityFromPar($par[0]);
+		$entity = $this->entityFromPar($par);
 		if ($entity == -1) {
 			$out->addWikiText("No valid entityID given. Usage: .../Q42 or .../P42");
 			exit(1);
@@ -76,7 +76,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 	function entityFromPar($parameter) {
 		global $lookup;
 
-		switch(strtoupper($parameter)) {
+		switch(strtoupper($parameter[0])) {
 		case 'Q':
 			return $lookup->getEntity(new ItemId($parameter));
 		case 'P':
