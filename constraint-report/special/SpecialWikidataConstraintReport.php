@@ -45,11 +45,25 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 
 		$out = $this->getContext()->getOutput();
 
+		// Show form
+		$out->addHTML( '<p>Enter an item id or an entity id and let it check against constraints.<br/>'
+            . 'Try for example <i>Qxx</i> (XYZ) or <i>Pyy</i> (ABC)'
+            . ' and look at the results.</p>'
+        );
+        $out->addHTML( "<form name='ItemIdForm' action='" . $_SERVER['PHP_SELF'] . "' method='post'>" );
+        $out->addHTML( "<input placeholder='Qxx/Pxx' name='entityID' id='entity-input'>" );
+        $out->addHTML( "<input type='submit' value='Check' />" );
+        $out->addHTML( "</form><br/><br/>" );
+		
+		if (!isset($_POST['entityId'])) {
+			exit();
+		}
+		
 		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
 		
 		$entity = $this->entityFromPar($par);
 		if ($entity == -1) {
-			$out->addWikiText("No valid entityID given. Usage: .../Q42 or .../P42");
+			$out->addWikiText("No valid entityID given. Usage: .../Q42 or .../P42\n\n");
 			exit(1);
 		}
 		
@@ -88,6 +102,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 						break;
 					default:
 						//not yet implemented cases, also error case
+						$out->addWikiText("The claim {{Property:$propertyId}}: $dataValue has a {{tl|$row->constraint_name}}, but there is no check implemented yet.\n\n");
 						break;
 				}
 
