@@ -45,7 +45,7 @@ abstract class Importer
      */
     function __construct( $dumpFileName, $dumpDataFormat, $dumpLanguage, $importContext )
     {
-        $this->dumpFile = __DIR__ . "/../../../dumps/$dumpFileName";
+        $this->dumpFile = join(DIRECTORY_SEPARATOR, array( __DIR__, "..", "..", "..", "dumps", $dumpFileName ) );
         $this->dumpDataFormat = $dumpDataFormat;
         $this->dumpLanguage = $dumpLanguage;
         $this->importContext = $importContext;
