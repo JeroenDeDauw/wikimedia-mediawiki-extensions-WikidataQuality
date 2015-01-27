@@ -12,7 +12,8 @@ EOT;
 if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 	require_once __DIR__ . '/vendor/autoload.php';
 }
- 
+
+// Set credits
 $wgExtensionCredits['specialpage'][] = array(
 	'path' => __FILE__,
 	'name' => 'WikidataQuality',
@@ -22,18 +23,22 @@ $wgExtensionCredits['specialpage'][] = array(
 	'version' => '0.0.0',
 );
 
+// Initialize localization and aliases
+$wgMessagesDirs['WikidataQuality'] = __DIR__ . "/i18n";
+$wgExtensionMessagesFiles['WikidataQuality'] = __DIR__ . "/WikidataQuality.i18n.php";
+$wgExtensionMessagesFiles['WikidataQualityAlias'] = __DIR__ . '/WikidataQuality.alias.php';
+
 // Initalize hooks for creating database tables
 global $wgHooks;
 $wgHooks['LoadExtensionSchemaUpdates'][] = 'WikidataQualityHooks::onCreateSchema';
 
+// Initialize special pages
+$wgAutoloadClasses['SpecialWikidataConstraintReport'] = __DIR__ . '/constraint-report/special/SpecialWikidataConstraintReport.php';
+$wgSpecialPages['ConstraintReport'] = 'SpecialWikidataConstraintReport';
+
+$wgAutoloadClasses['SpecialCrossCheck'] = __DIR__ . '/external-validation/specials/SpecialCrossCheck.php';
+$wgSpecialPages['CrossCheck'] = 'SpecialCrossCheck';
+
 // Define database table names
 DEFINE("DUMP_DATA_TABLE", "wdq_external_data");
 DEFINE("DUMP_META_TABLE", "wdq_dump_information");
-
-// Initialize special pages
-$wgMessagesDirs['WikidataQuality'] = __DIR__ . "/i18n"; # Location of localization files (Tell MediaWiki to load them)
-$wgExtensionMessagesFiles['WikidataQualityAlias'] = __DIR__ . '/WikidataQuality.alias.php'; # Location of an aliases file (Tell MediaWiki to load it)
-
-$wgAutoloadClasses['SpecialWikidataConstraintReport'] = __DIR__ . '/constraint-report/special/SpecialWikidataConstraintReport.php'; # Location of the SpecialWikidataConstraintReport class (Tell MediaWiki to load this file)
-$wgSpecialPages['WikidataConstraintReport'] = 'SpecialWikidataConstraintReport'; # Tell MediaWiki about the new special page and its class name
-$wgSpecialPageGroups['WikidataConstraintReport'] = 'Wikidata';

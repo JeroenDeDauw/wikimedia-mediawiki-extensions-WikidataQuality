@@ -12,9 +12,33 @@ use Wikibase\DataModel\Snak;
 class SpecialWikidataConstraintReport extends SpecialPage {
 
 	function __construct() {
-		parent::__construct( 'WikidataConstraintReport' );
+		parent::__construct( 'ConstraintReport' );
 	}
- 
+
+	/**
+	 * @see SpecialPage::getGroupName
+	 *
+	 * @return string
+	 */
+	function getGroupName() {
+		return "wikidataquality";
+	}
+
+	/**
+	 * @see SpecialPage::getDescription
+	 *
+	 * @return string
+	 */
+	public function getDescription() {
+		return $this->msg( 'special-constraintreport' )->text();
+	}
+
+
+	/**
+	 * @see SpecialPage::execute
+	 *
+	 * @param string|null $par
+	 */
 	function execute( $par ) {
 		global $wgRequest, $wgOut;
 		$this->setHeaders();

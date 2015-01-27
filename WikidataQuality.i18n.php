@@ -11,14 +11,13 @@ $messages = array();
  * @author 'BP2014N1'
  */
 $messages['en'] = array(
-    'wikidataquality' => 'WikidataQuality', // Ignore
-    'wikidataquality-desc' => "Extension's description",
-    'specialpages-group-wikidataquality' => 'WikidataQuality'
+    "wikidataquality" => "WikidataQuality",
+    "wikidataquality-desc" => "Extension's description"
 );
 
 /** Message documentation
  * @author <your username>
  */
 $messages['qqq'] = array(
-    'wikidataquality-desc' => "{{desc}}",
+    "wikidataquality-desc" => "{{desc}}",
 );
