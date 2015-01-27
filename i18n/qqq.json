@@ -1,12 +1,8 @@
 {
     "@metadata": {
-        "authors": [
-        	"Andreas Burmeister",
-            "Jonas Keutel",
-            "Sören Oldag",
-            "Dominic Sauer",
-            "Dimitri Schmidt",
-            "Tamara Slosarek"
-        ]
-    }
+        "authors": "BP2014N1"
+    },
+    "specialpages-group-wikidataquality": "{{doc-special-group|that=are related to the WikidataQuality extension}}",
+    "special-constraintreport": "{{doc-special|ConstraintReport}}\nTitle of the special page.",
+    "special-crosscheck": "{{doc-special|CrossCheck}}\nTitle of the special page."
 }

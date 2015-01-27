@@ -3,7 +3,6 @@
 namespace WikidataQuality\ExternalValidation\Maintenance;
 
 use Maintenance;
-use LoadBalancer;
 use WikidataQuality\ExternalValidation\UpdateTable\ImportContext;
 
 
@@ -14,7 +13,8 @@ require_once $basePath . "/maintenance/Maintenance.php";
 class UpdateTable extends Maintenance
 {
     /**
-     * @var array - array of importers to run
+     * Array of importers to run
+     * @var array
      */
     private $importers = array( 'WikidataQuality\ExternalValidation\UpdateTable\Importer\GndImporter' );
 
