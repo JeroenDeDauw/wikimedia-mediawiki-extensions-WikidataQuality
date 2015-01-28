@@ -49,7 +49,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 
 		// Show form
 		$out->addHTML( '<p>Enter an item id or an property id and let it check against constraints.<br/>'
-            . 'Try for example <i>Qxx</i> (XYZ) or <i>Pyy</i> (ABC)'
+            . 'Try for example <i>Q46</i> (Europe) or <i>Pxx</i> (XYZ)'
             . ' and look at the results.</p>'
         );
         $out->addHTML( "<form name='ItemIdForm' action='" . $_SERVER['PHP_SELF'] . "' method='post'>" );
@@ -63,8 +63,8 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 		}
 
 		$entity = $this->entityFromPar($_POST['entityID']);
-		if ($entity == -1) {
-			$out->addWikiText("No valid entityID given. Usage: .../Q42 or .../P42\n\n");//todo
+		if ($entity == null) {
+			$out->addWikiText("No valid entityID given or entity does not exist: " . $_POST['entityID'] . "\n");
 			return;
 		}
 		
@@ -103,7 +103,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 						break;
 					default:
 						//not yet implemented cases, also error case
-						$out->addWikiText("The claim {{Property:$propertyId}}: $dataValue has a {{tl|$row->constraint_name}}, but there is no check implemented yet.\n\n");
+						$out->addWikiText("Property " . $propertyId . " has a " . $row->constraint_name . " Constraint , but there is no check implemented yet. :(\n");
 						break;
 				}
 
@@ -121,7 +121,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 		case 'P':
 			return $lookup->getEntity(new PropertyId($parameter));
 		default:
-			return -1;
+			return null;
 		}
 	}
 		
@@ -141,7 +141,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 		 * cast min and max to int? why are they stored as varchar(255) anyway?
 		 * what dataValue is it? decimalValue, numberValue, quantityValue?
 		 */
-		global $out;
+		//global $out;
 		$output = '';
 
 		$dataValueType = $dataValue->getValue()->getType();
@@ -160,10 +160,11 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 		}
 
 		if( $value < $min || $value > $max ) {
-			$output .= "\'\'VIOLATION:\'\' The claim {{Property:$propertyId}}: $value violates the {{tl|Range Constraint}}: min $min, max $max\n\n";
+			$output .= "'''VIOLATION:''' The Claim (Property " . $propertyId . ": " . $value . ") violates the Range Constraint (min " . $min . ", max " . $max . ").\n";
 		} else {
-			$output .= "The claim {{Property:$propertyId}}: $value complies with the {{tl|Range Constraint}}: min $min, max $max\n\n";
+			$output .= "''The Claim (Property " . $propertyId . ": " . $value . ") complies with the Range Constraint (min " . $min . ", max " . $max . ").''\n";
 		}
+		$out = $this->getContext()->getOutput();
 		$out->addWikiText($output);
 	}
 
