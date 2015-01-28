@@ -49,25 +49,26 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 		$out = $this->getContext()->getOutput();
 
 		// Show form
-		$out->addHTML( '<p>Enter an item id or an entity id and let it check against constraints.<br/>'
+		$out->addHTML( '<p>Enter an item id or an property id and let it check against constraints.<br/>'
             . 'Try for example <i>Qxx</i> (XYZ) or <i>Pyy</i> (ABC)'
             . ' and look at the results.</p>'
         );
         $out->addHTML( "<form name='ItemIdForm' action='" . $_SERVER['PHP_SELF'] . "' method='post'>" );
         $out->addHTML( "<input placeholder='Qxx/Pxx' name='entityID' id='entity-input'>" );
-        $out->addHTML( "<input type='submit' value='Check' />" );
-        $out->addHTML( "</form><br/><br/>" );
-		
+		$out->addHTML( "<input type='submit' value='Check' />" );
+		$out->addHTML( "</form><br/><br/>" );
+
 		if (!isset($_POST['entityID'])) {
-			exit(0);
+			//exit(0);
+			return;
 		}
-		
+
 		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
-		
-		$entity = $this->entityFromPar($par);
+
+		$entity = $this->entityFromPar($_POST['entityID']);
 		if ($entity == -1) {
-			$out->addWikiText("No valid entityID given. Usage: .../Q42 or .../P42\n\n");
-			exit(1);
+			$out->addWikiText("No valid entityID given. Usage: .../Q42 or .../P42\n\n");//todo
+			return;
 		}
 		
 		$entityStatements = $entity->getStatements();
