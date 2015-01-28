@@ -3,6 +3,12 @@
         "authors": "BP2014N1"
     },
     "specialpages-group-wikidataquality": "WikidataQuality",
+
     "special-constraintreport": "Constraint Report",
-    "special-crosscheck": "Cross-Check with external databases"
+
+    "special-crosscheck": "Cross-Check with external databases",
+    "special-crosscheck-instructions": "Just enter an entity and let it cross-check against GND.",
+    "special-crosscheck-instructions-example": "Try for example Q76 (Barack Obama) and look at the results.",
+    "special-crosscheck-form-itemid-placeholder": "Qxx",
+    "special-crosscheck-form-submit-label": "Cross-Check"
 }
