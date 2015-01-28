@@ -45,7 +45,6 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 	function execute( $par ) {
 		global $wgRequest, $wgOut;
 		$this->setHeaders();
-
 		$out = $this->getContext()->getOutput();
 
 		// Show form
@@ -62,8 +61,6 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 			//exit(0);
 			return;
 		}
-
-		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
 
 		$entity = $this->entityFromPar($_POST['entityID']);
 		if ($entity == -1) {
@@ -117,8 +114,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 	}
 	
 	function entityFromPar($parameter) {
-		global $lookup;
-
+		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
 		switch(strtoupper($parameter[0])) {
 		case 'Q':
 			return $lookup->getEntity(new ItemId($parameter));
