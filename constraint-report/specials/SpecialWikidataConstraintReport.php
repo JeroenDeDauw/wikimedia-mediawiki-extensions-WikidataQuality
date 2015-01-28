@@ -1,5 +1,8 @@
 <?php
 
+namespace WikidataQuality\ConstraintReport\Specials;
+
+use SpecialPage;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;

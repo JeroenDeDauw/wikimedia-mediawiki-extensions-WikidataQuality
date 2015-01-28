@@ -1,5 +1,9 @@
 <?php
 
+namespace WikidataQuality\ExternalValidation\Specials;
+
+use SpecialPage;
+
 class SpecialCrossCheck extends SpecialPage
 {
     function __construct()

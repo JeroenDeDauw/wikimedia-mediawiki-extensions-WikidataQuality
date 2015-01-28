@@ -33,11 +33,8 @@ global $wgHooks;
 $wgHooks['LoadExtensionSchemaUpdates'][] = 'WikidataQualityHooks::onCreateSchema';
 
 // Initialize special pages
-$wgAutoloadClasses['SpecialWikidataConstraintReport'] = __DIR__ . '/constraint-report/special/SpecialWikidataConstraintReport.php';
-$wgSpecialPages['ConstraintReport'] = 'SpecialWikidataConstraintReport';
-
-$wgAutoloadClasses['SpecialCrossCheck'] = __DIR__ . '/external-validation/specials/SpecialCrossCheck.php';
-$wgSpecialPages['CrossCheck'] = 'SpecialCrossCheck';
+$wgSpecialPages['ConstraintReport'] = 'WikidataQuality\ConstraintReport\Specials\SpecialWikidataConstraintReport';
+$wgSpecialPages['CrossCheck'] = 'WikidataQuality\ExternalValidation\Specials\SpecialCrossCheck';
 
 // Define database table names
 DEFINE("DUMP_DATA_TABLE", "wdq_external_data");

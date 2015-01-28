@@ -4,7 +4,11 @@
   "description": "Extension for Wikibase to improve the data quality.",
   "homepage": "https://github.com/WikidataQuality/WikidataQuality/",
   "license": "GPL-2.0+",
-  "authors": [ ],
+  "authors": [
+    {
+      "name": "BP2014N1"
+    }
+  ],
   "support": {
     "issues": "https://github.com/WikidataQuality/WikidataQuality/issues"
   },
@@ -13,7 +17,10 @@
   },
   "autoload": {
     "psr-4": {
-      "WikidataQuality\\ExternalValidation\\": "external-validation/src/"
+      "WikidataQuality\\ConstraintReport\\": "constraint-report/src/",
+      "WikidataQuality\\ConstraintReport\\Specials\\": "constraint-report/specials/",
+      "WikidataQuality\\ExternalValidation\\": "external-validation/src/",
+      "WikidataQuality\\ExternalValidation\\Specials\\": "external-validation/specials/"
     },
     "files" : [
     ],
