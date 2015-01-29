@@ -87,8 +87,16 @@ abstract class Importer
      */
     protected function downloadDump( $dumpUrl )
     {
+        // Create directory, if needed
+        $dirName = dirname( $this->dumpFile );
+        if( !is_dir( $dirName ) ) {
+            mkdir( $dirName );
+        }
+
+        // Create file
         $targetFile = fopen( $this->dumpFile, "wb" );
 
+        // Start curl for downloading
         $curlSession = curl_init( $dumpUrl );
         curl_setopt( $curlSession, CURLOPT_RETURNTRANSFER, true );
         curl_setopt( $curlSession, CURLOPT_FILE, $targetFile );
@@ -97,18 +105,6 @@ abstract class Importer
             curl_setopt( $curlSession, CURLOPT_PROGRESSFUNCTION, array( $this, "downloadProgressCallback" ) );
         }
         curl_exec( $curlSession );
-        /*$sourceFile = fopen( $dumpUrl, "rb" );
-        $buffer = 1024 * 8;
-        while( !feof( $sourceFile ) ) {
-            fwrite( $targetFile, fread( $sourceFile, $buffer ), $buffer );
-            if( !$this->importContext->isQuiet() ) {
-                $this->downloadProgressCallback( null, null, ftell( $sourceFile ), null, null );
-            }
-        }
-        if( !$this->importContext->isQuiet() ) {
-            print "\n";
-        }
-        fclose( $sourceFile );*/
 
         if( !$this->importContext->isQuiet() ) {
             print "\n";
