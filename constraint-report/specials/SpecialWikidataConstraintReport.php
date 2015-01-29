@@ -53,12 +53,12 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 		$out->addHTML( "<input type='submit' value='Check' />" );
 		$out->addHTML( "</form><br /><br />" );
 
-		if (!isset($_POST['entityID'])) {
+		if( !isset($_POST['entityID']) ) {
 			return;
 		}
 
 		$entity = $this->entityFromPar($_POST['entityID']);
-		if ($entity == null) {
+		if( $entity == null ) {
 			$out->addWikiText("No valid entityID given or entity does not exist: " . $_POST['entityID'] . "\n");
 			return;
 		}
@@ -66,6 +66,15 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 		$out->addHTML( '<h2>Constraint report for ' . $entity->getType() . ' ' . $entity->getId() . ' (' . $entity->getLabel('en') . '):</h2><br />');
 
 		$entityStatements = $entity->getStatements();
+		$entityStatementsArray = $entityStatements->toArray();
+		$propertyCount = array();
+		foreach( $entityStatementsArray as $entityStatement ) {
+			if( array_key_exists($entityStatement->getPropertyId()->getNumericId(), $propertyCount) ) {
+				$propertyCount[$entityStatement->getPropertyId()->getNumericId()]++;
+			} else {
+				$propertyCount[$entityStatement->getPropertyId()->getNumericId()] = 0;
+			}
+		}
 
 		$dbr = wfGetDB( DB_SLAVE );
 
@@ -86,14 +95,20 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 				array('')														// $options = array()
 			);
 
-			foreach ($res as $row) {
+			foreach( $res as $row ) {
 
-				switch ($row->constraint_name) {
+				switch( $row->constraint_name ) {
+					case 'Multi value':
+						$this->checkMultiValueConstraint($propertyId, $propertyCount);
+						break;
 					case 'One of':
 						$this->checkOneOfConstraint($propertyId, $dataValue, $row->values_);
 						break;
 					case 'Range':
 						$this->checkRangeConstraint($propertyId, $dataValue, $row->min, $row->max);
+						break;
+					case 'Single value':
+						$this->checkSingleValueConstraint($propertyId, $propertyCount);
 						break;
 					default:
 						//not yet implemented cases, also error case
@@ -120,6 +135,20 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 		}
 	}
 
+	function checkMultiValueConstraint( $propertyId, $propertyCount ) {
+		$output = '';
+
+		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
+		if( $propertyCount[$propertyId->getNumericId()] <= 1 ) {
+			$output .= "'''VIOLATION:''' ''The Claim using Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") violates the Multi value Constraint.''\n";
+		} else {
+			$output .= "''The Claim using Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") complies with the Multi value Constraint.''\n";
+		}
+
+		$out = $this->getContext()->getOutput();
+		$out->addWikiText($output);
+	}
+
 	function checkOneOfConstraint( $propertyId ,$dataValue, $values ) {
 		$output = '';
 
@@ -135,25 +164,22 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 				//error case
 		}
 
-		$allowedValues = explode(", ", $values);
-		$toReplace = array("{", "}", "|", "[", "]");
+		$toReplace = array("{", "}", "|", "[", "]", " ");
+		$allowedValues = explode(",", str_replace($toReplace,"",$values));
 
 		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
 
 		$valueFound = false;
-		foreach ($allowedValues as $value) {
-			$allowedValues[$value] = str_replace($toReplace,"",$value);
-
+		foreach( $allowedValues as $value ) {
 			if( in_array($value,$allowedValues) ) {
 				$output .= "''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] complies with the One of Constraint [values " . $values . "].''\n";
 				$valueFound = true;
 				break;
 			}
+		}
 
-			if ( !$valueFound ) {
-				$output .= "'''VIOLATION:''' ''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] violates the One of Constraint [values " . $values . "].''\n";
-			}
-
+		if( !$valueFound ) {
+			$output .= "'''VIOLATION:''' ''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] violates the One of Constraint [values " . $values . "].''\n";
 		}
 
 		$out = $this->getContext()->getOutput();
@@ -182,6 +208,20 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 			$output .= "'''VIOLATION:''' ''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] violates the Range Constraint [min " . $min . ", max " . $max . "].''\n";
 		} else {
 			$output .= "''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] complies with the Range Constraint [min " . $min . ", max " . $max . "].''\n";
+		}
+
+		$out = $this->getContext()->getOutput();
+		$out->addWikiText($output);
+	}
+
+	function checkSingleValueConstraint( $propertyId, $propertyCount ) {
+		$output = '';
+
+		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
+		if( $propertyCount[$propertyId->getNumericId()] > 1 ) {
+			$output .= "'''VIOLATION:''' ''The Claim using Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") violates the Single value Constraint.''\n";
+		} else {
+			$output .= "''The Claim using Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") complies with the Single value Constraint.''\n";
 		}
 
 		$out = $this->getContext()->getOutput();
