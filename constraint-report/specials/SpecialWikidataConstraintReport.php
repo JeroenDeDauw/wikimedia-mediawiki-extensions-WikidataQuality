@@ -178,7 +178,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 		foreach( $allowedValues as $value ) {
 			if( in_array($value,$allowedValues) ) {
 				$out->addHTML("<div style='color: green'>");
-				$output .= "''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] complies with the One of Constraint [values " . $values . "].''\n";
+				$output .= "''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] complies with the One of Constraint [values " . "].''\n";
 				$valueFound = true;
 				break;
 			}
@@ -186,7 +186,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 
 		if( !$valueFound ) {
 			$out->addHTML("<div style='color: red'>");
-			$output .= "'''VIOLATION:''' ''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] violates the One of Constraint [values " . $values . "].''\n";
+			$output .= "'''VIOLATION:''' ''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] violates the One of Constraint [values " . "].''\n";
 		}
 
 		$out->addWikiText($output);
@@ -207,12 +207,15 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 				break;
 			default:
 				//error case, maybe value is 'now';
-				$value = 2015; //todo: make this work with 'now'
+				//$value = 2015; //todo: make this work with 'now'
 		}
 
 		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
 
 		$out = $this->getContext()->getOutput();
+		if( $max == "now"){
+			$max = 2015;
+		}
 		if( $value < $min || $value > $max ) {
 			$out->addHTML("<div style='color: red'>");
 			$output .= "'''VIOLATION:''' ''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] violates the Range Constraint [min " . $min . ", max " . $max . "].''\n";
