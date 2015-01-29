@@ -139,14 +139,19 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 		$output = '';
 
 		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
+		$out = $this->getContext()->getOutput();
+
 		if( $propertyCount[$propertyId->getNumericId()] <= 1 ) {
+			$out->addHTML("<div style='color: red'>");
 			$output .= "'''VIOLATION:''' ''The Claim using Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") violates the Multi value Constraint.''\n";
 		} else {
+			$out->addHTML("<div style='color: green'>");
 			$output .= "''The Claim using Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") complies with the Multi value Constraint.''\n";
 		}
 
-		$out = $this->getContext()->getOutput();
+
 		$out->addWikiText($output);
+		$out->addHTML("</div>");
 	}
 
 	function checkOneOfConstraint( $propertyId ,$dataValue, $values ) {
@@ -168,10 +173,11 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 		$allowedValues = explode(",", str_replace($toReplace,"",$values));
 
 		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
-
+		$out = $this->getContext()->getOutput();
 		$valueFound = false;
 		foreach( $allowedValues as $value ) {
 			if( in_array($value,$allowedValues) ) {
+				$out->addHTML("<div style='color: green'>");
 				$output .= "''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] complies with the One of Constraint [values " . $values . "].''\n";
 				$valueFound = true;
 				break;
@@ -179,11 +185,12 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 		}
 
 		if( !$valueFound ) {
+			$out->addHTML("<div style='color: red'>");
 			$output .= "'''VIOLATION:''' ''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] violates the One of Constraint [values " . $values . "].''\n";
 		}
 
-		$out = $this->getContext()->getOutput();
 		$out->addWikiText($output);
+		$out->addHTML("</div>");
 	}
 
 	function checkRangeConstraint( $propertyId ,$dataValue, $min, $max ) {
@@ -199,33 +206,40 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 				$value = $dataValue->getAmount()->getValue();
 				break;
 			default:
-				//error case
+				//error case, maybe value is 'now';
+				$value = 2015; //todo: make this work with 'now'
 		}
 
 		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
 
+		$out = $this->getContext()->getOutput();
 		if( $value < $min || $value > $max ) {
+			$out->addHTML("<div style='color: red'>");
 			$output .= "'''VIOLATION:''' ''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] violates the Range Constraint [min " . $min . ", max " . $max . "].''\n";
 		} else {
+			$out->addHTML("<div style='color: green'>");
 			$output .= "''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] complies with the Range Constraint [min " . $min . ", max " . $max . "].''\n";
 		}
 
-		$out = $this->getContext()->getOutput();
 		$out->addWikiText($output);
+		$out->addHTML("</div>");
 	}
 
 	function checkSingleValueConstraint( $propertyId, $propertyCount ) {
 		$output = '';
 
 		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
+		$out = $this->getContext()->getOutput();
+
 		if( $propertyCount[$propertyId->getNumericId()] > 1 ) {
+			$out->addHTML("<div style='color: red'>");
 			$output .= "'''VIOLATION:''' ''The Claim using Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") violates the Single value Constraint.''\n";
 		} else {
+			$out->addHTML("<div style='color: green'>");
 			$output .= "''The Claim using Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") complies with the Single value Constraint.''\n";
 		}
-
-		$out = $this->getContext()->getOutput();
 		$out->addWikiText($output);
+		$out->addHTML("</div>");
 	}
 
 }
