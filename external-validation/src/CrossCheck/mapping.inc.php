@@ -12,7 +12,7 @@ $mapping = array(
             'valueFormatter' => 'concat(substring-after(./text(), ", "), " ", substring-before(./text(), ", "))'
         ),
         25 => array(
-            'nodeSelector' => '/record/datafield[@tag="500" and subfield[@code="i"]="v:Mutter"]/subfield[@code="a"]',
+            'nodeSelector' => '/record/datafield[@tag="500" and subfield[@code="9"]="v:Mutter"]/subfield[@code="a"]',
             'valueFormatter' => 'concat(substring-after(./text(), ", "), " ", substring-before(./text(), ", "))'
         ),
         26 => array(
