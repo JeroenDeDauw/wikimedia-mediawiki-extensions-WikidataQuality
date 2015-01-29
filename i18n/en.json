@@ -8,10 +8,10 @@
 
     "special-crosscheck": "Cross-Check with external databases",
     "special-crosscheck-instructions": "Just enter an entity and let it cross-check against GND.",
-    "special-crosscheck-instructions-example": "Try for example Q76 (Barack Obama) and look at the results.",
+    "special-crosscheck-instructions-example": "Try for example Q506 (Nina Hagen) and look at the results.",
     "special-crosscheck-form-itemid-placeholder": "Qxx",
     "special-crosscheck-form-submit-label": "Cross-Check",
-    "special-crosscheck-result-headline": "Result",
+    "special-crosscheck-result-headline": "Result for ",
     "special-crosscheck-result-item-not-existent": "Item does not exist!",
     "special-crosscheck-result-no-wd-entity": "Could not find referenced entity",
     "special-crosscheck-result-no-ext-entity": "Could not find external entity",

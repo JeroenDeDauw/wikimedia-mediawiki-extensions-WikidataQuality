@@ -92,7 +92,7 @@ class SpecialCrossCheck extends SpecialPage
             // Print results
             $out->addHTML(
                 Html::openElement( 'h3' )
-                . $this->msg( 'special-crosscheck-result-headline' )->text()
+                . $this->msg( 'special-crosscheck-result-headline' )->text() . $_POST[ 'itemId' ]
                 . Html::closeElement( 'h3' )
             );
 
