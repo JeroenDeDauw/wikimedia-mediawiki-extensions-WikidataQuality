@@ -1,0 +1,19 @@
+#wbq-crosscheck-submit {
+    margin-left: 5px;
+}
+
+.wdq-crosscheck-error {
+    color: #ff0000;
+}
+
+.wdq-crosscheck-success, .wdq-crosscheck-mismatch {
+    margin-bottom: 10px;
+}
+
+.wdq-crosscheck-success {
+    color: #008000;
+}
+
+.wdq-crosscheck-mismatch {
+    color: #cc0000;
+}

@@ -3,6 +3,7 @@
 namespace WikidataQuality\ExternalValidation\CrossCheck\Result;
 
 use IteratorAggregate;
+use ArrayIterator;
 use Countable;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult;
 

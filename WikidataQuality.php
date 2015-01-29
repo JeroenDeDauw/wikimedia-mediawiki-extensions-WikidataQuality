@@ -36,6 +36,13 @@ $wgHooks['LoadExtensionSchemaUpdates'][] = 'WikidataQualityHooks::onCreateSchema
 $wgSpecialPages['ConstraintReport'] = 'WikidataQuality\ConstraintReport\Specials\SpecialWikidataConstraintReport';
 $wgSpecialPages['CrossCheck'] = 'WikidataQuality\ExternalValidation\Specials\SpecialCrossCheck';
 
+// Define modules
+$wgResourceModules['SpecialCrossCheck'] = array(
+	'styles' => 'external-validation/modules/SpecialCrossCheck.css',
+	'localBasePath' => __DIR__,
+	'remoteExtPath' => 'WikidataQuality'
+);
+
 // Define database table names
 DEFINE("DUMP_DATA_TABLE", "wdq_external_data");
 DEFINE("DUMP_META_TABLE", "wdq_dump_information");

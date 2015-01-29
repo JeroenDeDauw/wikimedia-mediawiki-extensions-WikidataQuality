@@ -63,19 +63,21 @@ class CrossChecker
     {
         // Get statements of item
         $item = $this->entityLookup->getEntity( $itemId );
-        $statements = $item->getStatements();
+        if ( $item ) {
+            $statements = $item->getStatements();
 
-        // Check statements for validating identifier properties
-        $results = new CompareResultList();
-        foreach ( $statements as $statement ) {
-            $propertyId = $statement->getClaim()->getPropertyId();
-            if ( array_key_exists( $propertyId->getNumericId(), $this->mapping ) ) {
-                // Run cross-check for this database
-                $results->merge( $this->crossCheckStatements( $statements, $propertyId ) );
+            // Check statements for validating identifier properties
+            $results = new CompareResultList();
+            foreach ( $statements as $statement ) {
+                $propertyId = $statement->getClaim()->getPropertyId();
+                if ( array_key_exists( $propertyId->getNumericId(), $this->mapping ) ) {
+                    // Run cross-check for this database
+                    $results->merge( $this->crossCheckStatements( $statements, $propertyId ) );
+                }
             }
-        }
 
-        return $results;
+            return $results;
+        }
     }
 
     /**
@@ -177,7 +179,7 @@ class CrossChecker
                     $result = $comparer->execute();
 
                     if ( isset( $result ) ) {
-                        return new CompareResult( $propertyId, $claimGuid, $comparer->localValues, $comparer->externalValues, true, null );
+                        return new CompareResult( $propertyId, $claimGuid, $comparer->localValues, $comparer->externalValues, !$result, null );
                     }
                 }
             }

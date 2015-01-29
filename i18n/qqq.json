@@ -10,5 +10,11 @@
     "special-crosscheck-instructions": "Instructions for starting a cross-check against GND.",
     "special-crosscheck-instructions-example": "Example item for cross-checking. Q76 is suitable.",
     "special-crosscheck-form-itemid-placeholder": "Item id placeholder for the input field.",
-    "special-crosscheck-form-submit-label": "Label of the button, that starts the cross-check."
+    "special-crosscheck-form-submit-label": "Label of the button, that starts the cross-check.",
+    "speical-crosscheck-result-headline": "Headline that appears above the cross-check results",
+    "special-crosscheck-result-item-not-existent": "Error message that appears when the entered item does not exist.",
+    "special-crosscheck-result-no-wd-entity": "Message that appears when the referenced wikidata entity does not exist.",
+    "special-crosscheck-result-no-ext-entity": "Message that appears when the external entity does not exist.",
+    "special-crosscheck-result-mismatch": "Message that appears for statements, which could not be verified. ",
+    "special-crosscheck-result-success": ": Message that appears for statements, which could be verified. "
 }

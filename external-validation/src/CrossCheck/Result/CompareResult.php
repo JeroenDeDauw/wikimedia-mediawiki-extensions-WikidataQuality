@@ -23,7 +23,7 @@ class CompareResult {
     private $propertyId;
 
     /**
-     * Id of the claim, that was compared
+     * Id of the claim, that was compared.
      * @var string
      */
     private $claimGuid;
@@ -84,8 +84,8 @@ class CompareResult {
         return $this->externalValues;
     }
 
-    public function isDataMismatchOccurred() {
-        return $this->isDataMismatchOccurred();
+    public function hasDataMismatchOccurred() {
+        return $this->dataMismatch;
     }
 
     public function areReferencesMissing() {

@@ -45,10 +45,10 @@ class EntityIdValueComparer extends DataValueComparer
 
         // Compare value
         if ( $this->localValues && count( array_intersect($this->localValues, $this->externalValues) ) > 0 ) {
-            return false;
+            return true;
         }
         else {
-            return true;
+            return false;
         }
     }
 
