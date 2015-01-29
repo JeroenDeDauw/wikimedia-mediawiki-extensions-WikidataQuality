@@ -206,6 +206,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 				$value = $dataValue->getAmount()->getValue();
 				break;
 			default:
+				$value = 2014;
 				//error case, maybe value is 'now';
 				//$value = 2015; //todo: make this work with 'now'
 		}
