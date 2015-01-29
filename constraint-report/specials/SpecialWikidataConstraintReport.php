@@ -3,9 +3,7 @@
 namespace WikidataQuality\ConstraintReport\Specials;
 
 use SpecialPage;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Store;
@@ -43,22 +41,19 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 	 * @param string|null $par
 	 */
 	function execute( $par ) {
-		global $wgRequest, $wgOut;
 		$this->setHeaders();
 		$out = $this->getContext()->getOutput();
 
 		// Show form
-		$out->addHTML( '<p>Enter an item id or an property id and let it check against constraints.<br/>'
-            . 'Try for example <i>Q46</i> (Europe) or <i>Pxx</i> (XYZ)'
-            . ' and look at the results.</p>'
+		$out->addHTML( '<p>Enter an Item or a Property ID to check the corresponding Entity\'s statements against Constraints.<br />'
+            . 'Try for example <i>Q46</i> (Europe)<sup>Range</sup>, <i>Q60</i> (New York City)<sup>Range, One of</sup>, <i>Q80</i> (Tim Berners-Lee)<sup>2x One of</sup> or some <i>Pxx</i> (XYZ)</p>'
         );
-        $out->addHTML( "<form name='ItemIdForm' action='" . $_SERVER['PHP_SELF'] . "' method='post'>" );
+        $out->addHTML( "<form name='EntityIdForm' action='" . $_SERVER['PHP_SELF'] . "' method='post'>" );
         $out->addHTML( "<input placeholder='Qxx/Pxx' name='entityID' id='entity-input'>" );
 		$out->addHTML( "<input type='submit' value='Check' />" );
-		$out->addHTML( "</form><br/><br/>" );
+		$out->addHTML( "</form><br /><br />" );
 
 		if (!isset($_POST['entityID'])) {
-			//exit(0);
 			return;
 		}
 
@@ -67,7 +62,9 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 			$out->addWikiText("No valid entityID given or entity does not exist: " . $_POST['entityID'] . "\n");
 			return;
 		}
-		
+
+		$out->addHTML( '<h2>Constraint report for ' . $entity->getType() . ' ' . $entity->getId() . ' (' . $entity->getLabel('en') . '):</h2><br />');
+
 		$entityStatements = $entity->getStatements();
 
 		$dbr = wfGetDB( DB_SLAVE );
@@ -82,28 +79,25 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 			$dataValue = $claim->getMainSnak()->getDataValue();
 
 			$res = $dbr->select(
-				'wbq_constraints_from_templates',                     // $table
-				array('pid', 'constraint_name', 'min', 'max'),        // $vars (columns of the table)
-				("pid = $numericPropertyId"),                         // $conds
-				__METHOD__,                                           // $fname = 'Database::select',
-				array('')                                             // $options = array()
+				'wbq_constraints_from_templates',								// $table
+				array('pid', 'constraint_name', 'min', 'max', 'values_'),		// $vars (columns of the table)
+				("pid = $numericPropertyId"),									// $conds
+				__METHOD__,														// $fname = 'Database::select',
+				array('')														// $options = array()
 			);
 
 			foreach ($res as $row) {
 
 				switch ($row->constraint_name) {
-					case 'Single value':
-						$this->checkSingleValueConstraint($propertyId, $dataValue);
+					case 'One of':
+						$this->checkOneOfConstraint($propertyId, $dataValue, $row->values_);
 						break;
 					case 'Range':
 						$this->checkRangeConstraint($propertyId, $dataValue, $row->min, $row->max);
 						break;
-					case 'Symmetric':
-						$this->checkSymmetricConstraint($propertyId, $dataValue);
-						break;
 					default:
 						//not yet implemented cases, also error case
-						$out->addWikiText("Property " . $propertyId . " has a " . $row->constraint_name . " Constraint , but there is no check implemented yet. :(\n");
+						$out->addWikiText("Property " . $propertyId . " has a " . $row->constraint_name . " Constraint, but there is no check implemented yet. :(\n");
 						break;
 				}
 
@@ -115,6 +109,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 	
 	function entityFromPar($parameter) {
 		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
+
 		switch(strtoupper($parameter[0])) {
 		case 'Q':
 			return $lookup->getEntity(new ItemId($parameter));
@@ -124,31 +119,53 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 			return null;
 		}
 	}
-		
-	function checkSingleValueConstraint( $propertyId, $dataValue ) {
-		//todo
-		/*
-		 * might be harder to check than thought
-		 * how are several values per property per entity stored?
-		 * 	- several statements, each of which with the same property?
-		 * 	- several dataValues, and if so, how to access them?
-		 */
+
+	function checkOneOfConstraint( $propertyId ,$dataValue, $values ) {
+		$output = '';
+
+		$dataValueType = $dataValue->getValue()->getType();
+		switch( $dataValueType ) {
+			case 'wikibase-entityid':
+				$value = $dataValue->getValue();
+				break;
+			case 'quantity':
+				$value = $dataValue->getAmount()->getValue();
+				break;
+			default:
+				//error case
+		}
+
+		$allowedValues = explode(", ", $values);
+		$toReplace = array("{", "}", "|", "[", "]");
+
+		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
+
+		$valueFound = false;
+		foreach ($allowedValues as $value) {
+			$allowedValues[$value] = str_replace($toReplace,"",$value);
+
+			if( in_array($value,$allowedValues) ) {
+				$output .= "''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] complies with the One of Constraint [values " . $values . "].''\n";
+				$valueFound = true;
+				break;
+			}
+
+			if ( !$valueFound ) {
+				$output .= "'''VIOLATION:''' ''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] violates the One of Constraint [values " . $values . "].''\n";
+			}
+
+		}
+
+		$out = $this->getContext()->getOutput();
+		$out->addWikiText($output);
 	}
 
 	function checkRangeConstraint( $propertyId ,$dataValue, $min, $max ) {
-		//todo
-		/*
-		 * cast min and max to int? why are they stored as varchar(255) anyway?
-		 * what dataValue is it? decimalValue, numberValue, quantityValue?
-		 */
-		//global $out;
 		$output = '';
 
 		$dataValueType = $dataValue->getValue()->getType();
 		switch( $dataValueType ) {
 			case 'decimal':
-				$value = $dataValue->getValue();
-				break;
 			case 'number':
 				$value = $dataValue->getValue();
 				break;
@@ -159,17 +176,16 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 				//error case
 		}
 
+		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
+
 		if( $value < $min || $value > $max ) {
-			$output .= "'''VIOLATION:''' The Claim (Property " . $propertyId . ": " . $value . ") violates the Range Constraint (min " . $min . ", max " . $max . ").\n";
+			$output .= "'''VIOLATION:''' ''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] violates the Range Constraint [min " . $min . ", max " . $max . "].''\n";
 		} else {
-			$output .= "''The Claim (Property " . $propertyId . ": " . $value . ") complies with the Range Constraint (min " . $min . ", max " . $max . ").''\n";
+			$output .= "''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] complies with the Range Constraint [min " . $min . ", max " . $max . "].''\n";
 		}
+
 		$out = $this->getContext()->getOutput();
 		$out->addWikiText($output);
 	}
 
-	function checkSymmetricConstraint( $propertyId ,$dataValue ) {
-		//todo
-	}
-	
 }
