@@ -150,7 +150,7 @@ class CrossChecker
 
         // Run query
         $numericPropertyId = $identifierPropertyId->getNumericId();
-        $result = $db->selectRow( DUMP_DATA_TABLE, "external_data", array( "pid=$numericPropertyId", "external_id=$externalId" ) );
+        $result = $db->selectRow( DUMP_DATA_TABLE, "external_data", array( "pid=$numericPropertyId", "external_id=\"$externalId\"" ) );
         if ( $result !== false ) {
             return $result->external_data;
         }
