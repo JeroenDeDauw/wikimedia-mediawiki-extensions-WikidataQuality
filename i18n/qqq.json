@@ -8,7 +8,7 @@
 
     "special-crosscheck": "{{doc-special|CrossCheck}}\nTitle of the special page.",
     "special-crosscheck-instructions": "Instructions for starting a cross-check against GND.",
-    "special-crosscheck-instructions-example": "Example item for cross-checking. Q76 is suitable.",
+    "special-crosscheck-instructions-example": "Example item for cross-checking. Q506 is suitable.",
     "special-crosscheck-form-itemid-placeholder": "Item id placeholder for the input field.",
     "special-crosscheck-form-submit-label": "Label of the button, that starts the cross-check.",
     "special-crosscheck-result-headline": "Headline that appears above the cross-check results",

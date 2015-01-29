@@ -4,8 +4,6 @@ namespace WikidataQuality\ExternalValidation\CrossCheck\Comparer;
 
 
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\DataModel\Entity\EntityIdValue;
-use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult;
 
 
 /**
@@ -24,18 +22,8 @@ class EntityIdValueComparer extends DataValueComparer
 
 
     /**
-     * @param EntityIdValue $dataValue
-     * @param array $externalValues
-     */
-    public function __construct( EntityIdValue $dataValue, $externalValues )
-    {
-        parent::__construct( $dataValue, $externalValues );
-    }
-
-
-    /**
      * Starts the comparison of given EntityIdValue and values of external database.
-     * @return \CompareResult - result of the comparison.
+     * @return bool - result of the comparison.
      */
     public function execute()
     {
@@ -44,10 +32,9 @@ class EntityIdValueComparer extends DataValueComparer
         $this->localValues = $this->getTerms( $entityId, "de" ); //TODO: get from database
 
         // Compare value
-        if ( $this->localValues && count( array_intersect($this->localValues, $this->externalValues) ) > 0 ) {
+        if ( $this->localValues && count( array_intersect( $this->localValues, $this->externalValues ) ) > 0 ) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
