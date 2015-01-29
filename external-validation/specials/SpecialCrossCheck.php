@@ -3,6 +3,9 @@
 namespace WikidataQuality\ExternalValidation\Specials;
 
 use SpecialPage;
+use Html;
+use Wikibase\DataModel\Entity\ItemId;
+use WikidataQuality\ExternalValidation\CrossCheck\CrossChecker;
 
 class SpecialCrossCheck extends SpecialPage
 {
@@ -16,7 +19,8 @@ class SpecialCrossCheck extends SpecialPage
      *
      * @return string
      */
-    function getGroupName() {
+    function getGroupName()
+    {
         return "wikidataquality";
     }
 
@@ -25,7 +29,8 @@ class SpecialCrossCheck extends SpecialPage
      *
      * @return string
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->msg( 'special-crosscheck' )->text();
     }
 
@@ -36,5 +41,47 @@ class SpecialCrossCheck extends SpecialPage
      */
     function execute( $subPage )
     {
+        // Build cross-check form
+        $this->setHeaders();
+        $this->getOutput()->addHTML(
+            Html::openElement( 'p' )
+            . $this->msg( 'special-crosscheck-instructions' )->text()
+            . Html::element( 'br' )
+            . $this->msg( 'special-crosscheck-instructions-example' )->text()
+            . Html::closeElement( 'p' )
+            . Html::openElement(
+                'form',
+                array(
+                    'action' => $_SERVER[ 'PHP_SELF' ],
+                    'method' => 'post'
+                )
+            )
+            . Html::input(
+                'itemId',
+                '',
+                'text',
+                array(
+                    'id' => 'wdq-crosscheck-itemid',
+                    'placeholder' => $this->msg( 'special-crosscheck-form-itemid-placeholder' )->text()
+                )
+            )
+            . Html::input(
+                'submit',
+                $this->msg( 'special-crosscheck-form-submit-label' )->text(),
+                'submit',
+                array(
+                    'id' => 'wbq-crosscheck-submit'
+                )
+            )
+            . Html::closeElement( 'form' )
+        );
+
+        // If item id was recieved, cross-check item
+        if ( isset( $_POST[ 'itemId' ] ) ) {
+            $itemId = new ItemId( $_POST[ 'itemId' ] );
+
+            $crossChecker = new CrossChecker();
+            $results = $crossChecker->execute( $itemId );
+        }
     }
 }
