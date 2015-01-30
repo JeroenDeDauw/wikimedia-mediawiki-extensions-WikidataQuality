@@ -10,6 +10,37 @@ use Wikibase\Repo\Store;
 use Wikibase\DataModel\Statement;
 use Wikibase\DataModel\Snak;
 
+//TODO (prio low): fix the table, having a sixth, empty, column
+//TODO (prio high): define tests for the checks against constraints (test items with statements)
+//TODO (prio high): add support for remaining constraints (some might use a common set of methods):
+	/*	[todo]	Commons link
+	 *	[todo]	Conflicts with - similar to Target required claim (target is self)
+	 *	[todo]	Diff within range - similar to Range
+	 *	[todo]	Format
+	 *	[todo]	Inverse - special case of Target required claim
+	 *	[todo]	Item
+	 *	[DONE]	Multi value - similar to Single value
+	 *	[DONE]	One of
+	 *	[todo]	Qualifier
+	 *	[todo]	Qualifiers
+	 *	[DONE]	Range
+	 *	[DONE]	Single value - similar to Multi value
+	 *	[todo]	Symmetric - special case of Inverse, which is a special case of Target required claim
+	 *	[todo]	Target required claim
+	 *	[todo]	Type - similar to Value type
+	 *	[todo]	Unique value
+	 *	[todo]	Value type - similar to Type
+	 */
+//TODO (prio normal): add templates for items, properties, constraints to our instance and write them like {{Q|1234}} or [[Property:P567]] or {{tl|Constraint:Range}} or ... in this code
+//TODO (prio normal): refactor this code, so that output creation (which is similar for all constraints) is done by one method
+//TODO (prio normal): refactor this code, so that finding the value of a statement (which is similar for all statements/claims) is done by one method
+//TODO (prio normal): check for exceptions and mark a statement as such, also handle qualifiers
+//TODO (prio low): handle output for the edge case, where there are no constraints defined on an entity's statements (as is the case for many properties)
+//TODO (prio low): find visualizations other than a table
+//TODO (prio low): add auto-completion/suggestions while typing to the input form
+//TODO (prio low): go through the warnings and refactor this code accordingly
+
+
 class SpecialWikidataConstraintReport extends SpecialPage {
 
 	function __construct() {
@@ -34,6 +65,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 		return $this->msg( 'special-constraintreport' )->text();
 	}
 
+	private $output = '';
 
 	/**
 	 * @see SpecialPage::execute
@@ -45,15 +77,13 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 		$out = $this->getContext()->getOutput();
 
 		// Show form
-		$out->addHTML( '<p>Enter an Item or a Property ID to check the corresponding Entity\'s statements against Constraints.<br />'
-            . 'Try for example <i>Q46</i> (Europe)<sup>Range</sup>, <i>Q60</i> (New York City)<sup>Range, One of</sup>, <i>Q80</i> (Tim Berners-Lee)<sup>2x One of</sup> or some <i>Pxx</i> (XYZ)</p>'
-        );
+		$out->addHTML( "<p>Enter an Item or a Property ID to check the corresponding Entity's statements against Constraints.</p>");
         $out->addHTML( "<form name='EntityIdForm' action='" . $_SERVER['PHP_SELF'] . "' method='post'>" );
         $out->addHTML( "<input placeholder='Qxx/Pxx' name='entityID' id='entity-input'>" );
 		$out->addHTML( "<input type='submit' value='Check' />" );
 		$out->addHTML( "</form><br /><br />" );
 
-		if( !isset($_POST['entityID']) ) {
+		if( !isset($_POST['entityID']) || strlen($_POST['entityID']) == 0 ) {
 			return;
 		}
 
@@ -78,6 +108,11 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 
 		$dbr = wfGetDB( DB_SLAVE );
 
+		$this->output .=
+			"{| class=\"wikitable sortable\"\n"
+			. "! Property !! class=\"unsortable\" | Value !! Constraint !! class=\"unsortable\" | Parameters !! Status\n"
+		;
+
 		foreach( $entityStatements as $statement ) {
 
 			$claim = $statement->getClaim();
@@ -95,7 +130,11 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 				array('')														// $options = array()
 			);
 
+			$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
+
 			foreach( $res as $row ) {
+
+				$this->output .= "|-\n";
 
 				switch( $row->constraint_name ) {
 					case 'Multi value':
@@ -112,14 +151,22 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 						break;
 					default:
 						//not yet implemented cases, also error case
-						$out->addWikiText("Property " . $propertyId . " has a " . $row->constraint_name . " Constraint, but there is no check implemented yet. :(\n");
+						$this->output .=
+							"| " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") "
+							. "|| "
+							. "|| " . $row->constraint_name . " "
+							. "|| "
+							. "|| <font color=\"#808080\">not yet implemented <b>:(</b></font> ||\n"
+						;
 						break;
 				}
 
 			}
 
 		}
-		
+
+		$this->output .= "|-\n|}";
+		$out->addWikiText($this->output);
 	}
 	
 	function entityFromPar($parameter) {
@@ -136,27 +183,21 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 	}
 
 	function checkMultiValueConstraint( $propertyId, $propertyCount ) {
-		$output = '';
-
 		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
-		$out = $this->getContext()->getOutput();
 
+		$this->output .=
+			"| " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") "
+			. "|| "
+			. "|| Multi value "
+			. "|| (none) ";
 		if( $propertyCount[$propertyId->getNumericId()] <= 1 ) {
-			$out->addHTML("<div style='color: red'>");
-			$output .= "'''VIOLATION:''' ''The Claim using Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") violates the Multi value Constraint.''\n";
+			$this->output .= "|| <font color=\"#8A0808\">violation <b>(-)</b></font> ||\n";
 		} else {
-			$out->addHTML("<div style='color: green'>");
-			$output .= "''The Claim using Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") complies with the Multi value Constraint.''\n";
+			$this->output .= "|| <font color=\"#088A08\">compliance <b>(+)</b></font> ||\n";
 		}
-
-
-		$out->addWikiText($output);
-		$out->addHTML("</div>");
 	}
 
 	function checkOneOfConstraint( $propertyId ,$dataValue, $values ) {
-		$output = '';
-
 		$dataValueType = $dataValue->getValue()->getType();
 		switch( $dataValueType ) {
 			case 'wikibase-entityid':
@@ -173,29 +214,29 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 		$allowedValues = explode(",", str_replace($toReplace,"",$values));
 
 		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
-		$out = $this->getContext()->getOutput();
+
+		$this->output .=
+			"| " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") "
+			. "|| " . $value->getEntityId() . " "
+			. "|| One of "
+			. "|| "// . $values . " "
+		;
+
 		$valueFound = false;
 		foreach( $allowedValues as $value ) {
 			if( in_array($value,$allowedValues) ) {
-				$out->addHTML("<div style='color: green'>");
-				$output .= "''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] complies with the One of Constraint [values " . "].''\n";
+				$this->output .= "|| <font color=\"#088A08\">compliance <b>(+)</b></font> ||\n";
 				$valueFound = true;
 				break;
 			}
 		}
 
 		if( !$valueFound ) {
-			$out->addHTML("<div style='color: red'>");
-			$output .= "'''VIOLATION:''' ''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] violates the One of Constraint [values " . "].''\n";
+			$this->output .= "|| <font color=\"#8A0808\">violation <b>(-)</b></font> ||\n";
 		}
-
-		$out->addWikiText($output);
-		$out->addHTML("</div>");
 	}
 
 	function checkRangeConstraint( $propertyId ,$dataValue, $min, $max ) {
-		$output = '';
-
 		$dataValueType = $dataValue->getValue()->getType();
 		switch( $dataValueType ) {
 			case 'decimal':
@@ -213,37 +254,31 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 
 		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
 
-		$out = $this->getContext()->getOutput();
-		if( $max == "now"){
-			$max = 2015;
-		}
+		$this->output .=
+			"| " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") "
+			. "|| " . $value . " "
+			. "|| Range "
+			. "|| min " . $min . ", max " . $max . " ";
 		if( $value < $min || $value > $max ) {
-			$out->addHTML("<div style='color: red'>");
-			$output .= "'''VIOLATION:''' ''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] violates the Range Constraint [min " . $min . ", max " . $max . "].''\n";
+			$this->output .= "|| <font color=\"#8A0808\">violation <b>(-)</b></font> ||\n";
 		} else {
-			$out->addHTML("<div style='color: green'>");
-			$output .= "''The Claim [Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . "): " . $value . "] complies with the Range Constraint [min " . $min . ", max " . $max . "].''\n";
+			$this->output .= "|| <font color=\"#088A08\">compliance <b>(+)</b></font> ||\n";
 		}
-
-		$out->addWikiText($output);
-		$out->addHTML("</div>");
 	}
 
 	function checkSingleValueConstraint( $propertyId, $propertyCount ) {
-		$output = '';
-
 		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
-		$out = $this->getContext()->getOutput();
 
+		$this->output .=
+			"| " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") "
+			. "|| "
+			. "|| Single value "
+			. "|| (none) ";
 		if( $propertyCount[$propertyId->getNumericId()] > 1 ) {
-			$out->addHTML("<div style='color: red'>");
-			$output .= "'''VIOLATION:''' ''The Claim using Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") violates the Single value Constraint.''\n";
+			$this->output .= "|| <font color=\"#8A0808\">violation <b>(-)</b></font> ||\n";
 		} else {
-			$out->addHTML("<div style='color: green'>");
-			$output .= "''The Claim using Property " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") complies with the Single value Constraint.''\n";
+			$this->output .= "|| <font color=\"#088A08\">compliance <b>(+)</b></font> ||\n";
 		}
-		$out->addWikiText($output);
-		$out->addHTML("</div>");
 	}
 
 }
