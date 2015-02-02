@@ -159,7 +159,7 @@ class CrossChecker
         $numericPropertyId = $identifierPropertyId->getNumericId();
         $result = $db->selectRow( DUMP_DATA_TABLE, "external_data", array( "pid=$numericPropertyId", "external_id=\"$externalId\"" ) );
         if ( $result !== false ) {
-            $this->metaData = getMetaInformation($result->dump_id);
+            $this->metaData = $this->getMetaInformation($result->dump_id);
             return $result->external_data;
         }
     }
