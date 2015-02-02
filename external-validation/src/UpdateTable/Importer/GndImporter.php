@@ -80,6 +80,10 @@ class GndImporter extends Importer
         $dumpUrl = $this->buildDumpUrl();
         if ( !$this->downloadDump( $dumpUrl ) ) {
             // If download fails, try previous dump
+            if ( !$this->importContext->isQuiet() ) {
+                print "Download of latest dump failed. Try to download previous one...\n";
+            }
+
             $dumpUrl = $this->buildDumpUrl( true );
             $this->downloadDump( $dumpUrl );
         }

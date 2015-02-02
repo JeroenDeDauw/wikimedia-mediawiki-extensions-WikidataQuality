@@ -108,14 +108,19 @@ abstract class Importer
         }
         curl_exec( $curlSession );
 
-        if ( !$this->importContext->isQuiet() ) {
-            print "\n";
-        }
-
         //Check for errors
         $statusCode = curl_getinfo( $curlSession, CURLINFO_HTTP_CODE );
         if ( $statusCode != 200 || curl_errno( $curlSession ) ) {
+            $error = curl_error( $curlSession );
+            if ( !$this->importContext->isQuiet() ) {
+                print "$error\n";
+            }
+
             return false;
+        }
+
+        if ( !$this->importContext->isQuiet() ) {
+            print "\n";
         }
 
         fclose( $targetFile );
