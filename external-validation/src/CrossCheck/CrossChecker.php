@@ -39,12 +39,6 @@ class CrossChecker
      */
     private $mapping;
 
-    /**
-     * Metadata for dump belonging to external entity.
-     * @var array
-     */
-    private $metaData;
-
 
     public function __construct()
     {
@@ -159,27 +153,7 @@ class CrossChecker
         $numericPropertyId = $identifierPropertyId->getNumericId();
         $result = $db->selectRow( DUMP_DATA_TABLE, "external_data", array( "pid=$numericPropertyId", "external_id=\"$externalId\"" ) );
         if ( $result !== false ) {
-            $this->metaData = $this->getMetaInformation($result->dump_id);
             return $result->external_data;
-        }
-    }
-
-    /**
-     * Retrieves meta information by its dump id from database.
-     * @param int $dumpId - id of the dump
-     */
-    private function getMetaInformation( $dumpId )
-    {
-        // Connect to database
-        $db = $this->loadBalancer->getConnection( DB_SLAVE );
-
-        // Run query
-        $result = $db->selectRow( DUMP_DATA_TABLE, "dump_information", array( "row_id=$dumpId" ) );
-        if ( $result !== false ) {
-            $id = $result->row_id;
-            $language = $result->language;
-            $format = $result->format;
-            return array( "id" => $id, "language" => $language, "format" => $format );
         }
     }
 
@@ -193,7 +167,7 @@ class CrossChecker
     private function compareDataValue( $propertyId, $claimGuid, $dataValue, $externalEntity, $propertyMapping )
     {
         // Get external values by evaluating mapping
-        $mapingEvaluator = MappingEvaluator::getEvaluator(  $this->metaData["format"], $externalEntity ); #TODO test if it works
+        $mapingEvaluator = MappingEvaluator::getEvaluator(  "xml", $externalEntity ); #TODO from db
         if ( $mapingEvaluator ) {
             $nodeSelector = $propertyMapping[ "nodeSelector" ];
             $valueFormatter = array_key_exists( "valueFormatter", $propertyMapping ) ? $propertyMapping[ "valueFormatter" ] : null;
