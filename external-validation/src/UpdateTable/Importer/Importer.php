@@ -98,6 +98,7 @@ abstract class Importer
 
         // Start curl for downloading
         $curlSession = curl_init( $dumpUrl );
+        curl_setopt( $curlSession, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0 );
         curl_setopt( $curlSession, CURLOPT_RETURNTRANSFER, true );
         curl_setopt( $curlSession, CURLOPT_FILE, $targetFile );
         if ( !$this->importContext->isQuiet() ) {
@@ -107,7 +108,8 @@ abstract class Importer
         curl_exec( $curlSession );
 
         //Check for errors
-        if ( curl_errno( $curlSession ) ) {
+        $statusCode = curl_getinfo( $curlSession, CURLINFO_HTTP_CODE );
+        if ( $statusCode != 200 || curl_errno( $curlSession ) ) {
             return false;
         }
 
