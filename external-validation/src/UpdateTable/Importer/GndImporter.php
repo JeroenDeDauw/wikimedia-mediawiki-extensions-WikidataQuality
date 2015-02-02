@@ -66,15 +66,18 @@ class GndImporter extends Importer
     {
         // Download dump
         $dumpUrl = $this->buildDumpUrl();
-        $this->downloadDump( $dumpUrl );
+        if ( !$this->downloadDump( $dumpUrl ) ) {
+            // If download fails, try previous dump
+            $dumpUrl = $this->buildDumpUrl( true );
+            $this->downloadDump( $dumpUrl );
+        }
 
-
-        // Connect to database and delete old entried
+        // Connect to database and delete old entries
         $db = $this->establishDbConnection();
 
         // Insert meta information
         $dumpSize = filesize( $this->dumpFile );
-        $this->insertMetaInformation( $db, self::DATABASE_NAME, self::DUMP_DATA_FORMAT, self::DUMP_LANGUAGE, $dumpUrl, $dumpSize, self::DUMP_LICENSE);
+        $this->insertMetaInformation( $db, self::DATABASE_NAME, self::DUMP_DATA_FORMAT, self::DUMP_LANGUAGE, $dumpUrl, $dumpSize, self::DUMP_LICENSE );
         $dumpId = $this->getDumpId( $db, self::DATABASE_NAME );
 
         // Delete old entries
@@ -97,22 +100,38 @@ class GndImporter extends Importer
 
     /**
      * Builds url of the latest dump
-     * @return string - url of the latest dump
+     * @param $previous - If true, url of the previous dump will be returned
+     * @return string - url of the dump
      */
-    private function buildDumpUrl()
+    private function buildDumpUrl( $previous = false )
     {
         $now = new DateTime();
         $year = intval( $now->format( "y" ) );
         $month = intval( $now->format( "m" ) );
-        if ( $month == 1 ) {
-            $month = 10;
-            $year--;
-        } else if ( $month < 6 ) {
-            $month = 2;
-        } else if ( $month < 10 ) {
-            $month = 6;
+
+        if ( $previous ) {
+            if ( $month == 1 ) {
+                $month = 6;
+                $year--;
+            } else if ( $month < 6 ) {
+                $month = 10;
+                $year--;
+            } else if ( $month < 10 ) {
+                $month = 2;
+            } else {
+                $month = 6;
+            }
         } else {
-            $month = 10;
+            if ( $month == 1 ) {
+                $month = 10;
+                $year--;
+            } else if ( $month < 6 ) {
+                $month = 2;
+            } else if ( $month < 10 ) {
+                $month = 6;
+            } else {
+                $month = 10;
+            }
         }
         $url = sprintf( self::DUMP_URL_FORMAT, $year, $month );
 

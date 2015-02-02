@@ -45,7 +45,7 @@ abstract class Importer
      */
     function __construct( $dumpFileName, $dumpDataFormat, $dumpLanguage, $importContext )
     {
-        $this->dumpFile = join(DIRECTORY_SEPARATOR, array( __DIR__, "..", "..", "..", "dumps", $dumpFileName ) );
+        $this->dumpFile = join( DIRECTORY_SEPARATOR, array( __DIR__, "..", "..", "..", "dumps", $dumpFileName ) );
         $this->dumpDataFormat = $dumpDataFormat;
         $this->dumpLanguage = $dumpLanguage;
         $this->importContext = $importContext;
@@ -89,7 +89,7 @@ abstract class Importer
     {
         // Create directory, if needed
         $dirName = dirname( $this->dumpFile );
-        if( !is_dir( $dirName ) ) {
+        if ( !is_dir( $dirName ) ) {
             mkdir( $dirName );
         }
 
@@ -106,11 +106,18 @@ abstract class Importer
         }
         curl_exec( $curlSession );
 
-        if( !$this->importContext->isQuiet() ) {
+        //Check for errors
+        if ( !curl_errno( $curlSession ) ) {
+            return false;
+        }
+
+        if ( !$this->importContext->isQuiet() ) {
             print "\n";
         }
 
         fclose( $targetFile );
+
+        return true;
     }
 
     /**
@@ -184,7 +191,8 @@ abstract class Importer
      * @param int $size
      * @param string $license
      */
-    protected function insertMetaInformation( $db, $name, $format, $language, $source, $size, $license ) {
+    protected function insertMetaInformation( $db, $name, $format, $language, $source, $size, $license )
+    {
         $accumulator = array(
             "name" => $name,
             "date" => null,
@@ -201,8 +209,7 @@ abstract class Importer
         $rowCount = $db->selectRowCount( $this->importContext->getMetaTableName(), "*", "name=\"$name\"" );
         if ( $rowCount == 0 ) {
             $db->insert( $this->importContext->getMetaTableName(), $accumulator );
-        }
-        else {
+        } else {
             $db->update( $this->importContext->getMetaTableName(), $accumulator, array( "name=\"$name\"" ) );
         }
     }
@@ -213,12 +220,12 @@ abstract class Importer
      * @param string $name
      * @return bool
      */
-    protected function getDumpId( $db, $name ) {
+    protected function getDumpId( $db, $name )
+    {
         $result = $db->selectRow( $this->importContext->getMetaTableName(), "row_id", "name=\"$name\"" );
         if ( $result == false ) {
             return false;
-        }
-        else {
+        } else {
             return $result->row_id;
         }
     }
