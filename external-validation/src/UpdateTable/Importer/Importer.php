@@ -107,7 +107,7 @@ abstract class Importer
         curl_exec( $curlSession );
 
         //Check for errors
-        if ( !curl_errno( $curlSession ) ) {
+        if ( curl_errno( $curlSession ) ) {
             return false;
         }
 
