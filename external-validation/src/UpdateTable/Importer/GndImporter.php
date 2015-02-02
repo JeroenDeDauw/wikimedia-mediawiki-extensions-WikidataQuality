@@ -35,6 +35,18 @@ class GndImporter extends Importer
      */
     private $numberOfImportedEntites = 0;
 
+    /**
+     * Curretn database connection
+     * @var \DatabaseBase
+     */
+    private $db;
+
+    /**
+     * Id of the current dump that is imported
+     * @var int
+     */
+    private $dumpId;
+
 
     /**
      * @param \ImportContext $importContext
@@ -73,29 +85,28 @@ class GndImporter extends Importer
         }
 
         // Connect to database and delete old entries
-        $db = $this->establishDbConnection();
+        $this->db = $this->establishDbConnection();
 
         // Insert meta information
         $dumpSize = filesize( $this->dumpFile );
-        $this->insertMetaInformation( $db, self::DATABASE_NAME, self::DUMP_DATA_FORMAT, self::DUMP_LANGUAGE, $dumpUrl, $dumpSize, self::DUMP_LICENSE );
-        $dumpId = $this->getDumpId( $db, self::DATABASE_NAME );
+        $this->insertMetaInformation( $this->db, self::DATABASE_NAME, self::DUMP_DATA_FORMAT, self::DUMP_LANGUAGE, $dumpUrl, $dumpSize, self::DUMP_LICENSE );
+        $this->dumpId = $this->getDumpId( $this->db, self::DATABASE_NAME );
 
         // Delete old entries
-        $this->deleteOldDatabaseEntries( $db, self::WD_PROPERTY_ID );
+        $this->deleteOldDatabaseEntries( $this->db, self::WD_PROPERTY_ID );
 
         // Parse dump and insert entities
         xml_set_element_handler(
             $this->parser,
             "startElement",
-            function ( $parser, $name ) use ( $db, $dumpId ) {
-                $this->endElement( $db, $dumpId, $name );
-            }
+            "endElement"
         );
         xml_set_character_data_handler( $this->parser, "characterData" );
-        $this->parseDump( $db );
+        $this->parseDump( $this->db );
 
         // Release connection
-        $this->reuseDbConnection( $db );
+        $this->reuseDbConnection( $this->db );
+        $this->db = null;
     }
 
     /**
@@ -174,14 +185,14 @@ class GndImporter extends Importer
 
     /**
      * SAX callback function for end-element event
-     * @param \DatabaseBase $db - database connection, that should be used to insert element
+     * @param Xml parser $parser - current xml parser
      * @param string $name - name of the ending element
      */
-    private function endElement( $db, $dumpId, $name )
+    private function endElement( $parser, $name )
     {
         $this->tempRecord .= "</$name>";
         if ( $name == "RECORD" ) {
-            $this->insertEntity( $db, $dumpId, self::WD_PROPERTY_ID, $this->getEntityId( $this->tempRecord ), $this->tempRecord );
+            $this->insertEntity( $this->db, $this->dumpId, self::WD_PROPERTY_ID, $this->getEntityId( $this->tempRecord ), $this->tempRecord );
             $this->numberOfImportedEntites++;
             if ( !$this->importContext->isQuiet() ) {
                 print "\r\033[K";
