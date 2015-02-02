@@ -113,23 +113,24 @@ class CrossChecker
         foreach ( $externalIds as $externalId ) {
             // Get external entity
             $externalEntity = $this->getExternalEntity( $identifierPropertyId, $externalId );
+            if ($externalEntity) {
+                // Compare each validatable statement
+                foreach ($validateableStatements as $validateableStatement) {
+                    // Get claim and ids
+                    $claim = $validateableStatement->getClaim();
+                    $claimGuid = $claim->getGuid();
 
-            // Compare each validatable statement
-            foreach ( $validateableStatements as $validateableStatement ) {
-                // Get claim and ids
-                $claim = $validateableStatement->getClaim();
-                $claimGuid = $claim->getGuid();
+                    // Get main snak
+                    $mainSnak = $claim->getMainSnak();
+                    if ($mainSnak instanceof PropertyValueSnak) {
+                        $dataValue = $mainSnak->getDataValue();
+                        $propertyId = $mainSnak->getPropertyId();
+                        $propertyMapping = $currentMapping[$propertyId->getNumericId()];
 
-                // Get main snak
-                $mainSnak = $claim->getMainSnak();
-                if ( $mainSnak instanceof PropertyValueSnak ) {
-                    $dataValue = $mainSnak->getDataValue();
-                    $propertyId = $mainSnak->getPropertyId();
-                    $propertyMapping = $currentMapping[ $propertyId->getNumericId() ];
-
-                    $result = $this->compareDataValue( $propertyId, $claimGuid, $dataValue, $externalEntity, $propertyMapping );
-                    if ( $result ) {
-                        $results->add( $result );
+                        $result = $this->compareDataValue($propertyId, $claimGuid, $dataValue, $externalEntity, $propertyMapping);
+                        if ($result) {
+                            $results->add($result);
+                        }
                     }
                 }
             }
