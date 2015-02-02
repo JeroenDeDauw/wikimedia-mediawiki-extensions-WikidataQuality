@@ -14,7 +14,7 @@ use Wikibase\DataModel\Snak;
 //TODO (prio high): add support for remaining constraints (some might use a common set of methods):
 /*	[todo]	Commons link
  *	[todo]	Conflicts with - similar to Target required claim (target is self)
- *	[todo]	Diff within range - similar to Range
+ *	[DONE]	Diff within range
  *	[todo]	Format
  *	[todo]	Inverse - special case of Target required claim
  *	[todo]	Item
@@ -33,7 +33,7 @@ use Wikibase\DataModel\Snak;
 //TODO (prio normal): add templates for items, properties, constraints to our instance and write them like {{Q|1234}} or [[Property:P567]] or {{tl|Constraint:Range}} or ... in this code
 //TODO (prio normal): check for exceptions and mark a statement as such
 //TODO (prio normal): handle qualifiers, e.g. on a property violating the single value constraint, although every value was only valid at a certain point in time
-//TODO (prio normal): handle time values, make them comparable, handle constraint parameter 'now'
+//TODO (prio normal): handle constraint parameter 'now' when dealing with time values
 //TODO (prio low): handle output for the edge case, where there are no constraints defined on an entity's statements (as is the case for many properties)
 //TODO (prio low): find visualizations other than a table
 //TODO (prio low): add auto-completion/suggestions while typing to the input form
@@ -122,15 +122,15 @@ class SpecialWikidataConstraintReport extends SpecialPage {
             if( $mainSnak->getType() == 'value' ) {
                 $dataValueString = $this->dataValueToString( $mainSnak->getDataValue() );
             } else {
-                $dataValueString = "(" . $mainSnak->getType() . ")";
+                $dataValueString = '\'\'(' . $mainSnak->getType() . '\'\')';
             }
 
             $res = $dbr->select(
-                'wbq_constraints_from_templates',											// $table
-                array('pid', 'constraint_name', 'min', 'max', 'values_', 'exceptions'),		// $vars (columns of the table)
-                ("pid = $numericPropertyId"),												// $conds
-                __METHOD__,																	// $fname = 'Database::select',
-                array('')																	// $options = array()
+                'wbq_constraints_from_templates',											                    // $table
+                array('pid', 'constraint_name', 'base_property', 'exceptions', 'max', 'min', 'values_'),		// $vars (columns of the table)
+                ("pid = $numericPropertyId"),												                    // $conds
+                __METHOD__,																	                    // $fname = 'Database::select',
+                array('')																	                    // $options = array()
             );
 
             foreach( $res as $row ) {
@@ -138,8 +138,11 @@ class SpecialWikidataConstraintReport extends SpecialPage {
                 $this->output .= "|-\n";
 
                 switch( $row->constraint_name ) {
+                    case 'Diff within range':
+                        $this->checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $row->base_property, $row->min, $row->max, $entityStatements );
+                        break;
                     case 'Multi value':
-                        $this->checkMultiValueConstraint( $propertyId, $dataValueString, $propertyCount, $row->exceptions);
+                        $this->checkMultiValueConstraint( $propertyId, $dataValueString, $propertyCount );
                         break;
                     case 'One of':
                         $this->checkOneOfConstraint( $propertyId, $dataValueString, $row->values_ );
@@ -180,6 +183,32 @@ class SpecialWikidataConstraintReport extends SpecialPage {
         }
     }
 
+    function checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $basePropertyId, $min, $max, $entityStatements ) {
+        $parameterString = 'Base Property: ' . $basePropertyId . ', min: ' . $min . ', max: ' . $max;
+
+        foreach( $entityStatements as $statement ) {
+            if( $basePropertyId == $statement->getClaim()->getPropertyId() ) {
+                $mainSnak = $statement->getClaim()->getMainSnak();
+
+                if( $mainSnak->getType() == 'value' ) {
+                    $basePropertyDataValueString = $this->dataValueToString( $mainSnak->getDataValue() );
+
+                    $diff = abs( $dataValueString-$basePropertyDataValueString );
+
+                    if( $diff < $min || $diff > $max ) {
+                        $status = 'violation';
+                    } else {
+                        $status = 'compliance';
+                    }
+                } else {
+                    $status = 'violation';
+                }
+
+                $this->addOutputRow( $propertyId, $dataValueString, 'Diff within range', $parameterString, $status );
+            }
+        }
+    }
+
     function checkMultiValueConstraint( $propertyId, $dataValueString, $propertyCount ) {
         if( $propertyCount[$propertyId->getNumericId()] <= 1 ) {
             $status = 'violation';
@@ -187,7 +216,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
             $status = 'compliance';
         }
 
-        $this->addOutputRow( $propertyId, $dataValueString, 'Multi value', '(none)', $status );
+        $this->addOutputRow( $propertyId, $dataValueString, 'Multi value', '\'\'(none)\'\'', $status );
     }
 
     function checkOneOfConstraint( $propertyId, $dataValueString, $values ) {
@@ -204,14 +233,14 @@ class SpecialWikidataConstraintReport extends SpecialPage {
         if( sizeof($allowedValues) <= $showMax ) {
             $parameterString = 'values: ' . implode(", ", $allowedValues);
         } else {
-            $parameterString = 'values: ' . implode(", ", array_slice($allowedValues, 0, $showMax)) . " (and " . (sizeof($allowedValues)-$showMax) . " more)";
+            $parameterString = 'values: ' . implode(", ", array_slice($allowedValues, 0, $showMax)) . ' \'\'(and ' . (sizeof($allowedValues)-$showMax) . ' more)\'\'';
         }
 
         $this->addOutputRow( $propertyId, $dataValueString, 'One of', $parameterString, $status );
     }
 
     function checkQualifierConstraint( $propertyId, $dataValueString ) {
-        $this->addOutputRow( $propertyId, $dataValueString, 'Qualifier', '(none)', 'violation' );
+        $this->addOutputRow( $propertyId, $dataValueString, 'Qualifier', '\'\'(none)\'\'', 'violation' );
     }
 
     function checkRangeConstraint( $propertyId, $dataValueString, $min, $max ) {
@@ -233,7 +262,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
             $status = 'compliance';
         }
 
-        $this->addOutputRow( $propertyId, $dataValueString, 'Single value', '(none)', $status );
+        $this->addOutputRow( $propertyId, $dataValueString, 'Single value', '\'\'(none)\'\'', $status );
     }
 
     function dataValueToString( $dataValue ) {
