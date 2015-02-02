@@ -10,7 +10,6 @@ use Wikibase\Repo\Store;
 use Wikibase\DataModel\Statement;
 use Wikibase\DataModel\Snak;
 
-//TODO (prio low): fix the table, having a sixth, empty, column
 //TODO (prio high): define tests for the checks against constraints (test items with statements)
 //TODO (prio high): add support for remaining constraints (some might use a common set of methods):
 	/*	[todo]	Commons link
@@ -21,7 +20,7 @@ use Wikibase\DataModel\Snak;
 	 *	[todo]	Item
 	 *	[DONE]	Multi value - similar to Single value
 	 *	[DONE]	One of
-	 *	[todo]	Qualifier
+	 *	[DONE]	Qualifier
 	 *	[todo]	Qualifiers
 	 *	[DONE]	Range
 	 *	[DONE]	Single value - similar to Multi value
@@ -32,9 +31,9 @@ use Wikibase\DataModel\Snak;
 	 *	[todo]	Value type - similar to Type
 	 */
 //TODO (prio normal): add templates for items, properties, constraints to our instance and write them like {{Q|1234}} or [[Property:P567]] or {{tl|Constraint:Range}} or ... in this code
-//TODO (prio normal): refactor this code, so that output creation (which is similar for all constraints) is done by one method
-//TODO (prio normal): refactor this code, so that finding the value of a statement (which is similar for all statements/claims) is done by one method
-//TODO (prio normal): check for exceptions and mark a statement as such, also handle qualifiers
+//TODO (prio normal): check for exceptions and mark a statement as such
+//TODO (prio normal): handle qualifiers, e.g. on a property violating the single value constraint, although every value was only valid at a certain point in time
+//TODO (prio normal): handle time values, make them comparable, handle constraint parameter 'now'
 //TODO (prio low): handle output for the edge case, where there are no constraints defined on an entity's statements (as is the case for many properties)
 //TODO (prio low): find visualizations other than a table
 //TODO (prio low): add auto-completion/suggestions while typing to the input form
@@ -77,7 +76,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 		$out = $this->getContext()->getOutput();
 
 		// Show form
-		$out->addHTML( "<p>Enter an Item or a Property ID to check the corresponding Entity's statements against Constraints.</p>");
+		$out->addHTML( "<p>Enter an Item or a Property ID to check the corresponding Entity's statements against Constraints.</p>" );
         $out->addHTML( "<form name='EntityIdForm' action='" . $_SERVER['PHP_SELF'] . "' method='post'>" );
         $out->addHTML( "<input placeholder='Qxx/Pxx' name='entityID' id='entity-input'>" );
 		$out->addHTML( "<input type='submit' value='Check' />" );
@@ -87,13 +86,13 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 			return;
 		}
 
-		$entity = $this->entityFromPar($_POST['entityID']);
+		$entity = $this->entityFromParameter( $_POST['entityID'] );
 		if( $entity == null ) {
-			$out->addWikiText("No valid entityID given or entity does not exist: " . $_POST['entityID'] . "\n");
+			$out->addWikiText( "No valid entityID given or entity does not exist: " . $_POST['entityID'] . "\n" );
 			return;
 		}
 
-		$out->addHTML( '<h2>Constraint report for ' . $entity->getType() . ' ' . $entity->getId() . ' (' . $entity->getLabel('en') . '):</h2><br />');
+		$out->addHTML( '<h2>Constraint report for ' . $entity->getType() . ' ' . $entity->getId() . ' (' . $entity->getLabel('en') . '):</h2><br />' );
 
 		$entityStatements = $entity->getStatements();
 		$entityStatementsArray = $entityStatements->toArray();
@@ -110,8 +109,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 
 		$this->output .=
 			"{| class=\"wikitable sortable\"\n"
-			. "! Property !! class=\"unsortable\" | Value !! Constraint !! class=\"unsortable\" | Parameters !! Status\n"
-		;
+			. "! Property !! class=\"unsortable\" | Value !! Constraint !! class=\"unsortable\" | Parameters !! Status\n";
 
 		foreach( $entityStatements as $statement ) {
 
@@ -120,7 +118,12 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 			$propertyId = $claim->getPropertyId();
 			$numericPropertyId = $propertyId->getNumericId();
 
-			$dataValue = $claim->getMainSnak()->getDataValue();
+			$mainSnak = $claim->getMainSnak();
+			if( $mainSnak->getType() == 'value' ) {
+				$dataValueString = $this->dataValueToString( $mainSnak->getDataValue() );
+			} else {
+				$dataValueString = "(" . $mainSnak->getType() . ")";
+			}
 
 			$res = $dbr->select(
 				'wbq_constraints_from_templates',								// $table
@@ -130,34 +133,29 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 				array('')														// $options = array()
 			);
 
-			$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
-
 			foreach( $res as $row ) {
 
 				$this->output .= "|-\n";
 
 				switch( $row->constraint_name ) {
 					case 'Multi value':
-						$this->checkMultiValueConstraint($propertyId, $propertyCount);
+						$this->checkMultiValueConstraint( $propertyId, $dataValueString, $propertyCount );
 						break;
 					case 'One of':
-						$this->checkOneOfConstraint($propertyId, $dataValue, $row->values_);
+						$this->checkOneOfConstraint( $propertyId, $dataValueString, $row->values_ );
+						break;
+					case 'Qualifier':
+						$this->checkQualifierConstraint( $propertyId, $dataValueString );
 						break;
 					case 'Range':
-						$this->checkRangeConstraint($propertyId, $dataValue, $row->min, $row->max);
+						$this->checkRangeConstraint( $propertyId, $dataValueString, $row->min, $row->max );
 						break;
 					case 'Single value':
-						$this->checkSingleValueConstraint($propertyId, $propertyCount);
+						$this->checkSingleValueConstraint( $propertyId, $dataValueString, $propertyCount );
 						break;
 					default:
 						//not yet implemented cases, also error case
-						$this->output .=
-							"| " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") "
-							. "|| "
-							. "|| " . $row->constraint_name . " "
-							. "|| "
-							. "|| <font color=\"#808080\">not yet implemented <b>:(</b></font> ||\n"
-						;
+						$this->addOutputRow( $propertyId, $dataValueString, $row->constraint_name, '', 'todo' );
 						break;
 				}
 
@@ -169,115 +167,130 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 		$out->addWikiText($this->output);
 	}
 	
-	function entityFromPar($parameter) {
+	function entityFromParameter( $parameter ) {
 		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
 
 		switch(strtoupper($parameter[0])) {
-		case 'Q':
-			return $lookup->getEntity(new ItemId($parameter));
-		case 'P':
-			return $lookup->getEntity(new PropertyId($parameter));
-		default:
-			return null;
+			case 'Q':
+				return $lookup->getEntity(new ItemId($parameter));
+			case 'P':
+				return $lookup->getEntity(new PropertyId($parameter));
+			default:
+				return null;
 		}
 	}
 
-	function checkMultiValueConstraint( $propertyId, $propertyCount ) {
-		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
-
-		$this->output .=
-			"| " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") "
-			. "|| "
-			. "|| Multi value "
-			. "|| (none) ";
+	function checkMultiValueConstraint( $propertyId, $dataValueString, $propertyCount ) {
 		if( $propertyCount[$propertyId->getNumericId()] <= 1 ) {
-			$this->output .= "|| <font color=\"#8A0808\">violation <b>(-)</b></font> ||\n";
+			$status = 'violation';
 		} else {
-			$this->output .= "|| <font color=\"#088A08\">compliance <b>(+)</b></font> ||\n";
+			$status = 'compliance';
 		}
+
+		$this->addOutputRow( $propertyId, $dataValueString, 'Multi value', '(none)', $status );
 	}
 
-	function checkOneOfConstraint( $propertyId ,$dataValue, $values ) {
-		$dataValueType = $dataValue->getValue()->getType();
+	function checkOneOfConstraint( $propertyId, $dataValueString, $values ) {
+		$toReplace = array("{", "}", "|", "[", "]", " ");
+		$allowedValues = explode(",", str_replace($toReplace, "", $values));
+
+		if( !in_array($dataValueString, $allowedValues) ) {
+			$status = 'violation';
+		} else {
+			$status = 'compliance';
+		}
+
+		$showMax = 5;
+		if( sizeof($allowedValues) <= $showMax ) {
+			$parameterString = 'values: ' . implode(", ", $allowedValues);
+		} else {
+			$parameterString = 'values: ' . implode(", ", array_slice($allowedValues, 0, $showMax)) . " (and " . (sizeof($allowedValues)-$showMax) . " more)";
+		}
+
+		$this->addOutputRow( $propertyId, $dataValueString, 'One of', $parameterString, $status );
+	}
+
+	function checkQualifierConstraint( $propertyId, $dataValueString ) {
+		$this->addOutputRow( $propertyId, $dataValueString, 'Qualifier', '(none)', 'violation' );
+	}
+
+	function checkRangeConstraint( $propertyId, $dataValueString, $min, $max ) {
+		if( $dataValueString < $min || $dataValueString > $max ) {
+			$status = 'violation';
+		} else {
+			$status = 'compliance';
+		}
+
+		$parameterString = 'min: ' . $min . ', max: ' . $max;
+
+		$this->addOutputRow( $propertyId, $dataValueString, 'Range', $parameterString, $status );
+	}
+
+	function checkSingleValueConstraint( $propertyId, $dataValueString, $propertyCount ) {
+		if( $propertyCount[$propertyId->getNumericId()] > 1 ) {
+			$status = 'violation';
+		} else {
+			$status = 'compliance';
+		}
+
+		$this->addOutputRow( $propertyId, $dataValueString, 'Single value', '(none)', $status );
+	}
+
+	function dataValueToString( $dataValue ) {
+		$dataValueType = $dataValue->getType();
 		switch( $dataValueType ) {
-			case 'wikibase-entityid':
-				$value = $dataValue->getValue();
-				break;
+			case 'string':
+			case 'decimal':
+			case 'number':
+			case 'boolean':
+			case 'unknown':
+				return $dataValue->getValue();
 			case 'quantity':
-				$value = $dataValue->getAmount()->getValue();
-				break;
+				return $dataValue->getAmount()->getValue();
+			case 'time':
+				return $dataValue->getTime();
+			case 'globecoordinate':
+			case 'geocoordinate':
+				return 'Latitude: ' . $dataValue->getLatitude() . ', Longitude: ' . $dataValue->getLongitude();
+			case 'monolingualtext':
+				return $dataValue->getText();
+			case 'multilingualtext':
+				if( array_key_exists('en', $dataValue) ) {
+					return $dataValue->getTexts()['en'];
+				} else {
+					return array_shift($dataValue->getTexts());
+				};
+			case 'wikibase-entityid':
+				return $dataValue->getEntityId();
+			case 'bad':
 			default:
 				//error case
 		}
+	}
 
-		$toReplace = array("{", "}", "|", "[", "]", " ");
-		$allowedValues = explode(",", str_replace($toReplace,"",$values));
-
+	function addOutputRow( $propertyId, $dataValueString, $constraintName, $parameterString, $status ) {
 		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
 
 		$this->output .=
 			"| " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") "
-			. "|| " . $value->getEntityId() . " "
-			. "|| One of "
-			. "|| "// . $values . " "
-		;
-
-		$valueFound = false;
-		foreach( $allowedValues as $value ) {
-			if( in_array($value,$allowedValues) ) {
-				$this->output .= "|| <font color=\"#088A08\">compliance <b>(+)</b></font> ||\n";
-				$valueFound = true;
+			. "|| " . $dataValueString . " "
+			. "|| " . $constraintName . " "
+			. "|| " . $parameterString . " ";
+		switch( $status ) {
+			case 'compliance':
+				$this->output .= "|| <font color=\"#088A08\">compliance <b>(+)</b></font>\n";
 				break;
-			}
-		}
-
-		if( !$valueFound ) {
-			$this->output .= "|| <font color=\"#8A0808\">violation <b>(-)</b></font> ||\n";
-		}
-	}
-
-	function checkRangeConstraint( $propertyId ,$dataValue, $min, $max ) {
-		$dataValueType = $dataValue->getValue()->getType();
-		switch( $dataValueType ) {
-			case 'decimal':
-			case 'number':
-				$value = $dataValue->getValue();
+			case 'violation':
+				$this->output .= "|| <font color=\"#8A0808\">violation <b>(-)</b></font>\n";
 				break;
-			case 'quantity':
-				$value = $dataValue->getAmount()->getValue();
+			case 'exception':
+				$this->output .= "|| <font color=\"#D2D20C\">exception <b>(+)</b></font>\n";
+				break;
+			case 'todo':
+				$this->output .= "|| <font color=\"#808080\">not yet implemented <b>:(</b></font>\n";
 				break;
 			default:
-				$value = 2014;
-				//error case, maybe value is 'now';
-				//$value = 2015; //todo: make this work with 'now'
-		}
-
-		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
-
-		$this->output .=
-			"| " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") "
-			. "|| " . $value . " "
-			. "|| Range "
-			. "|| min " . $min . ", max " . $max . " ";
-		if( $value < $min || $value > $max ) {
-			$this->output .= "|| <font color=\"#8A0808\">violation <b>(-)</b></font> ||\n";
-		} else {
-			$this->output .= "|| <font color=\"#088A08\">compliance <b>(+)</b></font> ||\n";
-		}
-	}
-
-	function checkSingleValueConstraint( $propertyId, $propertyCount ) {
-		$lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
-
-		$this->output .=
-			"| " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") "
-			. "|| "
-			. "|| Single value "
-			. "|| (none) ";
-		if( $propertyCount[$propertyId->getNumericId()] > 1 ) {
-			$this->output .= "|| <font color=\"#8A0808\">violation <b>(-)</b></font> ||\n";
-		} else {
-			$this->output .= "|| <font color=\"#088A08\">compliance <b>(+)</b></font> ||\n";
+				//error case
 		}
 	}
 
