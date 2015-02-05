@@ -127,7 +127,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 
             $res = $dbr->select(
                 'wbq_constraints_from_templates',											                    							// $table
-                array('pid', 'constraint_name', 'base_property', 'exceptions', 'max', 'min', 'values_', 'property', 'item', 'items'),		// $vars (columns of the table)
+                array('pid', 'constraint_name', 'base_property', 'exceptions', 'item', 'items', 'max', 'min', 'property', 'values_' ),		// $vars (columns of the table)
                 ("pid = $numericPropertyId"),												                  								// $conds
                 __METHOD__,																	                    							// $fname = 'Database::select',
                 array('')																	                    							// $options = array()
@@ -135,11 +135,12 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 
             foreach( $res as $row ) {
 
-                $this->output .= "|-\n";
-
                 switch( $row->constraint_name ) {
                     case 'Diff within range':
                         $this->checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $row->base_property, $row->min, $row->max, $entityStatements );
+                        break;
+                    case 'Inverse':
+                        $this->checkInverseConstraint( $propertyId, $dataValueString, $row->property);
                         break;
                     case 'Multi value':
                         $this->checkMultiValueConstraint( $propertyId, $dataValueString, $propertyCount );
@@ -156,14 +157,11 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 					case 'Single value':
 						$this->checkSingleValueConstraint( $propertyId, $dataValueString, $propertyCount );
 						break;
-                    case 'Target required claim':
-                        $this->checkTargetRequiredClaimConstraint( $propertyId, $dataValueString, $row->property, $row->item, $row->items);
-                        break;
-                    case 'Inverse':
-                        $this->checkInverseConstraint( $propertyId, $dataValueString, $row->property);
-                        break;
                     case 'Symmetric':
                         $this->checkSymmetricConstraint( $propertyId, $dataValueString);
+                        break;
+                    case 'Target required claim':
+                        $this->checkTargetRequiredClaimConstraint( $propertyId, $dataValueString, $row->property, $row->item, $row->items);
                         break;
                     default:
                         //not yet implemented cases, also error case
@@ -198,7 +196,6 @@ class SpecialWikidataConstraintReport extends SpecialPage {
     }
 
     function hasProperty( $itemStatementsArray, $propertyId ) {
-
         foreach( $itemStatementsArray as $itemStatement ) {
             if ($itemStatement->getPropertyId() == $propertyId){
                 return true;
@@ -208,7 +205,6 @@ class SpecialWikidataConstraintReport extends SpecialPage {
     }
 
     function hasClaim( $itemStatementsArray, $propertyId, $claimItemIdOrArray ) {
-
         foreach( $itemStatementsArray as $itemStatement ) {
             if ($itemStatement->getPropertyId() == $propertyId){
                 if (getType($claimItemIdOrArray) == "string" ) {
@@ -242,74 +238,12 @@ class SpecialWikidataConstraintReport extends SpecialPage {
     }
 
     function convertStringFromTemplatesToArray( $string ) {
-        $toReplace = array("{", "}", "|", " ");
-        return explode(',', str_replace('$toReplace', '', $string));
+        $toReplace = array("{", "}", "|", "[", "]", " ");
+        return explode(",", str_replace($toReplace, "", $string));
     }
-
-    function checkSymmetricConstraint( $propertyId, $dataValueString ) {
-        $targetItem = $this->entityFromParameter( $dataValueString->getSerialization() );
-        if ($targetItem == null) {
-            $this->addOutputRow( $propertyId, $dataValueString, 'Symmetric', '', 'Item does not exist' );
-            return;
-        }
-
-        $targetItemStatements = $targetItem->getStatements();
-        $targetItemStatementsArray = $targetItemStatements->toArray();
-
-        $targetHasProperty = $this->hasProperty( $targetItemStatementsArray, $propertyId );
-        $status = $targetHasProperty ? 'compliance' : 'violation';
-
-        $this->addOutputRow( $propertyId, $dataValueString, 'Symmetric', '', $status );
-
-    }
-
-    function checkInverseConstraint( $propertyId, $dataValueString, $property) {
-        $targetItem = $this->entityFromParameter( $dataValueString->getSerialization() );
-        $parameterString = 'Property: ' . $property;
-        if ($targetItem == null) {
-            $this->addOutputRow( $propertyId, $dataValueString, 'Inverse', $parameterString, 'Item does not exist' );
-            return;
-        }
-        $targetItemStatements = $targetItem->getStatements();
-        $targetItemStatementsArray = $targetItemStatements->toArray();
-
-        $targetHasProperty = $this->hasProperty( $targetItemStatementsArray, $property );
-        $status = $targetHasProperty ? 'compliance' : 'violation';
-
-        $this->addOutputRow( $propertyId, $dataValueString, 'Inverse', $parameterString, $status );
-    }
-
-	function checkTargetRequiredClaimConstraint( $propertyId, $dataValueString, $property, $item, $items) {
-        $targetItem = $this->entityFromParameter( $dataValueString->getSerialization() );
-        $parameterString = 'Property: ' . $property;
-        if ($targetItem == null) {
-            $this->addOutputRow( $propertyId, $dataValueString, 'Target required claim', $parameterString, 'Item does not exist' );
-            return;
-        }
-
-        $targetItemStatements = $targetItem->getStatements();
-        $targetItemStatementsArray = $targetItemStatements->toArray();
-
-		// 3 possibilities: Only property is set, property and item are set or property and items are set
-		if ($item == null && $items == null) {
-            $targetHasProperty = $this->hasProperty( $targetItemStatementsArray, $property );
-			$status = $targetHasProperty ? 'compliance' : 'violation';
-		} else if ($items == null) {
-			$parameterString .= ' Item: ' . $item;
-			// also check, if value of this statement = $item
-            $status = $this->hasClaim( $targetItemStatementsArray, $property, $item ) ? 'compliance' : 'violation';
-		} else {
-            $items = $this->convertStringFromTemplatesToArray( $items );
-            $parameterString .= ' Items: ' . implode(', ', $items);
-            $status = $this->hasClaim( $targetItemStatementsArray, $property, $items ) ? 'compliance' : 'violation';
-		}
-		
-		$this->addOutputRow( $propertyId, $dataValueString, 'Target required claim', $parameterString, $status );
-		
-	}
 
     function checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $basePropertyId, $min, $max, $entityStatements ) {
-        $parameterString = 'Base Property: ' . $basePropertyId . ', min: ' . $min . ', max: ' . $max;
+        $parameterString = 'base Property: ' . $basePropertyId . ', min: ' . $min . ', max: ' . $max;
 
         foreach( $entityStatements as $statement ) {
             if( $basePropertyId == $statement->getClaim()->getPropertyId() ) {
@@ -334,6 +268,22 @@ class SpecialWikidataConstraintReport extends SpecialPage {
         }
     }
 
+    function checkInverseConstraint( $propertyId, $dataValueString, $property) {
+        $targetItem = $this->entityFromParameter( $dataValueString->getSerialization() );
+        $parameterString = 'Property: ' . $property;
+        if ($targetItem == null) {
+            $this->addOutputRow( $propertyId, $dataValueString, 'Inverse', $parameterString, 'fail' );
+            return;
+        }
+        $targetItemStatements = $targetItem->getStatements();
+        $targetItemStatementsArray = $targetItemStatements->toArray();
+
+        $targetHasProperty = $this->hasProperty( $targetItemStatementsArray, $property );
+        $status = $targetHasProperty ? 'compliance' : 'violation';
+
+        $this->addOutputRow( $propertyId, $dataValueString, 'Inverse', $parameterString, $status );
+    }
+
     function checkMultiValueConstraint( $propertyId, $dataValueString, $propertyCount ) {
         if( $propertyCount[$propertyId->getNumericId()] <= 1 ) {
             $status = 'violation';
@@ -345,8 +295,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
     }
 
     function checkOneOfConstraint( $propertyId, $dataValueString, $values ) {
-        $toReplace = array("{", "}", "|", "[", "]", " ");
-        $allowedValues = explode(",", str_replace($toReplace, "", $values));
+        $allowedValues = $this->convertStringFromTemplatesToArray( $values );
 
         if( !in_array($dataValueString, $allowedValues) ) {
             $status = 'violation';
@@ -390,6 +339,50 @@ class SpecialWikidataConstraintReport extends SpecialPage {
         $this->addOutputRow( $propertyId, $dataValueString, 'Single value', '\'\'(none)\'\'', $status );
     }
 
+    function checkSymmetricConstraint( $propertyId, $dataValueString ) {
+        $targetItem = $this->entityFromParameter( $dataValueString->getSerialization() );
+        if ($targetItem == null) {
+            $this->addOutputRow( $propertyId, $dataValueString, 'Symmetric', '', 'fail' );
+            return;
+        }
+
+        $targetItemStatements = $targetItem->getStatements();
+        $targetItemStatementsArray = $targetItemStatements->toArray();
+
+        $targetHasProperty = $this->hasProperty( $targetItemStatementsArray, $propertyId );
+        $status = $targetHasProperty ? 'compliance' : 'violation';
+
+        $this->addOutputRow( $propertyId, $dataValueString, 'Symmetric', '', $status );
+    }
+
+    function checkTargetRequiredClaimConstraint( $propertyId, $dataValueString, $property, $item, $items) {
+        $targetItem = $this->entityFromParameter( $dataValueString->getSerialization() );
+        $parameterString = 'property: ' . $property;
+        if ($targetItem == null) {
+            $this->addOutputRow( $propertyId, $dataValueString, 'Target required claim', $parameterString, 'fail' );
+            return;
+        }
+
+        $targetItemStatements = $targetItem->getStatements();
+        $targetItemStatementsArray = $targetItemStatements->toArray();
+
+        // 3 possibilities: only property is set, property and item are set or property and items are set
+        if ($item == null && $items == null) {
+            $targetHasProperty = $this->hasProperty( $targetItemStatementsArray, $property );
+            $status = $targetHasProperty ? 'compliance' : 'violation';
+        } else if ($items == null) {
+            $parameterString .= ' item: ' . $item;
+            // also check, if value of this statement = $item
+            $status = $this->hasClaim( $targetItemStatementsArray, $property, $item ) ? 'compliance' : 'violation';
+        } else {
+            $items = $this->convertStringFromTemplatesToArray( $items );
+            $parameterString .= ' items: ' . implode(', ', $items);
+            $status = $this->hasClaim( $targetItemStatementsArray, $property, $items ) ? 'compliance' : 'violation';
+        }
+
+        $this->addOutputRow( $propertyId, $dataValueString, 'Target required claim', $parameterString, $status );
+    }
+
     function dataValueToString( $dataValue ) {
         $dataValueType = $dataValue->getType();
         switch( $dataValueType ) {
@@ -426,7 +419,8 @@ class SpecialWikidataConstraintReport extends SpecialPage {
         $lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
 
         $this->output .=
-            "| " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") "
+            "|-\n"
+            . "| " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") "
             . "|| " . $dataValueString . " "
             . "|| " . $constraintName . " "
             . "|| " . $parameterString . " ";
@@ -443,10 +437,9 @@ class SpecialWikidataConstraintReport extends SpecialPage {
             case 'todo':
                 $this->output .= "|| <div style=\"color:#808080\">not yet implemented <b>:(</b></div>\n";
                 break;
-            case 'Item does not exist':
-                $this->output .= "|| <div style=\"color:#a0ce00\">Item does not exist <b>:(</b></div>\n";
-                break;
+            case 'fail':
             default:
+                $this->output .= "|| <div style=\"color:#808080\">check failed <b>:(</b></div>\n";
                 //error case
         }
     }
