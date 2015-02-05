@@ -7,6 +7,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
 use WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\MappingEvaluator;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult;
@@ -43,7 +44,7 @@ class CrossChecker
      * Metadata for dump belonging to external entity.
      * @var array
      */
-    private $metaData;
+    private $dumpMetaInformation;
 
 
     public function __construct()
@@ -119,23 +120,23 @@ class CrossChecker
         foreach ( $externalIds as $externalId ) {
             // Get external entity
             $externalEntity = $this->getExternalEntity( $identifierPropertyId, $externalId );
-            if ($externalEntity) {
+            if ( $externalEntity ) {
                 // Compare each validatable statement
-                foreach ($validateableStatements as $validateableStatement) {
+                foreach ( $validateableStatements as $validateableStatement ) {
                     // Get claim and ids
                     $claim = $validateableStatement->getClaim();
                     $claimGuid = $claim->getGuid();
 
                     // Get main snak
                     $mainSnak = $claim->getMainSnak();
-                    if ($mainSnak instanceof PropertyValueSnak) {
+                    if ( $mainSnak instanceof PropertyValueSnak ) {
                         $dataValue = $mainSnak->getDataValue();
                         $propertyId = $mainSnak->getPropertyId();
-                        $propertyMapping = $currentMapping[$propertyId->getNumericId()];
+                        $propertyMapping = $currentMapping[ $propertyId->getNumericId() ];
 
-                        $result = $this->compareDataValue($propertyId, $claimGuid, $dataValue, $externalEntity, $propertyMapping);
-                        if ($result) {
-                            $results->add($result);
+                        $result = $this->compareDataValue( $propertyId, $claimGuid, $dataValue, $externalEntity, $propertyMapping );
+                        if ( $result ) {
+                            $results->add( $result );
                         }
                     }
                 }
@@ -157,30 +158,26 @@ class CrossChecker
 
         // Run query
         $numericPropertyId = $identifierPropertyId->getNumericId();
-        $result = $db->selectRow( DUMP_DATA_TABLE, "external_data", array( "pid=$numericPropertyId", "external_id=\"$externalId\"" ) );
+        $result = $db->selectRow( DUMP_DATA_TABLE, array( "dump_id", "external_data" ), array( "pid=$numericPropertyId", "external_id=\"$externalId\"" ) );
         if ( $result !== false ) {
-            $this->metaData = getMetaInformation($result->dump_id);
+            $this->dumpMetaInformation = $this->getMetaInformation( $db, $result->dump_id );
             return $result->external_data;
         }
     }
 
     /**
-     * Retrieves meta information by dumpi id from database.
+     * Retrieves meta information by dump id from database.
      * @param int $dumpId - id of the dump
      */
-    private function getMetaInformation( $dumpId )
+    private function getMetaInformation( $db, $dumpId )
     {
-        // Connect to database
-        $db = $this->loadBalancer->getConnection( DB_SLAVE );
-
         // Run query
-        $numericPropertyId = $identifierPropertyId->getNumericId();
-        $result = $db->selectRow( DUMP_DATA_TABLE, "dump_information", array( "id=$dump_id" ) );
+        $result = $db->selectRow( DUMP_META_TABLE, array( "format", "language", "date_format" ), array( "row_id=$dumpId" ) );
         if ( $result !== false ) {
-            $id = $result ->id;
-            $language = $result->language;
             $format = $result->format;
-            return array( "id" => $id, "language" => $language, "format" => $format );
+            $language = $result->language;
+            $dateFormat = $result->date_format;
+            return new DumpMetaInformation( $format, $language, $dateFormat );
         }
     }
 
@@ -194,7 +191,7 @@ class CrossChecker
     private function compareDataValue( $propertyId, $claimGuid, $dataValue, $externalEntity, $propertyMapping )
     {
         // Get external values by evaluating mapping
-        $mapingEvaluator = MappingEvaluator::getEvaluator(  $this->metaData["format"], $externalEntity ); #TODO from db
+        $mapingEvaluator = MappingEvaluator::getEvaluator( $this->dumpMetaInformation->getFormat(), $externalEntity );
         if ( $mapingEvaluator ) {
             $nodeSelector = $propertyMapping[ "nodeSelector" ];
             $valueFormatter = array_key_exists( "valueFormatter", $propertyMapping ) ? $propertyMapping[ "valueFormatter" ] : null;
@@ -202,7 +199,7 @@ class CrossChecker
 
             // Start comparer if external value could be evaluated
             if ( count( $externalValues ) > 0 ) {
-                $comparer = DataValueComparer::getComparer( $dataValue, $externalValues );
+                $comparer = DataValueComparer::getComparer( $this->dumpMetaInformation, $dataValue, $externalValues );
                 if ( $comparer ) {
                     $result = $comparer->execute();
 
