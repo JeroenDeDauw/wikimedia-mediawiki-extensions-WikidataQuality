@@ -65,6 +65,7 @@ class CrossChecker
      * Starts the whole cross-check process.
      * Statements of the item will be checked against each external database, that is supported and linked by the item.
      * @param \ItemId $itemId - Id of the item, that should be cross-cheked
+     * @return \CompareResultList
      */
     public function execute( $itemId )
     {
@@ -91,6 +92,7 @@ class CrossChecker
      * Checks given statements against one single database identified by given property id.
      * @param \StatementList $statements - list of statements, that should be cross-checked
      * @param \PropertyId $identifierPropertyId - id of the identifier property, that represents the external database
+     * @return \CompareResultList
      */
     private function crossCheckStatements( $statements, $identifierPropertyId )
     {
@@ -167,17 +169,20 @@ class CrossChecker
 
     /**
      * Retrieves meta information by dump id from database.
+     * @param $db - loadBalancer connection
      * @param int $dumpId - id of the dump
+     * @return \DumpMetaInformation
      */
     private function getMetaInformation( $db, $dumpId )
     {
         // Run query
-        $result = $db->selectRow( DUMP_META_TABLE, array( "format", "language", "date_format" ), array( "row_id=$dumpId" ) );
+        $result = $db->selectRow( DUMP_META_TABLE, array( "format", "language", "date_format", "name" ), array( "row_id=$dumpId" ) );
         if ( $result !== false ) {
             $format = $result->format;
             $language = $result->language;
             $dateFormat = $result->date_format;
-            return new DumpMetaInformation( $format, $language, $dateFormat );
+            $dataSourceName = $result->name;
+            return new DumpMetaInformation( $format, $language, $dateFormat, $dataSourceName );
         }
     }
 
