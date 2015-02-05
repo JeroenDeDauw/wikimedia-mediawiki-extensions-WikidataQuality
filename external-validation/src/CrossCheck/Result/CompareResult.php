@@ -52,20 +52,28 @@ class CompareResult {
      */
     private $referencesMissing;
 
+    /**
+     * Name of data source.
+     * @var string
+     */
+    private $dataSourceName;
+
 
     /**
      * @param array $localValues
      * @param array $externalValues
      * @param bool $dataMismatch
      * @param bool $referencesMissing
+     * @param string $dataSourceName
      */
-    public function __construct( $propertyId, $claimGuid, $localValues, $externalValues, $dataMismatch, $referencesMissing ) {
+    public function __construct( $propertyId, $claimGuid, $localValues, $externalValues, $dataMismatch, $referencesMissing, $dataSourceName ) {
         $this->propertyId = $propertyId;
         $this->claimGuid = $claimGuid;
         $this->localValues = $localValues;
         $this->externalValues = $externalValues;
         $this->dataMismatch = $dataMismatch;
         $this->referencesMissing = $referencesMissing;
+        $this->dataSourceName = $dataSourceName;
     }
 
     public function getPropertyId() {
@@ -90,5 +98,9 @@ class CompareResult {
 
     public function areReferencesMissing() {
         return $this->referencesMissing;
+    }
+
+    public function getDataSourceName() {
+        return $this->dataSourceName;
     }
 }

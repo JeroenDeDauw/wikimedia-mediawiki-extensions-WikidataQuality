@@ -204,7 +204,7 @@ class CrossChecker
                     $result = $comparer->execute();
 
                     if ( isset( $result ) ) {
-                        return new CompareResult( $propertyId, $claimGuid, $comparer->localValues, $comparer->externalValues, !$result, null );
+                        return new CompareResult( $propertyId, $claimGuid, $comparer->localValues, $comparer->externalValues, !$result, null, $this->dumpMetaInformation->getDataSourceName() );
                     }
                 }
             }

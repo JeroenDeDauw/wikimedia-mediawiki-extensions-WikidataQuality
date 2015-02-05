@@ -28,16 +28,24 @@ class DumpMetaInformation {
      */
     private $dateFormat;
 
+    /**
+     * Name of data source of the dump.
+     * @var string
+     */
+    private $dataSourceName;
+
 
     /**
      * @param string $format
      * @param string $language
      * @param string $dateFormat
+     * @param string $dataSourceName
      */
-    public function __construct($format, $language, $dateFormat) {
+    public function __construct($format, $language, $dateFormat, $dataSourceName) {
         $this->format = $format;
         $this->language = $language;
         $this->dateFormat = $dateFormat;
+        $this->dataSourceName = $dataSourceName;
     }
 
 
@@ -63,5 +71,13 @@ class DumpMetaInformation {
      */
     public function getDateFormat() {
         return $this->dateFormat;
+    }
+
+    /**
+     * Returns data source name.
+     * @return string
+     */
+    public function getDataSourceName() {
+        return $this->dataSourceName;
     }
 }

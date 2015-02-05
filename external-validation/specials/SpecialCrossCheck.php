@@ -124,6 +124,9 @@ class SpecialCrossCheck extends SpecialPage
                             . $localValues
                             . ' &harr; '
                             . $externalValues
+                            . ' ('
+                            . $result->getDataSourceName()
+                            . ')'
                             . Html::closeElement( 'li' )
                         );
                     } else {
