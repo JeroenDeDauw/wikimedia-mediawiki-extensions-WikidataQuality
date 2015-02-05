@@ -16,7 +16,7 @@ use Wikibase\DataModel\Snak;
  *	[todo]	Conflicts with - similar to Target required claim (target is self)
  *	[DONE]	Diff within range
  *	[todo]	Format
- *	[todo]	Inverse - special case of Target required claim
+ *	[DONE]	Inverse - special case of Target required claim
  *	[todo]	Item
  *	[DONE]	Multi value - similar to Single value
  *	[DONE]	One of
@@ -24,7 +24,7 @@ use Wikibase\DataModel\Snak;
  *	[todo]	Qualifiers
  *	[DONE]	Range
  *	[DONE]	Single value - similar to Multi value
- *	[todo]	Symmetric - special case of Inverse, which is a special case of Target required claim
+ *	[DONE]	Symmetric - special case of Inverse, which is a special case of Target required claim
  *	[DONE]	Target required claim
  *	[todo]	Type - similar to Value type
  *	[todo]	Unique value
@@ -156,9 +156,15 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 					case 'Single value':
 						$this->checkSingleValueConstraint( $propertyId, $dataValueString, $propertyCount );
 						break;
-					case 'Target required claim':
-						$this->checkTargetRequiredClaimConstraint( $propertyId, $dataValueString, $row->property, $row->item, $row->items);
-						break;
+                    case 'Target required claim':
+                        $this->checkTargetRequiredClaimConstraint( $propertyId, $dataValueString, $row->property, $row->item, $row->items);
+                        break;
+                    case 'Inverse':
+                        $this->checkInverseConstraint( $propertyId, $dataValueString, $row->property);
+                        break;
+                    case 'Symmetric':
+                        $this->checkSymmetricConstraint( $propertyId, $dataValueString);
+                        break;
                     default:
                         //not yet implemented cases, also error case
                         $this->addOutputRow( $propertyId, $dataValueString, $row->constraint_name, '', 'todo' );
@@ -240,6 +246,39 @@ class SpecialWikidataConstraintReport extends SpecialPage {
         return explode(',', str_replace('$toReplace', '', $string));
     }
 
+    function checkSymmetricConstraint( $propertyId, $dataValueString ) {
+        $targetItem = $this->entityFromParameter( $dataValueString->getSerialization() );
+        if ($targetItem == null) {
+            $this->addOutputRow( $propertyId, $dataValueString, 'Symmetric', '', 'Item does not exist' );
+            return;
+        }
+
+        $targetItemStatements = $targetItem->getStatements();
+        $targetItemStatementsArray = $targetItemStatements->toArray();
+
+        $targetHasProperty = $this->hasProperty( $targetItemStatementsArray, $propertyId );
+        $status = $targetHasProperty ? 'compliance' : 'violation';
+
+        $this->addOutputRow( $propertyId, $dataValueString, 'Symmetric', '', $status );
+
+    }
+
+    function checkInverseConstraint( $propertyId, $dataValueString, $property) {
+        $targetItem = $this->entityFromParameter( $dataValueString->getSerialization() );
+        $parameterString = 'Property: ' . $property;
+        if ($targetItem == null) {
+            $this->addOutputRow( $propertyId, $dataValueString, 'Inverse', $parameterString, 'Item does not exist' );
+            return;
+        }
+        $targetItemStatements = $targetItem->getStatements();
+        $targetItemStatementsArray = $targetItemStatements->toArray();
+
+        $targetHasProperty = $this->hasProperty( $targetItemStatementsArray, $property );
+        $status = $targetHasProperty ? 'compliance' : 'violation';
+
+        $this->addOutputRow( $propertyId, $dataValueString, 'Inverse', $parameterString, $status );
+    }
+
 	function checkTargetRequiredClaimConstraint( $propertyId, $dataValueString, $property, $item, $items) {
         $targetItem = $this->entityFromParameter( $dataValueString->getSerialization() );
         $parameterString = 'Property: ' . $property;
@@ -250,7 +289,6 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 
         $targetItemStatements = $targetItem->getStatements();
         $targetItemStatementsArray = $targetItemStatements->toArray();
-
 
 		// 3 possibilities: Only property is set, property and item are set or property and items are set
 		if ($item == null && $items == null) {
