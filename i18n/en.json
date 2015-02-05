@@ -3,6 +3,8 @@
         "authors": "BP2014N1"
     },
     "specialpages-group-wikidataquality": "WikidataQuality",
+    "specialpages-group-value": "Value",
+    "specialpages-group-status": "Status",
 
     "special-constraintreport": "Constraint Report",
 
@@ -15,6 +17,9 @@
     "special-crosscheck-result-item-not-existent": "Item does not exist!",
     "special-crosscheck-result-no-wd-entity": "Could not find referenced entity",
     "special-crosscheck-result-no-ext-entity": "Could not find external entity",
-    "special-crosscheck-result-mismatch": ": Data mismatch!",
-    "special-crosscheck-result-success": ": Verification successful!"
+    "special-crosscheck-result-mismatch": "Mismatch",
+    "special-crosscheck-result-success": "Match",
+    "special-crosscheck-comparative-value": "Comparative Value",
+    "special-crosscheck-external-source": "External Source"
+
 }

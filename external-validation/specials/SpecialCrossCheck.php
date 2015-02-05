@@ -100,7 +100,17 @@ class SpecialCrossCheck extends SpecialPage
                 // Head of table
                 $tableOutput =
                     "{| class=\"wikitable sortable\"\n"
-                    . "! Property !! class=\"unsortable\" | Value !! class=\"unsortable\" | Comparative Value !! External Source !! Status\n";
+                    . "! ". $this->msg( 'datatypes-type-wikibase-property' )->text() ." !! class=\"unsortable\" | ". $this->msg( 'specialpages-group-value' )->text() ." !! class=\"unsortable\" | ". $this->msg( 'special-crosscheck-comparative-value' )->text() ." !! ". $this->msg( 'special-crosscheck-external-source' )->text() ." !! ". $this->msg( 'specialpages-group-status' )->text() ."\n";
+
+                //Dummy
+
+                $tableOutput .=
+                    "|-\n"
+                    . "| PXX\n"
+                    . "| 123\n"
+                    . "| 321\n"
+                    . "| GND\n"
+                    . "| <span class=\"wdq-crosscheck-error\"> ". $this->msg( 'special-crosscheck-result-mismatch' )->text() ." <b>(-)</b></span>\n";
 
                 foreach ( $results as $result ) {
                     // Parse value arrays to concatenated strings
@@ -114,9 +124,9 @@ class SpecialCrossCheck extends SpecialPage
                     );
 
                     if ( $result->hasDataMismatchOccurred() ) {
-                        $status = "| <span class=\"wdq-crosscheck-error\">mismatch <b>(-)</b></span>\n";
+                        $status = "| <span class=\"wdq-crosscheck-error\"> ". $this->msg( 'special-crosscheck-result-mismatch' )->text() ." <b>(-)</b></span>\n";
                     } else {
-                        $status = "| <span class=\"wdq-crosscheck-success\">match <b>(+)</b></span>\n";
+                        $status = "| <span class=\"wdq-crosscheck-success\">". $this->msg( 'special-crosscheck-result-success' )->text() ." <b>(+)</b></span>\n";
                     }
 
                     // Body of table
