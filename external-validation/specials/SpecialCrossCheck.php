@@ -97,7 +97,11 @@ class SpecialCrossCheck extends SpecialPage
             );
 
             if ( $results ) {
-                $out->addHTML( Html::openElement( 'ul' ) );
+                // Head of table
+                $tableOutput =
+                    "{| class=\"wikitable sortable\"\n"
+                    . "! ". $this->msg( 'datatypes-type-wikibase-property' )->text() ." !! class=\"unsortable\" | ". $this->msg( 'specialpages-group-value' )->text() ." !! class=\"unsortable\" | ". $this->msg( 'special-crosscheck-comparative-value' )->text() ." !! ". $this->msg( 'special-crosscheck-external-source' )->text() ." !! ". $this->msg( 'specialpages-group-status' )->text() ."\n";
+
                 foreach ( $results as $result ) {
                     // Parse value arrays to concatenated strings
                     $localValues = $this->parseMultipleValues(
@@ -109,49 +113,26 @@ class SpecialCrossCheck extends SpecialPage
                         $this->msg( 'special-crosscheck-result-no-ext-entity' )->text()
                     );
 
-                    // Print list item
                     if ( $result->hasDataMismatchOccurred() ) {
-                        $out->addHTML(
-                            Html::openElement(
-                                'li',
-                                array(
-                                    'class' => 'wdq-crosscheck-mismatch'
-                                )
-                            )
-                            . $result->getPropertyId()
-                            . $this->msg( 'special-crosscheck-result-mismatch' )->text()
-                            . Html::element( 'br' )
-                            . $localValues
-                            . ' &harr; '
-                            . $externalValues
-                            . ' ('
-                            . $result->getDataSourceName()
-                            . ')'
-                            . Html::closeElement( 'li' )
-                        );
+                        $status = "| <span class=\"wdq-crosscheck-error\"> ". $this->msg( 'special-crosscheck-result-mismatch' )->text() ." <b>(-)</b></span>\n";
                     } else {
-                        $out->addHTML(
-                            Html::openElement(
-                                'li',
-                                array(
-                                    'class' => 'wdq-crosscheck-success'
-                                )
-                            )
-                            . $result->getPropertyId()
-                            . $this->msg( 'special-crosscheck-result-success' )->text()
-                            . Html::element( 'br' )
-                            . $localValues
-                            . ' &harr; '
-                            . $externalValues
-                            . Html::closeElement( 'li' )
-                        );
+                        $status = "| <span class=\"wdq-crosscheck-success\">". $this->msg( 'special-crosscheck-result-success' )->text() ." <b>(+)</b></span>\n";
                     }
+
+                    // Body of table
+                    $tableOutput .=
+                        "|-\n"
+                        . "| " . $result->getPropertyId() . "\n"
+                        . "| " . $localValues . "\n"
+                        . "| " . $externalValues . "\n"
+                        . "| " . $result->getDataSourceName() . "\n"
+                        . $status;
                 }
-                $out->addHTML(
-                    Html::closeElement( 'ul' )
-                );
-            }
-            else {
+
+                // End of table
+                $tableOutput .= "|-\n|}";
+                $out->addWikiText( $tableOutput );
+            } else {
                 $out->addHTML(
                     Html::openElement(
                         'p',
@@ -160,11 +141,12 @@ class SpecialCrossCheck extends SpecialPage
                         )
                     )
                     . $this->msg( 'special-crosscheck-result-item-not-existent' )->text()
-                    . Html::closeElement( 'p ')
+                    . Html::closeElement( 'p ' )
                 );
             }
         }
     }
+
 
     /**
      * Parse arary of values to human-readable string
@@ -172,11 +154,11 @@ class SpecialCrossCheck extends SpecialPage
      * @param $errorMessage
      * @return string
      */
-    private function parseMultipleValues( $values, $errorMessage ) {
-        if( $values ) {
+    private function parseMultipleValues( $values, $errorMessage )
+    {
+        if ( $values ) {
             return implode( ', ', $values );
-        }
-        else {
+        } else {
             return $errorMessage;
         }
     }

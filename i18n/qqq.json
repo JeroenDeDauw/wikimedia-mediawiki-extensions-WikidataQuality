@@ -3,6 +3,8 @@
         "authors": "BP2014N1"
     },
     "specialpages-group-wikidataquality": "{{doc-special-group|that=are related to the WikidataQuality extension}}",
+    "specialpages-group-value": "Name for value of the current statement",
+    "specialpages-group-status": "Name for status of the cross-check",
 
     "special-constraintreport": "{{doc-special|ConstraintReport}}\nTitle of the special page.",
 
@@ -16,5 +18,7 @@
     "special-crosscheck-result-no-wd-entity": "Message that appears when the referenced wikidata entity does not exist.",
     "special-crosscheck-result-no-ext-entity": "Message that appears when the external entity does not exist.",
     "special-crosscheck-result-mismatch": "Message that appears for statements, which could not be verified. ",
-    "special-crosscheck-result-success": ": Message that appears for statements, which could be verified. "
+    "special-crosscheck-result-success": ": Message that appears for statements, which could be verified. ",
+    "special-crosscheck-comparative-value": "Name for value from the external source for the cross-check",
+    "special-crosscheck-external-source": "Name for external source the comparative data is from"
 }
