@@ -97,39 +97,12 @@ class SpecialCrossCheck extends SpecialPage
             );
 
             if ( $results ) {
-
                 // Head of table
-                $tmp_output =
+                $tableOutput =
                     "{| class=\"wikitable sortable\"\n"
                     . "! Property !! class=\"unsortable\" | Value !! class=\"unsortable\" | Comparative Value !! External Source !! Status\n";
 
-                // Dummy data
-                $tmp_output .=
-                    "|-\n"
-                    . "| PWX\n"
-                    . "| 123\n"
-                    . "| 123\n"
-                    . "| GND\n"
-                    . "|  <div class=\"wdq-crosscheck-success\">match <b>(+)</b></div>\n";
-
-                $tmp_output .=
-                    "|-\n"
-                    . "| PXY\n"
-                    . "| 456\n"
-                    . "| 456\n"
-                    . "| GND\n"
-                    . "|  <div class=\"wdq-crosscheck-success\">match <b>(+)</b></div>\n";
-
-                $tmp_output .=
-                    "|-\n"
-                    . "| PYZ\n"
-                    . "| 987\n"
-                    . "| 789\n"
-                    . "| GND\n"
-                    . "|  <div class=\"wdq-crosscheck-error\">mismatch <b>(+)</b></div>\n";
-
                 foreach ( $results as $result ) {
-
                     // Parse value arrays to concatenated strings
                     $localValues = $this->parseMultipleValues(
                         $result->getLocalValues(),
@@ -140,16 +113,14 @@ class SpecialCrossCheck extends SpecialPage
                         $this->msg( 'special-crosscheck-result-no-ext-entity' )->text()
                     );
 
-                    $status = '';
-
                     if ( $result->hasDataMismatchOccurred() ) {
-                        $status = "| <div class=\"wdq-crosscheck-error\">mismatch <b>(-)</b></div>\n";
+                        $status = "| <span class=\"wdq-crosscheck-error\">mismatch <b>(-)</b></span>\n";
                     } else {
-                        $status = "| <div class=\"wdq-crosscheck-success\">match <b>(+)</b></div>\n";
+                        $status = "| <span class=\"wdq-crosscheck-success\">match <b>(+)</b></span>\n";
                     }
 
                     // Body of table
-                    $tmp_output .=
+                    $tableOutput .=
                         "|-\n"
                         . "| " . $result->getPropertyId() . "\n"
                         . "| " . $localValues . "\n"
@@ -159,8 +130,8 @@ class SpecialCrossCheck extends SpecialPage
                 }
 
                 // End of table
-                $tmp_output .= "|-\n|}";
-                $out->addWikiText( $tmp_output );
+                $tableOutput .= "|-\n|}";
+                $out->addWikiText( $tableOutput );
             } else {
                 $out->addHTML(
                     Html::openElement(
@@ -183,11 +154,11 @@ class SpecialCrossCheck extends SpecialPage
      * @param $errorMessage
      * @return string
      */
-    private function parseMultipleValues( $values, $errorMessage ) {
-        if( $values ) {
+    private function parseMultipleValues( $values, $errorMessage )
+    {
+        if ( $values ) {
             return implode( ', ', $values );
-        }
-        else {
+        } else {
             return $errorMessage;
         }
     }
