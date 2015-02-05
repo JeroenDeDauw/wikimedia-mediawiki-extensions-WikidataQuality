@@ -33,7 +33,7 @@ class TimeValueComparer extends DataValueComparer
         $localDateTime = DateTime::createFromFormat( 'Y-m-d\TH:i:s\Z', $value );
 
         // Parse external datetime
-        $externalDateTime = DateTime::createFromFormat( 'd.m.Y', $this->externalValues[ 0 ] );  //TODO: get from database
+        $externalDateTime = DateTime::createFromFormat( $this->dumpMetaInformation->getDateFormat(), $this->externalValues[ 0 ] );
 
         // Format output values
         $this->formatValues( $localDateTime, $externalDateTime );

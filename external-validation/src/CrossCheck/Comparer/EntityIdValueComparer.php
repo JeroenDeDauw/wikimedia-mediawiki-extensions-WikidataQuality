@@ -29,7 +29,7 @@ class EntityIdValueComparer extends DataValueComparer
     {
         // Get terms of the references entity
         $entityId = $this->dataValue->getEntityId();
-        $this->localValues = $this->getTerms( $entityId, "de" ); //TODO: get from database
+        $this->localValues = $this->getTerms( $entityId, $this->dumpMetaInformation->getLanguage() );
 
         // Compare value
         if ( $this->localValues && count( array_intersect( $this->localValues, $this->externalValues ) ) > 0 ) {

@@ -26,11 +26,11 @@ class MultilingualTextValueComparer extends MonolingualTextValueComparer
      * @param array $externalValues
      * @param array $localValues
      */
-    public function __construct( MultilingualTextValue $dataValue, $externalValues, $localValues = null )
+    public function __construct( $dumpMetaInformation, MultilingualTextValue $dataValue, $externalValues, $localValues = null )
     {
         foreach ( $dataValue->getTexts() as $text ) {
-            if ( $text->getLanguageCode() == "de" ) { //TODO: Get from database
-                parent::__construct( $text, $externalValues );
+            if ( $text->getLanguageCode() == $this->dumpMetaInformation->getLanguage() ) {
+                parent::__construct( $dumpMetaInformation, $text, $externalValues );
             }
         }
     }
