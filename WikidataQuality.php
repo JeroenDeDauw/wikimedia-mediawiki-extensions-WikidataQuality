@@ -19,13 +19,12 @@ $wgExtensionCredits['specialpage'][] = array(
 	'name' => 'WikidataQuality',
 	'author' => 'BP2014N1',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:WikidataQuality',
-	'descriptionmsg' => 'WikidataQuality-desc',
+	'descriptionmsg' => 'wikidataquality-desc',
 	'version' => '0.0.0',
 );
 
 // Initialize localization and aliases
 $wgMessagesDirs['WikidataQuality'] = __DIR__ . "/i18n";
-$wgExtensionMessagesFiles['WikidataQuality'] = __DIR__ . "/WikidataQuality.i18n.php";
 $wgExtensionMessagesFiles['WikidataQualityAlias'] = __DIR__ . '/WikidataQuality.alias.php';
 
 // Initalize hooks for creating database tables

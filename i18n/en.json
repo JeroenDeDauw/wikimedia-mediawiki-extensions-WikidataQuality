@@ -2,6 +2,8 @@
     "@metadata": {
         "authors": "BP2014N1"
     },
+    "wikidataquality-desc": "Cross check quality of Wikidata with external databases",
+
     "specialpages-group-wikidataquality": "WikidataQuality",
 
     "special-constraintreport": "Constraint Report",
