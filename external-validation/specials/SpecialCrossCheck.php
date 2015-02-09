@@ -31,7 +31,7 @@ class SpecialCrossCheck extends SpecialPage
      */
     public function getDescription()
     {
-        return $this->msg( 'special-crosscheck' )->text();
+        return $this->msg( 'wikidataquality-crosscheck' )->text();
     }
 
     /**
@@ -54,7 +54,7 @@ class SpecialCrossCheck extends SpecialPage
             Html::openElement( 'p' )
             . $this->msg( 'special-crosscheck-instructions' )->text()
             . Html::element( 'br' )
-            . $this->msg( 'special-crosscheck-instructions-example' )->text()
+            . $this->msg( 'wikidataquality-crosscheck-instructions-example' )->text()
             . Html::closeElement( 'p' )
             . Html::openElement(
                 'form',
@@ -69,12 +69,12 @@ class SpecialCrossCheck extends SpecialPage
                 'text',
                 array(
                     'id' => 'wdq-crosscheck-itemid',
-                    'placeholder' => $this->msg( 'special-crosscheck-form-itemid-placeholder' )->text()
+                    'placeholder' => $this->msg( 'wikidataquality-crosscheck-form-itemid-placeholder' )->text()
                 )
             )
             . Html::input(
                 'submit',
-                $this->msg( 'special-crosscheck-form-submit-label' )->text(),
+                $this->msg( 'wikidataquality-crosscheck-form-submit-label' )->text(),
                 'submit',
                 array(
                     'id' => 'wbq-crosscheck-submit'
@@ -92,7 +92,7 @@ class SpecialCrossCheck extends SpecialPage
             // Print results
             $out->addHTML(
                 Html::openElement( 'h3' )
-                . $this->msg( 'special-crosscheck-result-headline' )->text() . $_POST[ 'itemId' ]
+                . $this->msg( 'wikidataquality-crosscheck-result-headline' )->text() . $_POST[ 'itemId' ]
                 . Html::closeElement( 'h3' )
             );
 
@@ -100,23 +100,23 @@ class SpecialCrossCheck extends SpecialPage
                 // Head of table
                 $tableOutput =
                     "{| class=\"wikitable sortable\"\n"
-                    . "! ". $this->msg( 'datatypes-type-wikibase-property' )->text() ." !! class=\"unsortable\" | ". $this->msg( 'specialpages-group-value' )->text() ." !! class=\"unsortable\" | ". $this->msg( 'special-crosscheck-comparative-value' )->text() ." !! ". $this->msg( 'special-crosscheck-external-source' )->text() ." !! ". $this->msg( 'specialpages-group-status' )->text() ."\n";
+                    . "! ". $this->msg( 'datatypes-type-wikibase-property' )->text() ." !! class=\"unsortable\" | ". $this->msg( 'wikidataquality-value' )->text() ." !! class=\"unsortable\" | ". $this->msg( 'wikidataquality-crosscheck-comparative-value' )->text() ." !! ". $this->msg( 'wikidataquality-crosscheck-external-source' )->text() ." !! ". $this->msg( 'wikidataquality-status' )->text() ."\n";
 
                 foreach ( $results as $result ) {
                     // Parse value arrays to concatenated strings
                     $localValues = $this->parseMultipleValues(
                         $result->getLocalValues(),
-                        $this->msg( 'special-crosscheck-result-no-wd-entity' )->text()
+                        $this->msg( 'wikidataquality-crosscheck-result-no-wd-entity' )->text()
                     );
                     $externalValues = $this->parseMultipleValues(
                         $result->getExternalValues(),
-                        $this->msg( 'special-crosscheck-result-no-ext-entity' )->text()
+                        $this->msg( 'wikidataquality-crosscheck-result-no-ext-entity' )->text()
                     );
 
                     if ( $result->hasDataMismatchOccurred() ) {
-                        $status = "| <span class=\"wdq-crosscheck-error\"> ". $this->msg( 'special-crosscheck-result-mismatch' )->text() ." <b>(-)</b></span>\n";
+                        $status = "| <span class=\"wdq-crosscheck-error\"> ". $this->msg( 'wikidataquality-crosscheck-result-mismatch' )->text() ." <b>(-)</b></span>\n";
                     } else {
-                        $status = "| <span class=\"wdq-crosscheck-success\">". $this->msg( 'special-crosscheck-result-success' )->text() ." <b>(+)</b></span>\n";
+                        $status = "| <span class=\"wdq-crosscheck-success\">". $this->msg( 'wikidataquality-crosscheck-result-success' )->text() ." <b>(+)</b></span>\n";
                     }
 
                     // Body of table
@@ -140,7 +140,7 @@ class SpecialCrossCheck extends SpecialPage
                             'class' => 'wdq-crosscheck-error'
                         )
                     )
-                    . $this->msg( 'special-crosscheck-result-item-not-existent' )->text()
+                    . $this->msg( 'wikidataquality-crosscheck-result-item-not-existent' )->text()
                     . Html::closeElement( 'p ' )
                 );
             }

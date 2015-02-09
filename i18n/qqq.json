@@ -2,23 +2,26 @@
     "@metadata": {
         "authors": "BP2014N1"
     },
-    "specialpages-group-wikidataquality": "{{doc-special-group|that=are related to the WikidataQuality extension}}",
-    "specialpages-group-value": "Name for value of the current statement",
-    "specialpages-group-status": "Name for status of the cross-check",
 
-    "special-constraintreport": "{{doc-special|ConstraintReport}}\nTitle of the special page.",
+    "wikidataquality-desc": "{{desc|name=Wikidata Quality|url=https://www.mediawiki.org/wiki/Extension:WikidataQuality}}",
+    "wikidataquality-specialpages-group": "{{doc-special-group|that=are related to the WikidataQuality extension}}",
 
-    "special-crosscheck": "{{doc-special|CrossCheck}}\nTitle of the special page.",
-    "special-crosscheck-instructions": "Instructions for starting a cross-check against GND.",
-    "special-crosscheck-instructions-example": "Example item for cross-checking. Q506 is suitable.",
-    "special-crosscheck-form-itemid-placeholder": "Item id placeholder for the input field.",
-    "special-crosscheck-form-submit-label": "Label of the button, that starts the cross-check.",
-    "special-crosscheck-result-headline": "Headline that appears above the cross-check results",
-    "special-crosscheck-result-item-not-existent": "Error message that appears when the entered item does not exist.",
-    "special-crosscheck-result-no-wd-entity": "Message that appears when the referenced wikidata entity does not exist.",
-    "special-crosscheck-result-no-ext-entity": "Message that appears when the external entity does not exist.",
-    "special-crosscheck-result-mismatch": "Message that appears for statements, which could not be verified. ",
-    "special-crosscheck-result-success": ": Message that appears for statements, which could be verified. ",
-    "special-crosscheck-comparative-value": "Name for value from the external source for the cross-check",
-    "special-crosscheck-external-source": "Name for external source the comparative data is from"
+    "wikidataquality-value": "Name for value of the current statement",
+    "wikidataquality-status": "Name for status of the cross-check",
+
+    "wikidataquality-constraintreport": "{{doc-special|ConstraintReport}}\nTitle of the special page.",
+
+    "wikidataquality-crosscheck": "{{doc-special|CrossCheck}}\nTitle of the special page.",
+    "wikidataquality-crosscheck-instructions": "Instructions for starting a cross-check against GND.",
+    "wikidataquality-crosscheck-instructions-example": "Example item for cross-checking. Q506 is suitable.",
+    "wikidataquality-crosscheck-form-itemid-placeholder": "Item id placeholder for the input field.",
+    "wikidataquality-crosscheck-form-submit-label": "Label of the button, that starts the cross-check.",
+    "wikidataquality-crosscheck-result-headline": "Headline that appears above the cross-check results",
+    "wikidataquality-crosscheck-result-item-not-existent": "Error message that appears when the entered item does not exist.",
+    "wikidataquality-crosscheck-result-no-wd-entity": "Message that appears when the referenced wikidata entity does not exist.",
+    "wikidataquality-crosscheck-result-no-ext-entity": "Message that appears when the external entity does not exist.",
+    "wikidataquality-crosscheck-result-mismatch": "Message that appears for statements, which could not be verified. ",
+    "wikidataquality-crosscheck-result-success": ": Message that appears for statements, which could be verified. ",
+    "wikidataquality-crosscheck-comparative-value": "Name for value from the external source for the cross-check",
+    "wikidataquality-crosscheck-external-source": "Name for external source the comparative data is from"
 }

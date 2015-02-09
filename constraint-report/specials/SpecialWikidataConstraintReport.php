@@ -61,7 +61,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
      * @return string
      */
     public function getDescription() {
-        return $this->msg( 'special-constraintreport' )->text();
+        return $this->msg( 'wikidataquality-constraintreport' )->text();
     }
 
     private $output = '';
