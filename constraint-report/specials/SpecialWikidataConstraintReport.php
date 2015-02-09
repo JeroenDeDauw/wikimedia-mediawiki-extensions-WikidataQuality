@@ -126,7 +126,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
             }
 
             $res = $dbr->select(
-                'wbq_constraints_from_templates',											                    							// $table
+                'wdq_constraints_from_templates',											                    							// $table
                 array('pid', 'constraint_name', 'base_property', 'exceptions', 'item', 'items', 'max', 'min', 'property', 'values_' ),		// $vars (columns of the table)
                 ("pid = $numericPropertyId"),												                  								// $conds
                 __METHOD__,																	                    							// $fname = 'Database::select',
