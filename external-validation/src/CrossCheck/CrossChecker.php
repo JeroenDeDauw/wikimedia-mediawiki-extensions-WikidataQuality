@@ -4,10 +4,8 @@ namespace WikidataQuality\ExternalValidation\CrossCheck;
 
 
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
 use WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\MappingEvaluator;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult;
@@ -57,7 +55,7 @@ class CrossChecker
         $this->loadBalancer = wfGetLB();
 
         // Include mapping
-        require( "mapping.inc.php" );
+        require( 'mapping.inc.php' );
         $this->mapping = $mapping;
     }
 
@@ -65,7 +63,7 @@ class CrossChecker
      * Starts the whole cross-check process.
      * Statements of the item will be checked against each external database, that is supported and linked by the item.
      * @param \ItemId $itemId - Id of the item, that should be cross-cheked
-     * @return \CompareResultList
+     * @return \CompareResultList with results or null
      */
     public function execute( $itemId )
     {
@@ -86,6 +84,7 @@ class CrossChecker
 
             return $results;
         }
+        return null;
     }
 
     /**
@@ -152,6 +151,7 @@ class CrossChecker
      * Retrieves external entity by its id from database.
      * @param \PropertyId $identifierPropertyId - id of the identifier property, that represents the external database
      * @param string $externalId - id of the external entity
+     * @return string with external_data or return null
      */
     private function getExternalEntity( $identifierPropertyId, $externalId )
     {
@@ -160,11 +160,12 @@ class CrossChecker
 
         // Run query
         $numericPropertyId = $identifierPropertyId->getNumericId();
-        $result = $db->selectRow( DUMP_DATA_TABLE, array( "dump_id", "external_data" ), array( "pid=$numericPropertyId", "external_id=\"$externalId\"" ) );
+        $result = $db->selectRow( DUMP_DATA_TABLE, array( 'dump_id', 'external_data' ), array( "pid=$numericPropertyId", "external_id=\"$externalId\"" ) );
         if ( $result !== false ) {
             $this->dumpMetaInformation = $this->getMetaInformation( $db, $result->dump_id );
             return $result->external_data;
         }
+        return null;
     }
 
     /**
@@ -184,22 +185,25 @@ class CrossChecker
             $dataSourceName = $result->name;
             return new DumpMetaInformation( $format, $language, $dateFormat, $dataSourceName );
         }
+        return null;
     }
 
     /**
      * Compares a single DataValue object with a external entity by evaluating the property mapping.
+     * @param $propertyId
+     * @param $claimGuid
      * @param $dataValue
      * @param $externalEntity
      * @param $propertyMapping
-     * @return \CompareResult
+     * @return \CompareResult new compare result (true/false) or null
      */
     private function compareDataValue( $propertyId, $claimGuid, $dataValue, $externalEntity, $propertyMapping )
     {
         // Get external values by evaluating mapping
         $mapingEvaluator = MappingEvaluator::getEvaluator( $this->dumpMetaInformation->getFormat(), $externalEntity );
         if ( $mapingEvaluator ) {
-            $nodeSelector = $propertyMapping[ "nodeSelector" ];
-            $valueFormatter = array_key_exists( "valueFormatter", $propertyMapping ) ? $propertyMapping[ "valueFormatter" ] : null;
+            $nodeSelector = $propertyMapping[ 'nodeSelector' ];
+            $valueFormatter = array_key_exists( 'valueFormatter', $propertyMapping ) ? $propertyMapping[ 'valueFormatter' ] : null;
             $externalValues = $mapingEvaluator->evaluate( $nodeSelector, $valueFormatter );
 
             // Start comparer if external value could be evaluated
@@ -214,5 +218,6 @@ class CrossChecker
                 }
             }
         }
+        return null;
     }
 }

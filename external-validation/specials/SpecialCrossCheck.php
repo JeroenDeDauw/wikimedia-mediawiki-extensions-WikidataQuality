@@ -21,7 +21,7 @@ class SpecialCrossCheck extends SpecialPage
      */
     function getGroupName()
     {
-        return "wikidataquality";
+        return 'wikidataquality';
     }
 
     /**
@@ -122,10 +122,10 @@ class SpecialCrossCheck extends SpecialPage
                     // Body of table
                     $tableOutput .=
                         "|-\n"
-                        . "| " . $result->getPropertyId() . "\n"
-                        . "| " . $localValues . "\n"
-                        . "| " . $externalValues . "\n"
-                        . "| " . $result->getDataSourceName() . "\n"
+                        . '| ' . $result->getPropertyId() . "\n"
+                        . '| ' . $localValues . "\n"
+                        . '| ' . $externalValues . "\n"
+                        . '| ' . $result->getDataSourceName() . "\n"
                         . $status;
                 }
 

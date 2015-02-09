@@ -30,7 +30,7 @@ abstract class DataValueComparer
 
     /**
      * Meta information of the current dump.
-     * @var DumpMetaInformation
+     * @var \DumpMetaInformation
      */
     protected $dumpMetaInformation;
 
@@ -54,8 +54,10 @@ abstract class DataValueComparer
 
 
     /**
+     * @param $dumpMetaInformation
      * @param \DataValue $dataValue - wikibase DataValue
      * @param array $externalValues - external database values
+     * @param $localValues
      */
     public function __construct( $dumpMetaInformation, DataValue $dataValue, $externalValues, $localValues = null )
     {
@@ -75,19 +77,21 @@ abstract class DataValueComparer
 
     /**
      * Returns an instance of a comparer suitable to the given DataValue.
+     * @param array $dumpMetaInformation
      * @param \DataValue $dataValue - wikibase DataValue
      * @param array $externalValues - external database values
-     * @return DataValueComparer
+     * @return DataValueComparer or null
      */
     public static function getComparer( $dumpMetaInformation, DataValue $dataValue, $externalValues )
     {
         foreach ( self::$comparers as $comparer ) {
             $reflector = new ReflectionClass( $comparer );
-            $acceptedDataValues = $reflector->getStaticPropertyValue( "acceptedDataValues" );
+            $acceptedDataValues = $reflector->getStaticPropertyValue( 'acceptedDataValues' );
             $dataValueClass = get_class( $dataValue );
             if ( in_array( $dataValueClass, $acceptedDataValues ) ) {
                 return new $comparer( $dumpMetaInformation, $dataValue, $externalValues );
             }
         }
+        return null;
     }
 }

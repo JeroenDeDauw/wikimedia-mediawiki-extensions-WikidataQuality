@@ -60,6 +60,8 @@ class CompareResult {
 
 
     /**
+     * @param $propertyId
+     * @param $claimGuid
      * @param array $localValues
      * @param array $externalValues
      * @param bool $dataMismatch
