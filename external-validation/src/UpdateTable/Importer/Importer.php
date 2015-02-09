@@ -45,7 +45,7 @@ abstract class Importer
      */
     function __construct( $dumpFileName, $dumpDataFormat, $dumpLanguage, $importContext )
     {
-        $this->dumpFile = join( DIRECTORY_SEPARATOR, array( __DIR__, "..", "..", "..", "dumps", $dumpFileName ) );
+        $this->dumpFile = implode( DIRECTORY_SEPARATOR, array( __DIR__, '..', '..', '..', 'dumps', $dumpFileName ) );
         $this->dumpDataFormat = $dumpDataFormat;
         $this->dumpLanguage = $dumpLanguage;
         $this->importContext = $importContext;
@@ -66,7 +66,7 @@ abstract class Importer
             print "Removing old entries\n";
         }
         if ( $wgDBtype === 'sqlite' ) {
-            $db->delete( $tableName, "pid=" . $propertyId );
+            $db->delete( $tableName, 'pid=' . $propertyId );
         } else {
             do {
                 $db->commit( __METHOD__, 'flush' );
@@ -84,6 +84,7 @@ abstract class Importer
     /**
      * Download dump of the current database
      * @param string $dumpUrl - url of the dump file
+     * @return boolean - true if success
      */
     protected function downloadDump( $dumpUrl )
     {
@@ -94,7 +95,7 @@ abstract class Importer
         }
 
         // Create file
-        $targetFile = fopen( $this->dumpFile, "wb" );
+        $targetFile = fopen( $this->dumpFile, 'wb' );
 
         // Start curl for downloading
         $curlSession = curl_init( $dumpUrl );
@@ -104,7 +105,7 @@ abstract class Importer
         curl_setopt( $curlSession, CURLOPT_FILE, $targetFile );
         if ( !$this->importContext->isQuiet() ) {
             curl_setopt( $curlSession, CURLOPT_NOPROGRESS, false );
-            curl_setopt( $curlSession, CURLOPT_PROGRESSFUNCTION, array( $this, "downloadProgressCallback" ) );
+            curl_setopt( $curlSession, CURLOPT_PROGRESSFUNCTION, array( $this, 'downloadProgressCallback' ) );
         }
         curl_exec( $curlSession );
 
@@ -140,7 +141,7 @@ abstract class Importer
     {
         if ( empty( $downloadTotal ) ) {
             print "\r\033[K";
-            print "Downloading database dump... " . $this->formatBytes( $downloadNow );
+            print 'Downloading database dump... ' . $this->formatBytes( $downloadNow );
         } else {
             $progress = $downloadNow / $downloadTotal * 100;
             print "\r\033[K";
@@ -202,19 +203,19 @@ abstract class Importer
     protected function insertMetaInformation( $db, $name, $format, $language, $source, $size, $license )
     {
         $accumulator = array(
-            "name" => $name,
-            "date" => null,
-            "format" => $format,
-            "language" => $language,
-            "source" => $source,
-            "size" => $size,
-            "license" => $license
+            'name' => $name,
+            'date' => null,
+            'format' => $format,
+            'language' => $language,
+            'source' => $source,
+            'size' => $size,
+            'license' => $license
         );
 
-        $db->commit( __METHOD__, "flush" );
+        $db->commit( __METHOD__, 'flush' );
         wfWaitForSlaves();
 
-        $rowCount = $db->selectRowCount( $this->importContext->getMetaTableName(), "*", "name=\"$name\"" );
+        $rowCount = $db->selectRowCount( $this->importContext->getMetaTableName(), '*', "name=\"$name\"" );
         if ( $rowCount == 0 ) {
             $db->insert( $this->importContext->getMetaTableName(), $accumulator );
         } else {
@@ -230,7 +231,7 @@ abstract class Importer
      */
     protected function getDumpId( $db, $name )
     {
-        $result = $db->selectRow( $this->importContext->getMetaTableName(), "row_id", "name=\"$name\"" );
+        $result = $db->selectRow( $this->importContext->getMetaTableName(), 'row_id', "name=\"$name\"" );
         if ( $result == false ) {
             return false;
         } else {
@@ -248,13 +249,13 @@ abstract class Importer
     protected function insertEntity( $db, $dumpId, $pid, $externalId, $externalData )
     {
         $accumulator = array(
-            "dump_id" => $dumpId,
-            "pid" => $pid,
-            "external_id" => $externalId,
-            "external_data" => $externalData
+            'dump_id' => $dumpId,
+            'pid' => $pid,
+            'external_id' => $externalId,
+            'external_data' => $externalData
         );
 
-        $db->commit( __METHOD__, "flush" );
+        $db->commit( __METHOD__, 'flush' );
         wfWaitForSlaves();
         $db->insert( $this->importContext->getTargetTableName(), $accumulator );
     }

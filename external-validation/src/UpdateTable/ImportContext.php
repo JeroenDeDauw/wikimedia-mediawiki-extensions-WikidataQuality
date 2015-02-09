@@ -18,18 +18,18 @@ class ImportContext
      * table name of the table to import to
      * @var string
      */
-    private $targetTableName = "";
+    private $targetTableName = '';
 
     /**
      * table name of the table with dump meta information
      * @var string
      */
-    private $metaTableName = "";
+    private $metaTableName = '';
 
     /**
      * @var LoadBalancer
      */
-    private $loadBalancer = null;
+    private $loadBalancer;
 
     /**
      * @var int

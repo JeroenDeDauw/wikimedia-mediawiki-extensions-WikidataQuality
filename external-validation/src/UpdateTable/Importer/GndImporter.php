@@ -7,13 +7,12 @@ use SimpleXMLElement;
 
 class GndImporter extends Importer
 {
-    const DATABASE_NAME = "GND";
-    const DUMP_DATA_FORMAT = "xml";
-    const DUMP_LANGUAGE = "de";
-    const DUMP_URL_FORMAT = "http://datendienst.dnb.de/cgi-bin/mabit.pl?cmd=fetch&userID=GNDxml&pass=gndmarcxml143&mabheft=Tpgesamt%d%dgndmrc.xml.gz";
-    const DUMP_LICENSE = "CC-0 1.0";
-    const DUMP_FILE_NAME = "gnd.xml.gz";
-    const WD_PROPERTY_ID = "227";
+    const DATABASE_NAME = 'GND';
+    const DUMP_DATA_FORMAT = 'xml';
+    const DUMP_LANGUAGE = 'de';
+    const DUMP_URL_FORMAT = 'http://datendienst.dnb.de/cgi-bin/mabit.pl?cmd=fetch&userID=GNDxml&pass=gndmarcxml143&mabheft=Tpgesamt%d%dgndmrc.xml.gz';
+    const DUMP_FILE_NAME = 'gnd.xml.gz';
+    const WD_PROPERTY_ID = '227';
     const ENTITY_ID_XPATH = "/RECORD/CONTROLFIELD[@TAG=\"001\"]/text()";
     const BUFFER_SIZE = 4096;
 
@@ -27,7 +26,7 @@ class GndImporter extends Importer
      * Temporary record that is used when parsing the xml dump
      * @var string
      */
-    private $tempRecord = "";
+    private $tempRecord = '';
 
     /**
      * Number of external entites that were imported
@@ -102,10 +101,10 @@ class GndImporter extends Importer
         // Parse dump and insert entities
         xml_set_element_handler(
             $this->parser,
-            "startElement",
-            "endElement"
+            'startElement',
+            'endElement'
         );
-        xml_set_character_data_handler( $this->parser, "characterData" );
+        xml_set_character_data_handler( $this->parser, 'characterData' );
         $this->parseDump( $this->db );
 
         // Release connection
@@ -121,28 +120,28 @@ class GndImporter extends Importer
     private function buildDumpUrl( $previous = false )
     {
         $now = new DateTime();
-        $year = intval( $now->format( "y" ) );
-        $month = intval( $now->format( "m" ) );
+        $year = intval( $now->format( 'y' ) );
+        $month = intval( $now->format( 'm' ) );
 
         if ( $previous ) {
-            if ( $month == 1 ) {
+            if ( $month === 1 ) {
                 $month = 6;
                 $year--;
-            } else if ( $month < 6 ) {
+            } elseif ( $month < 6 ) {
                 $month = 10;
                 $year--;
-            } else if ( $month < 10 ) {
+            } elseif ( $month < 10 ) {
                 $month = 2;
             } else {
                 $month = 6;
             }
         } else {
-            if ( $month == 1 ) {
+            if ( $month === 1 ) {
                 $month = 10;
                 $year--;
-            } else if ( $month < 6 ) {
+            } elseif ( $month < 6 ) {
                 $month = 2;
-            } else if ( $month < 10 ) {
+            } elseif ( $month < 10 ) {
                 $month = 6;
             } else {
                 $month = 10;
@@ -160,7 +159,7 @@ class GndImporter extends Importer
     private function parseDump( $db )
     {
         if ( !$this->importContext->isQuiet() ) {
-            print "Importing entities... ";
+            print 'Importing entities... ';
         }
 
         $file = gzopen( $this->dumpFile, 'rb' );
@@ -172,11 +171,10 @@ class GndImporter extends Importer
 
     /**
      * SAX callback function for start-element event
-     * @param Xml parser $parser - current xml parser
      * @param string $name - name of the starting element
      * @param Array $attributes - attributes of the starting element
      */
-    private function startElement( $parser, $name, $attributes )
+    private function startElement( $name, $attributes )
     {
         if ( $name == "RECORD" || !empty( $this->tempRecord ) ) {
             $this->tempRecord .= "<$name";
@@ -189,10 +187,9 @@ class GndImporter extends Importer
 
     /**
      * SAX callback function for end-element event
-     * @param Xml parser $parser - current xml parser
      * @param string $name - name of the ending element
      */
-    private function endElement( $parser, $name )
+    private function endElement( $name )
     {
         $this->tempRecord .= "</$name>";
         if ( $name == "RECORD" ) {
@@ -200,7 +197,7 @@ class GndImporter extends Importer
             $this->numberOfImportedEntites++;
             if ( !$this->importContext->isQuiet() ) {
                 print "\r\033[K";
-                print "Importing entities... " . $this->numberOfImportedEntites;
+                print 'Importing entities... ' . $this->numberOfImportedEntites;
             }
             $this->tempRecord = "";
         }
@@ -208,10 +205,9 @@ class GndImporter extends Importer
 
     /**
      * SAX callback function for character-data event
-     * @param Xml parser $parser - current xml parser
      * @param string $cdata - content of an element
      */
-    private function characterData( $parser, $cdata )
+    private function characterData( $cdata )
     {
         $this->tempRecord .= htmlspecialchars( $cdata );
     }
