@@ -24,8 +24,15 @@ abstract class DataValueComparer
         'WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueComparer',
         'WikidataQuality\ExternalValidation\CrossCheck\Comparer\MultilingualTextValueComparer',
         'WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer',
-        'WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer'
+        'WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer',
+        'WikidataQuality\ExternalValidation\CrossCheck\Comparer\QuantityValueComparer'
     );
+
+    /**
+     * Meta information of the current dump.
+     * @var DumpMetaInformation
+     */
+    protected $dumpMetaInformation;
 
     /**
      * Wikibase data value.
@@ -50,8 +57,9 @@ abstract class DataValueComparer
      * @param \DataValue $dataValue - wikibase DataValue
      * @param array $externalValues - external database values
      */
-    public function __construct( DataValue $dataValue, $externalValues, $localValues = null )
+    public function __construct( $dumpMetaInformation, DataValue $dataValue, $externalValues, $localValues = null )
     {
+        $this->dumpMetaInformation = $dumpMetaInformation;
         $this->dataValue = $dataValue;
         $this->externalValues = $externalValues;
         $this->localValues = $localValues;
@@ -71,14 +79,14 @@ abstract class DataValueComparer
      * @param array $externalValues - external database values
      * @return DataValueComparer
      */
-    public static function getComparer( DataValue $dataValue, $externalValues )
+    public static function getComparer( $dumpMetaInformation, DataValue $dataValue, $externalValues )
     {
         foreach ( self::$comparers as $comparer ) {
             $reflector = new ReflectionClass( $comparer );
             $acceptedDataValues = $reflector->getStaticPropertyValue( "acceptedDataValues" );
             $dataValueClass = get_class( $dataValue );
             if ( in_array( $dataValueClass, $acceptedDataValues ) ) {
-                return new $comparer( $dataValue, $externalValues );
+                return new $comparer( $dumpMetaInformation, $dataValue, $externalValues );
             }
         }
     }

@@ -125,7 +125,7 @@ class SpecialCrossCheck extends SpecialPage
                         . "| " . $result->getPropertyId() . "\n"
                         . "| " . $localValues . "\n"
                         . "| " . $externalValues . "\n"
-                        . "| GND\n"                                         // TODO: get from database
+                        . "| " . $result->getDataSourceName() . "\n"
                         . $status;
                 }
 
