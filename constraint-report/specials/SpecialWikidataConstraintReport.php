@@ -3,12 +3,17 @@
 namespace WikidataQuality\ConstraintReport\Specials;
 
 use SpecialPage;
+use Html;
+use WikidataQuality\ConstraintChecker\ConstraintChecker;
+
+
+/*use SpecialPage;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Store;
 use Wikibase\DataModel\Statement;
-use Wikibase\DataModel\Snak;
+use Wikibase\DataModel\Snak;*/
 
 //TODO (prio high): define tests for the checks against constraints (test items with statements)
 //TODO (prio high): add support for remaining constraints (some might use a common set of methods):
@@ -42,6 +47,8 @@ use Wikibase\DataModel\Snak;
 
 class SpecialWikidataConstraintReport extends SpecialPage {
 
+    private $output = '';
+
     function __construct() {
         parent::__construct( 'ConstraintReport' );
     }
@@ -64,367 +71,87 @@ class SpecialWikidataConstraintReport extends SpecialPage {
         return $this->msg( 'wikidataquality-constraintreport' )->text();
     }
 
-    private $output = '';
-
     /**
      * @see SpecialPage::execute
      *
      * @param string|null $par
      */
     function execute( $par ) {
+        // Get output
+        $out = $this->getOutput();
+
+        // Build cross-check form
         $this->setHeaders();
-        $out = $this->getContext()->getOutput();
 
-        // Show form
-        $out->addHTML( "<p>Enter an Item or a Property ID to check the corresponding Entity's statements against Constraints.</p>" );
-        $out->addHTML( "<form name='EntityIdForm' action='" . $_SERVER['PHP_SELF'] . "' method='post'>" );
-        $out->addHTML( "<input placeholder='Qxx/Pxx' name='entityID' id='entity-input'>" );
-        $out->addHTML( "<input type='submit' value='Check' />" );
-        $out->addHTML( "</form><br /><br />" );
+        $out->addHTML( $this->getHtmlForm() );
 
-        if( !isset($_POST['entityID']) || strlen($_POST['entityID']) == 0 ) {
+        if( !empty($_POST['entityID'] ) ) {
+            $constraintChecker = new ConstraintChecker();
+            $results = $constraintChecker->execute( $_POST['entityID'] );
+        } else {
             return;
         }
 
-        $entity = $this->entityFromParameter( $_POST['entityID'] );
-        if( $entity == null ) {
-            $out->addWikiText( "No valid entityID given or entity does not exist: " . $_POST['entityID'] . "\n" );
+        if( $results ) {
+            $this->output .= $this->getTableHeader();
+            $this->output .= "|-\n|}"; // close Table
+
+            foreach( $results as $checkResult) {
+                $this->addOutputRow( $checkResult );
+            }
+
+            $out->addWikiText($this->output);
             return;
         }
 
-        $out->addHTML( '<h2>Constraint report for ' . $entity->getType() . ' ' . $entity->getId() . ' (' . $entity->getLabel('en') . '):</h2><br />' );
-
-        $entityStatements = $entity->getStatements();
-        $entityStatementsArray = $entityStatements->toArray();
-        $propertyCount = array();
-        foreach( $entityStatementsArray as $entityStatement ) {
-            if( array_key_exists($entityStatement->getPropertyId()->getNumericId(), $propertyCount) ) {
-                $propertyCount[$entityStatement->getPropertyId()->getNumericId()]++;
-            } else {
-                $propertyCount[$entityStatement->getPropertyId()->getNumericId()] = 0;
-            }
-        }
-
-        $dbr = wfGetDB( DB_SLAVE );
-
-        $this->output .=
-            "{| class=\"wikitable sortable\"\n"
-            . "! Property !! class=\"unsortable\" | Value !! Constraint !! class=\"unsortable\" | Parameters !! Status\n";
-
-        foreach( $entityStatements as $statement ) {
-
-            $claim = $statement->getClaim();
-
-            $propertyId = $claim->getPropertyId();
-            $numericPropertyId = $propertyId->getNumericId();
-
-            $mainSnak = $claim->getMainSnak();
-            if( $mainSnak->getType() == 'value' ) {
-                $dataValueString = $this->dataValueToString( $mainSnak->getDataValue() );
-            } else {
-                $dataValueString = '\'\'(' . $mainSnak->getType() . '\'\')';
-            }
-
-            $res = $dbr->select(
-                'wdq_constraints_from_templates',											                    							// $table
-                array('pid', 'constraint_name', 'base_property', 'exceptions', 'item', 'items', 'max', 'min', 'property', 'values_' ),		// $vars (columns of the table)
-                ("pid = $numericPropertyId"),												                  								// $conds
-                __METHOD__,																	                    							// $fname = 'Database::select',
-                array('')																	                    							// $options = array()
-            );
-
-            foreach( $res as $row ) {
-
-                switch( $row->constraint_name ) {
-                    case 'Diff within range':
-                        $this->checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $row->base_property, $row->min, $row->max, $entityStatements );
-                        break;
-                    case 'Inverse':
-                        $this->checkInverseConstraint( $propertyId, $dataValueString, $row->property);
-                        break;
-                    case 'Multi value':
-                        $this->checkMultiValueConstraint( $propertyId, $dataValueString, $propertyCount );
-                        break;
-                    case 'One of':
-                        $this->checkOneOfConstraint( $propertyId, $dataValueString, $row->values_ );
-                        break;
-                    case 'Qualifier':
-                        $this->checkQualifierConstraint( $propertyId, $dataValueString );
-                        break;
-                    case 'Range':
-                        $this->checkRangeConstraint( $propertyId, $dataValueString, $row->min, $row->max );
-                        break;
-					case 'Single value':
-						$this->checkSingleValueConstraint( $propertyId, $dataValueString, $propertyCount );
-						break;
-                    case 'Symmetric':
-                        $this->checkSymmetricConstraint( $propertyId, $dataValueString);
-                        break;
-                    case 'Target required claim':
-                        $this->checkTargetRequiredClaimConstraint( $propertyId, $dataValueString, $row->property, $row->item, $row->items);
-                        break;
-                    default:
-                        //not yet implemented cases, also error case
-                        $this->addOutputRow( $propertyId, $dataValueString, $row->constraint_name, '', 'todo' );
-                        break;
-                }
-
-            }
-
-        }
-
-        $this->output .= "|-\n|}";
-        $out->addWikiText($this->output);
     }
 
-    function getItem( $itemID ) {
+    private function getHtmlForm()
+    {
+        return Html::openElement( 'p' )
+                . $this->msg( 'wikidataquality-constraint-instructions' )->text()
+                . Html::element( 'br' )
+                . $this->msg( 'wikidataquality-constraint-instructions-example' )->text()
+                . Html::closeElement( 'p' )
+                . Html::openElement(
+                    'form',
+                    array(
+                        'action' => $_SERVER[ 'PHP_SELF' ],
+                        'method' => 'post'
+                    )
+                )
+                . Html::input(
+                    'entityID',
+                    '',
+                    'text',
+                    array(
+                        'id' => 'wdq-constraint-entityId',
+                        'placeholder' => $this->msg( 'wikidataquality-constraint-form-id-placeholder' )->text()
+                    )
+                )
+                . Html::input(
+                    'submit',
+                    $this->msg( 'wikidataquality-constraint-form-submit-label' )->text(),
+                    'submit',
+                    array(
+                        'id' => 'wbq-constraint-submit'
+                    )
+                )
+                . Html::closeElement( 'form' );
+    }
+
+
+
+
+    function addOutputRow( $result ) {
         $lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
-        return $lookup->getEntity(new ItemId($itemID));
-    }
-
-    function entityFromParameter( $parameter ) {
-        $lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
-
-        switch(strtoupper($parameter[0])) {
-            case 'Q':
-                return $lookup->getEntity(new ItemId($parameter));
-            case 'P':
-                return $lookup->getEntity(new PropertyId($parameter));
-            default:
-                return null;
-        }
-    }
-
-    function hasProperty( $itemStatementsArray, $propertyId ) {
-        foreach( $itemStatementsArray as $itemStatement ) {
-            if ($itemStatement->getPropertyId() == $propertyId){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    function hasClaim( $itemStatementsArray, $propertyId, $claimItemIdOrArray ) {
-        foreach( $itemStatementsArray as $itemStatement ) {
-            if ($itemStatement->getPropertyId() == $propertyId){
-                if (getType($claimItemIdOrArray) == "string" ) {
-                    if ($this->singleHasClaim( $itemStatement, $claimItemIdOrArray)){
-                        return true;
-                    }
-                } else {
-                    if ($this->arrayHasClaim( $itemStatement, $claimItemIdOrArray)){
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    function singleHasClaim( $itemStatement, $claimItemId) {
-        if ( $itemStatement->getClaim()->getMainSnak()->getDataValue()->getEntityId()->getSerialization() == $claimItemId) {
-            return true;
-        }
-        return false;
-    }
-
-    function arrayHasClaim( $itemStatement, $claimItemIdArray) {
-        foreach( $claimItemIdArray as $claimItemId) {
-            if ( $itemStatement->getClaim()->getMainSnak()->getDataValue()->getEntityId()->getSerialization() == $claimItemId) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    function convertStringFromTemplatesToArray( $string ) {
-        $toReplace = array("{", "}", "|", "[", "]", " ");
-        return explode(",", str_replace($toReplace, "", $string));
-    }
-
-    function checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $basePropertyId, $min, $max, $entityStatements ) {
-        $parameterString = 'base Property: ' . $basePropertyId . ', min: ' . $min . ', max: ' . $max;
-
-        foreach( $entityStatements as $statement ) {
-            if( $basePropertyId == $statement->getClaim()->getPropertyId() ) {
-                $mainSnak = $statement->getClaim()->getMainSnak();
-
-                if( $mainSnak->getType() == 'value' ) {
-                    $basePropertyDataValueString = $this->dataValueToString( $mainSnak->getDataValue() );
-
-                    $diff = abs( $dataValueString-$basePropertyDataValueString );
-
-                    if( $diff < $min || $diff > $max ) {
-                        $status = 'violation';
-                    } else {
-                        $status = 'compliance';
-                    }
-                } else {
-                    $status = 'violation';
-                }
-
-                $this->addOutputRow( $propertyId, $dataValueString, 'Diff within range', $parameterString, $status );
-            }
-        }
-    }
-
-    function checkInverseConstraint( $propertyId, $dataValueString, $property) {
-        $targetItem = $this->entityFromParameter( $dataValueString->getSerialization() );
-        $parameterString = 'Property: ' . $property;
-        if ($targetItem == null) {
-            $this->addOutputRow( $propertyId, $dataValueString, 'Inverse', $parameterString, 'fail' );
-            return;
-        }
-        $targetItemStatements = $targetItem->getStatements();
-        $targetItemStatementsArray = $targetItemStatements->toArray();
-
-        $targetHasProperty = $this->hasProperty( $targetItemStatementsArray, $property );
-        $status = $targetHasProperty ? 'compliance' : 'violation';
-
-        $this->addOutputRow( $propertyId, $dataValueString, 'Inverse', $parameterString, $status );
-    }
-
-    function checkMultiValueConstraint( $propertyId, $dataValueString, $propertyCount ) {
-        if( $propertyCount[$propertyId->getNumericId()] <= 1 ) {
-            $status = 'violation';
-        } else {
-            $status = 'compliance';
-        }
-
-        $this->addOutputRow( $propertyId, $dataValueString, 'Multi value', '\'\'(none)\'\'', $status );
-    }
-
-    function checkOneOfConstraint( $propertyId, $dataValueString, $values ) {
-        $allowedValues = $this->convertStringFromTemplatesToArray( $values );
-
-        if( !in_array($dataValueString, $allowedValues) ) {
-            $status = 'violation';
-        } else {
-            $status = 'compliance';
-        }
-
-        $showMax = 5;
-        if( sizeof($allowedValues) <= $showMax ) {
-            $parameterString = 'values: ' . implode(", ", $allowedValues);
-        } else {
-            $parameterString = 'values: ' . implode(", ", array_slice($allowedValues, 0, $showMax)) . ' \'\'(and ' . (sizeof($allowedValues)-$showMax) . ' more)\'\'';
-        }
-
-        $this->addOutputRow( $propertyId, $dataValueString, 'One of', $parameterString, $status );
-    }
-
-    function checkQualifierConstraint( $propertyId, $dataValueString ) {
-        $this->addOutputRow( $propertyId, $dataValueString, 'Qualifier', '\'\'(none)\'\'', 'violation' );
-    }
-
-    function checkRangeConstraint( $propertyId, $dataValueString, $min, $max ) {
-        if( $dataValueString < $min || $dataValueString > $max ) {
-            $status = 'violation';
-        } else {
-            $status = 'compliance';
-        }
-
-        $parameterString = 'min: ' . $min . ', max: ' . $max;
-
-        $this->addOutputRow( $propertyId, $dataValueString, 'Range', $parameterString, $status );
-    }
-
-    function checkSingleValueConstraint( $propertyId, $dataValueString, $propertyCount ) {
-        if( $propertyCount[$propertyId->getNumericId()] > 1 ) {
-            $status = 'violation';
-        } else {
-            $status = 'compliance';
-        }
-
-        $this->addOutputRow( $propertyId, $dataValueString, 'Single value', '\'\'(none)\'\'', $status );
-    }
-
-    function checkSymmetricConstraint( $propertyId, $dataValueString ) {
-        $targetItem = $this->entityFromParameter( $dataValueString->getSerialization() );
-        if ($targetItem == null) {
-            $this->addOutputRow( $propertyId, $dataValueString, 'Symmetric', '', 'fail' );
-            return;
-        }
-
-        $targetItemStatements = $targetItem->getStatements();
-        $targetItemStatementsArray = $targetItemStatements->toArray();
-
-        $targetHasProperty = $this->hasProperty( $targetItemStatementsArray, $propertyId );
-        $status = $targetHasProperty ? 'compliance' : 'violation';
-
-        $this->addOutputRow( $propertyId, $dataValueString, 'Symmetric', '', $status );
-    }
-
-    function checkTargetRequiredClaimConstraint( $propertyId, $dataValueString, $property, $item, $items) {
-        $targetItem = $this->entityFromParameter( $dataValueString->getSerialization() );
-        $parameterString = 'property: ' . $property;
-        if ($targetItem == null) {
-            $this->addOutputRow( $propertyId, $dataValueString, 'Target required claim', $parameterString, 'fail' );
-            return;
-        }
-
-        $targetItemStatements = $targetItem->getStatements();
-        $targetItemStatementsArray = $targetItemStatements->toArray();
-
-        // 3 possibilities: only property is set, property and item are set or property and items are set
-        if ($item == null && $items == null) {
-            $targetHasProperty = $this->hasProperty( $targetItemStatementsArray, $property );
-            $status = $targetHasProperty ? 'compliance' : 'violation';
-        } else if ($items == null) {
-            $parameterString .= ' item: ' . $item;
-            // also check, if value of this statement = $item
-            $status = $this->hasClaim( $targetItemStatementsArray, $property, $item ) ? 'compliance' : 'violation';
-        } else {
-            $items = $this->convertStringFromTemplatesToArray( $items );
-            $parameterString .= ' items: ' . implode(', ', $items);
-            $status = $this->hasClaim( $targetItemStatementsArray, $property, $items ) ? 'compliance' : 'violation';
-        }
-
-        $this->addOutputRow( $propertyId, $dataValueString, 'Target required claim', $parameterString, $status );
-    }
-
-    function dataValueToString( $dataValue ) {
-        $dataValueType = $dataValue->getType();
-        switch( $dataValueType ) {
-            case 'string':
-            case 'decimal':
-            case 'number':
-            case 'boolean':
-            case 'unknown':
-                return $dataValue->getValue();
-            case 'quantity':
-                return $dataValue->getAmount()->getValue();
-            case 'time':
-                return $dataValue->getTime();
-            case 'globecoordinate':
-            case 'geocoordinate':
-                return 'Latitude: ' . $dataValue->getLatitude() . ', Longitude: ' . $dataValue->getLongitude();
-            case 'monolingualtext':
-                return $dataValue->getText();
-            case 'multilingualtext':
-                if( array_key_exists('en', $dataValue) ) {
-                    return $dataValue->getTexts()['en'];
-                } else {
-                    return array_shift($dataValue->getTexts());
-                };
-            case 'wikibase-entityid':
-                return $dataValue->getEntityId();
-            case 'bad':
-            default:
-                //error case
-        }
-    }
-
-    function addOutputRow( $propertyId, $dataValueString, $constraintName, $parameterString, $status ) {
-        $lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
-
         $this->output .=
             "|-\n"
-            . "| " . $propertyId . " (" . $lookup->getEntity($propertyId)->getLabel('en') . ") "
-            . "|| " . $dataValueString . " "
-            . "|| " . $constraintName . " "
-            . "|| " . $parameterString . " ";
-        switch( $status ) {
+            . "| " . $result->getPropertyId . " (" . $lookup->getEntity($result->getPropertyId)->getLabel('en') . ") "
+            . "|| " . $result->getDataValue . " "
+            . "|| " . $result->getConstraintName . " "
+            . "|| " . $result->getParameter . " ";
+        switch( $result->status ) {
             case 'compliance':
                 $this->output .= "|| <div style=\"color:#088A08\">compliance <b>(+)</b></div>\n";
                 break;
@@ -442,6 +169,16 @@ class SpecialWikidataConstraintReport extends SpecialPage {
                 $this->output .= "|| <div style=\"color:#808080\">check failed <b>:(</b></div>\n";
                 //error case
         }
+    }
+
+    /**
+     * @return string
+     */
+    private function getTableHeader()
+    {
+        return "{| class=\"wikitable sortable\"\n"
+            . "! Property !! class=\"unsortable\" | Value !! Constraint !! class=\"unsortable\" | Parameters !! Status\n";
+
     }
 
 }

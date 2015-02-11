@@ -52,7 +52,7 @@ class SpecialCrossCheck extends SpecialPage
 
         $out->addHTML(
             Html::openElement( 'p' )
-            . $this->msg( 'special-crosscheck-instructions' )->text()
+            . $this->msg( 'wikidataquality-crosscheck-instructions' )->text()
             . Html::element( 'br' )
             . $this->msg( 'wikidataquality-crosscheck-instructions-example' )->text()
             . Html::closeElement( 'p' )
