@@ -9,7 +9,7 @@ class RangeChecker {
         $this->statements = $statements;
     }
 
-    function checkRangeConstraint( $propertyId, $dataValueString, $min, $max ) {
+    public function checkRangeConstraint( $propertyId, $dataValueString, $min, $max ) {
         if( $dataValueString < $min || $dataValueString > $max ) {
             $status = 'violation';
         } else {
@@ -22,7 +22,7 @@ class RangeChecker {
     }
 
 
-    function checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $basePropertyId, $min, $max, $entityStatements ) {
+    public function checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $basePropertyId, $min, $max, $entityStatements ) {
         $parameterString = 'base Property: ' . $basePropertyId . ', min: ' . $min . ', max: ' . $max;
 
         foreach( $entityStatements as $statement ) {

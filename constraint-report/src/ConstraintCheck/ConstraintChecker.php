@@ -1,6 +1,6 @@
 <?php
 
-namespace WikidataQuality\ConstraintChecker;
+namespace WikidataQuality\ConstraintReport\ConstraintCheck;
 
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\DataModel\Statement\StatementList;
@@ -9,6 +9,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
  * Class ConstraintChecker
+ * @package WikidataQuality\ConstraintReport\ConstraintReport
  * @author BP2014N1
  * @license GNU GPL v2+
  */
@@ -194,6 +195,13 @@ class ConstraintChecker {
             $this->rangeChecker = new RangeChecker( $this->statements);
         }
         return $this->qualifierChecker;
+    }
+
+    private function getTypeChecker()
+    {
+        if( !isset( $this->typeChecker ) ) {
+            $this->typeChecker = new TypeChecker( $this->statements );
+        }
     }
 
     /**
