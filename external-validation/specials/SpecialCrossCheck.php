@@ -52,7 +52,7 @@ class SpecialCrossCheck extends SpecialPage
 
         $out->addHTML(
             Html::openElement( 'p' )
-            . $this->msg( 'special-crosscheck-instructions' )->text()
+            . $this->msg( 'wikidataquality-crosscheck-instructions' )->text()
             . Html::element( 'br' )
             . $this->msg( 'wikidataquality-crosscheck-instructions-example' )->text()
             . Html::closeElement( 'p' )
@@ -100,7 +100,7 @@ class SpecialCrossCheck extends SpecialPage
                 // Head of table
                 $tableOutput =
                     "{| class=\"wikitable sortable\"\n"
-                    . "! ". $this->msg( 'datatypes-type-wikibase-property' )->text() ." !! class=\"unsortable\" | ". $this->msg( 'wikidataquality-value' )->text() ." !! class=\"unsortable\" | ". $this->msg( 'wikidataquality-crosscheck-comparative-value' )->text() ." !! ". $this->msg( 'wikidataquality-crosscheck-external-source' )->text() ." !! ". $this->msg( 'wikidataquality-status' )->text() ."\n";
+                    . '! '. $this->msg( 'datatypes-type-wikibase-property' )->text() ." !! class=\"unsortable\" | ". $this->msg( 'wikidataquality-value' )->text() ." !! class=\"unsortable\" | ". $this->msg( 'wikidataquality-crosscheck-comparative-value' )->text() ." !! ". $this->msg( 'wikidataquality-crosscheck-external-source' )->text() ." !! ". $this->msg( 'wikidataquality-status' )->text() ."\n";
 
                 foreach ( $results as $result ) {
                     // Parse value arrays to concatenated strings
