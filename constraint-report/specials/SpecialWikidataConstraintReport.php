@@ -4,16 +4,7 @@ namespace WikidataQuality\ConstraintReport\Specials;
 
 use SpecialPage;
 use Html;
-use WikidataQuality\ConstraintChecker\ConstraintChecker;
-
-
-/*use SpecialPage;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Repo\Store;
-use Wikibase\DataModel\Statement;
-use Wikibase\DataModel\Snak;*/
+use WikidataQuality\ConstraintReport\ConstraintChecker\ConstraintChecker;
 
 //TODO (prio high): define tests for the checks against constraints (test items with statements)
 //TODO (prio high): add support for remaining constraints (some might use a common set of methods):

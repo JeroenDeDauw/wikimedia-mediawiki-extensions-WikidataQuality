@@ -1,10 +1,16 @@
 <?php
 
-namespace WikidataQuality\ConstraintReport\ConstraintCheck;
+namespace WikidataQuality\ConstraintReport\ConstraintChecker;
 
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Repo\Store;
+use Wikibase\DataModel\Statement;
+use Wikibase\DataModel\Snak;
+use WikidataQuality\ConstraintReport\ConstraintChecker\CheckResult;
 
 
 /**
@@ -66,9 +72,6 @@ class ConstraintChecker {
 
             $this->statements = $entity->getStatements();
 
-            // only call this function, when you really need the property count (lazy initialization)
-            $propertyCount = $this->getPropertyCount( $this->statements );
-
             $dbr = wfGetDB( DB_SLAVE );
 
             foreach( $this->statements as $statement ) {
@@ -121,7 +124,7 @@ class ConstraintChecker {
                             break;
 
                         // QualifierCheckers
-                        case "Qualifier": // todo
+                        case "Qualifier":
                             $result[] = $this->getQualifierChecker()->checkQualifierConstraint( $propertyId, $dataValueString );
                             break;
                         case "Qualifiers": // todo
@@ -140,7 +143,7 @@ class ConstraintChecker {
 
                         default:
                             //not yet implemented cases, also error case
-                            $result[] = new \CheckResult( $propertyId, $dataValueString, $row->constraint_name, "", "todo" );
+                            $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, "", "todo" );
                             break;
                     }
 
