@@ -11,6 +11,13 @@ use Wikibase\Repo\Store;
 use Wikibase\DataModel\Statement;
 use Wikibase\DataModel\Snak;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\ValueCountChecker;
+use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\CommonsLinkChecker;
+use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\ConnectionChecker;
+use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\QualifierChecker;
+use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\RangeChecker;
+use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\TypeChecker;
+use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\FormatChecker;
+use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 
 
 /**
@@ -72,7 +79,8 @@ class ConstraintChecker {
             $this->statements = $entity->getStatements();
 
             $dbr = wfGetDB( DB_SLAVE );
-
+            $result = array();
+            
             foreach( $this->statements as $statement ) {
 
                 $claim = $statement->getClaim();
@@ -87,8 +95,6 @@ class ConstraintChecker {
                     __METHOD__,																	                    							// $fname = 'Database::select',
                     array('')																	                    							// $options = array()
                 );
-
-                $result = array();
 
                 foreach( $res as $row ) {
 
@@ -110,7 +116,7 @@ class ConstraintChecker {
 
                         // ConnectionCheckers
                         case "Target required claim":
-                            $result[] = $this->getConnectionChecker()->checkSymmetricConstraint( $propertyId, $dataValueString, $row->property, $row->$item, $row->$items );
+                            $result[] = $this->getConnectionChecker()->checkSymmetricConstraint( $propertyId, $dataValueString, $row->property, $row->item, $row->items );
                             break;
                         case "Symmetric":
                             $result[] = $this->getConnectionChecker()->checkSymmetricConstraint( $propertyId, $dataValueString );
@@ -146,17 +152,16 @@ class ConstraintChecker {
                             $result[] = $this->getTypeChecker()->checkValueTypeConstraint( $propertyId, $dataValueString, $row->class, $row->classes, $row->relation );
                             break;
 
-
                         // Rest
                         case "Format":
                             $result[] = $this->getFormatChecker()->checkFormatConstraint( $propertyId, $dataValueString );
                             break;
-                        case "Item":
-                            $result[] = $this->getItemChecker()->checkItemConstraint( $propertyId, $dataValueString, $this->statements, $row->property, $row->item, $row->items);
+                        case "Item": //todo
+                            //$result[] = $this->getItemChecker()->checkItemConstraint( $propertyId, $dataValueString, $this->statements, $row->property, $row->item, $row->items);
                             break;
                         case "Commons link":
                             $result[] = $this->getCommonsLinkChecker()->checkCommonsLinkConstraint( $propertyId, $dataValueString, $statement );
-
+                            break;
                         default:
                             //not yet implemented cases, also error case SHOULD NOT BE INVOKED
                             $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, "", "todo" );
@@ -168,7 +173,7 @@ class ConstraintChecker {
             }
 
         }
-        return null;
+        return $result;
     }
 
     private function getEntityID($entityId)
@@ -219,8 +224,9 @@ class ConstraintChecker {
     private function getTypeChecker()
     {
         if( !isset( $this->typeChecker ) ) {
-            $this->typeChecker = new TypeChecker( $this->statements );
+            $this->typeChecker = new TypeChecker( $this->statements, $this->entityLookup );
         }
+        return $this->typeChecker;
     }
 
     private function getOneOfChecker()
@@ -228,6 +234,7 @@ class ConstraintChecker {
         if( !isset( $this->oneOfChecker ) ) {
             $this->oneOfChecker = new OneOfChecker( $this->statements );
         }
+        return $this->oneOfChecker;
     }
 
     private function getCommonsLinkChecker()
@@ -235,20 +242,24 @@ class ConstraintChecker {
         if( !isset( $this->commonsLinkChecker ) ) {
             $this->commonsLinkChecker = new CommonsLinkChecker( $this->statements );
         }
+        return $this->commonsLinkChecker;
     }
 
+    //todo
     private function getItemChecker()
     {
         if( !isset( $this->itemChecker ) ) {
             $this->item = new ItemChecker( $this->statements );
         }
+        return $this->itemChecker;
     }
 
     private function getFormatChecker()
     {
-        if( !isset( $this->typeChecker ) ) {
-            $this->formatChecker = new FormatChecker( $this->statements );
+        if( !isset( $this->formatChecker ) ) {
+            $this->formatChecker = new FormatChecker();
         }
+        return $this->formatChecker;
     }
 
     /**
@@ -314,7 +325,7 @@ class ConstraintChecker {
             $parameterString = 'values: ' . implode(", ", array_slice($allowedValues, 0, $showMax)) . ' \'\'(and ' . (sizeof($allowedValues)-$showMax) . ' more)\'\'';
         }
 
-        return new \CheckResult($propertyId, $dataValueString, "One of", $parameterString, $status );
+        return new CheckResult($propertyId, $dataValueString, "One of", $parameterString, $status );
     }
 
 

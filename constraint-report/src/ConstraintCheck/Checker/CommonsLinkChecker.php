@@ -1,5 +1,9 @@
 <?php
 
+namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
+
+use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
+
 class CommonsLinkChecker {
 
     public function checkCommonsLinkConstraint( $propertyId, $dataValueString, $statement ) {
@@ -7,7 +11,7 @@ class CommonsLinkChecker {
             $status = $this->url_exists( $dataValueString ) ? 'compliance' : 'violation';
         else
             $status = 'violation';
-        $this->addOutputRow($propertyId, $dataValueString, 'Commons  link', '\'\'(none)\'\'', $status);
+        return new CheckResult($propertyId, $dataValueString, 'Commons link', '\'\'(none)\'\'', $status );
     }
 
     private function url_exists($url) {

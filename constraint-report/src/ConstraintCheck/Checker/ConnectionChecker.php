@@ -1,5 +1,10 @@
 <?php
 
+namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
+
+use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
+use Wikibase\DataModel\Entity\ItemId;
+
 class ConnectionChecker {
 
     private $statements;
@@ -11,11 +16,10 @@ class ConnectionChecker {
     }
 
     function checkTargetRequiredClaimConstraint( $propertyId, $dataValueString, $property, $item, $items) {
-        $targetItem = $this->entityLookup->getEntity( new EntityId( $dataValueString->getSerialization() ));
+        $targetItem = $this->entityLookup->getEntity( new ItemId( $dataValueString->getSerialization() ));
         $parameterString = 'property: ' . $property;
         if ($targetItem == null) {
-            return new \CheckResult($propertyId, $dataValueString, "Target required claim", $parameterString, "fail" );
-            return;
+            return new CheckResult($propertyId, $dataValueString, "Target required claim", $parameterString, "fail" );
         }
 
         $targetItemStatements = $targetItem->getStatements();
@@ -35,13 +39,13 @@ class ConnectionChecker {
             $status = $this->hasClaim( $targetItemStatementsArray, $property, $items ) ? 'compliance' : 'violation';
         }
 
-        return new \CheckResult($propertyId, $dataValueString, "Target required claim", $parameterString, $status );
+        return new CheckResult($propertyId, $dataValueString, "Target required claim", $parameterString, $status );
     }
 
     public function checkSymmetricConstraint( $propertyId, $dataValueString ) {
-        $targetItem = $this->entityLookup->getEntity( new EntityId( $dataValueString->getSerialization() ));
+        $targetItem = $this->entityLookup->getEntity( new ItemId( $dataValueString->getSerialization() ));
         if ($targetItem == null) {
-            return new \CheckResult($propertyId, $dataValueString, "Symmetric", "", "fail");
+            return new CheckResult($propertyId, $dataValueString, "Symmetric", "", "fail");
             return;
         }
 
@@ -51,14 +55,14 @@ class ConnectionChecker {
         $targetHasProperty = $this->hasProperty( $targetItemStatementsArray, $propertyId );
         $status = $targetHasProperty ? 'compliance' : 'violation';
 
-        return new \CheckResult($propertyId, $dataValueString, "Symmetric", "", $status );
+        return new CheckResult($propertyId, $dataValueString, "Symmetric", "", $status );
     }
 
     public function checkInverseConstraint( $propertyId, $dataValueString, $property) {
-        $targetItem = $this->entityLookup->getEntity( new EntityId( $dataValueString->getSerialization() ));
+        $targetItem = $this->entityLookup->getEntity( new ItemId( $dataValueString->getSerialization() ));
         $parameterString = 'Property: ' . $property;
         if ($targetItem == null) {
-            return new \CheckResult($propertyId, $dataValueString, "Inverse", §parameterString, "fail" );
+            return new CheckResult($propertyId, $dataValueString, "Inverse", $parameterString, "fail" );
             return;
         }
         $targetItemStatements = $targetItem->getStatements();
@@ -67,12 +71,12 @@ class ConnectionChecker {
         $targetHasProperty = $this->hasProperty( $targetItemStatementsArray, $property );
         $status = $targetHasProperty ? 'compliance' : 'violation';
 
-        return new \CheckResult($propertyId, $dataValueString, "Inverse", §parameterString, $status );
+        return new CheckResult($propertyId, $dataValueString, "Inverse", $parameterString, $status );
     }
 
     // TODO
     public function checkConflictsWithConstraint( $propertyId, $dataValueString ) {
-        return new \CheckResult($propertyId, $dataValueString, "Conflicts with", '\'\'(none)\'\'', "todo" );
+        return new CheckResult($propertyId, $dataValueString, "Conflicts with", '\'\'(none)\'\'', "todo" );
     }
 
     private function hasProperty( $itemStatementsArray, $propertyId ) {

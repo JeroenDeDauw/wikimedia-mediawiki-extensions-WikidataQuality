@@ -1,5 +1,9 @@
 <?php
 
+namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
+
+use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
+
 class QualifierChecker
 {
 
@@ -12,12 +16,12 @@ class QualifierChecker
 
     public function checkQualifierConstraint($propertyId, $dataValueString)
     {
-        return new \CheckResult($propertyId, $dataValueString, "Qualifier", '\'\'(none)\'\'', "violation");
+        return new CheckResult($propertyId, $dataValueString, "Qualifier", '\'\'(none)\'\'', "violation");
     }
 
     public function checkQualifiersConstraint($propertyId, $dataValueString)
     {
-        return new \CheckResult($propertyId, $dataValueString, "Qualifiers", '\'\'(none)\'\'', "todo" );
+        return new CheckResult($propertyId, $dataValueString, "Qualifiers", '\'\'(none)\'\'', "todo" );
     }
 
 }

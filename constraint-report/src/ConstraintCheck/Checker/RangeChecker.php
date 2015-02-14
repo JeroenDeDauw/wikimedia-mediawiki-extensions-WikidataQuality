@@ -1,5 +1,9 @@
 <?php
 
+namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
+
+use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
+
 class RangeChecker {
 
     private $statements;
@@ -18,7 +22,7 @@ class RangeChecker {
 
         $parameterString = 'min: ' . $min . ', max: ' . $max;
 
-        return new \CheckResult($propertyId, $dataValueString, "Range", $parameterString, $status );
+        return new CheckResult($propertyId, $dataValueString, "Range", $parameterString, $status );
     }
 
 
@@ -43,7 +47,7 @@ class RangeChecker {
                     $status = 'violation';
                 }
 
-                return new \CheckResult($propertyId, $dataValueString, "Diff within range", §parameterString, $status );
+                return new CheckResult($propertyId, $dataValueString, "Diff within range", $parameterString, $status );
             }
         }
     }

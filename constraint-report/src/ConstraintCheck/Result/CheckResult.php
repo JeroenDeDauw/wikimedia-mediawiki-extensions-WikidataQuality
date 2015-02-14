@@ -1,6 +1,6 @@
 <?php
 
-namespace WikidataQuality\ConstraintChecker;
+namespace WikidataQuality\ConstraintReport\ConstraintCheck\Result;
 
 class CheckResult {
 

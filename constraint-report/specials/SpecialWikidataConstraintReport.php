@@ -4,7 +4,8 @@ namespace WikidataQuality\ConstraintReport\Specials;
 
 use SpecialPage;
 use Html;
-use WikidataQuality\ConstraintReport\ConstraintChecker\ConstraintChecker;
+use WikidataQuality\ConstraintReport\ConstraintCheck\ConstraintChecker;
+use Wikibase\Repo\WikibaseRepo;
 
 //TODO (prio high): define tests for the checks against constraints (test items with statements)
 //TODO (prio high): add support for remaining constraints (some might use a common set of methods):
@@ -68,11 +69,11 @@ class SpecialWikidataConstraintReport extends SpecialPage {
      * @param string|null $par
      */
     function execute( $par ) {
-        // Get output
-        $out = $this->getOutput();
-
         // Build cross-check form
         $this->setHeaders();
+
+        // Get output
+        $out = $this->getOutput();
 
         $out->addHTML( $this->getHtmlForm() );
 
@@ -85,12 +86,10 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 
         if( $results ) {
             $this->output .= $this->getTableHeader();
-            $this->output .= "|-\n|}"; // close Table
-
             foreach( $results as $checkResult) {
                 $this->addOutputRow( $checkResult );
             }
-
+            $this->output .= "|-\n|}"; // close Table
             $out->addWikiText($this->output);
             return;
         }
@@ -138,11 +137,11 @@ class SpecialWikidataConstraintReport extends SpecialPage {
         $lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
         $this->output .=
             "|-\n"
-            . "| " . $result->getPropertyId . " (" . $lookup->getEntity($result->getPropertyId)->getLabel('en') . ") "
-            . "|| " . $result->getDataValue . " "
-            . "|| " . $result->getConstraintName . " "
-            . "|| " . $result->getParameter . " ";
-        switch( $result->status ) {
+            . "| " . $result->getPropertyId() . " (" . $lookup->getEntity($result->getPropertyId())->getLabel('en') . ") "
+            . "|| " . $result->getDataValue() . " "
+            . "|| " . $result->getConstraintName() . " "
+            . "|| " . $result->getParameter() . " ";
+        switch( $result->getStatus() ) {
             case 'compliance':
                 $this->output .= "|| <div style=\"color:#088A08\">compliance <b>(+)</b></div>\n";
                 break;
