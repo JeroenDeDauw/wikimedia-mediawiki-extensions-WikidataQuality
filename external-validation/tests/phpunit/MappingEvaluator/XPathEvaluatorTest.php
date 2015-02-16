@@ -2,12 +2,11 @@
 
 namespace WikidataQuality\ExternalValidation\Test\MappingEvaluator;
 
-//use WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\XPathEvaluator;
-require_once 'C:\Program Files (x86)\Xampp\htdocs\mediawiki\extensions\Wikidata\extensions\WikidataQuality\external-validation\src\CrossCheck\MappingEvaluator\XPathEvaluator.php';
-require_once 'C:\Program Files (x86)\Xampp\htdocs\mediawiki\extensions\Wikidata\extensions\WikidataQuality\external-validation\src\CrossCheck\MappingEvaluator\MappingEvaluator.php';
+use WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\MappingEvaluator;
+use WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\XPathEvaluator;
 
 /**
- * @covers WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator
+ * @covers WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\XPathEvaluator
  *
  * @group WikidataQuality
  * @group WikidataQuality\ExternalValidation
@@ -23,8 +22,9 @@ class XPathEvaluatorTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp() {
         parent::setUp();
-        $this->testData = __DIR__ . '/XMLData.xml';
-        $this->mapping = __DIR__ . '/mapping.inc.php';
+        $this->testData = file_get_contents(__DIR__ . '/XMLData.xml');
+        require __DIR__ . '/mapping.inc.php';
+        $this->mapping = $mapping;
         $this->evaluator = new XPathEvaluator( $this->testData );
     }
 
@@ -37,24 +37,20 @@ class XPathEvaluatorTest extends \PHPUnit_Framework_TestCase
 
     public function testEvaluate()
     {
-        $evaluator = $this->initializeXPathEvaluator();
-        $mapping = $this->getMapping();
+        $nodeSelector = $this->mapping[ "testcase one"][ "nodeSelector" ];
+        $this->assertEquals( array('success'), $this->evaluator->evaluate( $nodeSelector ), "should find path" );
 
-        $nodeSelector = $mapping[ "testcase one"[ "nodeSelector" ] ];
-        $this->assertEquals( 'true', $evaluator->evaluate( $nodeSelector ) );
+        $nodeSelector = $this->mapping[ "testcase two"][ "nodeSelector" ];
+        $valueFormatter = $this->mapping[ "testcase two"][ "valueFormatter" ];
+        $this->assertEquals( array('success'), $this->evaluator->evaluate( $nodeSelector, $valueFormatter ), "should format string" );
 
-        $nodeSelector = $mapping[ "testcase two"[ "nodeSelector" ] ];
-        $valueFormatter = $mapping[ "testcase two"[ "valueFormatter" ] ];
-        $this->assertEquals( 'true', $evaluator->evaluate( $nodeSelector, $valueFormatter ) );
-
-        $nodeSelector = $mapping[ "testcase tree"[ "nodeSelector" ] ];
-        $this->assertEquals( null, $evaluator->evaluate( $nodeSelector, $valueFormatter ) ); // null funktioniert wahrscheinlich nicht, kann leider gerade nicht testen ...
+        $nodeSelector = $this->mapping[ "testcase three"][ "nodeSelector" ];
+        $this->assertEquals( array(), $this->evaluator->evaluate( $nodeSelector, $valueFormatter ), "should find nothing" );
     }
 
     public function testGetEvaluator()
     {
-        $testData = $this->getTestData();
-        $evaluator = MappingEvaluator::getEvaluator( 'xml', $testData );
-        $this->assertEquals( 'XPathEvaluator', get_class( $evaluator ) );
+        $evaluator = MappingEvaluator::getEvaluator( 'xml', $this->testData );
+        $this->assertEquals( 'WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\XPathEvaluator', get_class( $evaluator ), "should get XPathEvaluator" );
     }
 }

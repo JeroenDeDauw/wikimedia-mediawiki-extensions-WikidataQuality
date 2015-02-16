@@ -5,7 +5,7 @@ $mapping = array(
     ),
     'testcase two' => array(
         'nodeSelector' => '/test/testcase[@case="two"]/result',
-        'valueFormatter' => 'concat(substring-after(./text(), "."), " ", substring-before(./text(), ".")'
+        'valueFormatter' => 'concat(substring-after(./text(), "."), substring-before(./text(), "."))'
     ),
     'testcase three' => array(
         'nodeSelector' => '/test/testcase[@case="tree"]/result'

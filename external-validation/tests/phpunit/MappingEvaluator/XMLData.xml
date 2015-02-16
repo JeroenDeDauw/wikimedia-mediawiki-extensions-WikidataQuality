@@ -2,6 +2,6 @@
     <testcase case="one" result="true">success</testcase>
     <testcase case="one">failure</testcase>
     <testcase case="two">
-        <result>ue.tr</result>
+        <result>cess.suc</result>
     </testcase>
 </test>
