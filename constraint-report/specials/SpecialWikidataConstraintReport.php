@@ -155,6 +155,9 @@ class SpecialWikidataConstraintReport extends SpecialPage {
             case 'todo':
                 $this->output .= "|| <div style=\"color:#808080\">not yet implemented <b>:(</b></div>\n";
                 break;
+            case 'wtf':
+                $this->output .= "|| <div style=\"color:#7B1F80\">WTF??? <b>:(</b></div>\n";
+                break;
             case 'fail':
             default:
                 $this->output .= "|| <div style=\"color:#808080\">check failed <b>:(</b></div>\n";

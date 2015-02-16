@@ -17,6 +17,7 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\QualifierChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\RangeChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\TypeChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\FormatChecker;
+use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\OneOfChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 
 
@@ -100,7 +101,7 @@ class ConstraintChecker {
 
                     switch( $row->constraint_name ) {
                         // Switch over every constraint, check them accordingly
-                        // Return value should be a CheckResult, which should be inserted in an Array of CheckResults (§results)
+                        // Return value should be a CheckResult, which should be inserted in an Array of CheckResults ($results)
                         // which should be returned in the end
 
                         // ValueCountCheckers
@@ -160,14 +161,14 @@ class ConstraintChecker {
                             $result[] = $this->getFormatChecker()->checkFormatConstraint( $propertyId, $dataValueString );
                             break;
                         case "Commons link":
-                            $result[] = $this->getCommonsLinkChecker()->checkCommonsLinkConstraint( $propertyId, $dataValueString, $statement );
+                            $result[] = $this->getCommonsLinkChecker()->checkCommonsLinkConstraint( $propertyId, $dataValueString );
                             break;
                         case "One of":
-                            $result[] = $this->getOneOfChecker()->checkOneOfConstraint( $propertyId, $dataValueString, $statement );
+                            $result[] = $this->getOneOfChecker()->checkOneOfConstraint( $propertyId, $dataValueString, $row->values_ );
                             break;
                         default:
                             //not yet implemented cases, also error case SHOULD NOT BE INVOKED
-                            $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, "", "todo" );
+                            $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, "", "wtf" );
                             break;
                     }
 
@@ -310,25 +311,6 @@ class ConstraintChecker {
         } else {
             return '\'\'(' . $mainSnak->getType() . '\'\')';
         }
-    }
-
-    function checkOneOfConstraint( $propertyId, $dataValueString, $values ) {
-        $allowedValues = $this->convertStringFromTemplatesToArray( $values );
-
-        if( !in_array($dataValueString, $allowedValues) ) {
-            $status = 'violation';
-        } else {
-            $status = 'compliance';
-        }
-
-        $showMax = 5;
-        if( sizeof($allowedValues) <= $showMax ) {
-            $parameterString = 'values: ' . implode(", ", $allowedValues);
-        } else {
-            $parameterString = 'values: ' . implode(", ", array_slice($allowedValues, 0, $showMax)) . ' \'\'(and ' . (sizeof($allowedValues)-$showMax) . ' more)\'\'';
-        }
-
-        return new CheckResult($propertyId, $dataValueString, "One of", $parameterString, $status );
     }
 
 

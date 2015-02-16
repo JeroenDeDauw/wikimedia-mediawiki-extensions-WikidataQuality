@@ -3,6 +3,7 @@
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 
 use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\OutputLimiter;
+use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\TemplateConverter;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 use Wikibase\DataModel\Entity\ItemId;
 
@@ -46,7 +47,7 @@ class ConnectionChecker {
             $parameterString .= ' item: ' . $item;
             $status = $this->hasClaim($this->statements, $property, $item);
         } else {
-            $items = $this->convertStringFromTemplatesToArray( $items );
+            $items = TemplateConverter::toArray( $items );
             $parameterString .= ' items: ' . implode(', ', $items );
             $status = $this->hasClaim($this->statements, $property, $items);
         }
@@ -72,7 +73,7 @@ class ConnectionChecker {
             // also check, if value of this statement = $item
             $status = $this->hasClaim( $targetItemStatementsArray, $property, $item ) ? 'compliance' : 'violation';
         } else {
-            $items = $this->convertStringFromTemplatesToArray( $items );
+            $items = TemplateConverter::toArray( $items );
             $parameterString .= ' items: ' . implode(', ', $items);
             $status = $this->hasClaim( $targetItemStatementsArray, $property, $items ) ? 'compliance' : 'violation';
         }
@@ -153,14 +154,5 @@ class ConnectionChecker {
             }
         }
         return false;
-    }
-
-    private function convertStringFromTemplatesToArray( $string ) {
-        $toReplace = array("{", "}", "|", "[", "]", " ");
-        return explode(",", str_replace($toReplace, "", $string));
-    }
-
-    private function entityFromParameter($getSerialization)
-    {
     }
 }

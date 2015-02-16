@@ -27,14 +27,14 @@ class TypeChecker {
         $relationId = $relation == 'instance' ? 31 : 279;
         $item = $this->entityLookup->getEntity( new ItemId( $dataValueString->getSerialization() ));
         if( !$item ) {
-            return new CheckResult($propertyId, $dataValueString, "Type", implode(', ', $classesToCheck), 'fail' );
+            return new CheckResult($propertyId, $dataValueString, "Value type", implode(', ', $classesToCheck), 'fail' );
         }
 
         $statements = $this->entityLookup->getEntity( new ItemId( $dataValueString->getSerialization() ) )->getStatements();
 
         $status = $this->hasClassInRelation( $statements, $relationId, $classesToCheck );
         $status = $status ? 'compliance' : 'violation';
-        return new CheckResult($propertyId, $dataValueString, "Type", implode(', ', $classesToCheck), $status );
+        return new CheckResult($propertyId, $dataValueString, "Value type", implode(', ', $classesToCheck), $status );
     }
 
     public function checkTypeConstraint( $propertyId, $dataValueString, $statements, $class, $classes, $relation ) {
