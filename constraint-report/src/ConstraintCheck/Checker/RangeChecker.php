@@ -2,6 +2,7 @@
 
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 
+use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\DataValueParser;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 
 class RangeChecker {
@@ -26,15 +27,15 @@ class RangeChecker {
     }
 
 
-    public function checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $basePropertyId, $min, $max, $entityStatements ) {
+    public function checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $basePropertyId, $min, $max ) {
         $parameterString = 'base Property: ' . $basePropertyId . ', min: ' . $min . ', max: ' . $max;
 
-        foreach( $entityStatements as $statement ) {
+        foreach( $this->statements as $statement ) {
             if( $basePropertyId == $statement->getClaim()->getPropertyId() ) {
                 $mainSnak = $statement->getClaim()->getMainSnak();
 
                 if( $mainSnak->getType() == 'value' ) {
-                    $basePropertyDataValueString = $this->dataValueToString( $mainSnak->getDataValue() );
+                    $basePropertyDataValueString = DataValueParser::dataValueToString( $mainSnak->getDataValue() );
 
                     $diff = abs( $dataValueString-$basePropertyDataValueString );
 
@@ -51,5 +52,6 @@ class RangeChecker {
             }
         }
     }
+
 
 }

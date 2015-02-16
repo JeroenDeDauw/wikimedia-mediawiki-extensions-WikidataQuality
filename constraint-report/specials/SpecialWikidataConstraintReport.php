@@ -69,7 +69,6 @@ class SpecialWikidataConstraintReport extends SpecialPage {
      * @param string|null $par
      */
     function execute( $par ) {
-        // Build cross-check form
         $this->setHeaders();
 
         // Get output
@@ -92,6 +91,8 @@ class SpecialWikidataConstraintReport extends SpecialPage {
             $this->output .= "|-\n|}"; // close Table
             $out->addWikiText($this->output);
             return;
+        } else {
+            $out->addHTML(Html::openElement( 'p' ) . $this->msg( 'wikidataquality-constraint-result-entity-not-existent')->text(). Html::closeElement( 'p' ) );
         }
 
     }

@@ -2,6 +2,7 @@
 
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 
+use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\DataValueParser;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 use Wikibase\DataModel\Entity\ItemId;
 
@@ -61,7 +62,7 @@ class TypeChecker {
             if( $claim->getPropertyId()->getNumericId() == 279) {
                 $mainSnak = $claim->getMainSnak();
                 if( $mainSnak->getType() == 'value' ) {
-                    $dataValueCompareString = $this->dataValueToString( $mainSnak->getDataValue() );
+                    $dataValueCompareString = DataValueParser::dataValueToString( $mainSnak->getDataValue() );
                 } else {
                     $dataValueCompareString = '\'\'(' . $mainSnak->getType() . '\'\')';
                 }
@@ -85,7 +86,7 @@ class TypeChecker {
             if( $numericPropertyId == $relationId ){
                 $mainSnak = $claim->getMainSnak();
                 if( $mainSnak->getType() == 'value' ) {
-                    $dataValueCompareString = $this->dataValueToString( $mainSnak->getDataValue() );
+                    $dataValueCompareString = DataValueParser::dataValueToString( $mainSnak->getDataValue() );
                 } else {
                     $dataValueCompareString = '\'\'(' . $mainSnak->getType() . '\'\')';
                 }
@@ -101,33 +102,4 @@ class TypeChecker {
         }
     }
 
-    private function dataValueToString($dataValue)
-    {
-        $dataValueType = $dataValue->getType();
-        switch( $dataValueType ) {
-            case 'string':
-            case 'decimal':
-            case 'number':
-            case 'boolean':
-            case 'unknown':
-                return $dataValue->getValue();
-            case 'quantity':
-                return $dataValue->getAmount()->getValue();
-            case 'time':
-                return $dataValue->getTime();
-            case 'globecoordinate':
-            case 'geocoordinate':
-                return 'Latitude: ' . $dataValue->getLatitude() . ', Longitude: ' . $dataValue->getLongitude();
-            case 'monolingualtext':
-                return $dataValue->getText();
-            case 'multilingualtext':
-                return array_key_exists('en', $dataValue) ? $dataValue->getTexts()['en'] : array_shift($dataValue->getTexts());;
-            case 'wikibase-entityid':
-                return $dataValue->getEntityId();
-            case 'bad':
-            default:
-                return null;
-            //error case
-        }
-    }
 }

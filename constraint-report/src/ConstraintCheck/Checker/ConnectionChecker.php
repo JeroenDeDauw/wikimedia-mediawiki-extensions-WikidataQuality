@@ -2,6 +2,7 @@
 
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 
+use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\OutputLimiter;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 use Wikibase\DataModel\Entity\ItemId;
 
@@ -15,7 +16,44 @@ class ConnectionChecker {
         $this->entityLookup = $lookup;
     }
 
-    function checkTargetRequiredClaimConstraint( $propertyId, $dataValueString, $property, $item, $items) {
+    public function checkConflictsWithConstraint( $propertyId, $dataValueString, $list) {
+        $toReplace = array("{", "}", "|", " ");
+        $listArray = explode(';', str_replace($toReplace, '', $list));
+        $parameterString = OutputLimiter::limitOutput( str_replace($toReplace, '', $list) );
+        foreach( $listArray as $conflictingValues ) {
+            if ( stripos($conflictingValues, ':') === false) {
+                $status = $this->hasProperty( $this->statements, $conflictingValues ) ? 'violation' : 'compliance';
+                if( $status == 'compliance')
+                    break;
+            } else {
+                $subArray = explode(':', $conflictingValues);
+                $property = $subArray[0];
+                $subArray = $subArray[1];
+                $subArray = explode(',', $subArray);
+                $status = $this->hasClaim( $this->statements, $property, $subArray ) ? 'violation' : 'compliance';
+                if( $status == 'compliance')
+                    break;
+            }
+        }
+        return new CheckResult( $propertyId, $dataValueString, 'Conflicts with', $parameterString, $status );
+    }
+
+    public function checkItemConstraint( $propertyId, $dataValueString, $property, $item, $items ) {
+        $parameterString = 'property: ' . $property;
+        if( $item == null && $items == null ){
+            $status = $this->hasProperty( $this->statements, $property ) ? 'compliance' : 'violation';
+        } elseif ($items == null ) {
+            $parameterString .= ' item: ' . $item;
+            $status = $this->hasClaim($this->statements, $property, $item);
+        } else {
+            $items = $this->convertStringFromTemplatesToArray( $items );
+            $parameterString .= ' items: ' . implode(', ', $items );
+            $status = $this->hasClaim($this->statements, $property, $items);
+        }
+        return new CheckResult( $propertyId, $dataValueString, "Item", $parameterString, $status );
+    }
+
+    public function checkTargetRequiredClaimConstraint( $propertyId, $dataValueString, $property, $item, $items) {
         $targetItem = $this->entityLookup->getEntity( new ItemId( $dataValueString->getSerialization() ));
         $parameterString = 'property: ' . $property;
         if ($targetItem == null) {
@@ -74,10 +112,6 @@ class ConnectionChecker {
         return new CheckResult($propertyId, $dataValueString, "Inverse", $parameterString, $status );
     }
 
-    // TODO
-    public function checkConflictsWithConstraint( $propertyId, $dataValueString ) {
-        return new CheckResult($propertyId, $dataValueString, "Conflicts with", '\'\'(none)\'\'', "todo" );
-    }
 
     private function hasProperty( $itemStatementsArray, $propertyId ) {
         foreach( $itemStatementsArray as $itemStatement ) {
