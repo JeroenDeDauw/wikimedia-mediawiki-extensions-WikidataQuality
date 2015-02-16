@@ -47,7 +47,7 @@ class EntityIdValueComparer extends DataValueComparer
      */
     private function getTerms( $entityId, $language )
     {
-        $lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
+        $lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
         $entity = $lookup->getEntity( $entityId );
         if ( $entity ) {
             $aliases = $entity->getAliases( $language );

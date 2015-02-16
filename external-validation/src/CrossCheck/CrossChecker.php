@@ -48,7 +48,7 @@ class CrossChecker
     public function __construct()
     {
         // Get entity lookup
-        $this->entityLookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
+        $this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
 
         // Get load balancer
         wfWaitForSlaves();
@@ -75,6 +75,8 @@ class CrossChecker
             // Check statements for validating identifier properties
             $results = new CompareResultList();
             foreach ( $statements as $statement ) {
+                if (count($statements) > 0) {
+                }
                 $propertyId = $statement->getClaim()->getPropertyId();
                 if ( array_key_exists( $propertyId->getNumericId(), $this->mapping ) ) {
                     // Run cross-check for this database
@@ -177,7 +179,7 @@ class CrossChecker
     private function getMetaInformation( $db, $dumpId )
     {
         // Run query
-        $result = $db->selectRow( DUMP_META_TABLE, array( "format", "language", "date_format", "name" ), array( "row_id=$dumpId" ) );
+        $result = $db->selectRow( DUMP_META_TABLE, array( 'format', 'language', 'date_format', 'name' ), array( "row_id=$dumpId" ) );
         if ( $result !== false ) {
             $format = $result->format;
             $language = $result->language;

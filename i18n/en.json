@@ -4,7 +4,7 @@
     },
 
     "wikidataquality-desc": "Migrate and improve the usage of constraints by visualizing constraint reports and cross-check data with external databases to ensure the quality of Wikidata.",
-    "wikidataquality-specialpages-group": "Wikidata Quality",
+    "specialpages-group-wikidataquality": "Wikidata Quality",
 
     "wikidataquality-value": "Value",
     "wikidataquality-status": "Status",

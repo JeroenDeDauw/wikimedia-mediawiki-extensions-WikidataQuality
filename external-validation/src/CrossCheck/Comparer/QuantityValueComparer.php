@@ -33,7 +33,7 @@ class QuantityValueComparer extends DataValueComparer {
 
         foreach ( $this->externalValues as $externalValue ) {
             // Convert given string to float
-            $externalValue = floatval( $externalValue );
+            $externalValue = (float)( $externalValue );
 
             // Compare
             if( $externalValue >= $lowerBound && $externalValue <= $upperBound ) {
