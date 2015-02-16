@@ -48,7 +48,7 @@ class CrossChecker
     public function __construct()
     {
         // Get entity lookup
-        $this->entityLookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
+        $this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
 
         // Get load balancer
         wfWaitForSlaves();

@@ -4,7 +4,7 @@
     },
 
     "wikidataquality-desc": "{{desc|name=Wikidata Quality|url=https://www.mediawiki.org/wiki/Extension:WikidataQuality}}",
-    "wikidataquality-specialpages-group": "{{doc-special-group|that=are related to the WikidataQuality extension}}",
+    "specialpages-group-wikidataquality": "{{doc-special-group|that=are related to the WikidataQuality extension}}",
 
     "wikidataquality-value": "Name for value of the current statement",
     "wikidataquality-status": "Name for status of the cross-check",
