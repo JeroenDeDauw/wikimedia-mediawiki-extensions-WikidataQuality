@@ -91,7 +91,7 @@ class ConstraintChecker {
 
                 $res = $dbr->select(
                     'wdq_constraints_from_templates',											                    							                                        // $table
-                    array('pid', 'constraint_name', 'base_property', 'class', 'classes', 'exceptions', 'item', 'items', 'list', 'max', 'min', 'property', 'relation', 'values_' ),		// $vars (columns of the table)
+                    array('pid', 'constraint_name', 'base_property', 'class', 'classes', 'exceptions', 'item', 'items', 'list', 'max', 'min', 'pattern', 'property', 'relation', 'values_' ),		// $vars (columns of the table)
                     ("pid = $numericPropertyId"),												                  								                                        // $conds
                     __METHOD__,																	                    							                                        // $fname = 'Database::select',
                     array('')																	                    							                                        // $options = array()
@@ -158,7 +158,7 @@ class ConstraintChecker {
 
                         // Rest
                         case "Format":
-                            $result[] = $this->getFormatChecker()->checkFormatConstraint( $propertyId, $dataValueString );
+                            $result[] = $this->getFormatChecker()->checkFormatConstraint( $propertyId, $dataValueString, $row->pattern );
                             break;
                         case "Commons link":
                             $result[] = $this->getCommonsLinkChecker()->checkCommonsLinkConstraint( $propertyId, $dataValueString );

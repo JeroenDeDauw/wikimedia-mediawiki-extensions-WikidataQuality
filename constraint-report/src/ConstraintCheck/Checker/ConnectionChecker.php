@@ -94,7 +94,7 @@ class ConnectionChecker {
         $targetHasProperty = $this->hasProperty( $targetItemStatementsArray, $propertyId );
         $status = $targetHasProperty ? 'compliance' : 'violation';
 
-        return new CheckResult($propertyId, $dataValueString, "Symmetric", "", $status );
+        return new CheckResult($propertyId, $dataValueString, "Symmetric", '\'\'(none)\'\'', $status );
     }
 
     public function checkInverseConstraint( $propertyId, $dataValueString, $property) {
