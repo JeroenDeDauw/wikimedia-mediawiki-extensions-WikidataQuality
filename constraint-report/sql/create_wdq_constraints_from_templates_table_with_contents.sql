@@ -59,7 +59,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (7, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P21", NULL, NULL, NULL, NULL, NULL);
+ VALUES (7, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P21", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -99,7 +99,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (10, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, ".+\.(webm|ogv|ogg|WebM|OGG)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (10, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, ".+\\.(webm|ogv|ogg|WebM|OGG)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -107,7 +107,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (14, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, ".+\.(svg|png)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (14, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, ".+\\.(svg|png)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -127,7 +127,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (15, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(?i).+\.(svg|png|jpg|jpeg|gif)|", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (15, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(?i).+\\.(svg|png|jpg|jpeg|gif)|", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -143,7 +143,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (17, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|5}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (17, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|11879590}}, {{Q|202444}}, {{Q|12308941}}", "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (17, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|5}}", "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -155,11 +159,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (18, "Commons link", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "File", NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (18, "Commons link", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, "File", NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (18, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(?i).+\.(jpg|jpeg|png|svg|tif|tiff|gif)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (18, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(?i).+\\.(jpg|jpeg|png|svg|tif|tiff|gif)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -231,7 +235,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (21, "One of", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{Q|6581097}}, {{Q|6581072}}, {{Q|1097630}}, {{Q|44148}}, {{Q|43445}}, {{Q|1052281}}, {{Q|2449503}}, {{Q|48270}}, {{Q|1399232}}, {{Q|3277905}}, {{Q|746411}}, {{Q|350374}}, {{Q|660882}}, {{Q|303479}}, somevalue");
+ VALUES (21, "One of", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{Q|6581097}}, {{Q|6581072}}, {{Q|1097630}}, {{Q|303479}}, {{Q|189125}}, {{Q|1052281}}, {{Q|2449503}}, {{Q|48270}}, {{Q|1399232}}, {{Q|3277905}}, {{Q|746411}}, {{Q|350374}}, {{Q|660882}}, {{Q|44148}}, {{Q|43445}},somevalue");
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -239,11 +243,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (21, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|14756018}}, {{Q|2301325}}, {{Q|14073567}}, {{Q|3046146}}, {{Q|1141470}}, {{Q|31184}}, {{Q|16334295}}, {{Q|281643}}, {{Q|10648343}}, {{Q|164950}}, {{Q|1156073}}, {{Q|13417114}}, {{Q|8436}}, {{Q|15618652}}, {{Q|16979650}}, {{Q|874405}}", "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
-INSERT 
- INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (21, "Conflicts with", NULL, NULL, NULL, NULL, "[[Q18646002]]; [[Q18646076]]", NULL, NULL, NULL, NULL, NULL, NULL, "{{P|527}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (21, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|14756018}}, {{Q|2301325}}, {{Q|3418125}}, {{Q|14073567}}, {{Q|3046146}}, {{Q|1141470}}, {{Q|31184}}, {{Q|16334295}}, {{Q|281643}}, {{Q|10648343}}, {{Q|164950}}, {{Q|1156073}}, {{Q|13417114}}, {{Q|8436}}, {{Q|15618652}}, {{Q|16979650}}, {{Q|874405}}", "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -251,11 +251,15 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (21, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|4167410}}, {{Q|4167836}}, {{Q|13406463}}, {{Q|4164871}}, {{Q|8261}}, {{Q|386724}}, {{Q|571}}, {{Q|1371849}}, {{Q|215380}}, {{Q|273057}}, {{Q|101352}}; {{P|360}}; {{P|364}}; {{P|50}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (21, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|4167836}}, {{Q|13406463}}, {{Q|4164871}}, {{Q|8261}}, {{Q|386724}}, {{Q|1371849}}, {{Q|273057}}, {{Q|101352}}, {{Q|132821}}, {{Q|4}}; {{P|360}}; {{P|364}}; {{P|50}}", "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (21, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|132821}}, {{Q|4}}; {{P|279}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (21, "Conflicts with", NULL, NULL, NULL, NULL, "{{Q|18646002}}; {{Q|18646076}}", NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|4167410}}, {{Q|15623926}}, {{Q|202444}}, {{Q|215380}}, {{Q|571}}; {{P|279}}; {{P|527}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (21, "Qualifiers", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|580}}, {{P|582}}, {{P|31}}", "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -375,7 +379,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (35, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (31, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|8441}}, {{Q|467}}, {{Q|6581097}}, {{Q|6581072}}", "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -388,6 +392,14 @@ INSERT
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (35, "Target required claim", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P39", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (35, "Qualifiers", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|580}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (35, "Qualifiers", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|580}}, {{P|582}}, {{P|805}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -443,7 +455,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (39, "Qualifiers", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|580}}, {{P|582}}, {{P|155}}, {{P|156}}, {{P|642}}, {{P|805}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (39, "Qualifiers", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|580}}, {{P|582}}, {{P|1365}}, {{P|1366}}, {{P|642}}, {{P|805}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -471,7 +483,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (41, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(.+\.(svg|png|jpg|jpeg|gif|SVG|PNG|JPG|JPEG|GIF)|)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (41, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(.+\\.(svg|png|jpg|jpeg|gif|SVG|PNG|JPG|JPEG|GIF)|)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -559,7 +571,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (51, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, ".+\.(ogg|wav|oga|mid|flac|OGG)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (51, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, ".+\\.(ogg|wav|oga|mid|flac|OGG)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -576,6 +588,10 @@ INSERT
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (53, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (53, "One of", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q152909, Q200229, Q112707, Q187525, Q511482, Q58389, Q256187, Q210398, Q83969, Q65968, Q1753846, Q131621, Q157217, Q700746, Q31711, Q2364167, Q2638011, Q182135, Q155616, Q2116135, Q2502270, Q193383, Q81589, Q155594, Q12818551, Q853342, Q691928, Q59488, Q35216, Q106151, Q51153, Q131976, Q201615, Q747516, Q834364, Q179840, Q484195, Q3642350, Q4164435, Q201625, Q1158126, Q128938, Q269876, Q895180, Q431928, Q155483, Q689115, Q2472713, Q704151, Q3065370, Q3091190, Q855303, Q133602, Q105285, Q1518738, Q192841, Q93180, Q168352, Q668182, Q2631859, Q122293, Q179544, Q112581, Q327202, Q7209, Q2914584, Q663367, Q45646, Q1570523, Q170022, Q2335769, Q939200, Q211515, Q220641, Q2975299, Q641628, Q7462, Q210601, Q682135, Q704122, Q746782, Q1356167, Q1129036, Q4904491, Q952109, Q1064630, Q601505, Q699788, Q287652, Q194355, Q101978, Q661534, Q9683, Q130875, Q516569, Q5185064, Q260388, Q1094925, Q597494, Q645719, Q1590107, Q2063857, Q155570, Q938786, Q3279354, Q1141077, Q695223, Q207991, Q1347533, Q895187, Q1772267, Q247331, Q13415043, Q10854753, Q4582435, Q819662, Q771679, Q291639, Q161205, Q2354826, Q653865, Q1062422, Q6500483, Q1281137, Q13527812, Q193254, Q378193, Q11239175, Q3313087, Q3271493, Q212475, Q690037, Q11498576, Q11531840, Q159386, Q16009115, Q156433, Q45310, Q1395011, Q115479, Q3324355, Q876797, Q3065926, Q3065039, Q1028587, Q3274200, Q16620526, Q105278, Q157106, Q700158, Q698530, Q175454, Q178438, Q1752059, Q854070, Q3919144, Q1650225, Q15715740, Q796782, Q431575, Q5189053, Q1075161, Q9903, Q3708255, Q895188, Q668414, Q2298285, Q697685, Q705371, Q848661, Q142913, Q2515971, Q859466, Q2628452, Q277700, Q767361, Q161204, Q807249, Q1607870, Q638926, Q8959, Q321219, Q189326, Q699409, Q273874, Q2975395, Q646085, Q4161885, Q567658, Q332531, Q3407336, Q845196, Q1259999, Q1273603, Q1362298, Q11402149, Q1468411, Q10855070, Q10856413, Q2092557, Q813367, Q677173, Q15206798, Q752662, Q200565, Q130858, Q2559223, Q1324480, Q1484140, Q237325, Q5914897, Q1091736, Q519718, Q931486, Q11402148, Q574503, Q3065598, Q3065447, Q6453379, Q2977246, Q1799189, Q17588094, Q1368637, Q2313700, Q538849, Q3065718, Q3658415, Q668150, Q2975325, Q835222, Q1764434, Q2717959, Q11554232, Q2670167, Q1590545, Q3066005, Q11402143, Q2470052, Q13542115, Q1165543, Q920729, Q429499, Q1198163, Q248786, Q2535463, Q11636427, Q3279305, Q849021, Q1226302, Q11520292, Q59027, Q3111454, Q2816439, Q878279, Q1056522, Q8733, Q172797, Q189545, Q913890, Q1069868, Q7183, Q220276, Q1590437, Q2975327, Q508046, Q949099, Q3942219, Q807765, Q388739, Q7405, Q237599, Q1502286, Q11369441, Q3065804, Q2328323, Q3033095, Q16141593, Q3139438, Q3065853, Q634281, Q594373, Q3065541, Q1590508, Q643591, Q1716871, Q3065463, Q507331, Q3613116, Q5312701, Q1107629, Q388127, Q1609118, Q11260880, Q504769, Q10800789, Q457683, Q1019498, Q5877901, Q3270246, Q11488909, Q327194, Q11425648, Q3276433, Q3279276, Q5914644, Q3279396, Q5561996, Q3349225, Q5433408, Q805920, Q11356220, Q355238, Q2006978, Q1283839, Q2477859, Q823420, Q1262271, Q2427192, Q2615540, Q180114, Q695165, Q866428, Q873772, Q15645448, Q13415387, Q2130819, Q2277295, Q655723, Q2975298, Q2975367, Q1542666, Q769552, Q887399, Q12016207, Q1412769, Q698981, Q699494, Q1791350, Q1414843, Q1530838, Q878309, Q5125808, Q7036397, Q959064, Q703919, Q522698, Q477878, Q7524164, Q775738, Q7796016, Q753557, Q75613, Q464319, Q780740, Q5125515, Q827790, Q731162, Q961820, Q7352, Q7375059, Q5125618, Q5079041, Q49725, Q740010, Q599881, Q783489, Q5915091, Q6646907, Q5915086, Q5914758, Q877155, Q873922, Q6424771, Q581531, Q7902709, Q663069, Q783739, Q847837, Q5540814, Q916883, Q920363, Q560837, Q5433363, Q841541, Q81452, Q858431, Q691626, Q861022, Q573437, Q571681, Q571419, Q856691, Q567638, Q782759, Q1714413, Q169705, Q1750348, Q1752110, Q1440482, Q1450591, Q1589976, Q16139353, Q2039257, Q2076431, Q207778, Q2164184, Q2275486, Q2285832, Q1872031, Q1886785, Q1985835, Q199443, Q2000952, Q11622808, Q11400595, Q11402139, Q11402141, Q11402147, Q11527318, Q11537837, Q11565285, Q1158144");
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -831,7 +847,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (94, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(?i).+\.(svg|png|jpg|jpeg|gif|tif|tiff)|", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (94, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(?i).+\\.(svg|png|jpg|jpeg|gif|tif|tiff)|", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -839,15 +855,15 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (97, "Type", NULL, NULL, "Q215627", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (97, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P21", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (97, "Value type", NULL, NULL, "Q355567", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
-
-INSERT 
- INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (97, "Type", NULL, NULL, "Q215627", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
-
-INSERT 
- INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (97, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P21", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -979,7 +995,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (109, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(?i).+\.(svg|png|jpg|jpeg|gif|tif|tiff)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (109, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(?i).+\\.(svg|png|jpg|jpeg|gif|tif|tiff)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -1079,7 +1095,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (117, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, ".+\.(svg|png|PNG)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (117, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, ".+\\.(svg|png|PNG)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -1167,6 +1183,10 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (127, "Value type", NULL, NULL, NULL, "Q215627, Q43229", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (128, "Type", NULL, NULL, "Q8054", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "subclass", NULL, NULL, NULL, NULL);
 
 INSERT 
@@ -1211,7 +1231,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (136, "Type", NULL, NULL, NULL, "Q5, Q386724", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (136, "Type", NULL, NULL, NULL, "Q5, Q386724, Q16334295", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -1303,7 +1323,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (154, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(?i).+\.(svg|png|jpg|jpeg|gif|tif|tiff)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (154, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(?i).+\\.(svg|png|jpg|jpeg|gif|tif|tiff)", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (155, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|5}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -1355,6 +1379,10 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (157, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q149086", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P1196", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (157, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
@@ -1363,7 +1391,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (158, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(?i).+\.(svg|png|jpg|jpeg|gif)|", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (158, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(?i).+\\.(svg|png|jpg|jpeg|gif)|", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -1423,6 +1451,10 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (166, "Qualifiers", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|585}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (167, "Type", NULL, NULL, "Q811979", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
@@ -1443,7 +1475,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (170, "Value type", NULL, NULL, "Q215627", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (170, "Value type", NULL, NULL, NULL, "Q215627, Q43229, Q16334295", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -1467,7 +1499,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (171, "Type", NULL, NULL, "Q16521", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (171, "Type", NULL, NULL, "Q16521", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -1535,6 +1567,18 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (179, "Type", NULL, NULL, "Q386724", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (179, "Value type", NULL, NULL, "Q7725310", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (179, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|5}}, {{Q|4167410}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (180, "Type", NULL, NULL, "Q386724", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
@@ -1543,11 +1587,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (181, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(?i).+\.(svg|png|jpg|jpeg|gif|tif|tiff|pdf)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (181, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(?i).+\\.(svg|png|jpg|jpeg|gif|tif|tiff|pdf)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (181, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(?i).+\.(svg|png|jpg|jpeg|gif|tif|tiff)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (181, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(?i).+\\.(svg|png|jpg|jpeg|gif|tif|tiff)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -1699,7 +1743,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (195, "Type", NULL, NULL, "Q386724", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (195, "Value type", NULL, NULL, NULL, "Q2668072, Q43229, Q811979", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (195, "Type", NULL, NULL, "Q18593264", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -1811,7 +1859,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (207, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ".+\.(svg|png|jpg|jpeg|gif|SVG|PNG|JPG|JPEG|GIF)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (207, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ".+\\.(svg|png|jpg|jpeg|gif|SVG|PNG|JPG|JPEG|GIF)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -1851,7 +1899,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (212, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "97[89]-([0-57]-\d-\d\d\d\d\d\d\d|[0-57]-\d\d-\d\d\d\d\d\d|[0-57]-\d\d\d-\d\d\d\d\d|[0-57]-\d\d\d\d-\d\d\d\d|[0-57]-\d\d\d\d\d-\d\d\d|[0-57]-\d\d\d\d\d\d-\d\d|[0-57]-\d\d\d\d\d\d\d-\d|[89]\d-\d-\d\d\d\d\d\d|[89]\d-\d\d-\d\d\d\d\d|[89]\d-\d\d\d-\d\d\d\d|[89]\d-\d\d\d\d-\d\d\d|[89]\d-\d\d\d\d\d-\d\d|[89]\d-\d\d\d\d\d\d-\d|[69]\d\d-\d-\d\d\d\d\d|[69]\d\d-\d\d-\d\d\d\d|[69]\d\d-\d\d\d-\d\d\d|[69]\d\d-\d\d\d\d-\d\d|[69]\d\d-\d\d\d\d\d-\d|99[0-8]\d-\d-\d\d\d\d|99[0-8]\d-\d\d-\d\d\d|99[0-8]\d-\d\d\d-\d\d|99[0-8]\d-\d\d\d\d-\d|999\d\d-\d-\d\d\d|999\d\d-\d\d-\d\d|999\d\d-\d\d\d-\d)-\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (212, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "97[89]-([0-57]-\\d-\\d\\d\\d\\d\\d\\d\\d|[0-57]-\\d\\d-\\d\\d\\d\\d\\d\\d|[0-57]-\\d\\d\\d-\\d\\d\\d\\d\\d|[0-57]-\\d\\d\\d\\d-\\d\\d\\d\\d|[0-57]-\\d\\d\\d\\d\\d-\\d\\d\\d|[0-57]-\\d\\d\\d\\d\\d\\d-\\d\\d|[0-57]-\\d\\d\\d\\d\\d\\d\\d-\\d|[89]\\d-\\d-\\d\\d\\d\\d\\d\\d|[89]\\d-\\d\\d-\\d\\d\\d\\d\\d|[89]\\d-\\d\\d\\d-\\d\\d\\d\\d|[89]\\d-\\d\\d\\d\\d-\\d\\d\\d|[89]\\d-\\d\\d\\d\\d\\d-\\d\\d|[89]\\d-\\d\\d\\d\\d\\d\\d-\\d|[69]\\d\\d-\\d-\\d\\d\\d\\d\\d|[69]\\d\\d-\\d\\d-\\d\\d\\d\\d|[69]\\d\\d-\\d\\d\\d-\\d\\d\\d|[69]\\d\\d-\\d\\d\\d\\d-\\d\\d|[69]\\d\\d-\\d\\d\\d\\d\\d-\\d|99[0-8]\\d-\\d-\\d\\d\\d\\d|99[0-8]\\d-\\d\\d-\\d\\d\\d|99[0-8]\\d-\\d\\d\\d-\\d\\d|99[0-8]\\d-\\d\\d\\d\\d-\\d|999\\d\\d-\\d-\\d\\d\\d|999\\d\\d-\\d\\d-\\d\\d|999\\d\\d-\\d\\d\\d-\\d)-\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -1871,11 +1919,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (213, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d\d\d\d \d\d\d\d \d\d\d\d \d\d\d[\dX]", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (213, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d\\d\\d\\d \\d\\d\\d\\d \\d\\d\\d\\d \\d\\d\\d[\\dX]", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (214, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "([1-9]\d{1,8}|)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (214, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "([1-9]\\d{1,8}|)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -1899,7 +1947,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (215, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[OBAFGKMLT][0-9](\.[0-9]){0,1}(VII|V/VI|V|IV/V|IV|III/IV|III|II/III|II|Ib-II|Ib|Iab-b|Iab|Ia/ab|Ia|Ia-O/Ia|a-O){0,1}(e){0,1}(p){0,1}(n){0,1}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (215, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[OBAFGKMLT][0-9](\\.[0-9]){0,1}(VII|V/VI|V|IV/V|IV|III/IV|III|II/III|II|Ib-II|Ib|Iab-b|Iab|Ia/ab|Ia|Ia-O/Ia|a-O){0,1}(e){0,1}(p){0,1}(n){0,1}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -1911,11 +1959,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (217, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[-a-zA-Z0-9 #äöüÄÖÜΓΕЭЖΦ.,°/()-]+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (217, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[-a-zA-Z0-9 #aouAOUA.,:/()-]+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (217, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (217, "Single value", NULL, NULL, NULL, NULL, "{{Q|59201}},{{Q|2289754}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2003,7 +2051,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (223, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(E(\d){0,1})|(S(A|B|AB){0,1}[0abcdm]{0,2})|(I)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (223, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(E(\\d){0,1})|(S(A|B|AB){0,1}[0abcdm]{0,2})|(I)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2011,7 +2059,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (225, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|279}}; {{P|242}}; {{P|627}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (225, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|279}}; {{P|242}}; {{P|627}}; {{P|405}}; {{P|697}}; {{P|574}}; {{P|678}}; {{P|1135}}; {{P|1353}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2019,7 +2067,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (225, "Unique value", NULL, NULL, NULL, NULL, "[[Q3613]], [[Q15483]], [[Q15490]], [[Q20808]], [[Q21130]], [[Q27736]], [[Q28915]], [[Q38822]], [[Q44789]], [[Q46109]], [[Q59798]], [[Q60319]], [[Q88736]], [[Q114264]], [[Q115850]], [[Q116209]], [[Q116312]], [[Q117944]], [[Q118979]], [[Q123279]], [[Q130918]], [[Q131224]], [[Q131492]], [[Q131986]], [[Q132102]], [[Q132229]], [[Q132647]], [[Q132650]], [[Q132967]], [[Q133101]], [[Q133289]], [[Q133340]], [[Q133759]], [[Q133781]], [[Q133831]], [[Q133840]], [[Q133985]], [[Q134036]], [[Q134170]], [[Q134249]], [[Q134459]], [[Q134723]], [[Q135362]], [[Q135584]], [[Q135769]], [[Q135848]], [[Q136216]], [[Q136985]], [[Q137039]], [[Q137054]], [[Q137465]], [[Q137605]], [[Q138488]], [[Q139521]], [[Q140563]], [[Q140812]], [[Q141307]], [[Q141575]], [[Q141042]], [[Q142507]], [[Q143072]], [[Q143254]], [[Q143760]], [[Q144014]], [[Q144428]], [[Q145429]], [[Q145872]], [[Q145936]], [[Q146095]], [[Q146983]], [[Q147044]], [[Q147348]], [[Q148304]], [[Q148336]], [[Q148652]], [[Q148938]], [[Q149031]], [[Q149508]], [[Q149459]], [[Q149886]], [[Q149927]], [[Q150436]], [[Q150604]], [[Q150667]], [[Q156692]], [[Q156901]], [[Q157503]], [[Q157505]], [[Q157665]], [[Q158009]], [[Q158086]], [[Q158341]], [[Q159372]], [[Q161308]], [[Q161577]], [[Q162097]], [[Q162143]], [[Q163137]], [[Q164167]], [[Q165260]], [[Q161675]], [[Q206998]], [[Q210320]], [[Q212032]], [[Q216113]], [[Q218482]], [[Q223302]], [[Q238258]], [[Q247641]], [[Q247836]], [[Q252831]], [[Q256304]], [[Q265684]], [[Q268597]], [[Q286775]], [[Q288279]], [[Q290676]], [[Q291548]], [[Q291636]], [[Q292341]], [[Q292351]], [[Q309499]], [[Q310368]], [[Q310591]], [[Q310745]], [[Q310882]], [[Q310927]], [[Q310977]], [[Q311086]], [[Q311463]], [[Q311714]], [[Q312194]], [[Q312349]], [[Q343251]], [[Q368955]], [[Q469636]], [[Q490401]], [[Q510296]], [[Q514417]], [[Q514515]], [[Q515830]], [[Q522293]], [[Q526640]], [[Q529976]], [[Q536675]], [[Q573055]], [[Q537894]], [[Q541917]], [[Q542488]], [[Q547143]], [[Q548227]], [[Q577619]], [[Q578571]], [[Q581971]], [[Q583378]], [[Q585776]], [[Q594051]], [[Q596457]], [[Q602788]], [[Q607399]], [[Q607912]], [[Q609717]], [[Q630333]], [[Q637716]], [[Q642055]], [[Q646860]], [[Q647507]], [[Q650106]], [[Q650703]], [[Q659774]], [[Q660147]], [[Q662202]], [[Q669771]], [[Q683090]], [[Q716132]], [[Q720501]], [[Q724176]], [[Q726614]], [[Q729037]], [[Q732394]], [[Q736378]], [[Q747421]], [[Q748899]], [[Q749412]], [[Q756181]], [[Q764799]], [[Q773896]], [[Q776109]], [[Q786018]], [[Q809586]], [[Q811624]], [[Q831376]], [[Q841027]], [[Q842663]], [[Q843914]], [[Q847194]], [[Q860112]], [[Q867395]], [[Q873584]], [[Q877147]], [[Q892657]], [[Q910110]], [[Q914039]], [[Q922335]], [[Q928224]], [[Q931930]], [[Q937405]], [[Q938830]], [[Q939613]], [[Q940523]], [[Q941485]], [[Q945272]], [[Q952089]], [[Q955567]], [[Q957567]], [[Q959222]], [[Q960200]], [[Q971690]], [[Q973314]], [[Q975998]], [[Q977223]], [[Q986182]], [[Q1001350]], [[Q1024187]], [[Q1027410]], [[Q1039125]], [[Q1039531]], [[Q1056752]], [[Q1058732]], [[Q1060039]], [[Q1061117]], [[Q1075697]], [[Q1082208]], [[Q1092517]], [[Q1135685]], [[Q1117674]], [[Q1143109]], [[Q1163100]], [[Q1171483]], [[Q1172479]], [[Q1226326]], [[Q1227267]], [[Q1241332]], [[Q1301202]], [[Q1301809]], [[Q1303760]], [[Q1304192]], [[Q1304844]], [[Q1308636]], [[Q1311833]], [[Q1314162]], [[Q1318931]], [[Q1319524]], [[Q1328886]], [[Q1336872]], [[Q1338922]], [[Q1361452]], [[Q1367265]], [[Q1384525]], [[Q1404299]], [[Q1452895]], [[Q1460935]], [[Q1461699]], [[Q1482244]], [[Q1497039]], [[Q1506945]], [[Q5137103]], [[Q1572326]], [[Q1587099]], [[Q1607561]], [[Q1629444]], [[Q1655422]], [[Q1708308]], [[Q1739062]], [[Q1756728]], [[Q1757681]], [[Q1757714]], [[Q1757756]], [[Q1758258]], [[Q1758637]], [[Q1761605]], [[Q1762051]], [[Q1763493]], [[Q1767132]], [[Q1767570]], [[Q1768585]], [[Q1817604]], [[Q1820184]], [[Q1826576]], [[Q1828247]], [[Q1856753]], [[Q1876697]], [[Q1886599]], [[Q1896675]], [[Q1911170]], [[Q1914222]], [[Q1920672]], [[Q1932304]], [[Q1932400]], [[Q1934283]], [[Q1936196]], [[Q1936276]], [[Q1936309]], [[Q1938278]], [[Q1940601]], [[Q1946085]], [[Q1946598]], [[Q1949541]], [[Q1952376]], [[Q1952379]], [[Q1964338]], [[Q1938012]], [[Q2015133]], [[Q2031123]], [[Q2039140]], [[Q2041055]], [[Q2053716]], [[Q2067686]], [[Q2068837]], [[Q2072302]], [[Q2084764]], [[Q2087279]], [[Q2089264]], [[Q2147082]], [[Q2158843]], [[Q2183754]], [[Q2086405]], [[Q2171188]], [[Q2184397]], [[Q2234141]], [[Q2234462]], [[Q2235255]], [[Q2236142]], [[Q2248627]], [[Q2260275]], [[Q2267687]], [[Q2299558]], [[Q2302897]], [[Q2317783]], [[Q2333853]], [[Q2338910]], [[Q2341570]], [[Q2358106]], [[Q2364622]], [[Q2367663]], [[Q2371001]], [[Q2377398]], [[Q2383656]], [[Q2393841]], [[Q2413478]], [[Q2413669]], [[Q2414970]], [[Q2417381]], [[Q2426272]], [[Q2433471]], [[Q2436802]], [[Q2441005]], [[Q2473735]], [[Q2452808]], [[Q2482833]], [[Q2487233]], [[Q2495248]], [[Q2505064]], [[Q2524440]], [[Q2547920]], [[Q2566619]], [[Q2568982]], [[Q2569205]], [[Q2570239]], [[Q2576670]], [[Q2579542]], [[Q2615285]], [[Q2619215]], [[Q2623321]], [[Q2655455]], [[Q2662997]], [[Q2666273]], [[Q2671368]], [[Q2673653]], [[Q2697235]], [[Q2697396]], [[Q2627457]], [[Q2700686]], [[Q2702870]], [[Q2703245]], [[Q2705131]], [[Q2706479]], [[Q2706745]], [[Q2708315]], [[Q2708411]], [[Q2709676]], [[Q2709804]], [[Q2710470]], [[Q2710975]], [[Q2711260]], [[Q2715464]], [[Q2716146]], [[Q2717836]], [[Q2720003]], [[Q2731014]], [[Q2803063]], [[Q2810933]], [[Q2813943]], [[Q2822947]], [[Q2830631]], [[Q2830659]], [[Q2832077]], [[Q2837705]], [[Q2839724]], [[Q2851430]], [[Q2861228]], [[Q2868401]], [[Q2872596]], [[Q2875136]], [[Q2880447]], [[Q2883028]], [[Q2890026]], [[Q2894193]], [[Q2899106]], [[Q2900744]], [[Q2917807]], [[Q2918700]], [[Q2934237]], [[Q2964420]], [[Q2993514]], [[Q2996592]], [[Q2998753]], [[Q3007739]], [[Q3007828]], [[Q3007993]], [[Q3012775]], [[Q3013613]], [[Q3013288]], [[Q3018540]], [[Q3022328]], [[Q3024494]], [[Q3046817]], [[Q3055695]], [[Q3075678]], [[Q3090671]], [[Q3017028]], [[Q3115760]], [[Q3137293]], [[Q3139083]], [[Q3139737]], [[Q3153643]], [[Q3169613]], [[Q3171274]], [[Q3172773]], [[Q3182415]], [[Q3195486]], [[Q3198953]], [[Q3240999]], [[Q3280428]], [[Q3310599]], [[Q3310749]], [[Q3314243]], [[Q3320241]], [[Q3360755]], [[Q3369339]], [[Q3368007]], [[Q3385410]], [[Q3392032]], [[Q3395540]], [[Q3395635]], [[Q3406453]], [[Q3409973]], [[Q3431772]], [[Q3442095]], [[Q3456208]], [[Q3456452]], [[Q3437200]], [[Q3489113]], [[Q3495779]], [[Q3523518]], [[Q3575728]], [[Q3595950]], [[Q3694977]], [[Q3698486]], [[Q3698683]], [[Q3699819]], [[Q3701740]], [[Q3703964]], [[Q3705489]], [[Q3705571]], [[Q3706132]], [[Q3715785]], [[Q3716278]], [[Q3719975]], [[Q3740972]], [[Q3753479]], [[Q3755532]], [[Q3759620]], [[Q3764156]], [[Q3786728]], [[Q3804892]], [[Q3821981]], [[Q3896039]], [[Q3916931]], [[Q3895189]], [[Q3953427]], [[Q3966622]], [[Q4000424]], [[Q4001082]], [[Q4005738]], [[Q4008718]], [[Q4009419]], [[Q4035717]], [[Q4037290]], [[Q4037311]], [[Q4039580]], [[Q4042791]], [[Q4043459]], [[Q4047603]], [[Q4051684]], [[Q4068983]], [[Q4118972]], [[Q4119036]], [[Q4119088]], [[Q4119182]], [[Q4119274]], [[Q4119328]], [[Q4119983]], [[Q4179839]], [[Q4194453]], [[Q4290323]], [[Q4292542]], [[Q4308480]], [[Q4347716]], [[Q4352642]], [[Q4371546]], [[Q4386113]], [[Q4409914]], [[Q4414480]], [[Q4418458]], [[Q4476425]], [[Q4485926]], [[Q4488696]], [[Q4528410]], [[Q4658728]], [[Q4673501]], [[Q4674609]], [[Q4676397]], [[Q4682081]], [[Q4676980]], [[Q4692851]], [[Q4726703]], [[Q4726221]], [[Q4734355]], [[Q4739493]], [[Q4742417]], [[Q4747668]], [[Q4765454]], [[Q4769853]], [[Q4774634]], [[Q4780161]], [[Q4780587]], [[Q4789202]], [[Q4806098]], [[Q4811178]], [[Q4815749]], [[Q4817492]], [[Q4845211]], [[Q4883994]], [[Q4918455]], [[Q4939996]], [[Q4991585]], [[Q5002691]], [[Q5018540]], [[Q5026880]], [[Q5028572]], [[Q5032268]], [[Q5047079]], [[Q5047738]], [[Q5053564]], [[Q5063331]], [[Q5063777]], [[Q5063823]], [[Q5064220]], [[Q5065497]], [[Q5066732]], [[Q5101280]], [[Q5101422]], [[Q5102904]], [[Q5103212]], [[Q5124937]], [[Q5125929]], [[Q5137107]], [[Q5136812]], [[Q5140323]], [[Q5149019]], [[Q5162652]], [[Q5173748]], [[Q5159189]], [[Q5184096]], [[Q5185776]], [[Q5158719]], [[Q5187280]], [[Q5190560]], [[Q5190953]], [[Q5190966]], [[Q5190987]], [[Q5194800]], [[Q5198943]], [[Q5215777]], [[Q5220183]], [[Q5221598]], [[Q5222331]], [[Q5222932]], [[Q5226000]], [[Q5228004]], [[Q5228980]], [[Q5232320]], [[Q5235884]], [[Q5239918]], [[Q5272271]], [[Q5272406]], [[Q5281672]], [[Q5283372]], [[Q5283625]], [[Q5294311]], [[Q5294329]], [[Q5311274]], [[Q5315968]], [[Q5232022]], [[Q5359158]], [[Q5376558]], [[Q5376577]], [[Q5382158]], [[Q5385040]], [[Q5398416]], [[Q5405867]], [[Q5447162]], [[Q5479329]], [[Q5518303]], [[Q5527608]], [[Q5535531]], [[Q5562421]], [[Q5577582]], [[Q5592163]], [[Q5605054]], [[Q5663218]], [[Q5676344]], [[Q5696096]], [[Q5677738]], [[Q5697562]], [[Q5703880]], [[Q5767723]], [[Q5790169]], [[Q5797241]], [[Q5797313]], [[Q5846494]], [[Q5959520]], [[Q5962422]], [[Q6003906]], [[Q6059062]], [[Q6080777]], [[Q6085034]], [[Q6086436]], [[Q6143659]], [[Q6146910]], [[Q6153868]], [[Q6169282]], [[Q6301970]], [[Q6429010]], [[Q6445327]], [[Q6449094]], [[Q6450255]], [[Q6462386]], [[Q6488174]], [[Q6505143]], [[Q6527975]], [[Q6527992]], [[Q6527998]], [[Q6532546]], [[Q6534246]], [[Q6564427]], [[Q6723368]], [[Q6753152]], [[Q6811426]], [[Q6811493]], [[Q6911948]], [[Q6911949]], [[Q6981096]], [[Q7086521]], [[Q7107696]], [[Q7116113]], [[Q7126873]], [[Q7134644]], [[Q7164994]], [[Q7200488]], [[Q7200522]], [[Q7200941]], [[Q7226585]], [[Q7228327]], [[Q7242327]], [[Q7255666]], [[Q7262922]], [[Q7263371]], [[Q7302305]], [[Q7319692]], [[Q7322017]], [[Q7331103]], [[Q7370476]], [[Q7321207]], [[Q7357471]], [[Q7406122]], [[Q7409051]], [[Q7425776]], [[Q7431176]], [[Q7498237]], [[Q7606660]], [[Q7617621]], [[Q7618558]], [[Q7625319]], [[Q7661406]], [[Q7661952]], [[Q7678934]], [[Q7680688]], [[Q7685210]], [[Q7685940]], [[Q7690221]], [[Q7705678]], [[Q7706272]], [[Q7706667]], [[Q7783456]], [[Q7798771]], [[Q7798616]], [[Q7799651]], [[Q7840782]], [[Q7847926]], [[Q7851405]], [[Q7897850]], [[Q7933846]], [[Q7990394]], [[Q8009371]], [[Q8187698]], [[Q8202430]], [[Q8248824]], [[Q8253738]], [[Q8253278]], [[Q8253279]], [[Q8346928]], [[Q8352318]], [[Q8045499]], [[Q8346914]], [[Q8776990]], [[Q8777337]], [[Q8963789]], [[Q8964714]], [[Q9002367]], [[Q9003378]], [[Q9005036]], [[Q9005364]], [[Q9022481]], [[Q9030852]], [[Q9034810]], [[Q9032445]], [[Q9054846]], [[Q9055681]], [[Q9059215]], [[Q9061322]], [[Q9063776]], [[Q9068622]], [[Q9068692]], [[Q9075167]], [[Q9077437]], [[Q9080014]], [[Q9089835]], [[Q9090198]], [[Q9081721]], [[Q9089650]], [[Q9090078]], [[Q9297219]], [[Q9334269]], [[Q9654519]], [[Q10260548]], [[Q10264780]], [[Q10273546]], [[Q10281141]], [[Q10295209]], [[Q10316826]], [[Q10323002]], [[Q10335470]], [[Q10349887]], [[Q10364027]], [[Q10369482]], [[Q10382280]], [[Q10384798]], [[Q10411490]], [[Q10420904]], [[Q10439800]], [[Q10458733]], [[Q10466286]], [[Q10481115]], [[Q10521895]], [[Q10523804]], [[Q10578463]], [[Q10616544]], [[Q10629827]], [[Q10636868]], [[Q10645546]], [[Q10657905]], [[Q10662444]], [[Q10663139]], [[Q10663518]], [[Q10675024]], [[Q10675083]], [[Q10712177]], [[Q10724077]], [[Q10762095]], [[Q10792303]], [[Q10794248]], [[Q10819953]], [[Q10826825]], [[Q11847616]], [[Q12723971]], [[Q12858588]], [[Q13080875]], [[Q13429575]], [[Q13489005]], [[Q13571068]], [[Q13583103]], [[Q13614984]], [[Q13846219]], [[Q13847289]], [[Q13863677]], [[Q14089833]], [[Q14148226]], [[Q14229093]], [[Q14437383]], [[Q14510792]], [[Q14537748]], [[Q14544093]], [[Q14556518]], [[Q14593427]], [[Q14593928]], [[Q14626007]], [[Q14626464]], [[Q14694213]], [[Q14694936]], [[Q14759694]], [[Q14923676]], [[Q14927235]], [[Q14944408]], [[Q14955045]], [[Q15148054]], [[Q15211446]], [[Q15290282]], [[Q15401614]], [[Q15530684]], [[Q15756262]], [[Q15711508]], [[Q15940376]], [[Q15963889]], [[Q15972195]], [[Q16738158]], [[Q16920987]], [[Q17302116]], [[Q17348489]], [[Q17378178]], [[Q17489262]], [[Q17518808]], [[Q17522626]], [[Q17561501]], [[Q17458540]], [[Q17389389]], [[Q18105679]], [[Q18335750]], [[Q937914]], [[Q2000625]], [[Q2096492]], [[Q2206133]], [[Q2491792]], [[Q2599422]], [[Q2791719]], [[Q502030]], [[Q3767504]], [[Q4648985]], [[Q4634156]], [[Q5527833]], [[Q10703568]], [[Q25397]], [[Q39275]], [[Q46076]], [[Q60205]], [[Q174322]], [[Q244133]], [[Q268608]], [[Q312154]], [[Q384345]], [[Q770093]], [[Q961413]],  [[Q1754819]], [[Q1859722]], [[Q2082228]], [[Q2156839]], [[Q2346039]], [[Q3147412]], [[Q3280744]], [[Q3461459]], [[Q3553235]], [[Q4038293]], [[Q518880]], [[Q736473]], [[Q827257]], [[Q1064620]], [[Q10671994]], [[Q1280997]], [[Q1369893]], [[Q1442513]], [[Q1653127]], [[Q1756087]], [[Q1179958]], [[Q1921685]], [[Q1927027]], [[Q1944939]], [[Q1981007]], [[Q2086371]], [[Q2311936]], [[Q2806221]], [[Q3472461]], [[Q3508129]], [[Q3808855]], [[Q3841274]], [[Q4051743]], [[Q4282961]], [[Q5185996]], [[Q5261336]], [[Q8962085]], [[Q8963374]], [[Q15148518]], [[Q15872063]], [[Q7391]], [[Q10872]], [[Q10876]], [[Q18952]], [[Q22708]], [[Q25833]], [[Q26214]], [[Q26308]], [[Q28960]], [[Q53636]], [[Q54950]], [[Q80066]], [[Q102778]], [[Q106345]], [[Q118578]], [[Q130942]], [[Q131393]], [[Q131810]], [[Q143441]], [[Q147877]], [[Q152228]], [[Q173612]], [[Q178235]], [[Q193006]], [[Q203547]], [[Q209602]], [[Q221563]], [[Q241151]], [[Q249907]], [[Q292332]], [[Q430301]], [[Q607044]], [[Q615290]], [[Q623256]], [[Q721722]], [[Q823931]], [[Q841641]], [[Q914888]], [[Q1134438]], [[Q1197160]], [[Q1226966]], [[Q1300407]], [[Q1765819]], [[Q1947035]], [[Q2254408]], [[Q3055705]], [[Q3393217]], [[Q3395756]], [[Q3429854]], [[Q3556237]], [[Q3392049]], [[Q3831105]], [[Q5361179]], [[Q5625164]], [[Q6580400]], [[Q6723361]], [[Q7456120]], [[Q15711568]], [[Q18583954]],   [[Q8316]], [[Q28449]], [[Q21716]], [[Q55475]], [[Q187014]], [[Q217478]], [[Q324132]], [[Q655316]], [[Q656319]], [[Q688840]], [[Q261238]], [[Q134858]], [[Q309516]], [[Q685950]], [[Q7860270]], [[Q806308]], [[Q860738]], [[Q1314424]], [[Q1544130]], [[Q1766734]],[[Q1869724]], [[Q1977569]], [[Q2011837]], [[Q2297709]], [[Q2307123]], [[Q2358171]], [[Q2454483]], [[Q2673947]], [[Q2742517]], [[Q2767054]], [[Q2789954]], [[Q2881036]], [[Q2917235]], [[Q3026783]], [[Q3018929]], [[Q3320604]], [[Q3433973]], [[Q3699001]], [[Q3767758]], [[Q4119131]], [[Q4345819]], [[Q4737298]], [[Q4784455]], [[Q4948271]], [[Q5018256]], [[Q5139167]], [[Q5265833]],  [[Q5733299]], [[Q7236965]], [[Q7362743]], [[Q7396785]], [[Q7575755]], [[Q7624346]], [[Q10638260]], [[Q10464181]], [[Q10730962]], [[Q10716283]], [[Q10719543]], [[Q14565141]], [[Q16295662]], [[Q16322486]], [[Q16335822]], [[Q17188270]],[[Q18058854]]", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (225, "Unique value", NULL, NULL, NULL, NULL, "[[Q3613]], [[Q15483]], [[Q15490]], [[Q20808]], [[Q21130]], [[Q27736]], [[Q28915]], [[Q38822]], [[Q44789]], [[Q46109]], [[Q59798]], [[Q60319]], [[Q88736]], [[Q114264]], [[Q115850]], [[Q116209]], [[Q116312]], [[Q117944]], [[Q118979]], [[Q123279]], [[Q130918]], [[Q131224]], [[Q131492]], [[Q131986]], [[Q132102]], [[Q132229]], [[Q132647]], [[Q132650]], [[Q132967]], [[Q133101]], [[Q133289]], [[Q133340]], [[Q133759]], [[Q133781]], [[Q133831]], [[Q133840]], [[Q133985]], [[Q134036]], [[Q134170]], [[Q134249]], [[Q134459]], [[Q134723]], [[Q135362]], [[Q135584]], [[Q135769]], [[Q135848]], [[Q136216]], [[Q136985]], [[Q137039]], [[Q137054]], [[Q137465]], [[Q137605]], [[Q138488]], [[Q139521]], [[Q140563]], [[Q140812]], [[Q141307]], [[Q141575]], [[Q141042]], [[Q142507]], [[Q143072]], [[Q143254]], [[Q143760]], [[Q144014]], [[Q144428]], [[Q145429]], [[Q145872]], [[Q145936]], [[Q146095]], [[Q146983]], [[Q147044]], [[Q147348]], [[Q148304]], [[Q148336]], [[Q148652]], [[Q148938]], [[Q149031]], [[Q149508]], [[Q149459]], [[Q149886]], [[Q149927]], [[Q150436]], [[Q150604]], [[Q150667]], [[Q156692]], [[Q156901]], [[Q157503]], [[Q157505]], [[Q157665]], [[Q158009]], [[Q158086]], [[Q158341]], [[Q159372]], [[Q161066]], [[Q161308]], [[Q161577]], [[Q162097]], [[Q162143]], [[Q163137]], [[Q164167]], [[Q165260]], [[Q161675]], [[Q206998]], [[Q210320]], [[Q212032]], [[Q216113]], [[Q218482]], [[Q223302]], [[Q238258]], [[Q247641]], [[Q247836]], [[Q252831]], [[Q256304]], [[Q265684]], [[Q268597]], [[Q286775]], [[Q288279]], [[Q290676]], [[Q291548]], [[Q291636]], [[Q292341]], [[Q292351]], [[Q309499]], [[Q310368]], [[Q310591]], [[Q310745]], [[Q310882]], [[Q310927]], [[Q310977]], [[Q311086]], [[Q311463]], [[Q311714]], [[Q312194]], [[Q312349]], [[Q343251]], [[Q368955]], [[Q469636]], [[Q490401]], [[Q510296]], [[Q514417]], [[Q514515]], [[Q515830]], [[Q522293]], [[Q526640]], [[Q529976]], [[Q536675]], [[Q573055]], [[Q537894]], [[Q541917]], [[Q542488]], [[Q547143]], [[Q548227]], [[Q577619]], [[Q578571]], [[Q581971]], [[Q583378]], [[Q585776]], [[Q594051]], [[Q596457]], [[Q602788]], [[Q607399]], [[Q607912]], [[Q609717]], [[Q630333]], [[Q637716]], [[Q642055]], [[Q646860]], [[Q647507]], [[Q650106]], [[Q650703]], [[Q656319]], [[Q659774]], [[Q660147]], [[Q662202]], [[Q669771]], [[Q683090]], [[Q716132]], [[Q720501]], [[Q724176]], [[Q726614]], [[Q729037]], [[Q732394]], [[Q736378]], [[Q747421]], [[Q748899]], [[Q749412]], [[Q756181]], [[Q764799]], [[Q773896]], [[Q776109]], [[Q786018]], [[Q809586]], [[Q811624]], [[Q831376]], [[Q841027]], [[Q842663]], [[Q843914]], [[Q847194]], [[Q860112]], [[Q867395]], [[Q873584]], [[Q877147]], [[Q892657]], [[Q910110]], [[Q914039]], [[Q922335]], [[Q928224]], [[Q931930]], [[Q937405]], [[Q938830]], [[Q939613]], [[Q940523]], [[Q941485]], [[Q945272]], [[Q952089]], [[Q955567]], [[Q957567]], [[Q959222]], [[Q960200]], [[Q971690]], [[Q973314]], [[Q975998]], [[Q977223]], [[Q986182]], [[Q1001350]], [[Q1024187]], [[Q1027410]], [[Q1039125]], [[Q1039531]], [[Q1056752]], [[Q1058732]], [[Q1060039]], [[Q1061117]], [[Q1075697]], [[Q1082208]], [[Q1092517]], [[Q1135685]], [[Q1117674]], [[Q1143109]], [[Q1163100]], [[Q1171483]], [[Q1172479]], [[Q1226326]], [[Q1227267]], [[Q1241332]], [[Q1301202]], [[Q1301809]], [[Q1303760]], [[Q1304192]], [[Q1304844]], [[Q1308636]], [[Q1311833]], [[Q1314162]], [[Q1316915]], [[Q1318931]], [[Q1319524]], [[Q1328886]], [[Q1336872]], [[Q1338922]], [[Q1361452]], [[Q1367265]], [[Q1384525]], [[Q1404299]], [[Q1452895]], [[Q1460935]], [[Q1461699]], [[Q1482244]], [[Q1497039]], [[Q1506945]], [[Q5137103]], [[Q1572326]], [[Q1587099]], [[Q1607561]], [[Q1629444]], [[Q1655422]], [[Q1708308]], [[Q1739062]], [[Q1756728]], [[Q1757681]], [[Q1757714]], [[Q1757756]], [[Q1758258]], [[Q1758637]], [[Q1761605]], [[Q1762051]], [[Q1763493]], [[Q1767132]], [[Q1767570]], [[Q1768585]], [[Q1817604]], [[Q1820184]], [[Q1826576]], [[Q1828247]], [[Q1856753]], [[Q1876697]], [[Q1886599]], [[Q1896675]], [[Q1911170]], [[Q1914222]], [[Q1920672]], [[Q1932304]], [[Q1932400]], [[Q1934283]], [[Q1936196]], [[Q1936276]], [[Q1936309]], [[Q1938278]], [[Q1940601]], [[Q1946085]], [[Q1946598]], [[Q1949541]], [[Q1952376]], [[Q1952379]], [[Q1964338]], [[Q1938012]], [[Q2015133]], [[Q2031123]], [[Q2039140]], [[Q2041055]], [[Q2053716]], [[Q2067686]], [[Q2068837]], [[Q2072302]], [[Q2084764]], [[Q2087279]], [[Q2089264]], [[Q2147082]], [[Q2158843]], [[Q2183754]], [[Q2086405]], [[Q2171188]], [[Q2184397]], [[Q2234141]], [[Q2234462]], [[Q2234786]], [[Q2235255]], [[Q2236142]], [[Q2248627]], [[Q2260275]], [[Q2267687]], [[Q2299558]], [[Q2302897]], [[Q2317783]], [[Q2333853]], [[Q2338910]], [[Q2341570]], [[Q2358106]], [[Q2364622]], [[Q2367663]], [[Q2371001]], [[Q2377398]], [[Q2383656]], [[Q2393841]], [[Q2413478]], [[Q2413669]], [[Q2414970]], [[Q2417381]], [[Q2426272]], [[Q2433471]], [[Q2436802]], [[Q2441005]], [[Q2473735]], [[Q2452808]], [[Q2482833]], [[Q2487233]], [[Q2495248]], [[Q2505064]], [[Q2524440]], [[Q2547920]], [[Q2566619]], [[Q2568982]], [[Q2569205]], [[Q2570239]], [[Q2576670]], [[Q2579542]], [[Q2615285]], [[Q2619215]], [[Q2623321]], [[Q2655455]], [[Q2662997]], [[Q2666273]], [[Q2671368]], [[Q2673653]], [[Q2697235]], [[Q2697396]], [[Q2627457]], [[Q2700686]], [[Q2702870]], [[Q2703245]], [[Q2705131]], [[Q2706479]], [[Q2706745]], [[Q2708315]], [[Q2708411]], [[Q2709676]], [[Q2709804]], [[Q2710470]], [[Q2710975]], [[Q2711260]], [[Q2715464]], [[Q2716146]], [[Q2717836]], [[Q2720003]], [[Q2731014]], [[Q2803063]], [[Q2810933]], [[Q2813943]], [[Q2822947]], [[Q2830631]], [[Q2830659]], [[Q2832077]], [[Q2837705]], [[Q2839724]], [[Q2851430]], [[Q2861228]], [[Q2868401]], [[Q2872596]], [[Q2875136]], [[Q2880447]], [[Q2883028]], [[Q2890026]], [[Q2894193]], [[Q2899106]], [[Q2900744]], [[Q2917807]], [[Q2918700]], [[Q2934237]], [[Q2964420]], [[Q2993514]], [[Q2996592]], [[Q2998753]], [[Q3007739]], [[Q3007828]], [[Q3007993]], [[Q3012775]], [[Q3013613]], [[Q3013288]], [[Q3018540]], [[Q3022328]], [[Q3024494]], [[Q3046817]], [[Q3055695]], [[Q3075678]], [[Q3090671]], [[Q3017028]], [[Q3115760]], [[Q3137293]], [[Q3139083]], [[Q3139737]], [[Q3153643]], [[Q3169613]], [[Q3171274]], [[Q3172773]], [[Q3182415]], [[Q3195486]], [[Q3198953]], [[Q3232424]], [[Q3240999]], [[Q3280428]], [[Q3310599]], [[Q3310749]], [[Q3314243]], [[Q3320241]], [[Q3360755]], [[Q3369339]], [[Q3368007]], [[Q3385410]], [[Q3392032]], [[Q3395540]], [[Q3395635]], [[Q3406453]], [[Q3409973]], [[Q3431772]], [[Q3442095]], [[Q3456208]], [[Q3456452]], [[Q3437200]], [[Q3489113]], [[Q3495779]], [[Q3523518]], [[Q3575728]], [[Q3595950]], [[Q3694977]], [[Q3698486]], [[Q3698683]], [[Q3699819]], [[Q3701740]], [[Q3703964]], [[Q3705489]], [[Q3705571]], [[Q3706132]], [[Q3715785]], [[Q3716278]], [[Q3719975]], [[Q3740972]], [[Q3753479]], [[Q3755532]], [[Q3759620]], [[Q3764156]], [[Q3786728]], [[Q3804892]], [[Q3821981]], [[Q3896039]], [[Q3916931]], [[Q3895189]], [[Q3953427]], [[Q3966622]], [[Q4000424]], [[Q4001082]], [[Q4005738]], [[Q4008718]], [[Q4009419]], [[Q4035717]], [[Q4037290]], [[Q4037311]], [[Q4039580]], [[Q4042791]], [[Q4043459]], [[Q4047603]], [[Q4051684]], [[Q4068983]], [[Q4118972]], [[Q4119036]], [[Q4119088]], [[Q4119182]], [[Q4119274]], [[Q4119328]], [[Q4119983]], [[Q4179839]], [[Q4194453]], [[Q4290323]], [[Q4292542]], [[Q4308480]], [[Q4347716]], [[Q4352642]], [[Q4371546]], [[Q4386113]], [[Q4409914]], [[Q4414480]], [[Q4418458]], [[Q4476425]], [[Q4485926]], [[Q4488696]], [[Q4492001]], [[Q4528410]], [[Q4658728]], [[Q4673501]], [[Q4674609]], [[Q4676397]], [[Q4682081]], [[Q4676980]], [[Q4692851]], [[Q4726703]], [[Q4726221]], [[Q4734355]], [[Q4739493]], [[Q4742417]], [[Q4747668]], [[Q4765454]], [[Q4769853]], [[Q4774634]], [[Q4780161]], [[Q4780587]], [[Q4789202]], [[Q4806098]], [[Q4811178]], [[Q4815749]], [[Q4817492]], [[Q4845211]], [[Q4883994]], [[Q4918455]], [[Q4939996]], [[Q4991585]], [[Q5002691]], [[Q5018540]], [[Q5026880]], [[Q5028572]], [[Q5032268]], [[Q5047079]], [[Q5047738]], [[Q5053564]], [[Q5063331]], [[Q5063777]], [[Q5063823]], [[Q5064220]], [[Q5065497]], [[Q5066732]], [[Q5101280]], [[Q5101422]], [[Q5102904]], [[Q5103212]], [[Q5124937]], [[Q5125929]], [[Q5137107]], [[Q5136812]], [[Q5140323]], [[Q5149019]], [[Q5162652]], [[Q5173748]], [[Q5159189]], [[Q5184096]], [[Q5185776]], [[Q5158719]], [[Q5187280]], [[Q5190560]], [[Q5190953]], [[Q5190966]], [[Q5190987]], [[Q5194800]], [[Q5198943]], [[Q5215777]], [[Q5220183]], [[Q5221598]], [[Q5222331]], [[Q5222932]], [[Q5226000]], [[Q5228004]], [[Q5228980]], [[Q5232320]], [[Q5235884]], [[Q5239918]], [[Q5272271]], [[Q5272406]], [[Q5281672]], [[Q5283372]], [[Q5283625]], [[Q5294311]], [[Q5294329]], [[Q5311274]], [[Q5315968]], [[Q5232022]], [[Q5359158]], [[Q5372508]], [[Q5376558]], [[Q5376577]], [[Q5382158]], [[Q5385040]], [[Q5398416]], [[Q5405867]], [[Q5447162]], [[Q5479329]], [[Q5518303]], [[Q5527608]], [[Q5535531]], [[Q5548703]], [[Q5562421]], [[Q5571097]], [[Q5577582]], [[Q5592163]], [[Q5605054]], [[Q5663218]], [[Q5676344]], [[Q5696096]], [[Q5677738]], [[Q5697562]], [[Q5703880]], [[Q5767723]], [[Q5790169]], [[Q5797241]], [[Q5797313]], [[Q5846494]], [[Q5959520]], [[Q5962422]], [[Q6003906]], [[Q6059062]], [[Q6080777]], [[Q6085034]], [[Q6086436]], [[Q6143659]], [[Q6146910]], [[Q6153868]], [[Q6169282]], [[Q6301970]], [[Q6429010]], [[Q6445327]], [[Q6449094]], [[Q6450255]], [[Q6462386]], [[Q6488174]], [[Q6505143]], [[Q6527975]], [[Q6527992]], [[Q6527998]], [[Q6532546]], [[Q6534246]], [[Q6564427]], [[Q6723368]], [[Q6753152]], [[Q6811426]], [[Q6811493]], [[Q6911948]], [[Q6911949]], [[Q6981096]], [[Q7086521]], [[Q7107696]], [[Q7108746]], [[Q7108850]], [[Q7116113]], [[Q7126873]], [[Q7134644]], [[Q7164994]], [[Q7200488]], [[Q7200522]], [[Q7200941]], [[Q7226585]], [[Q7228327]], [[Q7242327]], [[Q7255666]], [[Q7262922]], [[Q7263371]], [[Q7302305]], [[Q7319692]], [[Q7322017]], [[Q7331103]], [[Q7370476]], [[Q7321207]], [[Q7357471]], [[Q7406122]], [[Q7409051]], [[Q7425776]], [[Q7431176]], [[Q7498237]], [[Q7606660]], [[Q7617621]], [[Q7618558]], [[Q7625319]], [[Q7661406]], [[Q7661952]], [[Q7678934]], [[Q7680688]], [[Q7685210]], [[Q7685940]], [[Q7690221]], [[Q7705678]], [[Q7706272]], [[Q7706667]], [[Q7783456]], [[Q7798771]], [[Q7798616]], [[Q7799651]], [[Q7840782]], [[Q7847926]], [[Q7851405]], [[Q7897850]], [[Q7933846]], [[Q7990394]], [[Q8009371]], [[Q8187698]], [[Q8202430]], [[Q8248824]], [[Q8253738]], [[Q8253278]], [[Q8253279]], [[Q8346928]], [[Q8352318]], [[Q8045499]], [[Q8346914]], [[Q8776990]], [[Q8777337]], [[Q8963789]], [[Q8964714]], [[Q9002367]], [[Q9003378]], [[Q9005036]], [[Q9005364]], [[Q9022481]], [[Q9030852]], [[Q9034810]], [[Q9032445]], [[Q9054846]], [[Q9055681]], [[Q9059215]], [[Q9061322]], [[Q9063776]], [[Q9068622]], [[Q9068692]], [[Q9075167]], [[Q9077437]], [[Q9080014]], [[Q9089835]], [[Q9090198]], [[Q9081721]], [[Q9089650]], [[Q9090078]], [[Q9297219]], [[Q9334269]], [[Q9654519]], [[Q10260548]], [[Q10264780]], [[Q10273546]], [[Q10281141]], [[Q10295209]], [[Q10295328]], [[Q10316826]], [[Q10323002]], [[Q10335470]], [[Q10349887]], [[Q10364027]], [[Q10369482]], [[Q10382280]], [[Q10384798]], [[Q10411490]], [[Q10420904]], [[Q10439800]], [[Q10458733]], [[Q10466286]], [[Q10481115]], [[Q10521895]], [[Q10523804]], [[Q10524991]], [[Q10578463]], [[Q10616544]], [[Q10629827]], [[Q10636868]], [[Q10645546]], [[Q10657905]], [[Q10662444]], [[Q10663139]], [[Q10663518]], [[Q10675024]], [[Q10675083]], [[Q10712177]], [[Q10724077]], [[Q10762095]], [[Q10792303]], [[Q10794248]], [[Q10819953]], [[Q10826825]], [[Q11847616]], [[Q12723971]], [[Q12858588]], [[Q13080875]], [[Q13429575]], [[Q13489005]], [[Q13571068]], [[Q13583103]], [[Q13614984]], [[Q13846219]], [[Q13847289]], [[Q13863677]], [[Q14089833]], [[Q14148226]], [[Q14229093]], [[Q14437383]], [[Q14510792]], [[Q14537748]], [[Q14544093]], [[Q14556518]], [[Q14593427]], [[Q14593928]], [[Q14626007]], [[Q14626464]], [[Q14694213]], [[Q14694936]], [[Q14759694]], [[Q14923676]], [[Q14927235]], [[Q14944408]], [[Q14955045]], [[Q15148054]], [[Q15211446]], [[Q15290282]], [[Q15401614]], [[Q15530684]], [[Q15756262]], [[Q15711508]], [[Q15930699]],  [[Q15940376]], [[Q15963889]], [[Q15972195]], [[Q16738158]], [[Q16920987]], [[Q17302116]], [[Q17348489]], [[Q17378178]], [[Q17489262]], [[Q17518808]], [[Q17522626]], [[Q17561501]], [[Q17458540]], [[Q17389389]], [[Q18105679]], [[Q18335750]], [[Q502030]], [[Q937914]], [[Q2000625]], [[Q2096492]], [[Q2206133]], [[Q2491792]], [[Q2599422]], [[Q2791719]], [[Q2955866]], [[Q3767504]], [[Q4648985]], [[Q4634156]], [[Q5527833]], [[Q10703568]], [[Q25397]], [[Q39275]], [[Q46076]], [[Q60205]], [[Q174322]], [[Q244133]], [[Q268608]], [[Q312154]], [[Q384345]], [[Q736473]],[[Q770093]], [[Q827257]], [[Q961413]], [[Q1064620]], [[Q10671994]], [[Q1179958]], [[Q1280997]], [[Q1369893]], [[Q1442513]], [[Q1653127]], [[Q1754819]], [[Q1859722]], [[Q1877389]], [[Q2082228]], [[Q2156839]], [[Q2346039]], [[Q3147412]], [[Q3280744]], [[Q3461459]], [[Q3553235]], [[Q4035949]], [[Q4038293]], [[Q518880]],  [[Q1756087]], [[Q1921685]], [[Q1927027]], [[Q1944939]], [[Q1981007]], [[Q2086371]], [[Q2311936]], [[Q2806221]], [[Q3472461]], [[Q3508129]], [[Q3808855]], [[Q3841274]], [[Q4051743]], [[Q4282961]], [[Q5185996]], [[Q5261336]], [[Q8962085]], [[Q8963374]], [[Q15148518]], [[Q15872063]], [[Q7391]], [[Q10872]], [[Q10876]], [[Q18952]], [[Q22708]], [[Q25833]], [[Q26214]], [[Q26308]], [[Q28960]], [[Q53636]], [[Q54950]], [[Q80066]], [[Q102778]], [[Q106345]], [[Q118578]], [[Q130942]], [[Q131393]], [[Q131810]], [[Q143441]], [[Q147877]], [[Q152228]], [[Q173612]], [[Q178235]], [[Q193006]], [[Q203547]], [[Q209602]], [[Q221563]], [[Q241151]], [[Q249907]], [[Q292332]], [[Q430301]], [[Q607044]], [[Q615290]], [[Q623256]], [[Q721722]], [[Q823931]], [[Q841641]], [[Q914888]], [[Q1134438]], [[Q1197160]], [[Q1226966]], [[Q1300407]], [[Q1765819]], [[Q1947035]], [[Q2254408]], [[Q3055705]], [[Q3393217]], [[Q3395756]], [[Q3429854]], [[Q3556237]], [[Q3392049]], [[Q3831105]], [[Q5361179]], [[Q5625164]], [[Q6580400]], [[Q6723361]], [[Q7456120]], [[Q15711568]], [[Q18583954]],   [[Q8316]], [[Q28449]], [[Q21716]], [[Q55475]], [[Q187014]], [[Q217478]], [[Q324132]], [[Q655316]], [[Q688840]], [[Q261238]], [[Q134858]], [[Q309516]], [[Q685950]], [[Q7860270]], [[Q806308]], [[Q860738]], [[Q1314424]], [[Q1544130]], [[Q1766734]], [[Q1869724]], [[Q1977569]], [[Q2011837]], [[Q2297709]], [[Q2307123]], [[Q2358171]], [[Q2454483]], [[Q2673947]], [[Q2742517]], [[Q2767054]], [[Q2789954]], [[Q2881036]], [[Q2917235]], [[Q3026783]], [[Q3018929]], [[Q3320604]], [[Q3433973]], [[Q3699001]], [[Q3767758]], [[Q4119131]], [[Q4345819]], [[Q4737298]], [[Q4784455]], [[Q4948271]], [[Q5018256]], [[Q5139167]], [[Q5265833]], [[Q5733299]], [[Q7236965]], [[Q7362743]], [[Q7396785]], [[Q7575755]], [[Q7624346]], [[Q10638260]], [[Q10464181]], [[Q10730962]], [[Q10716283]], [[Q10719543]], [[Q14565141]], [[Q16295662]], [[Q16322486]], [[Q16335822]], [[Q17188270]],[[Q18058854]]", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2027,11 +2075,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (225, "Format", NULL, NULL, NULL, NULL, "[[Q25314]], [[Q78961]], [[Q165468]], [[Q338878]], [[Q747502]], [[Q846071]], [[Q868546]], [[Q869087]], [[Q899495]],[[Q2133361]], [[Q2182368]], [[Q2683213]], [[Q2935471]], [[Q5410882]], [[Q8222313]], [[Q10351700]], [[Q10351701]], [[Q10351702]], [[Q14405943]], [[Q14416861]], [[Q14451378]], [[Q14467364]], [[Q134886]], [[Q158906]], [[Q161162]], [[Q161307]], [[Q785213]], [[Q877973]], [[Q1241790]], [[Q2529160]], [[Q3495839]], [[Q3723693]], [[Q4804197]], [[Q5035976]], [[Q5103205]], [[Q5367668]], [[Q5367669]], [[Q5367670]], [[Q5367672]], [[Q5367673]], [[Q5367674]], [[Q5367675]], [[Q5367676]], [[Q5367679]], [[Q5367681]], [[Q5505747]], [[Q5747170]], [[Q6055199]], [[Q7136838]], [[Q7170041]], [[Q7703025]], [[Q7900903]], [[Q10401074]], [[Q10420176]], [[Q10429794]], [[Q10429843]], [[Q10440299]], [[Q10440566]], [[Q10440569]], [[Q10440841]], [[Q10455209]], [[Q10455965]], [[Q10464480]], [[Q10470655]], [[Q10473798]], [[Q10473799]], [[Q10479051]], [[Q10481964]], [[Q10481966]], [[Q10481967]], [[Q10481968]], [[Q10481969]], [[Q10481970]], [[Q10481971]], [[Q10481972]], [[Q10481973]], [[Q10481974]], [[Q10481975]], [[Q10481977]], [[Q10481978]], [[Q10481979]], [[Q10481980]], [[Q10481981]], [[Q10481982]], [[Q10481983]], [[Q10481984]], [[Q10481985]], [[Q10481986]], [[Q10481987]], [[Q10481988]], [[Q10481989]], [[Q10481990]], [[Q10481991]], [[Q10481992]], [[Q10481994]], [[Q10481995]], [[Q10481996]], [[Q10481997]], [[Q10481998]], [[Q10481999]], [[Q10482000]], [[Q10482001]], [[Q10486138]], [[Q10486140]], [[Q10486142]], [[Q10486143]], [[Q10495578]], [[Q10499363]], [[Q10499364]], [[Q10508400]], [[Q10520011]], [[Q10520012]], [[Q10520013]], [[Q10520014]], [[Q10520015]], [[Q10520016]], [[Q10520017]], [[Q10520018]], [[Q10520020]], [[Q10521336]], [[Q10523365]], [[Q10523369]], [[Q10521336]], [[Q10523365]], [[Q10523369]], [[Q10525115]], [[Q10553694]], [[Q10554177]], [[Q10554178]], [[Q10555711]], [[Q10556600]], [[Q10558057]], [[Q10578077]], [[Q10578078]], [[Q10578079]], [[Q10578080]], [[Q10578081]], [[Q10578082]], [[Q10578083]], [[Q10578084]], [[Q10583758]], [[Q10586205]], [[Q10589074]], [[Q10591601]], [[Q10591604]], [[Q10592915]], [[Q10595594]], [[Q10606061]], [[Q10606398]], [[Q10620272]], [[Q10620955]], [[Q10624890]], [[Q10626838]], [[Q10628317]], [[Q10628944]], [[Q10647391]], [[Q10647700]], [[Q10648487]], [[Q10650776]], [[Q10652846]], [[Q10659799]], [[Q10659805]], [[Q10659806]], [[Q10659807]], [[Q10696321]], [[Q10702804]], [[Q10711315]], [[Q10714432]], [[Q10724628]], [[Q10724629]], [[Q10724630]], [[Q10724631]], [[Q10724632]], [[Q10724633]], [[Q10724634]], [[Q10724635]], [[Q10724636]], [[Q10724637]], [[Q10724638]], [[Q10724639]], [[Q10724640]], [[Q10724641]], [[Q10724642]], [[Q10724643]], [[Q10724644]], [[Q10724646]], [[Q10724647]], [[Q10955368]], [[Q11688844]], [[Q12840695]], [[Q14995956]], [[Q15014396]], [[Q15149725]], [[Q15360586]], [[Q15568699]], [[Q15633851]], [[Q15637227]], [[Q17139416]], [[Q17334477]], [[Q17388100]], [[Q2573439]], [[Q2736580]], [[Q5032548]], [[Q7879393]], [[Q9604980]], [[Q15078274]], [[Q15078396]], [[Q15735986]], [[Q17135891]]", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(|somevalue|novalue|((×)?[A-Z]([a-z]+-)?[a-z]+(( [A-Z]?[a-z]+)|( ([a-z]+-)?([a-z]+-)?[a-z]+)|( ×([a-z]+-)?([a-z]+-)?([a-z]+-)?([a-z]+-)?[a-z]+)|( \([A-Z][a-z]+\) [a-z]+)|( (‘|')[A-Z][a-z]+(('|’)s)?( de)?( [A-Z][a-z]+(-([A-Z])?[a-z]+)*)*('|’)*)|( ×| Group| (sub)?sp\.| (con)?(sub)?(notho)?var\.| (sub)?ser\.| (sub)?sect\.| subg\.| (sub)?f\.))*))", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (225, "Format", NULL, NULL, NULL, NULL, "[[Q25314]], [[Q78961]], [[Q165468]], [[Q338878]], [[Q747502]], [[Q846071]], [[Q868546]], [[Q869087]], [[Q899495]],[[Q2133361]], [[Q2182368]], [[Q2683213]], [[Q2935471]], [[Q5410882]], [[Q8222313]], [[Q10351700]], [[Q10351701]], [[Q10351702]], [[Q14405943]], [[Q14416861]], [[Q14451378]], [[Q14467364]], [[Q134886]], [[Q158906]], [[Q161162]], [[Q161307]], [[Q785213]], [[Q877973]], [[Q1241790]], [[Q2529160]], [[Q3495839]], [[Q3723693]], [[Q4804197]], [[Q5035976]], [[Q5103205]], [[Q5367668]], [[Q5367669]], [[Q5367670]], [[Q5367672]], [[Q5367673]], [[Q5367674]], [[Q5367675]], [[Q5367676]], [[Q5367679]], [[Q5367681]], [[Q5505747]], [[Q5747170]], [[Q6055199]], [[Q7136838]], [[Q7170041]], [[Q7703025]], [[Q7900903]], [[Q10401074]], [[Q10420176]], [[Q10429794]], [[Q10429843]], [[Q10440299]], [[Q10440566]], [[Q10440569]], [[Q10440841]], [[Q10455209]], [[Q10455965]], [[Q10464480]], [[Q10470655]], [[Q10473798]], [[Q10473799]], [[Q10479051]], [[Q10481964]], [[Q10481966]], [[Q10481967]], [[Q10481968]], [[Q10481969]], [[Q10481970]], [[Q10481971]], [[Q10481972]], [[Q10481973]], [[Q10481974]], [[Q10481975]], [[Q10481977]], [[Q10481978]], [[Q10481979]], [[Q10481980]], [[Q10481981]], [[Q10481982]], [[Q10481983]], [[Q10481984]], [[Q10481985]], [[Q10481986]], [[Q10481987]], [[Q10481988]], [[Q10481989]], [[Q10481990]], [[Q10481991]], [[Q10481992]], [[Q10481994]], [[Q10481995]], [[Q10481996]], [[Q10481997]], [[Q10481998]], [[Q10481999]], [[Q10482000]], [[Q10482001]], [[Q10486138]], [[Q10486140]], [[Q10486142]], [[Q10486143]], [[Q10495578]], [[Q10499363]], [[Q10499364]], [[Q10508400]], [[Q10520011]], [[Q10520012]], [[Q10520013]], [[Q10520014]], [[Q10520015]], [[Q10520016]], [[Q10520017]], [[Q10520018]], [[Q10520020]], [[Q10521336]], [[Q10523365]], [[Q10523369]], [[Q10521336]], [[Q10523365]], [[Q10523369]], [[Q10525115]], [[Q10553694]], [[Q10554177]], [[Q10554178]], [[Q10555711]], [[Q10556600]], [[Q10558057]], [[Q10578077]], [[Q10578078]], [[Q10578079]], [[Q10578080]], [[Q10578081]], [[Q10578082]], [[Q10578083]], [[Q10578084]], [[Q10583758]], [[Q10586205]], [[Q10589074]], [[Q10591601]], [[Q10591604]], [[Q10592915]], [[Q10595594]], [[Q10606061]], [[Q10606398]], [[Q10620272]], [[Q10620955]], [[Q10624890]], [[Q10626838]], [[Q10628317]], [[Q10628944]], [[Q10647391]], [[Q10647700]], [[Q10648487]], [[Q10650776]], [[Q10652846]], [[Q10659799]], [[Q10659805]], [[Q10659806]], [[Q10659807]], [[Q10696321]], [[Q10702804]], [[Q10711315]], [[Q10714432]], [[Q10724628]], [[Q10724629]], [[Q10724630]], [[Q10724631]], [[Q10724632]], [[Q10724633]], [[Q10724634]], [[Q10724635]], [[Q10724636]], [[Q10724637]], [[Q10724638]], [[Q10724639]], [[Q10724640]], [[Q10724641]], [[Q10724642]], [[Q10724643]], [[Q10724644]], [[Q10724646]], [[Q10724647]], [[Q10955368]], [[Q11688844]], [[Q12840695]], [[Q14995956]], [[Q15014396]], [[Q15149725]], [[Q15360586]], [[Q15568699]], [[Q15633851]], [[Q15637227]], [[Q17139416]], [[Q17334477]], [[Q17388100]], [[Q2573439]], [[Q2736580]], [[Q4380638]], [[Q5032548]], [[Q7879393]], [[Q9604980]], [[Q15078274]], [[Q15078396]], [[Q15735986]], [[Q17135891]]", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(|somevalue|novalue|.*virus.*|.*viroid.*|.*phage.*|(()?[A-Z]([a-z]+-)?[a-z]+(( [A-Z]?[a-z]+)|( ([a-z]+-)?([a-z]+-)?[a-z]+)|( ([a-z]+-)?([a-z]+-)?([a-z]+-)?([a-z]+-)?[a-z]+)|( \\([A-Z][a-z]+\\) [a-z]+)|( (|')[A-Z][a-z]+(('|)s)?( de)?( [A-Z][a-z]+(-([A-Z])?[a-z]+)*)*('|)*)|( | Group| (sub)?sp\\.| (con)?(sub)?(notho)?var\\.| (sub)?ser\\.| (sub)?sect\\.| subg\\.| (sub)?f\\.))*))", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (227, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(1|10)\d{7}[0-9X]|[47]\d{6}-\d|[1-9]\d{0,7}-[0-9X]|3\d{7}[0-9X]", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (227, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(1|10)\\d{7}[0-9X]|[47]\\d{6}-\\d|[1-9]\\d{0,7}-[0-9X]|3\\d{7}[0-9X]", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2039,7 +2087,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (227, "Single value", NULL, NULL, NULL, NULL, "{{Q|5011}}, {{Q|504574}}, {{Q|19057}}, {{Q|1144457}}, {{Q|15646111}}, {{Q|212495}}, {{Q|156598}}, {{Q|1218}}, {{Q|2827815}}, {{Q|1906153}},  {{Q|31222}},    {{Q|84021}},    {{Q|105628}},   {{Q|1224100}},  {{Q|1627996}},  {{Q|1717160}},  {{Q|1926656}},  {{Q|2058211}},  {{Q|3154648}},  {{Q|3302715}},  {{Q|16941268}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (227, "Single value", NULL, NULL, NULL, NULL, "{{Q|5011}}, {{Q|504574}}, {{Q|19057}}, {{Q|1144457}}, {{Q|15646111}}, {{Q|212495}}, {{Q|156598}}, {{Q|1218}}, {{Q|2827815}}, {{Q|1906153}},  {{Q|31222}},    {{Q|84021}},    {{Q|105628}},   {{Q|1224100}},  {{Q|1627996}},  {{Q|1717160}},  {{Q|1926656}},  {{Q|2058211}},  {{Q|3154648}},  {{Q|3302715}},  {{Q|3830714}},  {{Q|16054255}}, {{Q|16941268}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2083,7 +2131,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (231, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[0-9]+-\d\d-\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (231, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[0-9]+-\\d\\d-\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2107,7 +2155,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (232, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d\d\d-\d\d\d-\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (232, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d\\d\\d-\\d\\d\\d-\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2123,7 +2171,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (233, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Za-z0-9+\-=#$:().>@\\/\[\]%]+|mandatory=true", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (233, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Za-z0-9+\\-=#$:().>@\\\\/\\[\\]%]+|mandatory=true", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2135,7 +2183,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (234, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "1S/([0-9]*[A-Z][ub]?[a-z]?[0-9]*\.?)+(/[A-Za-z0-9+\-(),.*;?]+)*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (234, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "1S/([0-9]*[A-Z][ub]?[a-z]?[0-9]*\\.?)+(/[A-Za-z0-9+\\-(),.*;?]+)*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2159,7 +2207,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (236, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{4}\-\d{3}(\d|X)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (236, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{4}\\-\\d{3}(\\d|X)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2275,7 +2323,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (242, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(?i).+\.(svg|png|jpg|jpeg|gif|tif|tiff)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (242, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(?i).+\\.(svg|png|jpg|jpeg|gif|tif|tiff)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2287,7 +2335,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (243, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (243, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2315,15 +2363,39 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (245, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "500\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
-
-INSERT 
- INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (245, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (245, "Single value", NULL, NULL, NULL, NULL, "{{Q|455252}}, {{Q|1464509}}, {{Q|3084298}}, {{Q|7326006}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (245, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "500\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (245, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P101", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (245, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P106", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (245, "Type", NULL, NULL, NULL, "Q215627,Q43229,Q16334295", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (245, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P21", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (245, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P19", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (245, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P569", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2339,7 +2411,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (246, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(Uu|Ub|Ut|Uq|[A-Z])[a-z]?", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (246, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(Uu|Ub|Ut|Uq|Up|[A-Z])[a-z]?", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2347,7 +2419,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (247, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(195|196|197|198|199|200|201)\d-(0|1)\d\d[A-Z]{1,2}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (247, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(195|196|197|198|199|200|201)\\d-(0|1)\\d\\d[A-Z]{1,2}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2419,7 +2491,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (268, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{8}[0-9bcdfghjkmnpqrstvwxz]", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (268, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{8}[0-9bcdfghjkmnpqrstvwxz]", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2435,15 +2507,15 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (268, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "&amp;lt;nowiki&amp;lt;\d{9}&amp;lt;/nowiki&amp;gt;", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (268, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "&amp;lt;nowiki&amp;lt;\\d{9}&amp;lt;/nowiki&amp;gt;", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (268, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "&amp;lt;nowiki&amp;lt;\d{8}[a-z]&amp;lt;/nowiki&amp;gt;", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (268, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "&amp;lt;nowiki&amp;lt;\\d{8}[a-z]&amp;lt;/nowiki&amp;gt;", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (269, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{8}[\dX]", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (269, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{8}[\\dX]", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2467,7 +2539,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (271, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "DA\d{7}[\dX]", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (271, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "DA\\d{7}[\\dX]", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2507,7 +2579,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (274, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "([αβγδφωλμπ]-)?([([]*[A-Z☐][ub]?[a-z]?[₁₂₃₄₅₆₇₈₉₀]*(\)?[¹²³⁴⁵⁶⁷⁸⁹⁰]*[⁺⁻]?)?[])|,₁₂₃₄₅₆₇₈₉₀]*(·\(?[-0-9.]*n?\)?)?)+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (274, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "([]-)?([([]*[A-Z][ub]?[a-z]?[1234567890]*(\\)?[1234567890]*[+]?)?[])|,1234567890]*(\\(?[-0-9.]*n?\\)?)?)+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2523,7 +2595,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (276, "Qualifiers", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|580}}, {{P|582}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (276, "Qualifiers", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|580}}, {{P|582}}, {{P|585}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2539,7 +2611,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (278, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[а-я]{3} \d{3}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (278, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[-]{3} \\d{3}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2555,7 +2627,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (281, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[-0-9a-zA-Z .]{1,9}((,|-|–|—)[-0-9a-zA-Z ]{2,9})*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (281, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[-0-9a-zA-Z .]{1,9}((,|-||)[-0-9a-zA-Z ]{2,9})*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2595,11 +2667,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (289, "Type", NULL, NULL, NULL, "Q16391167,Q18670171", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
-
-INSERT 
- INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (289, "Type", NULL, NULL, NULL, "Q1229765,Q14637321", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (289, "Type", NULL, NULL, NULL, "Q1229765,Q16708006,Q14637321", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2607,11 +2675,39 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (289, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|11446}}", "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (289, "Target required claim", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P743", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (289, "Target required claim", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P279", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (289, "Target required claim", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P137", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (289, "Target required claim", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P138", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (289, "Target required claim", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P18", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (289, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P879", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (289, "Target required claim", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P729", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (289, "Target required claim", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P730", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2627,7 +2723,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (296, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (296, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2899,7 +2995,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (303, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[0-1]\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (303, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[0-1]\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2911,7 +3007,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (304, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "([1-9]\d*|[1-9]\d*–[1-9]\d*|[A-Z]+|[a-z]+|[A-Za-z]*\d+[A-Za-z]*)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (304, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "([1-9]\\d*|[1-9]\\d*[1-9]\\d*|[A-Z]+|[a-z]+|[A-Za-z]*\\d+[A-Za-z]*)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2955,7 +3051,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (345, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(tt|nm|ch|co|ev)\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (345, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(tt|nm|ch|co|ev)\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -2995,7 +3091,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (347, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P195", NULL, NULL, NULL, NULL, NULL);
+ VALUES (347, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P195", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -3011,7 +3107,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (348, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[\w\s]*\d+(\.\d+){0,4}\w*(\s|-)?([Bb]uild|B|rc|RC|[Aa]lpha|[Bb]eta|[Uu]pdate|RTM)?(\s|-)?\d*(\s|-)?(\([\w\s]+\d*\))?", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (348, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[\\w\\s]*\\d+(\\.\\d+){0,4}\\w*(\\s|-)?([Bb]uild|B|rc|RC|[Aa]lpha|[Bb]eta|[Uu]pdate|RTM)?(\\s|-)?\\d*(\\s|-)?(\\([\\w\\s]+\\d*\\))?", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -3019,7 +3115,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (349, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "0?\d{8}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (349, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "0?\\d{8}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -3043,11 +3139,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (350, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (350, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (351, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (351, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -3099,7 +3195,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (354, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{1,5}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (354, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{1,5}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -3123,7 +3219,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (356, "Format", NULL, NULL, NULL, NULL, "{{Q|15082380}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "10\.\d{4}/.{3,30}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (356, "Format", NULL, NULL, NULL, NULL, "{{Q|15082380}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "10\\.\\d{4}/.{3,30}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -3159,7 +3255,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (359, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{1,6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (359, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{1,6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -3171,7 +3267,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (359, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P131", NULL, NULL, NULL, NULL, NULL);
+ VALUES (359, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P131", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -3219,7 +3315,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (367, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ".+ (S|s)ymbol.*\.svg", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (367, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ".+ (S|s)ymbol.*\\.svg", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -3251,11 +3347,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (373, "Unique value", NULL, NULL, NULL, NULL, "Q8206362, Q9864129, Q8206114, Q8860080,  Q8205469, Q8860144,  Q8898673, Q8943471,  Q8860178, Q9877088,  Q8205169, Q9713928,  Q8205137, Q8860173,  Q8205125, Q9860107,  Q6283392, Q9997504,  Q8057973, Q8205018,  Q8205003, Q8860200,  Q8204977, Q9951617,  Q8204926, Q9056127,  Q8204913, Q9864217,  Q8204867, Q8860218,  Q8898842, Q9056175, Q8778900, Q9058804,  Q8204460, Q8860285,  Q8204447, Q8265010, Q13553638,  Q8203101, Q8860374,  Q9056717, Q9509443, Q9595555,  Q8202863, Q9056855,  Q8202843, Q8860418,  Q6959378, Q8797819,  Q5852490, Q8202815, Q9656619,  Q8202677, Q9056985,  Q8202653, Q8860460,  Q8202274, Q9057081,  Q8899774, Q9057253,  Q8201483, Q8860571,  Q8201451, Q8833849,  Q8201240, Q9966792,  Q7473729, Q13107483,  Q8200675, Q9713653,  Q8200541, Q8860679,  Q8860693, Q9914994,   Q8860725, Q9075752,  Q8860744, Q8900065,Q6450142, Q9113122, Q7583019, Q9113116, Q7489888, Q8915081,  Q6468811, Q8915085,  Q8346180, Q9112918, Q6501522, Q8915089, Q14551973, Q8346170, Q8914815, Q9470243, Q9617232, Q8915131, Q14524119, Q7583025, Q8346277, Q5899239, Q6020963, Q7489588, Q8915113, Q8914829, Q9112752, Q9469507, Q9616532, Q7091110, Q9112961, Q9469480, Q9616511, Q8914891, Q9112781, Q8937985, Q9112795, Q8914928, Q9112805,  Q8914941, Q9112822, Q8914943, Q9112825, Q8914947, Q9112833, Q8914950, Q9112835, Q14902043, Q14902044, Q8914963, Q9112844, Q8914981, Q8938100, Q8914989, Q9112859, Q8915004, Q9112868, Q9469530, Q9616540,  Q8346359, Q8915147, Q8346363, Q9039814, Q7583013, Q9112992, Q8346379, Q13420174, Q9469554, Q9616551, Q9469589, Q9616570, Q9469601, Q9616577, Q9469630, Q9616595, Q8346499, Q8915164, Q8346455, Q9616601, Q8915041, Q9112896, Q8915167, Q9039844, Q8346458, Q8915053, Q6469602, Q8915182, Q6418162, Q8915184, Q9469444, Q9616499, Q9469419, Q9616494,  Q7698368, Q9113045, Q8346583, Q13107146, Q7698714, Q9113099, Q8346556, Q8915206, Q8915064, Q9112904, Q9469486, Q9616519, Q9470250, Q9617245, Q6747210, Q9113059, Q7131199, Q9112902, Q9470143, Q9617209, Q8888141, Q8897071,  Q6377957, Q14552492, Q4994, Q6496061,     Q8881904, Q8974093, Q6999970, Q8880858, Q7155750, Q13033817, Q8974106, Q9032936, Q8974018, Q9150294, Q8881917, Q9493613, Q7155749, Q8881857, Q8953110, Q14901872, Q6268075, Q9008432, Q6853365, Q8513499, Q8974042, Q9019347, Q6947434, Q7155752, Q8969829, Q9842438, Q6832346, Q8974033, Q8974045, Q9150346, Q6376019, Q7876358, Q8974047, Q7425077, Q8795994, Q7155751, Q14552196, Q5940944, Q9032975, Q7155748, Q8881210, Q9032906, Q8881265, Q9309321, Q8513509, Q8882074, Q8265991, Q8881298, Q9048724, Q6172074, Q8388573, Q9901992, Q8974071, Q10986541, Q7126339, Q10708472, Q8881475, Q8974080, Q5647627, Q6919839, Q8487096, Q8513516, Q10227429, Q6275300, Q6489814, Q5624533, Q9032953, Q9493395, Q7699291, Q14551558, Q7583197, Q9732174, Q7696406, Q8882196, Q6509347, Q8974091, Q6377925, Q8846050, Q8974103, Q9123510, Q7696450, Q9032983, Q5643503, Q8513526,  Q7067946, Q8882258, Q8974100, Q9062863,  Q5916897, Q9150328, Q9733066,  Q6430804, Q9712957‎, Q8104709, Q15089968, Q8143129, Q13238231, Q8171660, Q8171849, Q6813551, Q8218731, Q7214702, Q8982911, Q7055361, Q8967710, Q7055306, Q8967706, Q7055249, Q8967700, Q7094182, Q8967692, Q8860646, Q9484889, Q9068665, Q9185537, Q5326972, Q6489342, Q9484921, Q8227797, Q8227825, Q8227816, Q8820117, Q7032821, Q10164040, Q7484328, Q13312604, Q8229071, Q8229198, Q6808599, Q6985794, Q6808555, Q6985801, Q7484287, Q8229454, Q7130966, Q8230483, Q7023426, Q9569749, Q6808536, Q6985816, Q9025380, Q9313260, Q9435264, Q9579917, Q7215293, Q9504608,  Q8290800, Q8290887, Q8290971, Q8291004, Q8244392, Q8244470, Q8291073, Q8795021, Q8291087, Q8795026, Q8291096, Q8795032, Q8291102, Q8795036, Q8291110, Q8795040, Q8291112, Q8795042, Q8291113, Q8795044, Q8291119, Q8795047, Q8291122, Q8795051, Q8291129, Q8795056, Q8291135, Q8795059, Q8237584, Q8291140, Q8368934, Q8291145, Q8795066, Q8291158, Q8795073, Q8291160, Q8795074, Q8291171, Q13288857, Q8291199, Q8795081, Q7020072, Q9525456, Q6359007, Q14550984, Q7806198, Q8303591, Q6383480, Q8963828, Q6572483, Q8525504, Q8894723, Q8963813, Q6504562, Q8963830, Q8319664, Q8963831, Q8319674, Q8963954, Q8167496, Q8326269, Q9462009, Q8320677, Q8963847, Q8320766, Q8895447, Q8321015, Q9946804, Q6224758, Q8321050, Q8321319, Q8963866, Q8321464, Q8963872, Q6434288, Q7582743, Q7478736, Q9972875, Q7158869, Q8318608, Q7478550, Q8318628, Q7478549, Q8318632, Q7158941, Q8318634, Q8119409, Q8318636, Q7159216, Q8318638, Q7478542, Q8318662, Q6544500, Q8318690, Q7159240, Q8318696, Q6468151, Q8318698, Q7478532, Q9405231, Q7159307, Q8318717, Q8145176, Q8318729, Q8148346, Q8318737, Q7478530, Q8318741, Q7159337, Q14634221, Q7478529, Q8318743, Q7159362, Q14634099, Q7159339, Q8318749, Q7159338, Q8318750, Q7159357, Q8318753, Q7478527, Q8318755, Q7159384, Q9408103, Q7159381, Q8318756, Q7159380, Q8318759, Q6404494, Q6404615, Q7478526, Q8318762, Q8159397, Q8318761, Q7159386, Q8318763, Q7159383, Q8318764, Q7159376, Q8318767, Q7159375, Q9730205, Q7159402, Q8318771 Q7159368, Q8318770, Q7159372, Q8318776, Q7159549, Q8318775, Q7159374, Q8318778, Q7159589, Q8318786, Q7159586, Q8318785, Q7478524, Q8318788, Q7159578, Q8318789, Q7159577, Q7732488, Q7159638, Q8318791, Q7159614, Q8318792, Q7159645, Q9411889, Q6463710, Q8318794, Q7159571, Q8318797, Q7159639, Q8318795, Q7159585, Q8318799, Q7159617, Q8318801, Q7159650, Q9413382, Q8185589, Q8318804, Q7139380, Q7159644, Q6468130, Q8318808, Q7159590, Q8318809, Q7159651, Q9415673, Q8193000, Q9416388, Q7159653, Q8318814, Q7159673, Q8318815, Q7159659, Q9418714, Q7159654, Q8318817, Q7159660, Q8318822, Q7159652, Q8318819, Q8322386, Q8963893, Q6801032, Q8963884, Q6253489, Q8963891, Q7139228, Q8963895, Q6311858, Q8963906, Q8324512, Q8963912, Q6418236, Q8963913, Q8307544, Q8963915, Q8324954, Q8963926, Q6800491, Q8963928, Q7213811, Q8341041, Q6467547, Q7022643, Q6951153, Q9544644, Q7780057, Q13627491, Q8341197, Q9544732, Q6819344, Q8479845, Q6581398, Q8802172, Q9126476, Q6850061, Q8264933, Q6991716, Q6991717, Q6157059, Q6390029, Q7473633, Q8377813, Q6309074, Q6319062, Q7474133, Q7473493, Q9057171, Q5912048, Q8733174, Q6293039, Q6434486, Q6503360, Q14523728, Q8965787, Q9055821, Q8965680, Q9074851, Q8965681, Q9074853, Q8965788, Q9057683, Q5615449, Q8936523, Q7214696, Q9057685, Q8965789, Q9057696, Q9022171, Q9029455, Q9504067, Q9958334, Q6419393, Q9056194, Q8965732, Q9056198, Q7287038, Q9056247, Q6580094, Q10100816, Q8204531, Q8373696, Q7071824, Q9077372, Q7124336, Q9077373, Q7214568, Q9079546, Q7214637, Q7972867, Q8396233, Q8781703, Q8870197, Q14566475, Q8374972, Q8899918, Q6322791, Q7474858, Q9022370, Q9946479, Q8201026, Q9023325, Q6268741, Q9117310, Q8965806, Q9058983, Q6371458, Q9653619, Q4992950, Q6984567, Q6357085, Q9006397, Q7729884, Q9047380, Q8662949, Q9047382, Q8662953, Q9047386, Q8662956, Q9047391, Q8662958, Q9047394, Q8662961, Q9047397, Q8662963, Q9047399, Q8662970, Q9047406, Q8662974, Q9047412, Q8662978, Q9047418, Q8662980, Q13316065, Q8662982, Q9047426, Q8662984, Q9047440, Q8662990, Q9047429, Q8662994, Q9047435", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "yes", NULL, NULL);
+ VALUES (373, "Unique value", NULL, NULL, NULL, NULL, "Q8206362, Q9864129, Q8206114, Q8860080,  Q8205469, Q8860144,  Q8898673, Q8943471,  Q8860178, Q9877088,  Q8205169, Q9713928,  Q8205137, Q8860173,  Q8205125, Q9860107,  Q6283392, Q9997504,  Q8057973, Q8205018,  Q8205003, Q8860200,  Q8204977, Q9951617,  Q8204926, Q9056127,  Q8204913, Q9864217,  Q8204867, Q8860218,  Q8898842, Q9056175, Q8778900, Q9058804,  Q8204460, Q8860285,  Q8204447, Q8265010, Q13553638,  Q8203101, Q8860374,  Q9056717, Q9509443, Q9595555,  Q8202863, Q9056855,  Q8202843, Q8860418,  Q6959378, Q8797819,  Q5852490, Q8202815, Q9656619,  Q8202677, Q9056985,  Q8202653, Q8860460,  Q8202274, Q9057081,  Q8899774, Q9057253,  Q8201483, Q8860571,  Q8201451, Q8833849,  Q8201240, Q9966792,  Q7473729, Q13107483,  Q8200675, Q9713653,  Q8200541, Q8860679,  Q8860693, Q9914994,   Q8860725, Q9075752,  Q8860744, Q8900065,Q6450142, Q9113122, Q7583019, Q9113116, Q7489888, Q8915081,  Q6468811, Q8915085,  Q8346180, Q9112918, Q6501522, Q8915089, Q14551973, Q8346170, Q8914815, Q9470243, Q9617232, Q8915131, Q14524119, Q7583025, Q8346277, Q5899239, Q6020963, Q7489588, Q8915113, Q8914829, Q9112752, Q9469507, Q9616532, Q7091110, Q9112961, Q9469480, Q9616511, Q8914891, Q9112781, Q8937985, Q9112795, Q8914928, Q9112805,  Q8914941, Q9112822, Q8914943, Q9112825, Q8914947, Q9112833, Q8914950, Q9112835, Q14902043, Q14902044, Q8914963, Q9112844, Q8914981, Q8938100, Q8914989, Q9112859, Q8915004, Q9112868, Q9469530, Q9616540,  Q8346359, Q8915147, Q8346363, Q9039814, Q7583013, Q9112992, Q8346379, Q13420174, Q9469554, Q9616551, Q9469589, Q9616570, Q9469601, Q9616577, Q9469630, Q9616595, Q8346499, Q8915164, Q8346455, Q9616601, Q8915041, Q9112896, Q8915167, Q9039844, Q8346458, Q8915053, Q6469602, Q8915182, Q6418162, Q8915184, Q9469444, Q9616499, Q9469419, Q9616494,  Q7698368, Q9113045, Q8346583, Q13107146, Q7698714, Q9113099, Q8346556, Q8915206, Q8915064, Q9112904, Q9469486, Q9616519, Q9470250, Q9617245, Q6747210, Q9113059, Q7131199, Q9112902, Q9470143, Q9617209, Q8888141, Q8897071,  Q6377957, Q14552492, Q4994, Q6496061,     Q8881904, Q8974093, Q6999970, Q8880858, Q7155750, Q13033817, Q8974106, Q9032936, Q8974018, Q9150294, Q8881917, Q9493613, Q7155749, Q8881857, Q8953110, Q14901872, Q6268075, Q9008432, Q6853365, Q8513499, Q8974042, Q9019347, Q6947434, Q7155752, Q8969829, Q9842438, Q6832346, Q8974033, Q8974045, Q9150346, Q6376019, Q7876358, Q8974047, Q7425077, Q8795994, Q7155751, Q14552196, Q5940944, Q9032975, Q7155748, Q8881210, Q9032906, Q8881265, Q9309321, Q8513509, Q8882074, Q8265991, Q8881298, Q9048724, Q6172074, Q8388573, Q9901992, Q8974071, Q10986541, Q7126339, Q10708472, Q8881475, Q8974080, Q5647627, Q6919839, Q8487096, Q8513516, Q10227429, Q6275300, Q6489814, Q5624533, Q9032953, Q9493395, Q7699291, Q14551558, Q7583197, Q9732174, Q7696406, Q8882196, Q6509347, Q8974091, Q6377925, Q8846050, Q8974103, Q9123510, Q7696450, Q9032983, Q5643503, Q8513526,  Q7067946, Q8882258, Q8974100, Q9062863,  Q5916897, Q9150328, Q9733066,  Q6430804, Q9712957, Q8104709, Q15089968, Q8143129, Q13238231, Q8171660, Q8171849, Q6813551, Q8218731, Q7214702, Q8982911, Q7055361, Q8967710, Q7055306, Q8967706, Q7055249, Q8967700, Q7094182, Q8967692, Q8860646, Q9484889, Q9068665, Q9185537, Q5326972, Q6489342, Q9484921, Q8227797, Q8227825, Q8227816, Q8820117, Q7032821, Q10164040, Q7484328, Q13312604, Q8229071, Q8229198, Q6808599, Q6985794, Q6808555, Q6985801, Q7484287, Q8229454, Q7130966, Q8230483, Q7023426, Q9569749, Q6808536, Q6985816, Q9025380, Q9313260, Q9435264, Q9579917, Q7215293, Q9504608,  Q8290800, Q8290887, Q8290971, Q8291004, Q8244392, Q8244470, Q8291073, Q8795021, Q8291087, Q8795026, Q8291096, Q8795032, Q8291102, Q8795036, Q8291110, Q8795040, Q8291112, Q8795042, Q8291113, Q8795044, Q8291119, Q8795047, Q8291122, Q8795051, Q8291129, Q8795056, Q8291135, Q8795059, Q8237584, Q8291140, Q8368934, Q8291145, Q8795066, Q8291158, Q8795073, Q8291160, Q8795074, Q8291171, Q13288857, Q8291199, Q8795081, Q7020072, Q9525456, Q6359007, Q14550984, Q7806198, Q8303591, Q6383480, Q8963828, Q6572483, Q8525504, Q8894723, Q8963813, Q6504562, Q8963830, Q8319664, Q8963831, Q8319674, Q8963954, Q8167496, Q8326269, Q9462009, Q8320677, Q8963847, Q8320766, Q8895447, Q8321015, Q9946804, Q6224758, Q8321050, Q8321319, Q8963866, Q8321464, Q8963872, Q6434288, Q7582743, Q7478736, Q9972875, Q7158869, Q8318608, Q7478550, Q8318628, Q7478549, Q8318632, Q7158941, Q8318634, Q8119409, Q8318636, Q7159216, Q8318638, Q7478542, Q8318662, Q6544500, Q8318690, Q7159240, Q8318696, Q6468151, Q8318698, Q7478532, Q9405231, Q7159307, Q8318717, Q8145176, Q8318729, Q8148346, Q8318737, Q7478530, Q8318741, Q7159337, Q14634221, Q7478529, Q8318743, Q7159362, Q14634099, Q7159339, Q8318749, Q7159338, Q8318750, Q7159357, Q8318753, Q7478527, Q8318755, Q7159384, Q9408103, Q7159381, Q8318756, Q7159380, Q8318759, Q6404494, Q6404615, Q7478526, Q8318762, Q8159397, Q8318761, Q7159386, Q8318763, Q7159383, Q8318764, Q7159376, Q8318767, Q7159375, Q9730205, Q7159402, Q8318771 Q7159368, Q8318770, Q7159372, Q8318776, Q7159549, Q8318775, Q7159374, Q8318778, Q7159589, Q8318786, Q7159586, Q8318785, Q7478524, Q8318788, Q7159578, Q8318789, Q7159577, Q7732488, Q7159638, Q8318791, Q7159614, Q8318792, Q7159645, Q9411889, Q6463710, Q8318794, Q7159571, Q8318797, Q7159639, Q8318795, Q7159585, Q8318799, Q7159617, Q8318801, Q7159650, Q9413382, Q8185589, Q8318804, Q7139380, Q7159644, Q6468130, Q8318808, Q7159590, Q8318809, Q7159651, Q9415673, Q8193000, Q9416388, Q7159653, Q8318814, Q7159673, Q8318815, Q7159659, Q9418714, Q7159654, Q8318817, Q7159660, Q8318822, Q7159652, Q8318819, Q8322386, Q8963893, Q6801032, Q8963884, Q6253489, Q8963891, Q7139228, Q8963895, Q6311858, Q8963906, Q8324512, Q8963912, Q6418236, Q8963913, Q8307544, Q8963915, Q8324954, Q8963926, Q6800491, Q8963928, Q7213811, Q8341041, Q6467547, Q7022643, Q6951153, Q9544644, Q7780057, Q13627491, Q8341197, Q9544732, Q6819344, Q8479845, Q6581398, Q8802172, Q9126476, Q6850061, Q8264933, Q6991716, Q6991717, Q6157059, Q6390029, Q7473633, Q8377813, Q6309074, Q6319062, Q7474133, Q7473493, Q9057171, Q5912048, Q8733174, Q6293039, Q6434486, Q6503360, Q14523728, Q8965787, Q9055821, Q8965680, Q9074851, Q8965681, Q9074853, Q8965788, Q9057683, Q5615449, Q8936523, Q7214696, Q9057685, Q8965789, Q9057696, Q9022171, Q9029455, Q9504067, Q9958334, Q6419393, Q9056194, Q8965732, Q9056198, Q7287038, Q9056247, Q6580094, Q10100816, Q8204531, Q8373696, Q7071824, Q9077372, Q7124336, Q9077373, Q7214568, Q9079546, Q7214637, Q7972867, Q8396233, Q8781703, Q8870197, Q14566475, Q8374972, Q8899918, Q6322791, Q7474858, Q9022370, Q9946479, Q8201026, Q9023325, Q6268741, Q9117310, Q8965806, Q9058983, Q6371458, Q9653619, Q4992950, Q6984567, Q6357085, Q9006397, Q7729884, Q9047380, Q8662949, Q9047382, Q8662953, Q9047386, Q8662956, Q9047391, Q8662958, Q9047394, Q8662961, Q9047397, Q8662963, Q9047399, Q8662970, Q9047406, Q8662974, Q9047412, Q8662978, Q9047418, Q8662980, Q13316065, Q8662982, Q9047426, Q8662984, Q9047440, Q8662990, Q9047429, Q8662994, Q9047435", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "yes", NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (373, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(?![Cc]ategory\s*:)[^][|]+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (373, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(?![Cc]ategory\\s*:)[^][|]+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -3339,7 +3435,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (377, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d\d\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (377, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -3355,7 +3451,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (380, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[PEI][A]\d[0-9AB]\d\d\d\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (380, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[PEI][A]\\d[0-9AB]\\d\\d\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -3391,19 +3487,15 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (380, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[PEI][A]\d[0-9AB]\d\d\d\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (380, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[PEI][A]\\d[0-9AB]\\d\\d\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (381, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "1?\d{1,4}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (381, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "1?\\d{1,4}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (381, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q39", NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P17", NULL, NULL, NULL, NULL, NULL);
-
-INSERT 
- INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (381, "Type", NULL, NULL, "Q2065736", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -3419,7 +3511,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (381, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{Q|8274529}},{{Q|12126757}}", NULL, NULL, NULL, NULL, NULL, NULL, "P1435", NULL, NULL, NULL, NULL, NULL);
+ VALUES (381, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{Q|8274529}},{{Q|12126757}}", NULL, "true", NULL, NULL, NULL, NULL, "P1435", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -3447,7 +3539,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (382, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{4}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (382, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{4}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -3503,7 +3595,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (395, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "([A-Z0-9\p{L}]+(,\w)?)+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (395, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "([A-Z0-9\\p{L}]+(,\\w)?)+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -3515,7 +3607,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (396, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "IT\\ICCU\\(\d{10}|\D\D[\D\d]\D\\\d{6})", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (396, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "IT\\\\ICCU\\\\(\\d{10}|\\D\\D[\\D\\d]\\D\\\\\\d{6})", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -3927,7 +4019,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (428, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "('t )?(d')?(de )?(la )?(van (der )?)?(Ma?c)?(De)?[A-ZÁÅČÉÖØŘŠŞÜ]C?[a-záâãåäăąćčçéèêěëğıíłńñøóòôöřśşșšțúůüýž]*([-'. ]+(van )?(y )?(d[ae][nr]?[- ])?(Ma?c)?[A-ZÁČÉÖØŘŠŞbht]C?[a-záâãåäăąćčçéèêěëğıíłńñøóòôöřśşșšțúůüýž]*)*\.? ?f?\.?", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (428, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "('t )?(d')?(de )?(la )?(van (der )?)?(Ma?c)?(De)?[A-ZAACEORSSU]C?[a-zaaaaaaaccceeeeeginnooooorsssstuuuyz']*([-'. ]+(van )?(y )?(d[ae][nr]?[- ])?(Ma?c)?[A-ZACEORSSbht]C?[a-zaaaaaaaccceeeeeginnooooorsssstuuuyz']*)*\\.? ?f?\\.?", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -3943,7 +4035,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (429, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (429, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -3991,15 +4083,23 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (434, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (434, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (434, "Type", NULL, NULL, NULL, "Q215627, Q16334295", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (434, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|4167410}}, {{Q|4167836}}, {{Q|13406463}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (434, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (434, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
-INSERT 
- INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (434, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4063,7 +4163,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (439, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{8}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (439, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{8}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4091,7 +4191,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (440, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{5}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (440, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{5}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4119,7 +4219,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (442, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(1[1-5]|2[1-3]|3[1-7]|4[1-6]|5[0-4]|6[1-5]|71|8[1-2])( (0[1-9]|[1-6]\d|70|90)( (0[1-9]|[1-9]\d)( (00[1-9]|0[1-9]\d|[1-5]\d\d)( (00[1-9]|0[1-9]\d|[1-5]\d\d)( (11[1-2]|12[1-3]|2[1-2]0))?)?)?)?)?", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (442, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(1[1-5]|2[1-3]|3[1-7]|4[1-6]|5[0-4]|6[1-5]|71|8[1-2])( (0[1-9]|[1-6]\\d|70|90)( (0[1-9]|[1-9]\\d)( (00[1-9]|0[1-9]\\d|[1-5]\\d\\d)( (00[1-9]|0[1-9]\\d|[1-5]\\d\\d)( (11[1-2]|12[1-3]|2[1-2]0))?)?)?)?)?", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4143,7 +4243,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (443, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, ".+\.(ogg|oga|flac|wav)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (443, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, ".+\\.(ogg|oga|flac|wav)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4155,7 +4255,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (444, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(\d{1,4}|\d{1,3}\.\d{1,2}|[A-F][+-]?)(%|/\d{1,4}(\.0{1,2})?)?", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (444, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(\\d{1,4}|\\d{1,3}\\.\\d{1,2}|[A-F][+-]?)(%|/\\d{1,4}(\\.0{1,2})?)?", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (444, "Qualifiers", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|447}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4263,7 +4367,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (454, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[sp]\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (454, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[sp]\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4295,7 +4399,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (455, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (455, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4319,7 +4423,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (458, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (458, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4371,7 +4475,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (464, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Z]{4}\d{7}[A-Z]", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (464, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Z]{4}\\d{7}[A-Z]", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4459,7 +4563,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (473, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[\d\(\)\- \+]+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (473, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[\\d\\(\\)\\- \\+]+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4475,7 +4579,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (474, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\+\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (474, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\+\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4499,11 +4603,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (477, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P1435", NULL, NULL, NULL, NULL, NULL);
+ VALUES (477, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P1435", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (477, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (477, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4511,7 +4615,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (477, "Type", NULL, NULL, "Q2221906", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (477, "Type", NULL, NULL, "Q16686448", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4535,7 +4639,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (478, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[0-9A-Z\-]+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (478, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[0-9A-Z\\-]+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4543,7 +4647,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (480, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (480, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4555,11 +4659,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (481, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\w\w\d{8}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (481, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\w\\w\\d{8}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (481, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P31", NULL, NULL, NULL, NULL, NULL);
+ VALUES (481, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P31", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4571,7 +4675,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (481, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (481, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4587,7 +4691,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (484, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "IMA (19[6-9]\d|20\d\d)(-\d\d\d[a-z]?|-[A-Z]|-[a-z][a-z][a-z]| s\.p\.)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (484, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "IMA (19[6-9]\\d|20\\d\\d)(-\\d\\d\\d[a-z]?|-[A-Z]|-[a-z][a-z][a-z]| s\\.p\\.)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4627,7 +4731,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (486, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Z]\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (486, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Z]\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4667,7 +4771,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (490, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[0-9A-Za-z\-\/\(\) ]*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (490, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[0-9A-Za-z\\-\\/\\(\\) ]*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4679,11 +4783,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (491, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ".+\.(svg|png|jpg|jpeg|gif|SVG|PNG|JPG|JPEG|GIF)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (491, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ".+\\.(svg|png|jpg|jpeg|gif|SVG|PNG|JPG|JPEG|GIF)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (492, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d\d\d\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (492, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d\\d\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4699,7 +4803,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (493, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(\d\d\d|V\d\d|E[8-9]\d\d)(\.\d{1,2})?", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (493, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(\\d\\d\\d|V\\d\\d|E[8-9]\\d\\d)(\\.\\d{1,2})?", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4711,7 +4815,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (494, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Z]\d{2}(\.\d{1,2})?", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (494, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Z]\\d{2}(\\.\\d{1,2})?", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4735,7 +4839,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (496, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "0000-000(1-[5-9]|2-[0-9]|3-[0-4])\d\d\d-\d\d\d[\dX]", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (496, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "0000-000(1-[5-9]|2-[0-9]|3-[0-4])\\d\\d\\d-\\d\\d\\d[\\dX]", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4755,7 +4859,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (497, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (497, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4843,7 +4947,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (506, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "([A-Z][a-z][a-z][a-z]|(\d\d\d))", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (506, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "([A-Z][a-z][a-z][a-z]|(\\d\\d\\d))", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -4859,7 +4963,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (507, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (507, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5079,7 +5183,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (525, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (525, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5147,7 +5251,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (529, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(([1-9]|0[1-9]|[1-2][0-9]|3[0-6])(L|R|)\s*/?\s*)+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (529, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(([1-9]|0[1-9]|[1-2][0-9]|3[0-6])(L|R|)\\s*/?\\s*)+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5195,7 +5299,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (535, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (535, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5231,7 +5335,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (536, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[A-Z]*\d*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (536, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[A-Z]*\\d*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5251,7 +5355,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (539, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "M\d{4}(-\d{1,2})?", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (539, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "M\\d{4}(-\\d{1,2})?", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5335,7 +5439,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (549, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{1,6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (549, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{1,6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5372,10 +5476,6 @@ INSERT
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (550, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P569", NULL, NULL, NULL, NULL, NULL);
-
-INSERT 
- INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (551, "Inverse", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P466", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5431,15 +5531,19 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (553, "Value type", NULL, NULL, "Q35127", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (553, "Value type", NULL, NULL, "Q340169", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (553, "Qualifiers", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|554}}, {{P|407}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (553, "Qualifiers", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|554}}", "true", NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (554, "Qualifier", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (553, "Qualifiers", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|554}}, {{P|407}}", "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (554, "Qualifier", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5451,7 +5555,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (555, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+\s?-\s?\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (555, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5491,7 +5595,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (557, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{2,5}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (557, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{2,5}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5560,7 +5664,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (563, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[8-9]\d{3}(/[0-3])?", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (563, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[8-9]\\d{3}(/[0-3])?", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5576,7 +5680,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (564, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+\s?-\s?\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (564, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5608,7 +5712,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (566, "Target required claim", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P225", NULL, NULL, NULL, NULL, NULL);
+ VALUES (566, "Target required claim", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P225", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5748,7 +5852,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (586, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[1-9]\d{0,7}\-\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (586, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[1-9]\\d{0,7}\\-\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5792,7 +5896,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (587, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (587, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5812,7 +5916,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (590, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (590, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5824,7 +5928,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (591, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d\.\d+\.\d+\.\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (591, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d\\.\\d+\\.\\d+\\.\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5836,11 +5940,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (592, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "CHEMBL\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (592, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "CHEMBL\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (593, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (593, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5848,7 +5952,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (594, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "ENS(|MUS)G\d{11}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (594, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "ENS(|MUS)G\\d{11}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5860,7 +5964,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (597, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q10833314", NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P106", NULL, NULL, NULL, NULL, NULL);
+ VALUES (597, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{Q|10833314}},{{Q|18814798}}", NULL, "true", NULL, NULL, NULL, NULL, "P106", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5872,7 +5976,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (597, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (597, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5912,7 +6016,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (599, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q10833314", NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P106", NULL, NULL, NULL, NULL, NULL);
+ VALUES (599, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{Q|10833314}},{{Q|18814798}}", NULL, "true", NULL, NULL, NULL, NULL, "P106", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5920,7 +6024,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (599, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (599, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -5952,7 +6056,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (604, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d\d\d\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (604, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d\\d\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6100,15 +6204,15 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (625, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|11879590}}, {{Q|202444}}, {{Q|12308941}}", "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (625, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (625, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
-INSERT 
- INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (625, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|5}}, {{Q|783794}}, {{Q|4167410}}; {{P|247}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6120,7 +6224,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (628, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "E\d{3,4}[A-z]?", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (628, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "E\\d{3,4}[A-z]?", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6144,7 +6248,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (630, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "([BPXYZ0-9][0-9]|NC)\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (630, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "([BPXYZ0-9][0-9]|NC)\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6168,19 +6272,19 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (632, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{3}.\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (632, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{3}.\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (632, "Type", NULL, NULL, "Q2079150", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (632, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q184", NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P17", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (632, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q184", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P17", NULL, NULL, NULL, NULL, NULL);
+ VALUES (632, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q2079150", NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P1435", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (632, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q2079150", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P1435", NULL, NULL, NULL, NULL, NULL);
+ VALUES (632, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6188,11 +6292,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (632, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
-INSERT 
- INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (633, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P1435", NULL, NULL, NULL, NULL, NULL);
+ VALUES (633, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{Q|13789518}},{{Q|13790797}}, {{Q|17524832}}, {{Q|13859619}}, {{Q|14124496}}, {{Q|14331266}}, {{Q|14521462}}, {{Q|17619488}}, {{Q|17611549}}, {{Q|14332655}}", NULL, "true", NULL, NULL, NULL, NULL, "P1435", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6200,11 +6300,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (633, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (633, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (633, "Type", NULL, NULL, "Q16686448", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (633, "Type", NULL, NULL, "Q16686448", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6256,7 +6356,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (635, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (635, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6308,7 +6408,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (637, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[NX]P_(\d{6}|\d{9})", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (637, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[NX]P_(\\d{6}|\\d{9})", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6324,7 +6424,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (639, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(N|X)(M|R)_(\d{6}|\d{9})", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (639, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(N|X)(M|R)_(\\d{6}|\\d{9})", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6336,7 +6436,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (640, "Single value", NULL, NULL, NULL, NULL, "{{Q|1312123}}, {{Q|3085727}}, {{Q|3579869}}, {{Q|281781}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (640, "Single value", NULL, NULL, NULL, NULL, "{{Q|1312123}}, {{Q|3085727}}, {{Q|3579869}}, {{Q|281781}}, {{Q|3357066}}, {{Q|3262171}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6344,7 +6444,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (640, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "LH/\d{1,4}/\d{1,3}|19800035/\d{1,4}/\d{3,5}|C/0/\d{1,2}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (640, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "LH/\\d{1,4}/\\d{1,3}|19800035/\\d{1,4}/\\d{3,5}|C/0/\\d{1,2}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6444,7 +6544,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (648, "Format", NULL, NULL, NULL, NULL, "", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "OL\d+(W|M|A)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (648, "Format", NULL, NULL, NULL, NULL, "", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "OL\\d+(W|M|A)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6456,7 +6556,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (649, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{8}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (649, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{8}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6488,11 +6588,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (650, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (650, "Single value", NULL, NULL, NULL, NULL, "{{Q|129938}}, {{Q|319558}}, {{Q|1127030}}, {{Q|1343042}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (650, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d{0,5}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (650, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d{0,5}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6504,7 +6604,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (650, "Type", NULL, NULL, "Q215627", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (650, "Type", NULL, NULL, NULL, "Q215627,Q43229,Q16334295", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6520,7 +6620,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (651, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{8}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (651, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{8}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6576,7 +6676,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (653, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "PMH\d\d\d\d\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (653, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "PMH\\d\\d\\d\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6596,7 +6696,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (657, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[A-Z][A-Z]\d\d\d\d\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (657, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[A-Z][A-Z]\\d\\d\\d\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6628,7 +6728,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (661, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (661, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6640,7 +6740,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (662, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[1-9]\d*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (662, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[1-9]\\d*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6652,7 +6752,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (663, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+\.\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (663, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+\\.\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6672,7 +6772,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (665, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[CD]\d{5}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (665, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[CD|hsa]\\d{5}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6684,7 +6784,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (668, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "NBK\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (668, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "NBK\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6692,7 +6792,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (669, "Value type", NULL, NULL, "Q79007", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (669, "Value type", NULL, NULL, "Q83620", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6700,11 +6800,15 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (669, "Qualifiers", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|670}}, {{P|560}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (670, "Qualifier", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (670, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d.{0,5}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (670, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d.{0,5}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6712,7 +6816,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (672, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Z](\d\d(.\d\d\d){0,5})?", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (672, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Z](\\d\\d(.\\d\\d\\d){0,5})?", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6724,7 +6828,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (673, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d\d\d\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (673, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d\\d\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6744,7 +6848,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (675, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[0-9a-zA-Z_\-]{12}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (675, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[0-9a-zA-Z_\\-]{12}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6784,7 +6888,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (677, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (677, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6812,7 +6916,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (679, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (679, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6848,7 +6952,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (683, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (683, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6880,7 +6984,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (686, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (686, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6944,7 +7048,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (692, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ".+\.png", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (692, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ".+\\.png", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -6964,7 +7068,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (695, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (695, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7024,11 +7128,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (704, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(ENST|ENSMUST)\d{11}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (704, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(ENST|ENSMUST)\\d{11}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (705, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "ENS(|MUS)(P|G)\d{11}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (705, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "ENS(|MUS)(P|G)\\d{11}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7092,7 +7196,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (711, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[IV][IVX]{0,3}/[A-Z]\.[0-9][0-9]-[0-9]{2,3}[a-b]?", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (711, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[IV][IVX]{0,3}/[A-Z]\\.[0-9][0-9]-[0-9]{2,3}[a-b]?", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7112,11 +7216,15 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (711, "Item", NULL, NULL, NULL, NULL, "", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P714", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (711, "Item", NULL, NULL, NULL, NULL, "", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P138", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (712, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "([1-9]|10)\.[A-Z][A-Z]\.[0-9][0-9](|[a-j])", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (712, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "([1-9]|10)\\.[A-Z][A-Z]\\.[0-9][0-9](|[a-j])", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7124,11 +7232,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (712, "Item", NULL, NULL, NULL, NULL, "[[Q249452]], [[Q417223]], [[Q429902]], [[Q430026]], [[Q430062]], [[Q1018732]], [[Q2456879]], [[Q2312101]], [[Q413375]], [[Q680224]], [[Q7996116]], [[Q924427]], [[Q3723512]], [[Q3731651]], [[Q4006320]], [[Q4018793]], [[Q3618797]], [[Q3932956]], [[Q3895139]], [[Q18324782]], [[Q17562079]], [[Q17501680]], [[Q3924298]], [[Q3743171]], [[Q3743174]], [[Q3746839]], [[Q15962248]], [[Q3855507]], [[Q3873291]], [[Q3787825]], [[Q3895306]], [[Q15646565]], [[Q17485402]], [[Q423034]]", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P713", NULL, NULL, NULL, NULL, NULL);
+ VALUES (712, "Item", NULL, NULL, NULL, NULL, "[[Q249452]], [[Q417223]], [[Q429902]], [[Q430026]], [[Q430062]], [[Q1018732]], [[Q2456879]], [[Q2312101]], [[Q413375]], [[Q680224]], [[Q7996116]], [[Q924427]], [[Q3723512]], [[Q3731651]], [[Q4006320]], [[Q4018793]], [[Q3618797]], [[Q3932956]], [[Q3895139]], [[Q18324782]], [[Q17562079]], [[Q17501680]], [[Q3924298]], [[Q3743171]], [[Q3743174]], [[Q3746839]], [[Q15962248]], [[Q3855507]], [[Q3873291]], [[Q3787825]], [[Q3895306]], [[Q15646565]], [[Q17485402]], [[Q423034]], [[Q3746858]]", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P713", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (713, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "([1-9]|10)\.[A-Z][A-Z]\.[0-9][0-9](|[a-j])", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (713, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "([1-9]|10)\\.[A-Z][A-Z]\\.[0-9][0-9](|[a-j])", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7140,7 +7248,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (714, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[1-9][0-9]{0,1}[a-e]{0,1}\.[1-9][0-9]{0,1}[a-e]{0,1}\.[1-9][0-9]{0,1}[a-e]{0,1}\.[1-9][0-9]{0,1}[a-e]{0,1}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (714, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[1-9][0-9]{0,1}[a-e]{0,1}\\.[1-9][0-9]{0,1}[a-e]{0,1}\\.[1-9][0-9]{0,1}[a-e]{0,1}\\.[1-9][0-9]{0,1}[a-e]{0,1}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7152,7 +7260,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (715, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d\d\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (715, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7168,7 +7276,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (716, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "2\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (716, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "2\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7180,7 +7288,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (717, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[0-9A-J]\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (717, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[0-9A-J]\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7216,7 +7324,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (718, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (718, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7256,7 +7364,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (721, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(\d{11}|\d{8}|\d{5}|\d{2})", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (721, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(\\d{11}|\\d{8}|\\d{5}|\\d{2})", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7288,7 +7396,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (722, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (722, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7360,11 +7468,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (727, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+\/.+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (727, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+\\/.+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (727, "Type", NULL, NULL, "Q386724", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (727, "Type", NULL, NULL, "Q16686448", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7384,7 +7492,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (731, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (731, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7468,7 +7576,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (735, "Conflicts with ", NULL, NULL, NULL, NULL, NULL, NULL, "P31", NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|4167410}}, {{Q|101352}}, {{Q|12308941}}, {{Q|11879590}}, {{Q|3409032}}, {{Q|202444}}, {{Q|43229}}, {{Q|1092563}}, {{Q|157031}}, {{Q|14756018}}, {{Q|2301325}}, {{Q|14073567}}, {{Q|3046146}}, {{Q|1141470}}, {{Q|31184}}, {{Q|16334295}}, {{Q|281643}}, {{Q|10648343}}, {{Q|16979650}}", "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (735, "Conflicts with ", NULL, NULL, NULL, NULL, NULL, NULL, "P31", NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|4167836}}, {{Q|4167410}}, {{Q|101352}}, {{Q|12308941}}, {{Q|11879590}}, {{Q|3409032}}, {{Q|202444}}, {{Q|43229}}, {{Q|1092563}}, {{Q|157031}}, {{Q|14756018}}, {{Q|2301325}}, {{Q|14073567}}, {{Q|3046146}}, {{Q|1141470}}, {{Q|31184}}, {{Q|16334295}}, {{Q|281643}}, {{Q|10648343}}, {{Q|16979650}}", "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7480,7 +7588,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (735, "Value type", NULL, NULL, "Q202444", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (735, "Value type", NULL, NULL, "Q202444", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7576,7 +7684,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (745, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (745, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7672,7 +7780,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (757, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+(bis)?|\d{1,4}-\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (757, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+(bis)?|\\d{1,4}-\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7704,7 +7812,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (758, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (758, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7744,7 +7852,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (761, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{6}-\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (761, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{6}-\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7756,7 +7864,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (762, "Type", NULL, NULL, "Q385405", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (762, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{Q|649434}},{{Q|385405}}", NULL, NULL, NULL, NULL, NULL, NULL, "P1435", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7772,7 +7880,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (762, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d[\d\-/]*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (762, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d[\\d\\-/]*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7788,7 +7896,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (763, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (763, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7804,7 +7912,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (764, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(\d{8}|\d{11})", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (764, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(\\d{8}|\\d{11})", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7856,7 +7964,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (771, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[0-679]\d{3}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (771, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[0-679]\\d{3}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7916,7 +8024,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (772, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(0[1-9]|[1-4][0-9]|5[0-2])(|\d{3}|\d{9})", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (772, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(0[1-9]|[1-4][0-9]|5[0-2])(|\\d{3}|\\d{9})", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -7980,7 +8088,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (774, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d\d-\d{5}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (774, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d\\d-\\d{5}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8004,7 +8112,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (775, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(T|)(X|\d)\d{3}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (775, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(T|)(X|\\d)\\d{3}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8024,7 +8132,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (776, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(S|)\d{4}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (776, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(S|)\\d{4}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8032,7 +8140,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (777, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{4}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (777, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{4}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8052,7 +8160,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (778, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (778, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8076,7 +8184,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (779, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (779, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8100,27 +8208,31 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (781, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{7,9}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (781, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{7,9}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (781, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (781, "Single value", NULL, NULL, NULL, NULL, "{{Q|14540323}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (781, "Item", NULL, NULL, NULL, NULL, "Q568809", NULL, NULL, "Q5", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P31", NULL, NULL, NULL, NULL, NULL);
+ VALUES (781, "Item", NULL, NULL, NULL, NULL, "Q568809, Q19260349", NULL, NULL, "Q5", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P31", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (781, "Item", NULL, NULL, NULL, NULL, "Q568809", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P21", NULL, NULL, NULL, NULL, NULL);
+ VALUES (781, "Item", NULL, NULL, NULL, NULL, "Q568809, Q19260349", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P21", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (781, "Item", NULL, NULL, NULL, NULL, "Q568809", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P27", NULL, NULL, NULL, NULL, NULL);
+ VALUES (781, "Item", NULL, NULL, NULL, NULL, "Q568809, Q19260349, [[Q832788]], [[Q1467689]], [[Q1580820]], [[Q3083127]], [[Q4767282]]", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P27", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (781, "Item", NULL, NULL, NULL, NULL, "Q568809", NULL, NULL, "Q39", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P27", NULL, NULL, NULL, NULL, NULL);
+ VALUES (781, "Item", NULL, NULL, NULL, NULL, "Q568809, Q19260349", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P569", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (781, "Item", NULL, NULL, NULL, NULL, "Q568809, Q19260349", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P735", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8132,15 +8244,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (781, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P735", NULL, NULL, NULL, NULL, NULL);
-
-INSERT 
- INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (781, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P214", NULL, NULL, NULL, NULL, NULL);
-
-INSERT 
- INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (781, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P569", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8156,7 +8260,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (782, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Z0-9]{2}\d\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (782, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Z0-9]{2}\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8220,7 +8324,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (791, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\D{1,4}\-[A-Za-z\-0-9:/]{1,11}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (791, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\D{1,4}\\-[A-Za-z\\-0-9:/]{1,11}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8240,7 +8344,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (794, "Qualifier", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (794, "Qualifier", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8308,7 +8412,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (804, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (804, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8328,7 +8432,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (806, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\w\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (806, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\w\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8412,7 +8516,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (809, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (809, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8512,7 +8616,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (815, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d{1,5}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (815, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d{1,5}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8524,7 +8628,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (815, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (815, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8544,7 +8648,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (818, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d\d\d\d.\d\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (818, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d\\d\\d\\d.\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8556,7 +8660,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (821, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\D\D\D\D\D", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (821, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\D\\D\\D\\D\\D", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8580,7 +8684,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (824, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d\d\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (824, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8612,7 +8716,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (829, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "A\d\d\d\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (829, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "A\\d\\d\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8624,7 +8728,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (830, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (830, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8684,7 +8788,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (838, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (838, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8708,6 +8812,26 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (841, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P411", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (841, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q5", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P31", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (841, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P21", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (841, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P570", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (841, "Target required claim", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q14795564", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P31", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (842, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
@@ -8716,7 +8840,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (842, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (842, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8732,7 +8856,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (843, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{2,6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (843, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{2,6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8756,7 +8880,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (845, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (845, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8784,7 +8908,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (846, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (846, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8800,7 +8924,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (850, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{1,6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (850, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{1,6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8860,7 +8984,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (856, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "https?://\S+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (856, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "https?://\\S+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8876,7 +9000,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (858, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (858, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8896,7 +9020,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (860, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (860, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8908,7 +9032,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (861, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (861, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8948,7 +9072,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (864, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (864, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8968,15 +9092,15 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (865, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[a-z]\d{4}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (865, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[a-z]\\d{4}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (866, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "([1-9][0-9]*|[a-z]+\-[a-z]+(|\-[a-z]+|\d+))", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (866, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(([a-z]+|39)\\-)*([1-9][0-9]*|[a-z]+|[1-9][a-z0-9][a-z0-9])", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (866, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (866, "Single value", NULL, NULL, NULL, NULL, "{{Q|115630}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8984,7 +9108,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (866, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P214", NULL, NULL, NULL, NULL, NULL);
+ VALUES (866, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P214", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (866, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P227", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -8992,7 +9120,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (867, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[A-N][1-4]\d[0-1]\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (867, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[A-N][1-4]\\d[0-1]\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9028,7 +9156,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (877, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d?", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (877, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d?", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9036,7 +9164,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (879, "Type", NULL, NULL, "Q1229765", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (879, "Type", NULL, NULL, NULL, "Q11446,Q2811,Q16708006,Q14637321", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9060,7 +9188,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (882, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d\d\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (882, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9076,7 +9204,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (883, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d\d|\D\D", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (883, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d\\d|\\D\\D", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9096,7 +9224,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (884, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{23}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (884, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{23}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9160,7 +9288,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (892, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (892, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9176,11 +9304,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (898, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[iyɨʉɯuɪʏɪ̈ʊ̈ʊeøɘɵɤoəɛœɜɞʌɔæɐaɶɑɒ mɱn̪nɳɲŋɴʘǀǃǂǁpbp̪b̪t̪d̪tdʈɖcɟkɡqɢʡʔɓɗʄɠʛɸβfvθðszʃʒʂʐçʝxɣχʁħʕʜʢhɦpʼtʼkʼqʼsʼʋɹɻjɰɺɫʙr•ʀяʍwɥѵѵɾɽɢ̆ʡ̯ɕʑɧɬɮꞎʦʣʧʤlɭʎk͡pɡ͡bŋ͡m ɹ̩n̩e̯ʊ̯tʰdʰd̚dⁿdˡn̥d̥s̬t̬b̤a̤b̰a̰t̪d̪t̼d̼t̺d̺t̻d̻u̟t̟i̠t̠ëäe̽ɯ̽e̝ɹ̝e̞β̞β̞ɔ̹x̹ɔ̜x̜ʷtʷdʷtʲdʲtˠdˠtˁdˁɫz̴e̘o̘e̙o̙ẽz̃ɚɝ t͡sʦd͡zʣt͡ʃʧd͡ʒʤt͡ɕʨd͡ʑʥt͡ɬk͡pɡ͡bŋ͡m ˈˌː˘ˑ.‿|‖↗↘˧˦˨˥˩↑↓]+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (898, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[iyueoa mnnpbpbtdtdckqfvszcxhptkqsjrwlkpbm nethdhddndlndstbabatdtdtdtdutiteaeeexxwtwdwtjdjtdtdzeoeoez tsdztdtdtkpbm  .|]+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (901, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[A-Z][A-Z]([A-Z\d]\d)?", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (901, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[A-Z][A-Z]([A-Z\\d]\\d)?", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9200,7 +9328,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (902, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d{0,4}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (902, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d{0,4}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9216,7 +9344,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (905, "Single value", NULL, NULL, NULL, NULL, "{{Q|17738}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (905, "Single value", NULL, NULL, NULL, NULL, "{{Q|17738}}, {{Q|1055793}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9224,7 +9352,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (906, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d{0,8}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (906, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d{0,8}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9256,7 +9384,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (907, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{5}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (907, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{5}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9392,7 +9520,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (917, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[0-9][0-9АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ]+(\-\d+){0,1}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (917, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[0-9][0-9]+(\\-\\d+){0,1}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9405,6 +9533,10 @@ INSERT
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (921, "Type", NULL, NULL, "Q386724", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (921, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|5}}, {{Q|4167836}}", "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9440,7 +9572,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (933, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (933, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9520,7 +9652,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (939, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d\d\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (939, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9572,7 +9704,15 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (946, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[A-Z]{2}[A-Z\d]{10}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (945, "Type", NULL, NULL, NULL, "Q215627, Q43229", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (945, "Value type", NULL, NULL, NULL, "Q6256, Q43229", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (946, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[A-Z]{2}[A-Z\\d]{10}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9580,11 +9720,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (947, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (947, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (947, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (947, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9596,7 +9736,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (948, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(?i).+\.(jpg|jpeg|png|tif|tiff)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (948, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(?i).+\\.(jpg|jpeg|png|tif|tiff)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9604,11 +9744,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (948, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ".+\.(jpg|jpeg|JPG|png|tif|tiff)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (948, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ".+\\.(jpg|jpeg|JPG|png|tif|tiff)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (949, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (949, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9620,7 +9760,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (950, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "XX\d{5,7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (950, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "XX\\d{5,7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9632,7 +9772,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (951, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{12}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (951, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{12}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9648,7 +9788,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (954, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (954, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9664,7 +9804,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (957, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{1,5}(-)\d{1,7}\1\d{1,6}\1[0-9X]|novalue", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (957, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{1,5}(-)\\d{1,7}\\1\\d{1,6}\\1[0-9X]|novalue", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9680,7 +9820,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (959, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "1\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (959, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "1\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9720,7 +9860,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (961, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+-{1}\d{1}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (961, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+-{1}\\d{1}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9752,7 +9892,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (964, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d\d\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (964, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9800,7 +9940,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (968, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(\w\.)+@(\w)+\.(\w\.)+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (968, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(\\w\\.)+@(\\w)+\\.(\\w\\.)+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9840,7 +9980,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (981, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{4}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (981, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{4}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9900,7 +10040,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (989, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, ".+\.ogg", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (989, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, ".+\\.ogg", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9908,7 +10048,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (990, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, ".+\.(ogg|oga|flac)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (990, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, ".+\\.(ogg|oga|flac|wav)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9968,7 +10108,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (996, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, ".+\.(djvu|pdf|png|jpg|jpeg|DJVU|PDF|PNG|JPG|JPEG)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (996, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, ".+\\.(djvu|pdf|png|jpg|jpeg|DJVU|PDF|PNG|JPG|JPEG)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -9988,7 +10128,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1003, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1003, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10040,7 +10180,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1006, "Type", NULL, NULL, "Q5", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (1006, "Type", NULL, NULL, NULL, "Q215627,Q43229,Q16334295", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10056,7 +10196,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1010, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{2,19}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1010, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{2,19}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10068,7 +10208,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1011, "Qualifier", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1011, "Qualifier", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10080,7 +10220,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1014, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "300\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1014, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "300\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10100,7 +10240,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1015, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "x\d{8}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1015, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "x\\d{8}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10128,7 +10268,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1017, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "ADV\d{8}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1017, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "ADV\\d{8}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10152,7 +10292,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1022, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{4}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1022, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{4}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10164,7 +10304,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1023, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1023, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10176,11 +10316,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1024, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{5}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1024, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{5}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1025, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1025, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10280,7 +10420,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1036, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{3}|\d{3}\.\d+|2--\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1036, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{3}|\\d{3}\\.\\d+|2--\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10352,11 +10492,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1042, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{1,7}-[X\d]", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1042, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{1,7}-[X\\d]", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1044, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{8}[0-9X]", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1044, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{8}[0-9X]", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10364,7 +10504,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1045, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{1,5}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1045, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{1,5}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10476,7 +10616,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1053, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Z]-\d{4}-(19|20)\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1053, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Z]-\\d{4}-(19|20)\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10516,7 +10656,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1058, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{1,12}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1058, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{1,12}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10532,7 +10672,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1059, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{8}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1059, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{8}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10592,7 +10732,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1067, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(\d\d){1,4}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1067, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(\\d\\d){1,4}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10612,7 +10752,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1069, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1069, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10632,7 +10772,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1070, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(kew|tro|gcc|rjp|ild){1}-{1}\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1070, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(kew|tro|gcc|rjp|ild){1}-{1}\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10700,7 +10840,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1076, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d\d\.(|\d\d\d\.(|\d\.(|\d\d\.(|\d\d\d\.(|\d\d\.(|\d\d\d\.(|\d\d\d\.)))))))", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1076, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d\\d\\.(|\\d\\d\\d\\.(|\\d\\.(|\\d\\d\\.(|\\d\\d\\d\\.(|\\d\\d\\.(|\\d\\d\\d\\.(|\\d\\d\\d\\.)))))))", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10712,7 +10852,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1077, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{10}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1077, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{10}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10776,6 +10916,14 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1082, "Qualifiers", NULL, NULL, NULL, NULL, NULL, NULL, "P17", NULL, NULL, NULL, NULL, "{{P|585}}, {{P|459}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1082, "Type", NULL, NULL, NULL, "Q7703766, Q7275", NULL, NULL, "P17", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (1083, "Range", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "150000", "1", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
@@ -10784,7 +10932,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1084, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1084, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10804,15 +10952,15 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1085, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{1,8}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1085, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{1,8}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1086, "Range", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", "140", "1", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1086, "Range", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", "153", "0", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1086, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q11344", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P31", NULL, NULL, NULL, NULL, NULL);
+ VALUES (1086, "Type", NULL, NULL, NULL, "Q11344,Q25276", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10960,7 +11108,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1113, "Range", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", "1000", "0", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1112, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q3966183", NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P31", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1113, "Range", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", "10000", "0", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -10972,7 +11124,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1115, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1115, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11000,7 +11152,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1116, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(\d{2}|\d{4,10})", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1116, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(\\d{2}|\\d{4,10})", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11132,6 +11284,10 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1128, "Type", NULL, NULL, "Q43229", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (1129, "Range", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "65535", "0", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
@@ -11148,7 +11304,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1133, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{5}-[A-Z]{3}-\d{4}-\d{2}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1132, "Type", NULL, NULL, "Q1656682", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1133, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{5}-[A-Z]{3}-\\d{4}-\\d{2}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11240,7 +11400,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1138, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d{0,8}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1138, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d{0,8}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11260,7 +11420,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1140, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{4}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1140, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{4}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11288,7 +11448,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1143, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1143, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11304,7 +11464,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1144, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "((a(c|fl?|gr)?|b[irs]|c(a?d?|lc|[sxy])|do?|es?|f(i[ae]?)?|g[ms]?|h(a|e[wx]?)?|in?t|j[ax]?|kx?|l(lh|tf)?|m([ams]|ap|ed|i[cdef]|pa?|us)?|n(cn|ex?|o|[tu]c)|or|p([aop]|h[opq])|r[aceu]?|s(ax?|[cdfgnsu])?|t(b|mp)|u(m|nk)|w(ar)?|[xz])(\b|-)?|20)?\d\d(-\d{1,5}|(\b|-)?\d{6})", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1144, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "((a(c|fl?|gr)?|b[irs]|c(a?d?|lc|[sxy])|do?|es?|f(i[ae]?)?|g[ms]?|h(a|e[wx]?)?|in?t|j[ax]?|kx?|l(lh|tf)?|m([ams]|ap|ed|i[cdef]|pa?|us)?|n(cn|ex?|o|[tu]c)|or|p([aop]|h[opq])|r[aceu]?|s(ax?|[cdfgnsu])?|t(b|mp)|u(m|nk)|w(ar)?|[xz])(\\b|-)?|20)?\\d\\d(-\\d{1,5}|(\\b|-)?\\d{6})", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11400,7 +11560,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1153, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{1,6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1153, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{1,6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11428,7 +11588,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1156, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d{0,11}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1156, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d{0,11}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11444,7 +11604,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1157, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Z]\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1157, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Z]\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11500,7 +11660,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1163, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(application|audio|example|image|message|model|multipart|text|video)/[a-zA-Z0-9\-+.]+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1163, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(application|audio|example|image|message|model|multipart|text|video)/[a-zA-Z0-9\\-+.]+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11528,7 +11688,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1168, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{3}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1168, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{3}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11620,7 +11780,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1172, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "([0-1]\d|2[0-5])\d{5}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1172, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "([0-1]\\d|2[0-5])\\d{5}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11648,11 +11808,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1183, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Z]{2}/\d{2,7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1183, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Z]{2}/\\d{2,7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1184, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{5}/.{4,}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1184, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{5}/.{4,}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11665,6 +11825,10 @@ INSERT
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (1185, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1185, "Type", NULL, NULL, "Q5", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11684,7 +11848,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1186, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1186, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11744,7 +11908,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1187, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "A\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1187, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "A\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11768,11 +11932,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1188, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "PL\d{12}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1188, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "PL\\d{12}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1190, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{1,3}(\.\d{1,3})*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1190, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{1,3}(\\.\\d{1,3})*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11892,6 +12056,14 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1200, "Target required claim", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q166620", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P971", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1200, "Inverse", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P971", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (1201, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
@@ -11928,7 +12100,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1207, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "n(9[3-9]|0[0-2]|200[2-9]|201[0-4])\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1207, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "n(9[3-9]|0[0-2]|200[2-9]|201[0-4])\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11944,7 +12116,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1209, "Format", NULL, NULL, NULL, NULL, "", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(1[0-5]|2[1-3]|3[1-7]|4[1-6]|5[1-4]|6[1-5])-\d\d\d\d(/([A-FH-KN-SUVXZ]|G\d|T[BD-HJ-NPQSUV]))?", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1209, "Format", NULL, NULL, NULL, NULL, "", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(1[0-5]|2[1-3]|3[1-7]|4[1-6]|5[1-4]|6[1-5])-\\d\\d\\d\\d(/([A-FH-KN-SUVXZ]|G\\d|T[BD-HJ-NPQSUV]))?", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11964,7 +12136,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1212, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{1,5}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1212, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{1,5}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -11992,7 +12164,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1213, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{1,9}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1213, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{1,9}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12028,7 +12200,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1214, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{11,13}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1214, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{11,13}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12076,7 +12248,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1216, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1216, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12108,7 +12280,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1217, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1217, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12124,7 +12296,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1218, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1218, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12132,11 +12304,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1219, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1219, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1220, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1220, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12164,7 +12336,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1222, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1222, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12188,7 +12360,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1223, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1223, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12196,7 +12368,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1224, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1224, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12204,7 +12376,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1225, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1225, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12212,7 +12384,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1226, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1226, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12264,7 +12436,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1231, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1231, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12336,7 +12508,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1236, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\*(d|u|r| )+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1236, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\*(d|u|r| )+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12408,7 +12580,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1246, "Format", NULL, NULL, NULL, NULL, "", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Z]{2}\d{1,10}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1246, "Format", NULL, NULL, NULL, NULL, "", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Z]{2}\\d{1,10}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12420,7 +12592,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1248, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[0-9a-f]{8}\-[0-9a-f]{4}\-[0-9a-f]{4}\-[0-9a-f]{4}\-[0-9a-f]{12}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1248, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[0-9a-f]{8}\\-[0-9a-f]{4}\\-[0-9a-f]{4}\\-[0-9a-f]{4}\\-[0-9a-f]{12}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12440,7 +12612,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1250, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d{0,6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1250, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d{0,6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12468,7 +12640,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1251, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d(|\d|\d\d\d)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1251, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d(|\\d|\\d\\d\\d)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12492,7 +12664,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1253, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1253, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12540,15 +12712,15 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1255, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[1-9]\d*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1255, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[1-9]\\d*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1256, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{1,2}(([A-IK-Z])\2?\d{0,5}(\([A-Z&amp;, ]+\))?\d{0,2}(\(+\d{1,3}\))?|)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1256, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{1,2}(([A-IK-Z])\\2?\\d{0,5}(\\([A-Z&amp;, ]+\\))?\\d{0,2}(\\(+\\d{1,3}\\))?|)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1257, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{1,2}(([A-IK-Z])\2?\d{0,5}(\([A-Z&amp;, ]+\))?\d{0,2}(\(+\d{1,3}\))?|)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1257, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{1,2}(([A-IK-Z])\\2?\\d{0,5}(\\([A-Z&amp;, ]+\\))?\\d{0,2}(\\(+\\d{1,3}\\))?|)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12560,7 +12732,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1258, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "m/[0-9A-Za-z][-0-9A-Za-z_']*|(tv|celebrity|critic)/[0-9a-z][-0-9a-z_']*(/s\d\d)?|source-[1-9]\d*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1258, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "m/[0-9A-Za-z][-0-9A-Za-z_']*|(tv|celebrity|critic)/[0-9a-z][-0-9a-z_']*(/s\\d\\d)?|source-[1-9]\\d*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12600,7 +12772,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1265, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1265, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12640,7 +12812,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1267, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1267, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12652,7 +12824,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1273, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "a\d{7}[0-9x]", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1273, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "a\\d{7}[0-9x]", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12688,7 +12860,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1276, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1276, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12760,7 +12932,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1281, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[1-9]\d{0,9}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1281, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[1-9]\\d{0,9}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12768,7 +12940,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1282, "Format", "\S.*\S", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "Key:[0-9a-zA-Z_:]+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1282, "Format", "\\S.*\\S", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "Key:[0-9a-zA-Z_:]+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12781,6 +12953,10 @@ INSERT
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (1282, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1283, "Inverse", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P138", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12820,11 +12996,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1284, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "00\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1284, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "00\\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1284, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1284, "Single value", NULL, NULL, NULL, NULL, "{{Q|599627}}, {{Q|2094539}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12832,7 +13008,87 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1284, "Type", NULL, NULL, NULL, "Q5, Q43229", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (1284, "Type", NULL, NULL, NULL, "Q5, Q215380, Q219160", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1285, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "01\\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1285, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1285, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1285, "Type", NULL, NULL, NULL, "Q5, Q43229", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1286, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "02\\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1286, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1286, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1286, "Type", NULL, NULL, NULL, "Q5, Q2088357, Q188451", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1287, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "17\\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1287, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1287, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1287, "Type", NULL, NULL, NULL, "Q5", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1288, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "16\\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1288, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1288, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1288, "Type", NULL, NULL, NULL, "Q5", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1289, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "18\\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1289, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1289, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1289, "Type", NULL, NULL, NULL, "Q5", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12868,7 +13124,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1291, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1291, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12884,11 +13140,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1291, "Item", NULL, NULL, NULL, NULL, "{{Q|66253}},{{Q|2167941}},{{Q|2573794}},{{Q|66745}},{{Q|2545899}},{{Q|1554682}},{{Q|125458}},{{Q|1279285}},{{Q|1317586}},{{Q|1445897}},{{Q|1663309}},{{Q|916774}}", NULL, NULL, "Q39", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P27", NULL, NULL, NULL, NULL, NULL);
+ VALUES (1291, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P27", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1291, "Item", NULL, NULL, NULL, NULL, "Q1262912", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P214", NULL, NULL, NULL, NULL, NULL);
+ VALUES (1291, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P214", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12924,6 +13180,58 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1293, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{1,4}", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1293, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1293, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1293, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q5", NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P31", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1293, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P21", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1293, "Item", NULL, NULL, NULL, NULL, "{{Q|5761359}}, {{Q|5091935}}", NULL, NULL, "Q6581097", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P21", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1293, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P27", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1293, "Item", NULL, NULL, NULL, NULL, "{{Q|326033}}, {{Q|15142045}}, {{Q|5386680}}, {{Q|6219417}}, {{Q|7342939}}", NULL, NULL, "Q145", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P27", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1293, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P106", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1293, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P19", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1293, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P569", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1293, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P570", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1293, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P735", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (1295, "Range", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "1.0", "0.0", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
@@ -12932,7 +13240,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1296, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1296, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -12944,7 +13252,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1297, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(?:0[1-6]|1[0-6]|[27][0-7]|[35]\d|[468][0-8]|9[0-589])-\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1297, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(?:0[1-6]|1[0-6]|[27][0-7]|[35]\\d|[468][0-8]|9[0-589])-\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13108,7 +13416,35 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1315, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[1-9][0-9]*", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1315, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1315, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (1317, "Type", NULL, NULL, "Q5", NULL, NULL, NULL, "P31", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1320, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[a-z]{2}(_[a-z]{2})?/[0-9]{8}", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1320, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1320, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1320, "Type", NULL, NULL, "Q43229", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13160,7 +13496,19 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1323, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "A\d\d\.\d\.\d\d\.\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1322, "Symmetric", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1322, "Type", NULL, NULL, NULL, "Q747980, Q161973, Q547823", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "subclass", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1322, "Value type", NULL, NULL, NULL, "Q747980, Q161973, Q547823", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "subclass", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1323, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "A\\d\\d\\.\\d\\.\\d\\d\\.\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13181,6 +13529,22 @@ INSERT
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (1324, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P348", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1329, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\+([17]|[2345689]\\d{1,2})[\\- ][\\d(][ ()\\.\\-\\d]+", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1329, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P31", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1329, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1329, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13296,7 +13660,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1341, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "yes", NULL, NULL, NULL, "p\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1341, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "yes", NULL, NULL, NULL, "p\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13404,7 +13768,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1360, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(|\-)[1-9][0-9]*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1360, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(|\\-)[1-9][0-9]*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13420,7 +13784,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1361, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(anime|company|manga|people|releases)\/\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1361, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(anime|company|manga|people|releases)\\/\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13440,7 +13804,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1362, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[A-ZÅÄÖÜÉ][a-zåäâáàöóüéèëêşçA-Z0-9 ',\.\-–()\*/]*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1362, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[A-ZAAOUE][a-zaaaaaooueeeescA-Z0-9 ',\\.\\-()\\*/]*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13464,7 +13828,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1364, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1364, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13500,7 +13864,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1367, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[a-z\-0-9]+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1367, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[a-z\\-0-9]+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13520,7 +13884,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1368, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1368, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13564,19 +13928,27 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1371, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[N|S]-(\w{2})-(\w)?[\d]+(-\w)?", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1371, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P1435", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1375, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1371, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[N|S]-(\\w{2})-(\\w)?[\\d]+(-\\w)?", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1375, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1375, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{9}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1375, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1375, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1375, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1375, "Type", NULL, NULL, NULL, "Q5, Q43229", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13620,7 +13992,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1385, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1385, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13632,7 +14004,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1386, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d\d\d\d\dA", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1386, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d\\d\\d\\d\\dA", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13648,6 +14020,14 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1387, "One of", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{Q|1129409}}, {{Q|164597}}, {{Q|737014}}, {{Q|6587194}}, {{Q|844072}}, {{Q|76074}}, {{Q|204481}}");
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1387, "Type", NULL, NULL, "Q7278", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (1389, "One of", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{Q|654824}}, {{Q|2305591}}, {{Q|13439060}}, {{Q|13533432}}, {{Q|2751813}}, {{Q|1565828}}");
 
 INSERT 
@@ -13656,11 +14036,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1391, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1391, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1391, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d{0,5}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1391, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d{0,5}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13684,7 +14064,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1395, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "/cancertopics/types/[a-z\-]+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1395, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "/cancertopics/types/[a-z\\-]+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13696,7 +14076,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1396, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[0-9]{2}\-[A-Z]{3}\-[a-z]{1,3}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1396, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[0-9]{2}\\-[A-Z]{3}\\-[a-z]{1,3}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13720,7 +14100,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1400, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[1-9]\d{0,4}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1400, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[1-9]\\d{0,4}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13748,7 +14128,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1402, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1402, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13768,7 +14148,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1404, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[A-Z][A-Z]\d[A-Z\d]{6}\d{3}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1404, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[A-Z][A-Z]\\d[A-Z\\d]{6}\\d{3}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13793,6 +14173,18 @@ INSERT
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (1406, "Type", NULL, NULL, "Q2001982", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1407, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1407, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1407, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13852,7 +14244,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1413, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{5}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1413, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(PERSON|MOVIE|COMPANY|MUSIC)\\/\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13860,7 +14252,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1415, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "101\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1415, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "101\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13892,7 +14284,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1417, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1417, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13912,7 +14304,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1422, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "([1-9]\d{0,2}|[1-5]\d{3})", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1422, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "([1-9]\\d{0,2}|[1-5]\\d{3})", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -13964,7 +14356,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1428, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1428, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14004,7 +14396,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1430, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1430, "Single value", NULL, NULL, NULL, NULL, "{{Q|7245}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14044,15 +14436,15 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1435, "Type", NULL, NULL, "Q386724", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
-
-INSERT 
- INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (1435, "Value type", NULL, NULL, "Q2065736", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "subclass", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (1435, "Qualifiers", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|518}}, {{P|580}}, {{P|582}}, {{P|790}}", "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1435, "Type", NULL, NULL, "Q16686448", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14088,7 +14480,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1438, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{1,5}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1438, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{1,5}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14100,7 +14492,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1439, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1439, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14116,7 +14508,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1440, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{6,8}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1440, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{6,8}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14148,7 +14540,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1442, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(?i).+\.jpg", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1442, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "(?i).+\\.jpg", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14188,7 +14580,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1447, "Format", NULL, NULL, NULL, NULL, "{{Q|600404}}, {{Q|3717560}}, {{Q|5977667}}, {{Q|2107375}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "([a-z]{2}|o|u)/[a-z\-]*-\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1447, "Format", NULL, NULL, NULL, NULL, "{{Q|600404}}, {{Q|3717560}}, {{Q|5977667}}, {{Q|2107375}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "([a-z]{2}|o|u)/[a-z\\-]*-\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14200,11 +14592,15 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1447, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P1344", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (1447, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q5", NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P31", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1447, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P21", NULL, NULL, NULL, NULL, NULL);
+ VALUES (1447, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P21", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14292,7 +14688,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1459, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{1,7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1459, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{1,7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14324,7 +14720,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1460, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "HB\d\d/\d\d/\d\d\d(| [A-P])", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1460, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "HB\\d\\d/\\d\\d/\\d\\d\\d(| [A-P])", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14352,7 +14748,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1461, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Za-z\-'\(\)]+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1461, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[A-Za-z\\-'\\(\\)]+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14432,7 +14828,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1464, "Type", NULL, NULL, "Q7703766", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (1464, "Type", NULL, NULL, NULL, "Q7703766, Q7275", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14448,7 +14844,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1465, "Item", NULL, NULL, NULL, NULL, "{{Q|1011}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P17", NULL, NULL, NULL, NULL, NULL);
+ VALUES (1465, "Item", NULL, NULL, NULL, NULL, "{{Q|1011}}, {{Q|16}}, {{Q|810}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P17", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14468,7 +14864,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1465, "Type", NULL, NULL, "Q7703766", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (1465, "Type", NULL, NULL, NULL, "Q7703766, Q7275", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14544,7 +14940,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1469, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1469, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14552,19 +14948,23 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1469, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P21", NULL, NULL, NULL, NULL, NULL);
+ VALUES (1469, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q937857", NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P106", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1469, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P569", NULL, NULL, NULL, NULL, NULL);
+ VALUES (1469, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P27", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1469, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P21", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1469, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P569", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (1469, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P19", NULL, NULL, NULL, NULL, NULL);
-
-INSERT 
- INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1469, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q937857", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P106", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14588,11 +14988,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1472, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(?![Cc]reator\s*:)[^][|]+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1472, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(?![Cc]reator\\s*:)[^][|]+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1472, "Type", NULL, NULL, "Q215627", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (1472, "Type", NULL, NULL, NULL, "Q215627,Q43229,Q16334295", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14672,7 +15072,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1480, "One of", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{Q|Q18086598}},{{Q|Q18122778}},{{Q|Q18195782}}");
+ VALUES (1480, "One of", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{Q|Q5727902}},{{Q|Q18122778}},{{Q|Q18195782}},{{Q|Q18912752}}");
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14680,7 +15080,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1482, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\Ahttp://(((academia|android|anime|apple|arduino|astronomy|aviation|beer|bicycles|biology|bitcoin|blender|boardgames|bricks|buddhism|chemistry|chess|chinese|christianity|codegolf|codereview|cogsci|cooking|craftcms|crypto|cs|cstheory|datascience|dba|diy|drupal|dsp|earthscience|ebooks|electronics|ell|english|expatriates|expressionengine|fitness|freelancing|french|gamedev|gaming|gardening|genealogy|german|gis|graphicdesign|ham|hermeneutics|hinduism|history|homebrew|islam|italian|japanese|joomla|judaism|linguistics|magento|martialarts|math|matheducators|mathematica|mechanics|meta|moderators|money|movies|music|networkengineering|opendata|outdoors|parenting|patents|pets|philosophy|photo|physics|pm|poker|politics|productivity|programmers|puzzling|quant|raspberrypi|reverseengineering|robotics|rpg|russian|salesforce|scicomp|scifi|security|sharepoint|skeptics|softwarerecs|sound|space|spanish|sports|sqa|startups|stats|sustainability|tex|tor|travel|tridion|unix|ux|video|webapps|webmasters|windowsphone|wordpress|workplace|writers).stackexchange.com)|((askubuntu\.com|mathoverflow\.net|pt\.stackoverflow\.com|serverfault\.com|stackapps\.com|stackoverflow\.com|superuser\.com)))/tags/", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1482, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\Ahttp://(((academia|android|anime|apple|arduino|astronomy|aviation|beer|bicycles|biology|bitcoin|blender|boardgames|bricks|buddhism|chemistry|chess|chinese|christianity|codegolf|codereview|cogsci|cooking|craftcms|crypto|cs|cstheory|datascience|dba|diy|drupal|dsp|earthscience|ebooks|electronics|ell|english|expatriates|expressionengine|fitness|freelancing|french|gamedev|gaming|gardening|genealogy|german|gis|graphicdesign|ham|hermeneutics|hinduism|history|homebrew|islam|italian|japanese|joomla|judaism|linguistics|magento|martialarts|math|matheducators|mathematica|mechanics|meta|moderators|money|movies|music|networkengineering|opendata|outdoors|parenting|patents|pets|philosophy|photo|physics|pm|poker|politics|productivity|programmers|puzzling|quant|raspberrypi|reverseengineering|robotics|rpg|russian|salesforce|scicomp|scifi|security|sharepoint|skeptics|softwarerecs|sound|space|spanish|sports|sqa|startups|stats|sustainability|tex|tor|travel|tridion|unix|ux|video|webapps|webmasters|windowsphone|wordpress|workplace|writers).stackexchange.com)|((askubuntu\\.com|mathoverflow\\.net|pt\\.stackoverflow\\.com|serverfault\\.com|stackapps\\.com|stackoverflow\\.com|superuser\\.com)))/tags/", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14692,7 +15092,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1483, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1483, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14716,7 +15116,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1529, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "MERIMEEIA\d{8}|PALISSYIM\d{8}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1529, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "MERIMEEIA\\d{8}|PALISSYIM\\d{8}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14828,11 +15228,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1543, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ".+\.(svg|png|gif|SVG|PNG|GIF)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1543, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ".+\\.(svg|png|gif|SVG|PNG|GIF)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1545, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1545, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14868,7 +15268,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1551, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{5}-[A-Z]{3}-\d{4}-\d{2}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1551, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{5}-[A-Z]{3}-\\d{4}-\\d{2}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14920,11 +15320,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1553, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "&lt;code>[1-9]\d*&lt;/code>", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1553, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "&lt;code>[1-9]\\d*&lt;/code>", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1554, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1554, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -14940,11 +15340,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1555, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d{0,4}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1555, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d{0,4}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1556, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[a-z\-]+\.[a-z\-]+(|\.[1-5])", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1556, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[a-z\\-]+\\.[a-z\\-]+(|\\.[1-5])", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15036,7 +15436,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1562, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "v[1-9]\d{0,5}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1562, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "v[1-9]\\d{0,5}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15044,7 +15444,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1563, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[A-Za-z\-_'()]+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1563, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[A-Za-z\\-_'()]+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15076,7 +15476,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1564, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d{0,3}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1564, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d{0,3}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15104,7 +15504,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1565, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d*", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1565, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d*", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15140,7 +15540,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1566, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\d{0,8}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1566, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9]\\d{0,8}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15168,7 +15568,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1567, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{5}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1567, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{5}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15248,7 +15648,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1575, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "&lt;code>M\d{7}&lt;/code>", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1575, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "&lt;code>M\\d{7}&lt;/code>", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15272,7 +15672,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1577, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "P([1][012]|\d)?\d|0[1-3]?\d?\d[ab]?|[1-2]?\d{1,3}[ab]?|l[1-2]?\d{1,3}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1577, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "P([1][012]|\\d)?\\d|0[1-3]?\\d?\\d[ab]?|[1-2]?\\d{1,3}[ab]?|l[1-2]?\\d{1,3}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15300,7 +15700,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1578, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "&lt;code>\d{4}&lt;/code>", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1578, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "&lt;code>\\d{4}&lt;/code>", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15316,7 +15716,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1579, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "&lt;code>\d{6}&lt;/code>", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1579, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "&lt;code>\\d{6}&lt;/code>", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15328,7 +15728,15 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1580, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "&lt;code>a\d{7}&lt;/code>", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1580, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "&lt;code>a\\d{7}&lt;/code>", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1582, "Inverse", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P1672", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1582, "Value type", NULL, NULL, "Q16521", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15340,7 +15748,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1585, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1585, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15376,7 +15784,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1586, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{1,4}\-[A-Z][A-Z]", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1586, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{1,4}\\-[A-Z][A-Z]", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15396,7 +15804,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1587, "Type", NULL, NULL, "Q18564289", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (1587, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{Q|18398453}}, {{Q|12799435}}, {{Q|18363603}}, {{Q|18363639}}, {{Q|18519893}}", NULL, "true", NULL, NULL, NULL, NULL, "P1435", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15556,7 +15964,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1600, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{1,5}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1600, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{1,5}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15580,7 +15988,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1601, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{1,5}[b-z]?", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1601, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{1,5}[b-z]?", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15588,7 +15996,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1601, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1601, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15628,11 +16036,11 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1612, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(?![Ii]nstitution\s*:)[^][|]+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1612, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(?![Ii]nstitution\\s*:)[^][|]+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1612, "Type", NULL, NULL, "Q43229", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (1612, "Type", NULL, NULL, NULL, "Q43229,Q41176", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15648,7 +16056,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1614, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d\d\d\d-\d\d\d\d/member/[a-z]+-[a-z-()]+-\d\d\d\d\d?(|-\d\d|-\d\d\d\d)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1614, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d\\d\\d\\d-\\d\\d\\d\\d/member/[a-z]+-[a-z-()]+-\\d\\d\\d\\d\\d?(|-\\d\\d|-\\d\\d\\d\\d)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15712,7 +16120,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1618, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1618, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15760,7 +16168,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1621, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ".+\.(svg|png)", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1621, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ".+\\.(svg|png)", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15784,7 +16192,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1624, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "&lt;code>[1-9]\d{0,4}&lt;/code>", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1624, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "&lt;code>[1-9]\\d{0,4}&lt;/code>", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15804,7 +16212,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1626, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(\d){7}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1626, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(\\d){7}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15840,7 +16248,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1630, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "https?://[\wè\d\-\./\?=&amp;:_%+#~;!\[\]]*\$1[\w\d\-\./\?=&amp;:_%+#~;!\[\]]*|mandatory=true", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1630, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "https?://[\\we\\d\\-\\.,/\\?=&amp;:_%+#~;!\\[\\]]*\\$1[\\w\\d\\-\\.,/\\?=&amp;:_%+#~;!\\[\\]]*|mandatory=true", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15924,14 +16332,6 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1636, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P19", NULL, NULL, NULL, NULL, NULL);
-
-INSERT 
- INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1636, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P569", NULL, NULL, NULL, NULL, NULL);
-
-INSERT 
- INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (1636, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P735", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
@@ -15948,7 +16348,19 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1644, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\d{2}/[a-z-0-9]+/[a-z-]+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1639, "Symmetric", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1639, "Type", NULL, NULL, "Q838948", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1639, "Value type", NULL, NULL, "Q838948", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1644, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "\\d{2}/[a-z-0-9]+/[A-Z-a-z]+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -15976,7 +16388,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1648, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "s(|\d|10)-[A-Z0]{4}-[A-Z0]{3}-[0-9]{4}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1648, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "s(|\\d|10)-[A-Z0]{4}-[A-Z0]{3}-[0-9]{4}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -16084,7 +16496,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1662, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "10(\.[1-9][0-9]*)+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1662, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "10(\\.[1-9][0-9]*)+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -16096,7 +16508,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1667, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[17]\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1667, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "[17]\\d{6}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -16117,6 +16529,42 @@ INSERT
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (1668, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q[ABCDGHJLMNPRSV]([0-9][0-9]([A-Z]([A-Z]([0-9][0-9])?)?)?)?", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1670, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d\\d\\d\\d[A-Z]\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1670, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|4167410}}, {{Q|4167836}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1670, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1670, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1672, "Inverse", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P1582", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1672, "Type", NULL, NULL, "Q16521", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1672, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P225", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1672, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P171", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1672, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P105", NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -16156,11 +16604,19 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1686, "Value type", NULL, NULL, "Q386724", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+ VALUES (1685, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[RNSX]\\-\\d{3}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1686, "Qualifier", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1685, "Type", NULL, NULL, "Q3966183", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1686, "Value type", NULL, NULL, "Q386724", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1686, "Qualifier", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -16184,7 +16640,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1694, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "H\d\.\d\d\.\d\d\.\d\.\d\d\d\d\d", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1694, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "H\\d\\.\\d\\d\\.\\d\\d\\.\\d\\.\\d\\d\\d\\d\\d", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -16192,19 +16648,19 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1695, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "A[0-9]{7}[0-9X]", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1695, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "A[0-9]{7}[0-9X]", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1695, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|4167410}}, {{Q|4167836}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1695, "Conflicts with", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "{{P|31}}: {{Q|4167410}}, {{Q|4167836}}", "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1695, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1695, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1695, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1695, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -16232,7 +16688,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1698, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d{1,4}", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1698, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{1,4}", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -16244,7 +16700,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1700, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1700, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -16280,7 +16736,7 @@ INSERT
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
- VALUES (1702, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\d+", NULL, NULL, NULL, NULL, NULL, NULL);
+ VALUES (1702, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d+", NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
@@ -16306,3 +16762,154 @@ INSERT
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (1702, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P373", NULL, NULL, NULL, NULL, NULL);
 
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1708, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1708, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "\\d{8}", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1708, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P1435", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1708, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q183", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P17", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1708, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P625", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1708, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q1202", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P131", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1710, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "(1|10)\\d{7}[0-9X]|[47]\\d{6}-\\d|[1-9]\\d{0,7}-[0-9X]|3\\d{7}[0-9X]", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1710, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1710, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1710, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, "P227", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1710, "Item", NULL, NULL, NULL, NULL, "{{Q|827241}}, {{Q|872801}}, {{Q|1095142}}", NULL, NULL, "Q5", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P31", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1710, "Item", NULL, NULL, NULL, NULL, "{{Q|827241}}, {{Q|872801}}", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P21", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1711, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, "[1-9][0-9]*", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1711, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1711, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "true", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1712, "Single value", NULL, NULL, NULL, NULL, "", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1712, "Unique value", NULL, NULL, NULL, NULL, "", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1713, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "yes", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1713, "Single value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "yes", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1713, "Format", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "yes", NULL, NULL, NULL, "http://www.bundestag.de/bundestag/abgeordnete.*|http://webarchiv.bundestag.de/archive/.*", NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1713, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q5", NULL, NULL, NULL, NULL, "yes", NULL, NULL, NULL, NULL, "P31", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1713, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "yes", NULL, NULL, NULL, NULL, "P21", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1713, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q183", NULL, NULL, NULL, NULL, "yes", NULL, NULL, NULL, NULL, "P27", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1713, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q82955", NULL, NULL, NULL, NULL, "yes", NULL, NULL, NULL, NULL, "P106", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1713, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q1939555", NULL, NULL, NULL, NULL, "yes", NULL, NULL, NULL, NULL, "P39", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1713, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "yes", NULL, NULL, NULL, NULL, "P735", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1713, "Item", NULL, NULL, NULL, NULL, "", NULL, NULL, "Q188", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P1412", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1713, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P102", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1713, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P569", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1715, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q18398453", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P1435", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1715, "Unique value", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1715, "Type", NULL, NULL, "Q82821", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "instance", NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1715, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, "Q215", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P17", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1715, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P276", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1715, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P18", NULL, NULL, NULL, NULL, NULL);
+
+INSERT 
+ INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
+ VALUES (1715, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P373", NULL, NULL, NULL, NULL, NULL);
+
+ALTER TABLE wdq_constraints_from_templates
+  DROP COLUMN Tag,
+  DROP COLUMN item2,
+  DROP COLUMN item3,
+  DROP COLUMN group_by,
+  DROP COLUMN required,
+  DROP COLUMN seperate_category_processing;
