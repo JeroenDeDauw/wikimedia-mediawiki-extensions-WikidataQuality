@@ -9,12 +9,12 @@ use Wikibase\Repo\WikibaseRepo;
 
 //TODO (prio high): define tests for the checks against constraints (test items with statements)
 //TODO (prio high): add support for remaining constraints (some might use a common set of methods):
-/*	[todo]	Commons link
- *	[todo]	Conflicts with - similar to Target required claim (target is self)
+/*	[todo (partly done)]	Commons link
+ *	[DONE]	Conflicts with - similar to Target required claim (target is self)
  *	[DONE]	Diff within range
- *	[todo]	Format
+ *	[DONE]	Format
  *	[DONE]	Inverse - special case of Target required claim
- *	[todo]	Item
+ *	[DONE]	Item
  *	[DONE]	Multi value - similar to Single value
  *	[DONE]	One of
  *	[DONE]	Qualifier
@@ -23,9 +23,9 @@ use Wikibase\Repo\WikibaseRepo;
  *	[DONE]	Single value - similar to Multi value
  *	[DONE]	Symmetric - special case of Inverse, which is a special case of Target required claim
  *	[DONE]	Target required claim
- *	[todo]	Type - similar to Value type
+ *	[DONE]	Type - similar to Value type
  *	[todo]	Unique value
- *	[todo]	Value type - similar to Type
+ *	[DONE]	Value type - similar to Type
  */
 //TODO (prio normal): add templates for items, properties, constraints to our instance and write them like {{Q|1234}} or [[Property:P567]] or {{tl|Constraint:Range}} or ... in this code
 //TODO (prio normal): check for exceptions and mark a statement as such
