@@ -9,8 +9,14 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 
 class OneOfChecker {
 
+    private $helper;
+
+    public function __construct( $helper ) {
+        $this->helper = $helper;
+    }
+
     public function checkOneOfConstraint( $propertyId, $dataValueString, $values ) {
-        $allowedValues = TemplateConverter::toArray( $values );
+        $allowedValues = $this->helper->toArray( $values );
 
         if( !in_array($dataValueString, $allowedValues) ) {
             $status = 'violation';
@@ -18,7 +24,7 @@ class OneOfChecker {
             $status = 'compliance';
         }
 
-        $parameterString = 'Values: ' . OutputLimiter::limitOutput( TemplateConverter::toStringWithoutBrackets( $values ) );
+        $parameterString = 'Values: ' . $this->helper->limitOutput( $this->helper->toStringWithoutBrackets( $values ) );
 
         return new CheckResult( $propertyId, $dataValueString, 'One of', $parameterString, $status );
     }

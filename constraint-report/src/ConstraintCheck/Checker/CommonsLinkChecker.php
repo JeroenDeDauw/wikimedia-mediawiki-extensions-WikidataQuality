@@ -8,6 +8,12 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 
 class CommonsLinkChecker {
 
+    private $helper;
+
+    public function __construct( $helper ) {
+        $this->helper = $helper;
+    }
+
     public function checkCommonsLinkConstraint( $propertyId, $dataValueString ) {
         if( $this->isCommonsLinkWellFormed( $dataValueString ) )
             $status = $this->url_exists( $dataValueString ) ? 'compliance' : 'violation';

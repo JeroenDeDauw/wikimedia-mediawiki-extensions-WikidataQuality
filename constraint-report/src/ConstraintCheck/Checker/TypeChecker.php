@@ -10,10 +10,12 @@ class TypeChecker {
 
     private $statements;
     private $entityLookup;
+    private $helper;
 
-    public function __construct( $statements, $lookup) {
+    public function __construct( $statements, $lookup, $helper) {
         $this->statements = $statements;
         $this->entityLookup = $lookup;
+        $this->helper = $helper;
     }
 
     public function checkValueTypeConstraint( $propertyId, $dataValueString, $class, $classes, $relation ) {
@@ -62,7 +64,7 @@ class TypeChecker {
             if( $claim->getPropertyId()->getNumericId() == 279) {
                 $mainSnak = $claim->getMainSnak();
                 if( $mainSnak->getType() == 'value' ) {
-                    $dataValueCompareString = DataValueParser::dataValueToString( $mainSnak->getDataValue() );
+                    $dataValueCompareString = $this->helper->dataValueToString( $mainSnak->getDataValue() );
                 } else {
                     $dataValueCompareString = '\'\'(' . $mainSnak->getType() . '\'\')';
                 }
@@ -86,7 +88,7 @@ class TypeChecker {
             if( $numericPropertyId == $relationId ){
                 $mainSnak = $claim->getMainSnak();
                 if( $mainSnak->getType() == 'value' ) {
-                    $dataValueCompareString = DataValueParser::dataValueToString( $mainSnak->getDataValue() );
+                    $dataValueCompareString = $this->helper->dataValueToString( $mainSnak->getDataValue() );
                 } else {
                     $dataValueCompareString = '\'\'(' . $mainSnak->getType() . '\'\')';
                 }

@@ -8,10 +8,12 @@ class QualifierChecker
 {
 
     private $statements;
+    private $helper;
 
-    public function __construct($statements)
+    public function __construct($statements, $helper)
     {
         $this->statements = $statements;
+        $this->helper = $helper;
     }
 
     public function checkQualifierConstraint($propertyId, $dataValueString)

@@ -2,9 +2,12 @@
 
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Helper;
 
-class DataValueParser {
 
-    public static function dataValueToString( $dataValue )
+class ConstraintReportHelper {
+
+    private $showMax = 50;
+
+    public function dataValueToString( $dataValue )
     {
         $dataValueType = $dataValue->getType();
         switch( $dataValueType ) {
@@ -32,5 +35,23 @@ class DataValueParser {
                 return null;
             //error case
         }
+    }
+
+    public function limitOutput( $string ) {
+        if( strlen($string) <= $this->showMax ) {
+            return $string;
+        } else {
+            return substr( $string, 0, $this->showMax ) . '...';
+        }
+    }
+
+    public function toArray( $templateString ) {
+        $toReplace = array("{", "}", "|", "[", "]", " ");
+        return explode(",", str_replace($toReplace, "", $templateString));
+    }
+
+    public function toStringWithoutBrackets( $templateString ) {
+        $toReplace = array("{", "}", "|", "[", "]");
+        return str_replace( $toReplace, '', $templateString);
     }
 }

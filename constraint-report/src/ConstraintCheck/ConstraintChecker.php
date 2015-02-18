@@ -18,6 +18,7 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\RangeChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\TypeChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\FormatChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\OneOfChecker;
+use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 
 
@@ -41,6 +42,7 @@ class ConstraintChecker {
      */
     private $loadBalancer;
 
+    private $helper;
 
     private $valueCountChecker;
     private $qualifierChecker;
@@ -63,6 +65,9 @@ class ConstraintChecker {
         // Get load balancer
         wfWaitForSlaves();
         $this->loadBalancer = wfGetLB();
+
+        // Get helper to pass it to every checker
+        $this->helper = new ConstraintReportHelper();
     }
 
     /**
@@ -98,6 +103,10 @@ class ConstraintChecker {
                 );
 
                 foreach( $res as $row ) {
+                    if( in_array( $entityId, $this->helper->toArray( $row->exceptions ) ) ) {
+                        $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, '\'\'(none)\'\'', 'exception' );
+                        continue;
+                    }
 
                     switch( $row->constraint_name ) {
                         // Switch over every constraint, check them accordingly
@@ -168,7 +177,7 @@ class ConstraintChecker {
                             break;
                         default:
                             //not yet implemented cases, also error case SHOULD NOT BE INVOKED
-                            $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, "", "wtf" );
+                            $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, '\'\'(none)\'\'', "wtf" );
                             break;
                     }
 
@@ -196,7 +205,7 @@ class ConstraintChecker {
     private function getValueCountChecker()
     {
         if( !isset( $this->valueCountChecker ) ) {
-            $this->valueCountChecker = new ValueCountChecker( $this->statements );
+            $this->valueCountChecker = new ValueCountChecker( $this->statements, $this->helper );
         }
         return $this->valueCountChecker;
     }
@@ -204,7 +213,7 @@ class ConstraintChecker {
     private function getConnectionChecker()
     {
         if( !isset( $this->connectionChecker ) ) {
-            $this->connectionChecker = new ConnectionChecker( $this->statements, $this->entityLookup );
+            $this->connectionChecker = new ConnectionChecker( $this->statements, $this->entityLookup, $this->helper );
         }
         return $this->connectionChecker;
     }
@@ -212,7 +221,7 @@ class ConstraintChecker {
     private function getQualifierChecker()
     {
         if( !isset( $this->qualifierChecker ) ) {
-            $this->qualifierChecker = new QualifierChecker( $this->statements );
+            $this->qualifierChecker = new QualifierChecker( $this->statements, $this->helper );
         }
         return $this->qualifierChecker;
     }
@@ -220,7 +229,7 @@ class ConstraintChecker {
     private function getRangeChecker()
     {
         if( !isset( $this->rangeChecker ) ) {
-            $this->rangeChecker = new RangeChecker( $this->statements);
+            $this->rangeChecker = new RangeChecker( $this->statements, $this->helper);
         }
         return $this->rangeChecker;
     }
@@ -228,7 +237,7 @@ class ConstraintChecker {
     private function getTypeChecker()
     {
         if( !isset( $this->typeChecker ) ) {
-            $this->typeChecker = new TypeChecker( $this->statements, $this->entityLookup );
+            $this->typeChecker = new TypeChecker( $this->statements, $this->entityLookup, $this->helper );
         }
         return $this->typeChecker;
     }
@@ -236,7 +245,7 @@ class ConstraintChecker {
     private function getOneOfChecker()
     {
         if( !isset( $this->oneOfChecker ) ) {
-            $this->oneOfChecker = new OneOfChecker( $this->statements );
+            $this->oneOfChecker = new OneOfChecker( $this->helper );
         }
         return $this->oneOfChecker;
     }
@@ -244,24 +253,16 @@ class ConstraintChecker {
     private function getCommonsLinkChecker()
     {
         if( !isset( $this->commonsLinkChecker ) ) {
-            $this->commonsLinkChecker = new CommonsLinkChecker( $this->statements );
+            $this->commonsLinkChecker = new CommonsLinkChecker( $this->statements, $this->helper );
         }
         return $this->commonsLinkChecker;
     }
 
-    //todo
-    private function getItemChecker()
-    {
-        if( !isset( $this->itemChecker ) ) {
-            $this->item = new ItemChecker( $this->statements );
-        }
-        return $this->itemChecker;
-    }
 
     private function getFormatChecker()
     {
         if( !isset( $this->formatChecker ) ) {
-            $this->formatChecker = new FormatChecker();
+            $this->formatChecker = new FormatChecker( $this->helper );
         }
         return $this->formatChecker;
     }

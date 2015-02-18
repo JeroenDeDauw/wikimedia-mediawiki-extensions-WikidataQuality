@@ -8,10 +8,12 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 class RangeChecker {
 
     private $statements;
+    private $helper;
 
-    public function __construct($statements)
+    public function __construct($statements, $helper)
     {
         $this->statements = $statements;
+        $this->helper = $helper;
     }
 
     public function checkRangeConstraint( $propertyId, $dataValueString, $min, $max ) {
@@ -35,7 +37,7 @@ class RangeChecker {
                 $mainSnak = $statement->getClaim()->getMainSnak();
 
                 if( $mainSnak->getType() == 'value' ) {
-                    $basePropertyDataValueString = DataValueParser::dataValueToString( $mainSnak->getDataValue() );
+                    $basePropertyDataValueString = $this->helper->dataValueToString( $mainSnak->getDataValue() );
 
                     $diff = abs( $dataValueString-$basePropertyDataValueString );
 

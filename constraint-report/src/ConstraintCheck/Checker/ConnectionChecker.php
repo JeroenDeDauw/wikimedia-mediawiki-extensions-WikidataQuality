@@ -11,16 +11,18 @@ class ConnectionChecker {
 
     private $statements;
     private $entityLookup;
+    private $helper;
 
-    public function __construct( $statements, $lookup) {
+    public function __construct( $statements, $lookup, $helper  ) {
         $this->statements = $statements;
         $this->entityLookup = $lookup;
+        $this->helper = $helper;
     }
 
     public function checkConflictsWithConstraint( $propertyId, $dataValueString, $list) {
         $toReplace = array("{", "}", "|", " ");
         $listArray = explode(';', str_replace($toReplace, '', $list));
-        $parameterString = OutputLimiter::limitOutput( str_replace($toReplace, '', $list) );
+        $parameterString = $this->helper->limitOutput( str_replace($toReplace, '', $list) );
         foreach( $listArray as $conflictingValues ) {
             if ( stripos($conflictingValues, ':') === false) {
                 $status = $this->hasProperty( $this->statements, $conflictingValues ) ? 'violation' : 'compliance';
@@ -84,8 +86,7 @@ class ConnectionChecker {
     public function checkSymmetricConstraint( $propertyId, $dataValueString ) {
         $targetItem = $this->entityLookup->getEntity( new ItemId( $dataValueString->getSerialization() ));
         if ($targetItem == null) {
-            return new CheckResult($propertyId, $dataValueString, "Symmetric", "", "fail");
-            return;
+            return new CheckResult($propertyId, $dataValueString, "Symmetric", '\'\'(none)\'\'', "fail");
         }
 
         $targetItemStatements = $targetItem->getStatements();
