@@ -49,7 +49,7 @@ class ConnectionChecker {
             $parameterString .= ' item: ' . $item;
             $status = $this->hasClaim($this->statements, $property, $item);
         } else {
-            $items = TemplateConverter::toArray( $items );
+            $items = $this->helper->toArray( $items );
             $parameterString .= ' items: ' . implode(', ', $items );
             $status = $this->hasClaim($this->statements, $property, $items);
         }
@@ -75,7 +75,7 @@ class ConnectionChecker {
             // also check, if value of this statement = $item
             $status = $this->hasClaim( $targetItemStatementsArray, $property, $item ) ? 'compliance' : 'violation';
         } else {
-            $items = TemplateConverter::toArray( $items );
+            $items = $this->helper->toArray( $items );
             $parameterString .= ' items: ' . implode(', ', $items);
             $status = $this->hasClaim( $targetItemStatementsArray, $property, $items ) ? 'compliance' : 'violation';
         }
