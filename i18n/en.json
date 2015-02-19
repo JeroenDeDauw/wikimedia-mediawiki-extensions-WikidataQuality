@@ -20,7 +20,7 @@
 
     "wikidataquality-crosscheck": "Cross-Check with external databases",
     "wikidataquality-crosscheck-instructions": "Just enter an entity and let it cross-check against GND.",
-    "wikidataquality-crosscheck-instructions-example": "Try for example Q506 (Nina Hagen) and look at the results.",
+    "wikidataquality-crosscheck-instructions-example": "Try for example Q159099 (Nina Hagen) and look at the results.",
     "wikidataquality-crosscheck-form-itemid-placeholder": "Qxx",
     "wikidataquality-crosscheck-form-submit-label": "Cross-Check",
     "wikidataquality-crosscheck-result-headline": "Result for ",

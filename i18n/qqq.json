@@ -13,7 +13,7 @@
 
     "wikidataquality-crosscheck": "{{doc-special|CrossCheck}}\nTitle of the special page.",
     "wikidataquality-crosscheck-instructions": "Instructions for starting a cross-check against GND.",
-    "wikidataquality-crosscheck-instructions-example": "Example item for cross-checking. Q506 is suitable.",
+    "wikidataquality-crosscheck-instructions-example": "Example item for cross-checking. Q159099 is suitable.",
     "wikidataquality-crosscheck-form-itemid-placeholder": "Item id placeholder for the input field.",
     "wikidataquality-crosscheck-form-submit-label": "Label of the button, that starts the cross-check.",
     "wikidataquality-crosscheck-result-headline": "Headline that appears above the cross-check results",
