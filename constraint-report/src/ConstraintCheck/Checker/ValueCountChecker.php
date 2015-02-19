@@ -2,6 +2,7 @@
 
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 
+use Wikibase\DataModel\Statement\Statement;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 class ValueCountChecker {
 
@@ -47,6 +48,9 @@ class ValueCountChecker {
         if ( !isset( $propertyCount ) ) {
             $this->propertyCount = array();
             foreach( $statements as $statement ) {
+                if( $statement->getRank() == Statement::RANK_DEPRECATED )
+                    continue;
+
                 if( array_key_exists($statement->getPropertyId()->getNumericId(), $this->propertyCount) ) {
                     $this->propertyCount[$statement->getPropertyId()->getNumericId()]++;
                 } else {
