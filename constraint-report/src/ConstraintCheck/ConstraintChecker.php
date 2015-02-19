@@ -52,7 +52,6 @@ class ConstraintChecker {
     private $formatChecker;
     private $oneOfChecker;
     private $commonsLinkChecker;
-    private $itemChecker;
 
     private $statements;
 
@@ -146,7 +145,7 @@ class ConstraintChecker {
                             $result[] = $this->getQualifierChecker()->checkQualifierConstraint( $propertyId, $dataValueString );
                             break;
                         case "Qualifiers": // todo
-                            $result[] = $this->getQualifierChecker()->checkQualifiersConstraint( $propertyId, $dataValueString );
+                            $result[] = $this->getQualifierChecker()->checkQualifiersConstraint( $propertyId, $dataValueString, $statement, $row->list );
                             break;
 
                         // RangeCheckers

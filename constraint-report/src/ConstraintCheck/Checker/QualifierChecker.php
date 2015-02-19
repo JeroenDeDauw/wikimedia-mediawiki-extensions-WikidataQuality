@@ -21,9 +21,19 @@ class QualifierChecker
         return new CheckResult($propertyId, $dataValueString, "Qualifier", '\'\'(none)\'\'', "violation");
     }
 
-    public function checkQualifiersConstraint($propertyId, $dataValueString)
+    public function checkQualifiersConstraint($propertyId, $dataValueString, $statement, $list)
     {
-        return new CheckResult($propertyId, $dataValueString, "Qualifiers", '\'\'(none)\'\'', "todo" );
+        $list = $this->helper->toArray( $list );
+        $status = 'compliance';
+
+        foreach( $statement->getQualifiers() as $qualifier ) {
+            $pid = $qualifier->getPropertyId()->getSerialization();
+            if( !in_array($pid, $list) ){
+                $status = 'violation';
+                break;
+            }
+        }
+        return new CheckResult($propertyId, $dataValueString, "Qualifiers", '\'\'(none)\'\'', $status );
     }
 
 }
