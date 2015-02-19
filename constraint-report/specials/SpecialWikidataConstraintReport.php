@@ -135,7 +135,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 
 
     function addOutputRow( $result ) {
-        $lookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityLookup();
+        $lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
         $this->output .=
             "|-\n"
             . "| " . $result->getPropertyId() . " (" . $lookup->getEntity($result->getPropertyId())->getLabel('en') . ") "
