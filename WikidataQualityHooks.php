@@ -14,4 +14,10 @@ final class WikidataQualityHooks
 
         return true;
     }
+
+    public static function onUnitTestsList( &$files )
+    {
+        $files = array_merge( $files, glob( __DIR__ . '/tests/phpunit/*Test.php' ) );
+        return true;
+    }
 }

@@ -1,0 +1,7 @@
+<test>
+    <testcase case="one" result="true">success</testcase>
+    <testcase case="one">failure</testcase>
+    <testcase case="two">
+        <result>cess.suc</result>
+    </testcase>
+</test>

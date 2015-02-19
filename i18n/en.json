@@ -10,6 +10,13 @@
     "wikidataquality-status": "Status",
 
     "wikidataquality-constraintreport": "Constraint Report",
+    "wikidataquality-constraint-instructions": "Enter an entity ID and let it be checked against the constraints.",
+    "wikidataquality-constraint-instructions-example": "Try any ID, ideally an item ID, and look at the results.",
+    "wikidataquality-constraint-form-id-placeholder": "Qxx/Pxx",
+    "wikidataquality-constraint-form-submit-label": "Check",
+    "wikidataquality-constraint-result-headline": "Result for ",
+    "wikidataquality-constraint-result-entity-not-existent": "Entity does not exist!",
+
 
     "wikidataquality-crosscheck": "Cross-Check with external databases",
     "wikidataquality-crosscheck-instructions": "Just enter an entity and let it cross-check against GND.",
@@ -24,5 +31,6 @@
     "wikidataquality-crosscheck-result-success": "Match",
     "wikidataquality-crosscheck-comparative-value": "Comparative Value",
     "wikidataquality-crosscheck-external-source": "External Source"
+
 
 }

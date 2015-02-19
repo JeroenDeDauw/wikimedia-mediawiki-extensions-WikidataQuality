@@ -31,6 +31,9 @@ $wgExtensionMessagesFiles['WikidataQualityAlias'] = __DIR__ . '/WikidataQuality.
 global $wgHooks;
 $wgHooks['LoadExtensionSchemaUpdates'][] = 'WikidataQualityHooks::onCreateSchema';
 
+// Register hooks for Unit Tests
+$wgHooks['UnitTestsList'][] = 'WikidataQualityHooks::onUnitTestsList';
+
 // Initialize special pages
 $wgSpecialPages['ConstraintReport'] = 'WikidataQuality\ConstraintReport\Specials\SpecialWikidataConstraintReport';
 $wgSpecialPages['CrossCheck'] = 'WikidataQuality\ExternalValidation\Specials\SpecialCrossCheck';
