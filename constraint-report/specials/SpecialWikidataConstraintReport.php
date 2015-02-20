@@ -128,9 +128,6 @@ class SpecialWikidataConstraintReport extends SpecialPage {
             case 'todo':
                 $color = '#808080';
                 break;
-            case 'wtf': // should not happen, has to be figured out why it happens
-                $color = '#7B1F80';
-                break;
             case 'fail':
                 $color = '#808080';
                 break;
