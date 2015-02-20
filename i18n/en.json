@@ -30,7 +30,10 @@
     "wikidataquality-crosscheck-result-mismatch": "Mismatch",
     "wikidataquality-crosscheck-result-success": "Match",
     "wikidataquality-crosscheck-comparative-value": "Comparative Value",
-    "wikidataquality-crosscheck-external-source": "External Source"
+    "wikidataquality-crosscheck-external-source": "External Source",
 
-
+    "apihelp-wdqcrosscheck-description": "API module to cross-check entities against external data.",
+    "apihelp-wdqcrosscheck-param-entities": "Ids of the entities that should be crosschecked.",
+    "apihelp-wdqcrosscheck-examples-1": "Run cross-check for entity Q76.",
+    "apihelp-wdqcrosscheck-examples-2": "Run cross-check for entity Q76 and Q567."
 }

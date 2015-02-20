@@ -67,8 +67,8 @@ class CrossChecker
      */
     public function execute( $itemId )
     {
-        // Get statements of item
-        $item = $this->entityLookup->getEntity( $itemId );
+        // Get statements of entity
+      	$item = $this->entityLookup->getEntity( $itemId );
         if ( $item ) {
             $statements = $item->getStatements();
 

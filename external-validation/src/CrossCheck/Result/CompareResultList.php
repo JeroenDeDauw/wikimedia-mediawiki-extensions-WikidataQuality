@@ -16,7 +16,16 @@ use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult;
  */
 class CompareResultList implements IteratorAggregate, Countable
 {
-    private $results = array();
+    private $results;
+
+
+    /**
+     * @param array $list
+     */
+    public function __construct( $results = array() ) {
+        $this->results = $results;
+    }
+
 
     /**
      * Adds a given CompareResult to the list.
@@ -30,8 +39,8 @@ class CompareResultList implements IteratorAggregate, Countable
      * Merges another CompareResultList to the current one.
      * @param CompareResultList $list
      */
-    public function merge( CompareResultList $list ) {
-        $this->results = array_merge( $this->results, $list->results );
+    public function merge( CompareResultList $resultList ) {
+        $this->results = array_merge( $this->results, $resultList->results );
     }
 
 
@@ -64,26 +73,37 @@ class CompareResultList implements IteratorAggregate, Countable
     }
 
     /**
-     * Gets subset of results matching the given filters.
-     * @param bool|null $dataMismatch
-     * @param bool|null $referencesMissing
+     * Returns the property ids used by compare results.
      * @return array
      */
-    public function getResults( $dataMismatch = null, $referencesMissing = null )
-    {
-        $output = array();
+    function getPropertyIds() {
+        $propertyIds = array();
 
-        foreach ( $this->results as $result ) {
-            if  ( ( isset( $dataMismatch ) && isset( $referencesMissing ) && $result->isDataMismatchOccurred() == $dataMismatch && $result->areReferencesMissing() == $referencesMissing ) ||
-                  ( isset( $dataMismatch ) && !isset( $referencesMissing ) && $result->isDataMismatchOccurred() == $dataMismatch ) ||
-                  ( !isset( $dataMismatch ) && isset( $referencesMissing ) && $result->areReferencesMissing() == $referencesMissing ) ||
-                  ( !isset( $dataMismatch ) && !isset( $referencesMissing ) ) )
-            {
-                $output[] = $result;
+        foreach( $this->results as $result ) {
+            $propertyId = $result->getPropertyId();
+            if( !in_array( $propertyId, $propertyIds ) ) {
+                $propertyIds[] = $propertyId;
             }
         }
 
-        return $output;
+        return $propertyIds;
+    }
+
+    /**
+     * Returns all compare results using given property id.
+     * @param $propertyId
+     * @return CompareResultList
+     */
+    function getWithPropertyId( $propertyId ) {
+        $results = array();
+
+        foreach( $this->results as $result ) {
+            if ( $result->getPropertyId()->equals( $propertyId ) ) {
+                $results[] = $result;
+            }
+        }
+
+        return new self( $results );
     }
 
     /**

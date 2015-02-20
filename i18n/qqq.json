@@ -9,7 +9,7 @@
     "wikidataquality-value": "Name for value of the current statement",
     "wikidataquality-status": "Name for status of the cross-check",
 
-    "wikidataquality-constraintreport": "{{doc-special|ConstraintReport}}\nTitle of the special page.",
+    "wikidataquality-constraintreport": "{{doc-special|ConstraintReport}}",
     "wikidataquality-constraint-instructions": "Instructions for starting a check against the constraints.",
     "wikidataquality-constraint-instructions-example": "Example, what to enter to get good results.",
     "wikidataquality-constraint-form-id-placeholder": "Entity id placeholder for the input field.",
@@ -17,17 +17,22 @@
     "wikidataquality-constraint-result-headline": "Headline that appears above the results",
     "wikidataquality-constraint-result-entity-not-existent": "Error message that appears when the entered entity does not exist.",
 
-    "wikidataquality-crosscheck": "{{doc-special|CrossCheck}}\nTitle of the special page.",
+    "wikidataquality-crosscheck": "{{doc-special|CrossCheck}}",
     "wikidataquality-crosscheck-instructions": "Instructions for starting a cross-check against GND.",
     "wikidataquality-crosscheck-instructions-example": "Example item for cross-checking. Q159099 is suitable.",
     "wikidataquality-crosscheck-form-itemid-placeholder": "Item id placeholder for the input field.",
     "wikidataquality-crosscheck-form-submit-label": "Label of the button, that starts the cross-check.",
-    "wikidataquality-crosscheck-result-headline": "Headline that appears above the cross-check results",
+    "wikidataquality-crosscheck-result-headline": "Headline that appears above the cross-check results.",
     "wikidataquality-crosscheck-result-item-not-existent": "Error message that appears when the entered item does not exist.",
     "wikidataquality-crosscheck-result-no-wd-entity": "Message that appears when the referenced wikidata entity does not exist.",
     "wikidataquality-crosscheck-result-no-ext-entity": "Message that appears when the external entity does not exist.",
     "wikidataquality-crosscheck-result-mismatch": "Message that appears for statements, which could not be verified. ",
     "wikidataquality-crosscheck-result-success": ": Message that appears for statements, which could be verified. ",
-    "wikidataquality-crosscheck-comparative-value": "Name for value from the external source for the cross-check",
-    "wikidataquality-crosscheck-external-source": "Name for external source the comparative data is from"
+    "wikidataquality-crosscheck-comparative-value": "Name for value from the external source for the cross-check.",
+    "wikidataquality-crosscheck-external-source": "Name for external source the comparative data is from.",
+
+    "apihelp-wdqcrosscheck-description": "{{doc-apihelp-description|wblinktitles}}",
+    "apihelp-wdqcrosscheck-param-entities": "{{doc-apihelp-param|wbmergeitems|entities}}",
+    "apihelp-wdqcrosscheck-examples-1": "{{doc-apihelp-example|wdqcrosscheck}}",
+    "apihelp-wdqcrosscheck-examples-2": "{{doc-apihelp-example|wdqcrosscheck}}"
 }

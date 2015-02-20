@@ -1,12 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: soldag
- * Date: 27.01.15
- * Time: 22:47
- */
 
 namespace WikidataQuality\ExternalValidation\CrossCheck\Result;
+
+
+use JsonSerializable;
 
 
 /**
@@ -78,30 +75,51 @@ class CompareResult {
         $this->dataSourceName = $dataSourceName;
     }
 
+    /**
+     * @return \PropertyId
+     */
     public function getPropertyId() {
         return $this->propertyId;
     }
 
+    /**
+     * @return string
+     */
     public function getClaimGuid() {
         return $this->claimGuid;
     }
 
+    /**
+     * @return array
+     */
     public function getLocalValues() {
         return $this->localValues;
     }
 
+    /**
+     * @return array
+     */
     public function getExternalValues() {
         return $this->externalValues;
     }
 
+    /**
+     * @return bool
+     */
     public function hasDataMismatchOccurred() {
         return $this->dataMismatch;
     }
 
+    /**
+     * @return bool
+     */
     public function areReferencesMissing() {
         return $this->referencesMissing;
     }
 
+    /**
+     * @return string
+     */
     public function getDataSourceName() {
         return $this->dataSourceName;
     }
