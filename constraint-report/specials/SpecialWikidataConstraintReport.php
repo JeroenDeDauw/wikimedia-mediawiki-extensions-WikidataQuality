@@ -84,6 +84,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
         }
 
         if( $results ) {
+            $out->addHTML( Html::openElement( 'br' ) . Html::openElement( 'h1' ) . $this->msg( 'wikidataquality-constraint-result-headline' ) . $_POST['entityID'] .  Html::closeElement( 'h1' ) );
             $this->output .= $this->getTableHeader();
             foreach( $results as $checkResult) {
                 $this->addOutputRow( $checkResult );
@@ -142,27 +143,31 @@ class SpecialWikidataConstraintReport extends SpecialPage {
             . "|| " . $result->getDataValue() . " "
             . "|| " . $result->getConstraintName() . " "
             . "|| " . $result->getParameter() . " ";
+
         switch( $result->getStatus() ) {
             case 'compliance':
-                $this->output .= "|| <div style=\"color:#088A08\">compliance <b>(+)</b></div>\n";
+                $color = '#088A08';
                 break;
             case 'violation':
-                $this->output .= "|| <div style=\"color:#8A0808\">violation <b>(-)</b></div>\n";
+                $color = '#8A0808';
                 break;
             case 'exception':
-                $this->output .= "|| <div style=\"color:#D2D20C\">exception <b>(+)</b></div>\n";
+                $color = '#D2D20C';
                 break;
             case 'todo':
-                $this->output .= "|| <div style=\"color:#808080\">not yet implemented <b>:(</b></div>\n";
+                $color = '#808080';
                 break;
-            case 'wtf':
-                $this->output .= "|| <div style=\"color:#7B1F80\">WTF<b>???</b></div>\n";
+            case 'wtf': // should not happen, has to be figured out why it happens
+                $color = '#7B1F80';
                 break;
             case 'fail':
+                $color = '#808080';
+                break;
             default:
-                $this->output .= "|| <div style=\"color:#808080\">check failed <b>:(</b></div>\n";
-                //error case
+                $color = '#0D0DE0';
+                //error case; should not happen
         }
+        $this->output .= "|| <div style=\"color:" . $color . "\">" . $result->getStatus() . "</div>\n";
     }
 
     /**

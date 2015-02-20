@@ -10,6 +10,12 @@
     "wikidataquality-status": "Name for status of the cross-check",
 
     "wikidataquality-constraintreport": "{{doc-special|ConstraintReport}}\nTitle of the special page.",
+    "wikidataquality-constraint-instructions": "Instructions for starting a check against the constraints.",
+    "wikidataquality-constraint-instructions-example": "Example, what to enter to get good results.",
+    "wikidataquality-constraint-form-id-placeholder": "Entity id placeholder for the input field.",
+    "wikidataquality-constraint-form-submit-label": "Label of the button, that starts the check.",
+    "wikidataquality-constraint-result-headline": "Headline that appears above the results",
+    "wikidataquality-constraint-result-entity-not-existent": "Error message that appears when the entered entity does not exist.",
 
     "wikidataquality-crosscheck": "{{doc-special|CrossCheck}}\nTitle of the special page.",
     "wikidataquality-crosscheck-instructions": "Instructions for starting a cross-check against GND.",
