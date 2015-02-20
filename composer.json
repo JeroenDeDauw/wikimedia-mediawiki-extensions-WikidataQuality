@@ -20,6 +20,7 @@
       "WikidataQuality\\ConstraintReport\\": "constraint-report/src/",
       "WikidataQuality\\ConstraintReport\\Specials\\": "constraint-report/specials/",
       "WikidataQuality\\ExternalValidation\\": "external-validation/src/",
+      "WikidataQuality\\ExternalValidation\\Api\\": "external-validation/api",
       "WikidataQuality\\ExternalValidation\\Specials\\": "external-validation/specials/"
     },
     "files" : [

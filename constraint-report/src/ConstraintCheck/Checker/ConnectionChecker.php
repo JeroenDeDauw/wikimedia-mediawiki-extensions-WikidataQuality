@@ -22,7 +22,7 @@ class ConnectionChecker {
     public function checkConflictsWithConstraint( $propertyId, $dataValueString, $list) {
         $toReplace = array("{", "}", "|", " ");
         $listArray = explode(';', str_replace($toReplace, '', $list));
-        $parameterString = $this->helper->limitOutput( str_replace($toReplace, '', $list) );
+        $parameterString = $this->helper->limitOutput( 'list: ' . str_replace($toReplace, '', $list) );
         foreach( $listArray as $conflictingValues ) {
             if ( stripos($conflictingValues, ':') === false) {
                 $status = $this->hasProperty( $this->statements, $conflictingValues ) ? 'violation' : 'compliance';
@@ -46,11 +46,11 @@ class ConnectionChecker {
         if( $item == null && $items == null ){
             $status = $this->hasProperty( $this->statements, $property ) ? 'compliance' : 'violation';
         } elseif ($items == null ) {
-            $parameterString .= ' item: ' . $item;
+            $parameterString .= ', item: ' . $item;
             $status = $this->hasClaim($this->statements, $property, $item) ? 'compliance' : 'violation';
         } else {
             $items = $this->helper->toArray( $items );
-            $parameterString .= ' items: ' . implode(', ', $items );
+            $parameterString .= ', items: ' . implode(', ', $items );
             $status = $this->hasClaim($this->statements, $property, $items) ? 'compliance' : 'violation';
         }
         return new CheckResult( $propertyId, $dataValueString, "Item", $parameterString, $status );
@@ -100,7 +100,7 @@ class ConnectionChecker {
 
     public function checkInverseConstraint( $propertyId, $dataValueString, $property) {
         $targetItem = $this->entityLookup->getEntity( new ItemId( $dataValueString->getSerialization() ));
-        $parameterString = 'Property: ' . $property;
+        $parameterString = 'property: ' . $property;
         if ($targetItem == null) {
             return new CheckResult($propertyId, $dataValueString, "Inverse", $parameterString, "fail" );
             return;

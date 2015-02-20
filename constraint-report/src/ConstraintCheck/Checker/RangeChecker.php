@@ -30,7 +30,7 @@ class RangeChecker {
 
 
     public function checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $basePropertyId, $min, $max ) {
-        $parameterString = 'base Property: ' . $basePropertyId . ', min: ' . $min . ', max: ' . $max;
+        $parameterString = 'base property: ' . $basePropertyId . ', min: ' . $min . ', max: ' . $max;
 
         foreach( $this->statements as $statement ) {
             if( $basePropertyId == $statement->getClaim()->getPropertyId() ) {
