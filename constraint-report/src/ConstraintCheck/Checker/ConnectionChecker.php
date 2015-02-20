@@ -47,11 +47,11 @@ class ConnectionChecker {
             $status = $this->hasProperty( $this->statements, $property ) ? 'compliance' : 'violation';
         } elseif ($items == null ) {
             $parameterString .= ' item: ' . $item;
-            $status = $this->hasClaim($this->statements, $property, $item);
+            $status = $this->hasClaim($this->statements, $property, $item) ? 'compliance' : 'violation';
         } else {
             $items = $this->helper->toArray( $items );
             $parameterString .= ' items: ' . implode(', ', $items );
-            $status = $this->hasClaim($this->statements, $property, $items);
+            $status = $this->hasClaim($this->statements, $property, $items) ? 'compliance' : 'violation';
         }
         return new CheckResult( $propertyId, $dataValueString, "Item", $parameterString, $status );
     }
