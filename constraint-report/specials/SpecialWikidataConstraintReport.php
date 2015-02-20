@@ -7,35 +7,6 @@ use Html;
 use WikidataQuality\ConstraintReport\ConstraintCheck\ConstraintChecker;
 use Wikibase\Repo\WikibaseRepo;
 
-//TODO (prio high): define tests for the checks against constraints (test items with statements)
-//TODO (prio high): add support for remaining constraints (some might use a common set of methods):
-/*	[todo (partly done)]	Commons link
- *	[DONE]	Conflicts with - similar to Target required claim (target is self)
- *	[DONE]	Diff within range
- *	[DONE]	Format
- *	[DONE]	Inverse - special case of Target required claim
- *	[DONE]	Item
- *	[DONE]	Multi value - similar to Single value
- *	[DONE]	One of
- *	[DONE]	Qualifier
- *	[todo]	Qualifiers
- *	[DONE]	Range
- *	[DONE]	Single value - similar to Multi value
- *	[DONE]	Symmetric - special case of Inverse, which is a special case of Target required claim
- *	[DONE]	Target required claim
- *	[DONE]	Type - similar to Value type
- *	[todo]	Unique value
- *	[DONE]	Value type - similar to Type
- */
-//TODO (prio normal): add templates for items, properties, constraints to our instance and write them like {{Q|1234}} or [[Property:P567]] or {{tl|Constraint:Range}} or ... in this code
-//TODO (prio normal): check for exceptions and mark a statement as such
-//TODO (prio normal): handle qualifiers, e.g. on a property violating the single value constraint, although every value was only valid at a certain point in time
-//TODO (prio normal): handle constraint parameter 'now' when dealing with time values
-//TODO (prio low): handle output for the edge case, where there are no constraints defined on an entity's statements (as is the case for many properties)
-//TODO (prio low): find visualizations other than a table
-//TODO (prio low): add auto-completion/suggestions while typing to the input form
-//TODO (prio low): go through the warnings and refactor this code accordingly
-
 
 class SpecialWikidataConstraintReport extends SpecialPage {
 
