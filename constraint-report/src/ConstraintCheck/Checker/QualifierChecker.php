@@ -23,6 +23,9 @@ class QualifierChecker
 
     public function checkQualifiersConstraint($propertyId, $dataValueString, $statement, $list)
     {
+        $toReplace = array("{", "}", "|", " ");
+        $parameterString = $this->helper->limitOutput( 'list: ' . str_replace($toReplace, '', $list) );
+
         $list = $this->helper->toArray( $list );
         $status = 'compliance';
 
@@ -33,7 +36,7 @@ class QualifierChecker
                 break;
             }
         }
-        return new CheckResult($propertyId, $dataValueString, "Qualifiers", '\'\'(none)\'\'', $status );
+        return new CheckResult($propertyId, $dataValueString, "Qualifiers", $parameterString, $status );
     }
 
 }
