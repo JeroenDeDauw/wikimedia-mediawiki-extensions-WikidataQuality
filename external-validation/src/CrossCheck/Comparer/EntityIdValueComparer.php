@@ -54,7 +54,9 @@ class EntityIdValueComparer extends DataValueComparer
             $label = $entity->getLabel( $language );
 
             $terms = $aliases;
-            $terms[ ] = $label;
+            if( $label != false ) {
+                $terms[ ] = $label;
+            }
 
             return $terms;
         }
