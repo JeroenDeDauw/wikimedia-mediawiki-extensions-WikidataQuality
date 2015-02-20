@@ -24,7 +24,7 @@ class OneOfChecker {
             $status = 'compliance';
         }
 
-        $parameterString = 'Values: ' . $this->helper->limitOutput( $this->helper->toStringWithoutBrackets( $values ) );
+        $parameterString = 'values: ' . $this->helper->limitOutput( $this->helper->toStringWithoutBrackets( $values ) );
 
         return new CheckResult( $propertyId, $dataValueString, 'One of', $parameterString, $status );
     }

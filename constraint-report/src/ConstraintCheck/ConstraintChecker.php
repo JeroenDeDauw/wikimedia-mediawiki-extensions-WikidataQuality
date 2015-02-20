@@ -144,7 +144,7 @@ class ConstraintChecker {
                         case "Qualifier":
                             $result[] = $this->getQualifierChecker()->checkQualifierConstraint( $propertyId, $dataValueString );
                             break;
-                        case "Qualifiers": // todo
+                        case "Qualifiers":
                             $result[] = $this->getQualifierChecker()->checkQualifiersConstraint( $propertyId, $dataValueString, $statement, $row->list );
                             break;
 
@@ -176,7 +176,7 @@ class ConstraintChecker {
                             break;
                         default:
                             //not yet implemented cases, also error case SHOULD NOT BE INVOKED
-                            $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, '\'\'(none)\'\'', "wtf" );
+                            $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, '\'\'(none)\'\'', "should not happen" );
                             break;
                     }
 
