@@ -26,7 +26,7 @@ class OneOfCheckerTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
     }
 
-    public function testOneOfConstraint()
+    public function testCheckOneOfConstraint()
     {
         $valueIn = 'Q1';
         $valueNotIn = 'Q9';

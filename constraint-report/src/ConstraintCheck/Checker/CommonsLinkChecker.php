@@ -23,8 +23,6 @@ class CommonsLinkChecker {
     }
 
     private function url_exists( $dataValueString ) {
-        //$formatter = new CommonsLinkFormatter( new FormatterOptions( array('What should I pass here' => '???' ) ) );
-        //$file = $formatter->format( $dataValueString );
 
         $responseCode1 = substr( get_headers('http://commons.wikimedia.org/wiki/File:' . str_replace(' ', '_', $dataValueString ))[0], 9, 3);
         $responseCode2 = substr( get_headers('http://commons.wikimedia.org/wiki/Category:' . str_replace(' ', '_', $dataValueString ))[0], 9, 3);
