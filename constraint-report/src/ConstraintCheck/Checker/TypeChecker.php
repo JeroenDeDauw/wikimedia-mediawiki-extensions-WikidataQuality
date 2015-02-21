@@ -12,8 +12,7 @@ class TypeChecker {
     private $entityLookup;
     private $helper;
 
-    public function __construct( $statements, $lookup, $helper) {
-        $this->statements = $statements;
+    public function __construct( $lookup, $helper) {
         $this->entityLookup = $lookup;
         $this->helper = $helper;
     }
