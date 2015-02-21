@@ -22,6 +22,7 @@ class QualifierCheckerTest extends \PHPUnit_Framework_TestCase
 
     protected function tearDown() {
         unset($this->helper);
+        unset($this->qualifiersList);
         parent::tearDown();
     }
 
