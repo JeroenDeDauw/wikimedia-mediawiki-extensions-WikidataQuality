@@ -4,15 +4,34 @@ namespace WikidataQuality\ExternalValidation\Specials;
 
 use SpecialPage;
 use Html;
-use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use WikidataQuality\ExternalValidation\CrossCheck\CrossChecker;
+
 
 class SpecialCrossCheck extends SpecialPage
 {
+    /**
+     * Wikibase entity lookup.
+     * @var \Wikibase\Lib\Store\EntityLookup
+     */
+    private $entityLookup;
+
+
+    private $entityIdParser;
+
+
     function __construct()
     {
         parent::__construct( 'CrossCheck' );
+
+        // Get entity lookup
+        $this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+
+        // Get entity id parser
+        $this->entityIdParser = new BasicEntityIdParser();
     }
+
 
     /**
      * @see SpecialPage::getGroupName
@@ -64,12 +83,12 @@ class SpecialCrossCheck extends SpecialPage
                 )
             )
             . Html::input(
-                'itemId',
+                'entityId',
                 '',
                 'text',
                 array(
-                    'id' => 'wdq-crosscheck-itemid',
-                    'placeholder' => $this->msg( 'wikidataquality-crosscheck-form-itemid-placeholder' )->text()
+                    'id' => 'wdq-crosscheck-entityid',
+                    'placeholder' => $this->msg( 'wikidataquality-crosscheck-form-entityid-placeholder' )->text()
                 )
             )
             . Html::input(
@@ -83,16 +102,17 @@ class SpecialCrossCheck extends SpecialPage
             . Html::closeElement( 'form' )
         );
 
-        // If item id was recieved, cross-check item
-        if ( !empty( $_POST[ 'itemId' ] ) ) {
-            $itemId = new ItemId( $_POST[ 'itemId' ] );
+        // If entity id id was recieved, cross-check entity
+        if ( !empty( $_POST[ 'entityId' ] ) ) {
+            $entityId = $this->entityIdParser->parse( $_POST[ 'entityId' ] );
+            $entity = $this->entityLookup->getEntity( $entityId );
             $crossChecker = new CrossChecker();
-            $results = $crossChecker->execute( $itemId );
+            $results = $crossChecker->crossCheckEntity( $entity );
 
             // Print results
             $out->addHTML(
                 Html::openElement( 'h3' )
-                . $this->msg( 'wikidataquality-crosscheck-result-headline' )->text() . $_POST[ 'itemId' ]
+                . $this->msg( 'wikidataquality-crosscheck-result-headline' )->text() . $_POST[ 'entityId' ]
                 . Html::closeElement( 'h3' )
             );
 

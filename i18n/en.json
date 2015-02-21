@@ -17,11 +17,10 @@
     "wikidataquality-constraint-result-headline": "Result for ",
     "wikidataquality-constraint-result-entity-not-existent": "Entity does not exist!",
 
-
     "wikidataquality-crosscheck": "Cross-Check with external databases",
     "wikidataquality-crosscheck-instructions": "Just enter an entity and let it cross-check against GND.",
     "wikidataquality-crosscheck-instructions-example": "Try for example Q159099 (Nina Hagen) and look at the results.",
-    "wikidataquality-crosscheck-form-itemid-placeholder": "Qxx",
+    "wikidataquality-crosscheck-form-entityid-placeholder": "Qxx/Pxx",
     "wikidataquality-crosscheck-form-submit-label": "Cross-Check",
     "wikidataquality-crosscheck-result-headline": "Result for ",
     "wikidataquality-crosscheck-result-item-not-existent": "Item does not exist!",

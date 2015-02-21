@@ -5,6 +5,7 @@ namespace WikidataQuality\ExternalValidation\Api;
 
 use ApiMain;
 use Wikibase\Api\ApiWikibase;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use WikidataQuality\ExternalValidation\CrossCheck\CrossChecker;
 use WikidataQuality\ExternalValidation\Api\Serializer\CompareResultListSerializer;
@@ -19,6 +20,13 @@ use WikidataQuality\ExternalValidation\Api\Serializer\CompareResultListSerialize
 class CrossCheck extends ApiWikibase
 {
     /**
+     * Wikibase entity lookup.
+     * @var \Wikibase\Lib\Store\EntityLookup
+     */
+    private $entityLookup;
+
+
+    /**
      * @param ApiMain $main
      * @param string $name
      * @param string $prefix
@@ -26,6 +34,9 @@ class CrossCheck extends ApiWikibase
     public function __construct( ApiMain $main, $name, $prefix = '' )
     {
         parent::__construct( $main, $name, $prefix );
+
+        // Get entity lookup
+        $this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
     }
 
     /**
@@ -40,8 +51,9 @@ class CrossCheck extends ApiWikibase
         $resultLists = array();
         foreach ( $params[ 'entities' ] as $id ) {
             $entityId = $this->getIdParser()->parse( $id );
+            $entity = $this->entityLookup->getEntity( $entityId );
             $crossChecker = new CrossChecker();
-            $resultLists[ (string)$entityId ] = $crossChecker->execute( $entityId );
+            $resultLists[ (string)$entityId ] = $crossChecker->crossCheckEntity( $entity );
         }
 
         // Write results to output
