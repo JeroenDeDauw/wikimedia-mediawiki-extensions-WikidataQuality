@@ -30,6 +30,12 @@ class CrossChecker
     private $entityLookup;
 
     /**
+     * Wikibase entity id parser.
+     * @var \Wikibase\DataModel\Entity\EntityIdParser
+     */
+    private $entityIdParser;
+
+    /**
      * Wikibase load balancer for database connections.
      * @var \LoadBalancer
      */
@@ -52,6 +58,9 @@ class CrossChecker
     {
         // Get entity lookup
         $this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+
+        // Get entity id parser
+        $this->entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 
         // Get load balancer
         wfWaitForSlaves();
@@ -82,7 +91,9 @@ class CrossChecker
                 if ( is_array( $propertyIds ) || $propertyIds instanceof Traversable ) {
                     foreach ( $propertyIds as $propertyId ) {
                         if ( $propertyId instanceof PropertyId ) {
-                            $statements += $entity->getStatements()->getWithPropertyId( $propertyId );
+                            foreach ( $entity->getStatements()->getWithPropertyId( $propertyId ) as $statement ) {
+                                $statements->addStatement( $statement );
+                            }
                         } else {
                             throw new InvalidArgumentException( 'Every element in $propertyIds must be an instance of PropertyId.' );
                         }
@@ -92,36 +103,6 @@ class CrossChecker
                 }
             } else {
                 $statements = $entity->getStatements();
-            }
-
-            // Run cross-check for filtered statements
-            return $this->crossCheckStatements( $entity, $statements );
-        }
-    }
-
-    /**
-     * Runs cross-check for specific claims of an entity.
-     * @param \EntityId $entity - Id of the entity that should be cross-checked.
-     * @param string|array $claimGuids - Guids of claims of the specified item, that should be cross-checked.
-     * @return CompareResultList
-     * @throws InvalidArgumentException
-     */
-    public function crossCheckClaims( $entity, $claimGuids )
-    {
-        if ( $entity && $claimGuids ) {
-            // Get statements to be cross-checked
-            $statements = new StatementList();
-            if ( is_string( $claimGuids ) ) {
-                $claimGuids = array( $claimGuids );
-            }
-            if ( is_array( $claimGuids ) || $claimGuids instanceof \Traversable ) {
-                foreach ( $entity->getStatements() as $statement ) {
-                    if ( in_array( $statement->getClaim->getGuid(), $claimGuids ) ) {
-                        $statements->addStatement( $statement );
-                    }
-                }
-            } else {
-                throw new InvalidArgumentException( '$claimGuids must be string, array or an instance of Traversable.' );
             }
 
             // Run cross-check for filtered statements
