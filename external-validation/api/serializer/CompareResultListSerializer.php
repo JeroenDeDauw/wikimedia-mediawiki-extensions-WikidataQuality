@@ -19,7 +19,7 @@ class CompareResultListSerializer extends SerializerObject {
     public function getSerialized( $resultList ) {
         $serialization = array();
         foreach ( $resultList->getPropertyIds() as $propertyId ) {
-            //
+            // Index tags, if necessary
             if ( $this->getOptions()->shouldIndexTags() ) {
                 $index = count($serialization);
                 $serialization[ $index ][ 'id' ] = (string)$propertyId;

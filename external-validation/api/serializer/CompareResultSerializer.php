@@ -19,11 +19,15 @@ class CompareResultSerializer extends SerializerObject {
     public function getSerialized( $result ) {
         // Create list of local values with indexed tag name
         $localValues = $result->getLocalValues();
-        $this->setIndexedTagName( $localValues, 'value' );
+        if( $localValues ) {
+            $this->setIndexedTagName( $localValues, 'value' );
+        }
 
         // Create list of external values with indexed tag name
         $externalValues = $result->getExternalValues();
-        $this->setIndexedTagName( $externalValues, 'value' );
+        if( $externalValues ) {
+            $this->setIndexedTagName( $externalValues, 'value' );
+        }
 
         // Serialize whole CompareResult object
         $serialization = array(
