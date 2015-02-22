@@ -236,7 +236,7 @@ class ConstraintChecker {
     private function getTypeChecker()
     {
         if( !isset( $this->typeChecker ) ) {
-            $this->typeChecker = new TypeChecker( $this->statements, $this->entityLookup, $this->helper );
+            $this->typeChecker = new TypeChecker( $this->entityLookup, $this->helper );
         }
         return $this->typeChecker;
     }

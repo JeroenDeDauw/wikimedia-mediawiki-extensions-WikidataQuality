@@ -14,7 +14,7 @@ class FormatChecker {
 
     public function checkFormatConstraint( $propertyId, $dataValueString, $pattern ) {
         $parameterString = 'pattern: ' . $pattern;
-        $status = preg_match( '/' . str_replace( '/', '\/', $pattern ) . '/', $dataValueString) ? 'compliance' : 'violation';
+        $status = preg_match( '/^' . str_replace( '/', '\/', $pattern ) . '$/', $dataValueString) ? 'compliance' : 'violation';
         return new CheckResult( $propertyId, $dataValueString, 'Format', $parameterString, $status);
     }
 }
