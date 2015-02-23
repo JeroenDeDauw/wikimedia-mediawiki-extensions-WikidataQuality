@@ -31,8 +31,13 @@
     "wikidataquality-crosscheck-comparative-value": "Comparative Value",
     "wikidataquality-crosscheck-external-source": "External Source",
 
-    "apihelp-wdqcrosscheck-description": "API module to cross-check entities against external data.",
-    "apihelp-wdqcrosscheck-param-entities": "Ids of the entities that should be crosschecked.",
-    "apihelp-wdqcrosscheck-examples-1": "Run cross-check for entity Q76.",
-    "apihelp-wdqcrosscheck-examples-2": "Run cross-check for entity Q76 and Q567."
+    "apihelp-wdqcrosscheck-description": "API module to cross-check Wikibase entities against external data.",
+    "apihelp-wdqcrosscheck-param-entities": "Ids of the entities that should be cross-checked. Required unless claims are provided.",
+    "apihelp-wdqcrosscheck-param-properties": "Optional filter to cross-check only statements with specified property ids. This only works, if entities are given.",
+    "apihelp-wdqcrosscheck-param-claims": "Ids of claims that should be cross-checked. Required unless entities are provided.",
+    "apihelp-wdqcrosscheck-examples-1": "Run cross-check for all statements of item with ID Q76.",
+    "apihelp-wdqcrosscheck-examples-2": "Run cross-check for all statements of item with ID Q76 and item with ID Q567.",
+    "apihelp-wdqcrosscheck-examples-3": "Run cross-check for all statements of item with ID Q76 and item with ID Q567, that uses property with ID P19.",
+    "apihelp-wdqcrosscheck-examples-4": "Run cross-check for all statements of item with ID Q76 and item with ID Q567, that uses property with ID P19 or P31.",
+    "apihelp-wdqcrosscheck-examples-5": "Run cross-check for claim with GUID of Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F."
 }

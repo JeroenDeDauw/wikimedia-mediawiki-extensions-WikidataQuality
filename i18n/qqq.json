@@ -32,7 +32,12 @@
     "wikidataquality-crosscheck-external-source": "Name for external source the comparative data is from.",
 
     "apihelp-wdqcrosscheck-description": "{{doc-apihelp-description|wblinktitles}}",
-    "apihelp-wdqcrosscheck-param-entities": "{{doc-apihelp-param|wbmergeitems|entities}}",
+    "apihelp-wdqcrosscheck-param-entities": "{{doc-apihelp-param|wdqcrosscheck|entities}}",
+    "apihelp-wdqcrosscheck-param-properties": "{{doc-apihelp-param|wdqcrosscheck|properties}}",
+    "apihelp-wdqcrosscheck-param-claims": "{{doc-apihelp-param|wdqcrosscheck|claims}}",
     "apihelp-wdqcrosscheck-examples-1": "{{doc-apihelp-example|wdqcrosscheck}}",
     "apihelp-wdqcrosscheck-examples-2": "{{doc-apihelp-example|wdqcrosscheck}}"
+    "apihelp-wdqcrosscheck-examples-3": "{{doc-apihelp-example|wdqcrosscheck}}",
+    "apihelp-wdqcrosscheck-examples-4": "{{doc-apihelp-example|wdqcrosscheck}}",
+    "apihelp-wdqcrosscheck-examples-5": "{{doc-apihelp-example|wdqcrosscheck}}"
 }
