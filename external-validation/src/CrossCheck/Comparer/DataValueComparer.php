@@ -44,13 +44,13 @@ abstract class DataValueComparer
      * Local, probably converted values.
      * @var array
      */
-    public $localValues;
+    protected $localValues;
 
     /**
      * External database values.
      * @var array
      */
-    public $externalValues;
+    protected $externalValues;
 
 
     /**
@@ -73,6 +73,23 @@ abstract class DataValueComparer
      * @return bool - result of the comparison.
      */
     public abstract function execute();
+
+
+    /**
+     * Returns local, probably converted values.
+     * @return array
+     */
+    public function getLocalValues() {
+        return $this->localValues;
+    }
+
+    /**
+     * Returns external database values.
+     * @return array
+     */
+    public function getExternalValues() {
+        return $this->externalValues;
+    }
 
 
     /**

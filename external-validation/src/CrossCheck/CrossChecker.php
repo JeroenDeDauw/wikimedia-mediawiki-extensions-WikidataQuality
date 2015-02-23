@@ -113,7 +113,7 @@ class CrossChecker
     /**
      * Runs cross-check for specific statements of the given entity.
      * @param \EntityId $entity - Id of the entity that should be cross-checked.
-     * @param \Statement|\StatementList $statements - Statements of the entity that should be cross-checked.s
+     * @param \Statement|\StatementList $statements - Statements of the given entity that should be cross-checked.
      * @return CompareResultList
      * @throws InvalidArgumentException
      */
@@ -296,7 +296,7 @@ class CrossChecker
                     $result = $comparer->execute();
 
                     if ( isset( $result ) ) {
-                        return new CompareResult( $propertyId, $claimGuid, $comparer->localValues, $comparer->externalValues, !$result, null, $this->dumpMetaInformation->getDataSourceName() );
+                        return new CompareResult( $propertyId, $claimGuid, $comparer->getLocalValues(), $comparer->getExternalValues(), !$result, null, $this->dumpMetaInformation->getDataSourceName() );
                     }
                 }
             }
