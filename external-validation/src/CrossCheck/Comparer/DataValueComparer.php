@@ -3,6 +3,7 @@
 namespace WikidataQuality\ExternalValidation\CrossCheck\Comparer;
 
 
+use Doctrine\Instantiator\Exception\InvalidArgumentException;
 use ReflectionClass;
 use DataValues\DataValue;
 
@@ -30,7 +31,7 @@ abstract class DataValueComparer
 
     /**
      * Meta information of the current dump.
-     * @var \DumpMetaInformation
+     * @var DumpMetaInformation
      */
     protected $dumpMetaInformation;
 
@@ -55,16 +56,21 @@ abstract class DataValueComparer
 
     /**
      * @param $dumpMetaInformation
-     * @param \DataValue $dataValue - wikibase DataValue
+     * @param DataValue $dataValue - wikibase DataValue
      * @param array $externalValues - external database values
      * @param $localValues
      */
-    public function __construct( $dumpMetaInformation, DataValue $dataValue, $externalValues, $localValues = null )
+    public function __construct( $dumpMetaInformation, DataValue $dataValue, $externalValues )
     {
+        // Check types of parameters
+        if( $externalValues && !is_array( $externalValues ) ) {
+            throw new InvalidArgumentException( '$externalValues must be null or array.' );
+        }
+
+        // Set parameters
         $this->dumpMetaInformation = $dumpMetaInformation;
         $this->dataValue = $dataValue;
         $this->externalValues = $externalValues;
-        $this->localValues = $localValues;
     }
 
 
@@ -74,6 +80,22 @@ abstract class DataValueComparer
      */
     public abstract function execute();
 
+
+    /**
+     * Meta information of the current dump.
+     * @return DumpMetaInformation
+     */
+    public function getDumpMetaInformation() {
+        return $this->dumpMetaInformation;
+    }
+
+    /**
+     * Wikibase data value.
+     * @return DataValue
+     */
+    public function getDataValue() {
+        return $this->dataValue;
+    }
 
     /**
      * Returns local, probably converted values.
@@ -109,6 +131,7 @@ abstract class DataValueComparer
                 return new $comparer( $dumpMetaInformation, $dataValue, $externalValues );
             }
         }
+
         return null;
     }
 }

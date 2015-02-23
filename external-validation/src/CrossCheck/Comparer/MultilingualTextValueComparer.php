@@ -26,12 +26,34 @@ class MultilingualTextValueComparer extends MonolingualTextValueComparer
      * @param array $externalValues
      * @param array $localValues
      */
-    public function __construct( $dumpMetaInformation, MultilingualTextValue $dataValue, $externalValues, $localValues = null )
+    public function __construct( $dumpMetaInformation, MultilingualTextValue $dataValue, $externalValues )
     {
         foreach ( $dataValue->getTexts() as $text ) {
-            if ( $text->getLanguageCode() == $this->dumpMetaInformation->getLanguage() ) {
+            if ( $text->getLanguageCode() == $dumpMetaInformation->getLanguage() ) {
                 parent::__construct( $dumpMetaInformation, $text, $externalValues );
+                return;
             }
+        }
+
+        // If multilingual text does not contain text in language of dump, initialize variables manually
+        $this->dumpMetaInformation = $dumpMetaInformation;
+        $this->externalValues = $externalValues;
+    }
+
+
+    /**
+     * Starts the comparison of given DataValue and values of external database.
+     * @return bool - result of the comparison.
+     */
+    public function execute()
+    {
+        if ( $this->dataValue ) {
+            // Multilingual text contains text in language of dump
+            return parent::execute();
+        } else {
+            // Multilingual text does not contain text in language of dump
+            $this->localValues = array();
+            return false;
         }
     }
 }

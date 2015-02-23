@@ -28,7 +28,7 @@ class MonolingualTextValueComparer extends DataValueComparer
         $this->localValues = array( $this->dataValue->getText() );
 
         // Compare value
-        if ( $this->localValues && count( array_intersect( $this->localValues, $this->externalValues ) ) > 0 ) {
+        if ( $this->localValues && $this->externalValues && count( array_intersect( $this->localValues, $this->externalValues ) ) > 0 ) {
             return true;
         } else {
             return false;
