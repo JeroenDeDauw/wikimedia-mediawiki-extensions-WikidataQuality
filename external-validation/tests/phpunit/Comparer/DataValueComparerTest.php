@@ -33,6 +33,7 @@ class DataValueComparerTest  extends \PHPUnit_Framework_TestCase {
     protected function tearDown() {
         unset( $this->testDumpMetaInformation );
         unset( $this->testDataValue );
+        unset( $this->testExternalValues );
         parent::tearDown();
     }
 
