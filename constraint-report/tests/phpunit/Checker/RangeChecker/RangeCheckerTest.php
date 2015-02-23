@@ -1,29 +1,28 @@
 <?php
 
-namespace WikidataQuality\ConstraintReport\Test\ValueCountChecker;
+namespace WikidataQuality\ConstraintReport\Test\RangeChecker;
 
 use Wikibase\DataModel\Entity\PropertyId;
-use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\ValueCountChecker;
+use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\RangeChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
 use Wikibase\DataModel\DeserializerFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
-class ValueCountCheckerTest extends \PHPUnit_Framework_TestCase
+class RangeCheckerTest extends \PHPUnit_Framework_TestCase
 {
+    private $rangeChecker;
     private $helper;
-    private $propertyId;
 
     protected function setUp() {
         parent::setUp();
-
         $this->helper = new ConstraintReportHelper();
-        $this->propertyId = new PropertyId( 'P36' );
     }
 
     protected function tearDown() {
+        unset($this->rangeChecker);
+        unset($this->statements);
         unset($this->helper);
-        unset($this->propertyId);
         parent::tearDown();
     }
 
@@ -51,69 +50,69 @@ class ValueCountCheckerTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testCheckSingleValueConstraintOne()
+    public function testCheckRangeConstraintWithinRange()
     {
         $file = __DIR__ . './Q1.json';
         $json = json_decode(file_get_contents($file), true)[ 'entities' ][ 'Q1' ];
         $entity = $this->getEntity( $json );
-        $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
+        $this->rangeChecker = new RangeChecker( $entity->getStatements(), $this->helper );
 
-        $checkResult = $valueCountChecker->checkSingleValueConstraint( $this->propertyId, 'Q1384' );
+        $checkResult = $this->rangeChecker->checkRangeConstraint( new PropertyId( 'P1457' ), 3.1415926536, 0, 10 );
         $this->assertEquals( 'compliance', $checkResult->getStatus(), "check should comply" );
     }
 
-    public function testCheckSingleValueConstraintTwo()
+    public function testCheckRangeConstraintTooSmall()
     {
         $file = __DIR__ . './Q2.json';
         $json = json_decode(file_get_contents($file), true)[ 'entities' ][ 'Q2' ];
         $entity = $this->getEntity( $json );
-        $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
+        $this->rangeChecker = new RangeChecker( $entity->getStatements(), $this->helper );
 
-        $checkResult = $valueCountChecker->checkSingleValueConstraint( $this->propertyId, 'Q1384' );
+        $checkResult = $this->rangeChecker->checkRangeConstraint( new PropertyId( 'P1457' ), 42, 100, 1000 );
         $this->assertEquals( 'violation', $checkResult->getStatus(), "check should not comply" );
     }
 
-    public function testCheckSingleValueConstraintTwoButOneDeprecated()
+    public function testCheckRangeConstraintTooBig()
     {
         $file = __DIR__ . './Q3.json';
         $json = json_decode(file_get_contents($file), true)[ 'entities' ][ 'Q3' ];
         $entity = $this->getEntity( $json );
-        $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
+        $this->rangeChecker = new RangeChecker( $entity->getStatements(), $this->helper );
 
-        $checkResult = $valueCountChecker->checkSingleValueConstraint( $this->propertyId, 'Q1384' );
-        $this->assertEquals( 'compliance', $checkResult->getStatus(), "check should comply" );
+        $checkResult = $this->rangeChecker->checkRangeConstraint( new PropertyId( 'P1457' ), 3.1415926536, 0, 1 );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), "check should not comply" );
     }
 
-    public function testCheckMultiValueConstraintOne()
+    public function testCheckDiffWithinRangeConstraintWithinRange()
     {
         $file = __DIR__ . './Q4.json';
         $json = json_decode(file_get_contents($file), true)[ 'entities' ][ 'Q4' ];
         $entity = $this->getEntity( $json );
-        $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
+        $this->rangeChecker = new RangeChecker( $entity->getStatements(), $this->helper );
 
-        $checkResult = $valueCountChecker->checkMultiValueConstraint( $this->propertyId, 'Q207' );
-        $this->assertEquals( 'violation', $checkResult->getStatus(), "check should not comply" );
+        $checkResult = $this->rangeChecker->checkDiffWithinRangeConstraint( new PropertyId( 'P570' ), '+00000001970-01-01T00:00:00Z', new PropertyId( 'P569' ), 0, 150 );
+        $this->assertEquals( 'compliance', $checkResult->getStatus(), "check should comply" );
     }
 
-    public function testCheckMultiValueConstraintTwo()
+    public function testCheckDiffWithinRangeConstraintTooSmall()
     {
         $file = __DIR__ . './Q5.json';
         $json = json_decode(file_get_contents($file), true)[ 'entities' ][ 'Q5' ];
         $entity = $this->getEntity( $json );
-        $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
+        $this->rangeChecker = new RangeChecker( $entity->getStatements(), $this->helper );
 
-        $checkResult = $valueCountChecker->checkMultiValueConstraint( $this->propertyId, 'Q207' );
-        $this->assertEquals( 'compliance', $checkResult->getStatus(), "check should comply" );
+        $checkResult = $this->rangeChecker->checkDiffWithinRangeConstraint( new PropertyId( 'P570' ), '+00000001970-01-01T00:00:00Z', new PropertyId( 'P569' ), 0, 150 );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), "check should not comply" );
     }
 
-    public function testCheckMultiValueConstraintTwoButOneDeprecated()
+    public function testCheckDiffWithinRangeConstraintTooBig()
     {
         $file = __DIR__ . './Q6.json';
         $json = json_decode(file_get_contents($file), true)[ 'entities' ][ 'Q6' ];
         $entity = $this->getEntity( $json );
-        $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
+        $this->rangeChecker = new RangeChecker( $entity->getStatements(), $this->helper );
 
-        $checkResult = $valueCountChecker->checkMultiValueConstraint( $this->propertyId, 'Q207' );
+        $checkResult = $this->rangeChecker->checkDiffWithinRangeConstraint( new PropertyId( 'P570' ), '+00000001970-01-01T00:00:00Z', new PropertyId( 'P569' ), 50, 150 );
         $this->assertEquals( 'violation', $checkResult->getStatus(), "check should not comply" );
     }
 
