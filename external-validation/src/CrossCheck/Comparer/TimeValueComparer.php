@@ -41,8 +41,13 @@ class TimeValueComparer extends DataValueComparer
         $opts->setOption( ValueParser::OPT_LANG, $this->dumpMetaInformation->getLanguage() );
 
         $parser = null;
-        if ($this->dumpMetaInformation->getDateFormat() === 'd.m.Y'){   # Look at TimeParserTest.php to determine which parser is needed
-            $parser = new DateTimeParser( new EraParser(), $opts );
+        $dateFormat = $this->dumpMetaInformation->getDateFormat();
+        switch ( $dateFormat ){ # Look at TimeParserTest.php to determine which parser is needed
+            case 'd.m.Y':
+                $parser = new DateTimeParser( new EraParser(), $opts );
+                break;
+            default:
+                $parser = new DateTimeParser( new EraParser(), $opts );
         }
 
         // Compare values
