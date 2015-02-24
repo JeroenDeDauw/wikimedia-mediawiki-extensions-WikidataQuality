@@ -29,28 +29,26 @@ class XPathEvaluatorTest extends \PHPUnit_Framework_TestCase
     }
 
     protected function tearDown() {
-        unset($this->evaluator);
-        unset($this->mapping);
-        unset($this->testData);
+        unset( $this->evaluator, $this->mapping, $this->testData );
         parent::tearDown();
     }
 
     public function testEvaluate()
     {
-        $nodeSelector = $this->mapping[ "testcase one"][ "nodeSelector" ];
-        $this->assertEquals( array('success'), $this->evaluator->evaluate( $nodeSelector ), "should find path" );
+        $nodeSelector = $this->mapping[ 'testcase one' ][ 'nodeSelector' ];
+        $this->assertEquals( array('success'), $this->evaluator->evaluate( $nodeSelector ), 'should find path' );
 
-        $nodeSelector = $this->mapping[ "testcase two"][ "nodeSelector" ];
-        $valueFormatter = $this->mapping[ "testcase two"][ "valueFormatter" ];
-        $this->assertEquals( array('success'), $this->evaluator->evaluate( $nodeSelector, $valueFormatter ), "should format string" );
+        $nodeSelector = $this->mapping[ 'testcase two' ][ 'nodeSelector' ];
+        $valueFormatter = $this->mapping[ 'testcase two' ][ 'valueFormatter' ];
+        $this->assertEquals( array('success'), $this->evaluator->evaluate( $nodeSelector, $valueFormatter ), 'should format string' );
 
-        $nodeSelector = $this->mapping[ "testcase three"][ "nodeSelector" ];
-        $this->assertEquals( array(), $this->evaluator->evaluate( $nodeSelector, $valueFormatter ), "should find nothing" );
+        $nodeSelector = $this->mapping[ 'testcase three' ][ 'nodeSelector' ];
+        $this->assertEquals( array(), $this->evaluator->evaluate( $nodeSelector, $valueFormatter ), 'should find nothing' );
     }
 
     public function testGetEvaluator()
     {
         $evaluator = MappingEvaluator::getEvaluator( 'xml', $this->testData );
-        $this->assertEquals( 'WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\XPathEvaluator', get_class( $evaluator ), "should get XPathEvaluator" );
+        $this->assertEquals( 'WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\XPathEvaluator', get_class( $evaluator ), 'should get XPathEvaluator' );
     }
 }

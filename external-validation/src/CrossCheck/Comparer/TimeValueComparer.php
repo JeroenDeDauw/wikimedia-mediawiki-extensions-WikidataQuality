@@ -3,7 +3,6 @@
 namespace WikidataQuality\ExternalValidation\CrossCheck\Comparer;
 
 
-use DateTime;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\MwTimeIsoFormatter;
@@ -36,10 +35,6 @@ class TimeValueComparer extends DataValueComparer
      */
     public function execute()
     {
-
-        // Parse external datetime
-        $externalDateTime = DateTime::createFromFormat( $this->dumpMetaInformation->getDateFormat(), $this->externalValues[ 0 ] );
-
         // Set opts and get parser
         $opts = new ParserOptions();
         $opts->setOption( TimeParser::OPT_CALENDAR, TimeParser::CALENDAR_GREGORIAN );
@@ -53,11 +48,11 @@ class TimeValueComparer extends DataValueComparer
         // Compare values
         $result = false;
 
-        if ($parser) {
-            $externalTimeValue = $parser->parse($externalDateTime->format($this->dumpMetaInformation->getDateFormat()));
+        if ( $parser ) {
+            $externalTimeValue = $parser->parse( $this->externalValues[ 0 ] );
             $localTimeValue = $this->dataValue;
 
-            if ($externalTimeValue instanceof DataValue && $localTimeValue instanceof DataValue) {
+            if ( $externalTimeValue instanceof DataValue && $localTimeValue instanceof DataValue ) {
                 // format
                 $optsFormatter = new FormatterOptions();
                 $optsFormatter->setOption( ValueFormatter::OPT_LANG, $this->dumpMetaInformation->getLanguage() );
@@ -67,7 +62,7 @@ class TimeValueComparer extends DataValueComparer
                 $externalTimeValue = $formatter->format( $externalTimeValue );
 
                 //compare
-                $result = $localTimeValue == $externalTimeValue;
+                $result = $localTimeValue === $externalTimeValue;
                 $this->localValues = array( $localTimeValue );
                 $this->externalValues = array( $externalTimeValue );
             }

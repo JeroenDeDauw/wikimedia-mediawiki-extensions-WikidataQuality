@@ -31,9 +31,7 @@ class DataValueComparerTest  extends \PHPUnit_Framework_TestCase {
     }
 
     protected function tearDown() {
-        unset( $this->testDumpMetaInformation );
-        unset( $this->testDataValue );
-        unset( $this->testExternalValues );
+        unset( $this->testDumpMetaInformation, $this->testDataValue, $this->testExternalValues );
         parent::tearDown();
     }
 
@@ -61,11 +59,11 @@ class DataValueComparerTest  extends \PHPUnit_Framework_TestCase {
     public function getComparerProvider() {
         return array(
             array( new EntityIdValue( new ItemId( 'Q42' ) ), 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\EntityIdValueComparer' ),
-            array(new MonolingualTextValue( 'en', 'foo' ), 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueComparer' ),
-            array(new MultilingualTextValue( array( new MonolingualTextValue( 'en', 'foo' ) ) ), 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\MultilingualTextValueComparer' ),
-            array(new QuantityValue( new  DecimalValue( 42 ), '1', new DecimalValue( 42 ), new DecimalValue(42 ) ), 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\QuantityValueComparer' ),
-            array(new StringValue( 'foo' ), 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer' ),
-            array(new TimeValue( '+00000002013-12-07T00:00:00Z', 0, 0, 0, 11, 'http://www.wikidata.org/entity/Q1985727' ), 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer' )/*,
+            array( new MonolingualTextValue( 'en', 'foo' ), 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueComparer' ),
+            array( new MultilingualTextValue( array( new MonolingualTextValue( 'en', 'foo' ) ) ), 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\MultilingualTextValueComparer' ),
+            array( new QuantityValue( new  DecimalValue( 42 ), '1', new DecimalValue( 42 ), new DecimalValue(42 ) ), 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\QuantityValueComparer' ),
+            array( new StringValue( 'foo' ), 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer' ),
+            array( new TimeValue( '+00000002013-12-07T00:00:00Z', 0, 0, 0, 11, 'http://www.wikidata.org/entity/Q1985727' ), 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer' )/*,
             array(new GlobeCoordinateValue( new LatLongValue(52.5, 13.3), 0.016), 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueComparer')*/
         );
     }

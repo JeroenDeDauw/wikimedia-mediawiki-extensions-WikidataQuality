@@ -29,8 +29,7 @@ class MonolingualTextValueComparerTest extends \PHPUnit_Framework_TestCase {
     }
 
     protected function tearDown() {
-        unset( $this->testDumpMetaInformation );
-        unset( $this->testDataValue );
+        unset( $this->testDumpMetaInformation, $this->testDataValue );
         parent::tearDown();
     }
 

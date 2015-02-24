@@ -122,7 +122,7 @@ class CrossChecker
         // Check $statements argument
         if ( $statements instanceof Statement ) {
             $statements = new StatementList( $statements );
-        } else if ( !( $statements instanceof StatementList ) ) {
+        } elseif ( !( $statements instanceof StatementList ) ) {
             throw new InvalidArgumentException( '$statements must be Statement or StatementList.' );
         }
 
