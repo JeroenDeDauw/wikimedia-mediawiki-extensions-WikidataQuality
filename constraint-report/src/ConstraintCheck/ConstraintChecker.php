@@ -196,7 +196,7 @@ class ConstraintChecker {
                             break;
                         case "One of":
                             $result[] = $this->getOneOfChecker()
-                                ->checkOneOfConstraint( $propertyId, $dataValueString, $itemArray ); // doing
+                                ->checkOneOfConstraint( $propertyId, $dataValueString, $itemArray ); // done
                             break;
 
                         // not yet implemented cases, also error case, SHOULD NOT BE INVOKED

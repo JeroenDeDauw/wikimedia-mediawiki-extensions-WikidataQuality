@@ -19,7 +19,7 @@ class CommonsLinkChecker {
             $status = $this->url_exists( $dataValueString, $namespace ) ? 'compliance' : 'violation';
         else
             $status = 'violation';
-        return new CheckResult( $propertyId, $dataValueString, 'Commons link', 'namespace: ' . $dataValueString, $status );
+        return new CheckResult( $propertyId, $dataValueString, 'Commons link', 'namespace: ' . $namespace, $status );
     }
 
     private function url_exists( $dataValueString, $namespace )
