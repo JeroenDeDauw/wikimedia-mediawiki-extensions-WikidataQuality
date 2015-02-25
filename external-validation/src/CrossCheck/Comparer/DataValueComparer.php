@@ -26,7 +26,8 @@ abstract class DataValueComparer
         'WikidataQuality\ExternalValidation\CrossCheck\Comparer\MultilingualTextValueComparer',
         'WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer',
         'WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer',
-        'WikidataQuality\ExternalValidation\CrossCheck\Comparer\QuantityValueComparer'
+        'WikidataQuality\ExternalValidation\CrossCheck\Comparer\QuantityValueComparer',
+        'WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueComparer'
     );
 
     /**

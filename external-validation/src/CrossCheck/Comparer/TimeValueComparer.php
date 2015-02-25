@@ -54,8 +54,8 @@ class TimeValueComparer extends DataValueComparer
         $result = false;
 
         if ( $parser ) {
-            $externalTimeValue = $parser->parse( $this->externalValues[ 0 ] );
             $localTimeValue = $this->dataValue;
+            $externalTimeValue = $parser->parse( $this->externalValues[ 0 ] );
 
             if ( $externalTimeValue instanceof DataValue && $localTimeValue instanceof DataValue ) {
                 // format

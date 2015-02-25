@@ -3,13 +3,14 @@
 namespace WikidataQuality\ExternalValidation\Test\Comparer;
 
 
-use DataValues\TimeValue;
+use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\Geo\Values\LatLongValue;
 use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
-use WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer;
+use WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueComparer;
 
 
 /**
- * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer
+ * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueComparer
  *
  * @group WikidataQuality
  * @group WikidataQuality\ExternalValidation
@@ -17,7 +18,7 @@ use WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer;
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class TimeValueComparerTest extends \PHPUnit_Framework_TestCase {
+class GlobeCoordinateValueComparerTest extends \PHPUnit_Framework_TestCase {
     private $testDumpMetaInformation;
     private $testDataValue;
     private $shownValue;
@@ -26,8 +27,8 @@ class TimeValueComparerTest extends \PHPUnit_Framework_TestCase {
     protected function setUp() {
         parent::setUp();
         $this->testDumpMetaInformation = new DumpMetaInformation( 'xml', 'de', 'd.m.Y', 'TestDB' );
-        $this->testDataValue = new TimeValue( '+00000001955-03-11T00:00:00Z', 0, 0, 0, 11, 'gregorian' );
-        $this->shownValue = '11 März 1955';
+        $this->testDataValue = new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1, null );
+        $this->shownValue = '64° N, 26° E';
     }
 
     protected function tearDown() {
@@ -35,9 +36,8 @@ class TimeValueComparerTest extends \PHPUnit_Framework_TestCase {
         parent::tearDown();
     }
 
-
     public function testExecuteOne() {
-        $comparer = new TimeValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '11.03.1955' ) );
+        $comparer = new GlobeCoordinateValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '64.000000 N, 26.000000 E' ) );
         $this->assertTrue( $comparer->execute() );
 
         $this->assertEquals( $comparer->getLocalValues(), array( $this->shownValue ) );
@@ -45,7 +45,7 @@ class TimeValueComparerTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testExecuteTwo() {
-        $comparer = new TimeValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '1955-03-11' ) );
+        $comparer = new GlobeCoordinateValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '64 N, 26 E' ) );
         $this->assertTrue( $comparer->execute() );
 
         $this->assertEquals( $comparer->getLocalValues(), array( $this->shownValue ) );
@@ -53,10 +53,10 @@ class TimeValueComparerTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testExecuteThree() {
-        $comparer = new TimeValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '11 Mar 1955' ) );
-        $this->assertTrue( $comparer->execute() );
+        $comparer = new GlobeCoordinateValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '64.000001 N, 26.000010 E' ) );
+        $this->assertFalse( $comparer->execute() );
 
         $this->assertEquals( $comparer->getLocalValues(), array( $this->shownValue ) );
-        $this->assertEquals( $comparer->getExternalValues(), array( $this->shownValue ) );
+        $this->assertNotEquals( $comparer->getExternalValues(), array( $this->shownValue ) );
     }
 }
