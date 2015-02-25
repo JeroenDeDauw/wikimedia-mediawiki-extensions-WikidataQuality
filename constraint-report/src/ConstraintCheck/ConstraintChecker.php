@@ -94,15 +94,18 @@ class ConstraintChecker {
                 $dataValueString = $this->getDataValueString( $claim );
 
                 $res = $dbr->select(
-                    'wdq_constraints_from_templates',											                    							                                        // $table
-                    array('pid', 'constraint_name', 'base_property', 'class', 'classes', 'exceptions', 'item', 'items', 'list', 'max', 'min', 'pattern', 'property', 'relation', 'values_' ),		// $vars (columns of the table)
-                    ("pid = $numericPropertyId"),												                  								                                        // $conds
-                    __METHOD__,																	                    							                                        // $fname = 'Database::select',
-                    array('')																	                    							                                        // $options = array()
+                    'constraints_ready_for_migration',						    // $table
+                    array('pid', 'constraint_name',
+                        'class', 'constraint_status', 'comment', 'group_by', 'item', 'known_exception',
+                        'maximum_date', 'maximum_quantity', 'minimum_date', 'minimum_quantity',
+                        'namespace', 'pattern', 'property', 'relation' ),		// $vars (columns of the table)
+                    ("pid = $numericPropertyId"),							    // $conds
+                    __METHOD__,													// $fname = 'Database::select',
+                    array('')													// $options = array()
                 );
 
                 foreach( $res as $row ) {
-                    if( in_array( $entityId, $this->helper->toArray( $row->exceptions ) ) ) {
+                    if( in_array( $entityId, $this->helper->toArray( $row->known_exception ) ) ) {
                         $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, '\'\'(none)\'\'', 'exception' );
                         continue;
                     }
@@ -114,69 +117,87 @@ class ConstraintChecker {
 
                         // ValueCountCheckers
                         case "Single value":
-                            $result[] = $this->getValueCountChecker()->checkSingleValueConstraint( $propertyId, $dataValueString );
+                            $result[] = $this->getValueCountChecker()
+                                ->checkSingleValueConstraint( $propertyId, $dataValueString );
                             break;
                         case "Multi value":
-                            $result[] = $this->getValueCountChecker()->checkMultiValueConstraint( $propertyId, $dataValueString );
+                            $result[] = $this->getValueCountChecker()
+                                ->checkMultiValueConstraint( $propertyId, $dataValueString );
                             break;
                         case "Unique value": // todo
-                            $result[] = $this->getValueCountChecker()->checkUniqueValueConstraint( $propertyId, $dataValueString );
+                            $result[] = $this->getValueCountChecker()
+                                ->checkUniqueValueConstraint( $propertyId, $dataValueString );
                             break;
 
                         // ConnectionCheckers
                         case "Target required claim":
-                            $result[] = $this->getConnectionChecker()->checkSymmetricConstraint( $propertyId, $dataValueString, $row->property, $row->item, $row->items );
+                            $result[] = $this->getConnectionChecker()
+                                ->checkSymmetricConstraint( $propertyId, $dataValueString, $row->property, $row->item ); // todo
                             break;
                         case "Symmetric":
-                            $result[] = $this->getConnectionChecker()->checkSymmetricConstraint( $propertyId, $dataValueString );
+                            $result[] = $this->getConnectionChecker()
+                                ->checkSymmetricConstraint( $propertyId, $dataValueString );
                             break;
                         case "Inverse":
-                            $result[] = $this->getConnectionChecker()->checkInverseConstraint( $propertyId, $dataValueString, $row->property );
+                            $result[] = $this->getConnectionChecker()
+                                ->checkInverseConstraint( $propertyId, $dataValueString, $row->property ); // todo
                             break;
                         case "Conflicts with":
-                            $result[] = $this->getConnectionChecker()->checkConflictsWithConstraint( $propertyId, $dataValueString, $row->list );
+                            $result[] = $this->getConnectionChecker()
+                                ->checkConflictsWithConstraint( $propertyId, $dataValueString, $row->property, $row->item ); // todo
                             break;
                         case "Item":
-                            $result[] = $this->getConnectionChecker()->checkItemConstraint( $propertyId, $dataValueString, $row->property, $row->item, $row->items);
+                            $result[] = $this->getConnectionChecker()
+                                ->checkItemConstraint( $propertyId, $dataValueString, $row->property, $row->item ); // todo
                             break;
 
                         // QualifierCheckers
                         case "Qualifier":
-                            $result[] = $this->getQualifierChecker()->checkQualifierConstraint( $propertyId, $dataValueString );
+                            $result[] = $this->getQualifierChecker()
+                                ->checkQualifierConstraint( $propertyId, $dataValueString );
                             break;
                         case "Qualifiers":
-                            $result[] = $this->getQualifierChecker()->checkQualifiersConstraint( $propertyId, $dataValueString, $statement, $row->list );
+                            $result[] = $this->getQualifierChecker()
+                                ->checkQualifiersConstraint( $propertyId, $dataValueString, $statement, $row->property ); // done
                             break;
 
                         // RangeCheckers
                         case "Range":
-                            $result[] = $this->getRangeChecker()->checkRangeConstraint( $propertyId, $dataValueString, $row->min, $row->max );
+                            $result[] = $this->getRangeChecker()
+                                ->checkRangeConstraint( $propertyId, $dataValueString, $row->minimum_quantity, $row->maximum_quantity, $row->minimum_date, $row->maximum_date ); // todo
                             break;
                         case "Diff within range":
-                            $result[] = $this->getRangeChecker()->checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $row->base_property, $row->min, $row->max );
+                            $result[] = $this->getRangeChecker()
+                                ->checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $row->property, $row->minimum_quantity, $row->maximum_quantity, $row->minimum_date, $row->maximum_date ); // todo
                             break;
 
-                        //Type Checkers
+                        // Type Checkers
                         case "Type":
-                            $result[] = $this->getTypeChecker()->checkTypeConstraint( $propertyId, $dataValueString, $this->statements, $row->class, $row->classes, $row->relation );
+                            $result[] = $this->getTypeChecker()
+                                ->checkTypeConstraint( $propertyId, $dataValueString, $this->statements, $row->class, $row->relation ); // todo
                             break;
                         case "Value type":
-                            $result[] = $this->getTypeChecker()->checkValueTypeConstraint( $propertyId, $dataValueString, $row->class, $row->classes, $row->relation );
+                            $result[] = $this->getTypeChecker()
+                                ->checkValueTypeConstraint( $propertyId, $dataValueString, $row->class, $row->relation ); // todo
                             break;
 
                         // Rest
                         case "Format":
-                            $result[] = $this->getFormatChecker()->checkFormatConstraint( $propertyId, $dataValueString, $row->pattern );
+                            $result[] = $this->getFormatChecker()
+                                ->checkFormatConstraint( $propertyId, $dataValueString, $row->pattern );
                             break;
                         case "Commons link":
-                            $result[] = $this->getCommonsLinkChecker()->checkCommonsLinkConstraint( $propertyId, $dataValueString );
+                            $result[] = $this->getCommonsLinkChecker()
+                                ->checkCommonsLinkConstraint( $propertyId, $dataValueString );
                             break;
                         case "One of":
-                            $result[] = $this->getOneOfChecker()->checkOneOfConstraint( $propertyId, $dataValueString, $row->values_ );
+                            $result[] = $this->getOneOfChecker()
+                                ->checkOneOfConstraint( $propertyId, $dataValueString, $row->item ); // todo
                             break;
+
+                        // not yet implemented cases, also error case, SHOULD NOT BE INVOKED
                         default:
-                            //not yet implemented cases, also error case SHOULD NOT BE INVOKED
-                            $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, '\'\'(none)\'\'', "should not happen" );
+                            $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, '\'\'(none)\'\'', "whoops" );
                             break;
                     }
 
@@ -312,6 +333,5 @@ class ConstraintChecker {
             return '\'\'(' . $mainSnak->getType() . '\'\')';
         }
     }
-
 
 }

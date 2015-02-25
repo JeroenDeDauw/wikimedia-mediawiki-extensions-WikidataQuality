@@ -21,17 +21,14 @@ class QualifierChecker
         return new CheckResult($propertyId, $dataValueString, "Qualifier", '\'\'(none)\'\'', "violation");
     }
 
-    public function checkQualifiersConstraint($propertyId, $dataValueString, $statement, $list)
+    public function checkQualifiersConstraint($propertyId, $dataValueString, $statement, $property)
     {
-        $toReplace = array("{", "}", "|", " ");
-        $parameterString = $this->helper->limitOutput( 'list: ' . str_replace($toReplace, '', $list) );
-
-        $list = $this->helper->toArray( $list );
+        $parameterString = $this->helper->limitOutput( 'property: ' . str_replace(",", ", ", $property) );
         $status = 'compliance';
 
         foreach( $statement->getQualifiers() as $qualifier ) {
             $pid = $qualifier->getPropertyId()->getSerialization();
-            if( !in_array($pid, $list) ){
+            if( !in_array($pid, $property) ){
                 $status = 'violation';
                 break;
             }
