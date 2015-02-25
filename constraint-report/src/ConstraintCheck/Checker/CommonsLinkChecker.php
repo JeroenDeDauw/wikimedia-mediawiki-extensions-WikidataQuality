@@ -14,19 +14,18 @@ class CommonsLinkChecker {
         $this->helper = $helper;
     }
 
-    public function checkCommonsLinkConstraint( $propertyId, $dataValueString ) {
+    public function checkCommonsLinkConstraint( $propertyId, $dataValueString, $namespace ) {
         if( $this->isCommonsLinkWellFormed( $dataValueString ) )
-            $status = $this->url_exists( $dataValueString ) ? 'compliance' : 'violation';
+            $status = $this->url_exists( $dataValueString, $namespace ) ? 'compliance' : 'violation';
         else
             $status = 'violation';
-        return new CheckResult($propertyId, $dataValueString, 'Commons link', '\'\'(none)\'\'', $status );
+        return new CheckResult( $propertyId, $dataValueString, 'Commons link', 'namespace: ' . $dataValueString, $status );
     }
 
-    private function url_exists( $dataValueString ) {
-
-        $responseCode1 = substr( get_headers('http://commons.wikimedia.org/wiki/File:' . str_replace(' ', '_', $dataValueString ))[0], 9, 3);
-        $responseCode2 = substr( get_headers('http://commons.wikimedia.org/wiki/Category:' . str_replace(' ', '_', $dataValueString ))[0], 9, 3);
-        return $responseCode1 < 400 || $responseCode2 < 400;
+    private function url_exists( $dataValueString, $namespace )
+    {
+        $responseCode = substr( get_headers( 'http://commons.wikimedia.org/wiki/' . $namespace . ':' . str_replace( ' ', '_', $dataValueString ) )[0], 9, 3);
+        return $responseCode < 400;
     }
 
     private function isCommonsLinkWellFormed( $dataValueString ) {

@@ -7,6 +7,24 @@ class ConstraintReportHelper {
 
     private $showMax = 50;
 
+    /**
+     * @param $claim
+     * @return string
+     */
+    public function getDataValueString( $claim )
+    {
+        $mainSnak = $claim->getMainSnak();
+        if( $mainSnak->getType() == 'value' ) {
+            return $this->dataValueToString( $mainSnak->getDataValue() );
+        } else {
+            return '\'\'(' . $mainSnak->getType() . '\'\')';
+        }
+    }
+
+    /**
+     * @param $dataValue
+     * @return mixed|string
+     */
     public function dataValueToString( $dataValue )
     {
         $dataValueType = $dataValue->getType();
@@ -27,13 +45,13 @@ class ConstraintReportHelper {
             case 'monolingualtext':
                 return $dataValue->getText();
             case 'multilingualtext':
-                return array_key_exists('en', $dataValue) ? $dataValue->getTexts()['en'] : array_shift($dataValue->getTexts());;
+                return array_key_exists('en', $dataValue) ? $dataValue->getTexts()['en'] : array_shift( $dataValue->getTexts() );;
             case 'wikibase-entityid':
                 return $dataValue->getEntityId();
             case 'bad':
             default:
                 return null;
-            //error case
+                //error case
         }
     }
 
@@ -45,13 +63,16 @@ class ConstraintReportHelper {
         }
     }
 
-    public function toArray( $templateString ) {
-        $toReplace = array("{", "}", "|", "[", "]", " ");
-        return explode(",", str_replace($toReplace, "", $templateString));
+    public function removeBrackets( $templateString ) {
+        $toReplace = array("{", "}", "|", "[", "]");
+        return str_replace( $toReplace, "", $templateString);
     }
 
-    public function toStringWithoutBrackets( $templateString ) {
-        $toReplace = array("{", "}", "|", "[", "]");
-        return str_replace( $toReplace, '', $templateString);
+    public function stringToArray( $templateString ) {
+        return explode(",", $this->removeBrackets( str_replace(" ", "", $templateString ) ) );
+    }
+
+    public function arrayToString( $templateArray ) {
+        return implode(", ", $templateArray);
     }
 }

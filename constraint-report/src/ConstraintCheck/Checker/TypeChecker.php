@@ -8,11 +8,10 @@ use Wikibase\DataModel\Entity\ItemId;
 
 class TypeChecker {
 
-    private $statements;
     private $entityLookup;
     private $helper;
 
-    public function __construct( $lookup, $helper) {
+    public function __construct( $lookup, $helper ) {
         $this->entityLookup = $lookup;
         $this->helper = $helper;
     }

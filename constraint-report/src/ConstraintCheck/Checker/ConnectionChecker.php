@@ -84,9 +84,9 @@ class ConnectionChecker {
     }
 
     public function checkSymmetricConstraint( $propertyId, $dataValueString ) {
-        $targetItem = $this->entityLookup->getEntity( new ItemId( $dataValueString->getSerialization() ));
+        $targetItem = $this->entityLookup->getEntity( new ItemId( $dataValueString->getSerialization() ) );
         if ($targetItem == null) {
-            return new CheckResult($propertyId, $dataValueString, "Symmetric", '\'\'(none)\'\'', "fail");
+            return new CheckResult( $propertyId, $dataValueString, "Symmetric", '\'\'(none)\'\'', "fail" );
         }
 
         $targetItemStatements = $targetItem->getStatements();
@@ -99,10 +99,10 @@ class ConnectionChecker {
     }
 
     public function checkInverseConstraint( $propertyId, $dataValueString, $property) {
-        $targetItem = $this->entityLookup->getEntity( new ItemId( $dataValueString->getSerialization() ));
+        $targetItem = $this->entityLookup->getEntity( new ItemId( $dataValueString->getSerialization() ) );
         $parameterString = 'property: ' . $property;
         if ($targetItem == null) {
-            return new CheckResult($propertyId, $dataValueString, "Inverse", $parameterString, "fail" );
+            return new CheckResult( $propertyId, $dataValueString, "Inverse", $parameterString, "fail" );
             return;
         }
         $targetItemStatements = $targetItem->getStatements();
@@ -117,7 +117,7 @@ class ConnectionChecker {
 
     private function hasProperty( $itemStatementsArray, $propertyId ) {
         foreach( $itemStatementsArray as $itemStatement ) {
-            if ($itemStatement->getPropertyId() == $propertyId){
+            if ( $itemStatement->getPropertyId() == $propertyId ){
                 return true;
             }
         }
@@ -126,13 +126,13 @@ class ConnectionChecker {
 
     private function hasClaim( $itemStatementsArray, $propertyId, $claimItemIdOrArray ) {
         foreach( $itemStatementsArray as $itemStatement ) {
-            if ($itemStatement->getPropertyId() == $propertyId){
-                if (getType($claimItemIdOrArray) == "string" ) {
-                    if ($this->singleHasClaim( $itemStatement, $claimItemIdOrArray)){
+            if ( $itemStatement->getPropertyId() == $propertyId ){
+                if ( getType($claimItemIdOrArray) == "string" ) {
+                    if ( $this->singleHasClaim( $itemStatement, $claimItemIdOrArray ) ){
                         return true;
                     }
                 } else {
-                    if ($this->arrayHasClaim( $itemStatement, $claimItemIdOrArray)){
+                    if ( $this->arrayHasClaim( $itemStatement, $claimItemIdOrArray ) ){
                         return true;
                     }
                 }
@@ -142,7 +142,7 @@ class ConnectionChecker {
     }
 
     private function singleHasClaim( $itemStatement, $claimItemId) {
-        if ( $itemStatement->getClaim()->getMainSnak()->getDataValue()->getEntityId()->getSerialization() == $claimItemId) {
+        if ( $this->helper->getDataValueString( $itemStatement->getClaim() ) == $claimItemId ) {
             return true;
         }
         return false;
@@ -150,7 +150,7 @@ class ConnectionChecker {
 
     private function arrayHasClaim( $itemStatement, $claimItemIdArray) {
         foreach( $claimItemIdArray as $claimItemId) {
-            if ( $itemStatement->getClaim()->getMainSnak()->getDataValue()->getEntityId()->getSerialization() == $claimItemId) {
+            if ( $this->helper->getDataValueString( $itemStatement->getClaim() ) == $claimItemId ) {
                 return true;
             }
         }

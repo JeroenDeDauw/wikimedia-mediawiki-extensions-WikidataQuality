@@ -91,7 +91,7 @@ class ConstraintChecker {
                 $claim = $statement->getClaim();
                 $propertyId = $claim->getPropertyId();
                 $numericPropertyId = $propertyId->getNumericId();
-                $dataValueString = $this->getDataValueString( $claim );
+                $dataValueString = $this->helper->getDataValueString( $claim );
 
                 $res = $dbr->select(
                     'constraints_ready_for_migration',						    // $table
@@ -105,10 +105,14 @@ class ConstraintChecker {
                 );
 
                 foreach( $res as $row ) {
-                    if( in_array( $entityId, $this->helper->toArray( $row->known_exception ) ) ) {
+                    if( in_array( $entityId, $this->helper->stringToArray( $row->known_exception ) ) ) {
                         $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, '\'\'(none)\'\'', 'exception' );
                         continue;
                     }
+
+                    $classArray = $this->helper->stringToArray( $row->class );
+                    $itemArray = $this->helper->stringToArray( $row->item );
+                    $propertyArray = $this->helper->stringToArray( $row->property );
 
                     switch( $row->constraint_name ) {
                         // Switch over every constraint, check them accordingly
@@ -132,7 +136,7 @@ class ConstraintChecker {
                         // ConnectionCheckers
                         case "Target required claim":
                             $result[] = $this->getConnectionChecker()
-                                ->checkSymmetricConstraint( $propertyId, $dataValueString, $row->property, $row->item ); // todo
+                                ->checkSymmetricConstraint( $propertyId, $dataValueString, $row->property, $itemArray ); // todo
                             break;
                         case "Symmetric":
                             $result[] = $this->getConnectionChecker()
@@ -144,11 +148,11 @@ class ConstraintChecker {
                             break;
                         case "Conflicts with":
                             $result[] = $this->getConnectionChecker()
-                                ->checkConflictsWithConstraint( $propertyId, $dataValueString, $row->property, $row->item ); // todo
+                                ->checkConflictsWithConstraint( $propertyId, $dataValueString, $row->property, $itemArray ); // todo
                             break;
                         case "Item":
                             $result[] = $this->getConnectionChecker()
-                                ->checkItemConstraint( $propertyId, $dataValueString, $row->property, $row->item ); // todo
+                                ->checkItemConstraint( $propertyId, $dataValueString, $row->property, $itemArray ); // todo
                             break;
 
                         // QualifierCheckers
@@ -158,7 +162,7 @@ class ConstraintChecker {
                             break;
                         case "Qualifiers":
                             $result[] = $this->getQualifierChecker()
-                                ->checkQualifiersConstraint( $propertyId, $dataValueString, $statement, $row->property ); // done
+                                ->checkQualifiersConstraint( $propertyId, $dataValueString, $statement, $propertyArray ); // done
                             break;
 
                         // RangeCheckers
@@ -178,7 +182,7 @@ class ConstraintChecker {
                             break;
                         case "Value type":
                             $result[] = $this->getTypeChecker()
-                                ->checkValueTypeConstraint( $propertyId, $dataValueString, $row->class, $row->relation ); // todo
+                                ->checkValueTypeConstraint( $propertyId, $dataValueString, $classArray, $row->relation ); // todo
                             break;
 
                         // Rest
@@ -188,11 +192,11 @@ class ConstraintChecker {
                             break;
                         case "Commons link":
                             $result[] = $this->getCommonsLinkChecker()
-                                ->checkCommonsLinkConstraint( $propertyId, $dataValueString );
+                                ->checkCommonsLinkConstraint( $propertyId, $dataValueString, $row->namespace );
                             break;
                         case "One of":
                             $result[] = $this->getOneOfChecker()
-                                ->checkOneOfConstraint( $propertyId, $dataValueString, $row->item ); // todo
+                                ->checkOneOfConstraint( $propertyId, $dataValueString, $itemArray ); // doing
                             break;
 
                         // not yet implemented cases, also error case, SHOULD NOT BE INVOKED
@@ -209,7 +213,7 @@ class ConstraintChecker {
         return null;
     }
 
-    private function getEntityID($entityId)
+    private function getEntityID( $entityId )
     {
         switch(strtoupper($entityId[0])) {
             case 'Q':
@@ -249,7 +253,7 @@ class ConstraintChecker {
     private function getRangeChecker()
     {
         if( !isset( $this->rangeChecker ) ) {
-            $this->rangeChecker = new RangeChecker( $this->statements, $this->helper);
+            $this->rangeChecker = new RangeChecker( $this->statements, $this->helper );
         }
         return $this->rangeChecker;
     }
@@ -285,53 +289,6 @@ class ConstraintChecker {
             $this->formatChecker = new FormatChecker( $this->helper );
         }
         return $this->formatChecker;
-    }
-
-    /**
-     * @param $getDataValue
-     * @return mixed|string
-     */
-    private function dataValueToString($dataValue)
-    {
-        $dataValueType = $dataValue->getType();
-        switch( $dataValueType ) {
-            case 'string':
-            case 'decimal':
-            case 'number':
-            case 'boolean':
-            case 'unknown':
-                return $dataValue->getValue();
-            case 'quantity':
-                return $dataValue->getAmount()->getValue();
-            case 'time':
-                return $dataValue->getTime();
-            case 'globecoordinate':
-            case 'geocoordinate':
-                return 'Latitude: ' . $dataValue->getLatitude() . ', Longitude: ' . $dataValue->getLongitude();
-            case 'monolingualtext':
-                return $dataValue->getText();
-            case 'multilingualtext':
-                return array_key_exists('en', $dataValue) ? $dataValue->getTexts()['en'] : array_shift($dataValue->getTexts());;
-            case 'wikibase-entityid':
-                return $dataValue->getEntityId();
-            case 'bad':
-            default:
-                return null;
-                //error case
-        }
-    }
-
-    /**
-     * @param $claim
-     */
-    private function getDataValueString($claim)
-    {
-        $mainSnak = $claim->getMainSnak();
-        if( $mainSnak->getType() == 'value' ) {
-            return $this->dataValueToString( $mainSnak->getDataValue() );
-        } else {
-            return '\'\'(' . $mainSnak->getType() . '\'\')';
-        }
     }
 
 }
