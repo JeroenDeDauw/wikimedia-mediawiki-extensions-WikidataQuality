@@ -4,6 +4,7 @@ namespace WikidataQuality\ExternalValidation\UpdateTable\Importer;
 
 use DateTime;
 use SimpleXMLElement;
+use WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\MappingEvaluator;
 
 class GndImporter extends Importer
 {
@@ -46,6 +47,8 @@ class GndImporter extends Importer
      */
     private $dumpId;
 
+    private $mapping;
+
 
     /**
      * @param \ImportContext $importContext
@@ -59,6 +62,9 @@ class GndImporter extends Importer
         xml_parser_set_option( $this->parser, XML_OPTION_CASE_FOLDING, true );
         xml_parser_set_option( $this->parser, XML_OPTION_SKIP_WHITE, true );
         xml_set_object( $this->parser, $this );
+
+        require( '../../CrossCheck/mapping.inc.php' );
+        $this->mapping = $mapping;
     }
 
     /**
@@ -193,7 +199,19 @@ class GndImporter extends Importer
     {
         $this->tempRecord .= "</$name>";
         if ( $name == "RECORD" ) {
-            $this->insertEntity( $this->db, $this->dumpId, self::WD_PROPERTY_ID, $this->getEntityId( $this->tempRecord ), $this->tempRecord );
+            $externalEntity = $this->tempRecord;
+            $mappingEvaluator = MappingEvaluator::getEvaluator( self::DUMP_DATA_FORMAT, $externalEntity );
+            $mapping = $this->mapping[ self::WD_PROPERTY_ID ];
+
+            if ( $mappingEvaluator && $mapping ) {
+                foreach ( $mapping as $pid => $propertyMapping ){
+                    $externalValues = $this->evaluatePropertyMapping( $mappingEvaluator, $propertyMapping );
+                    foreach ($externalValues as $externalValue) {
+                        $this->insertEntity($this->db, $this->dumpId, self::WD_PROPERTY_ID, $this->getEntityId($this->tempRecord), $pid, $externalValue);
+                    }
+                }
+            }
+
             $this->numberOfImportedEntites++;
             if ( !$this->importContext->isQuiet() ) {
                 print "\r\033[K";
@@ -224,4 +242,14 @@ class GndImporter extends Importer
 
         return $ext_id;
     }
+
+    private function evaluatePropertyMapping( $mappingEvaluator, $propertyMapping )
+    {
+        $nodeSelector = $propertyMapping[ 'nodeSelector' ];
+        $valueFormatter = array_key_exists( 'valueFormatter', $propertyMapping ) ? $propertyMapping[ 'valueFormatter' ] : null;
+        $externalValues = $mappingEvaluator->evaluate( $nodeSelector, $valueFormatter );
+        return $externalValues;
+    }
+
+
 }

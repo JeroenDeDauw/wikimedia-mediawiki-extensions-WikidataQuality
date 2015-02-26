@@ -246,12 +246,13 @@ abstract class Importer
      * @param string $externalId - external identifier
      * @param string $externalData - external entity for the identifier
      */
-    protected function insertEntity( $db, $dumpId, $pid, $externalId, $externalData )
+    protected function insertEntity( $db, $dumpId, $idPid, $externalId, $propertyId, $externalData )
     {
         $accumulator = array(
             'dump_id' => $dumpId,
-            'pid' => $pid,
+            'id_pid' => $idPid,
             'external_id' => $externalId,
+            'p_pid' => $propertyId,
             'external_data' => $externalData
         );
 
