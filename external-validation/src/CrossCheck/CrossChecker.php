@@ -179,7 +179,7 @@ class CrossChecker
         // Filter out statements, that can not be checked against the current database
         $validateableStatements = $this->getValidateableStatements( $statements, $mapping );
 
-        // If an external entity exists, Compare each validatable statement
+        // Compare each validatable statement
         $results = new CompareResultList();
         foreach ( $validateableStatements as $validateableStatement ) {
             // Get claim with guid
@@ -232,7 +232,8 @@ class CrossChecker
      * Retrieves external entity by its id from database.
      * @param \PropertyId $identifierPropertyId - Id of the identifier property, that represents the external database
      * @param string $externalId - Id of the external entity
-     * @return string
+     * @param \PropertyId $propertyId - Id of the property for which the external values are needed
+     * @return array
      */
     private function getExternalValues( $identifierPropertyId, $externalId, $propertyId )
     {
@@ -280,8 +281,7 @@ class CrossChecker
      * @param $propertyId - PropertyId of the claim, that contains the DataValue
      * @param $claimGuid - Guid of the claim, that contains the DataValue
      * @param $dataValue - DataValue, that should be compared
-     * @param $externalEntity - External entity, that should be used to check against
-     * @param $propertyMapping - Property mapping, that should be used for cross-checking
+     * @param $externalValues - External entity, that should be used to check against
      * @return \CompareResult
      */
     private function compareDataValues( $propertyId, $claimGuid, $dataValue, $externalValues )

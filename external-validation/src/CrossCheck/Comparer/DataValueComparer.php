@@ -59,7 +59,6 @@ abstract class DataValueComparer
      * @param $dumpMetaInformation
      * @param DataValue $dataValue - wikibase DataValue
      * @param array $externalValues - external database values
-     * @param $localValues
      */
     public function __construct( $dumpMetaInformation, DataValue $dataValue, $externalValues )
     {

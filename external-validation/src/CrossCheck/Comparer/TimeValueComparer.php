@@ -54,25 +54,39 @@ class TimeValueComparer extends DataValueComparer
         $result = false;
 
         if ( $parser ) {
+
+            $optsFormatter = new FormatterOptions();
+            $optsFormatter->setOption( ValueFormatter::OPT_LANG, $this->dumpMetaInformation->getLanguage() );
+            $formatter = new MwTimeIsoFormatter( $optsFormatter );
+
+            // Parse and format external TimeValues
+            $externalTimeValues = array();
+
+            foreach ( $this->externalValues as $value ) {
+                $externalTimeValue = $parser->parse( $value );
+
+                if ($externalTimeValue instanceof DataValue) {
+                    $externalTimeValue = $formatter->format( $externalTimeValue );
+                    $externalTimeValues[] = $externalTimeValue;
+                }
+            }
+
+            // Format local TimeValue
             $localTimeValue = $this->dataValue;
-            $externalTimeValue = $parser->parse( $this->externalValues[ 0 ] );
 
-            if ( $externalTimeValue instanceof DataValue && $localTimeValue instanceof DataValue ) {
-                // format
-                $optsFormatter = new FormatterOptions();
-                $optsFormatter->setOption( ValueFormatter::OPT_LANG, $this->dumpMetaInformation->getLanguage() );
-
-                $formatter = new MwTimeIsoFormatter( $optsFormatter );
+            if ( $localTimeValue instanceof DataValue ) {
                 $localTimeValue = $formatter->format( $localTimeValue );
-                $externalTimeValue = $formatter->format( $externalTimeValue );
+            }
 
-                //compare
-                $result = $localTimeValue === $externalTimeValue;
-                $this->localValues = array( $localTimeValue );
-                $this->externalValues = array( $externalTimeValue );
+            $this->localValues = array( $localTimeValue );
+            $this->externalValues = $externalTimeValues;
+
+            //compare
+            if ( count( array_intersect( $this->localValues, $this->externalValues ) ) > 0 ) {
+                return true;
+            } else {
+                return false;
             }
         }
-
-        return $result;
     }
 }
