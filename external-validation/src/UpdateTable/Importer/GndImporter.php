@@ -11,8 +11,9 @@ class GndImporter extends Importer
     const DATABASE_NAME = 'GND';
     const DUMP_DATA_FORMAT = 'xml';
     const DUMP_LANGUAGE = 'de';
-    const DUMP_URL_FORMAT = 'http://datendienst.dnb.de/cgi-bin/mabit.pl?cmd=fetch&userID=GNDxml&pass=gndmarcxml143&mabheft=Tpgesamt%d%dgndmrc.xml.gz';
+    const DUMP_URL_FORMAT = 'http://datendienst.dnb.de/cgi-bin/mabit.pl?cmd=fetch&userID=GNDxml&pass=gndmarcxml151&mabheft=Tpgesamt%d%sgndmrc.xml.gz';
     const DUMP_FILE_NAME = 'gnd.xml.gz';
+    const DUMP_LICENSE = 'CC-0';
     const WD_PROPERTY_ID = '227';
     const ENTITY_ID_XPATH = "/RECORD/CONTROLFIELD[@TAG=\"001\"]/text()";
     const BUFFER_SIZE = 4096;
@@ -63,7 +64,8 @@ class GndImporter extends Importer
         xml_parser_set_option( $this->parser, XML_OPTION_SKIP_WHITE, true );
         xml_set_object( $this->parser, $this );
 
-        require( '../../CrossCheck/mapping.inc.php' );
+        $mappingPath = implode( DIRECTORY_SEPARATOR, array( __DIR__, '..', '..', 'CrossCheck', 'mapping.inc.php' ) );
+        require( $mappingPath );
         $this->mapping = $mapping;
     }
 
@@ -83,7 +85,7 @@ class GndImporter extends Importer
     {
         // Download dump
         $dumpUrl = $this->buildDumpUrl();
-        if ( !$this->downloadDump( $dumpUrl ) ) {
+/*        if ( !$this->downloadDump( $dumpUrl ) ) {
             // If download fails, try previous dump
             if ( !$this->importContext->isQuiet() ) {
                 print "Download of latest dump failed. Try to download previous one...\n";
@@ -92,7 +94,7 @@ class GndImporter extends Importer
             $dumpUrl = $this->buildDumpUrl( true );
             $this->downloadDump( $dumpUrl );
         }
-
+*/
         // Connect to database and delete old entries
         $this->db = $this->establishDbConnection();
 
@@ -131,30 +133,29 @@ class GndImporter extends Importer
 
         if ( $previous ) {
             if ( $month === 1 ) {
-                $month = 6;
+                $month = '06';
                 $year--;
             } elseif ( $month < 6 ) {
-                $month = 10;
+                $month = '10';
                 $year--;
             } elseif ( $month < 10 ) {
-                $month = 2;
+                $month = '02';
             } else {
-                $month = 6;
+                $month = '06';
             }
         } else {
             if ( $month === 1 ) {
-                $month = 10;
+                $month = '10';
                 $year--;
             } elseif ( $month < 6 ) {
-                $month = 2;
+                $month = '02';
             } elseif ( $month < 10 ) {
-                $month = 6;
+                $month = '06';
             } else {
-                $month = 10;
+                $month = '10';
             }
         }
         $url = sprintf( self::DUMP_URL_FORMAT, $year, $month );
-
         return $url;
     }
 

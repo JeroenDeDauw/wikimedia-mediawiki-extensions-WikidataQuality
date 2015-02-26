@@ -66,7 +66,7 @@ abstract class Importer
             print "Removing old entries\n";
         }
         if ( $wgDBtype === 'sqlite' ) {
-            $db->delete( $tableName, 'pid=' . $propertyId );
+            $db->delete( $tableName, 'id_pid=' . $propertyId );
         } else {
             do {
                 $db->commit( __METHOD__, 'flush' );
@@ -76,7 +76,7 @@ abstract class Importer
                 }
                 $table = $db->tableName( $tableName );
                 $batchSize = $this->importContext->getBatchSize();
-                $db->query( "DELETE FROM $table WHERE pid=$propertyId LIMIT $batchSize" );
+                $db->query( "DELETE FROM $table WHERE id_pid=$propertyId LIMIT $batchSize" );
             } while ( $db->affectedRows() > 0 );
         }
     }
