@@ -77,7 +77,7 @@ class ConstraintChecker {
      */
     public function execute( $entityId )
     {
-        // Get statements of item
+        // Get statements of entity
         $entity = $this->entityLookup->getEntity( $this->getEntityID( $entityId ) );
         if ( $entity ) {
 
@@ -168,21 +168,21 @@ class ConstraintChecker {
                         // RangeCheckers
                         case "Range":
                             $result[] = $this->getRangeChecker()
-                                ->checkRangeConstraint( $propertyId, $dataValueString, $row->minimum_quantity, $row->maximum_quantity, $row->minimum_date, $row->maximum_date ); // todo
+                                ->checkRangeConstraint( $propertyId, $dataValueString, $row->minimum_quantity, $row->maximum_quantity, $row->minimum_date, $row->maximum_date ); // done
                             break;
                         case "Diff within range":
                             $result[] = $this->getRangeChecker()
-                                ->checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $row->property, $row->minimum_quantity, $row->maximum_quantity, $row->minimum_date, $row->maximum_date ); // todo
+                                ->checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $row->property, $row->minimum_quantity, $row->maximum_quantity, $row->minimum_date, $row->maximum_date ); // done
                             break;
 
                         // Type Checkers
                         case "Type":
                             $result[] = $this->getTypeChecker()
-                                ->checkTypeConstraint( $propertyId, $dataValueString, $this->statements, $row->class, $row->relation ); // todo
+                                ->checkTypeConstraint( $propertyId, $dataValueString, $this->statements, $classArray, $row->relation ); // done
                             break;
                         case "Value type":
                             $result[] = $this->getTypeChecker()
-                                ->checkValueTypeConstraint( $propertyId, $dataValueString, $classArray, $row->relation ); // todo
+                                ->checkValueTypeConstraint( $propertyId, $dataValueString, $classArray, $row->relation ); // done
                             break;
 
                         // Rest
@@ -199,9 +199,9 @@ class ConstraintChecker {
                                 ->checkOneOfConstraint( $propertyId, $dataValueString, $itemArray ); // done
                             break;
 
-                        // not yet implemented cases, also error case, SHOULD NOT BE INVOKED
+                        // error case, SHOULD NOT BE INVOKED
                         default:
-                            $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, '\'\'(none)\'\'', "whoops" );
+                            $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, '\'\'(none)\'\'', 'error' );
                             break;
                     }
 
@@ -215,11 +215,11 @@ class ConstraintChecker {
 
     private function getEntityID( $entityId )
     {
-        switch(strtoupper($entityId[0])) {
+        switch( strtoupper( $entityId[0] ) ) {
             case 'Q':
-                return new ItemId($entityId);
+                return new ItemId( $entityId );
             case 'P':
-                return new PropertyId($entityId);
+                return new PropertyId( $entityId );
             default:
                 return null;
         }

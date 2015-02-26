@@ -103,37 +103,32 @@ class SpecialWikidataConstraintReport extends SpecialPage {
                 . Html::closeElement( 'form' );
     }
 
-
-
-
     function addOutputRow( $result ) {
         $lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
         $this->output .=
             "|-\n"
-            . "| " . $result->getPropertyId() . " (" . $lookup->getEntity($result->getPropertyId())->getLabel('en') . ") "
+            . "| " . $result->getPropertyId() . " (" . $lookup->getEntity( $result->getPropertyId() )->getLabel('en') . ") "
             . "|| " . $result->getDataValue() . " "
             . "|| " . $result->getConstraintName() . " "
             . "|| " . $result->getParameter() . " ";
 
         switch( $result->getStatus() ) {
-            case 'compliance':
+            case 'compliance':  // constraint has been checked, result is positive
                 $color = '#088A08';
                 break;
-            case 'violation':
-                $color = '#8A0808';
-                break;
-            case 'exception':
+            case 'exception':   // the statement violates the constraint, but is a known exception
                 $color = '#D2D20C';
                 break;
-            case 'todo':
+            case 'violation':   // constraint has been checked, result is negative
+            case 'error':       // there was an error in the definition of the constraint, e.g. missing or wrong parameters
+            case 'fail':        // the check failed, e.g. because a referenced item doesn't exist
+                $color = '#8A0808';
+                break;
+            case 'todo':        // the constraint check has not yet been implemented
                 $color = '#808080';
                 break;
-            case 'fail':
-                $color = '#808080';
-                break;
-            default:
+            default:            // error case, should not happen
                 $color = '#0D0DE0';
-                //error case; should not happen
         }
         $this->output .= "|| <div style=\"color:" . $color . "\">" . $result->getStatus() . "</div>\n";
     }
