@@ -12,6 +12,9 @@ use WikidataQuality\ExternalValidation\CrossCheck\Comparer\MultilingualTextValue
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\MultilingualTextValueComparer
  *
+ * @uses WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
+ * @uses WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
+ *
  * @group WikidataQuality
  * @group WikidataQuality\ExternalValidation
  *
@@ -39,6 +42,9 @@ class MultilingualTextValueComparerTest extends \PHPUnit_Framework_TestCase {
     }
 
 
+    /**
+     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\MultilingualTextValueComparer::__construct
+     */
     public function testConstructOne() {
         $externalValues = array( 'foo', 'bar' );
         $comparer = new MultilingualTextValueComparer( $this->testDumpMetaInformationEn, $this->testMultilingualTextDataValue, $externalValues );
@@ -48,6 +54,9 @@ class MultilingualTextValueComparerTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals( $externalValues, $comparer->getExternalValues() );
     }
 
+    /**
+     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\MultilingualTextValueComparer::__construct
+     */
     public function testConstructTwo() {
         $externalValues = array( 'foo', 'bar' );
         $comparer = new MultilingualTextValueComparer( $this->testDumpMetaInformationDe, $this->testMultilingualTextDataValue, $externalValues );
@@ -58,49 +67,43 @@ class MultilingualTextValueComparerTest extends \PHPUnit_Framework_TestCase {
     }
 
 
+    /**
+     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\MultilingualTextValueComparer::execute
+     */
     public function testExecuteOne() {
         $comparer = new MultilingualTextValueComparer( $this->testDumpMetaInformationEn, $this->testMultilingualTextDataValue, array( 'foo', 'bar' ) );
         $this->assertTrue( $comparer->execute() );
 
-        $monolingualTextValue = $this->getTextInLanguage( $this->testMultilingualTextDataValue, $this->testDumpMetaInformationEn->getLanguage() );
-        $this->assertEquals( $comparer->getLocalValues(), array( $monolingualTextValue->getText() ) );
+        $this->assertEquals( $comparer->getLocalValues(), array( $this->testMonolingualTextValue->getText() ) );
     }
 
+    /**
+     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\MultilingualTextValueComparer::execute
+     */
     public function testExecuteTwo() {
         $comparer = new MultilingualTextValueComparer( $this->testDumpMetaInformationEn, $this->testMultilingualTextDataValue, array( 'bar', 'foobar' ) );
         $this->assertFalse( $comparer->execute() );
 
-        $monolingualTextValue = $this->getTextInLanguage( $this->testMultilingualTextDataValue, $this->testDumpMetaInformationEn->getLanguage() );
-        $this->assertEquals( $comparer->getLocalValues(), array( $monolingualTextValue->getText() ) );
+        $this->assertEquals( $comparer->getLocalValues(), array( $this->testMonolingualTextValue->getText() ) );
     }
 
+    /**
+     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\MultilingualTextValueComparer::execute
+     */
     public function testExecuteThree() {
         $comparer = new MultilingualTextValueComparer( $this->testDumpMetaInformationEn, $this->testMultilingualTextDataValue, null );
         $this->assertFalse( $comparer->execute() );
 
-        $monolingualTextValue = $this->getTextInLanguage( $this->testMultilingualTextDataValue, $this->testDumpMetaInformationEn->getLanguage() );
-        $this->assertEquals( $comparer->getLocalValues(), array( $monolingualTextValue->getText() ) );
+        $this->assertEquals( $comparer->getLocalValues(), array( $this->testMonolingualTextValue->getText() ) );
     }
 
+    /**
+     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\MultilingualTextValueComparer::execute
+     */
     public function testExecuteFour() {
         $comparer = new MultilingualTextValueComparer( $this->testDumpMetaInformationDe, $this->testMultilingualTextDataValue, array( 'foo', 'bar' ) );
         $this->assertFalse( $comparer->execute() );
 
         $this->assertEquals( $comparer->getLocalValues(), array() );
-    }
-
-
-    /**
-     * Extracts MonolingualTextValue in specified language of given MultilingualTextValue
-     * @param MultilingualTextValue $multilingualTextValue
-     * @param string $languageCode
-     * @return MonolingualTextValue
-     */
-    private function getTextInLanguage( $multilingualTextValue, $languageCode ) {
-        foreach( $multilingualTextValue->getTexts() as $text ) {
-            if ( $text->getLanguageCode() == $languageCode ) {
-                return $text;
-            }
-        }
     }
 }

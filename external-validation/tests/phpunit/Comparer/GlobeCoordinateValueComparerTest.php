@@ -12,6 +12,9 @@ use WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueC
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueComparer
  *
+ * @uses WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
+ * @uses WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
+ *
  * @group WikidataQuality
  * @group WikidataQuality\ExternalValidation
  *
@@ -36,27 +39,37 @@ class GlobeCoordinateValueComparerTest extends \PHPUnit_Framework_TestCase {
         parent::tearDown();
     }
 
+
+    /**
+     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueComparer::execute
+     */
     public function testExecuteOne() {
         $comparer = new GlobeCoordinateValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '64.000000 N, 26.000000 E' ) );
         $this->assertTrue( $comparer->execute() );
 
-        $this->assertEquals( $comparer->getLocalValues(), array( $this->shownValue ) );
-        $this->assertEquals( $comparer->getExternalValues(), array( $this->shownValue ) );
+        $this->assertEquals( array( $this->shownValue ), $comparer->getLocalValues() );
+        $this->assertEquals( array( $this->shownValue ), $comparer->getExternalValues() );
     }
 
+    /**
+     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueComparer::execute
+     */
     public function testExecuteTwo() {
         $comparer = new GlobeCoordinateValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '64 N, 26 E' ) );
         $this->assertTrue( $comparer->execute() );
 
-        $this->assertEquals( $comparer->getLocalValues(), array( $this->shownValue ) );
-        $this->assertEquals( $comparer->getExternalValues(), array( $this->shownValue ) );
+        $this->assertEquals( array( $this->shownValue ), $comparer->getLocalValues() );
+        $this->assertEquals( array( $this->shownValue ), $comparer->getExternalValues() );
     }
 
+    /**
+     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueComparer::execute
+     */
     public function testExecuteThree() {
         $comparer = new GlobeCoordinateValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '64.000001 N, 26.000010 E' ) );
         $this->assertFalse( $comparer->execute() );
 
-        $this->assertEquals( $comparer->getLocalValues(), array( $this->shownValue ) );
-        $this->assertNotEquals( $comparer->getExternalValues(), array( $this->shownValue ) );
+        $this->assertEquals( array( $this->shownValue ), $comparer->getLocalValues() );
+        $this->assertNotEquals( array( $this->shownValue ), $comparer->getExternalValues() );
     }
 }

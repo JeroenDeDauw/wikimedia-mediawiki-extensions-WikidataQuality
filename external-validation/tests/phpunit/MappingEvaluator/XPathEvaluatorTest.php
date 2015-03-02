@@ -8,6 +8,8 @@ use WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\XPathEvaluato
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\XPathEvaluator
  *
+ * @uses WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\MappingEvaluator
+ *
  * @group WikidataQuality
  * @group WikidataQuality\ExternalValidation
  *
@@ -19,6 +21,7 @@ class XPathEvaluatorTest extends \PHPUnit_Framework_TestCase
     private $testData;
     private $mapping;
     private $evaluator;
+
 
     protected function setUp() {
         parent::setUp();
@@ -33,6 +36,10 @@ class XPathEvaluatorTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
     }
 
+
+    /**
+     * @covers WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\XPathEvaluator::evaluate
+     */
     public function testEvaluate()
     {
         $nodeSelector = $this->mapping[ 'testcase one' ][ 'nodeSelector' ];
@@ -46,6 +53,9 @@ class XPathEvaluatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals( array(), $this->evaluator->evaluate( $nodeSelector, $valueFormatter ), 'should find nothing' );
     }
 
+    /**
+     * @covers WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\XPathEvaluator::getEvaluator
+     */
     public function testGetEvaluator()
     {
         $evaluator = MappingEvaluator::getEvaluator( 'xml', $this->testData );

@@ -132,7 +132,5 @@ abstract class DataValueComparer
                 return new $comparer( $dumpMetaInformation, $dataValue, $externalValues );
             }
         }
-
-        return null;
     }
 }

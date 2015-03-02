@@ -11,6 +11,9 @@ use WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer;
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer
  *
+ * @uses WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
+ * @uses WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
+ *
  * @group WikidataQuality
  * @group WikidataQuality\ExternalValidation
  *
@@ -36,27 +39,36 @@ class TimeValueComparerTest extends \PHPUnit_Framework_TestCase {
     }
 
 
+    /**
+     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer::execute
+     */
     public function testExecuteOne() {
         $comparer = new TimeValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '11.03.1955' ) );
         $this->assertTrue( $comparer->execute() );
 
-        $this->assertEquals( $comparer->getLocalValues(), array( $this->shownValue ) );
-        $this->assertEquals( $comparer->getExternalValues(), array( $this->shownValue ) );
+        $this->assertEquals( array( $this->shownValue ), $comparer->getLocalValues() );
+        $this->assertEquals( array( $this->shownValue ), $comparer->getExternalValues() );
     }
 
+    /**
+     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer::execute
+     */
     public function testExecuteTwo() {
         $comparer = new TimeValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '1955-03-11' ) );
         $this->assertTrue( $comparer->execute() );
 
-        $this->assertEquals( $comparer->getLocalValues(), array( $this->shownValue ) );
-        $this->assertEquals( $comparer->getExternalValues(), array( $this->shownValue ) );
+        $this->assertEquals( array( $this->shownValue ), $comparer->getLocalValues() );
+        $this->assertEquals( array( $this->shownValue ), $comparer->getExternalValues() );
     }
 
+    /**
+     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer::execute
+     */
     public function testExecuteThree() {
         $comparer = new TimeValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '11 Mar 1955' ) );
         $this->assertTrue( $comparer->execute() );
 
-        $this->assertEquals( $comparer->getLocalValues(), array( $this->shownValue ) );
-        $this->assertEquals( $comparer->getExternalValues(), array( $this->shownValue ) );
+        $this->assertEquals( array( $this->shownValue ), $comparer->getLocalValues() );
+        $this->assertEquals( array( $this->shownValue ), $comparer->getExternalValues() );
     }
 }

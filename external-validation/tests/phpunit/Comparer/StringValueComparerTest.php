@@ -11,6 +11,9 @@ use WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer;
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer
  *
+ * @uses WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
+ * @uses WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
+ *
  * @group WikidataQuality
  * @group WikidataQuality\ExternalValidation
  *
@@ -34,24 +37,33 @@ class StringValueComparerTest extends \PHPUnit_Framework_TestCase {
     }
 
 
+    /**
+     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer::execute
+     */
     public function testExecuteOne() {
         $comparer = new StringValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( 'foo', 'bar' ) );
         $this->assertTrue( $comparer->execute() );
 
-        $this->assertEquals( $comparer->getLocalValues(), array( $this->testDataValue->getValue() ) );
+        $this->assertEquals( array( $this->testDataValue->getValue() ), $comparer->getLocalValues() );
     }
 
+    /**
+     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer::execute
+     */
     public function testExecuteTwo() {
         $comparer = new StringValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( 'bar', 'foobar' ) );
         $this->assertFalse( $comparer->execute() );
 
-        $this->assertEquals( $comparer->getLocalValues(), array( $this->testDataValue->getValue() ) );
+        $this->assertEquals( array( $this->testDataValue->getValue() ), $comparer->getLocalValues() );
     }
 
+    /**
+     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer::execute
+     */
     public function testExecuteThree() {
         $comparer = new StringValueComparer( $this->testDumpMetaInformation, $this->testDataValue, null );
         $this->assertFalse( $comparer->execute() );
 
-        $this->assertEquals( $comparer->getLocalValues(), array( $this->testDataValue->getValue() ) );
+        $this->assertEquals( array( $this->testDataValue->getValue() ), $comparer->getLocalValues() );
     }
 }
