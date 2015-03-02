@@ -17,6 +17,7 @@
   },
   "autoload": {
     "psr-4": {
+      "WikidataQuality\\Tests\\": "tests",
       "WikidataQuality\\ConstraintReport\\": "constraint-report/src/",
       "WikidataQuality\\ConstraintReport\\Specials\\": "constraint-report/specials/",
       "WikidataQuality\\ExternalValidation\\": "external-validation/src/",
