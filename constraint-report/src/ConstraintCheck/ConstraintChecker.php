@@ -136,7 +136,7 @@ class ConstraintChecker {
                         // ConnectionCheckers
                         case "Target required claim":
                             $result[] = $this->getConnectionChecker()
-                                ->checkSymmetricConstraint( $propertyId, $dataValueString, $row->property, $itemArray ); // todo
+                                ->checkSymmetricConstraint( $propertyId, $dataValueString, $row->property, $itemArray );
                             break;
                         case "Symmetric":
                             $result[] = $this->getConnectionChecker()
@@ -144,15 +144,15 @@ class ConstraintChecker {
                             break;
                         case "Inverse":
                             $result[] = $this->getConnectionChecker()
-                                ->checkInverseConstraint( $propertyId, $dataValueString, $row->property ); // todo
+                                ->checkInverseConstraint( $propertyId, $dataValueString, $row->property );
                             break;
                         case "Conflicts with":
                             $result[] = $this->getConnectionChecker()
-                                ->checkConflictsWithConstraint( $propertyId, $dataValueString, $row->property, $itemArray ); // todo
+                                ->checkConflictsWithConstraint( $propertyId, $dataValueString, $row->property, $itemArray );
                             break;
                         case "Item":
                             $result[] = $this->getConnectionChecker()
-                                ->checkItemConstraint( $propertyId, $dataValueString, $row->property, $itemArray ); // todo
+                                ->checkItemConstraint( $propertyId, $dataValueString, $row->property, $itemArray );
                             break;
 
                         // QualifierCheckers
@@ -162,27 +162,27 @@ class ConstraintChecker {
                             break;
                         case "Qualifiers":
                             $result[] = $this->getQualifierChecker()
-                                ->checkQualifiersConstraint( $propertyId, $dataValueString, $statement, $propertyArray ); // done
+                                ->checkQualifiersConstraint( $propertyId, $dataValueString, $statement, $propertyArray );
                             break;
 
                         // RangeCheckers
                         case "Range":
                             $result[] = $this->getRangeChecker()
-                                ->checkRangeConstraint( $propertyId, $dataValueString, $row->minimum_quantity, $row->maximum_quantity, $row->minimum_date, $row->maximum_date ); // done
+                                ->checkRangeConstraint( $propertyId, $dataValueString, $row->minimum_quantity, $row->maximum_quantity, $row->minimum_date, $row->maximum_date );
                             break;
                         case "Diff within range":
                             $result[] = $this->getRangeChecker()
-                                ->checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $row->property, $row->minimum_quantity, $row->maximum_quantity, $row->minimum_date, $row->maximum_date ); // done
+                                ->checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $row->property, $row->minimum_quantity, $row->maximum_quantity, $row->minimum_date, $row->maximum_date );
                             break;
 
                         // Type Checkers
                         case "Type":
                             $result[] = $this->getTypeChecker()
-                                ->checkTypeConstraint( $propertyId, $dataValueString, $this->statements, $classArray, $row->relation ); // done
+                                ->checkTypeConstraint( $propertyId, $dataValueString, $this->statements, $classArray, $row->relation );
                             break;
                         case "Value type":
                             $result[] = $this->getTypeChecker()
-                                ->checkValueTypeConstraint( $propertyId, $dataValueString, $classArray, $row->relation ); // done
+                                ->checkValueTypeConstraint( $propertyId, $dataValueString, $classArray, $row->relation );
                             break;
 
                         // Rest
@@ -196,7 +196,7 @@ class ConstraintChecker {
                             break;
                         case "One of":
                             $result[] = $this->getOneOfChecker()
-                                ->checkOneOfConstraint( $propertyId, $dataValueString, $itemArray ); // done
+                                ->checkOneOfConstraint( $propertyId, $dataValueString, $itemArray );
                             break;
 
                         // error case, SHOULD NOT BE INVOKED
