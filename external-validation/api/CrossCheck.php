@@ -143,17 +143,22 @@ class CrossCheck extends ApiWikibase
             // Get entity
             $entity = $this->entityLookup->getEntity( $this->entityIdParser->parse( $entityId ) );
 
-            // Get statements of claims
-            $statements = new StatementList();
-            foreach( $entity->getStatements() as $statement ) {
-                if( in_array( $statement->getClaim()->getGuid(), $claimGuidsPerEntity) ) {
-                    $statements->addStatement( $statement );
+            if( $entity ) {
+                // Get statements of claims
+                $statements = new StatementList();
+                foreach ( $entity->getStatements() as $statement ) {
+                    if ( in_array( $statement->getClaim()->getGuid(), $claimGuidsPerEntity ) ) {
+                        $statements->addStatement( $statement );
+                    }
                 }
-            }
 
-            // Run cross-check for filtered statements
-            $crossChecker = new CrossChecker();
-            $resultLists[ (string)$entityId ] = $crossChecker->crossCheckStatements( $entity, $statements );
+                // Run cross-check for filtered statements
+                $crossChecker = new CrossChecker();
+                $resultLists[ (string)$entityId ] = $crossChecker->crossCheckStatements( $entity, $statements );
+            }
+            else {
+                $resultLists[ (string)$entityId ] = null;
+            }
         }
 
         return $resultLists;
@@ -241,7 +246,7 @@ class CrossCheck extends ApiWikibase
             'action=wdqcrosscheck&entities=Q76|Q567' => 'apihelp-wdqcrosscheck-examples-2',
             'action=wdqcrosscheck&entities=Q76|Q567&properties=P19' => 'apihelp-wdqcrosscheck-examples-3',
             'action=wdqcrosscheck&entities=Q76|Q567&properties=P19|P31' => 'apihelp-wdqcrosscheck-examples-4',
-            'action=wdqcrosscheck&claim=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' => 'apihelp-wdqcrosscheck-examples-5'
+            'action=wdqcrosscheck&claims=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' => 'apihelp-wdqcrosscheck-examples-5'
         );
     }
 }
