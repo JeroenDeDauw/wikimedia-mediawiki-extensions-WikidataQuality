@@ -3,17 +3,16 @@
 namespace WikidataQuality\ExternalValidation\Test\Comparer;
 
 
-use DataValues\DecimalValue;
 use DataValues\QuantityValue;
-use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\QuantityValueComparer;
+use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
 
 
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\QuantityValueComparer
  *
- * @uses WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
- * @uses WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
  *
  * @group WikidataQuality
  * @group WikidataQuality\ExternalValidation
@@ -21,57 +20,76 @@ use WikidataQuality\ExternalValidation\CrossCheck\Comparer\QuantityValueComparer
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class QuantityValueComparerTest extends \PHPUnit_Framework_TestCase {
-    private $testDumpMetaInformation;
-    private $testAmount;
-    private $testUpperBound;
-    private $testLowerBound;
-    private $testDataValue;
+class QuantityValueComparerTest extends \PHPUnit_Framework_TestCase
+{
+    /**
+     * @covers       WikidataQuality\ExternalValidation\CrossCheck\Comparer\QuantityValueComparer::execute
+     * @dataProvider executeDataProvider
+     */
+    public function testExecute( $dumpMetaInformation, $dataValue, $externalValues, $expectedResult, $expectedLocalValues )
+    {
+        $comparer = new QuantityValueComparer( $dumpMetaInformation, $dataValue, $externalValues );
 
-
-    protected function setUp() {
-        parent::setUp();
-        $this->testDumpMetaInformation = new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' );
-        $this->testAmount = new DecimalValue( 42 );
-        $this->testUpperBound = new DecimalValue( 44 );
-        $this->testLowerBound = new DecimalValue( 40 );
-        $this->testDataValue = new QuantityValue( $this->testAmount, '1', $this->testUpperBound, $this->testLowerBound );
-    }
-
-    protected function tearDown() {
-        unset( $this->testDumpMetaInformation, $this->testDataValue );
-        parent::tearDown();
+        $this->assertEquals( $expectedResult, $comparer->execute() );
+        if ( is_array( $expectedLocalValues ) ) {
+            $this->assertSame(
+                array_diff( $expectedLocalValues, $comparer->getLocalValues() ),
+                array_diff( $comparer->getLocalValues(), $expectedLocalValues )
+            );
+        } else {
+            $this->assertEquals( $expectedLocalValues, $comparer->getLocalValues() );
+        }
     }
 
     /**
-     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\QuantityValueComparer::execute
+     * Test cases for testExecute
+     * @return array
      */
-    public function testExecuteOne() {
-        $comparer = new QuantityValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '42' ) );
-        $this->assertTrue( $comparer->execute() );
-    }
-
-    /**
-     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\QuantityValueComparer::execute
-     */
-    public function testExecuteTwo() {
-        $comparer = new QuantityValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '41' ) );
-        $this->assertTrue( $comparer->execute() );
-    }
-
-    /**
-     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\QuantityValueComparer::execute
-     */
-    public function testExecuteThree() {
-        $comparer = new QuantityValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '44' ) );
-        $this->assertTrue( $comparer->execute() );
-    }
-
-    /**
-     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\QuantityValueComparer::execute
-     */
-    public function testExecuteFour() {
-        $comparer = new QuantityValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '23' ) );
-        $this->assertFalse( $comparer->execute() );
+    public function executeDataProvider()
+    {
+        return array(
+            array(
+                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
+                QuantityValue::newFromNumber( 42, '1', 44, 40 ),
+                array( '42' ),
+                true,
+                array( '42±2' )
+            ),
+            array(
+                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
+                QuantityValue::newFromNumber( 42, '1', 44, 40 ),
+                array( '41' ),
+                true,
+                array( '42±2' )
+            ),
+            array(
+                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
+                QuantityValue::newFromNumber( 42, '1', 44, 40 ),
+                array( '23' ),
+                false,
+                array( '42±2' )
+            ),
+            array(
+                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
+                QuantityValue::newFromNumber( 42, '1' ),
+                array( '42' ),
+                true,
+                array( '42' )
+            ),
+            array(
+                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
+                QuantityValue::newFromNumber( 42, '1' ),
+                array( '44' ),
+                false,
+                array( '42' )
+            ),
+            array(
+                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
+                QuantityValue::newFromNumber( 42, '1', 44, 40 ),
+                null,
+                false,
+                array( '42±2' )
+            )
+        );
     }
 }

@@ -3,9 +3,9 @@
 namespace WikidataQuality\ExternalValidation\CrossCheck\Comparer;
 
 
+use DataValues\DataValue;
 use Doctrine\Instantiator\Exception\InvalidArgumentException;
 use ReflectionClass;
-use DataValues\DataValue;
 
 
 /**
@@ -59,12 +59,11 @@ abstract class DataValueComparer
      * @param $dumpMetaInformation
      * @param DataValue $dataValue - wikibase DataValue
      * @param array $externalValues - external database values
-     * @param $localValues
      */
     public function __construct( $dumpMetaInformation, DataValue $dataValue, $externalValues )
     {
         // Check types of parameters
-        if( $externalValues && !is_array( $externalValues ) ) {
+        if ( $externalValues && !is_array( $externalValues ) ) {
             throw new InvalidArgumentException( '$externalValues must be null or array.' );
         }
 
@@ -86,7 +85,8 @@ abstract class DataValueComparer
      * Meta information of the current dump.
      * @return DumpMetaInformation
      */
-    public function getDumpMetaInformation() {
+    public function getDumpMetaInformation()
+    {
         return $this->dumpMetaInformation;
     }
 
@@ -94,7 +94,8 @@ abstract class DataValueComparer
      * Wikibase data value.
      * @return DataValue
      */
-    public function getDataValue() {
+    public function getDataValue()
+    {
         return $this->dataValue;
     }
 
@@ -102,7 +103,8 @@ abstract class DataValueComparer
      * Returns local, probably converted values.
      * @return array
      */
-    public function getLocalValues() {
+    public function getLocalValues()
+    {
         return $this->localValues;
     }
 
@@ -110,7 +112,8 @@ abstract class DataValueComparer
      * Returns external database values.
      * @return array
      */
-    public function getExternalValues() {
+    public function getExternalValues()
+    {
         return $this->externalValues;
     }
 

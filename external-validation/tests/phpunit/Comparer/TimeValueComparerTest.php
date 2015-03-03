@@ -4,15 +4,15 @@ namespace WikidataQuality\ExternalValidation\Test\Comparer;
 
 
 use DataValues\TimeValue;
-use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer;
+use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
 
 
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer
  *
- * @uses WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
- * @uses WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
  *
  * @group WikidataQuality
  * @group WikidataQuality\ExternalValidation
@@ -20,55 +20,69 @@ use WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer;
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class TimeValueComparerTest extends \PHPUnit_Framework_TestCase {
-    private $testDumpMetaInformation;
-    private $testDataValue;
-    private $shownValue;
-
-
-    protected function setUp() {
-        parent::setUp();
-        $this->testDumpMetaInformation = new DumpMetaInformation( 'xml', 'de', 'd.m.Y', 'TestDB' );
-        $this->testDataValue = new TimeValue( '+00000001955-03-11T00:00:00Z', 0, 0, 0, 11, 'gregorian' );
-        $this->shownValue = '11 März 1955';
-    }
-
-    protected function tearDown() {
-        unset( $this->testDumpMetaInformation, $this->testDataValue, $this->shownValue );
-        parent::tearDown();
-    }
-
-
+class TimeValueComparerTest extends \PHPUnit_Framework_TestCase
+{
     /**
-     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer::execute
+     * @covers       WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer::execute
+     * @dataProvider executeDataProvider
      */
-    public function testExecuteOne() {
-        $comparer = new TimeValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '11.03.1955' ) );
-        $this->assertTrue( $comparer->execute() );
+    public function testExecute( $dumpMetaInformation, $dataValue, $externalValues, $expectedResult, $expectedLocalValues )
+    {
+        $comparer = new TimeValueComparer( $dumpMetaInformation, $dataValue, $externalValues );
 
-        $this->assertEquals( array( $this->shownValue ), $comparer->getLocalValues() );
-        $this->assertEquals( array( $this->shownValue ), $comparer->getExternalValues() );
+        $this->assertEquals( $expectedResult, $comparer->execute() );
+        if ( is_array( $expectedLocalValues ) ) {
+            $this->assertSame(
+                array_diff( $expectedLocalValues, $comparer->getLocalValues() ),
+                array_diff( $comparer->getLocalValues(), $expectedLocalValues )
+            );
+        } else {
+            $this->assertEquals( $expectedLocalValues, $comparer->getLocalValues() );
+        }
     }
 
     /**
-     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer::execute
+     * Test cases for testExecute
+     * @return array
      */
-    public function testExecuteTwo() {
-        $comparer = new TimeValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '1955-03-11' ) );
-        $this->assertTrue( $comparer->execute() );
-
-        $this->assertEquals( array( $this->shownValue ), $comparer->getLocalValues() );
-        $this->assertEquals( array( $this->shownValue ), $comparer->getExternalValues() );
-    }
-
-    /**
-     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer::execute
-     */
-    public function testExecuteThree() {
-        $comparer = new TimeValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '11 Mar 1955' ) );
-        $this->assertTrue( $comparer->execute() );
-
-        $this->assertEquals( array( $this->shownValue ), $comparer->getLocalValues() );
-        $this->assertEquals( array( $this->shownValue ), $comparer->getExternalValues() );
+    public function executeDataProvider()
+    {
+        return array(
+            array(
+                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                new TimeValue( '+0000000000001955-03-11T00:00:00Z', 0, 0, 0, 11, 'http://www.wikidata.org/entity/Q1985727' ),
+                array( '11.03.1955' ),
+                true,
+                array( '11 March 1955' )
+            ),
+            array(
+                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                new TimeValue( '+0000000000001955-03-11T00:00:00Z', 0, 0, 0, 11, 'http://www.wikidata.org/entity/Q1985727' ),
+                array( '1955-03-11' ),
+                true,
+                array( '11 March 1955' )
+            ),
+            array(
+                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                new TimeValue( '+0000000000001955-03-11T00:00:00Z', 0, 0, 0, 11, 'http://www.wikidata.org/entity/Q1985727' ),
+                array( '1991-05-23' ),
+                false,
+                array( '11 March 1955' )
+            ),
+            array(
+                new DumpMetaInformation( 'json', 'de', 'Y-m-d', 'TestDB' ),
+                new TimeValue( '+0000000000002015-03-11T00:00:00Z', 0, 0, 0, 9, 'http://www.wikidata.org/entity/Q1985727' ),
+                array( '2015' ),
+                true,
+                array( '2015' ),
+            ),
+            array(
+                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                new TimeValue( '+0000000000001955-03-11T00:00:00Z', 0, 0, 0, 11, 'http://www.wikidata.org/entity/Q1985727' ),
+                null,
+                false,
+                array( '11 March 1955' )
+            )
+        );
     }
 }

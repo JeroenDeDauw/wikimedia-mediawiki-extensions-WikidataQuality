@@ -4,15 +4,15 @@ namespace WikidataQuality\ExternalValidation\Test\Comparer;
 
 
 use DataValues\StringValue;
-use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer;
+use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
 
 
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer
  *
- * @uses WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
- * @uses WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
  *
  * @group WikidataQuality
  * @group WikidataQuality\ExternalValidation
@@ -20,50 +20,62 @@ use WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer;
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class StringValueComparerTest extends \PHPUnit_Framework_TestCase {
-    private $testDumpMetaInformation;
-    private $testDataValue;
-
-
-    protected function setUp() {
-        parent::setUp();
-        $this->testDumpMetaInformation = new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' );
-        $this->testDataValue = new StringValue( 'foo' );
-    }
-
-    protected function tearDown() {
-        unset( $this->testDumpMetaInformation, $this->testDataValue );
-        parent::tearDown();
-    }
-
-
+class StringValueComparerTest extends \PHPUnit_Framework_TestCase
+{
     /**
-     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer::execute
+     * @covers       WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer::execute
+     * @dataProvider executeDataProvider
      */
-    public function testExecuteOne() {
-        $comparer = new StringValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( 'foo', 'bar' ) );
-        $this->assertTrue( $comparer->execute() );
+    public function testExecute( $dumpMetaInformation, $dataValue, $externalValues, $expectedResult, $expectedLocalValues )
+    {
+        $comparer = new StringValueComparer( $dumpMetaInformation, $dataValue, $externalValues );
 
-        $this->assertEquals( array( $this->testDataValue->getValue() ), $comparer->getLocalValues() );
+        $this->assertEquals( $expectedResult, $comparer->execute() );
+        if ( is_array( $expectedLocalValues ) ) {
+            $this->assertSame(
+                array_diff( $expectedLocalValues, $comparer->getLocalValues() ),
+                array_diff( $comparer->getLocalValues(), $expectedLocalValues )
+            );
+        } else {
+            $this->assertEquals( $expectedLocalValues, $comparer->getLocalValues() );
+        }
     }
 
     /**
-     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer::execute
+     * Test cases for testExecute
+     * @return array
      */
-    public function testExecuteTwo() {
-        $comparer = new StringValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( 'bar', 'foobar' ) );
-        $this->assertFalse( $comparer->execute() );
-
-        $this->assertEquals( array( $this->testDataValue->getValue() ), $comparer->getLocalValues() );
-    }
-
-    /**
-     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer::execute
-     */
-    public function testExecuteThree() {
-        $comparer = new StringValueComparer( $this->testDumpMetaInformation, $this->testDataValue, null );
-        $this->assertFalse( $comparer->execute() );
-
-        $this->assertEquals( array( $this->testDataValue->getValue() ), $comparer->getLocalValues() );
+    public function executeDataProvider()
+    {
+        return array(
+            array(
+                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                new StringValue( 'foo' ),
+                array( 'foo', 'bar' ),
+                true,
+                array( 'foo' )
+            ),
+            array(
+                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                new StringValue( 'foo' ),
+                array( 'foobar', 'bar' ),
+                false,
+                array( 'foo' )
+            ),
+            array(
+                new DumpMetaInformation( 'json', 'de', 'Y-m-d', 'TestDB' ),
+                new StringValue( 'foobar' ),
+                array( 'foobar', 'bar' ),
+                true,
+                array( 'foobar' )
+            ),
+            array(
+                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                new StringValue( 'foo' ),
+                null,
+                false,
+                array( 'foo' )
+            )
+        );
     }
 }

@@ -1,0 +1,32 @@
+{
+  "id": "Q1",
+  "type": "item",
+  "aliases": {
+    "en": [
+      {
+        "language": "en",
+        "value": "foo"
+      },
+      {
+        "language": "en",
+        "value": "bar"
+      }
+    ],
+    "de": [
+      {
+        "language": "de",
+        "value": "foobar"
+      }
+    ]
+  },
+  "labels": {
+    "en": {
+      "language": "en",
+      "value": "foobar"
+    },
+    "de": {
+      "language": "de",
+      "value": "Fubar"
+    }
+  }
+}

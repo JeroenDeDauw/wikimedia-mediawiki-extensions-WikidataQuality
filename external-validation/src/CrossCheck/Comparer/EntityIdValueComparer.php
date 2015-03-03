@@ -32,7 +32,7 @@ class EntityIdValueComparer extends DataValueComparer
         $this->localValues = $this->getTerms( $entityId, $this->dumpMetaInformation->getLanguage() );
 
         // Compare value
-        if ( $this->localValues && count( array_intersect( $this->localValues, $this->externalValues ) ) > 0 ) {
+        if ( $this->localValues && $this->externalValues && count( array_intersect( $this->localValues, $this->externalValues ) ) > 0 ) {
             return true;
         } else {
             return false;
@@ -47,18 +47,26 @@ class EntityIdValueComparer extends DataValueComparer
      */
     private function getTerms( $entityId, $language )
     {
-        $lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
-        $entity = $lookup->getEntity( $entityId );
+        $entity = $this->getEntityLookup()->getEntity( $entityId );
         if ( $entity ) {
             $aliases = $entity->getAliases( $language );
             $label = $entity->getLabel( $language );
 
             $terms = $aliases;
-            if( $label != false ) {
+            if ( $label != false ) {
                 $terms[ ] = $label;
             }
 
             return $terms;
         }
+    }
+
+    /**
+     * @param $entityId
+     * @return \Wikibase\Lib\Store\EntityLookup|EntityLookup
+     */
+    protected function getEntityLookup()
+    {
+        return WikibaseRepo::getDefaultInstance()->getEntityLookup();
     }
 }

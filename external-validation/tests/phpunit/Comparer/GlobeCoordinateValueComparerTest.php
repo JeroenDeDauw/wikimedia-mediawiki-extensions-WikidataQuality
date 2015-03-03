@@ -5,15 +5,15 @@ namespace WikidataQuality\ExternalValidation\Test\Comparer;
 
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
-use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueComparer;
+use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
 
 
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueComparer
  *
- * @uses WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
- * @uses WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
  *
  * @group WikidataQuality
  * @group WikidataQuality\ExternalValidation
@@ -21,55 +21,62 @@ use WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueC
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class GlobeCoordinateValueComparerTest extends \PHPUnit_Framework_TestCase {
-    private $testDumpMetaInformation;
-    private $testDataValue;
-    private $shownValue;
-
-
-    protected function setUp() {
-        parent::setUp();
-        $this->testDumpMetaInformation = new DumpMetaInformation( 'xml', 'de', 'd.m.Y', 'TestDB' );
-        $this->testDataValue = new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1, null );
-        $this->shownValue = '64° N, 26° E';
-    }
-
-    protected function tearDown() {
-        unset( $this->testDumpMetaInformation, $this->testDataValue, $this->shownValue );
-        parent::tearDown();
-    }
-
-
+class GlobeCoordinateValueComparerTest extends \PHPUnit_Framework_TestCase
+{
     /**
-     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueComparer::execute
+     * @covers       WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueComparer::execute
+     * @dataProvider executeDataProvider
      */
-    public function testExecuteOne() {
-        $comparer = new GlobeCoordinateValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '64.000000 N, 26.000000 E' ) );
-        $this->assertTrue( $comparer->execute() );
+    public function testExecute( $dumpMetaInformation, $dataValue, $externalValues, $expectedResult, $expectedLocalValues )
+    {
+        $comparer = new GlobeCoordinateValueComparer( $dumpMetaInformation, $dataValue, $externalValues );
 
-        $this->assertEquals( array( $this->shownValue ), $comparer->getLocalValues() );
-        $this->assertEquals( array( $this->shownValue ), $comparer->getExternalValues() );
+        $this->assertEquals( $expectedResult, $comparer->execute() );
+        if ( is_array( $expectedLocalValues ) ) {
+            $this->assertSame(
+                array_diff( $expectedLocalValues, $comparer->getLocalValues() ),
+                array_diff( $comparer->getLocalValues(), $expectedLocalValues )
+            );
+        } else {
+            $this->assertEquals( $expectedLocalValues, $comparer->getLocalValues() );
+        }
     }
 
     /**
-     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueComparer::execute
+     * Test cases for testExecute
+     * @return array
      */
-    public function testExecuteTwo() {
-        $comparer = new GlobeCoordinateValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '64 N, 26 E' ) );
-        $this->assertTrue( $comparer->execute() );
-
-        $this->assertEquals( array( $this->shownValue ), $comparer->getLocalValues() );
-        $this->assertEquals( array( $this->shownValue ), $comparer->getExternalValues() );
-    }
-
-    /**
-     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueComparer::execute
-     */
-    public function testExecuteThree() {
-        $comparer = new GlobeCoordinateValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( '64.000001 N, 26.000010 E' ) );
-        $this->assertFalse( $comparer->execute() );
-
-        $this->assertEquals( array( $this->shownValue ), $comparer->getLocalValues() );
-        $this->assertNotEquals( array( $this->shownValue ), $comparer->getExternalValues() );
+    public function executeDataProvider()
+    {
+        return array(
+            array(
+                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
+                new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1, null ),
+                array( '64.000000 N, 26.000000 E' ),
+                true,
+                array( '64, 26' )
+            ),
+            array(
+                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
+                new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1, null ),
+                array( '64 N, 26 E' ),
+                true,
+                array( '64, 26' )
+            ),
+            array(
+                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
+                new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1, null ),
+                array( '64.000001 N, 26.000010 E' ),
+                false,
+                array( '64, 26' )
+            ),
+            array(
+                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
+                new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1, null ),
+                null,
+                false,
+                array( '64, 26' )
+            )
+        );
     }
 }

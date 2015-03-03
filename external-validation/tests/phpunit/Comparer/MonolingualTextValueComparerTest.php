@@ -4,15 +4,15 @@ namespace WikidataQuality\ExternalValidation\Test\Comparer;
 
 
 use DataValues\MonolingualTextValue;
-use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueComparer;
+use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
 
 
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueComparer
  *
- * @uses WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
- * @uses WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
  *
  * @group WikidataQuality
  * @group WikidataQuality\ExternalValidation
@@ -20,50 +20,62 @@ use WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueC
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class MonolingualTextValueComparerTest extends \PHPUnit_Framework_TestCase {
-    private $testDumpMetaInformation;
-    private $testDataValue;
-
-
-    protected function setUp() {
-        parent::setUp();
-        $this->testDumpMetaInformation = new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' );
-        $this->testDataValue = new MonolingualTextValue( 'en', 'foo' );
-    }
-
-    protected function tearDown() {
-        unset( $this->testDumpMetaInformation, $this->testDataValue );
-        parent::tearDown();
-    }
-
-
+class MonolingualTextValueComparerTest extends \PHPUnit_Framework_TestCase
+{
     /**
-     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueComparer::execute()
+     * @covers       WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueComparer::execute
+     * @dataProvider executeDataProvider
      */
-    public function testExecuteOne() {
-        $comparer = new MonolingualTextValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( 'foo', 'bar' ) );
-        $this->assertTrue( $comparer->execute() );
+    public function testExecute( $dumpMetaInformation, $dataValue, $externalValues, $expectedResult, $expectedLocalValues )
+    {
+        $comparer = new MonolingualTextValueComparer( $dumpMetaInformation, $dataValue, $externalValues );
 
-        $this->assertEquals( array( $this->testDataValue->getText() ), $comparer->getLocalValues() );
+        $this->assertEquals( $expectedResult, $comparer->execute() );
+        if ( is_array( $expectedLocalValues ) ) {
+            $this->assertSame(
+                array_diff( $expectedLocalValues, $comparer->getLocalValues() ),
+                array_diff( $comparer->getLocalValues(), $expectedLocalValues )
+            );
+        } else {
+            $this->assertEquals( $expectedLocalValues, $comparer->getLocalValues() );
+        }
     }
 
     /**
-     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueComparer::execute()
+     * Test cases for testExecute
+     * @return array
      */
-    public function testExecuteTwo() {
-        $comparer = new MonolingualTextValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( 'bar', 'foobar' ) );
-        $this->assertFalse( $comparer->execute() );
-
-        $this->assertEquals( array( $this->testDataValue->getText() ), $comparer->getLocalValues() );
-    }
-
-    /**
-     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueComparer::execute()
-     */
-    public function testExecuteThree() {
-        $comparer = new MonolingualTextValueComparer( $this->testDumpMetaInformation, $this->testDataValue, null );
-        $this->assertFalse( $comparer->execute() );
-
-        $this->assertEquals( array( $this->testDataValue->getText() ), $comparer->getLocalValues() );
+    public function executeDataProvider()
+    {
+        return array(
+            array(
+                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                new MonolingualTextValue( 'en', 'foo' ),
+                array( 'foo', 'bar' ),
+                true,
+                array( 'foo' )
+            ),
+            array(
+                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                new MonolingualTextValue( 'en', 'foo' ),
+                array( 'foobar', 'bar' ),
+                false,
+                array( 'foo' )
+            ),
+            array(
+                new DumpMetaInformation( 'json', 'de', 'Y-m-d', 'TestDB' ),
+                new MonolingualTextValue( 'en', 'foo' ),
+                array( 'foo', 'bar' ),
+                true,
+                array( 'foo' )
+            ),
+            array(
+                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                new MonolingualTextValue( 'en', 'foo' ),
+                null,
+                false,
+                array( 'foo' )
+            )
+        );
     }
 }
