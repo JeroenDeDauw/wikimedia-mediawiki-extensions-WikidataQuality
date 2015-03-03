@@ -21,6 +21,7 @@ use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
  * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
  *
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\MultilingualTextValueComparer
  *
  * @group WikidataQuality
  * @group WikidataQuality\ExternalValidation
