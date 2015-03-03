@@ -1,6 +1,6 @@
 <?php
 
-namespace WikidataQuality\ExternalValidation\Test\Comparer;
+namespace WikidataQuality\ExternalValidation\Tests\Comparer;
 
 
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -21,27 +21,8 @@ use WikidataQuality\Tests\Helper\JsonFileEntityLookup;
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class EntityIdValueComparerTest extends \PHPUnit_Framework_TestCase
+class EntityIdValueComparerTest extends DataValueComparerTestBase
 {
-    /**
-     * @covers       WikidataQuality\ExternalValidation\CrossCheck\Comparer\EntityIdValueComparer::execute
-     * @dataProvider executeDataProvider
-     */
-    public function testExecute( $dumpMetaInformation, $dataValue, $externalValues, $expectedResult, $expectedLocalValues )
-    {
-        $comparer = $this->createEntityIdValueComparerMock( $dumpMetaInformation, $dataValue, $externalValues );
-
-        $this->assertEquals( $expectedResult, $comparer->execute() );
-        if ( is_array( $expectedLocalValues ) ) {
-            $this->assertSame(
-                array_diff( $expectedLocalValues, $comparer->getLocalValues() ),
-                array_diff( $comparer->getLocalValues(), $expectedLocalValues )
-            );
-        } else {
-            $this->assertEquals( $expectedLocalValues, $comparer->getLocalValues() );
-        }
-    }
-
     /**
      * Test cases for testExecute
      * @return array
@@ -95,14 +76,7 @@ class EntityIdValueComparerTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    /**
-     * Returns EntityIdValueComparer mock with given arguments
-     * @param $dumpMetaInformation
-     * @param $dataValue
-     * @param $externalValues
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    private function createEntityIdValueComparerMock( $dumpMetaInformation, $dataValue, $externalValues )
+    protected function createComparer( $dumpMetaInformation, $dataValue, $externalValues )
     {
         $mock = $this->getMockBuilder( 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\EntityIdValueComparer' )
             ->setMethods( array( 'getEntityLookup' ) )

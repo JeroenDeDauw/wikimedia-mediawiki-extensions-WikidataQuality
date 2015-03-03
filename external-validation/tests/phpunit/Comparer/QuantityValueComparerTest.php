@@ -1,6 +1,6 @@
 <?php
 
-namespace WikidataQuality\ExternalValidation\Test\Comparer;
+namespace WikidataQuality\ExternalValidation\Tests\Comparer;
 
 
 use DataValues\QuantityValue;
@@ -20,27 +20,8 @@ use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class QuantityValueComparerTest extends \PHPUnit_Framework_TestCase
+class QuantityValueComparerTest extends DataValueComparerTestBase
 {
-    /**
-     * @covers       WikidataQuality\ExternalValidation\CrossCheck\Comparer\QuantityValueComparer::execute
-     * @dataProvider executeDataProvider
-     */
-    public function testExecute( $dumpMetaInformation, $dataValue, $externalValues, $expectedResult, $expectedLocalValues )
-    {
-        $comparer = new QuantityValueComparer( $dumpMetaInformation, $dataValue, $externalValues );
-
-        $this->assertEquals( $expectedResult, $comparer->execute() );
-        if ( is_array( $expectedLocalValues ) ) {
-            $this->assertSame(
-                array_diff( $expectedLocalValues, $comparer->getLocalValues() ),
-                array_diff( $comparer->getLocalValues(), $expectedLocalValues )
-            );
-        } else {
-            $this->assertEquals( $expectedLocalValues, $comparer->getLocalValues() );
-        }
-    }
-
     /**
      * Test cases for testExecute
      * @return array
@@ -91,5 +72,10 @@ class QuantityValueComparerTest extends \PHPUnit_Framework_TestCase
                 array( '42±2' )
             )
         );
+    }
+
+    protected function createComparer( $dumpMetaInformation, $dataValue, $externalValues )
+    {
+        return new QuantityValueComparer( $dumpMetaInformation, $dataValue, $externalValues );
     }
 }

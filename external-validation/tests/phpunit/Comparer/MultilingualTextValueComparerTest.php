@@ -1,6 +1,6 @@
 <?php
 
-namespace WikidataQuality\ExternalValidation\Test\Comparer;
+namespace WikidataQuality\ExternalValidation\Tests\Comparer;
 
 
 use DataValues\MonolingualTextValue;
@@ -14,6 +14,8 @@ use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
  *
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueComparer
+
  *
  * @group WikidataQuality
  * @group WikidataQuality\ExternalValidation
@@ -21,15 +23,14 @@ use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class MultilingualTextValueComparerTest extends \PHPUnit_Framework_TestCase
+class MultilingualTextValueComparerTest extends DataValueComparerTestBase
 {
     /**
-     * @covers       WikidataQuality\ExternalValidation\CrossCheck\Comparer\MultilingualTextValueComparer::__construct
      * @dataProvider constructDataProvider
      */
     public function testConstruct( $dumpMetaInformation, $dataValue, $externalValues, $expectedDataValue )
     {
-        $comparer = new MultilingualTextValueComparer( $dumpMetaInformation, $dataValue, $externalValues );
+        $comparer = $this->createComparer( $dumpMetaInformation, $dataValue, $externalValues );
 
         $this->assertEquals( $dumpMetaInformation, $comparer->getDumpMetaInformation() );
         $this->assertEquals( $expectedDataValue, $comparer->getDataValue() );
@@ -56,26 +57,6 @@ class MultilingualTextValueComparerTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-
-    /**
-     * @covers       WikidataQuality\ExternalValidation\CrossCheck\Comparer\MultilingualTextValueComparer::execute
-     * @uses         WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueComparer
-     * @dataProvider executeDataProvider
-     */
-    public function testExecute( $dumpMetaInformation, $dataValue, $externalValues, $expectedResult, $expectedLocalValues )
-    {
-        $comparer = new MultilingualTextValueComparer( $dumpMetaInformation, $dataValue, $externalValues );
-
-        $this->assertEquals( $expectedResult, $comparer->execute() );
-        if ( is_array( $expectedLocalValues ) ) {
-            $this->assertSame(
-                array_diff( $expectedLocalValues, $comparer->getLocalValues() ),
-                array_diff( $comparer->getLocalValues(), $expectedLocalValues )
-            );
-        } else {
-            $this->assertEquals( $expectedLocalValues, $comparer->getLocalValues() );
-        }
-    }
 
     /**
      * Test cases for testExecute
@@ -120,5 +101,10 @@ class MultilingualTextValueComparerTest extends \PHPUnit_Framework_TestCase
                 array( 'foo' )
             )
         );
+    }
+
+    protected function createComparer( $dumpMetaInformation, $dataValue, $externalValues )
+    {
+        return new MultilingualTextValueComparer( $dumpMetaInformation, $dataValue, $externalValues );
     }
 }

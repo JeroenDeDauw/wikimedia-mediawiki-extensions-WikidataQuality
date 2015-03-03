@@ -1,6 +1,6 @@
 <?php
 
-namespace WikidataQuality\ExternalValidation\Test\Comparer;
+namespace WikidataQuality\ExternalValidation\Tests\Comparer;
 
 
 use DataValues\TimeValue;
@@ -20,27 +20,8 @@ use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class TimeValueComparerTest extends \PHPUnit_Framework_TestCase
+class TimeValueComparerTest extends DataValueComparerTestBase
 {
-    /**
-     * @covers       WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer::execute
-     * @dataProvider executeDataProvider
-     */
-    public function testExecute( $dumpMetaInformation, $dataValue, $externalValues, $expectedResult, $expectedLocalValues )
-    {
-        $comparer = new TimeValueComparer( $dumpMetaInformation, $dataValue, $externalValues );
-
-        $this->assertEquals( $expectedResult, $comparer->execute() );
-        if ( is_array( $expectedLocalValues ) ) {
-            $this->assertSame(
-                array_diff( $expectedLocalValues, $comparer->getLocalValues() ),
-                array_diff( $comparer->getLocalValues(), $expectedLocalValues )
-            );
-        } else {
-            $this->assertEquals( $expectedLocalValues, $comparer->getLocalValues() );
-        }
-    }
-
     /**
      * Test cases for testExecute
      * @return array
@@ -84,5 +65,10 @@ class TimeValueComparerTest extends \PHPUnit_Framework_TestCase
                 array( '11 March 1955' )
             )
         );
+    }
+
+    protected function createComparer( $dumpMetaInformation, $dataValue, $externalValues )
+    {
+        return new TimeValueComparer( $dumpMetaInformation, $dataValue, $externalValues );
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace WikidataQuality\ExternalValidation\Test\Comparer;
+namespace WikidataQuality\ExternalValidation\Tests\Comparer;
 
 
 use DataValues\DecimalValue;
@@ -51,11 +51,6 @@ class DataValueComparerTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers       WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer::__construct
-     * @covers       WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer::getDumpMetaInformation
-     * @covers       WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer::getDataValue
-     * @covers       WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer::getLocalValues
-     * @covers       WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer::getExternalValues
      * @dataProvider constructValidArgumentsDataProvider
      */
     public function testConstructValidArguments( $dumpMetaInformation, $dataValue, $externalValues )
@@ -84,9 +79,6 @@ class DataValueComparerTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    /**
-     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer::__construct
-     */
     public function testConstructInvalidArguments()
     {
         $this->setExpectedException( 'InvalidArgumentException' );
@@ -96,7 +88,6 @@ class DataValueComparerTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers       WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer::getComparer
      * @dataProvider getComparerDataProvider
      */
     public function testComparer( $dataValue, $comparerClass )
