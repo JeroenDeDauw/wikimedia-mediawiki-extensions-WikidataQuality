@@ -20,24 +20,28 @@ class MultilingualTextValueComparer extends MonolingualTextValueComparer
      */
     public static $acceptedDataValues = array( 'DataValues\MultilingualTextValue' );
 
+    /**
+     * @var MonolingualTextValueComparer
+     */
+    private $monolingualTextValueComparer;
+
 
     /**
-     * @param MultilingualTextValue $dataValue
+     * @param DumpMetaInformation $dumpMetaInformation
+     * @param MultilingualTextValue $localValue
      * @param array $externalValues
-     * @param array $localValues
      */
-    public function __construct( $dumpMetaInformation, MultilingualTextValue $dataValue, $externalValues )
+    public function __construct( $dumpMetaInformation, MultilingualTextValue $localValue, $externalValues )
     {
-        foreach ( $dataValue->getTexts() as $text ) {
-            if ( $text->getLanguageCode() == $dumpMetaInformation->getLanguage() ) {
-                parent::__construct( $dumpMetaInformation, $text, $externalValues );
+        parent::__construct( $dumpMetaInformation, $localValue, $externalValues );
+
+        // Check, if multilingual text value contains text in language of dump
+        foreach ( $localValue->getTexts() as $textValue ) {
+            if ( $textValue->getLanguageCode() == $dumpMetaInformation->getLanguage() ) {
+                $this->monolingualTextValueComparer = new MonolingualTextValueComparer( $dumpMetaInformation, $textValue, $externalValues );
                 return;
             }
         }
-
-        // If multilingual text does not contain text in language of dump, initialize variables manually
-        $this->dumpMetaInformation = $dumpMetaInformation;
-        $this->externalValues = $externalValues;
     }
 
 
@@ -47,13 +51,15 @@ class MultilingualTextValueComparer extends MonolingualTextValueComparer
      */
     public function execute()
     {
-        if ( $this->dataValue ) {
-            // Multilingual text contains text in language of dump
-            return parent::execute();
-        } else {
-            // Multilingual text does not contain text in language of dump
-            $this->localValues = array();
-            return false;
+        // Parse external values
+        $this->parseExternalValues();
+
+        // Compare external values
+        $result = false;
+        if ( $this->monolingualTextValueComparer ) {
+            $result = $this->monolingualTextValueComparer->execute();
         }
+
+        return $result;
     }
 }

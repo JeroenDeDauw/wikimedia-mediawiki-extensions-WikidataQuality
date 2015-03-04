@@ -24,14 +24,15 @@ class MonolingualTextValueComparer extends DataValueComparer
      */
     public function execute()
     {
-        // Get monolingual text
-        $this->localValues = array( $this->dataValue->getText() );
-
         // Compare value
-        if ( $this->localValues && $this->externalValues && count( array_intersect( $this->localValues, $this->externalValues ) ) > 0 ) {
-            return true;
-        } else {
-            return false;
+        $result = false;
+        if ( $this->externalValues && in_array( $this->localValue->getText(), $this->externalValues ) ) {
+            $result = true;
         }
+
+        // Parse external values
+        $this->parseExternalValues();
+
+        return $result;
     }
 }

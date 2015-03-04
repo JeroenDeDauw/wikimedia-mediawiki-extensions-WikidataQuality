@@ -24,14 +24,15 @@ class StringValueComparer extends DataValueComparer
      */
     public function execute()
     {
-        // Get monolingual text
-        $this->localValues = array( $this->dataValue->getValue() );
-
         // Compare value
-        if ( $this->localValues && $this->externalValues && count( array_intersect( $this->localValues, $this->externalValues ) ) > 0 ) {
-            return true;
-        } else {
-            return false;
+        $result = false;
+        if ( $this->externalValues && in_array( $this->localValue->getValue(), $this->externalValues ) ) {
+            $result = true;
         }
+
+        // Parse external values
+        $this->parseExternalValues();
+
+        return $result;
     }
 }

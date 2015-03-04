@@ -2,17 +2,17 @@
 
 namespace WikidataQuality\ConstraintReport\Specials;
 
-use SpecialPage;
 use Html;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use WikidataQuality\ConstraintReport\ConstraintCheck\ConstraintChecker;
 use Wikibase\Repo\WikibaseRepo;
+use WikidataQuality\ConstraintReport\ConstraintCheck\ConstraintChecker;
+use WikidataQuality\Specials\SpecialWikidataQualityPage;
 
 
-class SpecialWikidataConstraintReport extends SpecialPage {
+class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
 
-    private $entityLookup;
+    protected $entityLookup;
     private $output = '';
 
     function __construct() {
@@ -120,11 +120,11 @@ class SpecialWikidataConstraintReport extends SpecialPage {
         }
     }
 
+
     private function addOutputRow( $result ) {
-        $lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
         $this->output .=
             "|-\n"
-            . "| " . $result->getPropertyId() . " (" . $lookup->getEntity( $result->getPropertyId() )->getLabel('en') . ") "
+            . "| " . $result->getPropertyId() . " (" . $this->entityLookup->getEntity($result->getPropertyId())->getLabel('en') . ") "
             . "|| " . $result->getDataValue() . " "
             . "|| " . $result->getConstraintName() . " "
             . "|| <nowiki>" . $this->limitOutput( $result->getParameter() ) . "</nowiki> ";

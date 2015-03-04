@@ -2,11 +2,14 @@
 
 namespace WikidataQuality\ExternalValidation\Test\MappingEvaluator;
 
-use WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\MappingEvaluator;
+
 use WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\XPathEvaluator;
+
 
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\XPathEvaluator
+ *
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\MappingEvaluator
  *
  * @group WikidataQuality
  * @group WikidataQuality\ExternalValidation
@@ -16,39 +19,73 @@ use WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\XPathEvaluato
  */
 class XPathEvaluatorTest extends \PHPUnit_Framework_TestCase
 {
-    private $testData;
-    private $mapping;
-    private $evaluator;
-
-    protected function setUp() {
-        parent::setUp();
-        $this->testData = file_get_contents(__DIR__ . '/XMLData.xml');
-        require __DIR__ . '/mapping.inc.php';
-        $this->mapping = $mapping;
-        $this->evaluator = new XPathEvaluator( $this->testData );
-    }
-
-    protected function tearDown() {
-        unset( $this->evaluator, $this->mapping, $this->testData );
-        parent::tearDown();
-    }
-
-    public function testEvaluate()
+    /**
+     * @dataProvider constructDataProvider
+     */
+    public function testConstruct( $externalData, $expectedException )
     {
-        $nodeSelector = $this->mapping[ 'testcase one' ][ 'nodeSelector' ];
-        $this->assertEquals( array('success'), $this->evaluator->evaluate( $nodeSelector ), 'should find path' );
+        $this->setExpectedException( $expectedException );
 
-        $nodeSelector = $this->mapping[ 'testcase two' ][ 'nodeSelector' ];
-        $valueFormatter = $this->mapping[ 'testcase two' ][ 'valueFormatter' ];
-        $this->assertEquals( array('success'), $this->evaluator->evaluate( $nodeSelector, $valueFormatter ), 'should format string' );
+        $evaluator = new XPathEvaluator( $externalData );
 
-        $nodeSelector = $this->mapping[ 'testcase three' ][ 'nodeSelector' ];
-        $this->assertEquals( array(), $this->evaluator->evaluate( $nodeSelector, $valueFormatter ), 'should find nothing' );
+        $this->assertEquals( $externalData, $evaluator->getExternalData() );
     }
 
-    public function testGetEvaluator()
+    /**
+     * Test cases for testConstruct
+     * @return array
+     */
+    public function constructDataProvider()
     {
-        $evaluator = MappingEvaluator::getEvaluator( 'xml', $this->testData );
-        $this->assertEquals( 'WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\XPathEvaluator', get_class( $evaluator ), 'should get XPathEvaluator' );
+        return array(
+            array(
+                '<foobar />',
+                null
+            ),
+            array(
+                'foobar',
+                'InvalidArgumentException'
+            )
+        );
+    }
+
+
+    /**
+     * @dataProvider evaluateDataProvider
+     */
+    public function testEvaluate( $externalData, $nodeSelector, $valueFormatter, $expectedResult )
+    {
+        $evaluator = new XPathEvaluator( $externalData );
+        $this->assertEquals( $expectedResult, $evaluator->evaluate( $nodeSelector, $valueFormatter ) );
+    }
+
+    /**
+     * Test cases for testEvaluate
+     * @return array
+     */
+    public function evaluateDataProvider()
+    {
+        $testData = file_get_contents( __DIR__ . '/testdata/data.xml' );
+
+        return array(
+            array(
+                $testData,
+                '/test/testcase[@case="one" and @result="true"]',
+                null,
+                array( 'success' )
+            ),
+            array(
+                $testData,
+                '/test/testcase[@case="two"]/result',
+                'concat(substring-after(./text(), "."), substring-before(./text(), "."))',
+                array( 'success' )
+            ),
+            array(
+                $testData,
+                '/test/testcase[@case="tree"]/result',
+                null,
+                array()
+            )
+        );
     }
 }

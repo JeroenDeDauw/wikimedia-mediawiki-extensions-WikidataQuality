@@ -3,41 +3,43 @@
 namespace WikidataQuality\ExternalValidation\CrossCheck\Comparer;
 
 
-use ValueParsers\ParserOptions;
-use ValueParsers\QuantityParser;
-use ValueParsers\ValueParser;
+use DataValues\Geo\Formatters\GlobeCoordinateFormatter;
+use DataValues\Geo\Parsers\GlobeCoordinateParser;
 
 
 /**
- * Class QuantityValueComparer
+ * Class GlobeCoordinateComparer
  * @package WikidataQuality\ExternalValidation\CrossCheck\Comparer
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class QuantityValueComparer extends DataValueComparer
+class GlobeCoordinateValueComparer extends DataValueComparer
 {
     /**
      * Array of DataValue classes that are supported by the current comparer.
      * @var array
      */
-    public static $acceptedDataValues = array( 'DataValues\QuantityValue' );
+    public static $acceptedDataValues = array( 'DataValues\Geo\Values\GlobeCoordinateValue' );
 
 
     /**
-     * Starts the comparison of given QuantityValue and values of external database.
+     * Starts the comparison of given GlobeCoordinateValue and values of external database.
      * @return bool - result of the comparison.
      */
     public function execute()
     {
+        // Format local value
+        $globeFormatter = new GlobeCoordinateFormatter();
+        $formattedDataValue = $globeFormatter->format( $this->localValue );
+
         // Parse external values
         $this->parseExternalValues();
 
         // Compare each external value with local value
         if ( $this->externalValues ) {
             foreach ( $this->externalValues as $externalValue ) {
-                if ( $externalValue->getLowerBound() <= $this->localValue->getUpperBound() &&
-                    $externalValue->getUpperBound() >= $this->localValue->getLowerBound()
-                ) {
+                $formattedExternalValue = $globeFormatter->format( $externalValue );
+                if ( $formattedDataValue == $formattedExternalValue ) {
                     return true;
                 }
             }
@@ -52,9 +54,6 @@ class QuantityValueComparer extends DataValueComparer
      */
     protected function getExternalValueParser()
     {
-        $parserOptions = new ParserOptions();
-        $parserOptions->setOption( ValueParser::OPT_LANG, $this->dumpMetaInformation->getLanguage() );
-
-        return new QuantityParser( $parserOptions );
+        return new GlobeCoordinateParser();
     }
 }

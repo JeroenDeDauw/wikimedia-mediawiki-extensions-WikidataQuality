@@ -10,7 +10,8 @@ use ReflectionClass;
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-abstract class MappingEvaluator {
+abstract class MappingEvaluator
+{
     /**
      * Array of registered evaluators
      * @var array
@@ -29,10 +30,20 @@ abstract class MappingEvaluator {
     /**
      * @param $externalData - external data object
      */
-    public function __construct( $externalData ) {
+    public function __construct( $externalData )
+    {
         $this->externalData = $externalData;
     }
 
+
+    /**
+     * Returns the external data object
+     * @return string
+     */
+    public function getExternalData()
+    {
+        return $this->externalData;
+    }
 
     /**
      * Evaluates a given query on external data object
@@ -48,11 +59,12 @@ abstract class MappingEvaluator {
      * @param string $externalData - external data object with that the evaluator should be initialized
      * @return MappingEvaluator
      */
-    public static function getEvaluator( $dataFormat, $externalData ) {
-        foreach( self::$evaluators as $evaluator ) {
+    public static function getEvaluator( $dataFormat, $externalData )
+    {
+        foreach ( self::$evaluators as $evaluator ) {
             $reflector = new ReflectionClass( $evaluator );
             $acceptedDataFormats = $reflector->getStaticPropertyValue( "acceptedDataFormats" );
-            if( in_array( $dataFormat, $acceptedDataFormats ) ) {
+            if ( in_array( $dataFormat, $acceptedDataFormats ) ) {
                 return new $evaluator( $externalData );
             }
         }

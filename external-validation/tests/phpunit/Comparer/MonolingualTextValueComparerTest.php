@@ -1,15 +1,18 @@
 <?php
 
-namespace WikidataQuality\ExternalValidation\Test\Comparer;
+namespace WikidataQuality\ExternalValidation\Tests\Comparer;
 
 
 use DataValues\MonolingualTextValue;
-use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueComparer;
+use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
 
 
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueComparer
+ *
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
  *
  * @group WikidataQuality
  * @group WikidataQuality\ExternalValidation
@@ -17,41 +20,57 @@ use WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueC
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class MonolingualTextValueComparerTest extends \PHPUnit_Framework_TestCase {
-    private $testDumpMetaInformation;
-    private $testDataValue;
-
-
-    protected function setUp() {
-        parent::setUp();
-        $this->testDumpMetaInformation = new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' );
-        $this->testDataValue = new MonolingualTextValue( 'en', 'foo' );
+class MonolingualTextValueComparerTest extends DataValueComparerTestBase
+{
+    /**
+     * Test cases for testExecute
+     * @return array
+     */
+    public function executeDataProvider()
+    {
+        return array(
+            array(
+                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                new MonolingualTextValue( 'en', 'foo' ),
+                array( 'foo', 'bar' ),
+                true,
+                array(
+                    new MonolingualTextValue( 'en', 'foo' ),
+                    new MonolingualTextValue( 'en', 'bar' )
+                )
+            ),
+            array(
+                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                new MonolingualTextValue( 'en', 'foo' ),
+                array( 'foobar', 'bar' ),
+                false,
+                array(
+                    new MonolingualTextValue( 'en', 'foobar' ),
+                    new MonolingualTextValue( 'en', 'bar' )
+                )
+            ),
+            array(
+                new DumpMetaInformation( 'json', 'de', 'Y-m-d', 'TestDB' ),
+                new MonolingualTextValue( 'en', 'foo' ),
+                array( 'foo', 'bar' ),
+                true,
+                array(
+                    new MonolingualTextValue( 'de', 'foo' ),
+                    new MonolingualTextValue( 'de', 'bar' )
+                )
+            ),
+            array(
+                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                new MonolingualTextValue( 'en', 'foo' ),
+                null,
+                false,
+                null
+            )
+        );
     }
 
-    protected function tearDown() {
-        unset( $this->testDumpMetaInformation, $this->testDataValue );
-        parent::tearDown();
-    }
-
-
-    public function testExecuteOne() {
-        $comparer = new MonolingualTextValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( 'foo', 'bar' ) );
-        $this->assertTrue( $comparer->execute() );
-
-        $this->assertEquals( $comparer->getLocalValues(), array( $this->testDataValue->getText() ) );
-    }
-
-    public function testExecuteTwo() {
-        $comparer = new MonolingualTextValueComparer( $this->testDumpMetaInformation, $this->testDataValue, array( 'bar', 'foobar' ) );
-        $this->assertFalse( $comparer->execute() );
-
-        $this->assertEquals( $comparer->getLocalValues(), array( $this->testDataValue->getText() ) );
-    }
-
-    public function testExecuteThree() {
-        $comparer = new MonolingualTextValueComparer( $this->testDumpMetaInformation, $this->testDataValue, null );
-        $this->assertFalse( $comparer->execute() );
-
-        $this->assertEquals( $comparer->getLocalValues(), array( $this->testDataValue->getText() ) );
+    protected function createComparer( $dumpMetaInformation, $localValue, $externalValues )
+    {
+        return new MonolingualTextValueComparer( $dumpMetaInformation, $localValue, $externalValues );
     }
 }

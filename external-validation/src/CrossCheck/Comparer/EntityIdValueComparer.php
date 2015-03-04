@@ -28,15 +28,19 @@ class EntityIdValueComparer extends DataValueComparer
     public function execute()
     {
         // Get terms of the references entity
-        $entityId = $this->dataValue->getEntityId();
-        $this->localValues = $this->getTerms( $entityId, $this->dumpMetaInformation->getLanguage() );
+        $entityId = $this->localValue->getEntityId();
+        $terms = $this->getTerms( $entityId, $this->dumpMetaInformation->getLanguage() );
 
         // Compare value
-        if ( $this->localValues && count( array_intersect( $this->localValues, $this->externalValues ) ) > 0 ) {
-            return true;
-        } else {
-            return false;
+        $result = false;
+        if ( $this->externalValues && $terms && count( array_intersect( $terms, $this->externalValues ) ) > 0 ) {
+            $result = true;
         }
+
+        // Parse external values
+        $this->parseExternalValues();
+
+        return $result;
     }
 
     /**
@@ -47,18 +51,27 @@ class EntityIdValueComparer extends DataValueComparer
      */
     private function getTerms( $entityId, $language )
     {
-        $lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
-        $entity = $lookup->getEntity( $entityId );
+        $entity = $this->getEntityLookup()->getEntity( $entityId );
         if ( $entity ) {
             $aliases = $entity->getAliases( $language );
             $label = $entity->getLabel( $language );
 
             $terms = $aliases;
-            if( $label != false ) {
+            if ( $label != false ) {
                 $terms[ ] = $label;
             }
 
             return $terms;
         }
+    }
+
+    /**
+     * @param $entityId
+     * @return \Wikibase\Lib\Store\EntityLookup|EntityLook
+     * @codeCoverageIgnore
+     */
+    protected function getEntityLookup()
+    {
+        return WikibaseRepo::getDefaultInstance()->getEntityLookup();
     }
 }
