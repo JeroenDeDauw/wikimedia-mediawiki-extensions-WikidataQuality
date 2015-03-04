@@ -106,7 +106,7 @@ class ConstraintChecker {
 
                 foreach( $res as $row ) {
                     if( in_array( $entityId, $this->helper->stringToArray( $row->known_exception ) ) ) {
-                        $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, '\'\'(none)\'\'', 'exception' );
+                        $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, '(none)', 'exception' );
                         continue;
                     }
 
@@ -136,7 +136,7 @@ class ConstraintChecker {
                         // ConnectionCheckers
                         case "Target required claim":
                             $result[] = $this->getConnectionChecker()
-                                ->checkSymmetricConstraint( $propertyId, $dataValueString, $row->property, $itemArray );
+                                ->checkTargetRequiredClaimConstraint( $propertyId, $dataValueString, $row->property, $itemArray );
                             break;
                         case "Symmetric":
                             $result[] = $this->getConnectionChecker()
@@ -201,7 +201,7 @@ class ConstraintChecker {
 
                         // error case, SHOULD NOT BE INVOKED
                         default:
-                            $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, '\'\'(none)\'\'', 'error' );
+                            $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, '(none)', 'error' );
                             break;
                     }
 

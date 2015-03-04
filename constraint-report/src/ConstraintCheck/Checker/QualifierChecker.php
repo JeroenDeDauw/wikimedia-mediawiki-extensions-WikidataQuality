@@ -18,12 +18,12 @@ class QualifierChecker
 
     public function checkQualifierConstraint( $propertyId, $dataValueString )
     {
-        return new CheckResult( $propertyId, $dataValueString, "Qualifier", '\'\'(none)\'\'', "violation" );
+        return new CheckResult( $propertyId, $dataValueString, 'Qualifier', '(none)', 'violation' );
     }
 
     public function checkQualifiersConstraint( $propertyId, $dataValueString, $statement, $propertyArray )
     {
-        $parameterString = $this->helper->limitOutput( 'property: ' . $this->helper->arrayToString( $propertyArray ) );
+        $parameterString = 'property: ' . $this->helper->arrayToString( $propertyArray );
         $status = 'compliance';
 
         foreach( $statement->getQualifiers() as $qualifier ) {
@@ -33,7 +33,7 @@ class QualifierChecker
                 break;
             }
         }
-        return new CheckResult( $propertyId, $dataValueString, "Qualifiers", $parameterString, $status );
+        return new CheckResult( $propertyId, $dataValueString, 'Qualifiers', $parameterString, $status );
     }
 
 }

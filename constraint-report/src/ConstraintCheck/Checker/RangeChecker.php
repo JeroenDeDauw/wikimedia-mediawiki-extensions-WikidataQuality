@@ -2,7 +2,6 @@
 
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 
-use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\DataValueParser;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 
 class RangeChecker {
@@ -24,7 +23,7 @@ class RangeChecker {
             $min = $minimum_date;
             $max = $maximum_date;
         } else {
-            return new CheckResult( $propertyId, $dataValueString, "Range", '\'\'(erroneous min/max)\'\'', 'error' );
+            return new CheckResult( $propertyId, $dataValueString, 'Range', '(erroneous min/max)', 'error' );
         }
 
         if( $dataValueString < $min || $dataValueString > $max ) {
@@ -33,9 +32,9 @@ class RangeChecker {
             $status = 'compliance';
         }
 
-        $parameterString = $this->helper->limitOutput( 'min: ' . $min . ', max: ' . $max );
+        $parameterString = 'min: ' . $min . ', max: ' . $max;
 
-        return new CheckResult($propertyId, $dataValueString, "Range", $parameterString, $status );
+        return new CheckResult($propertyId, $dataValueString, 'Range', $parameterString, $status );
     }
 
 
@@ -47,10 +46,10 @@ class RangeChecker {
             $min = $minimum_date;
             $max = $maximum_date;
         } else {
-            return new CheckResult( $propertyId, $dataValueString, "Diff within range", 'property: ' . $property . ', \'\'(erroneous min/max)\'\'', 'error' );
+            return new CheckResult( $propertyId, $dataValueString, 'Diff within range', 'property: ' . $property . ', (erroneous min/max)', 'error' );
         }
 
-        $parameterString = $this->helper->limitOutput( 'property: ' . $property . ', min: ' . $min . ', max: ' . $max );
+        $parameterString = 'property: ' . $property . ', min: ' . $min . ', max: ' . $max;
 
         foreach( $this->statements as $statement ) {
             if( $property == $statement->getClaim()->getPropertyId() ) {
@@ -70,7 +69,7 @@ class RangeChecker {
                     $status = 'violation';
                 }
 
-                return new CheckResult( $propertyId, $dataValueString, "Diff within range", $parameterString, $status );
+                return new CheckResult( $propertyId, $dataValueString, 'Diff within range', $parameterString, $status );
             }
         }
     }

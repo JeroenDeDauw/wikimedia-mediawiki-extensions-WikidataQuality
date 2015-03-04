@@ -4,6 +4,7 @@ namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 
 use Wikibase\DataModel\Statement\Statement;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
+
 class ValueCountChecker {
 
     /**
@@ -25,7 +26,7 @@ class ValueCountChecker {
             $status = 'compliance';
         }
 
-        return new CheckResult($propertyId, $dataValueString, "Single value", '\'\'(none)\'\'', $status );
+        return new CheckResult($propertyId, $dataValueString, 'Single value', '(none)', $status );
     }
 
     public function checkMultiValueConstraint( $propertyId, $dataValueString ) {
@@ -35,12 +36,12 @@ class ValueCountChecker {
             $status = 'compliance';
         }
 
-        return new CheckResult($propertyId, $dataValueString, "Multi value", '\'\'(none)\'\'', $status );
+        return new CheckResult($propertyId, $dataValueString, 'Multi value', '(none)', $status );
     }
 
     // TODO
     public function checkUniqueValueConstraint( $propertyId, $dataValueString ) {
-        return new CheckResult($propertyId, $dataValueString, "Unique value", '\'\'(none)\'\'', "todo" );
+        return new CheckResult($propertyId, $dataValueString, 'Unique value', '(none)', 'todo' );
     }
 
     private function getPropertyCount( $statements )

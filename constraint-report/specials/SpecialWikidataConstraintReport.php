@@ -6,6 +6,7 @@ use SpecialPage;
 use Html;
 use WikidataQuality\ConstraintReport\ConstraintCheck\ConstraintChecker;
 use Wikibase\Repo\WikibaseRepo;
+use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
 
 
 class SpecialWikidataConstraintReport extends SpecialPage {
@@ -110,7 +111,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
             . "| " . $result->getPropertyId() . " (" . $lookup->getEntity( $result->getPropertyId() )->getLabel('en') . ") "
             . "|| " . $result->getDataValue() . " "
             . "|| " . $result->getConstraintName() . " "
-            . "|| " . $result->getParameter() . " ";
+            . "|| <nowiki>" . $this->limitOutput( $result->getParameter() ) . "</nowiki> ";
 
         switch( $result->getStatus() ) {
             case 'compliance':  // constraint has been checked, result is positive
@@ -131,6 +132,16 @@ class SpecialWikidataConstraintReport extends SpecialPage {
                 $color = '#0D0DE0';
         }
         $this->output .= "|| <div style=\"color:" . $color . "\">" . $result->getStatus() . "</div>\n";
+    }
+
+    private $showMax = 50;
+
+    private function limitOutput( $string ) {
+        if( strlen($string) <= $this->showMax ) {
+            return $string;
+        } else {
+            return substr( $string, 0, $this->showMax ) . '...';
+        }
     }
 
     /**

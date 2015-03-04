@@ -5,8 +5,6 @@ namespace WikidataQuality\ConstraintReport\ConstraintCheck\Helper;
 
 class ConstraintReportHelper {
 
-    private $showMax = 50;
-
     /**
      * @param $claim
      * @return string
@@ -17,7 +15,7 @@ class ConstraintReportHelper {
         if( $mainSnak->getType() == 'value' ) {
             return $this->dataValueToString( $mainSnak->getDataValue() );
         } else {
-            return '\'\'(' . $mainSnak->getType() . '\'\')';
+            return '(' . $mainSnak->getType() . ')';
         }
     }
 
@@ -55,21 +53,13 @@ class ConstraintReportHelper {
         }
     }
 
-    public function limitOutput( $string ) {
-        if( strlen($string) <= $this->showMax ) {
-            return $string;
-        } else {
-            return substr( $string, 0, $this->showMax ) . '...';
-        }
-    }
-
     public function removeBrackets( $templateString ) {
         $toReplace = array("{", "}", "|", "[", "]");
         return str_replace( $toReplace, "", $templateString);
     }
 
     public function stringToArray( $templateString ) {
-        return explode(",", $this->removeBrackets( str_replace(" ", "", $templateString ) ) );
+        return $templateString == "" ? array() : explode(",", $this->removeBrackets( str_replace(" ", "", $templateString ) ) );
     }
 
     public function arrayToString( $templateArray ) {

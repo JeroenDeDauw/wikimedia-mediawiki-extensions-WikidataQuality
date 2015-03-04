@@ -2,8 +2,6 @@
 
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 
-use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\OutputLimiter;
-use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\TemplateConverter;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 
 class OneOfChecker {
@@ -22,7 +20,7 @@ class OneOfChecker {
             $status = 'compliance';
         }
 
-        $parameterString = $this->helper->limitOutput( 'values: ' . $this->helper->arrayToString( $itemArray ) );
+        $parameterString = 'values: ' . $this->helper->arrayToString( $itemArray );
 
         return new CheckResult( $propertyId, $dataValueString, 'One of', $parameterString, $status );
     }
