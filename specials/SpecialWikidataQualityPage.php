@@ -76,9 +76,8 @@ abstract class SpecialWikidataQualityPage extends SpecialPage
         $formatterOptions = new FormatterOptions();
         $entityTitleLookup = $repo->getEntityTitleLookup();
         $labelLookup = new LanguageLabelLookup( $repo->getTermLookup(), $this->getLanguage()->getCode() );
-        $this->entityIdLinkFormatter = new EntityIdLinkFormatter( $formatterOptions, $entityTitleLookup );
+        $this->entityIdLinkFormatter = new EntityIdLinkFormatter( $entityTitleLookup );
         $this->entityIdHtmlLinkFormatter = new EntityIdHtmlLinkFormatter(
-            $formatterOptions,
             $labelLookup,
             $entityTitleLookup,
             new LanguageNameLookup()

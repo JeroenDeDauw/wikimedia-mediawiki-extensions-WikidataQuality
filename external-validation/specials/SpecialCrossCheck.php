@@ -87,7 +87,7 @@ class SpecialCrossCheck extends SpecialWikidataQualityPage
             $out->addHTML(
                 Html::openElement( 'h3' )
                 . $this->msg( 'wikidataquality-crosscheck-result-headline' )->text()
-                . $this->entityIdHtmlLinkFormatter->format( $this->entityIdParser->parse( $_POST[ 'entityId' ] ) )
+                . $this->entityIdHtmlLinkFormatter->formatEntityId( $this->entityIdParser->parse( $_POST[ 'entityId' ] ) )
                 . Html::closeElement( 'h3' )
             );
 
@@ -107,7 +107,7 @@ class SpecialCrossCheck extends SpecialWikidataQualityPage
                     // Body of table
                     $tableOutput .=
                         "|-\n"
-                        . '| ' . $this->entityIdLinkFormatter->format( $result->getPropertyId() ) . "\n"
+                        . '| ' . $this->entityIdLinkFormatter->formatEntityId( $result->getPropertyId() ) . "\n"
                         . '| ' . $this->formatDataValues( $result->getLocalValue() ) . "\n"
                         . '| ' . $this->formatDataValues( $result->getExternalValues() ) . "\n"
                         . '| ' . $result->getDataSourceName() . "\n"
@@ -147,7 +147,7 @@ class SpecialCrossCheck extends SpecialWikidataQualityPage
         $formattedDataValues = array();
         foreach ( $dataValues as $dataValue ) {
             if ( $dataValue instanceof EntityIdValue ) {
-                $formattedDataValues[ ] = $this->entityIdLinkFormatter->format( $dataValue );
+                $formattedDataValues[ ] = $this->entityIdLinkFormatter->formatEntityId( $dataValue->getEntityId() );
             } else {
                 $formattedDataValues[ ] = $this->dataValueFormatter->format( $dataValue );
             }
