@@ -2,13 +2,12 @@
 
 namespace WikidataQuality\ConstraintReport\Specials;
 
-use SpecialPage;
 use Html;
 use WikidataQuality\ConstraintReport\ConstraintCheck\ConstraintChecker;
-use Wikibase\Repo\WikibaseRepo;
+use WikidataQuality\Specials\SpecialWikidataQualityPage;
 
 
-class SpecialWikidataConstraintReport extends SpecialPage {
+class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
 
     private $output = '';
 
@@ -16,14 +15,6 @@ class SpecialWikidataConstraintReport extends SpecialPage {
         parent::__construct( 'ConstraintReport' );
     }
 
-    /**
-     * @see SpecialPage::getGroupName
-     *
-     * @return string
-     */
-    function getGroupName() {
-        return "wikidataquality";
-    }
 
     /**
      * @see SpecialPage::getDescription
@@ -107,10 +98,9 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 
 
     function addOutputRow( $result ) {
-        $lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
         $this->output .=
             "|-\n"
-            . "| " . $result->getPropertyId() . " (" . $lookup->getEntity($result->getPropertyId())->getLabel('en') . ") "
+            . "| " . $result->getPropertyId() . " (" . $this->entityLookup->getEntity($result->getPropertyId())->getLabel('en') . ") "
             . "|| " . $result->getDataValue() . " "
             . "|| " . $result->getConstraintName() . " "
             . "|| " . $result->getParameter() . " ";

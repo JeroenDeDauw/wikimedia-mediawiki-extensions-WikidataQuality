@@ -17,10 +17,13 @@
   },
   "autoload": {
     "psr-4": {
+      "WikidataQuality\\Specials\\": "specials",
       "WikidataQuality\\Tests\\": "tests",
+
       "WikidataQuality\\ConstraintReport\\": "constraint-report/src/",
       "WikidataQuality\\ConstraintReport\\Specials\\": "constraint-report/specials/",
       "WikidataQuality\\ConstraintReport\\Tests\\": "external-validation/tests/phpunit/",
+
       "WikidataQuality\\ExternalValidation\\": "external-validation/src/",
       "WikidataQuality\\ExternalValidation\\Api\\": "external-validation/api",
       "WikidataQuality\\ExternalValidation\\Specials\\": "external-validation/specials/",
