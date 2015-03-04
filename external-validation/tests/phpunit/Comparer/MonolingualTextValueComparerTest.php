@@ -4,8 +4,8 @@ namespace WikidataQuality\ExternalValidation\Tests\Comparer;
 
 
 use DataValues\MonolingualTextValue;
-use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueComparer;
+use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
 
 
 /**
@@ -34,34 +34,43 @@ class MonolingualTextValueComparerTest extends DataValueComparerTestBase
                 new MonolingualTextValue( 'en', 'foo' ),
                 array( 'foo', 'bar' ),
                 true,
-                array( 'foo' )
+                array(
+                    new MonolingualTextValue( 'en', 'foo' ),
+                    new MonolingualTextValue( 'en', 'bar' )
+                )
             ),
             array(
                 new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
                 new MonolingualTextValue( 'en', 'foo' ),
                 array( 'foobar', 'bar' ),
                 false,
-                array( 'foo' )
+                array(
+                    new MonolingualTextValue( 'en', 'foobar' ),
+                    new MonolingualTextValue( 'en', 'bar' )
+                )
             ),
             array(
                 new DumpMetaInformation( 'json', 'de', 'Y-m-d', 'TestDB' ),
                 new MonolingualTextValue( 'en', 'foo' ),
                 array( 'foo', 'bar' ),
                 true,
-                array( 'foo' )
+                array(
+                    new MonolingualTextValue( 'de', 'foo' ),
+                    new MonolingualTextValue( 'de', 'bar' )
+                )
             ),
             array(
                 new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
                 new MonolingualTextValue( 'en', 'foo' ),
                 null,
                 false,
-                array( 'foo' )
+                null
             )
         );
     }
 
-    protected function createComparer( $dumpMetaInformation, $dataValue, $externalValues )
+    protected function createComparer( $dumpMetaInformation, $localValue, $externalValues )
     {
-        return new MonolingualTextValueComparer( $dumpMetaInformation, $dataValue, $externalValues );
+        return new MonolingualTextValueComparer( $dumpMetaInformation, $localValue, $externalValues );
     }
 }

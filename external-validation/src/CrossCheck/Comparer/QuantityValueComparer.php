@@ -3,10 +3,6 @@
 namespace WikidataQuality\ExternalValidation\CrossCheck\Comparer;
 
 
-use ValueFormatters\DecimalFormatter;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\QuantityFormatter;
-use ValueFormatters\ValueFormatter;
 use ValueParsers\ParserOptions;
 use ValueParsers\QuantityParser;
 use ValueParsers\ValueParser;
@@ -33,25 +29,14 @@ class QuantityValueComparer extends DataValueComparer
      */
     public function execute()
     {
-        // Get time parser and formatter
-        $parserOptions = new ParserOptions();
-        $parserOptions->setOption( ValueParser::OPT_LANG, $this->dumpMetaInformation->getLanguage() );
-        $timeParser = new QuantityParser( $parserOptions );
+        // Parse external values
+        $this->parseExternalValues();
 
-        $formatterOptions = new FormatterOptions();
-        $formatterOptions->setOption( ValueFormatter::OPT_LANG, $this->dumpMetaInformation->getLanguage() );
-        $timeFormatter = new QuantityFormatter( new DecimalFormatter( $formatterOptions ), $formatterOptions );
-
-        // Set local values
-        $formattedDataValue = $timeFormatter->format( $this->dataValue->getValue() );
-        $this->localValues = array( $formattedDataValue );
-
-        // Compare each external value
+        // Compare each external value with local value
         if ( $this->externalValues ) {
             foreach ( $this->externalValues as $externalValue ) {
-                $parsedExternalValue = $timeParser->parse( $externalValue );
-                if ( $parsedExternalValue->getLowerBound() <= $this->dataValue->getUpperBound() &&
-                    $parsedExternalValue->getUpperBound() >= $this->dataValue->getLowerBound()
+                if ( $externalValue->getLowerBound() <= $this->localValue->getUpperBound() &&
+                    $externalValue->getUpperBound() >= $this->localValue->getLowerBound()
                 ) {
                     return true;
                 }
@@ -59,5 +44,17 @@ class QuantityValueComparer extends DataValueComparer
         }
 
         return false;
+    }
+
+    /**
+     * Returns parser that is used to parse strings of external values to Wikibase DataValues.
+     * @return GlobeCoordinateParser
+     */
+    protected function getExternalValueParser()
+    {
+        $parserOptions = new ParserOptions();
+        $parserOptions->setOption( ValueParser::OPT_LANG, $this->dumpMetaInformation->getLanguage() );
+
+        return new QuantityParser( $parserOptions );
     }
 }

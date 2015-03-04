@@ -3,6 +3,7 @@
 namespace WikidataQuality\ExternalValidation\Tests\Comparer;
 
 
+use DataValues\MonolingualTextValue;
 use DataValues\StringValue;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer;
 use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
@@ -34,34 +35,43 @@ class StringValueComparerTest extends DataValueComparerTestBase
                 new StringValue( 'foo' ),
                 array( 'foo', 'bar' ),
                 true,
-                array( 'foo' )
+                array(
+                    new MonolingualTextValue( 'en', 'foo' ),
+                    new MonolingualTextValue( 'en', 'bar' )
+                )
             ),
             array(
                 new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
                 new StringValue( 'foo' ),
                 array( 'foobar', 'bar' ),
                 false,
-                array( 'foo' )
+                array(
+                    new MonolingualTextValue( 'en', 'foobar' ),
+                    new MonolingualTextValue( 'en', 'bar' )
+                )
             ),
             array(
                 new DumpMetaInformation( 'json', 'de', 'Y-m-d', 'TestDB' ),
                 new StringValue( 'foobar' ),
                 array( 'foobar', 'bar' ),
                 true,
-                array( 'foobar' )
+                array(
+                    new MonolingualTextValue( 'de', 'foobar' ),
+                    new MonolingualTextValue( 'de', 'bar' )
+                )
             ),
             array(
                 new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
-                new StringValue( 'foo' ),
+                new MonolingualTextValue( 'en', 'foo' ),
                 null,
                 false,
-                array( 'foo' )
+                null
             )
         );
     }
 
-    protected function createComparer( $dumpMetaInformation, $dataValue, $externalValues )
+    protected function createComparer( $dumpMetaInformation, $localValue, $externalValues )
     {
-        return new StringValueComparer( $dumpMetaInformation, $dataValue, $externalValues );
+        return new StringValueComparer( $dumpMetaInformation, $localValue, $externalValues );
     }
 }

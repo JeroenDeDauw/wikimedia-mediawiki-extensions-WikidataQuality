@@ -32,29 +32,39 @@ class TimeValueComparer extends DataValueComparer
      */
     public function execute()
     {
-        // Get time parser and formatter
-        $parserOptions = new ParserOptions();
-        $parserOptions->setOption( ValueParser::OPT_LANG, $this->dumpMetaInformation->getLanguage() );
-        $timeParser = new TimeParser( $parserOptions );
-
+        // Get formatter
         $formatterOptions = new FormatterOptions();
         $formatterOptions->setOption( ValueFormatter::OPT_LANG, $this->dumpMetaInformation->getLanguage() );
         $timeFormatter = new MwTimeIsoFormatter( $formatterOptions );
 
-        // Set local values
-        $formattedDataValue = $timeFormatter->format( $this->dataValue->getValue() );
-        $this->localValues = array( $formattedDataValue );
+        // Format local value
+        $formattedDataValue = $timeFormatter->format( $this->localValue );
 
-        // Compare each external value
+        // Parse external values
+        $this->parseExternalValues();
+
+        // Compare each external value with local value
         if ( $this->externalValues ) {
             foreach ( $this->externalValues as $externalValue ) {
-                $parsedExternalValue = $timeParser->parse( $externalValue );
-                if ( $formattedDataValue == $timeFormatter->format( $parsedExternalValue ) ) {
+                $formattedExternalValue = $timeFormatter->format( $externalValue );
+                if ( $formattedDataValue == $formattedExternalValue ) {
                     return true;
                 }
             }
         }
 
         return false;
+    }
+
+    /**
+     * Returns parser that is used to parse strings of external values to Wikibase DataValues.
+     * @return TimeParser
+     */
+    protected function getExternalValueParser()
+    {
+        $parserOptions = new ParserOptions();
+        $parserOptions->setOption( ValueParser::OPT_LANG, $this->dumpMetaInformation->getLanguage() );
+
+        return new TimeParser( $parserOptions );
     }
 }

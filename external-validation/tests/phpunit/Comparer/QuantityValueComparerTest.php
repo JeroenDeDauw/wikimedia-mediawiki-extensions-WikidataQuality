@@ -34,48 +34,58 @@ class QuantityValueComparerTest extends DataValueComparerTestBase
                 QuantityValue::newFromNumber( 42, '1', 44, 40 ),
                 array( '42' ),
                 true,
-                array( '42±2' )
+                array(
+                    QuantityValue::newFromNumber( 42, '1', 43, 41 )
+                )
             ),
             array(
                 new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
                 QuantityValue::newFromNumber( 42, '1', 44, 40 ),
                 array( '41' ),
                 true,
-                array( '42±2' )
+                array(
+                    QuantityValue::newFromNumber( 41, '1', 42, 40 )
+                )
             ),
             array(
                 new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
-                QuantityValue::newFromNumber( 42, '1', 44, 40 ),
+                QuantityValue::newFromNumber( 42, '1' ),
                 array( '23' ),
                 false,
-                array( '42±2' )
+                array(
+                    QuantityValue::newFromNumber( 23, '1', 24, 22 )
+                )
             ),
             array(
                 new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
                 QuantityValue::newFromNumber( 42, '1' ),
                 array( '42' ),
                 true,
-                array( '42' )
+                array(
+                    QuantityValue::newFromNumber( 42, '1', 43, 41 )
+                )
             ),
             array(
                 new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
                 QuantityValue::newFromNumber( 42, '1' ),
                 array( '44' ),
                 false,
-                array( '42' )
+                array(
+                    QuantityValue::newFromNumber( 44, '1', 45, 43 )
+                )
             ),
             array(
                 new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
                 QuantityValue::newFromNumber( 42, '1', 44, 40 ),
                 null,
                 false,
-                array( '42±2' )
+                null
             )
         );
     }
 
-    protected function createComparer( $dumpMetaInformation, $dataValue, $externalValues )
+    protected function createComparer( $dumpMetaInformation, $localValue, $externalValues )
     {
-        return new QuantityValueComparer( $dumpMetaInformation, $dataValue, $externalValues );
+        return new QuantityValueComparer( $dumpMetaInformation, $localValue, $externalValues );
     }
 }

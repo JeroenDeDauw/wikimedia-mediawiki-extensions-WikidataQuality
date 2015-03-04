@@ -15,7 +15,6 @@ use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueComparer
-
  *
  * @group WikidataQuality
  * @group WikidataQuality\ExternalValidation
@@ -28,12 +27,12 @@ class MultilingualTextValueComparerTest extends DataValueComparerTestBase
     /**
      * @dataProvider constructDataProvider
      */
-    public function testConstruct( $dumpMetaInformation, $dataValue, $externalValues, $expectedDataValue )
+    public function testConstruct( $dumpMetaInformation, $localValue, $externalValues )
     {
-        $comparer = $this->createComparer( $dumpMetaInformation, $dataValue, $externalValues );
+        $comparer = $this->createComparer( $dumpMetaInformation, $localValue, $externalValues );
 
         $this->assertEquals( $dumpMetaInformation, $comparer->getDumpMetaInformation() );
-        $this->assertEquals( $expectedDataValue, $comparer->getDataValue() );
+        $this->assertEquals( $localValue, $comparer->getLocalValue() );
         $this->assertEquals( $externalValues, $comparer->getExternalValues() );
     }
 
@@ -45,14 +44,12 @@ class MultilingualTextValueComparerTest extends DataValueComparerTestBase
             array(
                 new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
                 new MultilingualTextValue( array( $monolingualTextValue ) ),
-                array( 'foo', 'bar' ),
-                $monolingualTextValue
+                array( 'foo', 'bar' )
             ),
             array(
                 new DumpMetaInformation( 'json', 'de', 'Y-m-d', 'TestDB' ),
                 new MultilingualTextValue( array( $monolingualTextValue ) ),
-                array( 'foo', 'bar' ),
-                null
+                array( 'foo', 'bar' )
             )
         );
     }
@@ -70,41 +67,53 @@ class MultilingualTextValueComparerTest extends DataValueComparerTestBase
                 new MultilingualTextValue( array( new MonolingualTextValue( 'en', 'foo' ) ) ),
                 array( 'foo', 'bar' ),
                 true,
-                array( 'foo' )
+                array(
+                    new MonolingualTextValue( 'en', 'foo' ),
+                    new MonolingualTextValue( 'en', 'bar' )
+                )
             ),
             array(
                 new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
                 new MultilingualTextValue( array( new MonolingualTextValue( 'en', 'foo' ) ) ),
                 array( 'foobar', 'bar' ),
                 false,
-                array( 'foo' )
+                array(
+                    new MonolingualTextValue( 'en', 'foobar' ),
+                    new MonolingualTextValue( 'en', 'bar' )
+                )
             ),
             array(
                 new DumpMetaInformation( 'json', 'de', 'Y-m-d', 'TestDB' ),
                 new MultilingualTextValue( array( new MonolingualTextValue( 'en', 'foo' ) ) ),
                 array( 'foo', 'bar' ),
                 false,
-                array()
+                array(
+                    new MonolingualTextValue( 'de', 'foo' ),
+                    new MonolingualTextValue( 'de', 'bar' )
+                )
             ),
             array(
                 new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
                 new MultilingualTextValue( array( new MonolingualTextValue( 'de', 'foo' ) ) ),
                 array( 'foo', 'bar' ),
                 false,
-                array()
+                array(
+                    new MonolingualTextValue( 'en', 'foo' ),
+                    new MonolingualTextValue( 'en', 'bar' )
+                )
             ),
             array(
                 new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
                 new MultilingualTextValue( array( new MonolingualTextValue( 'en', 'foo' ) ) ),
                 null,
                 false,
-                array( 'foo' )
+                null
             )
         );
     }
 
-    protected function createComparer( $dumpMetaInformation, $dataValue, $externalValues )
+    protected function createComparer( $dumpMetaInformation, $localValue, $externalValues )
     {
-        return new MultilingualTextValueComparer( $dumpMetaInformation, $dataValue, $externalValues );
+        return new MultilingualTextValueComparer( $dumpMetaInformation, $localValue, $externalValues );
     }
 }

@@ -6,6 +6,9 @@ namespace WikidataQuality\ExternalValidation\CrossCheck\Comparer;
 use DataValues\DataValue;
 use Doctrine\Instantiator\Exception\InvalidArgumentException;
 use ReflectionClass;
+use ValueParsers\ParserOptions;
+use ValueParsers\ValueParser;
+use Wikibase\Parsers\MonolingualTextParser;
 
 
 /**
@@ -37,19 +40,13 @@ abstract class DataValueComparer
     protected $dumpMetaInformation;
 
     /**
-     * Wikibase data value.
-     * @var DataValue
-     */
-    protected $dataValue;
-
-    /**
-     * Local, probably converted values.
+     * Wikibase data value for comparison.
      * @var array
      */
-    protected $localValues;
+    protected $localValue;
 
     /**
-     * External database values.
+     * Data values from external database for comparison.
      * @var array
      */
     protected $externalValues;
@@ -57,10 +54,10 @@ abstract class DataValueComparer
 
     /**
      * @param $dumpMetaInformation
-     * @param DataValue $dataValue - wikibase DataValue
-     * @param array $externalValues - external database values
+     * @param DataValue $localValue - Wikibase data value
+     * @param array $externalValues - external database data values
      */
-    public function __construct( $dumpMetaInformation, DataValue $dataValue, $externalValues )
+    public function __construct( $dumpMetaInformation, DataValue $localValue, $externalValues )
     {
         // Check types of parameters
         if ( $externalValues && !is_array( $externalValues ) ) {
@@ -69,7 +66,7 @@ abstract class DataValueComparer
 
         // Set parameters
         $this->dumpMetaInformation = $dumpMetaInformation;
-        $this->dataValue = $dataValue;
+        $this->localValue = $localValue;
         $this->externalValues = $externalValues;
     }
 
@@ -79,6 +76,34 @@ abstract class DataValueComparer
      * @return bool - result of the comparison.
      */
     public abstract function execute();
+
+    /**
+     * Returns parser that is used to parse strings of external values to Wikibase DataValues.
+     * @return ValueParser
+     */
+    protected function getExternalValueParser()
+    {
+        $options = new ParserOptions();
+        $options->setOption( 'valuelang', $this->dumpMetaInformation->getLanguage() );
+        return new MonolingualTextParser( $options );
+    }
+
+
+    /**
+     * Parses each string in externalValues array to Wikibase DataValue.
+     */
+    protected function parseExternalValues()
+    {
+        if ( $this->externalValues ) {
+            foreach ( $this->externalValues as $index => $externalValue ) {
+                if ( is_string( $externalValue ) ) {
+                    $parsedValue = $this->getExternalValueParser()->parse( $externalValue );
+                    $this->externalValues[ $index ] = $parsedValue;
+                }
+            }
+
+        }
+    }
 
 
     /**
@@ -91,25 +116,16 @@ abstract class DataValueComparer
     }
 
     /**
-     * Wikibase data value.
-     * @return DataValue
-     */
-    public function getDataValue()
-    {
-        return $this->dataValue;
-    }
-
-    /**
-     * Returns local, probably converted values.
+     * Returns Wikibase data value.
      * @return array
      */
-    public function getLocalValues()
+    public function getLocalValue()
     {
-        return $this->localValues;
+        return $this->localValue;
     }
 
     /**
-     * Returns external database values.
+     * Returns external database data values.
      * @return array
      */
     public function getExternalValues()
@@ -121,18 +137,18 @@ abstract class DataValueComparer
     /**
      * Returns an instance of a comparer suitable to the given DataValue.
      * @param array $dumpMetaInformation
-     * @param \DataValue $dataValue - wikibase DataValue
-     * @param array $externalValues - external database values
-     * @return DataValueComparer or null
+     * @param \DataValue $localValue - Wikibase data value
+     * @param array $externalValues - external database data values
+     * @return DataValueComparer|null
      */
-    public static function getComparer( $dumpMetaInformation, DataValue $dataValue, $externalValues )
+    public static function getComparer( $dumpMetaInformation, DataValue $localValue, $externalValues )
     {
         foreach ( self::$comparers as $comparer ) {
             $reflector = new ReflectionClass( $comparer );
             $acceptedDataValues = $reflector->getStaticPropertyValue( 'acceptedDataValues' );
-            $dataValueClass = get_class( $dataValue );
+            $dataValueClass = get_class( $localValue );
             if ( in_array( $dataValueClass, $acceptedDataValues ) ) {
-                return new $comparer( $dumpMetaInformation, $dataValue, $externalValues );
+                return new $comparer( $dumpMetaInformation, $localValue, $externalValues );
             }
         }
     }

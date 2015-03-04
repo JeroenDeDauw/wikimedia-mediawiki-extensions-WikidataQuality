@@ -5,12 +5,12 @@ namespace WikidataQuality\ExternalValidation\CrossCheck;
 
 use Doctrine\Instantiator\Exception\InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\WikibaseRepo;
-use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\MappingEvaluator;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Repo\WikibaseRepo;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer;
+use WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\MappingEvaluator;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResultList;
 
@@ -296,7 +296,7 @@ class CrossChecker
                     $result = $comparer->execute();
 
                     if ( isset( $result ) ) {
-                        return new CompareResult( $propertyId, $claimGuid, $comparer->getLocalValues(), $comparer->getExternalValues(), !$result, null, $this->dumpMetaInformation->getDataSourceName() );
+                        return new CompareResult( $propertyId, $claimGuid, $comparer->getLocalValue(), $comparer->getExternalValues(), !$result, null, $this->dumpMetaInformation->getDataSourceName() );
                     }
                 }
             }

@@ -28,24 +28,32 @@ class GlobeCoordinateValueComparer extends DataValueComparer
      */
     public function execute()
     {
-        // Get globe coordinate parser and formatter
-        $globeParser = new GlobeCoordinateParser();
+        // Format local value
         $globeFormatter = new GlobeCoordinateFormatter();
+        $formattedDataValue = $globeFormatter->format( $this->localValue );
 
-        // Set local values
-        $formattedDataValue = $globeFormatter->format( $this->dataValue );
-        $this->localValues = array( $formattedDataValue );
+        // Parse external values
+        $this->parseExternalValues();
 
-        //Compare each external value
+        // Compare each external value with local value
         if ( $this->externalValues ) {
             foreach ( $this->externalValues as $externalValue ) {
-                $parsedExternalValue = $globeParser->parse( $externalValue );
-                if ( $formattedDataValue == $globeFormatter->format( $parsedExternalValue ) ) {
+                $formattedExternalValue = $globeFormatter->format( $externalValue );
+                if ( $formattedDataValue == $formattedExternalValue ) {
                     return true;
                 }
             }
         }
 
         return false;
+    }
+
+    /**
+     * Returns parser that is used to parse strings of external values to Wikibase DataValues.
+     * @return GlobeCoordinateParser
+     */
+    protected function getExternalValueParser()
+    {
+        return new GlobeCoordinateParser();
     }
 }

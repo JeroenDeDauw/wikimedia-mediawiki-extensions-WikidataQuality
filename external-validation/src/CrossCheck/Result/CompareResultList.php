@@ -2,10 +2,9 @@
 
 namespace WikidataQuality\ExternalValidation\CrossCheck\Result;
 
-use IteratorAggregate;
 use ArrayIterator;
 use Countable;
-use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult;
+use IteratorAggregate;
 
 
 /**
@@ -22,7 +21,8 @@ class CompareResultList implements IteratorAggregate, Countable
     /**
      * @param array $list
      */
-    public function __construct( $results = array() ) {
+    public function __construct( $results = array() )
+    {
         $this->results = $results;
     }
 
@@ -31,15 +31,17 @@ class CompareResultList implements IteratorAggregate, Countable
      * Adds a given CompareResult to the list.
      * @param CompareResult $result
      */
-    public function add( CompareResult $result ) {
-        $this->results[] = $result;
+    public function add( CompareResult $result )
+    {
+        $this->results[ ] = $result;
     }
 
     /**
      * Merges another CompareResultList to the current one.
      * @param CompareResultList $list
      */
-    public function merge( CompareResultList $resultList ) {
+    public function merge( CompareResultList $resultList )
+    {
         $this->results = array_merge( $this->results, $resultList->results );
     }
 
@@ -48,7 +50,8 @@ class CompareResultList implements IteratorAggregate, Countable
      * Specifies, whether at least one data mismatch occurred.
      * @return bool
      */
-    public function isDataMismatchOccurred() {
+    public function isDataMismatchOccurred()
+    {
         foreach ( $this->results as $result ) {
             if ( $result->isDataMismatchOccurred() ) {
                 return true;
@@ -62,7 +65,8 @@ class CompareResultList implements IteratorAggregate, Countable
      * Specifies, whether at least one reference is missing.
      * @return bool
      */
-    public function areReferencesMissing() {
+    public function areReferencesMissing()
+    {
         foreach ( $this->results as $result ) {
             if ( $result->areReferencesMissing() ) {
                 return true;
@@ -76,13 +80,14 @@ class CompareResultList implements IteratorAggregate, Countable
      * Returns the property ids used by compare results.
      * @return array
      */
-    function getPropertyIds() {
+    function getPropertyIds()
+    {
         $propertyIds = array();
 
-        foreach( $this->results as $result ) {
+        foreach ( $this->results as $result ) {
             $propertyId = $result->getPropertyId();
-            if( !in_array( $propertyId, $propertyIds ) ) {
-                $propertyIds[] = $propertyId;
+            if ( !in_array( $propertyId, $propertyIds ) ) {
+                $propertyIds[ ] = $propertyId;
             }
         }
 
@@ -94,12 +99,13 @@ class CompareResultList implements IteratorAggregate, Countable
      * @param $propertyId
      * @return CompareResultList
      */
-    function getWithPropertyId( $propertyId ) {
+    function getWithPropertyId( $propertyId )
+    {
         $results = array();
 
-        foreach( $this->results as $result ) {
+        foreach ( $this->results as $result ) {
             if ( $result->getPropertyId()->equals( $propertyId ) ) {
-                $results[] = $result;
+                $results[ ] = $result;
             }
         }
 
@@ -110,7 +116,8 @@ class CompareResultList implements IteratorAggregate, Countable
      * Gets an iterator for results.
      * @return ArrayIterator
      */
-    public function getIterator() {
+    public function getIterator()
+    {
         return new ArrayIterator( $this->results );
     }
 
@@ -118,7 +125,8 @@ class CompareResultList implements IteratorAggregate, Countable
      * Counts number of results.
      * @return int
      */
-    public function count () {
+    public function count()
+    {
         return count( $this->results );
     }
 }

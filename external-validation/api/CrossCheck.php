@@ -5,11 +5,11 @@ namespace WikidataQuality\ExternalValidation\Api;
 
 use ApiMain;
 use Wikibase\Api\ApiWikibase;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use WikidataQuality\ExternalValidation\CrossCheck\CrossChecker;
+use Wikibase\Repo\WikibaseRepo;
 use WikidataQuality\ExternalValidation\Api\Serializer\CompareResultListSerializer;
+use WikidataQuality\ExternalValidation\CrossCheck\CrossChecker;
 
 
 /**
@@ -54,10 +54,11 @@ class CrossCheck extends ApiWikibase
     {
         parent::__construct( $main, $name, $prefix );
 
-        $this->entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
-        $this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
-        $this->claimGuidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
-        $this->claimGuidValidator = WikibaseRepo::getDefaultInstance()->getClaimGuidValidator();
+        $repo = WikibaseRepo::getDefaultInstance();
+        $this->entityIdParser = $repo->getEntityIdParser();
+        $this->entityLookup = $repo->getEntityLookup();
+        $this->claimGuidParser = $repo->getClaimGuidParser();
+        $this->claimGuidValidator = $repo->getClaimGuidValidator();
     }
 
     /**
@@ -74,14 +75,11 @@ class CrossCheck extends ApiWikibase
                 'Either provide the ids of entities or ids of claims, that should be cross-checked.',
                 'param-invalid'
             );
-        }
-        elseif ( $params[ 'entities' ] ) {
+        } elseif ( $params[ 'entities' ] ) {
             $resultLists = $this->crossCheckEntities( $params[ 'entities' ], $params[ 'properties' ] );
-        }
-        elseif ( $params[ 'claims' ] ) {
+        } elseif ( $params[ 'claims' ] ) {
             $resultLists = $this->crossCheckClaim( $params[ 'claims' ] );
-        }
-        else {
+        } else {
             $this->dieError(
                 'Either provide the ids of entities or ids of claims, that should be cross-checked.',
                 'param-missing'
@@ -100,8 +98,8 @@ class CrossCheck extends ApiWikibase
     private function crossCheckEntities( $entityIds, $propertyIds = null )
     {
         // Parse property ids
-        if( $propertyIds ) {
-            foreach( $propertyIds as $key => $propertyId ) {
+        if ( $propertyIds ) {
+            foreach ( $propertyIds as $key => $propertyId ) {
                 $propertyIds[ $key ] = $this->entityIdParser->parse( $propertyId );
             }
         }
@@ -134,7 +132,7 @@ class CrossCheck extends ApiWikibase
             }
 
             $claimGuid = $this->claimGuidParser->parse( $claimGuid );
-            $groupedClaimGuids[ (string)$claimGuid->getEntityId() ][] = $claimGuid;
+            $groupedClaimGuids[ (string)$claimGuid->getEntityId() ][ ] = $claimGuid;
         }
 
         // Run cross-checker for each entity with corresponding claims
@@ -143,7 +141,7 @@ class CrossCheck extends ApiWikibase
             // Get entity
             $entity = $this->entityLookup->getEntity( $this->entityIdParser->parse( $entityId ) );
 
-            if( $entity ) {
+            if ( $entity ) {
                 // Get statements of claims
                 $statements = new StatementList();
                 foreach ( $entity->getStatements() as $statement ) {
@@ -155,8 +153,7 @@ class CrossCheck extends ApiWikibase
                 // Run cross-check for filtered statements
                 $crossChecker = new CrossChecker();
                 $resultLists[ (string)$entityId ] = $crossChecker->crossCheckStatements( $entity, $statements );
-            }
-            else {
+            } else {
                 $resultLists[ (string)$entityId ] = null;
             }
         }
@@ -180,7 +177,7 @@ class CrossCheck extends ApiWikibase
         // Write output array
         $output = array();
         foreach ( $resultLists as $entityId => $resultList ) {
-            if( $resultList ) {
+            if ( $resultList ) {
                 // Serialize CompareResultList
                 $serializedResultList = $serializer->getSerialized( $resultList );
 
@@ -193,8 +190,7 @@ class CrossCheck extends ApiWikibase
                 } else {
                     $output[ (string)$entityId ] = $serializedResultList;
                 }
-            }
-            else {
+            } else {
                 // If resultList is null, entity does not exist
                 $output[ (string)$entityId ] = array(
                     'missing' => ''

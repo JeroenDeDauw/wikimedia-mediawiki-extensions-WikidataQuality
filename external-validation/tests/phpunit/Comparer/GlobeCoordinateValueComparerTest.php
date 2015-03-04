@@ -32,37 +32,43 @@ class GlobeCoordinateValueComparerTest extends DataValueComparerTestBase
         return array(
             array(
                 new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
-                new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1, null ),
+                new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1 ),
                 array( '64.000000 N, 26.000000 E' ),
                 true,
-                array( '64, 26' )
+                array(
+                    new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1 )
+                )
             ),
             array(
                 new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
-                new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1, null ),
+                new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1 ),
                 array( '64 N, 26 E' ),
                 true,
-                array( '64, 26' )
+                array(
+                    new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1 )
+                )
             ),
             array(
                 new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
-                new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1, null ),
-                array( '64.000001 N, 26.000010 E' ),
+                new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1 ),
+                array( '42.000000 N, 32.000000 E' ),
                 false,
-                array( '64, 26' )
+                array(
+                    new GlobeCoordinateValue( new LatLongValue( 42, 32 ), 1 )
+                )
             ),
             array(
                 new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
-                new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1, null ),
+                new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1 ),
                 null,
                 false,
-                array( '64, 26' )
+                null
             )
         );
     }
 
-    protected function createComparer( $dumpMetaInformation, $dataValue, $externalValues )
+    protected function createComparer( $dumpMetaInformation, $localValue, $externalValues )
     {
-        return new GlobeCoordinateValueComparer( $dumpMetaInformation, $dataValue, $externalValues );
+        return new GlobeCoordinateValueComparer( $dumpMetaInformation, $localValue, $externalValues );
     }
 }

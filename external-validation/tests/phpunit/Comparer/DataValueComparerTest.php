@@ -34,14 +34,13 @@ class DataValueComparerTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider constructValidArgumentsDataProvider
      */
-    public function testConstructValidArguments( $dumpMetaInformation, $dataValue, $externalValues )
+    public function testConstructValidArguments( $dumpMetaInformation, $localValue, $externalValues )
     {
-        $comparerMock = $this->getDataValueComparerMock( $dumpMetaInformation, $dataValue, $externalValues );
+        $comparerMock = $this->getDataValueComparerMock( $dumpMetaInformation, $localValue, $externalValues );
 
         $this->assertEquals( $dumpMetaInformation, $comparerMock->getDumpMetaInformation() );
-        $this->assertEquals( $dataValue, $comparerMock->getDataValue() );
+        $this->assertEquals( $localValue, $comparerMock->getLocalValue() );
         $this->assertEquals( $externalValues, $comparerMock->getExternalValues() );
-        $this->assertNull( $comparerMock->getLocalValues() );
     }
 
     /**
@@ -63,11 +62,11 @@ class DataValueComparerTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider constructInvalidArgumentsDataProvider
      */
-    public function testConstructInvalidArguments( $dumpMetaInformation, $dataValue, $externalValues )
+    public function testConstructInvalidArguments( $dumpMetaInformation, $localValue, $externalValues )
     {
         $this->setExpectedException( 'InvalidArgumentException' );
 
-        $this->getDataValueComparerMock( $dumpMetaInformation, $dataValue, $externalValues );
+        $this->getDataValueComparerMock( $dumpMetaInformation, $localValue, $externalValues );
     }
 
     /**
@@ -94,9 +93,9 @@ class DataValueComparerTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getComparerDataProvider
      */
-    public function testComparer( $dumpMetaInformation, $dataValue, $externalValues, $comparerClass )
+    public function testGetComparer( $dumpMetaInformation, $localValue, $externalValues, $comparerClass )
     {
-        $comparer = DataValueComparer::getComparer( $dumpMetaInformation, $dataValue, $externalValues );
+        $comparer = DataValueComparer::getComparer( $dumpMetaInformation, $localValue, $externalValues );
         if ( $comparerClass ) {
             $this->assertInstanceOf( $comparerClass, $comparer );
         } else {
@@ -110,50 +109,50 @@ class DataValueComparerTest extends \PHPUnit_Framework_TestCase
      */
     public function getComparerDataProvider()
     {
-        return array (
-            array (
+        return array(
+            array(
                 new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
                 new EntityIdValue( new ItemId( 'Q42' ) ),
                 array( 'foo', 'bar' ),
                 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\EntityIdValueComparer'
             ),
-            array (
+            array(
                 new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
                 new MonolingualTextValue( 'en', 'foo' ),
                 array( 'foo', 'bar' ),
                 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueComparer'
             ),
-            array (
+            array(
                 new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
                 new MultilingualTextValue( array( new MonolingualTextValue( 'en', 'foo' ) ) ),
                 array( 'foo', 'bar' ),
                 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\MultilingualTextValueComparer'
             ),
-            array (
+            array(
                 new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
                 QuantityValue::newFromNumber( 42, '1' ),
                 array( 'foo', 'bar' ),
                 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\QuantityValueComparer'
             ),
-            array (
+            array(
                 new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
                 new StringValue( 'foo' ),
                 array( 'foo', 'bar' ),
                 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer'
             ),
-            array (
+            array(
                 new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
                 new TimeValue( '+00000002013-12-07T00:00:00Z', 0, 0, 0, 11, 'http://www.wikidata.org/entity/Q1985727' ),
                 array( 'foo', 'bar' ),
                 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer'
             ),
-            array (
+            array(
                 new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
                 new GlobeCoordinateValue( new LatLongValue( 52.5, 13.3 ), 0.016 ),
                 array( 'foo', 'bar' ),
                 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueComparer'
             ),
-            array (
+            array(
                 new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
                 new UnknownValue( null ),
                 array( 'foo', 'bar' ),
@@ -166,15 +165,15 @@ class DataValueComparerTest extends \PHPUnit_Framework_TestCase
     /**
      * Returns DataValueComparer mock with given arguments
      * @param DumpMetaInformation $dumpMetaInformation
-     * @param DataValue $dataValue
+     * @param DataValue $localValue
      * @param array $externalValues
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    private function getDataValueComparerMock( $dumpMetaInformation, $dataValue, $externalValues )
+    private function getDataValueComparerMock( $dumpMetaInformation, $localValue, $externalValues )
     {
         return $this->getMockForAbstractClass(
             'WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer',
-            array( $dumpMetaInformation, $dataValue, $externalValues )
+            array( $dumpMetaInformation, $localValue, $externalValues )
         );
     }
 }

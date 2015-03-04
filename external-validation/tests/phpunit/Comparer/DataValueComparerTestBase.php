@@ -13,21 +13,16 @@ namespace WikidataQuality\ExternalValidation\Tests\Comparer;
 abstract class DataValueComparerTestBase extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer::getExternalValueParser
+     * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer::parseExternalValues
      * @dataProvider executeDataProvider
      */
-    public function testExecute( $dumpMetaInformation, $dataValue, $externalValues, $expectedResult, $expectedLocalValues )
+    public function testExecute( $dumpMetaInformation, $localValue, $externalValues, $expectedResult, $expectedExternalValues )
     {
-        $comparer = $this->createComparer( $dumpMetaInformation, $dataValue, $externalValues );
+        $comparer = $this->createComparer( $dumpMetaInformation, $localValue, $externalValues );
 
         $this->assertEquals( $expectedResult, $comparer->execute() );
-        if ( is_array( $expectedLocalValues ) ) {
-            $this->assertSame(
-                array_diff( $expectedLocalValues, $comparer->getLocalValues() ),
-                array_diff( $comparer->getLocalValues(), $expectedLocalValues )
-            );
-        } else {
-            $this->assertEquals( $expectedLocalValues, $comparer->getLocalValues() );
-        }
+        $this->assertEquals( $expectedExternalValues, $comparer->getExternalValues() );
     }
 
     /*
@@ -40,5 +35,5 @@ abstract class DataValueComparerTestBase extends \PHPUnit_Framework_TestCase
      * Returns new instance of the comparer being tested with given arguments.
      * @return DataValueComparer
      */
-    protected abstract function createComparer( $dumpMetaInformation, $dataValue, $externalValues );
+    protected abstract function createComparer( $dumpMetaInformation, $localValue, $externalValues );
 }
