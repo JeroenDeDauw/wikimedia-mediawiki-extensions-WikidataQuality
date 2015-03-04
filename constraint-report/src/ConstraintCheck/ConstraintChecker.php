@@ -75,10 +75,8 @@ class ConstraintChecker {
      * @param \EntityId $entityId - Id of the entity, that should be checked against constraints
      * @return \CompareResultList (adapted version) with results or null
      */
-    public function execute( $entityId )
+    public function execute( $entity )
     {
-        // Get statements of entity
-        $entity = $this->entityLookup->getEntity( $this->getEntityID( $entityId ) );
         if ( $entity ) {
 
             $this->statements = $entity->getStatements();
@@ -99,13 +97,13 @@ class ConstraintChecker {
                         'class', 'constraint_status', 'comment', 'group_by', 'item', 'known_exception',
                         'maximum_date', 'maximum_quantity', 'minimum_date', 'minimum_quantity',
                         'namespace', 'pattern', 'property', 'relation' ),		// $vars (columns of the table)
-                    ("pid = $numericPropertyId"),							    // $conds
+                    ( "pid = $numericPropertyId" ),							    // $conds
                     __METHOD__,													// $fname = 'Database::select',
                     array('')													// $options = array()
                 );
 
                 foreach( $res as $row ) {
-                    if( in_array( $entityId, $this->helper->stringToArray( $row->known_exception ) ) ) {
+                    if( in_array( $entity->getId()->getSerialization(), $this->helper->stringToArray( $row->known_exception ) ) ) {
                         $result[] = new CheckResult( $propertyId, $dataValueString, $row->constraint_name, '(none)', 'exception' );
                         continue;
                     }
@@ -211,18 +209,6 @@ class ConstraintChecker {
             return $result;
         }
         return null;
-    }
-
-    private function getEntityID( $entityId )
-    {
-        switch( strtoupper( $entityId[0] ) ) {
-            case 'Q':
-                return new ItemId( $entityId );
-            case 'P':
-                return new PropertyId( $entityId );
-            default:
-                return null;
-        }
     }
 
 

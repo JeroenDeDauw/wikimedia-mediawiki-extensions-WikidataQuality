@@ -4,17 +4,20 @@ namespace WikidataQuality\ConstraintReport\Specials;
 
 use SpecialPage;
 use Html;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use WikidataQuality\ConstraintReport\ConstraintCheck\ConstraintChecker;
 use Wikibase\Repo\WikibaseRepo;
-use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
 
 
 class SpecialWikidataConstraintReport extends SpecialPage {
 
+    private $entityLookup;
     private $output = '';
 
     function __construct() {
         parent::__construct( 'ConstraintReport' );
+        $this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
     }
 
     /**
@@ -23,7 +26,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
      * @return string
      */
     function getGroupName() {
-        return "wikidataquality";
+        return 'wikidataquality';
     }
 
     /**
@@ -40,7 +43,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
      *
      * @param string|null $par
      */
-    function execute( $par ) {
+    public function execute( $par ) {
         $this->setHeaders();
 
         // Get output
@@ -48,24 +51,25 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 
         $out->addHTML( $this->getHtmlForm() );
 
-        if( !empty($_POST['entityID'] ) ) {
+        if( !empty( $_POST['entityID'] ) ) {
             $constraintChecker = new ConstraintChecker();
-            $results = $constraintChecker->execute( $_POST['entityID'] );
+            $entity = $this->entityLookup->getEntity( $this->getEntityID( $_POST['entityID'] ) );
+            $results = $constraintChecker->execute( $entity );
         } else {
             return;
         }
 
         if( $results ) {
-            $out->addHTML( Html::openElement( 'br' ) . Html::openElement( 'h1' ) . $this->msg( 'wikidataquality-constraint-result-headline' ) . $_POST['entityID'] .  Html::closeElement( 'h1' ) );
+            $out->addHTML( Html::openElement( 'br' ) . Html::openElement( 'h1' ) . $this->msg( 'wikidataquality-constraint-result-headline' ) . $entity->getId()->getSerialization() . " (" . $entity->getLabel('en') . ")" . Html::closeElement( 'h1' ) );
             $this->output .= $this->getTableHeader();
             foreach( $results as $checkResult) {
                 $this->addOutputRow( $checkResult );
             }
             $this->output .= "|-\n|}"; // close Table
-            $out->addWikiText($this->output);
+            $out->addWikiText( $this->output );
             return;
         } else {
-            $out->addHTML(Html::openElement( 'p' ) . $this->msg( 'wikidataquality-constraint-result-entity-not-existent')->text(). Html::closeElement( 'p' ) );
+            $out->addHTML( Html::openElement( 'p' ) . $this->msg( 'wikidataquality-constraint-result-entity-not-existent' )->text(). Html::closeElement( 'p' ) );
         }
 
     }
@@ -73,38 +77,50 @@ class SpecialWikidataConstraintReport extends SpecialPage {
     private function getHtmlForm()
     {
         return Html::openElement( 'p' )
-                . $this->msg( 'wikidataquality-constraint-instructions' )->text()
-                . Html::element( 'br' )
-                . $this->msg( 'wikidataquality-constraint-instructions-example' )->text()
-                . Html::closeElement( 'p' )
-                . Html::openElement(
-                    'form',
-                    array(
-                        'action' => $_SERVER[ 'PHP_SELF' ],
-                        'method' => 'post'
-                    )
+            . $this->msg( 'wikidataquality-constraint-instructions' )->text()
+            . Html::element( 'br' )
+            . $this->msg( 'wikidataquality-constraint-instructions-example' )->text()
+            . Html::closeElement( 'p' )
+            . Html::openElement(
+                'form',
+                array(
+                    'action' => $_SERVER[ 'PHP_SELF' ],
+                    'method' => 'post'
                 )
-                . Html::input(
-                    'entityID',
-                    '',
-                    'text',
-                    array(
-                        'id' => 'wdq-constraint-entityId',
-                        'placeholder' => $this->msg( 'wikidataquality-constraint-form-id-placeholder' )->text()
-                    )
+            )
+            . Html::input(
+                'entityID',
+                '',
+                'text',
+                array(
+                    'id' => 'wdq-constraint-entityId',
+                    'placeholder' => $this->msg( 'wikidataquality-constraint-form-id-placeholder' )->text()
                 )
-                . Html::input(
-                    'submit',
-                    $this->msg( 'wikidataquality-constraint-form-submit-label' )->text(),
-                    'submit',
-                    array(
-                        'id' => 'wbq-constraint-submit'
-                    )
+            )
+            . Html::input(
+                'submit',
+                $this->msg( 'wikidataquality-constraint-form-submit-label' )->text(),
+                'submit',
+                array(
+                    'id' => 'wbq-constraint-submit'
                 )
-                . Html::closeElement( 'form' );
+            )
+            . Html::closeElement( 'form' );
     }
 
-    function addOutputRow( $result ) {
+    private function getEntityID( $entityId )
+    {
+        switch( strtoupper( $entityId[0] ) ) {
+            case 'Q':
+                return new ItemId( $entityId );
+            case 'P':
+                return new PropertyId( $entityId );
+            default:
+                return null;
+        }
+    }
+
+    private function addOutputRow( $result ) {
         $lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
         $this->output .=
             "|-\n"
