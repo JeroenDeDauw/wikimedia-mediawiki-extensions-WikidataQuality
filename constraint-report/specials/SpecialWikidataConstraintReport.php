@@ -124,7 +124,7 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
     private function addOutputRow( $result ) {
         $this->output .=
             "|-\n"
-            . "| " . $result->getPropertyId() . " (" . $this->entityLookup->getEntity($result->getPropertyId())->getLabel('en') . ") "
+            . "| " . $this->entityIdLinkFormatter->formatEntityId( $result->getPropertyId() )
             . "|| " . $result->getDataValue() . " "
             . "|| " . $result->getConstraintName() . " "
             . "|| <nowiki>" . $this->limitOutput( $result->getParameter() ) . "</nowiki> ";
