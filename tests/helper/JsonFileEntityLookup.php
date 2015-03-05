@@ -35,6 +35,7 @@ class JsonFileEntityLookup implements EntityLookup {
         if( $this->hasEntity( $entityId ) ) {
             $filePath = $this->buildFilePath( $entityId );
             $serializedEntity = json_decode( file_get_contents( $filePath ), true );
+            //fwrite(STDERR, "\n" . print_r($serializedEntity, TRUE));
             if ( $serializedEntity ) {
                 $deserializerFactory = new DeserializerFactory(
                     new DataValueDeserializer(
@@ -74,7 +75,8 @@ class JsonFileEntityLookup implements EntityLookup {
      * @return string
      */
     private function buildFilePath( EntityId $entityId ) {
-        $filePath = sprintf('%s/%s.json', $this->baseDir, (string)$entityId);
+        $filePath = sprintf('%s\\%s.json', $this->baseDir, (string)$entityId);
+        //fwrite(STDERR, "\n" . print_r($filePath, TRUE));
         return $filePath;
     }
 }

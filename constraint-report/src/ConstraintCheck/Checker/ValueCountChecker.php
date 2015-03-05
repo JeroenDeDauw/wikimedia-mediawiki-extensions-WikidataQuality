@@ -30,7 +30,7 @@ class ValueCountChecker {
     }
 
     public function checkMultiValueConstraint( $propertyId, $dataValueString ) {
-        if( $this->propertyCount[$propertyId->getNumericId()] <= 1 ) {
+        if( $this->getPropertyCount( $this->statements )[$propertyId->getNumericId()] <= 1 ) {
             $status = 'violation';
         } else {
             $status = 'compliance';
@@ -41,7 +41,7 @@ class ValueCountChecker {
 
     // TODO
     public function checkUniqueValueConstraint( $propertyId, $dataValueString ) {
-        return new CheckResult($propertyId, $dataValueString, 'Unique value', '(none)', 'todo' );
+        return new CheckResult( $propertyId, $dataValueString, 'Unique value', '(none)', 'todo' );
     }
 
     private function getPropertyCount( $statements )
@@ -52,7 +52,7 @@ class ValueCountChecker {
                 if( $statement->getRank() == Statement::RANK_DEPRECATED )
                     continue;
 
-                if( array_key_exists($statement->getPropertyId()->getNumericId(), $this->propertyCount) ) {
+                if( array_key_exists( $statement->getPropertyId()->getNumericId(), $this->propertyCount ) ) {
                     $this->propertyCount[$statement->getPropertyId()->getNumericId()]++;
                 } else {
                     $this->propertyCount[$statement->getPropertyId()->getNumericId()] = 1;

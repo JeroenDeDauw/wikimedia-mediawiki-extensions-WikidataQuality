@@ -2,52 +2,28 @@
 
 namespace WikidataQuality\ConstraintReport\Test\QualifierChecker;
 
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\ItemId;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\QualifierChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
-use Wikibase\DataModel\DeserializerFactory;
-use DataValues\Deserializers\DataValueDeserializer;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use WikidataQuality\Tests\Helper\JsonFileEntityLookup;
 
 class QualifierCheckerTest extends \PHPUnit_Framework_TestCase
 {
     private $helper;
     private $qualifiersList;
+    private $lookup;
 
     protected function setUp() {
         parent::setUp();
         $this->helper = new ConstraintReportHelper();
-        $this->qualifiersList = '{{P|580}}, {{P|582}}, {{P|1365}}, {{P|1366}}, {{P|642}}, {{P|805}}';
+        $this->qualifiersList = array('P580', 'P582', 'P1365', 'P1366', 'P642', 'P805');
+        $this->lookup = new JsonFileEntityLookup(  __DIR__ );
     }
 
     protected function tearDown() {
         unset($this->helper);
         unset($this->qualifiersList);
         parent::tearDown();
-    }
-
-    private function getEntity( $entityJson )
-    {
-        if ( $entityJson ) {
-            $deserializerFactory = new DeserializerFactory(
-                new DataValueDeserializer(
-                    array(
-                        'boolean' => 'DataValues\BooleanValue',
-                        'number' => 'DataValues\NumberValue',
-                        'string' => 'DataValues\StringValue',
-                        'unknown' => 'DataValues\UnknownValue',
-                        'globecoordinate' => 'DataValues\GlobeCoordinateValue',
-                        'monolingualtext' => 'DataValues\MonolingualTextValue',
-                        'multilingualtext' => 'DataValues\MultilingualTextValue',
-                        'quantity' => 'DataValues\QuantityValue',
-                        'time' => 'DataValues\TimeValue',
-                        'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
-                    )
-                ),
-                new BasicEntityIdParser()
-            );
-            return $deserializerFactory->newEntityDeserializer()->deserialize( $entityJson );
-        }
     }
 
     private function getFirstStatement( $entity )
@@ -59,9 +35,7 @@ class QualifierCheckerTest extends \PHPUnit_Framework_TestCase
 
     public function testQualifierConstraintQualifierProperty()
     {
-        $file = __DIR__ . './Q1.json';
-        $json = json_decode(file_get_contents($file), true)[ 'entities' ][ 'Q1' ];
-        $entity = $this->getEntity( $json );
+        $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
         $qualifierChecker = new QualifierChecker( $entity->getStatements(), $this->helper );
 
         $checkResult = $qualifierChecker->checkQualifierConstraint( 'P580', 'Q1384' );
@@ -70,9 +44,7 @@ class QualifierCheckerTest extends \PHPUnit_Framework_TestCase
 
     public function testQualifiersConstraint()
     {
-        $file = __DIR__ . './Q2.json';
-        $json = json_decode(file_get_contents($file), true)[ 'entities' ][ 'Q2' ];
-        $entity = $this->getEntity( $json );
+        $entity = $this->lookup->getEntity( new ItemId( 'Q2' ) );
         $qualifierChecker = new QualifierChecker( $entity->getStatements(), $this->helper );
 
         $checkResult = $qualifierChecker->checkQualifiersConstraint( 'P39', 'Q11696', $this->getFirstStatement( $entity ),  $this->qualifiersList);
@@ -81,9 +53,7 @@ class QualifierCheckerTest extends \PHPUnit_Framework_TestCase
 
     public function testQualifiersConstraintToManyQualifiers()
     {
-        $file = __DIR__ . './Q3.json';
-        $json = json_decode(file_get_contents($file), true)[ 'entities' ][ 'Q3' ];
-        $entity = $this->getEntity( $json );
+        $entity = $this->lookup->getEntity( new ItemId( 'Q3' ) );
         $qualifierChecker = new QualifierChecker( $entity->getStatements(), $this->helper );
         $checkResult = $qualifierChecker->checkQualifiersConstraint( 'P39', 'Q11696', $this->getFirstStatement( $entity ),  $this->qualifiersList);
         $this->assertEquals( 'violation', $checkResult->getStatus(), "check should not comply" );
