@@ -38,13 +38,10 @@ class RangeChecker {
     }
 
 
-    public function checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $property, $minimum_quantity, $maximum_quantity, $minimum_date, $maximum_date ) {
-        if( $minimum_quantity != null && $maximum_quantity != null && $minimum_date == null && $maximum_date == null ) {
+    public function checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $property, $minimum_quantity, $maximum_quantity ) {
+        if( $minimum_quantity != null && $maximum_quantity != null ) {
             $min = $minimum_quantity;
             $max = $maximum_quantity;
-        } else if( $minimum_quantity == null && $maximum_quantity == null && $minimum_date != null && $maximum_date != null ) {
-            $min = $minimum_date;
-            $max = $maximum_date;
         } else {
             return new CheckResult( $propertyId, $dataValueString, 'Diff within range', 'property: ' . $property . ', (erroneous min/max)', 'error' );
         }

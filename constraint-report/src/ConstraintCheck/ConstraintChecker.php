@@ -87,6 +87,10 @@ class ConstraintChecker {
             foreach( $this->statements as $statement ) {
 
                 $claim = $statement->getClaim();
+
+                //skip somevalue and novalue cases (todo: handle in a better way)
+                if( $claim->getMainSnak()->getType() != 'value' ) continue;
+
                 $propertyId = $claim->getPropertyId();
                 $numericPropertyId = $propertyId->getNumericId();
                 $dataValueString = $this->helper->getDataValueString( $claim );
@@ -170,7 +174,7 @@ class ConstraintChecker {
                             break;
                         case "Diff within range":
                             $result[] = $this->getRangeChecker()
-                                ->checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $row->property, $row->minimum_quantity, $row->maximum_quantity, $row->minimum_date, $row->maximum_date );
+                                ->checkDiffWithinRangeConstraint( $propertyId, $dataValueString, $row->property, $row->minimum_quantity, $row->maximum_quantity );
                             break;
 
                         // Type Checkers
