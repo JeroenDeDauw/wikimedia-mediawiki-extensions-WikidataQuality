@@ -36,4 +36,23 @@ abstract class DataValueComparerTestBase extends \PHPUnit_Framework_TestCase
      * @return DataValueComparer
      */
     protected abstract function createComparer( $dumpMetaInformation, $localValue, $externalValues );
+
+
+    /**
+     * Returns DumpMetaInformation mock with given language
+     * @param $language
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function getDumpMetaInformationMock( $language )
+    {
+        $mock = $this->getMockBuilder( 'WikidataQuality\ExternalValidation\DumpMetaInformation' )
+            ->setMethods( array( 'getLanguage' ) )
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mock->expects( $this->any() )
+            ->method( 'getLanguage' )
+            ->willReturn( $language );
+
+        return $mock;
+    }
 }

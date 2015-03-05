@@ -5,17 +5,14 @@ namespace WikidataQuality\ExternalValidation\Tests\Comparer;
 
 use DataValues\MonolingualTextValue;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueComparer;
-use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
+use WikidataQuality\ExternalValidation\DumpMetaInformation;
 
 
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueComparer
  *
- * @uses   WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
+ * @uses   WikidataQuality\ExternalValidation\DumpMetaInformation
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
- *
- * @group WikidataQuality
- * @group WikidataQuality\ExternalValidation
  *
  * @author BP2014N1
  * @license GNU GPL v2+
@@ -28,10 +25,14 @@ class MonolingualTextValueComparerTest extends DataValueComparerTestBase
      */
     public function executeDataProvider()
     {
+        $dumpMetaInformationEn = $this->getDumpMetaInformationMock( 'en' );
+        $dumpMetaInformationDe = $this->getDumpMetaInformationMock( 'de' );
+        $localValue = new MonolingualTextValue( 'en', 'foo' );
+
         return array(
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
-                new MonolingualTextValue( 'en', 'foo' ),
+                $dumpMetaInformationEn,
+                $localValue,
                 array( 'foo', 'bar' ),
                 true,
                 array(
@@ -40,8 +41,8 @@ class MonolingualTextValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
-                new MonolingualTextValue( 'en', 'foo' ),
+                $dumpMetaInformationEn,
+                $localValue,
                 array( 'foobar', 'bar' ),
                 false,
                 array(
@@ -50,8 +51,8 @@ class MonolingualTextValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'json', 'de', 'Y-m-d', 'TestDB' ),
-                new MonolingualTextValue( 'en', 'foo' ),
+                $dumpMetaInformationDe,
+                $localValue,
                 array( 'foo', 'bar' ),
                 true,
                 array(
@@ -60,8 +61,8 @@ class MonolingualTextValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
-                new MonolingualTextValue( 'en', 'foo' ),
+                $dumpMetaInformationEn,
+                $localValue,
                 null,
                 false,
                 null

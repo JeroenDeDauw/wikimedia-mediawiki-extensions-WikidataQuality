@@ -110,7 +110,7 @@ class SpecialCrossCheck extends SpecialWikidataQualityPage
                         . '| ' . $this->entityIdLinkFormatter->formatEntityId( $result->getPropertyId() ) . "\n"
                         . '| ' . $this->formatDataValues( $result->getLocalValue() ) . "\n"
                         . '| ' . $this->formatDataValues( $result->getExternalValues() ) . "\n"
-                        . '| ' . $result->getDataSourceName() . "\n"
+                        . '| ' . $this->entityIdLinkFormatter->formatEntityId( $result->getDumpMetaInformation()->getSourceItemId() ) . "\n"
                         . $status;
                 }
 

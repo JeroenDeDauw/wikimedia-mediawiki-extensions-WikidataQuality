@@ -9,21 +9,25 @@ use Wikibase\Lib\Serializers\SerializerObject;
 
 /**
  * Class CompareResultSerializer
- * @package WikidataQuality\ExternalValidation\Api
+ * @package WikidataQuality\ExternalValidation\Api\Serializer
  * @author BP2014N1
  * @license GNU GPL v2+
  */
 class CompareResultSerializer extends SerializerObject
 {
     private $dataValueSerializer;
+    private $dumpMetaInformationSerializer;
 
 
-    public function __construct()
+    public function __construct( $options = null )
     {
-        parent::__construct();
+        parent::__construct( $options );
 
         // Get data value serializer
-        $this->dataValueSerializer = new DataValueSerializer();
+        $this->dataValueSerializer = new DataValueSerializer( $options );
+
+        // Get dump meta information serializer
+        $this->dumpMetaInformationSerializer = new DumpMetaInformationSerializer( $options );
     }
 
 
@@ -52,7 +56,7 @@ class CompareResultSerializer extends SerializerObject
             'localValue' => $localValue,
             'externalValues' => $externalValues,
             'referencesMissing' => $result->areReferencesMissing(),
-            'dataSourceName' => $result->getDataSourceName()
+            'dataSource' => $this->dumpMetaInformationSerializer->getSerialized( $result->getDumpMetaInformation() )
         );
 
         return $serialization;

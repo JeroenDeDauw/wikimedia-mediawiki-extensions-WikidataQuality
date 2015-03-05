@@ -10,9 +10,6 @@ use WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\MappingEvalua
  *
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\XPathEvaluator
  *
- * @group WikidataQuality
- * @group WikidataQuality\ExternalValidation
- *
  * @author BP2014N1
  * @license GNU GPL v2+
  */

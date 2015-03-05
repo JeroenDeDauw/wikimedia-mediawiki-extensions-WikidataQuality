@@ -6,18 +6,14 @@ namespace WikidataQuality\ExternalValidation\Tests\Comparer;
 use DataValues\MonolingualTextValue;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
 use WikidataQuality\Tests\Helper\JsonFileEntityLookup;
 
 
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\EntityIdValueComparer
  *
- * @uses   WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
+ * @uses   WikidataQuality\ExternalValidation\DumpMetaInformation
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
- *
- * @group WikidataQuality
- * @group WikidataQuality\ExternalValidation
  *
  * @author BP2014N1
  * @license GNU GPL v2+
@@ -30,10 +26,16 @@ class EntityIdValueComparerTest extends DataValueComparerTestBase
      */
     public function executeDataProvider()
     {
+        $dumpMetaInformationEn = $this->getDumpMetaInformationMock( 'en' );
+        $dumpMetaInformationDe = $this->getDumpMetaInformationMock( 'de' );
+        $dumpMetaInformationEs = $this->getDumpMetaInformationMock( 'es' );
+        $localValueQ1 = new EntityIdValue( new ItemId( 'Q1' ) );
+        $localValueQ2 = new EntityIdValue( new ItemId( 'Q2' ) );
+
         return array(
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
-                new EntityIdValue( new ItemId( 'Q1' ) ),
+                $dumpMetaInformationEn,
+                $localValueQ1,
                 array( 'foo' ),
                 true,
                 array (
@@ -41,8 +43,8 @@ class EntityIdValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
-                new EntityIdValue( new ItemId( 'Q1' ) ),
+                $dumpMetaInformationEn,
+                $localValueQ1,
                 array( 'baz' ),
                 false,
                 array(
@@ -50,8 +52,8 @@ class EntityIdValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'json', 'de', 'Y-m-d', 'TestDB' ),
-                new EntityIdValue( new ItemId( 'Q1' ) ),
+                $dumpMetaInformationDe,
+                $localValueQ1,
                 array( 'Fubar' ),
                 true,
                 array(
@@ -59,8 +61,8 @@ class EntityIdValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'json', 'es', 'Y-m-d', 'TestDB' ),
-                new EntityIdValue( new ItemId( 'Q1' ) ),
+                $dumpMetaInformationEs,
+                $localValueQ1,
                 array( 'foo' ),
                 false,
                 array(
@@ -68,15 +70,15 @@ class EntityIdValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
-                new EntityIdValue( new ItemId( 'Q1' ) ),
+                $dumpMetaInformationEn,
+                $localValueQ1,
                 null,
                 false,
                 null
             ),
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
-                new EntityIdValue( new ItemId( 'Q2' ) ),
+                $dumpMetaInformationEn,
+                $localValueQ2,
                 array( 'foo' ),
                 false,
                 array(

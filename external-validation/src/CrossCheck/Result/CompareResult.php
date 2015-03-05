@@ -48,10 +48,10 @@ class CompareResult
     private $referencesMissing;
 
     /**
-     * Name of data source.
-     * @var string
+     * Meta information about the data source.
+     * @var DumpMetaInformation
      */
-    private $dataSourceName;
+    private $dumpMetaInformation;
 
 
     /**
@@ -61,9 +61,9 @@ class CompareResult
      * @param array $externalValues
      * @param bool $dataMismatch
      * @param bool $referencesMissing
-     * @param string $dataSourceName
+     * @param DumpMetaInformation $dumpMetaInformation
      */
-    public function __construct( $propertyId, $claimGuid, $localValue, $externalValues, $dataMismatch, $referencesMissing, $dataSourceName )
+    public function __construct( $propertyId, $claimGuid, $localValue, $externalValues, $dataMismatch, $referencesMissing, $dumpMetaInformation )
     {
         $this->propertyId = $propertyId;
         $this->claimGuid = $claimGuid;
@@ -71,7 +71,7 @@ class CompareResult
         $this->externalValues = $externalValues;
         $this->dataMismatch = $dataMismatch;
         $this->referencesMissing = $referencesMissing;
-        $this->dataSourceName = $dataSourceName;
+        $this->dumpMetaInformation = $dumpMetaInformation;
     }
 
     /**
@@ -123,10 +123,10 @@ class CompareResult
     }
 
     /**
-     * @return string
+     * @return DumpMetaInformation
      */
-    public function getDataSourceName()
+    public function getDumpMetaInformation()
     {
-        return $this->dataSourceName;
+        return $this->dumpMetaInformation;
     }
 }
