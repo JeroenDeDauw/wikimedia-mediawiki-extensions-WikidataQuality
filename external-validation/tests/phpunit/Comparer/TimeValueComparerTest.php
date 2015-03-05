@@ -5,17 +5,14 @@ namespace WikidataQuality\ExternalValidation\Tests\Comparer;
 
 use DataValues\TimeValue;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer;
-use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
+use WikidataQuality\ExternalValidation\DumpMetaInformation;
 
 
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer
  *
- * @uses   WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
+ * @uses   WikidataQuality\ExternalValidation\DumpMetaInformation
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
- *
- * @group WikidataQuality
- * @group WikidataQuality\ExternalValidation
  *
  * @author BP2014N1
  * @license GNU GPL v2+
@@ -28,10 +25,14 @@ class TimeValueComparerTest extends DataValueComparerTestBase
      */
     public function executeDataProvider()
     {
+        $dumpMetaInformation = $this->getDumpMetaInformationMock( 'en' );
+        $localValue1955 = new TimeValue( '+0000000000001955-03-11T00:00:00Z', 0, 0, 0, 11, 'http://www.wikidata.org/entity/Q1985727' );
+        $localValue2015 = new TimeValue( '+0000000000002015-00-00T00:00:00Z', 0, 0, 0, 9, 'http://www.wikidata.org/entity/Q1985727' );
+
         return array(
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
-                new TimeValue( '+0000000000001955-03-11T00:00:00Z', 0, 0, 0, 11, 'http://www.wikidata.org/entity/Q1985727' ),
+                $dumpMetaInformation,
+                $localValue1955,
                 array( '11.03.1955' ),
                 true,
                 array(
@@ -39,8 +40,8 @@ class TimeValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
-                new TimeValue( '+0000000000001955-03-11T00:00:00Z', 0, 0, 0, 11, 'http://www.wikidata.org/entity/Q1985727' ),
+                $dumpMetaInformation,
+                $localValue1955,
                 array( '1955-03-11' ),
                 true,
                 array(
@@ -48,8 +49,8 @@ class TimeValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
-                new TimeValue( '+0000000000001955-03-11T00:00:00Z', 0, 0, 0, 11, 'http://www.wikidata.org/entity/Q1985727' ),
+                $dumpMetaInformation,
+                $localValue1955,
                 array( '1991-05-23' ),
                 false,
                 array(
@@ -57,8 +58,8 @@ class TimeValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'json', 'de', 'Y-m-d', 'TestDB' ),
-                new TimeValue( '+0000000000002015-03-11T00:00:00Z', 0, 0, 0, 9, 'http://www.wikidata.org/entity/Q1985727' ),
+                $dumpMetaInformation,
+                $localValue2015,
                 array( '2015' ),
                 true,
                 array(
@@ -66,8 +67,8 @@ class TimeValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
-                new TimeValue( '+0000000000001955-03-11T00:00:00Z', 0, 0, 0, 11, 'http://www.wikidata.org/entity/Q1985727' ),
+                $dumpMetaInformation,
+                $localValue1955,
                 null,
                 false,
                 null

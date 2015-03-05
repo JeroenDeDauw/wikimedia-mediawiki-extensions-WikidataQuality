@@ -11,9 +11,6 @@ use WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\XPathEvaluato
  *
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\MappingEvaluator
  *
- * @group WikidataQuality
- * @group WikidataQuality\ExternalValidation
- *
  * @author BP2014N1
  * @license GNU GPL v2+
  */

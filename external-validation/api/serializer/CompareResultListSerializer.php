@@ -8,12 +8,24 @@ use Wikibase\Lib\Serializers\SerializerObject;
 
 /**
  * Class CompareResultListSerializer
- * @package WikidataQuality\ExternalValidation\Api
+ * @package WikidataQuality\ExternalValidation\Api\Serializer
  * @author BP2014N1
  * @license GNU GPL v2+
  */
 class CompareResultListSerializer extends SerializerObject
 {
+    private $compareResultSerializer;
+
+
+    public function __construct( $options = null )
+    {
+        parent::__construct( $options );
+
+        // Get compare result serializer
+        $this->compareResultSerializer = new CompareResultSerializer( $options );
+    }
+
+
     /**
      * @param \CompareResultList $resultList
      */
@@ -33,8 +45,7 @@ class CompareResultListSerializer extends SerializerObject
 
             // Serialize single CompareResults
             foreach ( $resultList->getWithPropertyId( $propertyId ) as $result ) {
-                $compareResultSerializer = new CompareResultSerializer( $this->getOptions() );
-                $serialization[ $index ][ ] = $compareResultSerializer->getSerialized( $result );
+                $serialization[ $index ][ ] = $this->compareResultSerializer->getSerialized( $result );
             }
         }
 

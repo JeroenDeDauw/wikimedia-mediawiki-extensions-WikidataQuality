@@ -6,17 +6,14 @@ namespace WikidataQuality\ExternalValidation\Tests\Comparer;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueComparer;
-use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
+use WikidataQuality\ExternalValidation\DumpMetaInformation;
 
 
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueComparer
  *
- * @uses   WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
+ * @uses   WikidataQuality\ExternalValidation\DumpMetaInformation
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
- *
- * @group WikidataQuality
- * @group WikidataQuality\ExternalValidation
  *
  * @author BP2014N1
  * @license GNU GPL v2+
@@ -29,10 +26,13 @@ class GlobeCoordinateValueComparerTest extends DataValueComparerTestBase
      */
     public function executeDataProvider()
     {
+        $dumpMetaInformation = $this->getDumpMetaInformationMock( 'en' );
+        $localValue = new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1 );
+
         return array(
             array(
-                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
-                new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1 ),
+                $dumpMetaInformation,
+                $localValue,
                 array( '64.000000 N, 26.000000 E' ),
                 true,
                 array(
@@ -40,8 +40,8 @@ class GlobeCoordinateValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
-                new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1 ),
+                $dumpMetaInformation,
+                $localValue,
                 array( '64 N, 26 E' ),
                 true,
                 array(
@@ -49,8 +49,8 @@ class GlobeCoordinateValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
-                new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1 ),
+                $dumpMetaInformation,
+                $localValue,
                 array( '42.000000 N, 32.000000 E' ),
                 false,
                 array(
@@ -58,8 +58,8 @@ class GlobeCoordinateValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
-                new GlobeCoordinateValue( new LatLongValue( 64, 26 ), 1 ),
+                $dumpMetaInformation,
+                $localValue,
                 null,
                 false,
                 null

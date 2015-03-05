@@ -14,17 +14,14 @@ use DataValues\UnknownValue;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer;
-use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
+use WikidataQuality\ExternalValidation\DumpMetaInformation;
 
 
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
  *
- * @uses   WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
+ * @uses   WikidataQuality\ExternalValidation\DumpMetaInformation
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\MultilingualTextValueComparer
- *
- * @group WikidataQuality
- * @group WikidataQuality\ExternalValidation
  *
  * @author BP2014N1
  * @license GNU GPL v2+
@@ -51,7 +48,7 @@ class DataValueComparerTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                $this->getDumpMetaInformationMock(),
                 new StringValue( 'foo' ),
                 array( 'foo', 'bar' )
             )
@@ -75,15 +72,18 @@ class DataValueComparerTest extends \PHPUnit_Framework_TestCase
      */
     public function constructInvalidArgumentsDataProvider()
     {
+        $dumpMetaInformation = $this->getDumpMetaInformationMock();
+        $localValue = new StringValue( 'foo' );
+
         return array(
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
-                new StringValue( 'foo' ),
+                $dumpMetaInformation,
+                $localValue,
                 'foo'
             ),
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
-                new StringValue( 'foo' ),
+                $dumpMetaInformation,
+                $localValue,
                 42
             )
         );
@@ -109,53 +109,55 @@ class DataValueComparerTest extends \PHPUnit_Framework_TestCase
      */
     public function getComparerDataProvider()
     {
+        $dumpMetaInformation = $this->getDumpMetaInformationMock();
+
         return array(
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                $dumpMetaInformation,
                 new EntityIdValue( new ItemId( 'Q42' ) ),
-                array( 'foo', 'bar' ),
+                array(),
                 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\EntityIdValueComparer'
             ),
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                $dumpMetaInformation,
                 new MonolingualTextValue( 'en', 'foo' ),
-                array( 'foo', 'bar' ),
+                array(),
                 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\MonolingualTextValueComparer'
             ),
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                $dumpMetaInformation,
                 new MultilingualTextValue( array( new MonolingualTextValue( 'en', 'foo' ) ) ),
-                array( 'foo', 'bar' ),
+                array(),
                 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\MultilingualTextValueComparer'
             ),
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                $dumpMetaInformation,
                 QuantityValue::newFromNumber( 42, '1' ),
-                array( 'foo', 'bar' ),
+                array(),
                 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\QuantityValueComparer'
             ),
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                $dumpMetaInformation,
                 new StringValue( 'foo' ),
-                array( 'foo', 'bar' ),
+                array(),
                 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer'
             ),
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                $dumpMetaInformation,
                 new TimeValue( '+00000002013-12-07T00:00:00Z', 0, 0, 0, 11, 'http://www.wikidata.org/entity/Q1985727' ),
-                array( 'foo', 'bar' ),
+                array(),
                 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\TimeValueComparer'
             ),
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                $dumpMetaInformation,
                 new GlobeCoordinateValue( new LatLongValue( 52.5, 13.3 ), 0.016 ),
-                array( 'foo', 'bar' ),
+                array(),
                 'WikidataQuality\ExternalValidation\CrossCheck\Comparer\GlobeCoordinateValueComparer'
             ),
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                $dumpMetaInformation,
                 new UnknownValue( null ),
-                array( 'foo', 'bar' ),
+                array(),
                 null
             )
         );
@@ -175,5 +177,18 @@ class DataValueComparerTest extends \PHPUnit_Framework_TestCase
             'WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer',
             array( $dumpMetaInformation, $localValue, $externalValues )
         );
+    }
+
+    /**
+     * Returns DumpMetaInformation mock.
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    public function getDumpMetaInformationMock()
+    {
+        $mock = $this->getMockBuilder( 'WikidataQuality\ExternalValidation\DumpMetaInformation' )
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        return $mock;
     }
 }

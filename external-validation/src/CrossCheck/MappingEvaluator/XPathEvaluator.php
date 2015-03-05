@@ -2,9 +2,10 @@
 
 namespace WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator;
 
+
 use DOMNode;
 use DOMXPath;
-use DomDocument;
+
 
 /**
  * Class XPathEvaluator
@@ -35,7 +36,7 @@ class XPathEvaluator extends MappingEvaluator
     {
         parent::__construct( $externalData );
 
-        $doc = new DomDocument();
+        $doc = new \DomDocument();
         if ( !@$doc->loadXML( $this->externalData ) ) {
             throw new \InvalidArgumentException( '$externalData must be well-formed xml.' );
         }
