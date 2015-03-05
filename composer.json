@@ -17,6 +17,7 @@
   },
   "autoload": {
     "psr-4": {
+      "WikidataQuality\\": "src/",
       "WikidataQuality\\Specials\\": "specials",
       "WikidataQuality\\Tests\\": "tests",
 

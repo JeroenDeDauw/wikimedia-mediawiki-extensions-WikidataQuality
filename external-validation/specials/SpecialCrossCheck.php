@@ -6,6 +6,7 @@ namespace WikidataQuality\ExternalValidation\Specials;
 use Html;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use WikidataQuality\ExternalValidation\CrossCheck\CrossChecker;
+use WikidataQuality\Html\HtmlTable;
 use WikidataQuality\Specials\SpecialWikidataQualityPage;
 
 
@@ -92,31 +93,37 @@ class SpecialCrossCheck extends SpecialWikidataQualityPage
             );
 
             if ( $results ) {
-                // Head of table
-                $tableOutput =
-                    "{| class=\"wikitable sortable\"\n"
-                    . '! ' . $this->msg( 'datatypes-type-wikibase-property' )->text() . " !! class=\"unsortable\" | " . $this->msg( 'wikidataquality-value' )->text() . " !! class=\"unsortable\" | " . $this->msg( 'wikidataquality-crosscheck-comparative-value' )->text() . " !! " . $this->msg( 'wikidataquality-crosscheck-external-source' )->text() . " !! " . $this->msg( 'wikidataquality-status' )->text() . "\n";
+                $table = new HtmlTable(
+                    array(
+                        $this->msg( 'datatypes-type-wikibase-property' )->text(),
+                        $this->msg( 'wikidataquality-value' )->text(),
+                        $this->msg( 'wikidataquality-crosscheck-comparative-value' )->text(),
+                        $this->msg( 'wikidataquality-crosscheck-external-source' )->text(),
+                        $this->msg( 'wikidataquality-status' )->text()
+                    ),
+                    true
+                );
 
                 foreach ( $results as $result ) {
                     if ( $result->hasDataMismatchOccurred() ) {
-                        $status = "| <span class=\"wdq-crosscheck-error\"> " . $this->msg( 'wikidataquality-crosscheck-result-mismatch' )->text() . " <b>(-)</b></span>\n";
+                        $status = "<span class=\"wdq-crosscheck-error\"> " . $this->msg( 'wikidataquality-crosscheck-result-mismatch' )->text() . " <b>(-)</b></span>";
                     } else {
-                        $status = "| <span class=\"wdq-crosscheck-success\">" . $this->msg( 'wikidataquality-crosscheck-result-success' )->text() . " <b>(+)</b></span>\n";
+                        $status = "<span class=\"wdq-crosscheck-success\">" . $this->msg( 'wikidataquality-crosscheck-result-success' )->text() . " <b>(+)</b></span>";
                     }
 
                     // Body of table
-                    $tableOutput .=
-                        "|-\n"
-                        . '| ' . $this->entityIdLinkFormatter->formatEntityId( $result->getPropertyId() ) . "\n"
-                        . '| ' . $this->formatDataValues( $result->getLocalValue() ) . "\n"
-                        . '| ' . $this->formatDataValues( $result->getExternalValues() ) . "\n"
-                        . '| ' . $this->entityIdLinkFormatter->formatEntityId( $result->getDumpMetaInformation()->getSourceItemId() ) . "\n"
-                        . $status;
+                    $table->appendRow(
+                        array(
+                            $this->entityIdHtmlLinkFormatter->formatEntityId( $result->getPropertyId() ),
+                            $this->formatDataValues( $result->getLocalValue() ),
+                            $this->formatDataValues( $result->getExternalValues() ),
+                            $this->entityIdHtmlLinkFormatter->formatEntityId( $result->getDumpMetaInformation()->getSourceItemId() ),
+                            $status
+                        )
+                    );
                 }
 
-                // End of table
-                $tableOutput .= "|-\n|}";
-                $out->addWikiText( $tableOutput );
+                $out->addHTML( $table->toHtml() );
             } else {
                 $out->addHTML(
                     Html::openElement(
@@ -126,7 +133,7 @@ class SpecialCrossCheck extends SpecialWikidataQualityPage
                         )
                     )
                     . $this->msg( 'wikidataquality-crosscheck-result-item-not-existent' )->text()
-                    . Html::closeElement( 'p ' )
+                    . Html::closeElement( 'p' )
                 );
             }
         }
@@ -147,7 +154,7 @@ class SpecialCrossCheck extends SpecialWikidataQualityPage
         $formattedDataValues = array();
         foreach ( $dataValues as $dataValue ) {
             if ( $dataValue instanceof EntityIdValue ) {
-                $formattedDataValues[ ] = $this->entityIdLinkFormatter->formatEntityId( $dataValue->getEntityId() );
+                $formattedDataValues[ ] = $this->entityIdHtmlLinkFormatter->formatEntityId( $dataValue->getEntityId() );
             } else {
                 $formattedDataValues[ ] = $this->dataValueFormatter->format( $dataValue );
             }
