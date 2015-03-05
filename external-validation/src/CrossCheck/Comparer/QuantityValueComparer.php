@@ -2,13 +2,20 @@
 
 namespace WikidataQuality\ExternalValidation\CrossCheck\Comparer;
 
+
+use ValueParsers\ParserOptions;
+use ValueParsers\QuantityParser;
+use ValueParsers\ValueParser;
+
+
 /**
  * Class QuantityValueComparer
  * @package WikidataQuality\ExternalValidation\CrossCheck\Comparer
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class QuantityValueComparer extends DataValueComparer {
+class QuantityValueComparer extends DataValueComparer
+{
     /**
      * Array of DataValue classes that are supported by the current comparer.
      * @var array
@@ -22,25 +29,32 @@ class QuantityValueComparer extends DataValueComparer {
      */
     public function execute()
     {
-        // Get local bounds
-        $lowerBound = $this->dataValue->getLowerBound()->getValueFloat();
-        $upperBound = $this->dataValue->getUpperBound()->getValueFloat();
+        // Parse external values
+        $this->parseExternalValues();
 
-        // Set local values
-        $ammount = $this->dataValue->getAmount()->getValueFloat();
-        $uncertainty = $this->dataValue->getUncertainty() / 2;
-        $this->localValues = array( "$ammount ±$uncertainty" );
-
-        foreach ( $this->externalValues as $externalValue ) {
-            // Convert given string to float
-            $externalValue = (float)( $externalValue );
-
-            // Compare
-            if( $externalValue >= $lowerBound && $externalValue <= $upperBound ) {
-                return true;
+        // Compare each external value with local value
+        if ( $this->externalValues ) {
+            foreach ( $this->externalValues as $externalValue ) {
+                if ( $externalValue->getLowerBound() <= $this->localValue->getUpperBound() &&
+                    $externalValue->getUpperBound() >= $this->localValue->getLowerBound()
+                ) {
+                    return true;
+                }
             }
         }
 
         return false;
+    }
+
+    /**
+     * Returns parser that is used to parse strings of external values to Wikibase DataValues.
+     * @return GlobeCoordinateParser
+     */
+    protected function getExternalValueParser()
+    {
+        $parserOptions = new ParserOptions();
+        $parserOptions->setOption( ValueParser::OPT_LANG, $this->dumpMetaInformation->getLanguage() );
+
+        return new QuantityParser( $parserOptions );
     }
 }

@@ -30,7 +30,7 @@ class OneOfCheckerTest extends \PHPUnit_Framework_TestCase
     {
         $valueIn = 'Q1';
         $valueNotIn = 'Q9';
-        $values = '{{Q|1}}, {{Q|2}}, {{Q|3}}';
+        $values = array('Q1', 'Q2', 'Q3');
         $this->assertEquals('compliance', $this->oneOfChecker->checkOneOfConstraint(123, $valueIn, $values)->getStatus(), 'check should comply');
         $this->assertEquals('violation', $this->oneOfChecker->checkOneOfConstraint(123, $valueNotIn, $values)->getStatus(), 'check should not comply');
     }

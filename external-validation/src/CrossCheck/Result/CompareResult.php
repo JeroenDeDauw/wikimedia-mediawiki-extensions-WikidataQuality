@@ -3,16 +3,14 @@
 namespace WikidataQuality\ExternalValidation\CrossCheck\Result;
 
 
-use JsonSerializable;
-
-
 /**
  * Class CompareResult
  * @package WikidataQuality\ExternalValidation\CrossCheck\Result
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class CompareResult {
+class CompareResult
+{
     /**
      * Id of the property of the claim, that was compared.
      * @var \PropertyId
@@ -26,13 +24,13 @@ class CompareResult {
     private $claimGuid;
 
     /**
-     * Array of compared local values.
-     * @var array
+     * Wikibase data value
+     * @var DataValue
      */
-    private $localValues;
+    private $localValue;
 
     /**
-     * Array of compared external values.
+     * Data values from external database.
      * @var array
      */
     private $externalValues;
@@ -50,77 +48,85 @@ class CompareResult {
     private $referencesMissing;
 
     /**
-     * Name of data source.
-     * @var string
+     * Meta information about the data source.
+     * @var DumpMetaInformation
      */
-    private $dataSourceName;
+    private $dumpMetaInformation;
 
 
     /**
      * @param $propertyId
      * @param $claimGuid
-     * @param array $localValues
+     * @param DataValue $localValue
      * @param array $externalValues
      * @param bool $dataMismatch
      * @param bool $referencesMissing
-     * @param string $dataSourceName
+     * @param DumpMetaInformation $dumpMetaInformation
      */
-    public function __construct( $propertyId, $claimGuid, $localValues, $externalValues, $dataMismatch, $referencesMissing, $dataSourceName ) {
+    public function __construct( $propertyId, $claimGuid, $localValue, $externalValues, $dataMismatch, $referencesMissing, $dumpMetaInformation )
+    {
         $this->propertyId = $propertyId;
         $this->claimGuid = $claimGuid;
-        $this->localValues = $localValues;
+        $this->localValue = $localValue;
         $this->externalValues = $externalValues;
         $this->dataMismatch = $dataMismatch;
         $this->referencesMissing = $referencesMissing;
-        $this->dataSourceName = $dataSourceName;
+        $this->dumpMetaInformation = $dumpMetaInformation;
     }
 
     /**
      * @return \PropertyId
      */
-    public function getPropertyId() {
+    public function getPropertyId()
+    {
         return $this->propertyId;
     }
 
     /**
      * @return string
      */
-    public function getClaimGuid() {
+    public function getClaimGuid()
+    {
         return $this->claimGuid;
     }
 
     /**
-     * @return array
+     * @return DataValue
      */
-    public function getLocalValues() {
-        return $this->localValues;
+    public function getLocalValue()
+    {
+        return $this->localValue;
     }
 
     /**
      * @return array
      */
-    public function getExternalValues() {
+    public function getExternalValues()
+    {
         return $this->externalValues;
     }
 
     /**
      * @return bool
      */
-    public function hasDataMismatchOccurred() {
+    public function hasDataMismatchOccurred()
+    {
         return $this->dataMismatch;
     }
 
     /**
      * @return bool
      */
-    public function areReferencesMissing() {
+    public function areReferencesMissing()
+    {
         return $this->referencesMissing;
     }
 
     /**
-     * @return string
+     * @return DumpMetaInformation
      */
-    public function getDataSourceName() {
-        return $this->dataSourceName;
+    public function getDumpMetaInformation()
+    {
+        return $this->dumpMetaInformation;
     }
 }

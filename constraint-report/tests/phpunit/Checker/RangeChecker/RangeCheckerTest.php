@@ -49,7 +49,7 @@ class RangeCheckerTest extends \PHPUnit_Framework_TestCase
             return $deserializerFactory->newEntityDeserializer()->deserialize( $entityJson );
         }
     }
-
+/*
     public function testCheckRangeConstraintWithinRange()
     {
         $file = __DIR__ . './Q1.json';
@@ -115,5 +115,5 @@ class RangeCheckerTest extends \PHPUnit_Framework_TestCase
         $checkResult = $this->rangeChecker->checkDiffWithinRangeConstraint( new PropertyId( 'P570' ), '+00000001970-01-01T00:00:00Z', new PropertyId( 'P569' ), 50, 150 );
         $this->assertEquals( 'violation', $checkResult->getStatus(), "check should not comply" );
     }
-
+*/
 }

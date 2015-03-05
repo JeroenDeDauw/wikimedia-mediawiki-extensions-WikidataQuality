@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="tests/bootstrap.php"
+         colors="false"
+         backupGlobals="false"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         forceCoversAnnotation="true"
+         stopOnFailure="false"
+         timeoutForSmallTests="10"
+         timeoutForMediumTests="30"
+         timeoutForLargeTests="60"
+         strict="true"
+         verbose="true">
+    <testsuites>
+        <testsuite name="Common">
+            <directory>tests/phpunit</directory>
+        </testsuite>
+        <testsuite name="ExternalValidation">
+            <directory>external-validation/tests/phpunit</directory>
+        </testsuite>
+        <testsuite name="ConstraintReport">
+            <directory>constraint-report/tests/phpunit</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">constraint-report/src</directory>
+            <directory suffix=".php">constraint-report/specials</directory>
+
+            <directory suffix=".php">external-validation/api</directory>
+            <directory suffix=".php">external-validation/src</directory>
+            <directory suffix=".php">external-validation/specials</directory>
+            <exclude>
+                <file>external-validation/src/CrossCheck/mapping.inc.php</file>
+            </exclude>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-html" target="tests/coverage" />
+    </logging>
+</phpunit>

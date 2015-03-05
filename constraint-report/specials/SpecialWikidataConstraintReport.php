@@ -2,18 +2,22 @@
 
 namespace WikidataQuality\ConstraintReport\Specials;
 
-use SpecialPage;
 use Html;
-use WikidataQuality\ConstraintReport\ConstraintCheck\ConstraintChecker;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\WikibaseRepo;
+use WikidataQuality\ConstraintReport\ConstraintCheck\ConstraintChecker;
+use WikidataQuality\Specials\SpecialWikidataQualityPage;
 
 
-class SpecialWikidataConstraintReport extends SpecialPage {
+class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
 
+    protected $entityLookup;
     private $output = '';
 
     function __construct() {
         parent::__construct( 'ConstraintReport' );
+        $this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
     }
 
     /**
@@ -22,7 +26,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
      * @return string
      */
     function getGroupName() {
-        return "wikidataquality";
+        return 'wikidataquality';
     }
 
     /**
@@ -39,7 +43,7 @@ class SpecialWikidataConstraintReport extends SpecialPage {
      *
      * @param string|null $par
      */
-    function execute( $par ) {
+    public function execute( $par ) {
         $this->setHeaders();
 
         // Get output
@@ -47,24 +51,25 @@ class SpecialWikidataConstraintReport extends SpecialPage {
 
         $out->addHTML( $this->getHtmlForm() );
 
-        if( !empty($_POST['entityID'] ) ) {
+        if( !empty( $_POST['entityID'] ) ) {
             $constraintChecker = new ConstraintChecker();
-            $results = $constraintChecker->execute( $_POST['entityID'] );
+            $entity = $this->entityLookup->getEntity( $this->getEntityID( $_POST['entityID'] ) );
+            $results = $constraintChecker->execute( $entity );
         } else {
             return;
         }
 
         if( $results ) {
-            $out->addHTML( Html::openElement( 'br' ) . Html::openElement( 'h1' ) . $this->msg( 'wikidataquality-constraint-result-headline' ) . $_POST['entityID'] .  Html::closeElement( 'h1' ) );
+            $out->addHTML( Html::openElement( 'br' ) . Html::openElement( 'h1' ) . $this->msg( 'wikidataquality-constraint-result-headline' ) . $entity->getId()->getSerialization() . " (" . $entity->getLabel('en') . ")" . Html::closeElement( 'h1' ) );
             $this->output .= $this->getTableHeader();
             foreach( $results as $checkResult) {
                 $this->addOutputRow( $checkResult );
             }
             $this->output .= "|-\n|}"; // close Table
-            $out->addWikiText($this->output);
+            $out->addWikiText( $this->output );
             return;
         } else {
-            $out->addHTML(Html::openElement( 'p' ) . $this->msg( 'wikidataquality-constraint-result-entity-not-existent')->text(). Html::closeElement( 'p' ) );
+            $out->addHTML( Html::openElement( 'p' ) . $this->msg( 'wikidataquality-constraint-result-entity-not-existent' )->text(). Html::closeElement( 'p' ) );
         }
 
     }
@@ -72,70 +77,87 @@ class SpecialWikidataConstraintReport extends SpecialPage {
     private function getHtmlForm()
     {
         return Html::openElement( 'p' )
-                . $this->msg( 'wikidataquality-constraint-instructions' )->text()
-                . Html::element( 'br' )
-                . $this->msg( 'wikidataquality-constraint-instructions-example' )->text()
-                . Html::closeElement( 'p' )
-                . Html::openElement(
-                    'form',
-                    array(
-                        'action' => $_SERVER[ 'PHP_SELF' ],
-                        'method' => 'post'
-                    )
+            . $this->msg( 'wikidataquality-constraint-instructions' )->text()
+            . Html::element( 'br' )
+            . $this->msg( 'wikidataquality-constraint-instructions-example' )->text()
+            . Html::closeElement( 'p' )
+            . Html::openElement(
+                'form',
+                array(
+                    'action' => $_SERVER[ 'PHP_SELF' ],
+                    'method' => 'post'
                 )
-                . Html::input(
-                    'entityID',
-                    '',
-                    'text',
-                    array(
-                        'id' => 'wdq-constraint-entityId',
-                        'placeholder' => $this->msg( 'wikidataquality-constraint-form-id-placeholder' )->text()
-                    )
+            )
+            . Html::input(
+                'entityID',
+                '',
+                'text',
+                array(
+                    'id' => 'wdq-constraint-entityId',
+                    'placeholder' => $this->msg( 'wikidataquality-constraint-form-id-placeholder' )->text()
                 )
-                . Html::input(
-                    'submit',
-                    $this->msg( 'wikidataquality-constraint-form-submit-label' )->text(),
-                    'submit',
-                    array(
-                        'id' => 'wbq-constraint-submit'
-                    )
+            )
+            . Html::input(
+                'submit',
+                $this->msg( 'wikidataquality-constraint-form-submit-label' )->text(),
+                'submit',
+                array(
+                    'id' => 'wbq-constraint-submit'
                 )
-                . Html::closeElement( 'form' );
+            )
+            . Html::closeElement( 'form' );
+    }
+
+    private function getEntityID( $entityId )
+    {
+        switch( strtoupper( $entityId[0] ) ) {
+            case 'Q':
+                return new ItemId( $entityId );
+            case 'P':
+                return new PropertyId( $entityId );
+            default:
+                return null;
+        }
     }
 
 
-
-
-    function addOutputRow( $result ) {
-        $lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+    private function addOutputRow( $result ) {
         $this->output .=
             "|-\n"
-            . "| " . $result->getPropertyId() . " (" . $lookup->getEntity($result->getPropertyId())->getLabel('en') . ") "
+            . "| " . $result->getPropertyId() . " (" . $this->entityLookup->getEntity($result->getPropertyId())->getLabel('en') . ") "
             . "|| " . $result->getDataValue() . " "
             . "|| " . $result->getConstraintName() . " "
-            . "|| " . $result->getParameter() . " ";
+            . "|| <nowiki>" . $this->limitOutput( $result->getParameter() ) . "</nowiki> ";
 
         switch( $result->getStatus() ) {
-            case 'compliance':
+            case 'compliance':  // constraint has been checked, result is positive
                 $color = '#088A08';
                 break;
-            case 'violation':
-                $color = '#8A0808';
-                break;
-            case 'exception':
+            case 'exception':   // the statement violates the constraint, but is a known exception
                 $color = '#D2D20C';
                 break;
-            case 'todo':
+            case 'violation':   // constraint has been checked, result is negative
+            case 'error':       // there was an error in the definition of the constraint, e.g. missing or wrong parameters
+            case 'fail':        // the check failed, e.g. because a referenced item doesn't exist
+                $color = '#8A0808';
+                break;
+            case 'todo':        // the constraint check has not yet been implemented
                 $color = '#808080';
                 break;
-            case 'fail':
-                $color = '#808080';
-                break;
-            default:
+            default:            // error case, should not happen
                 $color = '#0D0DE0';
-                //error case; should not happen
         }
         $this->output .= "|| <div style=\"color:" . $color . "\">" . $result->getStatus() . "</div>\n";
+    }
+
+    private $showMax = 50;
+
+    private function limitOutput( $string ) {
+        if( strlen($string) <= $this->showMax ) {
+            return $string;
+        } else {
+            return substr( $string, 0, $this->showMax ) . '...';
+        }
     }
 
     /**

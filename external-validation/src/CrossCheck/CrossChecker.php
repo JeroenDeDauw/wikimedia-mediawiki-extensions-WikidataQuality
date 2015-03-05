@@ -5,11 +5,11 @@ namespace WikidataQuality\ExternalValidation\CrossCheck;
 
 use Doctrine\Instantiator\Exception\InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\WikibaseRepo;
-use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\MappingEvaluator;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Repo\WikibaseRepo;
+use WikidataQuality\ExternalValidation\DumpMetaInformation;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResultList;
@@ -248,30 +248,10 @@ class CrossChecker
             $externalValues = array();
             foreach ($result as $row) {
                 $externalValues[] = $row->external_data;
+                $dumpId = $row->dump_id;
             }
-            $dump_id = $db->selectField( DUMP_DATA_TABLE, 'dump_id', array( "id_pid=$numericIdentifierPropertyId", "external_id=\"$externalId\"" ) );
-            $this->dumpMetaInformation = $this->getMetaInformation($db, $dump_id);
+            $this->dumpMetaInformation = DumpMetaInformation::get( $db, $dumpId);
             return $externalValues;
-        }
-        return null;
-    }
-
-    /**
-     * Retrieves meta information by dump id from database.
-     * @param $db - Database connection
-     * @param int $dumpId - Id of the dump
-     * @return \DumpMetaInformation
-     */
-    private function getMetaInformation( $db, $dumpId )
-    {
-        // Run query
-        $result = $db->selectRow( DUMP_META_TABLE, array( 'format', 'language', 'date_format', 'name' ), array( "row_id=$dumpId" ) );
-        if ( $result !== false ) {
-            $format = $result->format;
-            $language = $result->language;
-            $dateFormat = $result->date_format;
-            $dataSourceName = $result->name;
-            return new DumpMetaInformation( $format, $language, $dateFormat, $dataSourceName );
         }
         return null;
     }
@@ -293,7 +273,7 @@ class CrossChecker
                 $result = $comparer->execute();
 
                 if ( isset( $result ) ) {
-                    return new CompareResult( $propertyId, $claimGuid, $comparer->getLocalValues(), $comparer->getExternalValues(), !$result, null, $this->dumpMetaInformation->getDataSourceName() );
+                    return new CompareResult( $propertyId, $claimGuid, $comparer->getLocalValue(), $comparer->getExternalValues(), !$result, null, $this->dumpMetaInformation );
                 }
             }
         }

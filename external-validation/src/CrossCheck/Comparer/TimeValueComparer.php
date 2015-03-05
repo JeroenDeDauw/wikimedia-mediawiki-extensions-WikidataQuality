@@ -5,13 +5,10 @@ namespace WikidataQuality\ExternalValidation\CrossCheck\Comparer;
 
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\Lib\MwTimeIsoFormatter;
-use ValueParsers\TimeParser;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
-use Wikibase\Lib\Parsers\DateTimeParser;
-use Wikibase\Lib\Parsers\EraParser;
-use DataValues\DataValue;
+use Wikibase\Lib\MwTimeIsoFormatter;
+use Wikibase\Lib\Parsers\TimeParser;
 
 
 /**
@@ -35,58 +32,39 @@ class TimeValueComparer extends DataValueComparer
      */
     public function execute()
     {
-        // Set opts and get parser
-        $opts = new ParserOptions();
-        $opts->setOption( TimeParser::OPT_CALENDAR, TimeParser::CALENDAR_GREGORIAN );
-        $opts->setOption( ValueParser::OPT_LANG, $this->dumpMetaInformation->getLanguage() );
+        // Get formatter
+        $formatterOptions = new FormatterOptions();
+        $formatterOptions->setOption( ValueFormatter::OPT_LANG, $this->dumpMetaInformation->getLanguage() );
+        $timeFormatter = new MwTimeIsoFormatter( $formatterOptions );
 
-        $parser = null;
-        $dateFormat = $this->dumpMetaInformation->getDateFormat();
-        switch ( $dateFormat ){ # Look at TimeParserTest.php to determine which parser is needed
-            case 'd.m.Y':
-                $parser = new DateTimeParser( new EraParser(), $opts );
-                break;
-            default:
-                $parser = new DateTimeParser( new EraParser(), $opts );
-        }
+        // Format local value
+        $formattedDataValue = $timeFormatter->format( $this->localValue );
 
-        // Compare values
-        $result = false;
+        // Parse external values
+        $this->parseExternalValues();
 
-        if ( $parser ) {
-
-            $optsFormatter = new FormatterOptions();
-            $optsFormatter->setOption( ValueFormatter::OPT_LANG, $this->dumpMetaInformation->getLanguage() );
-            $formatter = new MwTimeIsoFormatter( $optsFormatter );
-
-            // Parse and format external TimeValues
-            $externalTimeValues = array();
-
-            foreach ( $this->externalValues as $value ) {
-                $externalTimeValue = $parser->parse( $value );
-
-                if ($externalTimeValue instanceof DataValue) {
-                    $externalTimeValue = $formatter->format( $externalTimeValue );
-                    $externalTimeValues[] = $externalTimeValue;
+        // Compare each external value with local value
+        if ( $this->externalValues ) {
+            foreach ( $this->externalValues as $externalValue ) {
+                $formattedExternalValue = $timeFormatter->format( $externalValue );
+                if ( $formattedDataValue == $formattedExternalValue ) {
+                    return true;
                 }
             }
-
-            // Format local TimeValue
-            $localTimeValue = $this->dataValue;
-
-            if ( $localTimeValue instanceof DataValue ) {
-                $localTimeValue = $formatter->format( $localTimeValue );
-            }
-
-            $this->localValues = array( $localTimeValue );
-            $this->externalValues = $externalTimeValues;
-
-            //compare
-            if ( count( array_intersect( $this->localValues, $this->externalValues ) ) > 0 ) {
-                return true;
-            } else {
-                return false;
-            }
         }
+
+        return false;
+    }
+
+    /**
+     * Returns parser that is used to parse strings of external values to Wikibase DataValues.
+     * @return TimeParser
+     */
+    protected function getExternalValueParser()
+    {
+        $parserOptions = new ParserOptions();
+        $parserOptions->setOption( ValueParser::OPT_LANG, $this->dumpMetaInformation->getLanguage() );
+
+        return new TimeParser( $parserOptions );
     }
 }

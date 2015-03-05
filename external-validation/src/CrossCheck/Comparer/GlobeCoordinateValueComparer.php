@@ -3,12 +3,8 @@
 namespace WikidataQuality\ExternalValidation\CrossCheck\Comparer;
 
 
-use ValueFormatters\FormatterOptions;
 use DataValues\Geo\Formatters\GlobeCoordinateFormatter;
-use ValueParsers\ParserOptions;
 use DataValues\Geo\Parsers\GlobeCoordinateParser;
-use DataValues\DataValue;
-use DataValues\Geo\Formatters\GeoCoordinateFormatter;
 
 
 /**
@@ -32,34 +28,32 @@ class GlobeCoordinateValueComparer extends DataValueComparer
      */
     public function execute()
     {
-        // Set opts and get parser
-        $opts = new ParserOptions();
-        $parser = new GlobeCoordinateParser( $opts );
+        // Format local value
+        $globeFormatter = new GlobeCoordinateFormatter();
+        $formattedDataValue = $globeFormatter->format( $this->localValue );
 
-        // Compare values
-        $result = false;
+        // Parse external values
+        $this->parseExternalValues();
 
-        if ( $parser ) {
-            $localGlobeCoordinateValue = $this->dataValue;
-            $externalGlobeCoordinateValue = $parser->parse( $this->externalValues[ 0 ] );
-
-            if ( $externalGlobeCoordinateValue instanceof DataValue && $localGlobeCoordinateValue instanceof DataValue ) {
-                // format
-                $optsFormatter = new FormatterOptions();
-                $optsFormatter->setOption( GeoCoordinateFormatter::OPT_FORMAT, GeoCoordinateFormatter::TYPE_DMS);
-                $optsFormatter->setOption( GeoCoordinateFormatter::OPT_DIRECTIONAL, 'directional');
-
-                $formatter = new GlobeCoordinateFormatter ( $optsFormatter );
-                $localGlobeCoordinateValue = $formatter->format( $localGlobeCoordinateValue );
-                $externalGlobeCoordinateValue = $formatter->format( $externalGlobeCoordinateValue );
-
-                //compare
-                $result = $localGlobeCoordinateValue === $externalGlobeCoordinateValue;
-                $this->localValues = array( $localGlobeCoordinateValue );
-                $this->externalValues = array( $externalGlobeCoordinateValue );
+        // Compare each external value with local value
+        if ( $this->externalValues ) {
+            foreach ( $this->externalValues as $externalValue ) {
+                $formattedExternalValue = $globeFormatter->format( $externalValue );
+                if ( $formattedDataValue == $formattedExternalValue ) {
+                    return true;
+                }
             }
         }
 
-        return $result;
+        return false;
+    }
+
+    /**
+     * Returns parser that is used to parse strings of external values to Wikibase DataValues.
+     * @return GlobeCoordinateParser
+     */
+    protected function getExternalValueParser()
+    {
+        return new GlobeCoordinateParser();
     }
 }

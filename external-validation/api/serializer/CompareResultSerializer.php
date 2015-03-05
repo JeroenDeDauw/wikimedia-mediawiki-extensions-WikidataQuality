@@ -3,30 +3,49 @@
 namespace WikidataQuality\ExternalValidation\Api\Serializer;
 
 
+use DataValues\Serializers\DataValueSerializer;
 use Wikibase\Lib\Serializers\SerializerObject;
 
 
 /**
  * Class CompareResultSerializer
- * @package WikidataQuality\ExternalValidation\Api
+ * @package WikidataQuality\ExternalValidation\Api\Serializer
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class CompareResultSerializer extends SerializerObject {
+class CompareResultSerializer extends SerializerObject
+{
+    private $dataValueSerializer;
+    private $dumpMetaInformationSerializer;
+
+
+    public function __construct( $options = null )
+    {
+        parent::__construct( $options );
+
+        // Get data value serializer
+        $this->dataValueSerializer = new DataValueSerializer( $options );
+
+        // Get dump meta information serializer
+        $this->dumpMetaInformationSerializer = new DumpMetaInformationSerializer( $options );
+    }
+
+
     /**
      * @param \CompareResult $resultList
      */
-    public function getSerialized( $result ) {
-        // Create list of local values with indexed tag name
-        $localValues = $result->getLocalValues();
-        if( $localValues ) {
-            $this->setIndexedTagName( $localValues, 'value' );
-        }
+    public function getSerialized( $result )
+    {
+        // Serialize local value
+        $localValue = $this->dataValueSerializer->serialize( $result->getLocalValue() );
 
-        // Create list of external values with indexed tag name
-        $externalValues = $result->getExternalValues();
-        if( $externalValues ) {
-            $this->setIndexedTagName( $externalValues, 'value' );
+        // Serialize external values
+        $externalValues = array();
+        if ( $result->getExternalValues() ) {
+            foreach ( $result->getExternalValues() as $externalValue ) {
+                $externalValues[ ] = $this->dataValueSerializer->serialize( $externalValue );
+            }
+            $this->setIndexedTagName( $externalValues, 'dataValue' );
         }
 
         // Serialize whole CompareResult object
@@ -34,10 +53,10 @@ class CompareResultSerializer extends SerializerObject {
             'propertyId' => (string)$result->getPropertyId(),
             'claimGuid' => $result->getClaimGuid(),
             'dataMismatch' => $result->hasDataMismatchOccurred(),
-            'localValues' => $localValues,
+            'localValue' => $localValue,
             'externalValues' => $externalValues,
             'referencesMissing' => $result->areReferencesMissing(),
-            'dataSourceName' => $result->getDataSourceName()
+            'dataSource' => $this->dumpMetaInformationSerializer->getSerialized( $result->getDumpMetaInformation() )
         );
 
         return $serialization;

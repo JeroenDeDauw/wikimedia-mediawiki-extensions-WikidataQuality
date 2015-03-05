@@ -2,59 +2,57 @@
 
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 
-use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\DataValueParser;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 use Wikibase\DataModel\Entity\ItemId;
+use \Exception;
 
 class TypeChecker {
 
-    private $statements;
     private $entityLookup;
     private $helper;
 
-    public function __construct( $lookup, $helper) {
+    public function __construct( $lookup, $helper ) {
         $this->entityLookup = $lookup;
         $this->helper = $helper;
     }
 
-    public function checkValueTypeConstraint( $propertyId, $dataValueString, $class, $classes, $relation ) {
+    public function checkValueTypeConstraint( $propertyId, $dataValueString, $classArray, $relation ) {
         $status = null;
-        if ( $class != null ) {
-            $classesToCheck = array( $class );
-        } else {
-            $classesToCheck = explode(',', str_replace(' ', '', $classes) );
-        }
 
         $relationId = $relation == 'instance' ? 31 : 279;
-        $item = $this->entityLookup->getEntity( new ItemId( $dataValueString->getSerialization() ));
+
+        $parameterString = 'class: ' . $this->helper->arrayToString( $classArray ) . ', relation: ' . $relation;
+
+        try {
+            $item = $this->entityLookup->getEntity( new ItemId( $dataValueString ) );
+        } catch( Exception $ex ) {
+            return new CheckResult( $propertyId, $dataValueString, 'Value type', $parameterString, 'error' );
+        }
         if( !$item ) {
-            return new CheckResult($propertyId, $dataValueString, "Value type", 'class(es): ' . implode(', ', $classesToCheck), 'fail' );
+            return new CheckResult( $propertyId, $dataValueString, 'Value type', $parameterString, 'fail' );
         }
 
-        $statements = $this->entityLookup->getEntity( new ItemId( $dataValueString->getSerialization() ) )->getStatements();
+        $statements = $this->entityLookup->getEntity( new ItemId( $dataValueString ) )->getStatements();
 
-        $status = $this->hasClassInRelation( $statements, $relationId, $classesToCheck );
+        $status = $this->hasClassInRelation( $statements, $relationId, $classArray );
         $status = $status ? 'compliance' : 'violation';
-        return new CheckResult($propertyId, $dataValueString, "Value type", 'class(es): ' . implode(', ', $classesToCheck), $status );
+        return new CheckResult( $propertyId, $dataValueString, 'Value type', $parameterString, $status );
     }
 
-    public function checkTypeConstraint( $propertyId, $dataValueString, $statements, $class, $classes, $relation ) {
+    public function checkTypeConstraint( $propertyId, $dataValueString, $statements, $classArray, $relation ) {
         $status = null;
-        if ( $class != null ) {
-            $classesToCheck = array( $class );
-        } else {
-            $classesToCheck = explode(',', $classes);
-        }
 
         $relationId = $relation == 'instance' ? 31 : 279;
 
-        $status = $this->hasClassInRelation( $statements, $relationId, $classesToCheck );
+        $parameterString = 'class: ' . $this->helper->arrayToString( $classArray ) . ', relation: ' . $relation;
+
+        $status = $this->hasClassInRelation( $statements, $relationId, $classArray );
         $status = $status ? 'compliance' : 'violation';
-        return new CheckResult($propertyId, $dataValueString, "Type", 'class(es): ' . implode(', ', $classesToCheck), $status );
+        return new CheckResult($propertyId, $dataValueString, 'Type', $parameterString, $status );
     }
 
-    private function isSubclassOf($itemId, $classesToCheck) {
-        $item = $this->entityLookup->getEntity( $itemId );
+    private function isSubclassOf( $itemIdString, $classesToCheck ) {
+        $item = $this->entityLookup->getEntity( new ItemId( $itemIdString ) );
         if( !$item )
             return; //lookup failed, probably because item doesn't exist
 
@@ -65,7 +63,7 @@ class TypeChecker {
                 if( $mainSnak->getType() == 'value' ) {
                     $dataValueCompareString = $this->helper->dataValueToString( $mainSnak->getDataValue() );
                 } else {
-                    $dataValueCompareString = '\'\'(' . $mainSnak->getType() . '\'\')';
+                    $dataValueCompareString = '(' . $mainSnak->getType() . ')';
                 }
 
                 foreach( $classesToCheck as $val ) {
@@ -89,7 +87,7 @@ class TypeChecker {
                 if( $mainSnak->getType() == 'value' ) {
                     $dataValueCompareString = $this->helper->dataValueToString( $mainSnak->getDataValue() );
                 } else {
-                    $dataValueCompareString = '\'\'(' . $mainSnak->getType() . '\'\')';
+                    $dataValueCompareString = '(' . $mainSnak->getType() . ')';
                 }
 
                 foreach( $classesToCheck as $val ) {
