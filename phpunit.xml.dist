@@ -14,10 +14,14 @@
          strict="true"
          verbose="true">
     <testsuites>
-        <testsuite name="WikidataQuality">
+        <testsuite name="Common">
             <directory>tests/phpunit</directory>
-            <directory>constraint-report/tests/phpunit</directory>
+        </testsuite>
+        <testsuite name="ExternalValidation">
             <directory>external-validation/tests/phpunit</directory>
+        </testsuite>
+        <testsuite name="ConstraintReport">
+            <directory>constraint-report/tests/phpunit</directory>
         </testsuite>
     </testsuites>
     <filter>
