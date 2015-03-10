@@ -7,6 +7,7 @@ use SpecialPage;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\EntityIdLinkFormatter;
+use Wikibase\Lib\HtmlUrlFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\LanguageLabelLookup;
@@ -46,6 +47,11 @@ abstract class SpecialWikidataQualityPage extends SpecialPage
      */
     protected $entityIdHtmlLinkFormatter;
 
+    /**
+     * @var HtmlUrlFormatter
+     */
+    protected $htmlUrlFormatter;
+
 
     /**
      * @param string $name
@@ -82,6 +88,10 @@ abstract class SpecialWikidataQualityPage extends SpecialPage
             $entityTitleLookup,
             new LanguageNameLookup()
         );
+
+        // Get url formatter
+        $formatterOptions = new FormatterOptions();
+        $this->htmlUrlFormatter = new HtmlUrlFormatter( $formatterOptions );
     }
 
 

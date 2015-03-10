@@ -4,9 +4,10 @@ namespace WikidataQuality\ExternalValidation\Specials;
 
 
 use Html;
+use DataValues\StringValue;
+use WikidataQuality\ExternalValidation\DumpMetaInformation;
 use WikidataQuality\Html\HtmlTable;
 use WikidataQuality\Specials\SpecialWikidataQualityPage;
-use WikidataQuality\ExternalValidation\DumpMetaInformation;
 
 
 class SpecialExternalDbs extends SpecialWikidataQualityPage
@@ -74,15 +75,15 @@ class SpecialExternalDbs extends SpecialWikidataQualityPage
             foreach ( $result_db_ids as $row ) {
                 $db_id = $row->row_id;
 
-                $db_meta_information = DumpMetaInformation::get($db_connection, $db_id);
+                $db_meta_information = DumpMetaInformation::get( $db_connection, $db_id );
 
                 $table->appendRow(
                     array(
-                        $this->entityIdHtmlLinkFormatter->formatEntityId($db_meta_information->getSourceItemId()),
+                        $this->entityIdHtmlLinkFormatter->formatEntityId( $db_meta_information->getSourceItemId() ),
                         $db_meta_information->getImportDate()->format('Y-m-d H:i:s'),
                         $db_meta_information->getFormat(),
                         $db_meta_information->getLanguage(),
-                        $db_meta_information->getSourceUrl(),
+                        $this->htmlUrlFormatter->format( new StringValue( $db_meta_information->getSourceUrl() ) ),
                         $db_meta_information->getSize(),
                         $db_meta_information->getLicense()
                     )
