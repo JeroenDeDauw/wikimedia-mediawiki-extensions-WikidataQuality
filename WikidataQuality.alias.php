@@ -13,5 +13,6 @@ $specialPageAliases = array();
  */
 $specialPageAliases['en'] = array(
     'CrossCheck' => array( 'CrossCheck', 'Cross Check' ),
-    'ConstraintReport' => array( 'ConstraintReport', 'Constraint Report' )
+    'ConstraintReport' => array( 'ConstraintReport', 'Constraint Report' ),
+    'ExternalDbs' => array( 'ExternalDbs', 'External Dbs' )
 );

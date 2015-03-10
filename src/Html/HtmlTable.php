@@ -40,7 +40,7 @@ class HtmlTable {
 
 
     /**
-     * @param aray $headers
+     * @param array $headers
      * @param bool $isSortable
      */
     public function __construct( $headers, $isSortable = false )

@@ -37,6 +37,7 @@ $wgHooks['UnitTestsList'][] = 'WikidataQualityHooks::onUnitTestsList';
 // Initialize special pages
 $wgSpecialPages['ConstraintReport'] = 'WikidataQuality\ConstraintReport\Specials\SpecialWikidataConstraintReport';
 $wgSpecialPages['CrossCheck'] = 'WikidataQuality\ExternalValidation\Specials\SpecialCrossCheck';
+$wgSpecialPages['ExternalDbs'] = 'WikidataQuality\ExternalValidation\Specials\SpecialExternalDbs';
 
 // Define modules
 $wgResourceModules['SpecialCrossCheck'] = array(

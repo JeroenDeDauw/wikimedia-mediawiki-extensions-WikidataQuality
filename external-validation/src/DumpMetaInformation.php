@@ -100,7 +100,7 @@ class DumpMetaInformation
      */
     public function getImportDate()
     {
-        return $this->getImportDate();
+        return $this->importDate;
     }
 
     /**

@@ -31,6 +31,18 @@
     "wikidataquality-crosscheck-comparative-value": "Comparative Value",
     "wikidataquality-crosscheck-external-source": "External Source",
 
+    "wikidataquality-externaldbs": "List of external databases",
+    "wikidataquality-externaldbs-instructions": "Here you see an overview of the databases for which you can cross-check the wikidata items.",
+    "wikidataquality-externaldbs-overview-headline": "Databases",
+    "wikidataquality-externaldbs-source-item-id": "Source item",
+    "wikidataquality-externaldbs-import-date": "Import date",
+    "wikidataquality-externaldbs-format": "Data format",
+    "wikidataquality-externaldbs-language": "Data language",
+    "wikidataquality-externaldbs-source-url": "Source URL",
+    "wikidataquality-externaldbs-size": "Dump Size",
+    "wikidataquality-externaldbs-license": "License",
+    "wikidataquality-externaldbs-no-databases": "No external databases available for crosscheck.",
+
     "apihelp-wdqcrosscheck-description": "API module to cross-check Wikibase entities against external data.",
     "apihelp-wdqcrosscheck-param-entities": "Ids of the entities that should be cross-checked. Required unless claims are provided.",
     "apihelp-wdqcrosscheck-param-properties": "Optional filter to cross-check only statements with specified property ids. This only works, if entities are given.",
