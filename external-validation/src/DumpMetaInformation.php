@@ -34,12 +34,6 @@ class DumpMetaInformation
     private $importDate;
 
     /**
-     * Data format of the dump.
-     * @var string
-     */
-    private $format;
-
-    /**
      * Language of data in the dump.
      * @var string
      */
@@ -67,23 +61,37 @@ class DumpMetaInformation
     /**
      * @param $sourceItemId
      * @param $importDate
-     * @param $format
      * @param $language
      * @param $sourceUrl
      * @param $size
      * @param $license
      */
-    public function __construct( $sourceItemId, $importDate, $format, $language, $sourceUrl, $size, $license )
+    public function __construct( $dumpId, $sourceItemId, $importDate, $language, $sourceUrl, $size, $license )
     {
-        $this->sourceItemId = $sourceItemId;
+        $this->dumpId = $dumpId;
+        if ( is_string( $sourceItemId ) ) {
+            if ($sourceItemId[0] != 'Q') {
+                $sourceItemId = 'Q' . $sourceItemId;
+            }
+            $this->sourceItemId = new ItemId( $sourceItemId );
+        } else {
+            $this->sourceItemId = $sourceItemId;
+        }
         $this->importDate = $importDate;
-        $this->format = $format;
         $this->language = $language;
         $this->sourceUrl = $sourceUrl;
         $this->size = $size;
         $this->license = $license;
     }
 
+    /**
+     * Returns id of dump meta information in database.
+     * @return int
+     */
+    public function getDumpId()
+    {
+        return $this->dumpId;
+    }
 
     /**
      * Returns id of the item that represents the data source of the dump.
@@ -101,15 +109,6 @@ class DumpMetaInformation
     public function getImportDate()
     {
         return $this->getImportDate();
-    }
-
-    /**
-     * Returns data format.
-     * @return string
-     */
-    public function getFormat()
-    {
-        return $this->format;
     }
 
     /**
@@ -157,8 +156,8 @@ class DumpMetaInformation
     {
         // Set accumulator
         $accumulator = array(
+            'row_id' => $this->getDumpId(),
             'source_item_id' => $this->getSourceItemId()->getNumericId(),
-            'format' => $this->getFormat(),
             'language' => $this->getLanguage(),
             'source_url' => $this->getSourceUrl(),
             'size' => $this->getSize(),
@@ -171,7 +170,7 @@ class DumpMetaInformation
             $dumpId = $this->dumpId;
             $existing = $db->selectRow(
                 DUMP_META_TABLE,
-                array(),
+                array( 'row_id' ),
                 array( "row_id=$dumpId" )
             );
         }
