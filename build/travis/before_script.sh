@@ -55,4 +55,7 @@ echo 'require_once __DIR__ . "/extensions/Wikibase/client/WikibaseClient.php";' 
 echo 'require_once __DIR__ . "/extensions/WikidataQuality/WikidataQuality.php";' >> LocalSettings.php
 echo '$wgWBClientSettings["siteGlobalID"] = "enwiki";' >> LocalSettings.php
 
+cd tests/phpunit
+sudo ./install-phpunit.sh
+
 php maintenance/update.php --quick
