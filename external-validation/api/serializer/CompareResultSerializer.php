@@ -49,10 +49,16 @@ class CompareResultSerializer extends SerializerObject
         }
 
         // Serialize whole CompareResult object
+        if ( $result->hasDataMismatchOccurred() ) {
+            $dataMismatch = "mismatch";
+        } else {
+            $dataMismatch = "match";
+        }
+
         $serialization = array(
             'propertyId' => (string)$result->getPropertyId(),
             'claimGuid' => $result->getClaimGuid(),
-            'dataMismatch' => $result->hasDataMismatchOccurred(),
+            'result' => $dataMismatch,
             'localValue' => $localValue,
             'externalValues' => $externalValues,
             'referencesMissing' => $result->areReferencesMissing(),
