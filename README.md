@@ -1,4 +1,4 @@
-# WikidataQuality
+# WikidataQuality  [![Build Status](https://travis-ci.org/WikidataQuality/wikimedia-mediawiki-extensions-WikidataQuality.svg)](https://travis-ci.org/WikidataQuality/wikimedia-mediawiki-extensions-WikidataQuality)
 
 ## Installation
 
