@@ -1,10 +1,10 @@
 CREATE TABLE IF NOT EXISTS wdq_external_data (
   row_id            BIGINT UNSIGNED  NOT NULL PRIMARY KEY AUTO_INCREMENT,
   dump_id           BIGINT UNSIGNED  NOT NULL,
-  id_pid            INT unsigned     NOT NULL,
+  identifier_pid    INT unsigned     NOT NULL,
   external_id       VARBINARY(50)    NOT NULL,
-  p_pid             INT unsigned     NOT NULL,
-  external_data     VARBINARY(255)         NOT NULL
+  pid               INT unsigned     NOT NULL,
+  external_value    VARBINARY(255)   NOT NULL
 );
 
 ALTER TABLE wdq_external_data ADD FOREIGN KEY(dump_id) REFERENCES wdq_dump_information(row_id);

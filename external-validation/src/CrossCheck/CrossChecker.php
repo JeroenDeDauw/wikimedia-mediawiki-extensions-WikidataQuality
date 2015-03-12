@@ -243,11 +243,11 @@ class CrossChecker
         // Run query
         $numericIdentifierPropertyId = $identifierPropertyId->getNumericId();
         $numericPropertyId = $propertyId->getNumericId();
-        $result = $db->select( DUMP_DATA_TABLE, array( 'dump_id', 'external_data' ), array( "id_pid=$numericIdentifierPropertyId", "external_id=\"$externalId\"", "p_pid=$numericPropertyId" ) );
+        $result = $db->select( DUMP_DATA_TABLE, array( 'dump_id', 'external_value' ), array( "identifier_pid=$numericIdentifierPropertyId", "external_id=\"$externalId\"", "pid=$numericPropertyId" ) );
         if ( $result !== false ) {
             $externalValues = array();
             foreach ($result as $row) {
-                $externalValues[] = $row->external_data;
+                $externalValues[] = $row->external_value;
                 $dumpId = $row->dump_id;
             }
             $this->dumpMetaInformation = DumpMetaInformation::get( $db, $dumpId);
