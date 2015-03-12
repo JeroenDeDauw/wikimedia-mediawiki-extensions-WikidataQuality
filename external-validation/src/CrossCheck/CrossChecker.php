@@ -11,7 +11,6 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\WikibaseRepo;
 use WikidataQuality\ExternalValidation\DumpMetaInformation;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer;
-use WikidataQuality\ExternalValidation\CrossCheck\MappingEvaluator\MappingEvaluator;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResultList;
 
@@ -180,29 +179,27 @@ class CrossChecker
         // Filter out statements, that can not be checked against the current database
         $validateableStatements = $this->getValidateableStatements( $statements, $mapping );
 
-        // Get external entity
-        $externalEntity = $this->getExternalEntity( $identifierPropertyId, $externalId );
-
-        // If an external entity exists, Compare each validatable statement
+        // Compare each validatable statement
         $results = new CompareResultList();
-        if ( $externalEntity ) {
-            foreach ( $validateableStatements as $validateableStatement ) {
-                // Get claim with guid
-                $claim = $validateableStatement->getClaim();
-                $claimGuid = $claim->getGuid();
+        foreach ( $validateableStatements as $validateableStatement ) {
+            // Get claim with guid
+            $claim = $validateableStatement->getClaim();
+            $claimGuid = $claim->getGuid();
 
-                // Get main snak
-                $mainSnak = $claim->getMainSnak();
-                if ( $mainSnak instanceof PropertyValueSnak ) {
-                    $dataValue = $mainSnak->getDataValue();
-                    $propertyId = $mainSnak->getPropertyId();
-                    $propertyMapping = $mapping[ $propertyId->getNumericId() ];
+            // Get main snak
+            $mainSnak = $claim->getMainSnak();
+            if ( $mainSnak instanceof PropertyValueSnak ) {
+                $dataValue = $mainSnak->getDataValue();
+                $propertyId = $mainSnak->getPropertyId();
 
-                    // Compare data value
-                    $result = $this->compareDataValue( $propertyId, $claimGuid, $dataValue, $externalEntity, $propertyMapping );
-                    if ( $result ) {
-                        $results->add( $result );
-                    }
+                // Get external values for propertyId
+                $externalValues = $this->getExternalValues( $identifierPropertyId, $externalId, $propertyId );
+
+
+                // Compare data value
+                $result = $this->compareDataValues( $propertyId, $claimGuid, $dataValue, $externalValues );
+                if ( $result ) {
+                    $results->add( $result );
                 }
             }
         }
@@ -235,19 +232,27 @@ class CrossChecker
      * Retrieves external entity by its id from database.
      * @param \PropertyId $identifierPropertyId - Id of the identifier property, that represents the external database
      * @param string $externalId - Id of the external entity
-     * @return string
+     * @param \PropertyId $propertyId - Id of the property for which the external values are needed
+     * @return array
      */
-    private function getExternalEntity( $identifierPropertyId, $externalId )
+    private function getExternalValues( $identifierPropertyId, $externalId, $propertyId )
     {
         // Connect to database
         $db = $this->loadBalancer->getConnection( DB_SLAVE );
 
         // Run query
-        $numericPropertyId = $identifierPropertyId->getNumericId();
-        $result = $db->selectRow( DUMP_DATA_TABLE, array( 'dump_id', 'external_data' ), array( "pid=$numericPropertyId", "external_id=\"$externalId\"" ) );
+        $numericIdentifierPropertyId = $identifierPropertyId->getNumericId();
+        $numericPropertyId = $propertyId->getNumericId();
+        $result = $db->select( DUMP_DATA_TABLE, array( 'dump_id', 'external_value' ), array( "identifier_pid=$numericIdentifierPropertyId", "external_id=\"$externalId\"", "pid=$numericPropertyId" ) );
         if ( $result !== false ) {
-            $this->dumpMetaInformation = DumpMetaInformation::get( $db, $result->dump_id );
-            return $result->external_data;
+            $externalValues = array();
+            foreach ($result as $row) {
+                $externalValues[] = $row->external_value;
+                $dumpId = $row->dump_id;
+            }
+            // TODO: Maybe there are multiple dumps per identifier property
+            $this->dumpMetaInformation = DumpMetaInformation::get( $db, $dumpId);
+            return $externalValues;
         }
         return null;
     }
@@ -257,28 +262,19 @@ class CrossChecker
      * @param $propertyId - PropertyId of the claim, that contains the DataValue
      * @param $claimGuid - Guid of the claim, that contains the DataValue
      * @param $dataValue - DataValue, that should be compared
-     * @param $externalEntity - External entity, that should be used to check against
-     * @param $propertyMapping - Property mapping, that should be used for cross-checking
+     * @param $externalValues - External entity, that should be used to check against
      * @return \CompareResult
      */
-    private function compareDataValue( $propertyId, $claimGuid, $dataValue, $externalEntity, $propertyMapping )
+    private function compareDataValues( $propertyId, $claimGuid, $dataValue, $externalValues )
     {
-        // Get external values by evaluating mapping
-        $mapingEvaluator = MappingEvaluator::getEvaluator( $this->dumpMetaInformation->getFormat(), $externalEntity );
-        if ( $mapingEvaluator ) {
-            $nodeSelector = $propertyMapping[ 'nodeSelector' ];
-            $valueFormatter = array_key_exists( 'valueFormatter', $propertyMapping ) ? $propertyMapping[ 'valueFormatter' ] : null;
-            $externalValues = $mapingEvaluator->evaluate( $nodeSelector, $valueFormatter );
+        // Start comparer if external value could be evaluated
+        if ( count( $externalValues ) > 0 ) {
+            $comparer = DataValueComparer::getComparer( $this->dumpMetaInformation, $dataValue, $externalValues );
+            if ( $comparer ) {
+                $result = $comparer->execute();
 
-            // Start comparer if external value could be evaluated
-            if ( count( $externalValues ) > 0 ) {
-                $comparer = DataValueComparer::getComparer( $this->dumpMetaInformation, $dataValue, $externalValues );
-                if ( $comparer ) {
-                    $result = $comparer->execute();
-
-                    if ( isset( $result ) ) {
-                        return new CompareResult( $propertyId, $claimGuid, $comparer->getLocalValue(), $comparer->getExternalValues(), !$result, null, $this->dumpMetaInformation );
-                    }
+                if ( isset( $result ) ) {
+                    return new CompareResult( $propertyId, $claimGuid, $comparer->getLocalValue(), $comparer->getExternalValues(), !$result, null, $this->dumpMetaInformation );
                 }
             }
         }
