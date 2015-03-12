@@ -205,19 +205,18 @@ class DumpMetaInformation
         // Run query
         $result = $db->selectRow(
             DUMP_META_TABLE,
-            array( 'source_item_id', 'import_date', 'format', 'language', 'source_url', 'size', 'license' ),
+            array( 'source_item_id', 'import_date', 'language', 'source_url', 'size', 'license' ),
             array( "row_id=$dumpId" ) );
 
         if ( $result !== false ) {
             $dataSource = new ItemId( 'Q' . $result->source_item_id );
             $import_date = new DateTime( $result->import_date );
-            $format = $result->format;
             $language = $result->language;
             $sourceUrl = $result->source_url;
             $size = (int)$result->size;
             $license = $result->license;
 
-            return new DumpMetaInformation( $dataSource, $import_date, $format, $language, $sourceUrl, $size, $license );
+            return new DumpMetaInformation( $dumpId, $dataSource, $import_date, $language, $sourceUrl, $size, $license );
         }
     }
 }

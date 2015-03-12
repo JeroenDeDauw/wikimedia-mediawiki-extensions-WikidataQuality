@@ -250,6 +250,7 @@ class CrossChecker
                 $externalValues[] = $row->external_value;
                 $dumpId = $row->dump_id;
             }
+            // TODO: Maybe there are multiple dumps per identifier property
             $this->dumpMetaInformation = DumpMetaInformation::get( $db, $dumpId);
             return $externalValues;
         }
