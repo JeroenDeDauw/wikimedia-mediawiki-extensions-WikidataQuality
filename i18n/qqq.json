@@ -36,7 +36,6 @@
     "wikidataquality-externaldbs-overview-headline": "Headline that appears above the overview of external databases.",
     "wikidataquality-externaldbs-source-item-id": "Name for source item id from the external source.",
     "wikidataquality-externaldbs-import-date": "Name for import date from the external source.",
-    "wikidataquality-externaldbs-format": "Name for format from the external source.",
     "wikidataquality-externaldbs-language": "Name for language from the external source.",
     "wikidataquality-externaldbs-source-url": "Name for source url from the external source.",
     "wikidataquality-externaldbs-size": "Name for size from the external source.",

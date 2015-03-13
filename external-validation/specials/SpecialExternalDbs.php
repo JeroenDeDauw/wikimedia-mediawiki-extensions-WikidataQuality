@@ -4,6 +4,7 @@ namespace WikidataQuality\ExternalValidation\Specials;
 
 
 use Html;
+use Language;
 use DataValues\StringValue;
 use WikidataQuality\ExternalValidation\DumpMetaInformation;
 use WikidataQuality\Html\HtmlTable;
@@ -54,7 +55,6 @@ class SpecialExternalDbs extends SpecialWikidataQualityPage
             array(
                 $this->msg( 'wikidataquality-externaldbs-source-item-id' )->text(),
                 $this->msg( 'wikidataquality-externaldbs-import-date' )->text(),
-                $this->msg( 'wikidataquality-externaldbs-format' )->text(),
                 $this->msg( 'wikidataquality-externaldbs-language' )->text(),
                 $this->msg( 'wikidataquality-externaldbs-source-url' )->text(),
                 $this->msg( 'wikidataquality-externaldbs-size' )->text(),
@@ -81,10 +81,9 @@ class SpecialExternalDbs extends SpecialWikidataQualityPage
                     array(
                         $this->entityIdHtmlLinkFormatter->formatEntityId( $db_meta_information->getSourceItemId() ),
                         $db_meta_information->getImportDate()->format('Y-m-d H:i:s'),
-                        $db_meta_information->getFormat(),
-                        $db_meta_information->getLanguage(),
+                        Language::fetchLanguageName( $db_meta_information->getLanguage(), $this->getLanguage()->getCode() ),
                         $this->htmlUrlFormatter->format( new StringValue( $db_meta_information->getSourceUrl() ) ),
-                        $db_meta_information->getSize(),
+                        $this->getLanguage()->formatSize( $db_meta_information->getSize() ),
                         $db_meta_information->getLicense()
                     )
                 );
