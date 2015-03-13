@@ -65,10 +65,6 @@ class CrossChecker
         // Get load balancer
         wfWaitForSlaves();
         $this->loadBalancer = wfGetLB();
-
-        // Include mapping
-        require( 'mapping.inc.php' );
-        $this->mapping = $mapping;
     }
 
 
