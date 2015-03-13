@@ -25,7 +25,7 @@ relation varchar(255),
 required varchar(255),
 seperate_category_processing varchar(255),
 value varchar(255),
-values_ text,
+values_ text
 );
 
 INSERT 
