@@ -75,8 +75,7 @@ class JsonFileEntityLookup implements EntityLookup {
      * @return string
      */
     private function buildFilePath( EntityId $entityId ) {
-        $filePath = sprintf('%s\\%s.json', $this->baseDir, (string)$entityId);
-        //fwrite(STDERR, "\n" . print_r($filePath, TRUE));
+        $filePath = sprintf('%s/%s.json', $this->baseDir, (string)$entityId);
         return $filePath;
     }
 }

@@ -3,7 +3,8 @@
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Helper;
 
 
-class ConstraintReportHelper {
+class ConstraintReportHelper
+{
 
     /**
      * @param $claim
@@ -12,7 +13,7 @@ class ConstraintReportHelper {
     public function getDataValueString( $claim )
     {
         $mainSnak = $claim->getMainSnak();
-        if( $mainSnak->getType() == 'value' ) {
+        if ( $mainSnak->getType() == 'value' ) {
             return $this->dataValueToString( $mainSnak->getDataValue() );
         } else {
             return '(' . $mainSnak->getType() . ')';
@@ -26,7 +27,7 @@ class ConstraintReportHelper {
     public function dataValueToString( $dataValue )
     {
         $dataValueType = $dataValue->getType();
-        switch( $dataValueType ) {
+        switch ( $dataValueType ) {
             case 'string':
             case 'decimal':
             case 'number':
@@ -43,26 +44,34 @@ class ConstraintReportHelper {
             case 'monolingualtext':
                 return $dataValue->getText();
             case 'multilingualtext':
-                return array_key_exists( 'en', $dataValue ) ? $dataValue->getTexts()['en'] : array_shift( $dataValue->getTexts() );
+                if ( array_key_exists( 'en', $dataValue ) ) {
+                    $texts = $dataValue->getTexts();
+                    return $texts[ 'en' ];
+                } else {
+                    return array_shift( $dataValue->getTexts() );
+                }
             case 'wikibase-entityid':
                 return $dataValue->getEntityId()->getSerialization();
             case 'bad':
             default:
                 return null;
-                //error case
+            //error case
         }
     }
 
-    public function removeBrackets( $templateString ) {
-        $toReplace = array("{", "}", "|", "[", "]");
-        return str_replace( $toReplace, "", $templateString);
+    public function removeBrackets( $templateString )
+    {
+        $toReplace = array( "{", "}", "|", "[", "]" );
+        return str_replace( $toReplace, "", $templateString );
     }
 
-    public function stringToArray( $templateString ) {
-        return $templateString == "" ? array() : explode(",", $this->removeBrackets( str_replace(" ", "", $templateString ) ) );
+    public function stringToArray( $templateString )
+    {
+        return $templateString == "" ? array() : explode( ",", $this->removeBrackets( str_replace( " ", "", $templateString ) ) );
     }
 
-    public function arrayToString( $templateArray ) {
-        return implode(", ", $templateArray);
+    public function arrayToString( $templateArray )
+    {
+        return implode( ", ", $templateArray );
     }
 }
