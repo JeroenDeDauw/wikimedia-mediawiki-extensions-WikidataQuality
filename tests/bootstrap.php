@@ -12,7 +12,6 @@ You are running these tests directly from phpunit. You may not have all globals 
 Running phpunit.php instead is recommended.
 EOF;
     require_once $IP . "/tests/phpunit.php";
-    require_once __DIR__ . "/../vendor/autoload.php";
 }
 
 class MediaWikiPHPUnitBootstrap {
