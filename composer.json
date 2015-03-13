@@ -24,6 +24,7 @@
       "WikidataQuality\\": "src/",
       "WikidataQuality\\Specials\\": "specials",
       "WikidataQuality\\Tests\\": "tests",
+      "WikidataQuality\\Tests\\Helper": "tests/helper/",
 
       "WikidataQuality\\ConstraintReport\\": "constraint-report/src/",
       "WikidataQuality\\ConstraintReport\\Specials\\": "constraint-report/specials/",
