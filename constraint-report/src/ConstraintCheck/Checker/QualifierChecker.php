@@ -4,8 +4,7 @@ namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 
-class QualifierChecker
-{
+class QualifierChecker {
 
     private $statements;
     private $helper;
@@ -16,14 +15,20 @@ class QualifierChecker
         $this->helper = $helper;
     }
 
-    public function checkQualifierConstraint( $propertyId, $dataValueString )
+    public function checkQualifierConstraint( $propertyId, $dataValue )
     {
-        return new CheckResult( $propertyId, $dataValueString, 'Qualifier', '(none)', 'violation' );
+        return new CheckResult( $propertyId, $dataValue, 'Qualifier', array(), 'violation' );
     }
 
-    public function checkQualifiersConstraint( $propertyId, $dataValueString, $statement, $propertyArray )
+    public function checkQualifiersConstraint( $propertyId, $dataValue, $statement, $propertyArray )
     {
-        $parameterString = 'property: ' . $this->helper->arrayToString( $propertyArray );
+        $parameters = array( 'property' => $propertyArray );
+
+        /*
+         * error handling:
+         *  parameter $propertyArray can be null, meaning that there are explicitly no qualifiers allowed
+         */
+
         $status = 'compliance';
 
         foreach( $statement->getQualifiers() as $qualifier ) {
@@ -33,7 +38,8 @@ class QualifierChecker
                 break;
             }
         }
-        return new CheckResult( $propertyId, $dataValueString, 'Qualifiers', $parameterString, $status );
+
+        return new CheckResult( $propertyId, $dataValue, 'Qualifiers', $parameters, $status );
     }
 
 }

@@ -7,14 +7,14 @@ class CheckResult {
     private $propertyId;
     private $dataValue;
     private $constraintName;
-    private $parameter;
+    private $parameters;
     private $status;
 
-    public function __construct( $propertyId, $dataValue, $constraintName, $parameter, $status ) {
+    public function __construct( $propertyId, $dataValue, $constraintName, $parameters, $status ) {
         $this->propertyId = $propertyId;
         $this->dataValue = $dataValue;
         $this->constraintName = $constraintName;
-        $this->parameter = $parameter;
+        $this->parameters = $parameters;
         $this->status = $status;
     }
 
@@ -30,8 +30,8 @@ class CheckResult {
         return $this->constraintName;
     }
 
-    public function getParameter() {
-        return $this->parameter;
+    public function getParameters() {
+        return $this->parameters;
     }
 
     public function getStatus() {

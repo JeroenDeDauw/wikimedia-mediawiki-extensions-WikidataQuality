@@ -12,16 +12,25 @@ class OneOfChecker {
         $this->helper = $helper;
     }
 
-    public function checkOneOfConstraint( $propertyId, $dataValueString, $itemArray ) {
+    public function checkOneOfConstraint( $propertyId, $dataValue, $itemArray ) {
+        $parameters = array( 'value' => $itemArray );
 
-        if( !in_array( $dataValueString, $itemArray ) ) {
+        /*
+         * error handling:
+         *   type of $dataValue for properties with 'One of' constraint has to be 'wikidata-entityid'
+         *   parameter $itemArray must not be null
+         */
+        if( $dataValue->getType() != 'wikibase-entityid' || $itemArray == null) {
+            return new CheckResult( $propertyId, $dataValue, 'Format', $parameters, 'error' );
+        }
+
+        if( !in_array( $dataValue, $itemArray ) ) {
             $status = 'violation';
         } else {
             $status = 'compliance';
         }
 
-        $parameterString = 'values: ' . $this->helper->arrayToString( $itemArray );
-
-        return new CheckResult( $propertyId, $dataValueString, 'One of', $parameterString, $status );
+        return new CheckResult( $propertyId, $dataValue, 'One of', $parameters, $status );
     }
+
 }

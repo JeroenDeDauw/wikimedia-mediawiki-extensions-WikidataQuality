@@ -7,9 +7,6 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 
 class ValueCountChecker {
 
-    /**
-     * Counts, how often a property appears on this item.
-     */
     private $propertyCount;
     private $statements;
     private $helper;
@@ -20,28 +17,34 @@ class ValueCountChecker {
     }
 
     public function checkSingleValueConstraint( $propertyId, $dataValueString ) {
+        $parameters = array();
+
         if( $this->getPropertyCount( $this->statements )[$propertyId->getNumericId()] > 1 ) {
             $status = 'violation';
         } else {
             $status = 'compliance';
         }
 
-        return new CheckResult($propertyId, $dataValueString, 'Single value', '(none)', $status );
+        return new CheckResult( $propertyId, $dataValueString, 'Single value', $parameters, $status );
     }
 
     public function checkMultiValueConstraint( $propertyId, $dataValueString ) {
+        $parameters = array();
+
         if( $this->getPropertyCount( $this->statements )[$propertyId->getNumericId()] <= 1 ) {
             $status = 'violation';
         } else {
             $status = 'compliance';
         }
 
-        return new CheckResult($propertyId, $dataValueString, 'Multi value', '(none)', $status );
+        return new CheckResult( $propertyId, $dataValueString, 'Multi value', $parameters, $status );
     }
 
     // TODO
     public function checkUniqueValueConstraint( $propertyId, $dataValueString ) {
-        return new CheckResult( $propertyId, $dataValueString, 'Unique value', '(none)', 'todo' );
+        $parameters = array();
+
+        return new CheckResult( $propertyId, $dataValueString, 'Unique value', $parameters, 'todo' );
     }
 
     private function getPropertyCount( $statements )
@@ -49,8 +52,9 @@ class ValueCountChecker {
         if ( !isset( $propertyCount ) ) {
             $this->propertyCount = array();
             foreach( $statements as $statement ) {
-                if( $statement->getRank() == Statement::RANK_DEPRECATED )
+                if( $statement->getRank() == Statement::RANK_DEPRECATED ) {
                     continue;
+                }
 
                 if( array_key_exists( $statement->getPropertyId()->getNumericId(), $this->propertyCount ) ) {
                     $this->propertyCount[$statement->getPropertyId()->getNumericId()]++;

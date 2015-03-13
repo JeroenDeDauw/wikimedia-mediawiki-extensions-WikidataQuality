@@ -12,9 +12,23 @@ class FormatChecker {
         $this->helper = $helper;
     }
 
-    public function checkFormatConstraint( $propertyId, $dataValueString, $pattern ) {
-        $parameterString = 'pattern: ' . $pattern;
-        $status = preg_match( '/^' . str_replace( '/', '\/', $pattern ) . '$/', $dataValueString) ? 'compliance' : 'violation';
-        return new CheckResult( $propertyId, $dataValueString, 'Format', $parameterString, $status);
+    public function checkFormatConstraint( $propertyId, $dataValue, $pattern ) {
+        $parameters = array( 'pattern' => $pattern );
+
+        /*
+         * error handling:
+         *   type of $dataValue for properties with 'Format' constraint has to be 'string'
+         *   parameter $pattern must not be null
+         */
+        if( $dataValue->getType() != 'string' || $pattern == null ) {
+            return new CheckResult( $propertyId, $dataValue, 'Format', $parameters, 'error' );
+        }
+
+        $stringToCompare = $dataValue->getValue();
+
+        $status = preg_match( '/^' . str_replace( '/', '\/', $pattern ) . '$/', $stringToCompare  ) ? 'compliance' : 'violation';
+
+        return new CheckResult( $propertyId, $dataValue, 'Format', $parameters, $status );
     }
+
 }

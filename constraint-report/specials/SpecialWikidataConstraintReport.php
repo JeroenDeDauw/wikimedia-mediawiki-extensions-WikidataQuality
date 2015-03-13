@@ -9,7 +9,6 @@ use Wikibase\Repo\WikibaseRepo;
 use WikidataQuality\ConstraintReport\ConstraintCheck\ConstraintChecker;
 use WikidataQuality\Specials\SpecialWikidataQualityPage;
 
-
 class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
 
     protected $entityLookup;
@@ -125,9 +124,9 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
         $this->output .=
             "|-\n"
             . "| " . $this->entityIdLinkFormatter->formatEntityId( $result->getPropertyId() )
-            . "|| " . $result->getDataValue() . " "
+            . "|| " . $this->formatValue( $result->getDataValue() ) . " "
             . "|| " . $result->getConstraintName() . " "
-            . "|| <nowiki>" . $this->limitOutput( $result->getParameter() ) . "</nowiki> ";
+            . "|| " . $this->formatParameters( $result->getParameters() );
 
         switch( $result->getStatus() ) {
             case 'compliance':  // constraint has been checked, result is positive
@@ -150,13 +149,25 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
         $this->output .= "|| <div style=\"color:" . $color . "\">" . $result->getStatus() . "</div>\n";
     }
 
-    private $showMax = 50;
+    private function formatValue( $dataValue ) {
+        if( $dataValue->getType() == 'wikibase-entityid' ) {
+            return $this->entityIdLinkFormatter->formatEntityId( $dataValue->getEntityId() );
+        } else {
+            return $this->dataValueFormatter->format( $dataValue );
+        }
+    }
 
-    private function limitOutput( $string ) {
-        if( strlen($string) <= $this->showMax ) {
+    private function formatParameters( $parameters ) {
+        return $this->limitLength( 'todo :\'(' ); //todo
+    }
+
+    private $maxLength = 50;
+
+    private function limitLength( $string ) {
+        if( strlen( $string ) <= $this->maxLength ) {
             return $string;
         } else {
-            return substr( $string, 0, $this->showMax ) . '...';
+            return substr( $string, 0, $this->maxLength ) . '...';
         }
     }
 
@@ -167,7 +178,6 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
     {
         return "{| class=\"wikitable sortable\"\n"
             . "! Property !! class=\"unsortable\" | Value !! Constraint !! class=\"unsortable\" | Parameters !! Status\n";
-
     }
 
 }
