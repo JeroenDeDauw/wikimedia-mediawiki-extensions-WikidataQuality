@@ -6,14 +6,14 @@ matrix:
     - env: DBTYPE=mysql
       php: 5.3
     - env: DBTYPE=sqlite
-      php: 5.4
+      php: 5.3
+    - env: DBTYPE=mysql
+      php: 5.5
     - env: DBTYPE=sqlite
       php: 5.5
     - env: DBTYPE=mysql
-      php: 5.6
-    - env: DBTYPE=sqlite
       php: hhvm-nightly
-    - env: DBTYPE=mysql
+    - env: DBTYPE=sqlite
       php: hhvm-nightly
 
 before_script:
