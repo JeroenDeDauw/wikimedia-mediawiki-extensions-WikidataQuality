@@ -43,7 +43,7 @@ class ConstraintReportHelper {
             case 'monolingualtext':
                 return $dataValue->getText();
             case 'multilingualtext':
-                return array_key_exists( 'en', $dataValue ) ? $dataValue->getTexts()['en'] : array_shift( $dataValue->getTexts() );;
+                return array_key_exists( 'en', $dataValue ) ? $dataValue->getTexts()['en'] : array_shift( $dataValue->getTexts() );
             case 'wikibase-entityid':
                 return $dataValue->getEntityId()->getSerialization();
             case 'bad':
