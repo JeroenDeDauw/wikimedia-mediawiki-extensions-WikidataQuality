@@ -1,6 +1,6 @@
 CREATE TABLE wdq_constraints_from_templates
 (
-ID int NOT NULL AUTO_INCREMENT,
+ID int /*NOT NULL*/ PRIMARY KEY AUTO_INCREMENT,
 pid int,
 constraint_name varchar(255),
 Tag varchar(255),
@@ -26,7 +26,6 @@ required varchar(255),
 seperate_category_processing varchar(255),
 value varchar(255),
 values_ text,
-PRIMARY KEY (ID)
 );
 
 INSERT 
