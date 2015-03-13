@@ -20,7 +20,8 @@ class ValueCountChecker {
     }
 
     public function checkSingleValueConstraint( $propertyId, $dataValueString ) {
-        if( $this->getPropertyCount( $this->statements )[$propertyId->getNumericId()] > 1 ) {
+        $propertyCount = $this->getPropertyCount( $this->statements );
+        if( $propertyCount[$propertyId->getNumericId()] > 1 ) {
             $status = 'violation';
         } else {
             $status = 'compliance';
@@ -30,7 +31,8 @@ class ValueCountChecker {
     }
 
     public function checkMultiValueConstraint( $propertyId, $dataValueString ) {
-        if( $this->getPropertyCount( $this->statements )[$propertyId->getNumericId()] <= 1 ) {
+        $propertyCount = $this->getPropertyCount( $this->statements );
+        if( $propertyCount[$propertyId->getNumericId()] <= 1 ) {
             $status = 'violation';
         } else {
             $status = 'compliance';
