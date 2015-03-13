@@ -19,12 +19,18 @@ $mapping = array(
             'nodeSelector' => '/record/datafield[@tag="500" and subfield[@code="9"]="v:Ehemann" or subfield[@code="9"]="v:Ehefrau"]/subfield[@code="a"]',
             'valueFormatter' => 'concat(substring-after(./text(), ", "), " ", substring-before(./text(), ", "))'
         ),
+        39 => array(
+            'nodeSelector' => '/record/datafield[@tag="550" and subfield[@code="i"]="Funktion"]/subfield[@code="a"]'
+        ),
         40 => array(
             'nodeSelector' => '/record/datafield[@tag="500" and subfield[@code="9"]="v:Sohn" or subfield[@code="9"]="v:Tochter"]/subfield[@code="a"]',
             'valueFormatter' => 'concat(substring-after(./text(), ", "), " ", substring-before(./text(), ", "))'
         ),
         106 => array(
-            'nodeSelector' => '/record/datafield[@tag="550"]/subfield[@code="a"]'
+            'nodeSelector' => '/record/datafield[@tag="550" and (subfield[@code="i"]="Charakteristischer Beruf" or subfield[@code="i"]="Beruf")]/subfield[@code="a"]'
+        ),
+        410 => array(
+            'nodeSelector' => '/record/datafield[@tag="550" and subfield[@code="i"]="Funktion"]/subfield[@code="a"]'
         ),
         569 => array(
             'nodeSelector' => '/record/datafield[@tag="548" and subfield[@code="i"]="Exakte Lebensdaten"]/subfield[@code="a"]',
