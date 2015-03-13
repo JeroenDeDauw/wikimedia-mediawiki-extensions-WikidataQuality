@@ -23,6 +23,9 @@ $mapping = array(
             'nodeSelector' => '/record/datafield[@tag="500" and subfield[@code="9"]="v:Sohn" or subfield[@code="9"]="v:Tochter"]/subfield[@code="a"]',
             'valueFormatter' => 'concat(substring-after(./text(), ", "), " ", substring-before(./text(), ", "))'
         ),
+        106 => array(
+            'nodeSelector' => '/record/datafield[@tag="550"]/subfield[@code="a"]'
+        ),
         569 => array(
             'nodeSelector' => '/record/datafield[@tag="548" and subfield[@code="i"]="Exakte Lebensdaten"]/subfield[@code="a"]',
             'valueFormatter' => 'substring-before(./text(), "-")'
