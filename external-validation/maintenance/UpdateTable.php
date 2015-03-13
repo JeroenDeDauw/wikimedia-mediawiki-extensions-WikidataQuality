@@ -17,8 +17,8 @@ class UpdateTable extends Maintenance
     {
         parent::__construct();
         $this->mDescription = "Downloads dumps of external databases and imports the entities into the local database.";
-        $this->addOption( 'entitiesFile', 'CSV file that contains external entities.', true, true );
-        $this->addOption( 'metaFile', 'CSV file that contains meta information about the data source.', true, true );
+        $this->addOption( 'entities-file', 'CSV file that contains external entities.', true, true );
+        $this->addOption( 'meta-information-file', 'CSV file that contains meta information about the data source.', true, true );
         $this->setBatchSize( 1000 );
     }
 
@@ -36,8 +36,8 @@ class UpdateTable extends Maintenance
             DUMP_META_TABLE,
             $this->mBatchSize,
             $this->isQuiet(),
-            $this->getOption( 'entitiesFile' ),
-            $this->getOption( 'metaFile' )
+            $this->getOption( 'entities-file' ),
+            $this->getOption( 'meta-information-file' )
         );
         $importer = new Importer( $context );
         $importer->import();
