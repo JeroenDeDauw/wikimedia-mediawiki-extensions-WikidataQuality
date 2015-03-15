@@ -20,7 +20,22 @@ class TypeChecker {
     }
 
     public function checkValueTypeConstraint( $propertyId, $dataValue, $classArray, $relation ) {
-        $parameters = array( 'class' => $classArray, 'relation'  => $relation );
+        $parameters = array();
+
+        if( empty( $classArray ) ) {
+            $parameters['class'] = array( 'null' );
+        } else {
+            $func = function( $class ) {
+                return new ItemId( $class );
+            };
+            $parameters['item'] = array_map( $func, $classArray );
+        }
+
+        if( $relation == null ) {
+            $parameters['relation'] = array( 'null' );
+        } else {
+            $parameters['relation'] = array( $relation );
+        }
 
         /*
          * error handling:
@@ -35,9 +50,9 @@ class TypeChecker {
          * error handling:
          *   parameter $relation must be either 'instance' or 'subclass'
          */
-        if( $relation = 'instance' ) {
+        if( $relation == 'instance' ) {
             $relationId = self::instanceId;
-        } else if( $relation = 'subclass' ) {
+        } else if( $relation == 'subclass' ) {
             $relationId = self::subclassId;
         } else {
             return new CheckResult( $propertyId, $dataValue, 'Value type', $parameters, 'error' );
@@ -60,7 +75,22 @@ class TypeChecker {
     }
 
     public function checkTypeConstraint( $propertyId, $dataValue, $statements, $classArray, $relation ) {
-        $parameters = array( 'class' => $classArray, 'relation'  => $relation );
+        $parameters = array();
+
+        if( empty( $classArray ) ) {
+            $parameters['class'] = array( 'null' );
+        } else {
+            $func = function( $class ) {
+                return new ItemId( $class );
+            };
+            $parameters['item'] = array_map( $func, $classArray );
+        }
+
+        if( $relation == null ) {
+            $parameters['relation'] = array( 'null' );
+        } else {
+            $parameters['relation'] = array( $relation );
+        }
 
         /*
          * error handling:
@@ -75,12 +105,12 @@ class TypeChecker {
          * error handling:
          *   parameter $relation must be either 'instance' or 'subclass'
          */
-        if( $relation = 'instance' ) {
+        if( $relation == 'instance' ) {
             $relationId = self::instanceId;
-        } else if( $relation = 'subclass' ) {
+        } else if( $relation == 'subclass' ) {
             $relationId = self::subclassId;
         } else {
-            return new CheckResult( $propertyId, $dataValue, 'Value type', $parameters, 'error' );
+            return new CheckResult( $propertyId, $dataValue, 'Type', $parameters, 'error' );
         }
 
         $status = $this->hasClassInRelation( $statements, $relationId, $classArray );

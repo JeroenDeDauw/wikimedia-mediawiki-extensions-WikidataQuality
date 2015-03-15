@@ -3,26 +3,33 @@
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
+use Wikibase\DataModel\Entity\PropertyId;
 
 class QualifierChecker {
 
     private $statements;
     private $helper;
 
-    public function __construct( $statements, $helper )
-    {
+    public function __construct( $statements, $helper ) {
         $this->statements = $statements;
         $this->helper = $helper;
     }
 
-    public function checkQualifierConstraint( $propertyId, $dataValue )
-    {
+    public function checkQualifierConstraint( $propertyId, $dataValue ) {
         return new CheckResult( $propertyId, $dataValue, 'Qualifier', array(), 'violation' );
     }
 
-    public function checkQualifiersConstraint( $propertyId, $dataValue, $statement, $propertyArray )
-    {
-        $parameters = array( 'property' => $propertyArray );
+    public function checkQualifiersConstraint( $propertyId, $dataValue, $statement, $propertyArray ) {
+        $parameters = array();
+
+        if( empty( $propertyArray ) ) {
+            $parameters['property'] = array( 'null' );
+        } else {
+            $func = function( $property ) {
+                return new PropertyId( $property );
+            };
+            $parameters['property'] = array_map( $func, $propertyArray );
+        }
 
         /*
          * error handling:

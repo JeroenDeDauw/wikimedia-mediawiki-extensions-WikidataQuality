@@ -5,6 +5,7 @@ namespace WikidataQuality\ConstraintReport\Specials;
 use Html;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use DataValues;
 use Wikibase\Repo\WikibaseRepo;
 use WikidataQuality\ConstraintReport\ConstraintCheck\ConstraintChecker;
 use WikidataQuality\Specials\SpecialWikidataQualityPage;
@@ -52,29 +53,35 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
 
         if( !empty( $_POST['entityID'] ) ) {
             $constraintChecker = new ConstraintChecker();
-            $entity = $this->entityLookup->getEntity( $this->getEntityID( $_POST['entityID'] ) );
+            $entityId = $this->getEntityID( $_POST['entityID'] );
+            $entity = $this->entityLookup->getEntity( $entityId );
             $results = $constraintChecker->execute( $entity );
         } else {
             return;
         }
 
         if( $results ) {
-            $out->addHTML( Html::openElement( 'br' ) . Html::openElement( 'h1' ) . $this->msg( 'wikidataquality-constraint-result-headline' ) . $entity->getId()->getSerialization() . " (" . $entity->getLabel('en') . ")" . Html::closeElement( 'h1' ) );
+            $out->addHTML( Html::openElement( 'br' ) . Html::openElement( 'h1' )
+                . $this->msg( 'wikidataquality-constraint-result-headline' )
+                . $this->entityIdHtmlLinkFormatter->formatEntityId( $entityId )
+                . ' (<nowiki>' . $entityId . '</nowiki>)'
+                . Html::closeElement( 'h1' ) );
             $this->output .= $this->getTableHeader();
             foreach( $results as $checkResult) {
                 $this->addOutputRow( $checkResult );
             }
-            $this->output .= "|-\n|}"; // close Table
+            $this->output .= "|-\n|}"; // close table
             $out->addWikiText( $this->output );
             return;
         } else {
-            $out->addHTML( Html::openElement( 'p' ) . $this->msg( 'wikidataquality-constraint-result-entity-not-existent' )->text(). Html::closeElement( 'p' ) );
+            $out->addHTML( Html::openElement( 'p' )
+                . $this->msg( 'wikidataquality-constraint-result-entity-not-existent' )->text()
+                . Html::closeElement( 'p' ) );
         }
 
     }
 
-    private function getHtmlForm()
-    {
+    private function getHtmlForm() {
         return Html::openElement( 'p' )
             . $this->msg( 'wikidataquality-constraint-instructions' )->text()
             . Html::element( 'br' )
@@ -119,14 +126,13 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
         }
     }
 
-
     private function addOutputRow( $result ) {
         $this->output .=
             "|-\n"
             . "| " . $this->entityIdLinkFormatter->formatEntityId( $result->getPropertyId() )
             . "|| " . $this->formatValue( $result->getDataValue() ) . " "
             . "|| " . $result->getConstraintName() . " "
-            . "|| " . $this->formatParameters( $result->getParameters() );
+            . "|| " . $this->formatParameters( $result->getParameters() ) . " ";
 
         switch( $result->getStatus() ) {
             case 'compliance':  // constraint has been checked, result is positive
@@ -149,26 +155,54 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
         $this->output .= "|| <div style=\"color:" . $color . "\">" . $result->getStatus() . "</div>\n";
     }
 
+    /**
+     * @param mixed string|ItemId|PropertyId|DataValues\DataValue $dataValue
+     *
+     * @return string
+     */
     private function formatValue( $dataValue ) {
-        if( $dataValue->getType() == 'wikibase-entityid' ) {
-            return $this->entityIdLinkFormatter->formatEntityId( $dataValue->getEntityId() );
-        } else {
-            return $this->dataValueFormatter->format( $dataValue );
+        if( is_string( $dataValue ) ) { // cases like 'Format' 'pattern' or 'minimum'/'maximum' values, which we have stored as strings
+            return ( '<nowiki>' . $dataValue . '</nowiki>' );
+        } else if( get_class( $dataValue ) == 'Wikibase\DataModel\Entity\ItemId' || get_class( $dataValue ) == 'Wikibase\DataModel\Entity\PropertyId' ) { // cases like 'Conflicts with' 'property', to which we can link
+            return $this->entityIdLinkFormatter->formatEntityId( $dataValue );
+        } else { // cases where we format a DataValue
+            if ( $dataValue->getType() == 'wikibase-entityid' ) { // Entities, to which we can link
+                return $this->entityIdLinkFormatter->formatEntityId( $dataValue->getEntityId() );
+            } else { // other DataValues, which can be formatted
+                return $this->dataValueFormatter->format( $dataValue );
+            }
         }
     }
 
+    /**
+     * @param array $parameters
+     *
+     * @return string
+     */
     private function formatParameters( $parameters ) {
-        return $this->limitLength( 'todo :\'(' ); //todo
+        $formattedParameters = '';
+        $parameterNames = array_keys( $parameters );
+
+        foreach( $parameterNames as $parameterName ) {
+            $formattedParameters .= ( $parameterName . ': ' );
+            $parameterValue = $parameters[$parameterName];
+
+            $formattedParameters .= implode( ', ', $this->limitArrayLength( array_map( array( 'self', 'formatValue' ), $parameterValue ) ) );
+
+            $formattedParameters .= '<br />';
+        }
+
+        return $formattedParameters;
     }
 
-    private $maxLength = 50;
+    private $maxArrayLength = 5;
 
-    private function limitLength( $string ) {
-        if( strlen( $string ) <= $this->maxLength ) {
-            return $string;
-        } else {
-            return substr( $string, 0, $this->maxLength ) . '...';
+    private function limitArrayLength( $array ) {
+        if( count( $array ) > $this->maxArrayLength ) {
+            $array = array_slice( $array, 0, $this->maxArrayLength );
+            array_push( $array, '...' );
         }
+        return $array;
     }
 
     /**

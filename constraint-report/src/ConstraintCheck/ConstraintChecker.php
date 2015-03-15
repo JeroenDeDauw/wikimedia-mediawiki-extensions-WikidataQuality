@@ -6,6 +6,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Store;
 use Wikibase\DataModel\Statement;
 use Wikibase\DataModel\Snak;
+use Wikibase\Datamodel\Entity;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\ValueCountChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\CommonsLinkChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\ConnectionChecker;
@@ -66,7 +67,7 @@ class ConstraintChecker {
     /**
      * Starts the whole constraint-check process.
      * Statements of the entity will be checked against every constraint that is defined on the property.
-     * @param \EntityId $entityId - Id of the entity, that should be checked against constraints
+     * @param Entity\Entity $entity - Entity that shall be checked against constraints
      * @return \CompareResultList (adapted version) with results or null
      */
     public function execute( $entity )

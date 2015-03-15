@@ -13,14 +13,20 @@ class CommonsLinkChecker {
     }
 
     public function checkCommonsLinkConstraint( $propertyId, $dataValue, $namespace ) {
-        $parameters = array( 'namespace' => $namespace );
+        $parameters = array();
+
+        if( $namespace == null ) {
+            $parameters['namespace'] = array( 'null' );
+        } else {
+            $parameters['namespace'] = array( $namespace );
+        }
 
         /*
          * error handling:
          *   type of $dataValue for properties with 'Commons link' constraint has to be 'string'
          *   parameter $namespace can be null, works for commons galleries
          */
-        if( $dataValue->getType() != 'string' ) {
+        if( !is_string( $dataValue ) ) {
             return new CheckResult( $propertyId, $dataValue, 'Commons link', $parameters, 'error' );
         }
 

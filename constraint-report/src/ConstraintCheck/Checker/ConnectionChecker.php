@@ -3,6 +3,8 @@
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 
 class ConnectionChecker {
 
@@ -17,7 +19,22 @@ class ConnectionChecker {
     }
 
     public function checkConflictsWithConstraint( $propertyId, $dataValue, $property, $itemArray ) {
-        $parameters = array( 'property' => $property );
+        $parameters = array();
+
+        if( $property == null ) {
+            $parameters['property'] = array( 'null' );
+        } else {
+            $parameters['property'] = array( new PropertyId( $property ) );
+        }
+
+        if( empty( $itemArray ) ) {
+            $parameters['item'] = array( 'null' );
+        } else {
+            $func = function( $item ) {
+                return new ItemId( $item );
+            };
+            $parameters['item'] = array_map( $func, $itemArray );
+        }
 
         /*
          * error handling:
@@ -36,14 +53,28 @@ class ConnectionChecker {
             $status = $this->hasProperty( $this->statements, $property ) ? 'violation' : 'compliance';
         } else {
             $status = $this->hasClaim( $this->statements, $property, $itemArray ) ? 'violation' : 'compliance';
-            $parameters['item'] = $itemArray;
         }
 
         return new CheckResult( $propertyId, $dataValue, 'Conflicts with', $parameters, $status );
     }
 
     public function checkItemConstraint( $propertyId, $dataValue, $property, $itemArray ) {
-        $parameters = array( 'property' => $property );
+        $parameters = array();
+
+        if( $property == null ) {
+            $parameters['property'] = array( 'null' );
+        } else {
+            $parameters['property'] = array( new PropertyId( $property ) );
+        }
+
+        if( empty( $itemArray ) ) {
+            $parameters['item'] = array( 'null' );
+        } else {
+            $func = function( $item ) {
+                return new ItemId( $item );
+            };
+            $parameters['item'] = array_map( $func, $itemArray );
+        }
 
         /*
          * error handling:
@@ -62,14 +93,28 @@ class ConnectionChecker {
             $status = $this->hasProperty( $this->statements, $property ) ? 'compliance' : 'violation';
         } else {
             $status = $this->hasClaim( $this->statements, $property, $itemArray ) ? 'compliance' : 'violation';
-            $parameters['item'] = $itemArray;
         }
 
         return new CheckResult( $propertyId, $dataValue, 'Item', $parameters, $status );
     }
 
     public function checkTargetRequiredClaimConstraint( $propertyId, $dataValue, $property, $itemArray ) {
-        $parameters = array( 'property' => $property );
+        $parameters = array();
+
+        if( $property == null ) {
+            $parameters['property'] = array( 'null' );
+        } else {
+            $parameters['property'] = array( new PropertyId( $property ) );
+        }
+
+        if( empty( $itemArray ) ) {
+            $parameters['item'] = array( 'null' );
+        } else {
+            $func = function( $item ) {
+                return new ItemId( $item );
+            };
+            $parameters['item'] = array_map( $func, $itemArray );
+        }
 
         /*
          * error handling:
@@ -95,7 +140,6 @@ class ConnectionChecker {
             $status = $this->hasProperty( $targetItemStatementsArray, $property ) ? 'compliance' : 'violation';
         } else {
             $status = $this->hasClaim( $targetItemStatementsArray, $property, $itemArray ) ? 'compliance' : 'violation';
-            $parameters['item'] = $itemArray;
         }
 
         return new CheckResult( $propertyId, $dataValue, 'Target required claim', $parameters, $status );
@@ -120,11 +164,17 @@ class ConnectionChecker {
 
         $status = $this->hasProperty( $targetItemStatementsArray, $propertyId ) ? 'compliance' : 'violation';
 
-        return new CheckResult( $propertyId, $dataValue, 'Symmetric', '(none)', $status );
+        return new CheckResult( $propertyId, $dataValue, 'Symmetric', $parameters, $status );
     }
 
     public function checkInverseConstraint( $propertyId, $dataValue, $property ) {
-        $parameters = array( 'property' => $property );
+        $parameters = array();
+
+        if( $property == null ) {
+            $parameters['property'] = array( 'null' );
+        } else {
+            $parameters['property'] = array( new PropertyId( $property ) );
+        }
 
         /*
          * error handling:

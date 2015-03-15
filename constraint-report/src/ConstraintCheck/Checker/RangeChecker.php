@@ -3,6 +3,7 @@
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
+use Wikibase\DataModel\Entity\PropertyId;
 
 class RangeChecker {
 
@@ -16,6 +17,8 @@ class RangeChecker {
     }
 
     public function checkRangeConstraint( $propertyId, $dataValue, $minimum_quantity, $maximum_quantity, $minimum_date, $maximum_date ) {
+        $parameters = array();
+
         /*
          * error handling:
          *   type of $dataValue for properties with 'Range' constraint has to be 'quantity' or 'time' (also 'number' and 'decimal' could work)
@@ -24,11 +27,13 @@ class RangeChecker {
         if( $dataValue->getType() == 'quantity' && ( $minimum_quantity != null && $maximum_quantity != null && $minimum_date == null && $maximum_date == null ) ) {
             $min = $minimum_quantity;
             $max = $maximum_quantity;
-            $parameters = array( 'minimum_quantity' => $minimum_quantity, 'maximum_quantity' => $maximum_quantity );
+            $parameters['minimum_quantity'] = array( $minimum_quantity );
+            $parameters['maximum_quantity'] = array( $maximum_quantity );
         } else if( $dataValue->getType() == 'time' && ( $minimum_quantity == null && $maximum_quantity == null && $minimum_date != null && $maximum_date != null ) ) {
             $min = $minimum_date->getTime();
             $max = $maximum_date->getTime();
-            $parameters = array( 'minimum_date' => $minimum_date, 'maximum_date' => $maximum_date );
+            $parameters['minimum_date'] = array( $minimum_date );
+            $parameters['maximum_date'] = array( $maximum_date );
         } else {
             return new CheckResult( $propertyId, $dataValue, 'Range', array(), 'error' );
         }
@@ -45,6 +50,14 @@ class RangeChecker {
     }
 
     public function checkDiffWithinRangeConstraint( $propertyId, $dataValue, $property, $minimum_quantity, $maximum_quantity ) {
+        $parameters = array();
+
+        if( $property == null ) {
+            $parameters['property'] = array( 'null' );
+        } else {
+            $parameters['property'] = array( new PropertyId( $property ) );
+        }
+
         /*
          * error handling:
          *   type of $dataValue for properties with 'Diff within range' constraint has to be 'quantity' or 'time' (also 'number' and 'decimal' could work)
@@ -53,7 +66,8 @@ class RangeChecker {
         if( ( $dataValue->getType() == 'quantity' || $dataValue->getType() == 'time' ) && ( $property != null && $minimum_quantity != null && $maximum_quantity != null ) ) {
             $min = $minimum_quantity;
             $max = $maximum_quantity;
-            $parameters = array( 'property' => $property, 'minimum_quantity' => $minimum_quantity, 'maximum_quantity' => $maximum_quantity );
+            $parameters['minimum_quantity'] = array( $minimum_quantity );
+            $parameters['maximum_quantity'] = array( $maximum_quantity );
         } else {
             return new CheckResult( $propertyId, $dataValue, 'Diff within range', array(), 'error' );
         }

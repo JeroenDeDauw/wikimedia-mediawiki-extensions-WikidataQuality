@@ -13,7 +13,13 @@ class FormatChecker {
     }
 
     public function checkFormatConstraint( $propertyId, $dataValue, $pattern ) {
-        $parameters = array( 'pattern' => $pattern );
+        $parameters = array();
+
+        if( $pattern == null ) {
+            $parameters['pattern'] = array( 'null' );
+        } else {
+            $parameters['pattern'] = array( $pattern );
+        }
 
         /*
          * error handling:

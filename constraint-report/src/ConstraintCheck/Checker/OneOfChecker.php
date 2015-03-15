@@ -3,6 +3,7 @@
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
+use Wikibase\DataModel\Entity\ItemId;
 
 class OneOfChecker {
 
@@ -13,7 +14,16 @@ class OneOfChecker {
     }
 
     public function checkOneOfConstraint( $propertyId, $dataValue, $itemArray ) {
-        $parameters = array( 'value' => $itemArray );
+        $parameters = array();
+
+        if( empty( $itemArray ) ) {
+            $parameters['item'] = array( 'null' );
+        } else {
+            $func = function( $item ) {
+                return new ItemId( $item );
+            };
+            $parameters['item'] = array_map( $func, $itemArray );
+        }
 
         /*
          * error handling:
