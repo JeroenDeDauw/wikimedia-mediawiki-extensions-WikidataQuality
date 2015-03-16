@@ -51,8 +51,7 @@ class ConstraintChecker {
 
     private $statements;
 
-    public function __construct()
-    {
+    public function __construct() {
         // Get entity lookup
         $this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
 
@@ -70,8 +69,7 @@ class ConstraintChecker {
      * @param Entity\Entity $entity - Entity that shall be checked against constraints
      * @return \CompareResultList (adapted version) with results or null
      */
-    public function execute( $entity )
-    {
+    public function execute( $entity ) {
         if ( $entity ) {
 
             $this->statements = $entity->getStatements();
@@ -220,56 +218,49 @@ class ConstraintChecker {
         return $this->valueCountChecker;
     }
 
-    private function getConnectionChecker()
-    {
+    private function getConnectionChecker() {
         if( !isset( $this->connectionChecker ) ) {
             $this->connectionChecker = new ConnectionChecker( $this->statements, $this->entityLookup, $this->helper );
         }
         return $this->connectionChecker;
     }
 
-    private function getQualifierChecker()
-    {
+    private function getQualifierChecker() {
         if( !isset( $this->qualifierChecker ) ) {
             $this->qualifierChecker = new QualifierChecker( $this->statements, $this->helper );
         }
         return $this->qualifierChecker;
     }
 
-    private function getRangeChecker()
-    {
+    private function getRangeChecker() {
         if( !isset( $this->rangeChecker ) ) {
             $this->rangeChecker = new RangeChecker( $this->statements, $this->helper );
         }
         return $this->rangeChecker;
     }
 
-    private function getTypeChecker()
-    {
+    private function getTypeChecker() {
         if( !isset( $this->typeChecker ) ) {
             $this->typeChecker = new TypeChecker( $this->entityLookup, $this->helper );
         }
         return $this->typeChecker;
     }
 
-    private function getOneOfChecker()
-    {
+    private function getOneOfChecker() {
         if( !isset( $this->oneOfChecker ) ) {
             $this->oneOfChecker = new OneOfChecker( $this->helper );
         }
         return $this->oneOfChecker;
     }
 
-    private function getCommonsLinkChecker()
-    {
+    private function getCommonsLinkChecker() {
         if( !isset( $this->commonsLinkChecker ) ) {
             $this->commonsLinkChecker = new CommonsLinkChecker( $this->statements, $this->helper );
         }
         return $this->commonsLinkChecker;
     }
     
-    private function getFormatChecker()
-    {
+    private function getFormatChecker() {
         if( !isset( $this->formatChecker ) ) {
             $this->formatChecker = new FormatChecker( $this->helper );
         }

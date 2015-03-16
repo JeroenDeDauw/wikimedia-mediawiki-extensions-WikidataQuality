@@ -26,7 +26,7 @@ class CommonsLinkChecker {
          *   type of $dataValue for properties with 'Commons link' constraint has to be 'string'
          *   parameter $namespace can be null, works for commons galleries
          */
-        if( !is_string( $dataValue ) ) {
+        if( $dataValue->getType() != 'string' ) {
             return new CheckResult( $propertyId, $dataValue, 'Commons link', $parameters, 'error' );
         }
 

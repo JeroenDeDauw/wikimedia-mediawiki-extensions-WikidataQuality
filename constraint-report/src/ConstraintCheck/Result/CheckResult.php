@@ -9,13 +9,15 @@ class CheckResult {
     private $constraintName;
     private $parameters;
     private $status;
+    private $message;
 
-    public function __construct( $propertyId, $dataValue, $constraintName, $parameters, $status ) {
+    public function __construct( $propertyId, $dataValue, $constraintName, $parameters = array(), $status = 'error', $message = '' ) {
         $this->propertyId = $propertyId;
         $this->dataValue = $dataValue;
         $this->constraintName = $constraintName;
         $this->parameters = $parameters;
         $this->status = $status;
+        $this->message = $message;
     }
 
     public function getPropertyId() {
@@ -36,6 +38,10 @@ class CheckResult {
 
     public function getStatus() {
         return $this->status;
+    }
+
+    public function getMessage() {
+        return $this->message;
     }
 
 }

@@ -208,7 +208,7 @@ class ConnectionChecker {
     private function hasClaim( $itemStatementsArray, $propertyId, $claimItemIdOrArray ) {
         foreach( $itemStatementsArray as $itemStatement ) {
             if( $itemStatement->getPropertyId()->getSerialization() == $propertyId ) {
-                if( getType( $claimItemIdOrArray ) == 'string' ) {
+                if( is_string( $claimItemIdOrArray ) ) {
                     if( $this->singleHasClaim( $itemStatement, $claimItemIdOrArray ) ) {
                         return true;
                     }
