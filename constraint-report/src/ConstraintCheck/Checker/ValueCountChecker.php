@@ -40,7 +40,7 @@ class ValueCountChecker {
         return new CheckResult( $propertyId, $dataValueString, 'Multi value', $parameters, $status );
     }
 
-    // TODO
+    // TODO: implement when index exists that makes it possible in real-time
     public function checkUniqueValueConstraint( $propertyId, $dataValueString ) {
         $parameters = array();
 
@@ -52,7 +52,7 @@ class ValueCountChecker {
         if ( !isset( $propertyCount ) ) {
             $this->propertyCount = array();
             foreach( $statements as $statement ) {
-                if( $statement->getRank() == Statement::RANK_DEPRECATED ) {
+                if( $statement->getRank() === Statement::RANK_DEPRECATED ) {
                     continue;
                 }
 

@@ -31,7 +31,7 @@ class TypeChecker {
             $parameters['item'] = array_map( $func, $classArray );
         }
 
-        if( $relation == null ) {
+        if( $relation === null ) {
             $parameters['relation'] = array( 'null' );
         } else {
             $parameters['relation'] = array( $relation );
@@ -42,7 +42,7 @@ class TypeChecker {
          *   type of $dataValue for properties with 'Value type' constraint has to be 'wikibase-entityid'
          *   parameter $classArray must not be null
          */
-        if( $dataValue->getType() != 'wikibase-entityid' || $classArray == null ) {
+        if( $dataValue->getType() !== 'wikibase-entityid' || $classArray === null ) {
             return new CheckResult( $propertyId, $dataValue, 'Value type', $parameters, 'error' );
         }
 
@@ -50,9 +50,9 @@ class TypeChecker {
          * error handling:
          *   parameter $relation must be either 'instance' or 'subclass'
          */
-        if( $relation == 'instance' ) {
+        if( $relation === 'instance' ) {
             $relationId = self::instanceId;
-        } else if( $relation == 'subclass' ) {
+        } else if( $relation === 'subclass' ) {
             $relationId = self::subclassId;
         } else {
             return new CheckResult( $propertyId, $dataValue, 'Value type', $parameters, 'error' );
@@ -86,7 +86,7 @@ class TypeChecker {
             $parameters['item'] = array_map( $func, $classArray );
         }
 
-        if( $relation == null ) {
+        if( $relation === null ) {
             $parameters['relation'] = array( 'null' );
         } else {
             $parameters['relation'] = array( $relation );
@@ -96,7 +96,7 @@ class TypeChecker {
          * error handling:
          *   parameter $classArray must not be null
          */
-        if ( $classArray == null ) {
+        if ( $classArray === null ) {
             return new CheckResult( $propertyId, $dataValue, 'Type', $parameters, 'error' );
         }
 
@@ -104,9 +104,9 @@ class TypeChecker {
          * error handling:
          *   parameter $relation must be either 'instance' or 'subclass'
          */
-        if( $relation == 'instance' ) {
+        if( $relation === 'instance' ) {
             $relationId = self::instanceId;
-        } else if( $relation == 'subclass' ) {
+        } else if( $relation === 'subclass' ) {
             $relationId = self::subclassId;
         } else {
             return new CheckResult( $propertyId, $dataValue, 'Type', $parameters, 'error' );
@@ -128,17 +128,17 @@ class TypeChecker {
             $propertyId = $claim->getPropertyId();
             $numericPropertyId = $propertyId->getNumericId();
 
-            if( $numericPropertyId == self::subclassId ) {
+            if( $numericPropertyId === self::subclassId ) {
                 $mainSnak = $claim->getMainSnak();
 
-                if( $mainSnak->getType() == 'value' && $mainSnak->getDataValue()->getType() == 'wikibase-entityid' ) {
+                if( $mainSnak->getType() === 'value' && $mainSnak->getDataValue()->getType() === 'wikibase-entityid' ) {
                     $comparativeClass = $mainSnak->getDataValue()->getEntityId();
                 } else {
                     // error case
                 }
 
                 foreach( $classesToCheck as $class ) {
-                    if( $class == $comparativeClass->getSerialization() ) {
+                    if( $class === $comparativeClass->getSerialization() ) {
                         return true;
                     }
                 }
@@ -154,24 +154,24 @@ class TypeChecker {
             $propertyId = $claim->getPropertyId();
             $numericPropertyId = $propertyId->getNumericId();
 
-            if( $numericPropertyId == $relationId ) {
+            if( $numericPropertyId === $relationId ) {
                 $mainSnak = $claim->getMainSnak();
 
-                if( $mainSnak->getType() == 'value' && $mainSnak->getDataValue()->getType() == 'wikibase-entityid' ) {
+                if( $mainSnak->getType() === 'value' && $mainSnak->getDataValue()->getType() === 'wikibase-entityid' ) {
                     $comparativeClass = $mainSnak->getDataValue()->getEntityId();
                 } else {
                     // error case
                 }
 
                 foreach( $classesToCheck as $class ) {
-                    if( $class == $comparativeClass->getSerialization() ) {
+                    if( $class === $comparativeClass->getSerialization() ) {
                         return true;
                     }
                 }
 
                 $compliance = $this->isSubclassOf( $comparativeClass, $classesToCheck );
             }
-            if( $compliance == true ) {
+            if( $compliance === true ) {
                 return true;
             }
         }

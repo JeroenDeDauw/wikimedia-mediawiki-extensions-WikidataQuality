@@ -163,10 +163,10 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
     private function formatValue( $dataValue ) {
         if( is_string( $dataValue ) ) { // cases like 'Format' 'pattern' or 'minimum'/'maximum' values, which we have stored as strings
             return ( '<nowiki>' . $dataValue . '</nowiki>' );
-        } else if( get_class( $dataValue ) == 'Wikibase\DataModel\Entity\ItemId' || get_class( $dataValue ) == 'Wikibase\DataModel\Entity\PropertyId' ) { // cases like 'Conflicts with' 'property', to which we can link
+        } else if( get_class( $dataValue ) === 'Wikibase\DataModel\Entity\ItemId' || get_class( $dataValue ) === 'Wikibase\DataModel\Entity\PropertyId' ) { // cases like 'Conflicts with' 'property', to which we can link
             return $this->entityIdLinkFormatter->formatEntityId( $dataValue );
         } else { // cases where we format a DataValue
-            if ( $dataValue->getType() == 'wikibase-entityid' ) { // Entities, to which we can link
+            if ( $dataValue->getType() === 'wikibase-entityid' ) { // Entities, to which we can link
                 return $this->entityIdLinkFormatter->formatEntityId( $dataValue->getEntityId() );
             } else { // other DataValues, which can be formatted
                 return $this->dataValueFormatter->format( $dataValue );

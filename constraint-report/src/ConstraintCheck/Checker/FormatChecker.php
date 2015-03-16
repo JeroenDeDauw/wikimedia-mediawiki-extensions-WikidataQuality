@@ -15,7 +15,7 @@ class FormatChecker {
     public function checkFormatConstraint( $propertyId, $dataValue, $pattern ) {
         $parameters = array();
 
-        if( $pattern == null ) {
+        if( $pattern === null ) {
             $parameters['pattern'] = array( 'null' );
         } else {
             $parameters['pattern'] = array( $pattern );
@@ -26,13 +26,13 @@ class FormatChecker {
          *   type of $dataValue for properties with 'Format' constraint has to be 'string'
          *   parameter $pattern must not be null
          */
-        if( $dataValue->getType() != 'string' || $pattern == null ) {
+        if( $dataValue->getType() !== 'string' || $pattern === null ) {
             return new CheckResult( $propertyId, $dataValue, 'Format', $parameters, 'error' );
         }
 
-        $stringToCompare = $dataValue->getValue();
+        $comparativeString = $dataValue->getValue();
 
-        $status = preg_match( '/^' . str_replace( '/', '\/', $pattern ) . '$/', $stringToCompare  ) ? 'compliance' : 'violation';
+        $status = preg_match( '/^' . str_replace( '/', '\/', $pattern ) . '$/', $comparativeString  ) ? 'compliance' : 'violation';
 
         return new CheckResult( $propertyId, $dataValue, 'Format', $parameters, $status );
     }

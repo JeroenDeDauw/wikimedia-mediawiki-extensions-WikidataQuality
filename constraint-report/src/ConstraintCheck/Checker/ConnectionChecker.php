@@ -21,7 +21,7 @@ class ConnectionChecker {
     public function checkConflictsWithConstraint( $propertyId, $dataValue, $property, $itemArray ) {
         $parameters = array();
 
-        if( $property == null ) {
+        if( $property === null ) {
             $parameters['property'] = array( 'null' );
         } else {
             $parameters['property'] = array( new PropertyId( $property ) );
@@ -40,7 +40,7 @@ class ConnectionChecker {
          * error handling:
          *   parameter $property must not be null
          */
-        if( $property == null ) {
+        if( $property === null ) {
             return new CheckResult( $propertyId, $dataValue, 'Conflicts with', $parameters, 'error' );
         }
 
@@ -61,7 +61,7 @@ class ConnectionChecker {
     public function checkItemConstraint( $propertyId, $dataValue, $property, $itemArray ) {
         $parameters = array();
 
-        if( $property == null ) {
+        if( $property === null ) {
             $parameters['property'] = array( 'null' );
         } else {
             $parameters['property'] = array( new PropertyId( $property ) );
@@ -80,7 +80,7 @@ class ConnectionChecker {
          * error handling:
          *   parameter $property must not be null
          */
-        if( $property == null ) {
+        if( $property === null ) {
             return new CheckResult( $propertyId, $dataValue, 'Item', $parameters, 'error' );
         }
 
@@ -101,7 +101,7 @@ class ConnectionChecker {
     public function checkTargetRequiredClaimConstraint( $propertyId, $dataValue, $property, $itemArray ) {
         $parameters = array();
 
-        if( $property == null ) {
+        if( $property === null ) {
             $parameters['property'] = array( 'null' );
         } else {
             $parameters['property'] = array( new PropertyId( $property ) );
@@ -121,12 +121,12 @@ class ConnectionChecker {
          *   type of $dataValue for properties with 'Target required claim' constraint has to be 'wikibase-entityid'
          *   parameter $property must not be null
          */
-        if( $dataValue->getType() != 'wikibase-entityid' || $property == null ) {
+        if( $dataValue->getType() !== 'wikibase-entityid' || $property === null ) {
             return new CheckResult( $propertyId, $dataValue, 'Target required claim', $parameters, 'error' );
         }
 
         $targetItem = $this->entityLookup->getEntity( $dataValue->getEntityId() );
-        if( $targetItem == null ) {
+        if( $targetItem === null ) {
             return new CheckResult( $propertyId, $dataValue, 'Target required claim', $parameters, 'fail' );
         }
         $targetItemStatementsArray = $targetItem->getStatements()->toArray();
@@ -152,12 +152,12 @@ class ConnectionChecker {
          * error handling:
          *   type of $dataValue for properties with 'Symmetric' constraint has to be 'wikibase-entityid'
          */
-        if( $dataValue->getType() != 'wikibase-entityid' ) {
+        if( $dataValue->getType() !== 'wikibase-entityid' ) {
             return new CheckResult( $propertyId, $dataValue, 'Symmetric', $parameters, 'error' );
         }
 
         $targetItem = $this->entityLookup->getEntity( $dataValue->getEntityId() );
-        if( $targetItem == null ) {
+        if( $targetItem === null ) {
             return new CheckResult( $propertyId, $dataValue, 'Symmetric', $parameters, 'fail' );
         }
         $targetItemStatementsArray = $targetItem->getStatements()->toArray();
@@ -170,7 +170,7 @@ class ConnectionChecker {
     public function checkInverseConstraint( $propertyId, $dataValue, $property ) {
         $parameters = array();
 
-        if( $property == null ) {
+        if( $property === null ) {
             $parameters['property'] = array( 'null' );
         } else {
             $parameters['property'] = array( new PropertyId( $property ) );
@@ -181,12 +181,12 @@ class ConnectionChecker {
          *   type of $dataValue for properties with 'Inverse' constraint has to be 'wikibase-entityid'
          *   parameter $property must not be null
          */
-        if( $dataValue->getType() != 'wikibase-entityid' || $property == null ) {
+        if( $dataValue->getType() !== 'wikibase-entityid' || $property === null ) {
             return new CheckResult( $propertyId, $dataValue, 'Inverse', $parameters, 'error' );
         }
 
         $targetItem = $this->entityLookup->getEntity( $dataValue->getEntityId() );
-        if( $targetItem == null ) {
+        if( $targetItem === null ) {
             return new CheckResult( $propertyId, $dataValue, 'Inverse', $parameters, 'fail' );
         }
         $targetItemStatementsArray = $targetItem->getStatements()->toArray();
@@ -196,24 +196,24 @@ class ConnectionChecker {
         return new CheckResult( $propertyId, $dataValue, 'Inverse', $parameters, $status );
     }
 
-    private function hasProperty( $itemStatementsArray, $propertyId ) {
+    private function hasProperty( $itemStatementsArray, $propertyIdSerialization ) {
         foreach( $itemStatementsArray as $itemStatement ) {
-            if( $itemStatement->getPropertyId()->getSerialization() == $propertyId ) {
+            if( $itemStatement->getPropertyId()->getSerialization() === $propertyIdSerialization ) {
                 return true;
             }
         }
         return false;
     }
 
-    private function hasClaim( $statementsArray, $propertyId, $itemIdOrArray ) {
+    private function hasClaim( $statementsArray, $propertyIdSerialization, $itemIdSerializationOrArray ) {
         foreach( $statementsArray as $statement ) {
-            if( $statement->getPropertyId()->getSerialization() == $propertyId ) {
-                if( is_string( $itemIdOrArray ) ) {
-                    if( $this->singleHasClaim( $statement, $itemIdOrArray ) ) {
+            if( $statement->getPropertyId()->getSerialization() === $propertyIdSerialization ) {
+                if( is_string( $itemIdSerializationOrArray ) ) {
+                    if( $this->singleHasClaim( $statement, $itemIdSerializationOrArray ) ) {
                         return true;
                     }
                 } else {
-                    if( $this->arrayHasClaim( $statement, $itemIdOrArray ) ) {
+                    if( $this->arrayHasClaim( $statement, $itemIdSerializationOrArray ) ) {
                         return true;
                     }
                 }
@@ -222,17 +222,17 @@ class ConnectionChecker {
         return false;
     }
 
-    private function singleHasClaim( $statement, $itemId ) {
-        if( $statement->getMainSnak()->getDataValue()->getEntityId()->getSerialization() == $itemId ) {
+    private function singleHasClaim( $statement, $itemIdSerialization ) {
+        if( $statement->getMainSnak()->getDataValue()->getEntityId()->getSerialization() === $itemIdSerialization ) {
             return true;
         } else {
             return false;
         }
     }
 
-    private function arrayHasClaim( $statement, $itemIdArray ) {
-        foreach( $itemIdArray as $itemId ) {
-            if( $statement->getMainSnak()->getDataValue()->getEntityId()->getSerialization() == $itemId ) {
+    private function arrayHasClaim( $statement, $itemIdSerializationArray ) {
+        foreach( $itemIdSerializationArray as $itemIdSerialization ) {
+            if( $statement->getMainSnak()->getDataValue()->getEntityId()->getSerialization() === $itemIdSerialization ) {
                 return true;
             }
         }

@@ -83,7 +83,7 @@ class ConstraintChecker {
 
                 $claim = $statement->getClaim();
 
-                if( $claim->getMainSnak()->getType() == 'value' ) {
+                if( $claim->getMainSnak()->getType() === 'value' ) {
                     $dataValue = $claim->getMainSnak()->getDataValue();
                 } else {
                     // skip 'somevalue' and 'novalue' cases, todo: handle in a better way
@@ -116,7 +116,7 @@ class ConstraintChecker {
 
                     switch( $row->constraint_name ) {
                         // Switch over every constraint, check them accordingly
-                        // Return value should be a CheckResult, which should be inserted in an Array of CheckResults ($results)
+                        // Return value should be a CheckResult, which should be inserted in an array of CheckResults ($results)
                         // which should be returned in the end
 
                         // ValueCountCheckers
@@ -128,7 +128,7 @@ class ConstraintChecker {
                             $result[] = $this->getValueCountChecker()
                                 ->checkMultiValueConstraint( $propertyId, $dataValue );
                             break;
-                        case "Unique value": //todo
+                        case "Unique value":
                             $result[] = $this->getValueCountChecker()
                                 ->checkUniqueValueConstraint( $propertyId, $dataValue );
                             break;
