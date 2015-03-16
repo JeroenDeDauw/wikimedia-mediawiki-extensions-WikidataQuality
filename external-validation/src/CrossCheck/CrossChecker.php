@@ -42,12 +42,6 @@ class CrossChecker
     private $loadBalancer;
 
     /**
-     * Mapping that is used to extract correct data from external entities.
-     * @var array
-     */
-    private $mapping;
-
-    /**
      * Metadata for dump belonging to external entity.
      * @var array
      */
@@ -122,42 +116,23 @@ class CrossChecker
             throw new InvalidArgumentException( '$statements must be Statement or StatementList.' );
         }
 
-        // Extract external ids
-        $externalIds = $this->extractExternalIds( $entity );
+        // Connect to database
+        $db = $this->loadBalancer->getConnection( DB_SLAVE );
+
+        // Get validatable properties
+        $validatableProperties = $this->getValidatablePropertyIds( $db );
 
         // Run cross-check for each external id
         $resultList = new CompareResultList();
-        foreach ( $externalIds as $identifierPropertyId => $externalIdsPerDb ) {
+        foreach ( $validatableProperties as $identifierPropertyId => $validateablePropertyIds ) {
             // Parse property id from array key
-            $identifierPropertyId = new PropertyId( $identifierPropertyId );
+            $identifierPropertyId = new PropertyId( 'P' . $identifierPropertyId );
 
-            foreach ( $externalIdsPerDb as $externalId ) {
-                $resultList->merge( $this->crossCheckStatementsWithDatabase( $statements, $identifierPropertyId, $externalId ) );
-            }
+            // Cross-check validateable statements for single external database
+            $resultList->merge( $this->crossCheckStatementsWithDatabase( $db, $statements, $identifierPropertyId, $validateablePropertyIds ) );
         }
 
         return $resultList;
-    }
-
-    /**
-     * Extracts all external ids from an entity, that are supported for cross-checks.
-     * @param \Entity $entity - Entity from which external ids should be extracted
-     * @return array
-     */
-    private function extractExternalIds( $entity )
-    {
-        $externalIds = array();
-        foreach ( $entity->getStatements() as $statement ) {
-            $propertyId = $statement->getClaim()->getPropertyId();
-            if ( array_key_exists( $propertyId->getNumericId(), $this->mapping ) ) {
-                $mainSnak = $statement->getClaim()->getMainSnak();
-                if ( $mainSnak instanceof PropertyValueSnak ) {
-                    $externalIds[ (string)$propertyId ][ ] = $mainSnak->getDataValue()->getValue();
-                }
-            }
-        }
-
-        return $externalIds;
     }
 
     /**
@@ -167,35 +142,42 @@ class CrossChecker
      * @param string $externalId - Id of the external entity, that is equivalent to the wikibase entity.
      * @return \CompareResultList
      */
-    private function crossCheckStatementsWithDatabase( $statements, $identifierPropertyId, $externalId )
+    private function crossCheckStatementsWithDatabase( $db, $statements, $identifierPropertyId, $validateablePropertyIds )
     {
-        // Get mapping for current database
-        $mapping = $this->mapping[ $identifierPropertyId->getNumericId() ];
-
-        // Filter out statements, that can not be checked against the current database
-        $validateableStatements = $this->getValidateableStatements( $statements, $mapping );
-
-        // Compare each validatable statement
-        $results = new CompareResultList();
-        foreach ( $validateableStatements as $validateableStatement ) {
-            // Get claim with guid
-            $claim = $validateableStatement->getClaim();
-            $claimGuid = $claim->getGuid();
-
-            // Get main snak
-            $mainSnak = $claim->getMainSnak();
+        // Get external ids
+        $externalIds = array();
+        $identifierStatements = $statements->getWithPropertyId( $identifierPropertyId );
+        foreach ( $identifierStatements as $identifierStatement ) {
+            $mainSnak = $identifierStatement->getClaim()->getMainSnak();
             if ( $mainSnak instanceof PropertyValueSnak ) {
-                $dataValue = $mainSnak->getDataValue();
-                $propertyId = $mainSnak->getPropertyId();
+                $externalIds[] = $mainSnak->getDataValue()->getValue();
+            }
+        }
 
-                // Get external values for propertyId
-                $externalValues = $this->getExternalValues( $identifierPropertyId, $externalId, $propertyId );
+        // Cross-check validateable statements
+        $results = new CompareResultList();
+        foreach ( $statements as $statement ) {
+            // Check, if statements is validateable with current external database
+            if( in_array( $statement->getClaim()->getPropertyId()->getNumericId(), $validateablePropertyIds ))
+            {
+                // Get claim with guid
+                $claim = $statement->getClaim();
+                $claimGuid = $claim->getGuid();
 
+                // Get main snak
+                $mainSnak = $claim->getMainSnak();
+                if ( $mainSnak instanceof PropertyValueSnak ) {
+                    $dataValue = $mainSnak->getDataValue();
+                    $propertyId = $mainSnak->getPropertyId();
 
-                // Compare data value
-                $result = $this->compareDataValues( $propertyId, $claimGuid, $dataValue, $externalValues );
-                if ( $result ) {
-                    $results->add( $result );
+                    // Get external values for propertyId
+                    $externalValues = $this->getExternalValues( $db, $identifierPropertyId, $externalIds, $propertyId );
+
+                    // Compare data value
+                    $result = $this->compareDataValues( $propertyId, $claimGuid, $dataValue, $externalValues );
+                    if ( $result ) {
+                        $results->add( $result );
+                    }
                 }
             }
         }
@@ -204,42 +186,33 @@ class CrossChecker
     }
 
     /**
-     * Filter out those statements, that can not be cross-checked against a certain database.
-     * @param \StatementList $statements - Source list of statements
-     * @param array $mapping - Mapping for the database that is used for cross-checking
-     * @return StatementList
-     */
-    private function getValidateableStatements( $statements, $mapping )
-    {
-        $validateableStatements = new StatementList();
-        $validateablePropertyIds = array_keys( $mapping );
-
-        foreach ( $statements as $statement ) {
-            $propertyId = $statement->getClaim()->getPropertyId();
-            if ( in_array( $propertyId->getNumericId(), $validateablePropertyIds ) ) {
-                $validateableStatements->addStatement( $statement );
-            }
-        }
-
-        return $validateableStatements;
-    }
-
-    /**
      * Retrieves external entity by its id from database.
      * @param \PropertyId $identifierPropertyId - Id of the identifier property, that represents the external database
-     * @param string $externalId - Id of the external entity
+     * @param string $externalIds - Ids of the external entity
      * @param \PropertyId $propertyId - Id of the property for which the external values are needed
      * @return array
      */
-    private function getExternalValues( $identifierPropertyId, $externalId, $propertyId )
+    private function getExternalValues( $db, $identifierPropertyId, $externalIds, $propertyId )
     {
-        // Connect to database
-        $db = $this->loadBalancer->getConnection( DB_SLAVE );
+        // Build external ids conditions
+        $externalIdsConditions = array();
+        foreach ( $externalIds as $externalId ) {
+            $externalIdsConditions[] = "external_id=\"$externalId\"";
+        }
 
         // Run query
         $numericIdentifierPropertyId = $identifierPropertyId->getNumericId();
         $numericPropertyId = $propertyId->getNumericId();
-        $result = $db->select( DUMP_DATA_TABLE, array( 'dump_id', 'external_value' ), array( "identifier_pid=$numericIdentifierPropertyId", "external_id=\"$externalId\"", "pid=$numericPropertyId" ) );
+        $result = $db->select(
+            DUMP_DATA_TABLE,
+            array( 'dump_id', 'external_value' ),
+            array(
+                "identifier_pid=$numericIdentifierPropertyId",
+                "pid=$numericPropertyId",
+                implode( ' OR ', $externalIdsConditions )
+            )
+        );
+
         if ( $result !== false ) {
             $externalValues = array();
             foreach ($result as $row) {
@@ -277,5 +250,29 @@ class CrossChecker
             }
         }
         return null;
+    }
+
+    /*
+     * Returns ids of those properties, which can be validated.
+     * @param DatabaseBase $db
+     */
+    private function getValidatablePropertyIds( $db )
+    {
+        $result = $db->select(
+            DUMP_DATA_TABLE,
+            array( 'identifier_pid', 'pid' ),
+            array(),
+            __METHOD__,
+            array( 'DISTINCT' )
+        );
+        if( $result )
+        {
+            $validatableProperties = array();
+            foreach ( $result as $row ) {
+                $validatableProperties[ $row->identifier_pid ][] = $row->pid;
+            }
+
+            return $validatableProperties;
+        }
     }
 }
