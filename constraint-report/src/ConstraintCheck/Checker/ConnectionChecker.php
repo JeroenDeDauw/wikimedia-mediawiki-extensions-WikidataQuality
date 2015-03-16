@@ -205,15 +205,15 @@ class ConnectionChecker {
         return false;
     }
 
-    private function hasClaim( $itemStatementsArray, $propertyId, $claimItemIdOrArray ) {
-        foreach( $itemStatementsArray as $itemStatement ) {
-            if( $itemStatement->getPropertyId()->getSerialization() == $propertyId ) {
-                if( is_string( $claimItemIdOrArray ) ) {
-                    if( $this->singleHasClaim( $itemStatement, $claimItemIdOrArray ) ) {
+    private function hasClaim( $statementsArray, $propertyId, $itemIdOrArray ) {
+        foreach( $statementsArray as $statement ) {
+            if( $statement->getPropertyId()->getSerialization() == $propertyId ) {
+                if( is_string( $itemIdOrArray ) ) {
+                    if( $this->singleHasClaim( $statement, $itemIdOrArray ) ) {
                         return true;
                     }
                 } else {
-                    if( $this->arrayHasClaim( $itemStatement, $claimItemIdOrArray ) ) {
+                    if( $this->arrayHasClaim( $statement, $itemIdOrArray ) ) {
                         return true;
                     }
                 }
@@ -222,17 +222,17 @@ class ConnectionChecker {
         return false;
     }
 
-    private function singleHasClaim( $itemStatement, $claimItemId ) {
-        if( $itemStatement->getMainSnak()->getDataValue()->getEntityId()->getSerialization() == $claimItemId ) {
+    private function singleHasClaim( $statement, $itemId ) {
+        if( $statement->getMainSnak()->getDataValue()->getEntityId()->getSerialization() == $itemId ) {
             return true;
         } else {
             return false;
         }
     }
 
-    private function arrayHasClaim( $itemStatement, $claimItemIdArray ) {
-        foreach( $claimItemIdArray as $claimItemId ) {
-            if( $itemStatement->getMainSnak()->getDataValue()->getEntityId()->getSerialization() == $claimItemId ) {
+    private function arrayHasClaim( $statement, $itemIdArray ) {
+        foreach( $itemIdArray as $itemId ) {
+            if( $statement->getMainSnak()->getDataValue()->getEntityId()->getSerialization() == $itemId ) {
                 return true;
             }
         }

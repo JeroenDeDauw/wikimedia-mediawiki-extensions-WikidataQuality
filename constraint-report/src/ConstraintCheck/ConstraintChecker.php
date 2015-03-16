@@ -2,6 +2,8 @@
 
 namespace WikidataQuality\ConstraintReport\ConstraintCheck;
 
+define("USE_WIKIDATA_API_LOOKUP", true);
+
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Store;
 use Wikibase\DataModel\Statement;
@@ -81,11 +83,12 @@ class ConstraintChecker {
 
                 $claim = $statement->getClaim();
 
-                if( $claim->getMainSnak()->getType() == 'value' )
+                if( $claim->getMainSnak()->getType() == 'value' ) {
                     $dataValue = $claim->getMainSnak()->getDataValue();
-                else
+                } else {
                     // skip 'somevalue' and 'novalue' cases, todo: handle in a better way
                     continue;
+                }
 
                 $propertyId = $claim->getPropertyId();
                 $numericPropertyId = $propertyId->getNumericId();

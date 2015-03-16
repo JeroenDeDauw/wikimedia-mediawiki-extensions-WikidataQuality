@@ -27,7 +27,7 @@ class OneOfChecker {
 
         /*
          * error handling:
-         *   type of $dataValue for properties with 'One of' constraint has to be 'wikidata-entityid'
+         *   type of $dataValue for properties with 'One of' constraint has to be 'wikibase-entityid'
          *   parameter $itemArray must not be null
          */
         if( $dataValue->getType() != 'wikibase-entityid' || $itemArray == null) {

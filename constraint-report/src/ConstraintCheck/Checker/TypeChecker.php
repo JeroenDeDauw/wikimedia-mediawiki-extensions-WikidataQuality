@@ -148,6 +148,7 @@ class TypeChecker {
     }
 
     private function hasClassInRelation( $statements, $relationId, $classesToCheck ) {
+        $compliance = null;
         foreach( $statements as $statement ) {
             $claim = $statement->getClaim();
             $propertyId = $claim->getPropertyId();
@@ -168,9 +169,9 @@ class TypeChecker {
                     }
                 }
 
-                $status = $this->isSubclassOf( $comparativeClass, $classesToCheck );
+                $compliance = $this->isSubclassOf( $comparativeClass, $classesToCheck );
             }
-            if( $status == true ) {
+            if( $compliance == true ) {
                 return true;
             }
         }
