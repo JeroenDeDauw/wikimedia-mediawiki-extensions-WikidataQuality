@@ -22,7 +22,8 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 
 /**
  * Class ConstraintCheck
- * @package WikidataQuality\ConstraintReport\ConstraintReport
+ * Used to start the constraint-check process
+ * @package WikidataQuality\ConstraintReport\ConstraintCheck
  * @author BP2014N1
  * @license GNU GPL v2+
  */
@@ -40,17 +41,64 @@ class ConstraintChecker {
      */
     private $loadBalancer;
 
+    /**
+     * Class for helper functions for constraint checkers.
+     * @var \ConstraintReportHelper
+     */
     private $helper;
 
+    /**
+     * Checks Single, Multi and Unique value constraint.
+     * @var \ValueCountChecker
+     */
     private $valueCountChecker;
+
+    /**
+     * Checks Qualifier and Qualifiers constraint.
+     * @var \QualifierChecker
+     */
     private $qualifierChecker;
+
+    /**
+     * Checks Conflicts with, Item, Target required claim, Symmetric and Inverse constraint.
+     * @var \ConnectionChecker
+     */
     private $connectionChecker;
+
+    /**
+     * Checks Type and Value type constraint.
+     * @var \TypeChecker
+     */
     private $typeChecker;
+
+    /**
+     * Checks Range and Diff within range constraint.
+     * @var \RangeChecker
+     */
     private $rangeChecker;
+
+    /**
+     * Checks Format constraint.
+     * @var \FormatChecker
+     */
     private $formatChecker;
+
+    /**
+     * Checks One of constraint.
+     * @var \OneOfChecker
+     */
     private $oneOfChecker;
+
+    /**
+     * Checks Commons link constraint.
+     * @var \CommonsLinkChecker
+     */
     private $commonsLinkChecker;
 
+    /**
+     * List of all statemtens of given entity.
+     * @var \StatementList
+     */
     private $statements;
 
     public function __construct() {
@@ -69,7 +117,7 @@ class ConstraintChecker {
      * Starts the whole constraint-check process.
      * Statements of the entity will be checked against every constraint that is defined on the property.
      * @param Entity\Entity $entity - Entity that shall be checked against constraints
-     * @return \CompareResultList (adapted version) with results or null
+     * @return \Array with results or null
      */
     public function execute( $entity ) {
         if ( $entity ) {

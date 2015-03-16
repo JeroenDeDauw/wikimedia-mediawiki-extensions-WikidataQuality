@@ -6,6 +6,13 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 use Wikibase\DataModel\Entity\ItemId;
 use Exception;
 
+/**
+ * Class TypeChecker
+ * Checks Type and Value type constraint.
+ * @package WikidataQuality\ConstraintReport\ConstraintCheck\Checker
+ * @author BP2014N1
+ * @license GNU GPL v2+
+ */
 class TypeChecker {
 
     private $entityLookup;
