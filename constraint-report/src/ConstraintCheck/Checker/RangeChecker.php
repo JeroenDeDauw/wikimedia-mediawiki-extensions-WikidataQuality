@@ -14,15 +14,38 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class RangeChecker {
 
+    /**
+     * List of all statemtens of given entity.
+     * @var StatementList
+     */
     private $statements;
+
+    /**
+     * Class for helper functions for constraint checkers.
+     * @var ConstraintReportHelper
+     */
     private $helper;
 
+    /**
+     * @param StatementList $statements
+     * @param ConstraintReportHelper$helper
+     */
     public function __construct( $statements, $helper )
     {
         $this->statements = $statements;
         $this->helper = $helper;
     }
 
+    /**
+     * Checks Range constraint
+     * @param PropertyId $propertyId
+     * @param DataValue $dataValue
+     * @param string $minimum_quantity
+     * @param string $maximum_quantity
+     * @param string $minimum_date
+     * @param string $maximum_date
+     * @return CheckResult
+     */
     public function checkRangeConstraint( $propertyId, $dataValue, $minimum_quantity, $maximum_quantity, $minimum_date, $maximum_date ) {
         $parameters = array();
 
@@ -56,6 +79,14 @@ class RangeChecker {
         return new CheckResult( $propertyId, $dataValue, 'Range', $parameters, $status );
     }
 
+    /**
+     * @param PropertyId $propertyId
+     * @param DataValue $dataValue
+     * @param string $property
+     * @param string $minimum_quantity
+     * @param string $maximum_quantity
+     * @return CheckResult
+     */
     public function checkDiffWithinRangeConstraint( $propertyId, $dataValue, $property, $minimum_quantity, $maximum_quantity ) {
         $parameters = array();
 

@@ -14,12 +14,26 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class OneOfChecker {
 
+    /**
+     * Class for helper functions for constraint checkers.
+     * @var ConstraintReportHelper
+     */
     private $helper;
 
+    /**
+     * @param ConstraintReportHelper $helper
+     */
     public function __construct( $helper ) {
         $this->helper = $helper;
     }
 
+    /**
+     * Checks One of constraint
+     * @param PropertyId $propertyId
+     * @param Data $dataValue
+     * @param array $itemArray
+     * @return CheckResult
+     */
     public function checkOneOfConstraint( $propertyId, $dataValue, $itemArray ) {
         $parameters = array();
 

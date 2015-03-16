@@ -15,17 +15,39 @@ use Exception;
  */
 class TypeChecker {
 
-    private $entityLookup;
+    /**
+     * List of all statemtens of given entity.
+     * @var StatementList
+     */
+    private $statements;
+
+    /**
+     * Class for helper functions for constraint checkers.
+     * @var ConstraintReportHelper
+     */
     private $helper;
+
 
     const instanceId = 31;
     const subclassId = 279;
 
+    /**
+     * @param StatementList $statements
+     * @param ConstraintReportHelper $helper
+     */
     public function __construct( $lookup, $helper ) {
         $this->entityLookup = $lookup;
         $this->helper = $helper;
     }
 
+    /**
+     * Checks Value type constraint
+     * @param PropertyId $propertyId
+     * @param DataValue $dataValue
+     * @param array $classArray
+     * @param string $relation
+     * @return CheckResult
+     */
     public function checkValueTypeConstraint( $propertyId, $dataValue, $classArray, $relation ) {
         $parameters = array();
 
@@ -81,6 +103,14 @@ class TypeChecker {
         return new CheckResult( $propertyId, $dataValue, 'Value type', $parameters, $status );
     }
 
+    /**
+     * Checks Value type constraint
+     * @param PropertyId $propertyId
+     * @param DataValue $dataValue
+     * @param array $classArray
+     * @param string $relation
+     * @return CheckResult
+     */
     public function checkTypeConstraint( $propertyId, $dataValue, $statements, $classArray, $relation ) {
         $parameters = array();
 

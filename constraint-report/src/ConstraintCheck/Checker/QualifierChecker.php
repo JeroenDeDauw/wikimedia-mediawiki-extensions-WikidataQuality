@@ -14,18 +14,46 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class QualifierChecker {
 
+    /**
+     * List of all statemtens of given entity.
+     * @var StatementList
+     */
     private $statements;
+
+    /**
+     * Class for helper functions for constraint checkers.
+     * @var ConstraintReportHelper
+     */
     private $helper;
 
+    /**
+     * @param StatementList $statements
+     * @param ConstraintReportHelper $helper
+     */
     public function __construct( $statements, $helper ) {
         $this->statements = $statements;
         $this->helper = $helper;
     }
 
+    /**
+     * If this method gets invoked, it is automatically a violation since this method only gets invoked
+     * for properties used in statements
+     * @param PropertyId $propertyId
+     * @param DataValue $dataValue
+     * @return CheckResult
+     */
     public function checkQualifierConstraint( $propertyId, $dataValue ) {
         return new CheckResult( $propertyId, $dataValue, 'Qualifier', array(), 'violation' );
     }
 
+    /**
+     * Checks Qualifiers constraint
+     * @param PropertyId $propertyId
+     * @param DataValue $dataValue
+     * @param Statement $statement
+     * @param array $propertyArray
+     * @return CheckResult
+     */
     public function checkQualifiersConstraint( $propertyId, $dataValue, $statement, $propertyArray ) {
         $parameters = array();
 

@@ -13,12 +13,26 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
  */
 class FormatChecker {
 
+    /**
+     * Class for helper functions for constraint checkers.
+     * @var ConstraintReportHelper
+     */
     private $helper;
 
+    /**
+     * @param ConstraintReportHelper $helper
+     */
     public function __construct( $helper ) {
         $this->helper = $helper;
     }
 
+    /**
+     * Checks Format constraint
+     * @param PropertyId $propertyId
+     * @param DataValue $dataValue
+     * @param string $pattern
+     * @return CheckResult
+     */
     public function checkFormatConstraint( $propertyId, $dataValue, $pattern ) {
         $parameters = array();
 

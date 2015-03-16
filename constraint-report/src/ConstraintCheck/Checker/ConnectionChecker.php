@@ -15,16 +15,43 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class ConnectionChecker {
 
+    /**
+     * List of all statemtens of given entity.
+     * @var StatementList
+     */
     private $statements;
+
+    /**
+     * Wikibase entity lookup.
+     * @var \Wikibase\Lib\Store\EntityLookup
+     */
     private $entityLookup;
+
+    /**
+     * Class for helper functions for constraint checkers.
+     * @var ConstraintReportHelper
+     */
     private $helper;
 
+    /**
+     * @param StatementList $statements
+     * @param \Wikibase\Lib\Store\EntityLookup $lookup
+     * @param ConstraintReportHelper $helper
+     */
     public function __construct( $statements, $lookup, $helper  ) {
         $this->statements = $statements;
         $this->entityLookup = $lookup;
         $this->helper = $helper;
     }
 
+    /**
+     * Checks Conflicts with constraint
+     * @param PropertyId $propertyId
+     * @param DataVaule $dataValue
+     * @param string $property
+     * @param array $itemArray
+     * @return CheckResult
+     */
     public function checkConflictsWithConstraint( $propertyId, $dataValue, $property, $itemArray ) {
         $parameters = array();
 
@@ -65,6 +92,14 @@ class ConnectionChecker {
         return new CheckResult( $propertyId, $dataValue, 'Conflicts with', $parameters, $status );
     }
 
+    /**
+     * Checks Item constraint
+     * @param PropertyId $propertyId
+     * @param DataVaule $dataValue
+     * @param string $property
+     * @param array $itemArray
+     * @return CheckResult
+     */
     public function checkItemConstraint( $propertyId, $dataValue, $property, $itemArray ) {
         $parameters = array();
 
@@ -105,6 +140,14 @@ class ConnectionChecker {
         return new CheckResult( $propertyId, $dataValue, 'Item', $parameters, $status );
     }
 
+    /**
+     * Checks Target required claim constraint
+     * @param PropertyId $propertyId
+     * @param DataVaule $dataValue
+     * @param string $property
+     * @param array $itemArray
+     * @return CheckResult
+     */
     public function checkTargetRequiredClaimConstraint( $propertyId, $dataValue, $property, $itemArray ) {
         $parameters = array();
 
@@ -152,6 +195,12 @@ class ConnectionChecker {
         return new CheckResult( $propertyId, $dataValue, 'Target required claim', $parameters, $status );
     }
 
+    /**
+     * Checks Symmetric Constraint
+     * @param PropertyId $propertyId
+     * @param DataVaule $dataValue
+     * @return CheckResult
+     */
     public function checkSymmetricConstraint( $propertyId, $dataValue ) {
         $parameters = array();
 
@@ -174,6 +223,13 @@ class ConnectionChecker {
         return new CheckResult( $propertyId, $dataValue, 'Symmetric', $parameters, $status );
     }
 
+    /**
+     * Checks InverseConstraint
+     * @param PropertyId $propertyId
+     * @param DataValue $dataValue
+     * @param string $property
+     * @return CheckResult
+     */
     public function checkInverseConstraint( $propertyId, $dataValue, $property ) {
         $parameters = array();
 

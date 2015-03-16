@@ -15,15 +15,35 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 class ValueCountChecker {
 
     private $propertyCount;
+
+    /**
+     * List of all statemtens of given entity.
+     * @var StatementList
+     */
     private $statements;
+
+    /**
+     * Class for helper functions for constraint checkers.
+     * @var ConstraintReportHelper
+     */
     private $helper;
 
+    /**
+     * @param StatementList $statements
+     * @param ConstraintReportHelper $helper
+     */
     public function __construct( $statements, $helper ) {
         $this->statements = $statements;
         $this->helper = $helper;
     }
 
-    public function checkSingleValueConstraint( $propertyId, $dataValueString ) {
+    /**
+     * Checks Single value constraint
+     * @param PropertyId $propertyId
+     * @param DataValue $dataValue
+     * @return CheckResult
+     */
+    public function checkSingleValueConstraint( $propertyId, $dataValue ) {
         $parameters = array();
 
         if( $this->getPropertyCount( $this->statements )[$propertyId->getNumericId()] > 1 ) {
@@ -32,10 +52,16 @@ class ValueCountChecker {
             $status = 'compliance';
         }
 
-        return new CheckResult( $propertyId, $dataValueString, 'Single value', $parameters, $status );
+        return new CheckResult( $propertyId, $dataValue, 'Single value', $parameters, $status );
     }
 
-    public function checkMultiValueConstraint( $propertyId, $dataValueString ) {
+    /**
+     * Checks Multi value constraint
+     * @param PropertyId $propertyId
+     * @param DataValue $dataValue
+     * @return CheckResult
+     */
+    public function checkMultiValueConstraint( $propertyId, $dataValue ) {
         $parameters = array();
 
         if( $this->getPropertyCount( $this->statements )[$propertyId->getNumericId()] <= 1 ) {
@@ -44,14 +70,19 @@ class ValueCountChecker {
             $status = 'compliance';
         }
 
-        return new CheckResult( $propertyId, $dataValueString, 'Multi value', $parameters, $status );
+        return new CheckResult( $propertyId, $dataValue, 'Multi value', $parameters, $status );
     }
 
     // TODO: implement when index exists that makes it possible in real-time
-    public function checkUniqueValueConstraint( $propertyId, $dataValueString ) {
+    /**
+     * @param PropertyId $propertyId
+     * @param DataValue $dataValue
+     * @return CheckResult
+     */
+    public function checkUniqueValueConstraint( $propertyId, $dataValue ) {
         $parameters = array();
 
-        return new CheckResult( $propertyId, $dataValueString, 'Unique value', $parameters, 'todo' );
+        return new CheckResult( $propertyId, $dataValue, 'Unique value', $parameters, 'todo' );
     }
 
     private function getPropertyCount( $statements )
