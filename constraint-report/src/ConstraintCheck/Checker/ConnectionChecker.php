@@ -6,6 +6,13 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 
+/**
+ * Class ConnectionChecker
+ * Checks Conflicts with, Item, Target required claim, Symmetric and Inverse constraint.
+ * @package WikidataQuality\ConstraintReport\ConstraintCheck\Checker
+ * @author BP2014N1
+ * @license GNU GPL v2+
+ */
 class ConnectionChecker {
 
     private $statements;

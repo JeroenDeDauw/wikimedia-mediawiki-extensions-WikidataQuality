@@ -4,6 +4,13 @@ namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 
+/**
+ * Class FormatChecker
+ * Checks Format constraint.
+ * @package WikidataQuality\ConstraintReport\ConstraintCheck\Checker
+ * @author BP2014N1
+ * @license GNU GPL v2+
+ */
 class FormatChecker {
 
     private $helper;

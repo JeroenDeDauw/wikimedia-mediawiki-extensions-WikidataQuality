@@ -5,6 +5,13 @@ namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 use Wikibase\DataModel\Entity\PropertyId;
 
+/**
+ * Class RangeChecker
+ * Checks Range and Diff within range constraint.
+ * @package WikidataQuality\ConstraintReport\ConstraintCheck\Checker
+ * @author BP2014N1
+ * @license GNU GPL v2+
+ */
 class RangeChecker {
 
     private $statements;
