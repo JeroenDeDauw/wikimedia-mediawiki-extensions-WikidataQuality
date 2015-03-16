@@ -43,61 +43,61 @@ class ConstraintChecker {
 
     /**
      * Class for helper functions for constraint checkers.
-     * @var \ConstraintReportHelper
+     * @var ConstraintReportHelper
      */
     private $helper;
 
     /**
      * Checks Single, Multi and Unique value constraint.
-     * @var \ValueCountChecker
+     * @var ValueCountChecker
      */
     private $valueCountChecker;
 
     /**
      * Checks Qualifier and Qualifiers constraint.
-     * @var \QualifierChecker
+     * @var QualifierChecker
      */
     private $qualifierChecker;
 
     /**
      * Checks Conflicts with, Item, Target required claim, Symmetric and Inverse constraint.
-     * @var \ConnectionChecker
+     * @var ConnectionChecker
      */
     private $connectionChecker;
 
     /**
      * Checks Type and Value type constraint.
-     * @var \TypeChecker
+     * @var TypeChecker
      */
     private $typeChecker;
 
     /**
      * Checks Range and Diff within range constraint.
-     * @var \RangeChecker
+     * @var RangeChecker
      */
     private $rangeChecker;
 
     /**
      * Checks Format constraint.
-     * @var \FormatChecker
+     * @var FormatChecker
      */
     private $formatChecker;
 
     /**
      * Checks One of constraint.
-     * @var \OneOfChecker
+     * @var OneOfChecker
      */
     private $oneOfChecker;
 
     /**
      * Checks Commons link constraint.
-     * @var \CommonsLinkChecker
+     * @var CommonsLinkChecker
      */
     private $commonsLinkChecker;
 
     /**
      * List of all statemtens of given entity.
-     * @var \StatementList
+     * @var StatementList
      */
     private $statements;
 
@@ -261,6 +261,9 @@ class ConstraintChecker {
         return null;
     }
 
+    /**
+     * @return ValueCountChecker
+     */
     private function getValueCountChecker()
     {
         if( !isset( $this->valueCountChecker ) ) {
@@ -269,6 +272,9 @@ class ConstraintChecker {
         return $this->valueCountChecker;
     }
 
+    /**
+     * @return ConnectionChecker
+     */
     private function getConnectionChecker() {
         if( !isset( $this->connectionChecker ) ) {
             $this->connectionChecker = new ConnectionChecker( $this->statements, $this->entityLookup, $this->helper );
@@ -276,6 +282,9 @@ class ConstraintChecker {
         return $this->connectionChecker;
     }
 
+    /**
+     * @return QualifierChecker
+     */
     private function getQualifierChecker() {
         if( !isset( $this->qualifierChecker ) ) {
             $this->qualifierChecker = new QualifierChecker( $this->statements, $this->helper );
@@ -283,6 +292,9 @@ class ConstraintChecker {
         return $this->qualifierChecker;
     }
 
+    /**
+     * @return RangeChecker
+     */
     private function getRangeChecker() {
         if( !isset( $this->rangeChecker ) ) {
             $this->rangeChecker = new RangeChecker( $this->statements, $this->helper );
@@ -290,6 +302,9 @@ class ConstraintChecker {
         return $this->rangeChecker;
     }
 
+    /**
+     * @return TypeChecker
+     */
     private function getTypeChecker() {
         if( !isset( $this->typeChecker ) ) {
             $this->typeChecker = new TypeChecker( $this->entityLookup, $this->helper );
@@ -297,6 +312,9 @@ class ConstraintChecker {
         return $this->typeChecker;
     }
 
+    /**
+     * @return OneOfChecker
+     */
     private function getOneOfChecker() {
         if( !isset( $this->oneOfChecker ) ) {
             $this->oneOfChecker = new OneOfChecker( $this->helper );
@@ -304,13 +322,19 @@ class ConstraintChecker {
         return $this->oneOfChecker;
     }
 
+    /**
+     * @return CommonsLinkChecker
+     */
     private function getCommonsLinkChecker() {
         if( !isset( $this->commonsLinkChecker ) ) {
             $this->commonsLinkChecker = new CommonsLinkChecker( $this->statements, $this->helper );
         }
         return $this->commonsLinkChecker;
     }
-    
+
+    /**
+     * @return FormatChecker
+     */
     private function getFormatChecker() {
         if( !isset( $this->formatChecker ) ) {
             $this->formatChecker = new FormatChecker( $this->helper );

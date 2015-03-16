@@ -10,10 +10,33 @@ use Wikibase\Repo\WikibaseRepo;
 use WikidataQuality\ConstraintReport\ConstraintCheck\ConstraintChecker;
 use WikidataQuality\Specials\SpecialWikidataQualityPage;
 
+/**
+ * Class SpecialWikidataConstraintReport
+ * Special page that displays all constraints that are defined on an Entity with additional information
+ * (whether it complied or was a violation, which parameters the constraint has etc.).
+ * @package WikidataQuality\ConstraintReport\Specials
+ * @author BP2014N1
+ * @license GNU GPL v2+
+ */
 class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
 
+    /**
+     * Wikibase entity lookup.
+     * @var \Wikibase\Lib\Store\EntityLookup
+     */
     protected $entityLookup;
+
+    /**
+     * Variable to collect output before adding it to $out.
+     * @var string
+     */
     private $output = '';
+
+    /**
+     * @var int
+     */
+    private $maxArrayLength = 5;
+
 
     function __construct() {
         parent::__construct( 'ConstraintReport' );
@@ -114,6 +137,10 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
             . Html::closeElement( 'form' );
     }
 
+    /**
+     * @param $entityId
+     * @return null|ItemId|PropertyId
+     */
     private function getEntityID( $entityId )
     {
         switch( strtoupper( $entityId[0] ) ) {
@@ -126,6 +153,9 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
         }
     }
 
+    /**
+     * @param $result
+     */
     private function addOutputRow( $result ) {
         $this->output .=
             "|-\n"
@@ -194,8 +224,6 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
 
         return $formattedParameters;
     }
-
-    private $maxArrayLength = 5;
 
     private function limitArrayLength( $array ) {
         if( count( $array ) > $this->maxArrayLength ) {

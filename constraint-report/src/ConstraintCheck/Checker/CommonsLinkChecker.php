@@ -13,12 +13,26 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
  */
 class CommonsLinkChecker {
 
+    /**
+     * Class for helper functions for constraint checkers.
+     * @var ConstraintReportHelper
+     */
     private $helper;
 
+    /**
+     * @param $helper
+     */
     public function __construct( $helper ) {
         $this->helper = $helper;
     }
 
+    /**
+     * @param PropertyId $propertyId
+     * @param DataValue $dataValue
+     * @param string $namespace
+     * @return CheckResult
+     * Checks if data value is well-formed and links to an existing page
+     */
     public function checkCommonsLinkConstraint( $propertyId, $dataValue, $namespace ) {
         $parameters = array();
 
@@ -48,11 +62,20 @@ class CommonsLinkChecker {
         return new CheckResult( $propertyId, $dataValue, 'Commons link', $parameters, $status );
     }
 
+    /**
+     * @param string $commonsLink
+     * @param string $namespace
+     * @return bool
+     */
     private function urlExists( $commonsLink, $namespace ) {
         $responseCode = substr( get_headers( 'http://commons.wikimedia.org/wiki/' . $namespace . ':' . str_replace( ' ', '_', $commonsLink ) )[0], 9, 3);
         return $responseCode < 400;
     }
 
+    /**
+     * @param string $commonsLink
+     * @return bool
+     */
     private function commonsLinkIsWellFormed( $commonsLink ) {
         $toReplace = array( "_", ":", "%20" );
         $compareString = trim( str_replace( $toReplace, '', $commonsLink ) );
