@@ -26,7 +26,7 @@ use WikidataQuality\ExternalValidation\DumpMetaInformation;
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class DataValueComparerTest extends \PHPUnit_Framework_TestCase
+class DataValueComparerTest extends \MediaWikiTestCase
 {
     /**
      * @dataProvider constructValidArgumentsDataProvider

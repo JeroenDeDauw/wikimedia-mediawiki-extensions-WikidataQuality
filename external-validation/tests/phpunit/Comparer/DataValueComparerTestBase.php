@@ -10,7 +10,7 @@ namespace WikidataQuality\ExternalValidation\Tests\Comparer;
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-abstract class DataValueComparerTestBase extends \PHPUnit_Framework_TestCase
+abstract class DataValueComparerTestBase extends \MediaWikiTestCase
 {
     /**
      * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer::getExternalValueParser
