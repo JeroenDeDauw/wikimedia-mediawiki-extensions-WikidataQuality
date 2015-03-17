@@ -1,6 +1,6 @@
 <?php
 
-namespace WikidataQuality\ExternalValidation\Tests\Result;
+namespace WikidataQuality\ExternalValidation\Tests\CrossCheck\Result;
 
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult;
 use Wikibase\DataModel\Entity\PropertyId;

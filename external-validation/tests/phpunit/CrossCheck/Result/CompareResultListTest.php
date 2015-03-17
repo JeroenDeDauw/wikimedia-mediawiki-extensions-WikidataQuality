@@ -1,6 +1,6 @@
 <?php
 
-namespace WikidataQuality\ExternalValidation\Tests;
+namespace WikidataQuality\ExternalValidation\Tests\CrossCheck\Result;
 
 use DataValues\QuantityValue;
 use Wikibase\DataModel\Entity\ItemId;
