@@ -2,8 +2,6 @@
 
 cd ../wiki/extensions/WikidataQuality
 
-ls -lt build/logs
-
-cat build/logs/clover.xml
+ls build/logs
 
 php vendor/bin/coveralls -v
