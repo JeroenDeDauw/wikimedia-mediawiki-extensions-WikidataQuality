@@ -33,7 +33,8 @@
             <directory suffix=".php">external-validation/src</directory>
             <directory suffix=".php">external-validation/specials</directory>
             <exclude>
-                <file>external-validation/src/CrossCheck/mapping.inc.php</file>
+                <file>external-validation/src/CrossCheck/Result/CompareResult.php</file>
+                <file>external-validation/src/UpdateTable/ImportContext.php</file>
             </exclude>
         </whitelist>
     </filter>
