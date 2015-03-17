@@ -50,10 +50,10 @@ class CompareResultList implements IteratorAggregate, Countable
      * Specifies, whether at least one data mismatch occurred.
      * @return bool
      */
-    public function isDataMismatchOccurred()
+    public function hasDataMismatchOccurred()
     {
         foreach ( $this->results as $result ) {
-            if ( $result->isDataMismatchOccurred() ) {
+            if ( $result->hasDataMismatchOccurred() ) {
                 return true;
             }
         }
