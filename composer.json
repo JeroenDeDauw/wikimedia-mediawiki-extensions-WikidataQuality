@@ -21,15 +21,15 @@
   },
   "autoload": {
     "psr-4": {
-      "WikidataQuality\\": "include/",
+      "WikidataQuality\\": "includes/",
       "WikidataQuality\\Specials\\": "specials",
       "WikidataQuality\\Tests\\": "tests",
 
-      "WikidataQuality\\ConstraintReport\\": "constraint-report/include/",
+      "WikidataQuality\\ConstraintReport\\": "constraint-report/includes/",
       "WikidataQuality\\ConstraintReport\\Specials\\": "constraint-report/specials/",
       "WikidataQuality\\ConstraintReport\\Tests\\": "external-validation/tests/phpunit/",
 
-      "WikidataQuality\\ExternalValidation\\": "external-validation/include/",
+      "WikidataQuality\\ExternalValidation\\": "external-validation/includes/",
       "WikidataQuality\\ExternalValidation\\Api\\": "external-validation/api",
       "WikidataQuality\\ExternalValidation\\Specials\\": "external-validation/specials/",
       "WikidataQuality\\ExternalValidation\\Tests\\": "external-validation/tests/phpunit/"
