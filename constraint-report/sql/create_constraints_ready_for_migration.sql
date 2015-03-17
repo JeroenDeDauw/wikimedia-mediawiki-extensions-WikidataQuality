@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS constraints_ready_for_migration;
 
 CREATE TABLE constraints_ready_for_migration
 (
-ID int PRIMARY KEY AUTO_INCREMENT,
+ID int PRIMARY KEY AUTOINCREMENT,
 pid int,
 constraint_name varchar(255),
 class text,
