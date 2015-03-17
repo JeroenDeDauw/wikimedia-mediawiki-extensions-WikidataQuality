@@ -10,7 +10,7 @@ final class WikidataQualityHooks
     {
         $updater->addExtensionTable( 'wdq_dump_information', __DIR__ . '/external-validation/sql/create_wdq_dump_information.sql', true );
         $updater->addExtensionTable( 'wdq_external_data', __DIR__ . '/external-validation/sql/create_wdq_external_data.sql', true );
-        $updater->addExtensionTable( 'wdq_constraints_from_templates', __DIR__ . '/constraint-report/sql/create_wdq_constraints_from_templates_table_with_contents.sql', true );
+        $updater->addExtensionTable( 'constraints_ready_for_migration', __DIR__ . '/constraint-report/sql/create_constraints_ready_for_migration.sql', true );
 
         return true;
     }
