@@ -2,6 +2,6 @@
 
 cd ../wiki/extensions/WikidataQuality
 
-ls build/logs
+ls -lt build/logs
 
 php vendor/bin/coveralls -v
