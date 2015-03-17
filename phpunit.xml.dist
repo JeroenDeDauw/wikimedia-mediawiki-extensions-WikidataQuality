@@ -35,7 +35,7 @@
             <directory suffix=".php">external-validation/includes</directory>
             <directory suffix=".php">external-validation/specials</directory>
             <exclude>
-                <file>external-validation/src/UpdateTable/ImportContext.php</file>
+                <file>external-validation/includes/UpdateTable/ImportContext.php</file>
             </exclude>
         </whitelist>
     </filter>
