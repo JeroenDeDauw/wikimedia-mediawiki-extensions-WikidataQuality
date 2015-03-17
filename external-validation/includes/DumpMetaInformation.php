@@ -2,9 +2,9 @@
 
 namespace WikidataQuality\ExternalValidation;
 
-
 use DateTime;
 use Wikibase\DataModel\Entity\ItemId;
+use Doctrine\Instantiator\Exception\InvalidArgumentException;
 
 
 /**
@@ -59,25 +59,35 @@ class DumpMetaInformation
 
 
     /**
+     * @param $dumpId
      * @param $sourceItemId
      * @param $importDate
      * @param $language
      * @param $sourceUrl
      * @param $size
      * @param $license
+     * @throws InvalidArgumentException
      */
     public function __construct( $dumpId, $sourceItemId, $importDate, $language, $sourceUrl, $size, $license )
     {
         $this->dumpId = $dumpId;
         if ( is_string( $sourceItemId ) ) {
-            if ($sourceItemId[0] != 'Q') {
+            if ($sourceItemId[0] !== 'Q') {
                 $sourceItemId = 'Q' . $sourceItemId;
             }
             $this->sourceItemId = new ItemId( $sourceItemId );
-        } else {
+        } elseif ( $sourceItemId instanceof ItemId ) {
             $this->sourceItemId = $sourceItemId;
+        } else {
+            throw new InvalidArgumentException( '$sourceItemId must be either string or instance of ItemId.' );
         }
-        $this->importDate = $importDate;
+
+        if ( $importDate instanceof DateTime ) {
+            $this->importDate = $importDate;
+        } else {
+            throw new InvalidArgumentException( '$importDate must be an instance of DateTime.' );
+        }
+
         $this->language = $language;
         $this->sourceUrl = $sourceUrl;
         $this->size = $size;
