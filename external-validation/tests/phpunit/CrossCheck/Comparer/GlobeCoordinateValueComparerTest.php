@@ -1,6 +1,6 @@
 <?php
 
-namespace WikidataQuality\ExternalValidation\Tests\Comparer;
+namespace WikidataQuality\ExternalValidation\Tests\CrossCheck\Comparer;
 
 
 use DataValues\Geo\Values\GlobeCoordinateValue;

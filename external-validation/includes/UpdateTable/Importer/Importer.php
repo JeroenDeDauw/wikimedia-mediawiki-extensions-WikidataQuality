@@ -45,8 +45,8 @@ class Importer
         // Insert external values
         $this->insertExternalValues( $db, $metaInformation->getDumpId() );
 
-        // Reuse database connection
-        $this->reuseDbConnection( $db );
+        // Close database connection
+        $this->closeDbConnection( $db );
     }
 
     protected function deleteOldDatabaseEntries( $db, $dumpId )
@@ -96,13 +96,13 @@ class Importer
     }
 
     /**
-     * Mark database connection as available for reuse
+     * Close database connection
      * @param \DatabaseBase $db
      */
-    protected function reuseDbConnection( $db )
+    protected function closeDbConnection( $db )
     {
         $loadBalancer = $this->importContext->getLoadBalancer();
-        $loadBalancer->reuseConnection( $db );
+        $loadBalancer->closeConnection( $db );
     }
 
     /**

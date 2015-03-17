@@ -2,6 +2,11 @@
 
 namespace WikidataQuality\ExternalValidation\CrossCheck\Result;
 
+use DataValues\DataValue;
+use Wikibase\DataModel\Entity\PropertyId;
+use WikidataQuality\ExternalValidation\DumpMetaInformation;
+use Doctrine\Instantiator\Exception\InvalidArgumentException;
+
 
 /**
  * Class CompareResult
@@ -13,7 +18,7 @@ class CompareResult
 {
     /**
      * Id of the property of the claim, that was compared.
-     * @var \PropertyId
+     * @var PropertyId
      */
     private $propertyId;
 
@@ -62,20 +67,44 @@ class CompareResult
      * @param bool $dataMismatch
      * @param bool $referencesMissing
      * @param DumpMetaInformation $dumpMetaInformation
+     * @throws InvalidArgumentException
      */
     public function __construct( $propertyId, $claimGuid, $localValue, $externalValues, $dataMismatch, $referencesMissing, $dumpMetaInformation )
     {
-        $this->propertyId = $propertyId;
+        if ( $propertyId instanceof PropertyId ) {
+            $this->propertyId = $propertyId;
+        } else {
+            throw new InvalidArgumentException( '$propertyId must be an instance of PropertyId.' );
+        }
+
         $this->claimGuid = $claimGuid;
-        $this->localValue = $localValue;
-        $this->externalValues = $externalValues;
+
+        if ( $localValue instanceof DataValue ) {
+            $this->localValue = $localValue;
+        } else {
+            throw new InvalidArgumentException( '$localValue must be an instance of DataValue.' );
+        }
+
+        if ( is_array( $externalValues ) ) {
+            foreach ( $externalValues as $externalValue ){
+                if ( $externalValue instanceof DataValue ){
+
+                } else {
+                    throw new InvalidArgumentException( 'An external value must be instance of DataValue.' );
+                }
+            }
+            $this->externalValues = $externalValues;
+        } else {
+            throw new InvalidArgumentException( '$externalValues must be an array.' );
+        }
+
         $this->dataMismatch = $dataMismatch;
         $this->referencesMissing = $referencesMissing;
         $this->dumpMetaInformation = $dumpMetaInformation;
     }
 
     /**
-     * @return \PropertyId
+     * @return PropertyId
      */
     public function getPropertyId()
     {
