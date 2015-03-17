@@ -6,13 +6,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\ValueCountChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
-use Wikibase\DataModel\DeserializerFactory;
-use DataValues\Deserializers\DataValueDeserializer;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use WikidataQuality\Tests\Helper\JsonFileEntityLookup;
 
-class ValueCountCheckerTest extends \PHPUnit_Framework_TestCase
-{
+class ValueCountCheckerTest extends \PHPUnit_Framework_TestCase {
+
     private $helper;
     private $propertyId;
     private $lookup;
@@ -27,9 +24,9 @@ class ValueCountCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     protected function tearDown() {
-        unset($this->helper);
-        unset($this->propertyId);
-        unset($this->lookup);
+        unset( $this->helper );
+        unset( $this->propertyId );
+        unset( $this->lookup );
         parent::tearDown();
     }
 
@@ -39,7 +36,7 @@ class ValueCountCheckerTest extends \PHPUnit_Framework_TestCase
         $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
 
         $checkResult = $valueCountChecker->checkSingleValueConstraint( $this->singlePropertyId, 'Q1384' );
-        $this->assertEquals( 'compliance', $checkResult->getStatus(), "check should comply" );
+        $this->assertEquals( 'compliance', $checkResult->getStatus(), 'check should comply' );
     }
 
     public function testCheckSingleValueConstraintTwo()
@@ -48,7 +45,7 @@ class ValueCountCheckerTest extends \PHPUnit_Framework_TestCase
         $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
 
         $checkResult = $valueCountChecker->checkSingleValueConstraint( $this->singlePropertyId, 'Q1384' );
-        $this->assertEquals( 'violation', $checkResult->getStatus(), "check should not comply" );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
     }
 
     public function testCheckSingleValueConstraintTwoButOneDeprecated()
@@ -57,7 +54,7 @@ class ValueCountCheckerTest extends \PHPUnit_Framework_TestCase
         $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
 
         $checkResult = $valueCountChecker->checkSingleValueConstraint( $this->singlePropertyId, 'Q1384' );
-        $this->assertEquals( 'compliance', $checkResult->getStatus(), "check should comply" );
+        $this->assertEquals( 'compliance', $checkResult->getStatus(), 'check should comply' );
     }
 
     public function testCheckMultiValueConstraintOne()
@@ -66,7 +63,7 @@ class ValueCountCheckerTest extends \PHPUnit_Framework_TestCase
         $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
 
         $checkResult = $valueCountChecker->checkMultiValueConstraint( $this->multiPropertyId, 'Q207' );
-        $this->assertEquals( 'violation', $checkResult->getStatus(), "check should not comply" );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
     }
 
     public function testCheckMultiValueConstraintTwo()
@@ -75,7 +72,7 @@ class ValueCountCheckerTest extends \PHPUnit_Framework_TestCase
         $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
 
         $checkResult = $valueCountChecker->checkMultiValueConstraint( $this->multiPropertyId, 'Q207' );
-        $this->assertEquals( 'compliance', $checkResult->getStatus(), "check should comply" );
+        $this->assertEquals( 'compliance', $checkResult->getStatus(), 'check should comply' );
     }
 
     public function testCheckMultiValueConstraintTwoButOneDeprecated()
@@ -84,7 +81,7 @@ class ValueCountCheckerTest extends \PHPUnit_Framework_TestCase
         $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
 
         $checkResult = $valueCountChecker->checkMultiValueConstraint( $this->multiPropertyId, 'Q409' );
-        $this->assertEquals( 'violation', $checkResult->getStatus(), "check should not comply" );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
     }
 
 }

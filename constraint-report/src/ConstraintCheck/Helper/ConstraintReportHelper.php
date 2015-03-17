@@ -2,76 +2,41 @@
 
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Helper;
 
-
+/**
+ * Class ConstraintReportHelper
+ * Class for helper functions for constraint checkers.
+ * @package WikidataQuality\ConstraintReport\ConstraintCheck\Helper
+ * @author BP2014N1
+ * @license GNU GPL v2+
+ */
 class ConstraintReportHelper
 {
 
     /**
-     * @param $claim
+     * @param string $templateString
      * @return string
      */
-    public function getDataValueString( $claim )
+    public function removeBrackets( $templateString )
     {
-        $mainSnak = $claim->getMainSnak();
-        if ( $mainSnak->getType() == 'value' ) {
-            return $this->dataValueToString( $mainSnak->getDataValue() );
-        } else {
-            return '(' . $mainSnak->getType() . ')';
-        }
+        $toReplace = array("{", "}", "|", "[", "]");
+        return str_replace($toReplace, "", $templateString);
     }
 
     /**
-     * @param $dataValue
-     * @return string
+     * Used to convert string one gets out of the constraints table that is comma-seperated to array
+     * @param string $templateString
+     * @return array
      */
-    public function dataValueToString( $dataValue )
-    {
-        $dataValueType = $dataValue->getType();
-        switch ( $dataValueType ) {
-            case 'string':
-            case 'decimal':
-            case 'number':
-            case 'boolean':
-            case 'unknown':
-                return $dataValue->getValue();
-            case 'quantity':
-                return $dataValue->getAmount()->getValue();
-            case 'time':
-                return $dataValue->getTime();
-            case 'globecoordinate':
-            case 'geocoordinate':
-                return 'Latitude: ' . $dataValue->getLatitude() . ', Longitude: ' . $dataValue->getLongitude();
-            case 'monolingualtext':
-                return $dataValue->getText();
-            case 'multilingualtext':
-                if ( array_key_exists( 'en', $dataValue ) ) {
-                    $texts = $dataValue->getTexts();
-                    return $texts[ 'en' ];
-                } else {
-                    return array_shift( $dataValue->getTexts() );
-                }
-            case 'wikibase-entityid':
-                return $dataValue->getEntityId()->getSerialization();
-            case 'bad':
-            default:
-                return null;
-            //error case
-        }
-    }
-
-    public function removeBrackets( $templateString )
-    {
-        $toReplace = array( "{", "}", "|", "[", "]" );
-        return str_replace( $toReplace, "", $templateString );
-    }
-
-    public function stringToArray( $templateString )
-    {
+    public function stringToArray( $templateString ) {
         return $templateString == "" ? array() : explode( ",", $this->removeBrackets( str_replace( " ", "", $templateString ) ) );
     }
 
-    public function arrayToString( $templateArray )
-    {
+    /**
+     * @param array $templateArray
+     * @return string
+     */
+    public function arrayToString( $templateArray ) {
         return implode( ", ", $templateArray );
     }
+
 }

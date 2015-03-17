@@ -13,13 +13,13 @@ class TypeCheckerTest extends \PHPUnit_Framework_TestCase {
     private $lookup;
     private $typeChecker;
 
-    protected function setUp()
-    {
+    protected function setUp() {
         parent::setUp();
         $this->helper = new ConstraintReportHelper();
         $this->lookup = new JsonFileEntityLookup(  __DIR__ );
         $this->typeChecker = new TypeChecker( $this->lookup, $this->helper);
     }
+
 
     protected function tearDown()
     {
@@ -28,7 +28,6 @@ class TypeCheckerTest extends \PHPUnit_Framework_TestCase {
         unset($this->typeChecker);
         parent::tearDown();
     }
-
 
     public function testCheckTypeConstraintInstanceValid()
     {

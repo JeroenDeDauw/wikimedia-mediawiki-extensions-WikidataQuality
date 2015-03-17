@@ -4,114 +4,279 @@ namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 
+/**
+ * Class ConnectionChecker
+ * Checks Conflicts with, Item, Target required claim, Symmetric and Inverse constraint.
+ * @package WikidataQuality\ConstraintReport\ConstraintCheck\Checker
+ * @author BP2014N1
+ * @license GNU GPL v2+
+ */
 class ConnectionChecker {
 
+    /**
+     * List of all statemtens of given entity.
+     * @var StatementList
+     */
     private $statements;
+
+    /**
+     * Wikibase entity lookup.
+     * @var \Wikibase\Lib\Store\EntityLookup
+     */
     private $entityLookup;
+
+    /**
+     * Class for helper functions for constraint checkers.
+     * @var ConstraintReportHelper
+     */
     private $helper;
 
+    /**
+     * @param StatementList $statements
+     * @param \Wikibase\Lib\Store\EntityLookup $lookup
+     * @param ConstraintReportHelper $helper
+     */
     public function __construct( $statements, $lookup, $helper  ) {
         $this->statements = $statements;
         $this->entityLookup = $lookup;
         $this->helper = $helper;
     }
 
-    public function checkConflictsWithConstraint( $propertyId, $dataValueString, $property, $itemArray ) {
-        $parameterString = 'property: ' . $property;
+    /**
+     * Checks Conflicts with constraint
+     * @param PropertyId $propertyId
+     * @param DataVaule $dataValue
+     * @param string $property
+     * @param array $itemArray
+     * @return CheckResult
+     */
+    public function checkConflictsWithConstraint( $propertyId, $dataValue, $property, $itemArray ) {
+        $parameters = array();
 
+        if( $property === null ) {
+            $parameters['property'] = array( 'null' );
+        } else {
+            $parameters['property'] = array( new PropertyId( $property ) );
+        }
+
+        if( empty( $itemArray ) ) {
+            $parameters['item'] = array( 'null' );
+        } else {
+            $func = function( $item ) {
+                return new ItemId( $item );
+            };
+            $parameters['item'] = array_map( $func, $itemArray );
+        }
+
+        /*
+         * error handling:
+         *   parameter $property must not be null
+         */
+        if( $property === null ) {
+            return new CheckResult( $propertyId, $dataValue, 'Conflicts with', $parameters, 'error' );
+        }
+
+        /*
+         * 'Conflicts with' can be defined with
+         *   a) a property only
+         *   b) a property and a number of items (each combination of property and item forming an individual claim)
+         */
         if( empty( $itemArray ) ) {
             $status = $this->hasProperty( $this->statements, $property ) ? 'violation' : 'compliance';
         } else {
             $status = $this->hasClaim( $this->statements, $property, $itemArray ) ? 'violation' : 'compliance';
-            $parameterString .= ( ', item: ' . $this->helper->arrayToString( $itemArray ) );
         }
 
-        return new CheckResult( $propertyId, $dataValueString, 'Conflicts with', $parameterString, $status );
+        return new CheckResult( $propertyId, $dataValue, 'Conflicts with', $parameters, $status );
     }
 
-    public function checkItemConstraint( $propertyId, $dataValueString, $property, $itemArray ) {
-        $parameterString = 'property: ' . $property;
+    /**
+     * Checks Item constraint
+     * @param PropertyId $propertyId
+     * @param DataVaule $dataValue
+     * @param string $property
+     * @param array $itemArray
+     * @return CheckResult
+     */
+    public function checkItemConstraint( $propertyId, $dataValue, $property, $itemArray ) {
+        $parameters = array();
 
+        if( $property === null ) {
+            $parameters['property'] = array( 'null' );
+        } else {
+            $parameters['property'] = array( new PropertyId( $property ) );
+        }
+
+        if( empty( $itemArray ) ) {
+            $parameters['item'] = array( 'null' );
+        } else {
+            $func = function( $item ) {
+                return new ItemId( $item );
+            };
+            $parameters['item'] = array_map( $func, $itemArray );
+        }
+
+        /*
+         * error handling:
+         *   parameter $property must not be null
+         */
+        if( $property === null ) {
+            return new CheckResult( $propertyId, $dataValue, 'Item', $parameters, 'error' );
+        }
+
+        /*
+         * 'Item' can be defined with
+         *   a) a property only
+         *   b) a property and a number of items (each combination of property and item forming an individual claim)
+         */
         if( empty( $itemArray ) ) {
             $status = $this->hasProperty( $this->statements, $property ) ? 'compliance' : 'violation';
         } else {
             $status = $this->hasClaim( $this->statements, $property, $itemArray ) ? 'compliance' : 'violation';
-            $parameterString .= ( ', item: ' . $this->helper->arrayToString( $itemArray ) );
         }
 
-        return new CheckResult( $propertyId, $dataValueString, 'Item', $parameterString, $status );
+        return new CheckResult( $propertyId, $dataValue, 'Item', $parameters, $status );
     }
 
-    public function checkTargetRequiredClaimConstraint( $propertyId, $dataValueString, $property, $itemArray ) {
-        $parameterString = 'property: ' . $property;
+    /**
+     * Checks Target required claim constraint
+     * @param PropertyId $propertyId
+     * @param DataVaule $dataValue
+     * @param string $property
+     * @param array $itemArray
+     * @return CheckResult
+     */
+    public function checkTargetRequiredClaimConstraint( $propertyId, $dataValue, $property, $itemArray ) {
+        $parameters = array();
 
-        $targetItem = $this->entityLookup->getEntity( new ItemId( $dataValueString ) );
-        if( $targetItem == null ) {
-            return new CheckResult( $propertyId, $dataValueString, 'Target required claim', $parameterString, 'fail' );
+        if( $property === null ) {
+            $parameters['property'] = array( 'null' );
+        } else {
+            $parameters['property'] = array( new PropertyId( $property ) );
         }
 
+        if( empty( $itemArray ) ) {
+            $parameters['item'] = array( 'null' );
+        } else {
+            $func = function( $item ) {
+                return new ItemId( $item );
+            };
+            $parameters['item'] = array_map( $func, $itemArray );
+        }
+
+        /*
+         * error handling:
+         *   type of $dataValue for properties with 'Target required claim' constraint has to be 'wikibase-entityid'
+         *   parameter $property must not be null
+         */
+        if( $dataValue->getType() !== 'wikibase-entityid' || $property === null ) {
+            return new CheckResult( $propertyId, $dataValue, 'Target required claim', $parameters, 'error' );
+        }
+
+        $targetItem = $this->entityLookup->getEntity( $dataValue->getEntityId() );
+        if( $targetItem === null ) {
+            return new CheckResult( $propertyId, $dataValue, 'Target required claim', $parameters, 'fail' );
+        }
         $targetItemStatementsArray = $targetItem->getStatements()->toArray();
 
+        /*
+         * 'Target required claim' can be defined with
+         *   a) a property only
+         *   b) a property and a number of items (each combination forming an individual claim)
+         */
         if( empty( $itemArray ) ) {
             $status = $this->hasProperty( $targetItemStatementsArray, $property ) ? 'compliance' : 'violation';
         } else {
             $status = $this->hasClaim( $targetItemStatementsArray, $property, $itemArray ) ? 'compliance' : 'violation';
-            $parameterString .= ( ', item: ' . $this->helper->arrayToString( $itemArray ) );
         }
 
-        return new CheckResult( $propertyId, $dataValueString, 'Target required claim', $parameterString, $status );
+        return new CheckResult( $propertyId, $dataValue, 'Target required claim', $parameters, $status );
     }
 
-    public function checkSymmetricConstraint( $propertyId, $dataValueString ) {
-        $targetItem = $this->entityLookup->getEntity( new ItemId( $dataValueString ) );
+    /**
+     * Checks Symmetric Constraint
+     * @param PropertyId $propertyId
+     * @param DataVaule $dataValue
+     * @return CheckResult
+     */
+    public function checkSymmetricConstraint( $propertyId, $dataValue ) {
+        $parameters = array();
 
-        if( $targetItem == null ) {
-            return new CheckResult( $propertyId, $dataValueString, 'Symmetric', '(none)', 'fail' );
+        /*
+         * error handling:
+         *   type of $dataValue for properties with 'Symmetric' constraint has to be 'wikibase-entityid'
+         */
+        if( $dataValue->getType() !== 'wikibase-entityid' ) {
+            return new CheckResult( $propertyId, $dataValue, 'Symmetric', $parameters, 'error' );
         }
 
+        $targetItem = $this->entityLookup->getEntity( $dataValue->getEntityId() );
+        if( $targetItem === null ) {
+            return new CheckResult( $propertyId, $dataValue, 'Symmetric', $parameters, 'fail' );
+        }
         $targetItemStatementsArray = $targetItem->getStatements()->toArray();
 
         $status = $this->hasProperty( $targetItemStatementsArray, $propertyId ) ? 'compliance' : 'violation';
 
-        return new CheckResult( $propertyId, $dataValueString, 'Symmetric', '(none)', $status );
+        return new CheckResult( $propertyId, $dataValue, 'Symmetric', $parameters, $status );
     }
 
-    public function checkInverseConstraint( $propertyId, $dataValueString, $property ) {
-        $parameterString = 'property: ' . $property;
+    /**
+     * Checks InverseConstraint
+     * @param PropertyId $propertyId
+     * @param DataValue $dataValue
+     * @param string $property
+     * @return CheckResult
+     */
+    public function checkInverseConstraint( $propertyId, $dataValue, $property ) {
+        $parameters = array();
 
-        $targetItem = $this->entityLookup->getEntity( new ItemId( $dataValueString ) );
-
-        if( $targetItem == null ) {
-            return new CheckResult( $propertyId, $dataValueString, 'Inverse', $parameterString, 'fail' );
+        if( $property === null ) {
+            $parameters['property'] = array( 'null' );
+        } else {
+            $parameters['property'] = array( new PropertyId( $property ) );
         }
 
+        /*
+         * error handling:
+         *   type of $dataValue for properties with 'Inverse' constraint has to be 'wikibase-entityid'
+         *   parameter $property must not be null
+         */
+        if( $dataValue->getType() !== 'wikibase-entityid' || $property === null ) {
+            return new CheckResult( $propertyId, $dataValue, 'Inverse', $parameters, 'error' );
+        }
+
+        $targetItem = $this->entityLookup->getEntity( $dataValue->getEntityId() );
+        if( $targetItem === null ) {
+            return new CheckResult( $propertyId, $dataValue, 'Inverse', $parameters, 'fail' );
+        }
         $targetItemStatementsArray = $targetItem->getStatements()->toArray();
 
         $status = $this->hasProperty( $targetItemStatementsArray, $property ) ? 'compliance' : 'violation';
 
-        return new CheckResult($propertyId, $dataValueString, 'Inverse', $parameterString, $status );
+        return new CheckResult( $propertyId, $dataValue, 'Inverse', $parameters, $status );
     }
 
-
-    private function hasProperty( $itemStatementsArray, $propertyId ) {
+    private function hasProperty( $itemStatementsArray, $propertyIdSerialization ) {
         foreach( $itemStatementsArray as $itemStatement ) {
-            if( $itemStatement->getPropertyId() == $propertyId ) {
+            if( $itemStatement->getPropertyId()->getSerialization() === $propertyIdSerialization ) {
                 return true;
             }
         }
         return false;
     }
 
-    private function hasClaim( $itemStatementsArray, $propertyId, $claimItemIdOrArray ) {
-        foreach( $itemStatementsArray as $itemStatement ) {
-            if( $itemStatement->getPropertyId() == $propertyId ) {
-                if( getType( $claimItemIdOrArray ) == "string" ) {
-                    if( $this->singleHasClaim( $itemStatement, $claimItemIdOrArray ) ) {
+    private function hasClaim( $statementsArray, $propertyIdSerialization, $itemIdSerializationOrArray ) {
+        foreach( $statementsArray as $statement ) {
+            if( $statement->getPropertyId()->getSerialization() === $propertyIdSerialization ) {
+                if( is_string( $itemIdSerializationOrArray ) ) {
+                    if( $this->singleHasClaim( $statement, $itemIdSerializationOrArray ) ) {
                         return true;
                     }
                 } else {
-                    if( $this->arrayHasClaim( $itemStatement, $claimItemIdOrArray ) ) {
+                    if( $this->arrayHasClaim( $statement, $itemIdSerializationOrArray ) ) {
                         return true;
                     }
                 }
@@ -120,19 +285,21 @@ class ConnectionChecker {
         return false;
     }
 
-    private function singleHasClaim( $itemStatement, $claimItemId ) {
-        if( $this->helper->getDataValueString( $itemStatement->getClaim() ) == $claimItemId ) {
+    private function singleHasClaim( $statement, $itemIdSerialization ) {
+        if( $statement->getMainSnak()->getDataValue()->getEntityId()->getSerialization() === $itemIdSerialization ) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
-    private function arrayHasClaim( $itemStatement, $claimItemIdArray ) {
-        foreach( $claimItemIdArray as $claimItemId ) {
-            if( $this->helper->getDataValueString( $itemStatement->getClaim() ) == $claimItemId ) {
+    private function arrayHasClaim( $statement, $itemIdSerializationArray ) {
+        foreach( $itemIdSerializationArray as $itemIdSerialization ) {
+            if( $statement->getMainSnak()->getDataValue()->getEntityId()->getSerialization() === $itemIdSerialization ) {
                 return true;
             }
         }
         return false;
     }
+
 }

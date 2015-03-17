@@ -5,15 +5,38 @@ namespace WikidataQuality\ConstraintReport\Specials;
 use Html;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use DataValues;
 use Wikibase\Repo\WikibaseRepo;
 use WikidataQuality\ConstraintReport\ConstraintCheck\ConstraintChecker;
 use WikidataQuality\Specials\SpecialWikidataQualityPage;
 
-
+/**
+ * Class SpecialWikidataConstraintReport
+ * Special page that displays all constraints that are defined on an Entity with additional information
+ * (whether it complied or was a violation, which parameters the constraint has etc.).
+ * @package WikidataQuality\ConstraintReport\Specials
+ * @author BP2014N1
+ * @license GNU GPL v2+
+ */
 class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
 
+    /**
+     * Wikibase entity lookup.
+     * @var \Wikibase\Lib\Store\EntityLookup
+     */
     protected $entityLookup;
+
+    /**
+     * Variable to collect output before adding it to $out.
+     * @var string
+     */
     private $output = '';
+
+    /**
+     * @var int
+     */
+    private $maxArrayLength = 5;
+
 
     function __construct() {
         parent::__construct( 'ConstraintReport' );
@@ -53,29 +76,35 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
 
         if( !empty( $_POST['entityID'] ) ) {
             $constraintChecker = new ConstraintChecker();
-            $entity = $this->entityLookup->getEntity( $this->getEntityID( $_POST['entityID'] ) );
+            $entityId = $this->getEntityID( $_POST['entityID'] );
+            $entity = $this->entityLookup->getEntity( $entityId );
             $results = $constraintChecker->execute( $entity );
         } else {
             return;
         }
 
         if( $results ) {
-            $out->addHTML( Html::openElement( 'br' ) . Html::openElement( 'h1' ) . $this->msg( 'wikidataquality-constraint-result-headline' ) . $entity->getId()->getSerialization() . " (" . $entity->getLabel('en') . ")" . Html::closeElement( 'h1' ) );
+            $out->addHTML( Html::openElement( 'br' ) . Html::openElement( 'h1' )
+                . $this->msg( 'wikidataquality-constraint-result-headline' )
+                . $this->entityIdHtmlLinkFormatter->formatEntityId( $entityId )
+                . ' (<nowiki>' . $entityId . '</nowiki>)'
+                . Html::closeElement( 'h1' ) );
             $this->output .= $this->getTableHeader();
             foreach( $results as $checkResult) {
                 $this->addOutputRow( $checkResult );
             }
-            $this->output .= "|-\n|}"; // close Table
+            $this->output .= "|-\n|}"; // close table
             $out->addWikiText( $this->output );
             return;
         } else {
-            $out->addHTML( Html::openElement( 'p' ) . $this->msg( 'wikidataquality-constraint-result-entity-not-existent' )->text(). Html::closeElement( 'p' ) );
+            $out->addHTML( Html::openElement( 'p' )
+                . $this->msg( 'wikidataquality-constraint-result-entity-not-existent' )->text()
+                . Html::closeElement( 'p' ) );
         }
 
     }
 
-    private function getHtmlForm()
-    {
+    private function getHtmlForm() {
         return Html::openElement( 'p' )
             . $this->msg( 'wikidataquality-constraint-instructions' )->text()
             . Html::element( 'br' )
@@ -108,6 +137,10 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
             . Html::closeElement( 'form' );
     }
 
+    /**
+     * @param $entityId
+     * @return null|ItemId|PropertyId
+     */
     private function getEntityID( $entityId )
     {
         switch( strtoupper( $entityId[0] ) ) {
@@ -120,14 +153,16 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
         }
     }
 
-
+    /**
+     * @param $result
+     */
     private function addOutputRow( $result ) {
         $this->output .=
             "|-\n"
-            . "| " . $result->getPropertyId() . " (" . $this->entityLookup->getEntity($result->getPropertyId())->getLabel('en') . ") "
-            . "|| " . $result->getDataValue() . " "
+            . "| " . $this->entityIdLinkFormatter->formatEntityId( $result->getPropertyId() )
+            . "|| " . $this->formatValue( $result->getDataValue() ) . " "
             . "|| " . $result->getConstraintName() . " "
-            . "|| <nowiki>" . $this->limitOutput( $result->getParameter() ) . "</nowiki> ";
+            . "|| " . $this->formatParameters( $result->getParameters() ) . " ";
 
         switch( $result->getStatus() ) {
             case 'compliance':  // constraint has been checked, result is positive
@@ -150,14 +185,52 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
         $this->output .= "|| <div style=\"color:" . $color . "\">" . $result->getStatus() . "</div>\n";
     }
 
-    private $showMax = 50;
-
-    private function limitOutput( $string ) {
-        if( strlen($string) <= $this->showMax ) {
-            return $string;
-        } else {
-            return substr( $string, 0, $this->showMax ) . '...';
+    /**
+     * @param mixed string|ItemId|PropertyId|DataValues\DataValue $dataValue
+     *
+     * @return string
+     */
+    private function formatValue( $dataValue ) {
+        if( is_string( $dataValue ) ) { // cases like 'Format' 'pattern' or 'minimum'/'maximum' values, which we have stored as strings
+            return ( '<nowiki>' . $dataValue . '</nowiki>' );
+        } else if( get_class( $dataValue ) === 'Wikibase\DataModel\Entity\ItemId' || get_class( $dataValue ) === 'Wikibase\DataModel\Entity\PropertyId' ) { // cases like 'Conflicts with' 'property', to which we can link
+            return $this->entityIdLinkFormatter->formatEntityId( $dataValue );
+        } else { // cases where we format a DataValue
+            if ( $dataValue->getType() === 'wikibase-entityid' ) { // Entities, to which we can link
+                return $this->entityIdLinkFormatter->formatEntityId( $dataValue->getEntityId() );
+            } else { // other DataValues, which can be formatted
+                return $this->dataValueFormatter->format( $dataValue );
+            }
         }
+    }
+
+    /**
+     * @param array $parameters
+     *
+     * @return string
+     */
+    private function formatParameters( $parameters ) {
+        $formattedParameters = '';
+        $parameterNames = array_keys( $parameters );
+
+        foreach( $parameterNames as $parameterName ) {
+            $formattedParameters .= ( $parameterName . ': ' );
+            $parameterValue = $parameters[$parameterName];
+
+            $formattedParameters .= implode( ', ', $this->limitArrayLength( array_map( array( 'self', 'formatValue' ), $parameterValue ) ) );
+
+            $formattedParameters .= '<br />';
+        }
+
+        return $formattedParameters;
+    }
+
+    private function limitArrayLength( $array ) {
+        if( count( $array ) > $this->maxArrayLength ) {
+            $array = array_slice( $array, 0, $this->maxArrayLength );
+            array_push( $array, '...' );
+        }
+        return $array;
     }
 
     /**
@@ -167,7 +240,6 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
     {
         return "{| class=\"wikitable sortable\"\n"
             . "! Property !! class=\"unsortable\" | Value !! Constraint !! class=\"unsortable\" | Parameters !! Status\n";
-
     }
 
 }
