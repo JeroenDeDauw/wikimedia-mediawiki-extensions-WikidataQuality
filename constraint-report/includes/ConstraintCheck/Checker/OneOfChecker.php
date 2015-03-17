@@ -41,7 +41,12 @@ class OneOfChecker {
             $parameters['item'] = array( 'null' );
         } else {
             $func = function( $item ) {
-                return new ItemId( $item );
+                if( $item !== 'novalue' && $item ==! 'somevalue' ) {
+                    return new ItemId( $item );
+                } else {
+                    return $item;
+                }
+
             };
             $parameters['item'] = array_map( $func, $itemArray );
         }
@@ -55,7 +60,7 @@ class OneOfChecker {
             return new CheckResult( $propertyId, $dataValue, 'Format', $parameters, 'error' );
         }
 
-        if( !in_array( $dataValue, $itemArray ) ) {
+        if( !in_array( new ItemId( $dataValue->getEntityId()->getSerialization() ), $itemArray ) ) {
             $status = 'violation';
         } else {
             $status = 'compliance';
