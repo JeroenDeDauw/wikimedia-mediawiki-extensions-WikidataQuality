@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS constraints_ready_for_migration;
 
 CREATE TABLE constraints_ready_for_migration
 (
-ID int AUTO_INCREMENT,
+ID int PRIMARY KEY AUTO_INCREMENT,
 pid int,
 constraint_name varchar(255),
 class text,
@@ -20,8 +20,7 @@ minimum_quantity varchar(255),
 namespace varchar(255),
 pattern varchar(255),
 property varchar(255),
-relation varchar(255),
-PRIMARY KEY (ID)
+relation varchar(255)
 );
 
 INSERT INTO constraints_ready_for_migration (pid, constraint_name, class, comment, constraint_status, group_by, item, known_exception, maximum_date, maximum_quantity, minimum_date, minimum_quantity, namespace, pattern, property, relation) VALUES
