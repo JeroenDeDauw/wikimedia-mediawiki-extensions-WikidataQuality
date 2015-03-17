@@ -40,3 +40,4 @@ Thumbs.db
 vendor/
 tests/coverage
 composer.lock
+build/logs/
