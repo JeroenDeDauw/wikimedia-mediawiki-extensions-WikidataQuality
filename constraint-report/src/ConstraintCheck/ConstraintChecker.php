@@ -2,8 +2,6 @@
 
 namespace WikidataQuality\ConstraintReport\ConstraintCheck;
 
-define("USE_WIKIDATA_API_LOOKUP", true);
-
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Store;
 use Wikibase\DataModel\Statement;
