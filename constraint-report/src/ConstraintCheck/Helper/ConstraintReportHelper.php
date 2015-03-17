@@ -9,15 +9,17 @@ namespace WikidataQuality\ConstraintReport\ConstraintCheck\Helper;
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class ConstraintReportHelper {
+class ConstraintReportHelper
+{
 
     /**
      * @param string $templateString
      * @return string
      */
-    public function removeBrackets( $templateString ) {
-        $toReplace = array( "{", "}", "|", "[", "]" );
-        return str_replace( $toReplace, "", $templateString );
+    public function removeBrackets( $templateString )
+    {
+        $toReplace = array("{", "}", "|", "[", "]");
+        return str_replace($toReplace, "", $templateString);
     }
 
     /**

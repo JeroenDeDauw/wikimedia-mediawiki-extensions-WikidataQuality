@@ -47,6 +47,7 @@ class ValueCountChecker {
         $parameters = array();
 
         if( $this->getPropertyCount( $this->statements )[$propertyId->getNumericId()] > 1 ) {
+
             $status = 'violation';
         } else {
             $status = 'compliance';

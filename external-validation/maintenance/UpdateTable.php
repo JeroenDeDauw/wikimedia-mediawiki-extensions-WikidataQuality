@@ -4,6 +4,7 @@ namespace WikidataQuality\ExternalValidation\Maintenance;
 
 use Maintenance;
 use WikidataQuality\ExternalValidation\UpdateTable\ImportContext;
+use WikidataQuality\ExternalValidation\UpdateTable\Importer\Importer;
 
 
 $basePath = getenv( "MW_INSTALL_PATH" ) !== false ? getenv( "MW_INSTALL_PATH" ) : __DIR__ . "/../../../..";
@@ -12,17 +13,12 @@ require_once $basePath . "/maintenance/Maintenance.php";
 
 class UpdateTable extends Maintenance
 {
-    /**
-     * Array of importers to run
-     * @var array
-     */
-    private $importers = array( 'WikidataQuality\ExternalValidation\UpdateTable\Importer\GndImporter' );
-
-
     function __construct()
     {
         parent::__construct();
         $this->mDescription = "Downloads dumps of external databases and imports the entities into the local database.";
+        $this->addOption( 'entities-file', 'CSV file that contains external entities.', true, true );
+        $this->addOption( 'meta-information-file', 'CSV file that contains meta information about the data source.', true, true );
         $this->setBatchSize( 1000 );
     }
 
@@ -33,18 +29,18 @@ class UpdateTable extends Maintenance
         wfWaitForSlaves();
         $loadBalancer = wfGetLB();
 
-        // Run each selected importer
-        $context = new ImportContext( $loadBalancer, DUMP_DATA_TABLE, DUMP_META_TABLE, $this->mBatchSize, $this->isQuiet() );
-        foreach ( $this->importers as $class ) {
-            $namespaceExp = explode( '\\', $class );
-            $className = array_pop( $namespaceExp );
-            $this->output( "Running $className...\n" );
-
-            $importer = new $class( $context );
-            $importer->import();
-
-            $this->output( "\n" );
-        }
+        // Run importer
+        $context = new ImportContext(
+            $loadBalancer,
+            DUMP_DATA_TABLE,
+            DUMP_META_TABLE,
+            $this->mBatchSize,
+            $this->isQuiet(),
+            $this->getOption( 'entities-file' ),
+            $this->getOption( 'meta-information-file' )
+        );
+        $importer = new Importer( $context );
+        $importer->import();
     }
 }
 

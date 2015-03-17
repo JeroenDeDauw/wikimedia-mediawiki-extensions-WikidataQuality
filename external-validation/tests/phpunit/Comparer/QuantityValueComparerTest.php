@@ -5,17 +5,14 @@ namespace WikidataQuality\ExternalValidation\Tests\Comparer;
 
 use DataValues\QuantityValue;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\QuantityValueComparer;
-use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
+use WikidataQuality\ExternalValidation\DumpMetaInformation;
 
 
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\QuantityValueComparer
  *
- * @uses   WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
+ * @uses   WikidataQuality\ExternalValidation\DumpMetaInformation
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
- *
- * @group WikidataQuality
- * @group WikidataQuality\ExternalValidation
  *
  * @author BP2014N1
  * @license GNU GPL v2+
@@ -28,9 +25,11 @@ class QuantityValueComparerTest extends DataValueComparerTestBase
      */
     public function executeDataProvider()
     {
+        $dumpMetaInformation = $this->getDumpMetaInformationMock( 'en' );
+
         return array(
             array(
-                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
+                $dumpMetaInformation,
                 QuantityValue::newFromNumber( 42, '1', 44, 40 ),
                 array( '42' ),
                 true,
@@ -39,7 +38,7 @@ class QuantityValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
+                $dumpMetaInformation,
                 QuantityValue::newFromNumber( 42, '1', 44, 40 ),
                 array( '41' ),
                 true,
@@ -48,7 +47,7 @@ class QuantityValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
+                $dumpMetaInformation,
                 QuantityValue::newFromNumber( 42, '1' ),
                 array( '23' ),
                 false,
@@ -57,7 +56,7 @@ class QuantityValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
+                $dumpMetaInformation,
                 QuantityValue::newFromNumber( 42, '1' ),
                 array( '42' ),
                 true,
@@ -66,7 +65,7 @@ class QuantityValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
+                $dumpMetaInformation,
                 QuantityValue::newFromNumber( 42, '1' ),
                 array( '44' ),
                 false,
@@ -75,7 +74,7 @@ class QuantityValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'xml', 'en', 'd.m.Y', 'TestDB' ),
+                $dumpMetaInformation,
                 QuantityValue::newFromNumber( 42, '1', 44, 40 ),
                 null,
                 false,

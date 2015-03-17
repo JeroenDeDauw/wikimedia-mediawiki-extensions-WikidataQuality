@@ -27,6 +27,18 @@ class ImportContext
     private $metaTableName = '';
 
     /**
+     * Path of the entities file to be imported.
+     * @var string
+     */
+    private $entitiesFilePath;
+
+    /**
+     * Path of the meta information file to be imported.
+     * @var string
+     */
+    private $metaInformationFilePath;
+
+    /**
      * @var LoadBalancer
      */
     private $loadBalancer;
@@ -48,13 +60,15 @@ class ImportContext
      * @param int $batchSize
      * @param boolean $quiet
      */
-    function __construct( $loadBalancer, $targetTableName, $metaTableName, $batchSize, $quiet )
+    function __construct( $loadBalancer, $targetTableName, $metaTableName, $batchSize, $quiet, $entitiesFilePath, $metaInformationFilePath )
     {
         $this->setLoadBalancer( $loadBalancer );
         $this->setTargetTableName( $targetTableName );
         $this->setMetaTableName( $metaTableName );
         $this->setBatchSize( $batchSize );
         $this->setQuiet( $quiet );
+        $this->setEntitiesFilePath( $entitiesFilePath );
+        $this->setMetaInformationFilePath( $metaInformationFilePath );
     }
 
     /**
@@ -80,6 +94,23 @@ class ImportContext
     {
         return $this->targetTableName;
     }
+
+    /**
+     * @return string
+     */
+    public function getEntitiesFilePath( )
+    {
+        return $this->entitiesFilePath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMetaInformationFilePath( )
+    {
+        return $this->metaInformationFilePath;
+    }
+
 
     /**
      * @param string $tableName
@@ -135,5 +166,21 @@ class ImportContext
     public function setQuiet( $quiet )
     {
         $this->quiet = $quiet;
+    }
+
+    /**
+     * @param string $entitiesFilePath
+     */
+    public function setEntitiesFilePath( $entitiesFilePath )
+    {
+        $this->entitiesFilePath = $entitiesFilePath;
+    }
+
+    /**
+     * @param string $metaInformationFilePath
+     */
+    public function setMetaInformationFilePath( $metaInformationFilePath )
+    {
+        $this->metaInformationFilePath = $metaInformationFilePath;
     }
 }

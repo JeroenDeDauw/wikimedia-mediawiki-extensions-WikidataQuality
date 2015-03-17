@@ -14,10 +14,14 @@
          strict="true"
          verbose="true">
     <testsuites>
-        <testsuite name="WikidataQuality">
+        <testsuite name="Common">
             <directory>tests/phpunit</directory>
-            <directory>constraint-report/tests/phpunit</directory>
+        </testsuite>
+        <testsuite name="ExternalValidation">
             <directory>external-validation/tests/phpunit</directory>
+        </testsuite>
+        <testsuite name="ConstraintReport">
+            <directory>constraint-report/tests/phpunit</directory>
         </testsuite>
     </testsuites>
     <filter>
@@ -35,5 +39,6 @@
     </filter>
     <logging>
         <log type="coverage-html" target="tests/coverage" />
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
     </logging>
 </phpunit>

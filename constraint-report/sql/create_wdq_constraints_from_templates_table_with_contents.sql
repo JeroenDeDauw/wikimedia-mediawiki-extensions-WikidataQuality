@@ -1,6 +1,6 @@
 CREATE TABLE wdq_constraints_from_templates
 (
-ID int NOT NULL AUTO_INCREMENT,
+ID int /*NOT NULL*/ PRIMARY KEY AUTO_INCREMENT,
 pid int,
 constraint_name varchar(255),
 Tag varchar(255),
@@ -25,8 +25,7 @@ relation varchar(255),
 required varchar(255),
 seperate_category_processing varchar(255),
 value varchar(255),
-values_ text,
-PRIMARY KEY (ID)
+values_ text
 );
 
 INSERT 
@@ -16905,11 +16904,3 @@ INSERT
 INSERT 
  INTO wdq_constraints_from_templates (pid, constraint_name, Tag, base_property, class, classes, exceptions, group_by, group_property, item, item2, item3, items, list, mandatory, max, min, namespace, pattern, property, relation, required, seperate_category_processing, value, values_) 
  VALUES (1715, "Item", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "P373", NULL, NULL, NULL, NULL, NULL);
-
-ALTER TABLE wdq_constraints_from_templates
-  DROP COLUMN Tag,
-  DROP COLUMN item2,
-  DROP COLUMN item3,
-  DROP COLUMN group_by,
-  DROP COLUMN required,
-  DROP COLUMN seperate_category_processing;

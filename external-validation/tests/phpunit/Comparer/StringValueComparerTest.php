@@ -6,17 +6,14 @@ namespace WikidataQuality\ExternalValidation\Tests\Comparer;
 use DataValues\MonolingualTextValue;
 use DataValues\StringValue;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer;
-use WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation;
+use WikidataQuality\ExternalValidation\DumpMetaInformation;
 
 
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer
  *
- * @uses   WikidataQuality\ExternalValidation\CrossCheck\DumpMetaInformation
+ * @uses   WikidataQuality\ExternalValidation\DumpMetaInformation
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
- *
- * @group WikidataQuality
- * @group WikidataQuality\ExternalValidation
  *
  * @author BP2014N1
  * @license GNU GPL v2+
@@ -29,9 +26,12 @@ class StringValueComparerTest extends DataValueComparerTestBase
      */
     public function executeDataProvider()
     {
+        $dumpMetaInformationEn = $this->getDumpMetaInformationMock( 'en' );
+        $dumpMetaInformationDe = $this->getDumpMetaInformationMock( 'de' );
+
         return array(
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                $dumpMetaInformationEn,
                 new StringValue( 'foo' ),
                 array( 'foo', 'bar' ),
                 true,
@@ -41,7 +41,7 @@ class StringValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
+                $dumpMetaInformationEn,
                 new StringValue( 'foo' ),
                 array( 'foobar', 'bar' ),
                 false,
@@ -51,7 +51,7 @@ class StringValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'json', 'de', 'Y-m-d', 'TestDB' ),
+                $dumpMetaInformationDe,
                 new StringValue( 'foobar' ),
                 array( 'foobar', 'bar' ),
                 true,
@@ -61,8 +61,8 @@ class StringValueComparerTest extends DataValueComparerTestBase
                 )
             ),
             array(
-                new DumpMetaInformation( 'json', 'en', 'Y-m-d', 'TestDB' ),
-                new MonolingualTextValue( 'en', 'foo' ),
+                $dumpMetaInformationEn,
+                new StringValue( 'foo' ),
                 null,
                 false,
                 null

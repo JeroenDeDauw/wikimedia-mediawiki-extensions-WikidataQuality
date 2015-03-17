@@ -31,6 +31,17 @@
     "wikidataquality-crosscheck-comparative-value": "Name for value from the external source for the cross-check.",
     "wikidataquality-crosscheck-external-source": "Name for external source the comparative data is from.",
 
+    "wikidataquality-externaldbs": "{{doc-special|ExternalDbs}}",
+    "wikidataquality-externaldbs-instructions": "Purpose of SpecialPage:ExternalDbs",
+    "wikidataquality-externaldbs-overview-headline": "Headline that appears above the overview of external databases.",
+    "wikidataquality-externaldbs-source-item-id": "Name for source item id from the external source.",
+    "wikidataquality-externaldbs-import-date": "Name for import date from the external source.",
+    "wikidataquality-externaldbs-language": "Name for language from the external source.",
+    "wikidataquality-externaldbs-source-url": "Name for source url from the external source.",
+    "wikidataquality-externaldbs-size": "Name for size from the external source.",
+    "wikidataquality-externaldbs-license": "Name for license from the external source.",
+    "wikidataquality-externaldbs-no-databases": "Message that appears when no external databases exist.",
+
     "apihelp-wdqcrosscheck-description": "{{doc-apihelp-description|wblinktitles}}",
     "apihelp-wdqcrosscheck-param-entities": "{{doc-apihelp-param|wdqcrosscheck|entities}}",
     "apihelp-wdqcrosscheck-param-properties": "{{doc-apihelp-param|wdqcrosscheck|properties}}",
