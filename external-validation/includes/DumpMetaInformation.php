@@ -168,6 +168,7 @@ class DumpMetaInformation
         $accumulator = array(
             'row_id' => $this->getDumpId(),
             'source_item_id' => $this->getSourceItemId()->getNumericId(),
+            'import_date' => $this->getImportDate()->format(DateTime::ISO8601),
             'language' => $this->getLanguage(),
             'source_url' => $this->getSourceUrl(),
             'size' => $this->getSize(),
