@@ -23,4 +23,8 @@ class ConnectionCheckerTest extends \PHPUnit_Framework_TestCase {
         parent::tearDown();
     }
 
+    public function testTravisSucks() {
+        $this->assertEquals( 'foo', 'foo', 'check should comply' );
+    }
+
 }
