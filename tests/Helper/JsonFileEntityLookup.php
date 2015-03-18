@@ -35,7 +35,6 @@ class JsonFileEntityLookup implements EntityLookup {
         if( $this->hasEntity( $entityId ) ) {
             $filePath = $this->buildFilePath( $entityId );
             $serializedEntity = json_decode( file_get_contents( $filePath ), true );
-            //fwrite(STDERR, "\n" . print_r($serializedEntity, TRUE));
             if ( $serializedEntity ) {
                 $deserializerFactory = new DeserializerFactory(
                     new DataValueDeserializer(
