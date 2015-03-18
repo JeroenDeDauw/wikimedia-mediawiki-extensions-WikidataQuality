@@ -5,7 +5,7 @@ namespace WikidataQuality\ConstraintReport\Test\CommonsLinkChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\CommonsLinkChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
 
-class CommonsLinkCheckerTest {
+class CommonsLinkCheckerTest extends \PHPUnit_Framework_TestCase {
 
     private $helper;
     private $commonsLinkChecker;
