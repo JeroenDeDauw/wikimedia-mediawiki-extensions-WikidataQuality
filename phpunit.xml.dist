@@ -26,14 +26,16 @@
     </testsuites>
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">constraint-report/src</directory>
+            <directory suffix=".php">includes</directory>
+
+            <directory suffix=".php">constraint-report/includes</directory>
             <directory suffix=".php">constraint-report/specials</directory>
 
             <directory suffix=".php">external-validation/api</directory>
-            <directory suffix=".php">external-validation/src</directory>
+            <directory suffix=".php">external-validation/includes</directory>
             <directory suffix=".php">external-validation/specials</directory>
             <exclude>
-                <file>external-validation/src/UpdateTable/ImportContext.php</file>
+                <file>external-validation/includes/UpdateTable/ImportContext.php</file>
             </exclude>
         </whitelist>
     </filter>

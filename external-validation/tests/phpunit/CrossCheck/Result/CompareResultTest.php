@@ -127,6 +127,15 @@ class CompareResultTest extends \MediaWikiTestCase {
                 $propertyId,
                 $claimGuid,
                 $monolingualTextValue,
+                $monolingualTextValue,
+                true,
+                null,
+                $dumpInformation
+            ),
+            array(
+                $propertyId,
+                $claimGuid,
+                $monolingualTextValue,
                 array( $monolingualTextValue, $stringValue ),
                 true,
                 null,

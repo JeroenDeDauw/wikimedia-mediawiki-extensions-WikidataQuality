@@ -98,7 +98,7 @@ class DataValueComparerTest extends \PHPUnit_Framework_TestCase
 
         $expected = true;
         $this->anotherCompareResultTestList->add($this->anotherTestCompareResult);
-        $actual = $this->anotherTestCompareResult->areReferencesMissing();
+        $actual = $this->anotherCompareResultTestList->areReferencesMissing();
         $this->assertEquals($expected, $actual);
     }
 

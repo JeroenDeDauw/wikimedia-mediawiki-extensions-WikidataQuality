@@ -79,7 +79,6 @@ abstract class SpecialWikidataQualityPage extends SpecialPage
         $this->dataValueFormatter = $repo->getValueFormatterFactory()->getValueFormatter( SnakFormatter::FORMAT_HTML, $formatterOptions );
 
         // Get entity id link formatters
-        $formatterOptions = new FormatterOptions();
         $entityTitleLookup = $repo->getEntityTitleLookup();
         $labelLookup = new LanguageLabelLookup( $repo->getTermLookup(), $this->getLanguage()->getCode() );
         $this->entityIdLinkFormatter = new EntityIdLinkFormatter( $entityTitleLookup );

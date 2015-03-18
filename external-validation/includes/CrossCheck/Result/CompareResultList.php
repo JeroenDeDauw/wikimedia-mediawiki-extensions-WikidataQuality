@@ -115,6 +115,7 @@ class CompareResultList implements IteratorAggregate, Countable
     /**
      * Gets an iterator for results.
      * @return ArrayIterator
+     * @codeCoverageIgnore
      */
     public function getIterator()
     {
