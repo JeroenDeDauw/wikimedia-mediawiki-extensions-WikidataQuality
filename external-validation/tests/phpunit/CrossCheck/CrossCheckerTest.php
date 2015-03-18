@@ -393,13 +393,13 @@ class CrossCheckerTest extends \MediaWikiTestCase
     public function crossCheckStatementsDataProvider()
     {
         $language = $this->dumpMetaInformation->getLanguage();
-        $singleStatement = $this->items[ 'Q1' ]->getStatements()->getWithPropertyId( new PropertyId( 'P1' ) )->toArray();
+        $statementsP1 = $this->items[ 'Q1' ]->getStatements()->getWithPropertyId( new PropertyId( 'P1' ) )->toArray();
 
         return array(
             // Crosscheck single statement of Q1
             array(
                 $this->items[ 'Q1' ],
-                $singleStatement,
+                $statementsP1[ 0 ],
                 array(
                     'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b' => new CompareResult(
                         new PropertyId( "P1" ),
