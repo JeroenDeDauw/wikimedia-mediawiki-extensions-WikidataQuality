@@ -7,7 +7,15 @@ use Wikibase\DataModel\Entity\ItemId;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\OneOfChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
 
-class OneOfCheckerTest extends \PHPUnit_Framework_TestCase {
+/**
+ * @covers WikidataQuality\ConstraintReport\ConstraintCheck\Checker\OneOfChecker
+ *
+ * @uses WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult
+ *
+ * @author BP2014N1
+ * @license GNU GPL v2+
+ */
+class OneOfCheckerTest extends \MediaWikiTestCase {
 
     private $helper;
     private $oneOfChecker;

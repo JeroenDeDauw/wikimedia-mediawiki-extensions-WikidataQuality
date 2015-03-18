@@ -219,15 +219,14 @@ class DumpMetaInformation
             array( 'source_item_id', 'import_date', 'language', 'source_url', 'size', 'license' ),
             array( "row_id=$dumpId" ) );
 
-        if ( $result !== false ) {
-            $dataSource = new ItemId( 'Q' . $result->source_item_id );
-            $import_date = new DateTime( $result->import_date );
-            $language = $result->language;
-            $sourceUrl = $result->source_url;
-            $size = (int)$result->size;
-            $license = $result->license;
+        // Create DumpMetaInformation instance
+        $dataSource = new ItemId( 'Q' . $result->source_item_id );
+        $import_date = new DateTime( $result->import_date );
+        $language = $result->language;
+        $sourceUrl = $result->source_url;
+        $size = (int)$result->size;
+        $license = $result->license;
 
-            return new DumpMetaInformation( $dumpId, $dataSource, $import_date, $language, $sourceUrl, $size, $license );
-        }
+        return new DumpMetaInformation( $dumpId, $dataSource, $import_date, $language, $sourceUrl, $size, $license );
     }
 }

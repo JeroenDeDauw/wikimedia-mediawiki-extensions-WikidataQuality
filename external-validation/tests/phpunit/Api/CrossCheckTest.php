@@ -18,9 +18,20 @@ use WikidataQuality\ExternalValidation\DumpMetaInformation;
 
 /**
  * @covers WikidataQuality\ExternalValidation\Api\CrossCheck
+ *
  * @group Database
  * @group API
  * @group medium
+ *
+ * @uses WikidataQuality\ExternalValidation\DumpMetaInformation
+ * @uses WikidataQuality\ExternalValidation\CrossCheck\CrossChecker
+ * @uses WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
+ * @uses WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer
+ * @uses WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult
+ * @uses WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResultList
+ * @uses WikidataQuality\ExternalValidation\Api\Serializer\CompareResultSerializer
+ * @uses WikidataQuality\ExternalValidation\Api\Serializer\CompareResultListSerializer
+ * @uses WikidataQuality\ExternalValidation\Api\Serializer\DumpMetaInformationSerializer
  *
  * @author BP2014N1
  * @license GNU GPL v2+
@@ -37,10 +48,6 @@ class CrossCheckTest extends WikibaseApiTestcase
         parent::setup();
         $this->tablesUsed[] = DUMP_META_TABLE;
         $this->tablesUsed[] = DUMP_DATA_TABLE;
-    }
-
-    protected function tearDown() {
-        parent::tearDown();
     }
 
     public function testExecuteInvalidParams() {
@@ -137,10 +144,10 @@ class CrossCheckTest extends WikibaseApiTestcase
             $itemQ1->addClaim( $statement );
 
             $store->saveEntity( $itemQ1, 'TestEntityQ1', $GLOBALS['wgUser'], EDIT_UPDATE );
-            self::$idMap['Q1'] = $itemQ1->getId();
 
             self::$hasSetup = true;
         }
+
         // Truncate tables
         $this->db->delete(
             DUMP_META_TABLE,

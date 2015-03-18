@@ -8,7 +8,16 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\ValueCountChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
 use WikidataQuality\Tests\Helper\JsonFileEntityLookup;
 
-class ValueCountCheckerTest extends \PHPUnit_Framework_TestCase {
+
+/**
+ * @covers WikidataQuality\ConstraintReport\ConstraintCheck\Checker\ValueCountChecker
+ *
+ * @uses WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult
+ *
+ * @author BP2014N1
+ * @license GNU GPL v2+
+ */
+class ValueCountCheckerTest extends \MediaWikiTestCase {
 
     private $helper;
     private $propertyId;

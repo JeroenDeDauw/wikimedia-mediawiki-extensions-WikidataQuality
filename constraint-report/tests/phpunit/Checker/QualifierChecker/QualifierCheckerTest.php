@@ -7,7 +7,16 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\QualifierChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
 use WikidataQuality\Tests\Helper\JsonFileEntityLookup;
 
-class QualifierCheckerTest extends \PHPUnit_Framework_TestCase {
+
+/**
+ * @covers WikidataQuality\ConstraintReport\ConstraintCheck\Checker\QualifierChecker
+ *
+ * @uses WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult
+ *
+ * @author BP2014N1
+ * @license GNU GPL v2+
+ */
+class QualifierCheckerTest extends \MediaWikiTestCase {
 
     private $helper;
     private $qualifiersList;

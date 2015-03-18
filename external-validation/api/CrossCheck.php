@@ -212,6 +212,7 @@ class CrossCheck extends ApiWikibase
     /**
      * Returns an array of allowed parameters.
      * @return array
+     * @codeCoverageIgnore
      */
     public function getAllowedParams()
     {
@@ -234,6 +235,7 @@ class CrossCheck extends ApiWikibase
     /**
      * Returns usage examples for this module.
      * @return array
+     * @codeCoverageIgnore
      */
     public function getExamplesMessages()
     {
