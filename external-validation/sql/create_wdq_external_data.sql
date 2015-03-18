@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS wdq_external_data (
-  row_id            BIGINT UNSIGNED  /*NOT NULL*/ PRIMARY KEY AUTO_INCREMENT,
+  row_id            BIGINT UNSIGNED  PRIMARY KEY AUTO_INCREMENT,
   dump_id           BIGINT UNSIGNED  NOT NULL,
   identifier_pid    INT UNSIGNED     NOT NULL,
   external_id       VARBINARY(50)    NOT NULL,
