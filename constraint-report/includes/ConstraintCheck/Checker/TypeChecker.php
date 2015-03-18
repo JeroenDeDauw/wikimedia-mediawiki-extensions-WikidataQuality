@@ -16,17 +16,10 @@ use Exception;
 class TypeChecker {
 
     /**
-     * List of all statemtens of given entity.
-     * @var StatementList
-     */
-    private $statements;
-
-    /**
      * Class for helper functions for constraint checkers.
      * @var ConstraintReportHelper
      */
     private $helper;
-
 
     const instanceId = 31;
     const subclassId = 279;
