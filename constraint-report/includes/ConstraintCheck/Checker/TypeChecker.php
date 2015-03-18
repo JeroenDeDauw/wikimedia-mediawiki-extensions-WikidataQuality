@@ -107,6 +107,7 @@ class TypeChecker {
      * Checks Value type constraint
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
+     * @param StatementList $statements
      * @param array $classArray
      * @param string $relation
      * @return CheckResult
