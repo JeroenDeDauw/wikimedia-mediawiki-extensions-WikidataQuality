@@ -47,7 +47,7 @@ class ConnectionChecker {
     /**
      * Checks Conflicts with constraint
      * @param PropertyId $propertyId
-     * @param DataVaule $dataValue
+     * @param DataValue $dataValue
      * @param string $property
      * @param array $itemArray
      * @return CheckResult
@@ -65,7 +65,11 @@ class ConnectionChecker {
             $parameters['item'] = array( 'null' );
         } else {
             $func = function( $item ) {
-                return new ItemId( $item );
+                if( $item !== 'novalue' && $item !== 'somevalue' && $item !== '' ) {
+                    return new ItemId( $item );
+                } else {
+                    return $item;
+                }
             };
             $parameters['item'] = array_map( $func, $itemArray );
         }
@@ -113,7 +117,11 @@ class ConnectionChecker {
             $parameters['item'] = array( 'null' );
         } else {
             $func = function( $item ) {
-                return new ItemId( $item );
+                if( $item !== 'novalue' && $item !== 'somevalue' && $item !== '' ) {
+                    return new ItemId( $item );
+                } else {
+                    return $item;
+                }
             };
             $parameters['item'] = array_map( $func, $itemArray );
         }
@@ -161,7 +169,11 @@ class ConnectionChecker {
             $parameters['item'] = array( 'null' );
         } else {
             $func = function( $item ) {
-                return new ItemId( $item );
+                if( $item !== 'novalue' && $item !== 'somevalue' && $item !== '' ) {
+                    return new ItemId( $item );
+                } else {
+                    return $item;
+                }
             };
             $parameters['item'] = array_map( $func, $itemArray );
         }

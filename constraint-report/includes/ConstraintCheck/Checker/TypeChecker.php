@@ -48,9 +48,13 @@ class TypeChecker {
             $parameters['class'] = array( 'null' );
         } else {
             $func = function( $class ) {
-                return new ItemId( $class );
+                if( $class !== 'novalue' && $class !== 'somevalue' ) {
+                    return new ItemId( $class );
+                } else {
+                    return $class;
+                }
             };
-            $parameters['item'] = array_map( $func, $classArray );
+            $parameters['class'] = array_map( $func, $classArray );
         }
 
         if( $relation === null ) {
@@ -112,9 +116,13 @@ class TypeChecker {
             $parameters['class'] = array( 'null' );
         } else {
             $func = function( $class ) {
-                return new ItemId( $class );
+                if( $class !== 'novalue' && $class !== 'somevalue' ) {
+                    return new ItemId( $class );
+                } else {
+                    return $class;
+                }
             };
-            $parameters['item'] = array_map( $func, $classArray );
+            $parameters['class'] = array_map( $func, $classArray );
         }
 
         if( $relation === null ) {
