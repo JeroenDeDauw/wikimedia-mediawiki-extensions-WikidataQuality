@@ -66,7 +66,7 @@ class CrossCheckerTest extends \MediaWikiTestCase
 
         // Create dump meta information
         $this->dumpMetaInformation = new DumpMetaInformation(
-            '1',
+            1,
             '36578',
             new DateTime( '2015-01-01 00:00:00' ),
             'en',
@@ -84,7 +84,6 @@ class CrossCheckerTest extends \MediaWikiTestCase
         $this->tablesUsed[ ] = DUMP_META_TABLE;
         $this->tablesUsed[ ] = DUMP_DATA_TABLE;
     }
-
 
     public function tearDown()
     {
@@ -116,38 +115,38 @@ class CrossCheckerTest extends \MediaWikiTestCase
             DUMP_DATA_TABLE,
             array(
                 array(
-                    'dump_id' => '1',
-                    'identifier_pid' => '227',
+                    'dump_id' => 1,
+                    'identifier_pid' => 227,
                     'external_id' => '119033364',
-                    'pid' => '1',
+                    'pid' => 1,
                     'external_value' => 'foo'
                 ),
                 array(
-                    'dump_id' => '1',
-                    'identifier_pid' => '227',
+                    'dump_id' => 1,
+                    'identifier_pid' => 227,
                     'external_id' => '119033364',
-                    'pid' => '2',
+                    'pid' => 2,
                     'external_value' => 'baz'
                 ),
                 array(
-                    'dump_id' => '1',
-                    'identifier_pid' => '227',
+                    'dump_id' => 1,
+                    'identifier_pid' => 227,
                     'external_id' => '119033364',
-                    'pid' => '3',
+                    'pid' => 3,
                     'external_value' => 'foobar'
                 ),
                 array(
-                    'dump_id' => '1',
-                    'identifier_pid' => '227',
+                    'dump_id' => 1,
+                    'identifier_pid' => 227,
                     'external_id' => '121649091',
-                    'pid' => '1',
+                    'pid' => 1,
                     'external_value' => 'bar'
                 ),
                 array(
-                    'dump_id' => '2',
-                    'identifier_pid' => '434',
+                    'dump_id' => 2,
+                    'identifier_pid' => 434,
                     'external_id' => 'e9ed318d-8cc5-4cf8-ab77-505e39ab6ea4',
-                    'pid' => '1',
+                    'pid' => 1,
                     'external_value' => 'foobar'
                 )
             )
