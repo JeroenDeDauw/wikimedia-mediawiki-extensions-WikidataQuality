@@ -68,7 +68,8 @@ class CommonsLinkChecker {
      * @return bool
      */
     private function urlExists( $commonsLink, $namespace ) {
-        $responseCode = substr( get_headers( 'http://commons.wikimedia.org/wiki/' . $namespace . ':' . str_replace( ' ', '_', $commonsLink ) )[0], 9, 3);
+        $response = get_headers( 'http://commons.wikimedia.org/wiki/' . $namespace . ':' . str_replace( ' ', '_', $commonsLink ) );
+        $responseCode = substr( $response[0], 9, 3 );
         return $responseCode < 400;
     }
 
