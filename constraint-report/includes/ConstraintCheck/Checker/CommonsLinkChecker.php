@@ -5,8 +5,8 @@ namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 
 /**
- * Class CommonsLinkChecker
- * Checks Commons link constraint.
+ * Class CommonsLinkChecker.
+ * Checks 'Commons link' constraint.
  * @package WikidataQuality\ConstraintReport\ConstraintCheck\Checker
  * @author BP2014N1
  * @license GNU GPL v2+
@@ -27,11 +27,11 @@ class CommonsLinkChecker {
     }
 
     /**
+     * Checks if data value is well-formed and links to an existing page.
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param string $namespace
      * @return CheckResult
-     * Checks if data value is well-formed and links to an existing page
      */
     public function checkCommonsLinkConstraint( $propertyId, $dataValue, $namespace ) {
         $parameters = array();

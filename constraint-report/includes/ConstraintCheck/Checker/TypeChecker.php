@@ -7,8 +7,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Exception;
 
 /**
- * Class TypeChecker
- * Checks Type and Value type constraint.
+ * Class TypeChecker.
+ * Checks 'Type' and 'Value type' constraint.
  * @package WikidataQuality\ConstraintReport\ConstraintCheck\Checker
  * @author BP2014N1
  * @license GNU GPL v2+
@@ -34,7 +34,7 @@ class TypeChecker {
     }
 
     /**
-     * Checks Value type constraint
+     * Checks 'Value type' constraint.
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param array $classArray
@@ -101,7 +101,7 @@ class TypeChecker {
     }
 
     /**
-     * Checks Value type constraint
+     * Checks 'Value type' constraint.
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param StatementList $statements
@@ -113,7 +113,7 @@ class TypeChecker {
         $parameters = array();
 
         if( empty( $classArray ) ) {
-            $parameters['class'] = array( 'null' );
+            $parameters['item'] = array( 'null' );
         } else {
             $func = function( $class ) {
                 if( $class !== 'novalue' && $class !== 'somevalue' ) {
@@ -122,7 +122,7 @@ class TypeChecker {
                     return $class;
                 }
             };
-            $parameters['class'] = array_map( $func, $classArray );
+            $parameters['item'] = array_map( $func, $classArray );
         }
 
         if( $relation === null ) {

@@ -6,8 +6,8 @@ use Wikibase\DataModel\Statement\Statement;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 
 /**
- * Class ValueCountChecker
- * Checks Single, Multi and Unique value constraint.
+ * Class ValueCountChecker.
+ * Checks 'Single', 'Multi' and 'Unique value' constraint.
  * @package WikidataQuality\ConstraintReport\ConstraintCheck\Checker
  * @author BP2014N1
  * @license GNU GPL v2+
@@ -38,7 +38,7 @@ class ValueCountChecker {
     }
 
     /**
-     * Checks Single value constraint
+     * Checks 'Single value' constraint.
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @return CheckResult

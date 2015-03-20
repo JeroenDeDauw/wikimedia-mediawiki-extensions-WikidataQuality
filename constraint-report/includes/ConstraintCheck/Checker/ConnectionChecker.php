@@ -7,8 +7,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
- * Class ConnectionChecker
- * Checks Conflicts with, Item, Target required claim, Symmetric and Inverse constraint.
+ * Class ConnectionChecker.
+ * Checks 'Conflicts with', 'Item', 'Target required claim', 'Symmetric' and 'Inverse' constraints.
  * @package WikidataQuality\ConstraintReport\ConstraintCheck\Checker
  * @author BP2014N1
  * @license GNU GPL v2+
@@ -45,7 +45,7 @@ class ConnectionChecker {
     }
 
     /**
-     * Checks Conflicts with constraint
+     * Checks 'Conflicts with' constraint.
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param string $property
@@ -97,7 +97,7 @@ class ConnectionChecker {
     }
 
     /**
-     * Checks Item constraint
+     * Checks 'Item' constraint.
      * @param PropertyId $propertyId
      * @param DataVaule $dataValue
      * @param string $property
@@ -149,9 +149,9 @@ class ConnectionChecker {
     }
 
     /**
-     * Checks Target required claim constraint
+     * Checks 'Target required claim' constraint.
      * @param PropertyId $propertyId
-     * @param DataVaule $dataValue
+     * @param DataValue $dataValue
      * @param string $property
      * @param array $itemArray
      * @return CheckResult
@@ -208,7 +208,7 @@ class ConnectionChecker {
     }
 
     /**
-     * Checks Symmetric Constraint
+     * Checks 'Symmetric' constraint.
      * @param PropertyId $propertyId
      * @param DataVaule $dataValue
      * @return CheckResult
@@ -236,7 +236,7 @@ class ConnectionChecker {
     }
 
     /**
-     * Checks InverseConstraint
+     * Checks 'Inverse' constraint.
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param string $property
@@ -271,44 +271,51 @@ class ConnectionChecker {
         return new CheckResult( $propertyId, $dataValue, 'Inverse', $parameters, $status );
     }
 
-    private function hasProperty( $itemStatementsArray, $propertyIdSerialization ) {
-        foreach( $itemStatementsArray as $itemStatement ) {
-            if( $itemStatement->getPropertyId()->getSerialization() === $propertyIdSerialization ) {
+    /**
+     * Checks if there is a statement with a claim using the given property.
+     * @param array $statementsArray
+     * @param string $propertyIdSerialization
+     * @return boolean
+     */
+    private function hasProperty( $statementsArray, $propertyIdSerialization ) {
+        foreach( $statementsArray as $statement ) {
+            if( $statement->getPropertyId()->getSerialization() === $propertyIdSerialization ) {
                 return true;
             }
         }
         return false;
     }
 
+    /**
+     * Checks if there is a statement with a claim using the given property and having one of the given items as its value.
+     * @param array $statementsArray
+     * @param string $propertyIdSerialization
+     * @param mixed string|array $itemIdSerializationOrArray
+     * @return boolean
+     */
     private function hasClaim( $statementsArray, $propertyIdSerialization, $itemIdSerializationOrArray ) {
         foreach( $statementsArray as $statement ) {
             if( $statement->getPropertyId()->getSerialization() === $propertyIdSerialization ) {
-                if( is_string( $itemIdSerializationOrArray ) ) {
-                    if( $this->singleHasClaim( $statement, $itemIdSerializationOrArray ) ) {
-                        return true;
-                    }
-                } else {
-                    if( $this->arrayHasClaim( $statement, $itemIdSerializationOrArray ) ) {
-                        return true;
-                    }
+                if( is_string( $itemIdSerializationOrArray ) ) { // string
+                    $itemIdSerializationArray = array( $itemIdSerializationOrArray );
+                } else { // array
+                    $itemIdSerializationArray = $itemIdSerializationOrArray;
                 }
+                return $this->arrayHasClaim( $statement, $itemIdSerializationArray );
             }
         }
         return false;
-    }
-
-    private function singleHasClaim( $statement, $itemIdSerialization ) {
-        if( $statement->getMainSnak()->getDataValue()->getEntityId()->getSerialization() === $itemIdSerialization ) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     private function arrayHasClaim( $statement, $itemIdSerializationArray ) {
         foreach( $itemIdSerializationArray as $itemIdSerialization ) {
-            if( $statement->getMainSnak()->getDataValue()->getEntityId()->getSerialization() === $itemIdSerialization ) {
-                return true;
+            $mainSnak = $statement->getMainSnak();
+            if( $mainSnak->getType() === 'value' ) {
+                if( $mainSnak->getDataValue() === 'wikibase-entityid' ) {
+                    if( $mainSnak->getDataValue()->getEntityId()->getSerialization() === $itemIdSerialization ) {
+                        return true;
+                    }
+                }
             }
         }
         return false;

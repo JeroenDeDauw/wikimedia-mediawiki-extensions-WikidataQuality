@@ -6,8 +6,8 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
- * Class QualifierChecker
- * Checks Qualifier and Qualifiers constraint.
+ * Class QualifierChecker.
+ * Checks 'Qualifier' and 'Qualifiers' constraint.
  * @package WikidataQuality\ConstraintReport\ConstraintCheck\Checker
  * @author BP2014N1
  * @license GNU GPL v2+
@@ -37,7 +37,7 @@ class QualifierChecker {
 
     /**
      * If this method gets invoked, it is automatically a violation since this method only gets invoked
-     * for properties used in statements
+     * for properties used in statements.
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @return CheckResult
@@ -47,7 +47,7 @@ class QualifierChecker {
     }
 
     /**
-     * Checks Qualifiers constraint
+     * Checks 'Qualifiers' constraint.
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param Statement $statement

@@ -6,8 +6,8 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * Class OneOfChecker
- * Checks One of constraint.
+ * Class OneOfChecker.
+ * Checks 'One of' constraint.
  * @package WikidataQuality\ConstraintReport\ConstraintCheck\Checker
  * @author BP2014N1
  * @license GNU GPL v2+
@@ -28,7 +28,7 @@ class OneOfChecker {
     }
 
     /**
-     * Checks One of constraint
+     * Checks 'One of' constraint.
      * @param PropertyId $propertyId
      * @param Data $dataValue
      * @param array $itemArray

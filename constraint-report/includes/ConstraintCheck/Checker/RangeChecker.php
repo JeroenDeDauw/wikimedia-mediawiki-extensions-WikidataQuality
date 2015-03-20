@@ -6,8 +6,8 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
- * Class RangeChecker
- * Checks Range and Diff within range constraint.
+ * Class RangeChecker.
+ * Checks 'Range' and 'Diff within range' constraints.
  * @package WikidataQuality\ConstraintReport\ConstraintCheck\Checker
  * @author BP2014N1
  * @license GNU GPL v2+
@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 class RangeChecker {
 
     /**
-     * List of all statemtens of given entity.
+     * List of all statements of given entity.
      * @var StatementList
      */
     private $statements;
@@ -37,7 +37,7 @@ class RangeChecker {
     }
 
     /**
-     * Checks Range constraint
+     * Checks 'Range' constraint.
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param string $minimum_quantity
