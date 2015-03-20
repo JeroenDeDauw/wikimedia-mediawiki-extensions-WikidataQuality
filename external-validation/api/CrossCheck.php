@@ -127,9 +127,8 @@ class CrossCheck extends ApiWikibase
         $groupedClaimGuids = array();
         foreach ( $claimGuids as $claimGuid ) {
             // Check if claim guid is valid
-            if ( $this->claimGuidValidator->validateFormat( $claimGuid ) === false ) {
-                $this->dieError( 'Invalid claim guid', 'invalid-guid' );
-            }
+            if ( $this->claimGuidValidator->validateFormat( $claimGuid ) === false )
+                $this->dieError( 'Invalid claim guid.', 'invalid-guid' );
 
             $claimGuid = $this->claimGuidParser->parse( $claimGuid );
             $groupedClaimGuids[ (string)$claimGuid->getEntityId() ][ ] = $claimGuid;
