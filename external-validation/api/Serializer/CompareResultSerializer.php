@@ -15,7 +15,14 @@ use Wikibase\Lib\Serializers\SerializerObject;
  */
 class CompareResultSerializer extends SerializerObject
 {
+    /**
+     * @var DataValueSerializer
+     */
     private $dataValueSerializer;
+
+    /**
+     * @var DumpMetaInformationSerializer
+     */
     private $dumpMetaInformationSerializer;
 
 
