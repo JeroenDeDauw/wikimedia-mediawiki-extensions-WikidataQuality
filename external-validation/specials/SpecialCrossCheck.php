@@ -55,7 +55,7 @@ class SpecialCrossCheck extends SpecialWikidataQualityPage
                 'form',
                 array(
                     'action' => $_SERVER[ 'PHP_SELF' ],
-                    'method' => 'get'
+                    'method' => 'post'
                 )
             )
             . Html::input(
@@ -78,36 +78,35 @@ class SpecialCrossCheck extends SpecialWikidataQualityPage
             . Html::closeElement( 'form' )
         );
 
-        $pageParams = $subPage === '' ? array() : explode( '/', $subPage, 2 );
-
-
-
         // If entity id id was received, cross-check entity
-        if ( !empty( $_GET[ 'entityId' ] || $pageParams ) ) {
-            $validator = new NotEntityIdValidator( $this->entityIdParser, 'not an entity id string' );
-            $resultNotAnEntityId = $validator->validate( $_GET['entityId'] );
+        if ( !empty( $subPage ) || !empty( $_POST['entityId'] ) ) {
+            $entityIdString = $subPage ?: $_POST['entityId'];
+
+            $validator = new NotEntityIdValidator( $this->entityIdParser, '400' );
+            $resultNotAnEntityId = $validator->validate( $entityIdString );
+
             if ( !$resultNotAnEntityId->isValid() ) {
-                $entityId = $this->entityIdParser->parse($_GET['entityId']);
-                $entity = $this->entityLookup->getEntity($entityId);
+                $entityId = $this->entityIdParser->parse( $entityIdString );
+                $entity = $this->entityLookup->getEntity( $entityId );
                 $crossChecker = new CrossChecker();
-                $results = $crossChecker->crossCheckEntity($entity);
+                $results = $crossChecker->crossCheckEntity( $entity );
 
                 // Print results
                 $out->addHTML(
-                    Html::openElement('h3')
-                    . $this->msg('wikidataquality-crosscheck-result-headline')->text()
-                    . $this->entityIdHtmlLinkFormatter->formatEntityId($this->entityIdParser->parse($_GET['entityId']))
-                    . Html::closeElement('h3')
+                    Html::openElement( 'h3' )
+                    . $this->msg( 'wikidataquality-crosscheck-result-headline' )->text()
+                    . $this->entityIdHtmlLinkFormatter->formatEntityId( $this->entityIdParser->parse( $entityIdString ) )
+                    . Html::closeElement( 'h3' )
                 );
 
                 if ($results) {
                     $table = new HtmlTable(
                         array(
-                            $this->msg('datatypes-type-wikibase-property')->text(),
-                            $this->msg('wikidataquality-value')->text(),
-                            $this->msg('wikidataquality-crosscheck-comparative-value')->text(),
-                            $this->msg('wikidataquality-crosscheck-external-source')->text(),
-                            $this->msg('wikidataquality-status')->text()
+                            $this->msg( 'datatypes-type-wikibase-property' )->text(),
+                            $this->msg( 'wikidataquality-value' )->text(),
+                            $this->msg( 'wikidataquality-crosscheck-comparative-value' )->text(),
+                            $this->msg( 'wikidataquality-crosscheck-external-source' )->text(),
+                            $this->msg( 'wikidataquality-status' )->text()
                         ),
                         true
                     );
