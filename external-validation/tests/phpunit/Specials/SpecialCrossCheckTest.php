@@ -66,11 +66,31 @@ class SpecialCrossCheckTest extends SpecialPageTestBase {
             'content' => 'The given input string is not a string that could be parsed to an entityId.'
         );
 
-        $cases['invalid input'] = array( 'Qwertz', array(), 'en', $matchers );
+        $cases['invalid input 1'] = array( 'Qwertz', array(), 'en', $matchers );
+        $cases['invalid input 2'] = array( '300', array(), 'en', $matchers );
+
+        unset( $matchers['error'] );
+
+        $matchers['result for'] = array(
+            'tag' => 'h3',
+            'attributes' => array(
+                'class' => 'wdq-crosscheck-error'
+            ),
+            'content' => 'Result for'
+        );
+
+        $matchers['error'] = array(
+            'tag' => 'p',
+            'attributes' => array(
+                'class' => 'wdq-crosscheck-error'
+            ),
+            'content' => 'Item does not exist!'
+        );
+
+        $cases['valid input'] = array( 'Q2', array(), 'en', $matchers );
 
         return $cases;
     }
-
 
     /**
      * @dataProvider requestProvider
@@ -84,6 +104,7 @@ class SpecialCrossCheckTest extends SpecialPageTestBase {
         $request = new \FauxRequest( $request );
 
         list( $output, ) = $this->executeSpecialPage( $sub, $request, $userLanguage );
+        echo $output;
         foreach( $matchers as $key => $matcher ) {
             $this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}'" );
         }
