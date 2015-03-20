@@ -55,7 +55,7 @@ class SpecialCrossCheck extends SpecialWikidataQualityPage
                 'form',
                 array(
                     'action' => $_SERVER[ 'PHP_SELF' ],
-                    'method' => 'post'
+                    'method' => 'get'
                 )
             )
             . Html::input(
@@ -78,10 +78,16 @@ class SpecialCrossCheck extends SpecialWikidataQualityPage
             . Html::closeElement( 'form' )
         );
 
-        // If entity id id was received, cross-check entity
-        if ( !empty( $subPage ) || !empty( $_POST['entityId'] ) ) {
-            $entityIdString = $subPage ?: $_POST['entityId'];
 
+        // check if input via post parameter or via subpage parameter
+        if ( !empty( $_GET['entityId'] ) ) {
+            $entityIdString = $_GET['entityId'];
+        } elseif ( !empty( $subPage ) ) {
+            $entityIdString = $subPage;
+        }
+
+        // If entity id string was received, check if it is valid and then cross-check entity
+        if ( isset( $entityIdString ) ) {
             $validator = new NotEntityIdValidator( $this->entityIdParser, '400' );
             $resultNotAnEntityId = $validator->validate( $entityIdString );
 

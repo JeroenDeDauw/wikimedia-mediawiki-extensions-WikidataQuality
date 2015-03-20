@@ -57,7 +57,7 @@ class SpecialCrossCheckTest extends SpecialPageTestBase {
 
         $cases['empty'] = array('', array(), null, $matchers);
 
-        // Invalid input
+        // Invalid input (en)
         $matchers['error'] = array(
             'tag' => 'p',
             'attributes' => array(
