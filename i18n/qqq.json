@@ -24,6 +24,7 @@
     "wikidataquality-crosscheck-form-submit-label": "Label of the button, that starts the cross-check.",
     "wikidataquality-crosscheck-result-headline": "Headline that appears above the cross-check results.",
     "wikidataquality-crosscheck-result-item-not-existent": "Error message that appears when the entered item does not exist.",
+    "wikidataquality-crosscheck-result-not-an-entity-string": "Error message that appears when the entered string could not be parsed to an entityId.",
     "wikidataquality-crosscheck-result-no-wd-entity": "Message that appears when the referenced wikidata entity does not exist.",
     "wikidataquality-crosscheck-result-no-ext-entity": "Message that appears when the external entity does not exist.",
     "wikidataquality-crosscheck-result-mismatch": "Message that appears for statements, which could not be verified. ",
