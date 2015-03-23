@@ -41,7 +41,9 @@ class CrossCheckTest extends WikibaseApiTestcase
      */
     const NOT_EXISTENT_ITEM_ID = 'Q5678765432345678';
 
-    /** @var EntityId[] */
+    /**
+     * @var EntityId[]
+     */
     private static $idMap;
 
     /**
@@ -49,12 +51,14 @@ class CrossCheckTest extends WikibaseApiTestcase
      */
     private static $claimGuids = array();
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     private static $hasSetup;
 
-    protected function setup()
+    protected function setUp()
     {
-        parent::setup();
+        parent::setUp();
         $this->tablesUsed[ ] = DUMP_META_TABLE;
         $this->tablesUsed[ ] = DUMP_DATA_TABLE;
     }

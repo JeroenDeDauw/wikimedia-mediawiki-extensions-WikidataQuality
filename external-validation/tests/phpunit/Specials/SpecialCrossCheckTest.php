@@ -19,6 +19,7 @@ use WikidataQuality\ExternalValidation\DumpMetaInformation;
  * @covers WikidataQuality\ExternalValidation\Specials\SpecialCrossCheck
  *
  * @group Database
+ * @group medium
  *
  * @author BP2014N1
  * @license GNU GPL v2+exte
@@ -30,7 +31,9 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
      */
     const NOT_EXISTENT_ITEM_ID = 'Q5678765432345678';
 
-    /** @var EntityId[] */
+    /**
+     * @var EntityId[]
+     */
     private static $idMap;
 
     /**
@@ -38,45 +41,16 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
      */
     private static $claimGuids = array();
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     private static $hasSetup;
 
-
-    /**
-     * DumpMetaInformation instance for testing
-     * @var DumpMetaInformation
-     */
-    private $dumpMetaInformation;
-
-    public function __construct( $name = null, $data = array(), $dataName = null )
-    {
-        parent::__construct( $name, $data, $dataName );
-
-        // Create dump meta information
-        $this->dumpMetaInformation = new DumpMetaInformation(
-            1,
-            '36578',
-            new DateTime( '2015-01-01 00:00:00' ),
-            'en',
-            'http://www.foo.bar',
-            42,
-            'CC0' );
-    }
-
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
-
-        // Specify database tables used by this test
         $this->tablesUsed[ ] = DUMP_META_TABLE;
         $this->tablesUsed[ ] = DUMP_DATA_TABLE;
-    }
-
-    public function tearDown()
-    {
-        unset( $this->dumpMetaInformation );
-
-        parent::tearDown();
     }
 
     /**
@@ -148,46 +122,35 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
             '*'
         );
 
+        // Create dump meta information
+        $dumpMetaInformation = new DumpMetaInformation(
+            '1',
+            '36578',
+            new \DateTime( '2015-01-01 00:00:00' ),
+            'en',
+            'http://www.foo.bar',
+            42,
+            'CC0' );
+
         // Insert external test data
-        $this->dumpMetaInformation->save( $this->db );
+        $dumpMetaInformation->save( $this->db );
 
         $this->db->insert(
             DUMP_DATA_TABLE,
             array(
                 array(
-                    'dump_id' => 1,
-                    'identifier_pid' => 227,
-                    'external_id' => '119033364',
-                    'pid' => 1,
+                    'dump_id' => '1',
+                    'identifier_pid' => self::$idMap[ 'P3' ]->getNumericId(),
+                    'external_id' => '1234',
+                    'pid' => self::$idMap[ 'P1' ]->getNumericId(),
                     'external_value' => 'foo'
                 ),
                 array(
-                    'dump_id' => 1,
-                    'identifier_pid' => 227,
-                    'external_id' => '119033364',
-                    'pid' => 2,
-                    'external_value' => 'baz'
-                ),
-                array(
-                    'dump_id' => 1,
-                    'identifier_pid' => 227,
-                    'external_id' => '119033364',
-                    'pid' => 3,
-                    'external_value' => 'foobar'
-                ),
-                array(
-                    'dump_id' => 1,
-                    'identifier_pid' => 227,
-                    'external_id' => '121649091',
-                    'pid' => 1,
+                    'dump_id' => '1',
+                    'identifier_pid' => self::$idMap[ 'P3' ]->getNumericId(),
+                    'external_id' => '1234',
+                    'pid' => self::$idMap[ 'P2' ]->getNumericId(),
                     'external_value' => 'bar'
-                ),
-                array(
-                    'dump_id' => 2,
-                    'identifier_pid' => 434,
-                    'external_id' => 'e9ed318d-8cc5-4cf8-ab77-505e39ab6ea4',
-                    'pid' => 1,
-                    'external_value' => 'foobar'
                 )
             )
         );

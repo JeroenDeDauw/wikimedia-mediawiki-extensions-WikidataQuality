@@ -10,6 +10,7 @@ use DateTime;
  * @covers WikidataQuality\ExternalValidation\DumpMetaInformation
  *
  * @group Database
+ * @group medium
  *
  * @author BP2014N1
  * @license GNU GPL v2+exte
