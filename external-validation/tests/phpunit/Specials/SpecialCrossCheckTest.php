@@ -2,20 +2,55 @@
 
 namespace WikidataQuality\ExternalValidation\Tests\Specials\SpecialCrossCheck;
 
-use Language;
-use SpecialPage;
-use Title;
 use Wikibase\Test\SpecialPageTestBase;
 use WikidataQuality\ExternalValidation\Specials\SpecialCrossCheck;
-use WikidataQuality\Html\HtmlTable;
 
 /**
  * @covers WikidataQuality\ExternalValidation\Specials\SpecialCrossCheck
+ *
+ * @group Database
  *
  * @author BP2014N1
  * @license GNU GPL v2+exte
  */
 class SpecialCrossCheckTest extends SpecialPageTestBase {
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        // Specify database table used by this test
+        $this->tablesUsed[ ] = DUMP_DATA_TABLE;
+    }
+
+    /**
+     * Adds temporary test data to database
+     * @throws \DBUnexpectedError
+     */
+    public function addDBData()
+    {
+        /*// Truncate tables
+        $this->db->delete(
+            DUMP_DATA_TABLE,
+            '*'
+        );
+
+        // Insert example dump data information
+        $this->db->insert(
+            DUMP_META_TABLE,
+            array(
+                array(
+                    'row_id' => 1,
+                    'source_item_id' => 36578,
+                    'import_date' => '2015-01-01 00:00:00',
+                    'language' => 'en',
+                    'source_url' => 'http://www.foo.bar',
+                    'size' => 42,
+                    'license' =>  'CC0'
+                )
+            )
+        );*/
+    }
 
     protected function newSpecialPage() {
         $page = new SpecialCrossCheck();
@@ -85,6 +120,12 @@ class SpecialCrossCheckTest extends SpecialPageTestBase {
         );
 
         $cases['valid input - not existing item'] = array( 'Q99999999', array(), 'en', $matchers );
+
+        unset( $matchers['error'] );
+
+        #$cases['valid input - existing item without statements'] = array( 'Q2', array(), 'en', $matchers );
+
+        #$cases['valid input - existing item with statements'] = array( 'Q30', array(), 'en', $matchers );
 
         return $cases;
     }
