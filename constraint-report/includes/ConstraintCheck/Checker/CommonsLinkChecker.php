@@ -48,18 +48,26 @@ class CommonsLinkChecker {
          *   parameter $namespace can be null, works for commons galleries
          */
         if( $dataValue->getType() !== 'string' ) {
-            return new CheckResult( $propertyId, $dataValue, 'Commons link', $parameters, 'error' );
+            $message = 'Properties with \'Commons link\' constraint need to have values of type \'string\'.';
+            return new CheckResult( $propertyId, $dataValue, 'Commons link', $parameters, 'violation', $message );
         }
 
         $commonsLink = $dataValue->getValue();
 
         if( $this->commonsLinkIsWellFormed( $commonsLink ) ) {
-            $status = $this->urlExists( $commonsLink, $namespace ) ? 'compliance' : 'violation';
+            if( $this->urlExists( $commonsLink, $namespace ) ) {
+                $message = '';
+                $status = 'compliance';
+            } else {
+                $message = 'Commons link must exist.';
+                $status = 'violation';
+            }
         } else {
+            $message = 'Commons link must be well-formed.';
             $status = 'violation';
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'Commons link', $parameters, $status );
+        return new CheckResult( $propertyId, $dataValue, 'Commons link', $parameters, $status, $message );
     }
 
     /**
@@ -79,7 +87,7 @@ class CommonsLinkChecker {
     private function commonsLinkIsWellFormed( $commonsLink ) {
         $toReplace = array( "_", ":", "%20" );
         $compareString = trim( str_replace( $toReplace, '', $commonsLink ) );
-        return $commonsLink == $compareString;
+        return $commonsLink === $compareString;
     }
 
 }

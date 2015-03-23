@@ -19,6 +19,8 @@
     "wikidataquality-constraint-result-table-header-status": "Status",
     "wikidataquality-constraint-result-table-header-claim": "Claim",
     "wikidataquality-constraint-result-table-header-constraint": "Constraint",
+    "wikidataquality-constraint-result-link-to-claim" : "go to claim",
+    "wikidataquality-constraint-result-link-to-constraint" : "go to constraint",
     "wikidataquality-constraint-result-violation": "Violation",
     "wikidataquality-constraint-result-exception": "Exception",
     "wikidataquality-constraint-result-compliance": "Compliance",

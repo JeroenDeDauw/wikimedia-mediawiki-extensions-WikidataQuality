@@ -87,7 +87,7 @@ class CheckResult {
     }
 
     /**
-     * @return string#
+     * @return string
      */
     public function getMessage() {
         return $this->message;

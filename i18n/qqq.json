@@ -19,6 +19,8 @@
     "wikidataquality-constraint-result-table-header-status": "Column that shows the result of the constraint check.",
     "wikidataquality-constraint-result-table-header-claim": "Column that displays a link to the claim, the used property and its value.",
     "wikidataquality-constraint-result-table-header-constraint": "Column that gives information about which constraint was checked.",
+    "wikidataquality-constraint-result-link-to-claim" : "Text for the link to a claim group on the entity page.",
+    "wikidataquality-constraint-result-link-to-constraint" : "Text for the link to a constraint on the property page.",
     "wikidataquality-constraint-result-violation": "Status for constraints that are violated in any way.",
     "wikidataquality-constraint-result-exception": "Status for constraints that are violated, but marked as an exception.",
     "wikidataquality-constraint-result-compliance": "Status for constraints that are complied with.",

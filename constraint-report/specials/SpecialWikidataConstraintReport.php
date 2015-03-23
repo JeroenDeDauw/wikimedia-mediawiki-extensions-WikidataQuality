@@ -92,7 +92,7 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
 
         if( $results ) {
             $out->addHTML( Html::openElement( 'br' ) . Html::openElement( 'h3' )
-                . $this->msg( 'wikidataquality-constraint-result-headline' )
+                . $this->msg( 'wikidataquality-constraint-result-headline' )->text()
                 . $this->entityIdHtmlLinkFormatter->formatEntityId( $entityId )
                 . ' (<nowiki>' . $entityId . '</nowiki>)'
                 . Html::closeElement( 'h3' ) );
@@ -201,13 +201,16 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
             $property = $this->entityIdHtmlLinkFormatter->formatEntityId( $result->getPropertyId() );
             $value = $this->formatValue( $result->getDataValue() );
             $claimUrl = './' . $namespace . ':' . $this->entity->getId()->getSerialization() . '#' . $result->getPropertyId()->getSerialization();
-            $claimColumn = $property . ': ' . $value . ' (<a href="' . $claimUrl . '" target="_blank">go to claim</a>)';
+            $claimLink = '<a href="' . $claimUrl . '" target="_blank">' . $this->msg( 'wikidataquality-constraint-result-link-to-claim' )->text() . '</a>';
+            $claimColumn = $property . ': ' . $value . ' (' . $claimLink . ')';
 
+            $constraintUrl = './Property:' . $result->getPropertyId()->getSerialization() . '#' . '';
+            $constraintLink = '<a href="' . $constraintUrl . '" target="_blank">' . $this->msg( 'wikidataquality-constraint-result-link-to-constraint' )->text() . '</a>';
             if( count( $result->getParameters() ) !== 0 ) {
-                $constraint_tooltip = $this->formatParameters($result->getParameters());
-                $constraintColumn = '<div tooltip="' . $constraint_tooltip . '">' . $result->getConstraintName() . ' ' . $tooltipIndicator . '</div> ';
+                $constraint_tooltip = $this->formatParameters( $result->getParameters() );
+                $constraintColumn = '<div tooltip="' . $constraint_tooltip . '">' . $result->getConstraintName() . ' (' . $constraintLink . ') ' . $tooltipIndicator . '</div> ';
             } else {
-                $constraintColumn = $result->getConstraintName();
+                $constraintColumn = $result->getConstraintName() . ' (' . $constraintLink . ') ';
             }
 
             // Body of table
@@ -229,7 +232,7 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
      */
     private function formatValue( $dataValue ) {
         if( is_string( $dataValue ) ) { // cases like 'Format' 'pattern' or 'minimum'/'maximum' values, which we have stored as strings
-            return ( '<nowiki>' . $dataValue . '</nowiki>' );
+            return ( $dataValue );
         } else if( get_class( $dataValue ) === 'Wikibase\DataModel\Entity\ItemId' || get_class( $dataValue ) === 'Wikibase\DataModel\Entity\PropertyId' ) { // cases like 'Conflicts with' 'property', to which we can link
             return $this->entityIdHtmlLinkFormatter->formatEntityId( $dataValue );
         } else { // cases where we format a DataValue
@@ -270,7 +273,7 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
             $formattedParameters .= implode( ', ', $this->limitArrayLength( array_map( array( 'self', 'formatValueForTooltip' ), $parameterValue ) ) );
 
             if( $parameterName !== end( $parameterNames ) ) {
-                $formattedParameters .= ', ';
+                $formattedParameters .= '; ';
             }
         }
 
