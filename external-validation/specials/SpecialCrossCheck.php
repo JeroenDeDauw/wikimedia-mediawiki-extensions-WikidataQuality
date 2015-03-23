@@ -7,6 +7,7 @@ use Html;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use WikidataQuality\ExternalValidation\CrossCheck\CrossChecker;
 use WikidataQuality\Html\HtmlTable;
+use WikidataQuality\Html\HtmlTableHeader;
 use WikidataQuality\Specials\SpecialWikidataQualityPage;
 
 
@@ -95,11 +96,24 @@ class SpecialCrossCheck extends SpecialWikidataQualityPage
             if ( $results ) {
                 $table = new HtmlTable(
                     array(
-                        $this->msg( 'datatypes-type-wikibase-property' )->text(),
-                        $this->msg( 'wikidataquality-value' )->text(),
-                        $this->msg( 'wikidataquality-crosscheck-comparative-value' )->text(),
-                        $this->msg( 'wikidataquality-crosscheck-external-source' )->text(),
-                        $this->msg( 'wikidataquality-status' )->text()
+                        new HtmlTableHeader(
+                            $this->msg( 'datatypes-type-wikibase-property' )->text(),
+                            true
+                        ),
+                        new HtmlTableHeader(
+                            $this->msg( 'wikidataquality-value' )->text()
+                        ),
+                        new HtmlTableHeader(
+                            $this->msg( 'wikidataquality-crosscheck-comparative-value' )->text()
+                        ),
+                        new HtmlTableHeader(
+                            $this->msg( 'wikidataquality-crosscheck-external-source' )->text(),
+                            true
+                        ),
+                        new HtmlTableHeader(
+                            $this->msg( 'wikidataquality-status' )->text(),
+                            true
+                        )
                     ),
                     true
                 );

@@ -16,15 +16,15 @@ use Html;
 class HtmlTable {
     /**
      * Headers of the table.
-     * @var array
+     * @var HtmlTableHeader
      */
-    private $headers;
+    private $headers = array();
 
     /**
      * Rows of the table.
      * @var array
      */
-    private $rows;
+    private $rows = array();
 
     /**
      * Number of columns of the table.
@@ -45,8 +45,28 @@ class HtmlTable {
      */
     public function __construct( $headers, $isSortable = false )
     {
-        $this->headers = $headers;
-        $this->rows = array();
+        if( is_array( $headers ) )
+        {
+            foreach ( $headers as $header ) {
+                if( is_string( $header ) )
+                {
+                    $this->headers[] = new HtmlTableHeader( $header );
+                }
+                elseif ( $header instanceof HtmlTableHeader )
+                {
+                    $this->headers[] = $header;
+                }
+                else
+                {
+                    new InvalidArgumentException('$headers must be an array of strings or HtmlTableHeader elements.');
+                }
+            }
+        }
+        else
+        {
+            new InvalidArgumentException('$headers must be an array of strings or HtmlTableHeader elements.');
+        }
+
         $this->columnsCount = count($headers);
         $this->isSortable = $isSortable;
     }
@@ -98,10 +118,11 @@ class HtmlTable {
             $html .= Html::openElement(
                 'th',
                 array(
-                    'role' => 'columnheader button'
+                    'role' => 'columnheader button',
+                    'class' => $header->getIsSortable() ?: 'unsortable'
                 )
             )
-            . $header
+            . $header->getText()
             . Html::closeElement( 'th' );
         }
         $html .= Html::closeElement( 'tr' );
