@@ -21,6 +21,13 @@ use WikidataQuality\ExternalValidation\DumpMetaInformation;
  * @group Database
  * @group medium
  *
+ * @uses   WikidataQuality\ExternalValidation\DumpMetaInformation
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\CrossChecker
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResultList
+ *
  * @author BP2014N1
  * @license GNU GPL v2+exte
  */
@@ -46,9 +53,9 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
      */
     private static $hasSetup;
 
-    protected function setUp()
+    protected function setup()
     {
-        parent::setUp();
+        parent::setup();
         $this->tablesUsed[ ] = DUMP_META_TABLE;
         $this->tablesUsed[ ] = DUMP_DATA_TABLE;
     }
