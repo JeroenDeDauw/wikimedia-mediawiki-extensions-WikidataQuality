@@ -253,6 +253,7 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
         $request = new \FauxRequest( $request );
 
         list( $output, ) = $this->executeSpecialPage( $sub, $request, $userLanguage );
+        echo self::$idMap[ 'Q1' ];
         echo '######' . $output;
         foreach( $matchers as $key => $matcher ) {
             $this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}'" );
