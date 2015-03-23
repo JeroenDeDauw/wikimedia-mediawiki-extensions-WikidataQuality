@@ -88,7 +88,6 @@ class SpecialCrossCheck extends SpecialWikidataQualityPage
 
         // If entity id string was received, check if it is valid and then cross-check entity
         if ( isset( $entityIdString ) ) {
-            echo 'done';
             $validator = new NotEntityIdValidator( $this->entityIdParser, '400' );
             $resultNotAnEntityId = $validator->validate( $entityIdString );
 

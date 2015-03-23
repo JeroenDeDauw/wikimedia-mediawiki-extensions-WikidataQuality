@@ -235,7 +235,7 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
 
         unset( $matchers['error'] );
 
-        $cases['valid input - existing item with statements'] = array( '' . self::$idMap[ 'Q1' ], array(), 'en', $matchers );
+        $cases['valid input - existing item with statements'] = array( self::$idMap[ 'Q1' ], array(), 'en', $matchers );
         #$cases['valid input - existing item without statements'] = array( 'Q3', array(), 'en', $matchers );
 
         return $cases;
@@ -253,7 +253,7 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
         $request = new \FauxRequest( $request );
 
         list( $output, ) = $this->executeSpecialPage( $sub, $request, $userLanguage );
-        echo self::$idMap[ 'Q1' ];
+        echo self::$idMap[ 'Q1' ] . '#' . $sub;
         echo '######' . $output;
         foreach( $matchers as $key => $matcher ) {
             $this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}'" );
