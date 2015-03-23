@@ -4,6 +4,11 @@ namespace WikidataQuality\ExternalValidation\Tests\Specials\SpecialCrossCheck;
 
 use Wikibase\Test\SpecialPageTestBase;
 use WikidataQuality\ExternalValidation\Specials\SpecialCrossCheck;
+use DateTime;
+use Wikibase\DataModel\Entity\ItemId;
+use WikidataQuality\ExternalValidation\DumpMetaInformation;
+use WikidataQuality\Tests\Helper\JsonFileEntityLookup;
+use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * @covers WikidataQuality\ExternalValidation\Specials\SpecialCrossCheck
@@ -13,14 +18,64 @@ use WikidataQuality\ExternalValidation\Specials\SpecialCrossCheck;
  * @author BP2014N1
  * @license GNU GPL v2+exte
  */
-class SpecialCrossCheckTest extends SpecialPageTestBase {
+class SpecialCrossCheckTest extends SpecialPageTestBase
+{
+    /**
+     * @var EntityLookup
+     */
+    private $entityLookup;
+
+    /**
+     * Array of test items
+     * @var array
+     */
+    private $items;
+
+    /**
+     * DumpMetaInformation instance for testing
+     * @var DumpMetaInformation
+     */
+    private $dumpMetaInformation;
+
+    public function __construct( $name = null, $data = array(), $dataName = null )
+    {
+        parent::__construct( $name, $data, $dataName );
+
+        // Create entity lookup
+        $this->entityLookup = new JsonFileEntityLookup( __DIR__ . '/../CrossCheck/testdata' );
+
+        // Get items
+        $this->items = array(
+            'Q1' => $this->entityLookup->getEntity( new ItemId( 'Q1' ) ),
+            'Q2' => $this->entityLookup->getEntity( new ItemId( 'Q2' ) ),
+            'Q3' => null
+        );
+
+        // Create dump meta information
+        $this->dumpMetaInformation = new DumpMetaInformation(
+            1,
+            '36578',
+            new DateTime( '2015-01-01 00:00:00' ),
+            'en',
+            'http://www.foo.bar',
+            42,
+            'CC0' );
+    }
 
     public function setUp()
     {
         parent::setUp();
 
-        // Specify database table used by this test
+        // Specify database tables used by this test
+        $this->tablesUsed[ ] = DUMP_META_TABLE;
         $this->tablesUsed[ ] = DUMP_DATA_TABLE;
+    }
+
+    public function tearDown()
+    {
+        unset( $this->entityLookup, $this->items, $this->dumpMetaInformation );
+
+        parent::tearDown();
     }
 
     /**
@@ -29,27 +84,59 @@ class SpecialCrossCheckTest extends SpecialPageTestBase {
      */
     public function addDBData()
     {
-        /*// Truncate tables
+        // Truncate tables
+        $this->db->delete(
+            DUMP_META_TABLE,
+            '*'
+        );
         $this->db->delete(
             DUMP_DATA_TABLE,
             '*'
         );
 
-        // Insert example dump data information
+        // Insert external test data
+        $this->dumpMetaInformation->save( $this->db );
+
         $this->db->insert(
-            DUMP_META_TABLE,
+            DUMP_DATA_TABLE,
             array(
                 array(
-                    'row_id' => 1,
-                    'source_item_id' => 36578,
-                    'import_date' => '2015-01-01 00:00:00',
-                    'language' => 'en',
-                    'source_url' => 'http://www.foo.bar',
-                    'size' => 42,
-                    'license' =>  'CC0'
+                    'dump_id' => 1,
+                    'identifier_pid' => 227,
+                    'external_id' => '119033364',
+                    'pid' => 1,
+                    'external_value' => 'foo'
+                ),
+                array(
+                    'dump_id' => 1,
+                    'identifier_pid' => 227,
+                    'external_id' => '119033364',
+                    'pid' => 2,
+                    'external_value' => 'baz'
+                ),
+                array(
+                    'dump_id' => 1,
+                    'identifier_pid' => 227,
+                    'external_id' => '119033364',
+                    'pid' => 3,
+                    'external_value' => 'foobar'
+                ),
+                array(
+                    'dump_id' => 1,
+                    'identifier_pid' => 227,
+                    'external_id' => '121649091',
+                    'pid' => 1,
+                    'external_value' => 'bar'
+                ),
+                array(
+                    'dump_id' => 2,
+                    'identifier_pid' => 434,
+                    'external_id' => 'e9ed318d-8cc5-4cf8-ab77-505e39ab6ea4',
+                    'pid' => 1,
+                    'external_value' => 'foobar'
                 )
             )
-        );*/
+        );
     }
 
     protected function newSpecialPage() {
@@ -104,6 +191,7 @@ class SpecialCrossCheckTest extends SpecialPageTestBase {
         $cases['invalid input 1'] = array( 'Qwertz', array(), 'en', $matchers );
         $cases['invalid input 2'] = array( '300', array(), 'en', $matchers );
 
+        // Valid input (en)
         unset( $matchers['error'] );
 
         $matchers['result for'] = array(
@@ -124,7 +212,6 @@ class SpecialCrossCheckTest extends SpecialPageTestBase {
         unset( $matchers['error'] );
 
         #$cases['valid input - existing item without statements'] = array( 'Q2', array(), 'en', $matchers );
-
         #$cases['valid input - existing item with statements'] = array( 'Q30', array(), 'en', $matchers );
 
         return $cases;
