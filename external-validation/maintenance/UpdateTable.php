@@ -4,11 +4,12 @@ namespace WikidataQuality\ExternalValidation\Maintenance;
 
 use Maintenance;
 use WikidataQuality\ExternalValidation\UpdateTable\ImportContext;
-use WikidataQuality\ExternalValidation\UpdateTable\Importer\Importer;
+use WikidataQuality\ExternalValidation\UpdateTable\Importer;
 
 
-$basePath = getenv( "MW_INSTALL_PATH" ) !== false ? getenv( "MW_INSTALL_PATH" ) : __DIR__ . "/../../../..";
-require_once $basePath . "/maintenance/Maintenance.php";
+// TODO: Is this neccessary?
+/*$basePath = getenv( "MW_INSTALL_PATH" ) !== false ? getenv( "MW_INSTALL_PATH" ) : __DIR__ . "/../../../..";
+require_once $basePath . "/maintenance/Maintenance.php";*/
 
 
 class UpdateTable extends Maintenance

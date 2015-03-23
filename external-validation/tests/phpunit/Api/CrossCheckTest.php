@@ -54,6 +54,7 @@ class CrossCheckTest extends WikibaseApiTestcase
     /** @var bool */
     private static $hasSetup;
 
+
     protected function setup()
     {
         parent::setup();
