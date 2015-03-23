@@ -44,7 +44,7 @@ class TypeChecker {
     public function checkValueTypeConstraint( $propertyId, $dataValue, $classArray, $relation ) {
         $parameters = array();
 
-        if( empty( $classArray ) ) {
+        if( $classArray[0] === '' ) {
             $parameters['class'] = array( 'null' );
         } else {
             $func = function( $class ) {
@@ -112,7 +112,7 @@ class TypeChecker {
     public function checkTypeConstraint( $propertyId, $dataValue, $statements, $classArray, $relation ) {
         $parameters = array();
 
-        if( empty( $classArray ) ) {
+        if( $classArray[0] === '' ) {
             $parameters['item'] = array( 'null' );
         } else {
             $func = function( $class ) {
@@ -135,7 +135,7 @@ class TypeChecker {
          * error handling:
          *   parameter $classArray must not be null
          */
-        if ( $classArray === null ) {
+        if ( $classArray[0] === '' ) {
             return new CheckResult( $propertyId, $dataValue, 'Type', $parameters, 'error' );
         }
 

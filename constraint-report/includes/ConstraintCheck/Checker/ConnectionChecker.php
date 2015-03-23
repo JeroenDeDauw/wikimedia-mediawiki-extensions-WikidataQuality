@@ -61,7 +61,7 @@ class ConnectionChecker {
             $parameters['property'] = array( new PropertyId( $property ) );
         }
 
-        if( empty( $itemArray ) ) {
+        if( $itemArray[0] === '' ) {
             $parameters['item'] = array( 'null' );
         } else {
             $func = function( $item ) {
@@ -87,7 +87,7 @@ class ConnectionChecker {
          *   a) a property only
          *   b) a property and a number of items (each combination of property and item forming an individual claim)
          */
-        if( empty( $itemArray ) ) {
+        if( $itemArray[0] === '' ) {
             $status = $this->hasProperty( $this->statements, $property ) ? 'violation' : 'compliance';
         } else {
             $status = $this->hasClaim( $this->statements, $property, $itemArray ) ? 'violation' : 'compliance';
@@ -113,7 +113,7 @@ class ConnectionChecker {
             $parameters['property'] = array( new PropertyId( $property ) );
         }
 
-        if( empty( $itemArray ) ) {
+        if( $itemArray[0] === '' ) {
             $parameters['item'] = array( 'null' );
         } else {
             $func = function( $item ) {
@@ -139,7 +139,7 @@ class ConnectionChecker {
          *   a) a property only
          *   b) a property and a number of items (each combination of property and item forming an individual claim)
          */
-        if( empty( $itemArray ) ) {
+        if( $itemArray[0] === '' ) {
             $status = $this->hasProperty( $this->statements, $property ) ? 'compliance' : 'violation';
         } else {
             $status = $this->hasClaim( $this->statements, $property, $itemArray ) ? 'compliance' : 'violation';
@@ -165,7 +165,7 @@ class ConnectionChecker {
             $parameters['property'] = array( new PropertyId( $property ) );
         }
 
-        if( empty( $itemArray ) ) {
+        if( $itemArray[0] === '' ) {
             $parameters['item'] = array( 'null' );
         } else {
             $func = function( $item ) {

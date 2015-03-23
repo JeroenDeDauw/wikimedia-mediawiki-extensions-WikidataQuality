@@ -37,7 +37,7 @@ class OneOfChecker {
     public function checkOneOfConstraint( $propertyId, $dataValue, $itemArray ) {
         $parameters = array();
 
-        if( empty( $itemArray ) ) {
+        if( $itemArray[0] === '' ) {
             $parameters['item'] = array( 'null' );
         } else {
             $func = function( $item ) {

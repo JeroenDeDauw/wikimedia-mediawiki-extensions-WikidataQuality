@@ -57,7 +57,7 @@ class QualifierChecker {
     public function checkQualifiersConstraint( $propertyId, $dataValue, $statement, $propertyArray ) {
         $parameters = array();
 
-        if( empty( $propertyArray ) ) {
+        if( $propertyArray[0] === '' ) {
             $parameters['property'] = array( 'null' );
         } else {
             $func = function( $property ) {
