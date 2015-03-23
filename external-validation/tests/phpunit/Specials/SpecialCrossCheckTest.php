@@ -73,9 +73,6 @@ class SpecialCrossCheckTest extends SpecialPageTestBase {
 
         $matchers['result for'] = array(
             'tag' => 'h3',
-            'attributes' => array(
-                'class' => 'wdq-crosscheck-error'
-            ),
             'content' => 'Result for'
         );
 
@@ -104,7 +101,6 @@ class SpecialCrossCheckTest extends SpecialPageTestBase {
         $request = new \FauxRequest( $request );
 
         list( $output, ) = $this->executeSpecialPage( $sub, $request, $userLanguage );
-        echo $output;
         foreach( $matchers as $key => $matcher ) {
             $this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}'" );
         }
