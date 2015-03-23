@@ -3,6 +3,7 @@
 namespace WikidataQuality\ConstraintReport\Specials;
 
 use Html;
+use Wikibase\DataModel;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use DataValues;
@@ -26,6 +27,12 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
      * @var \Wikibase\Lib\Store\EntityLookup
      */
     protected $entityLookup;
+
+    /**
+     * The entity we want to check.
+     * @var \Wikibase\DataModel\Entity\Entity
+     */
+    private $entity;
 
     /**
      * Variable to collect output before adding it to $out.
@@ -77,8 +84,8 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
         if( !empty( $_POST['entityID'] ) ) {
             $constraintChecker = new ConstraintChecker();
             $entityId = $this->getEntityID( $_POST['entityID'] );
-            $entity = $this->entityLookup->getEntity( $entityId );
-            $results = $constraintChecker->execute( $entity );
+            $this->entity = $this->entityLookup->getEntity( $entityId );
+            $results = $constraintChecker->execute( $this->entity );
         } else {
             return;
         }
@@ -184,28 +191,30 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
 
             if( $result->getMessage() !== '' ) {
                 $status_tooltip = $result->getMessage();
-                $status = '<div tooltip="' . $status_tooltip . '"><span style="color:' . $color . '">' . $result->getStatus() . '</span> ' . $tooltipIndicator . '</div>';
+                $statusColumn = '<div tooltip="' . $status_tooltip . '"><span style="color:' . $color . '">' . $result->getStatus() . '</span> ' . $tooltipIndicator . '</div>';
             } else {
-                $status = '<span style="color:' . $color . '">' . $result->getStatus() . '</span>';
+                $statusColumn = '<span style="color:' . $color . '">' . $result->getStatus() . '</span>';
             }
 
             $property = $this->entityIdHtmlLinkFormatter->formatEntityId( $result->getPropertyId() );
             $value = $this->formatValue( $result->getDataValue() );
-            $claim = '<a href="#">Claim</a> states ' . $property . ': ' . $value;
+            $namespace = ( $this->entity instanceof \Wikibase\DataModel\Entity\Item ) ? 'Item' : 'Property';
+            $claimUrl = './' . $namespace . ':' . $this->entity->getId()->getSerialization() . '#' . $result->getPropertyId()->getSerialization();
+            $claimColumn = $property . ': ' . $value . ' (<a href="' . $claimUrl . '" target="_blank">go to claim</a>)';
 
             if( count( $result->getParameters() ) !== 0 ) {
                 $constraint_tooltip = $this->formatParameters($result->getParameters());
-                $constraint = '<div tooltip="' . $constraint_tooltip . '">' . $result->getConstraintName() . ' ' . $tooltipIndicator . '</div> ';
+                $constraintColumn = '<div tooltip="' . $constraint_tooltip . '">' . $result->getConstraintName() . ' ' . $tooltipIndicator . '</div> ';
             } else {
-                $constraint = $result->getConstraintName();
+                $constraintColumn = $result->getConstraintName();
             }
 
             // Body of table
             $table->appendRow(
                 array(
-                    $status,
-                    $claim,
-                    $constraint
+                    $statusColumn,
+                    $claimColumn,
+                    $constraintColumn
                 )
             );
         }
