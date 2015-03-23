@@ -5,10 +5,15 @@ namespace WikidataQuality\ExternalValidation\Tests\Specials\SpecialCrossCheck;
 use Wikibase\Test\SpecialPageTestBase;
 use WikidataQuality\ExternalValidation\Specials\SpecialCrossCheck;
 use DateTime;
-use Wikibase\DataModel\Entity\ItemId;
+use DataValues\StringValue;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\Repo\WikibaseRepo;
 use WikidataQuality\ExternalValidation\DumpMetaInformation;
-use WikidataQuality\Tests\Helper\JsonFileEntityLookup;
-use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * @covers WikidataQuality\ExternalValidation\Specials\SpecialCrossCheck
@@ -21,15 +26,21 @@ use Wikibase\Lib\Store\EntityLookup;
 class SpecialCrossCheckTest extends SpecialPageTestBase
 {
     /**
-     * @var EntityLookup
+     * Id of a item that (hopefully) does not exist.
      */
-    private $entityLookup;
+    const NOT_EXISTENT_ITEM_ID = 'Q5678765432345678';
+
+    /** @var EntityId[] */
+    private static $idMap;
 
     /**
-     * Array of test items
      * @var array
      */
-    private $items;
+    private static $claimGuids = array();
+
+    /** @var bool */
+    private static $hasSetup;
+
 
     /**
      * DumpMetaInformation instance for testing
@@ -40,16 +51,6 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
     public function __construct( $name = null, $data = array(), $dataName = null )
     {
         parent::__construct( $name, $data, $dataName );
-
-        // Create entity lookup
-        $this->entityLookup = new JsonFileEntityLookup( __DIR__ . '/../CrossCheck/testdata' );
-
-        // Get items
-        $this->items = array(
-            'Q1' => $this->entityLookup->getEntity( new ItemId( 'Q1' ) ),
-            'Q2' => $this->entityLookup->getEntity( new ItemId( 'Q2' ) ),
-            'Q3' => null
-        );
 
         // Create dump meta information
         $this->dumpMetaInformation = new DumpMetaInformation(
@@ -73,7 +74,7 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
 
     public function tearDown()
     {
-        unset( $this->entityLookup, $this->items, $this->dumpMetaInformation );
+        unset( $this->dumpMetaInformation );
 
         parent::tearDown();
     }
@@ -84,6 +85,59 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
      */
     public function addDBData()
     {
+        if ( !self::$hasSetup ) {
+            $store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
+            $propertyP1 = Property::newFromType( 'string' );
+            $store->saveEntity( $propertyP1, 'TestEntityP1', $GLOBALS[ 'wgUser' ], EDIT_NEW );
+            self::$idMap[ 'P1' ] = $propertyP1->getId();
+
+            $propertyP2 = Property::newFromType( 'string' );
+            $store->saveEntity( $propertyP2, 'TestEntityP2', $GLOBALS[ 'wgUser' ], EDIT_NEW );
+            self::$idMap[ 'P2' ] = $propertyP2->getId();
+
+            $propertyP3 = Property::newFromType( 'string' );
+            $store->saveEntity( $propertyP3, 'TestEntityP3', $GLOBALS[ 'wgUser' ], EDIT_NEW );
+            self::$idMap[ 'P3' ] = $propertyP3->getId();
+
+            $itemQ1 = new Item();
+            $store->saveEntity( $itemQ1, 'TestEntityQ1', $GLOBALS[ 'wgUser' ], EDIT_NEW );
+            self::$idMap[ 'Q1' ] = $itemQ1->getId();
+
+            $claimGuidGenerator = new ClaimGuidGenerator();
+
+            $dataValue = new StringValue( 'foo' );
+            $snak = new PropertyValueSnak( self::$idMap[ 'P1' ], $dataValue );
+            $claim = new Claim( $snak );
+            $claimGuid = $claimGuidGenerator->newGuid( self::$idMap[ 'Q1' ] );
+            self::$claimGuids[ 'P1' ] = $claimGuid;
+            $claim->setGuid( $claimGuid );
+            $statement = new Statement( $claim );
+            $itemQ1->addClaim( $statement );
+
+            $dataValue = new StringValue( 'baz' );
+            $snak = new PropertyValueSnak( self::$idMap[ 'P2' ], $dataValue );
+            $claim = new Claim( $snak );
+            $claimGuid = $claimGuidGenerator->newGuid( self::$idMap[ 'Q1' ] );
+            self::$claimGuids[ 'P2' ] = $claimGuid;
+            $claim->setGuid( $claimGuid );
+            $statement = new Statement( $claim );
+            $itemQ1->addClaim( $statement );
+
+            $dataValue = new StringValue( '1234' );
+            $snak = new PropertyValueSnak( self::$idMap[ 'P3' ], $dataValue );
+            $claim = new Claim( $snak );
+            $claimGuid = $claimGuidGenerator->newGuid( self::$idMap[ 'Q1' ] );
+            self::$claimGuids[ 'P3' ] = $claimGuid;
+            $claim->setGuid( $claimGuid );
+            $statement = new Statement( $claim );
+            $itemQ1->addClaim( $statement );
+
+            $store->saveEntity( $itemQ1, 'TestEntityQ1', $GLOBALS[ 'wgUser' ], EDIT_UPDATE );
+
+            self::$hasSetup = true;
+        }
+
         // Truncate tables
         $this->db->delete(
             DUMP_META_TABLE,
@@ -207,12 +261,12 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
             'content' => 'Item does not exist!'
         );
 
-        $cases['valid input - not existing item'] = array( 'Q99999999', array(), 'en', $matchers );
+        $cases['valid input - not existing item'] = array( self::NOT_EXISTENT_ITEM_ID, array(), 'en', $matchers );
 
         unset( $matchers['error'] );
 
-        $cases['valid input - existing item with statements'] = array( 'Q2', array(), 'en', $matchers );
-        $cases['valid input - existing item without statements'] = array( 'Q3', array(), 'en', $matchers );
+        $cases['valid input - existing item with statements'] = array( 'Q1', array(), 'en', $matchers );
+        #$cases['valid input - existing item without statements'] = array( 'Q3', array(), 'en', $matchers );
 
         return $cases;
     }
@@ -229,7 +283,7 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
         $request = new \FauxRequest( $request );
 
         list( $output, ) = $this->executeSpecialPage( $sub, $request, $userLanguage );
-        echo $output;
+        echo '######' . $output;
         foreach( $matchers as $key => $matcher ) {
             $this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}'" );
         }

@@ -20,11 +20,11 @@ $wgExtensionCredits['specialpage'][] = array(
 	'author' => 'BP2014N1',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:WikidataQuality',
 	'descriptionmsg' => 'wikidataquality-desc',
-	'version' => '0.0.0',
+	'version' => '0.0.0'
 );
 
 // Initialize localization and aliases
-$wgMessagesDirs['WikidataQuality'] = __DIR__ . "/i18n";
+$wgMessagesDirs['WikidataQuality'] = __DIR__ . '/i18n';
 $wgExtensionMessagesFiles['WikidataQualityAlias'] = __DIR__ . '/WikidataQuality.alias.php';
 
 // Initalize hooks for creating database tables
@@ -51,5 +51,5 @@ global $wgAPIModules;
 $wgAPIModules['wdqcrosscheck'] = 'WikidataQuality\ExternalValidation\Api\CrossCheck';
 
 // Define database table names
-define("DUMP_DATA_TABLE", "wdq_external_data");
-define("DUMP_META_TABLE", "wdq_dump_information");
+define('DUMP_DATA_TABLE', 'wdq_external_data');
+define('DUMP_META_TABLE', 'wdq_dump_information');
