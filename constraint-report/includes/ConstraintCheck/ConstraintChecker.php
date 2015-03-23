@@ -130,8 +130,7 @@ class ConstraintChecker {
         return null;
     }
 
-    private function checkEveryStatement( $entity, $dbr )
-    {
+    private function checkEveryStatement( $entity, $dbr ) {
         $result = array();
         foreach( $this->statements as $statement ) {
 
@@ -167,12 +166,11 @@ class ConstraintChecker {
         return $result;
     }
 
-    private function getCheckResultFor( $propertyId, $dataValue, $row, $classArray, $itemArray, $propertyArray, $statement )
-    {
+    private function getCheckResultFor( $propertyId, $dataValue, $row, $classArray, $itemArray, $propertyArray, $statement ) {
         switch( $row->constraint_name ) {
-            // Switch over every constraint, check them accordingly
+            // Switch over every constraint, check them accordingly.
             // Return value should be a CheckResult, which should be inserted in an array of CheckResults ($results)
-            // which should be returned in the end
+            // which should be returned in the end.
 
             // ValueCountCheckers
             case "Single value":
@@ -260,25 +258,24 @@ class ConstraintChecker {
                 break;
         }
     }
-    private function queryConstraintsForProperty( $dbr, $prop )
-    {
+
+    private function queryConstraintsForProperty( $dbr, $prop ) {
         return $dbr->select(
             'constraints_ready_for_migration',						    // $table
             array( 'pid', 'constraint_name',
                 'class', 'constraint_status', 'comment', 'group_by', 'item', 'known_exception',
                 'maximum_date', 'maximum_quantity', 'minimum_date', 'minimum_quantity',
                 'namespace', 'pattern', 'property', 'relation' ),		// $vars (columns of the table)
-            ( "pid = $prop" ),							    // $conds
+            ( "pid = $prop" ),							                // $conds
             __METHOD__,													// $fname = 'Database::select',
-            array('')													// $options = array()
+            array( '' )													// $options = array()
         );
     }
 
     /**
      * @return ValueCountChecker
      */
-    private function getValueCountChecker()
-    {
+    private function getValueCountChecker() {
         if( !isset( $this->valueCountChecker ) ) {
             $this->valueCountChecker = new ValueCountChecker( $this->statements, $this->helper );
         }

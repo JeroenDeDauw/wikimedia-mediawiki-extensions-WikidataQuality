@@ -28,7 +28,7 @@ class CheckResult {
 
     /**
      * @var Array
-     * Includes arrays of ItemIds or PropertyIds or strings
+     * Includes arrays of ItemIds or PropertyIds or strings.
      */
     private $parameters;
 

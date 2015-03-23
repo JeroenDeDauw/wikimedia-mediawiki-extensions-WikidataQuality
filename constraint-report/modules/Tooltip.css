@@ -1,0 +1,27 @@
+[tooltip]:before {
+    /* needed - do not touch */
+    content: attr(tooltip);
+    position: absolute;
+    opacity: 0;
+
+    /* customizable */
+    transition: all 0.15s ease;
+    padding: 5px;
+    border: 1px solid #AAA;
+    border-radius: 5px;
+    box-shadow: 2px 2px 1px #CCC;
+}
+
+[tooltip]:hover:before {
+    /* needed - do not touch */
+    opacity: 1;
+
+    /* customizable */
+    background: #F2F2F2;
+    margin-top: -35px;
+    margin-left: -5px;
+}
+
+[tooltip]:not([tooltip-persistent]):before {
+    pointer-events: none;
+}

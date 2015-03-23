@@ -2,7 +2,6 @@
 
 namespace WikidataQuality\Specials;
 
-
 use SpecialPage;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
@@ -13,15 +12,13 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\LanguageLabelLookup;
 use Wikibase\Repo\WikibaseRepo;
 
-
 /**
  * Class SpecialWikidataQualityPage
  * @package WikidataQuality\Specials
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-abstract class SpecialWikidataQualityPage extends SpecialPage
-{
+abstract class SpecialWikidataQualityPage extends SpecialPage {
     /**
      * @var \Wikibase\DataModel\Entity\EntityIdParser
      */
@@ -52,7 +49,6 @@ abstract class SpecialWikidataQualityPage extends SpecialPage
      */
     protected $htmlUrlFormatter;
 
-
     /**
      * @param string $name
      * @param string $restriction
@@ -61,8 +57,7 @@ abstract class SpecialWikidataQualityPage extends SpecialPage
      * @param string $file
      * @param bool $includable
      */
-    public function __construct( $name = '', $restriction = '', $listed = true, $function = false, $file = '', $includable = false )
-    {
+    public function __construct( $name = '', $restriction = '', $listed = true, $function = false, $file = '', $includable = false ) {
         parent::__construct( $name, $restriction, $listed, $function, $file, $includable );
 
         $repo = WikibaseRepo::getDefaultInstance();
@@ -93,14 +88,13 @@ abstract class SpecialWikidataQualityPage extends SpecialPage
         $this->htmlUrlFormatter = new HtmlUrlFormatter( $formatterOptions );
     }
 
-
     /**
      * @see SpecialPage::getGroupName
      *
      * @return string
      */
-    function getGroupName()
-    {
+    function getGroupName() {
         return 'wikidataquality';
     }
+
 }

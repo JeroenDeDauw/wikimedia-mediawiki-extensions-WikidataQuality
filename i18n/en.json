@@ -16,6 +16,13 @@
     "wikidataquality-constraint-form-submit-label": "Check",
     "wikidataquality-constraint-result-headline": "Result for ",
     "wikidataquality-constraint-result-entity-not-existent": "Entity does not exist!",
+    "wikidataquality-constraint-result-table-header-status": "Status",
+    "wikidataquality-constraint-result-table-header-claim": "Claim",
+    "wikidataquality-constraint-result-table-header-constraint": "Constraint",
+    "wikidataquality-constraint-result-violation": "Violation",
+    "wikidataquality-constraint-result-exception": "Exception",
+    "wikidataquality-constraint-result-compliance": "Compliance",
+    "wikidataquality-constraint-result-todo": "Todo",
 
     "wikidataquality-crosscheck": "Cross-Check with external databases",
     "wikidataquality-crosscheck-instructions": "Just enter an entity and let it cross-check against GND.",
