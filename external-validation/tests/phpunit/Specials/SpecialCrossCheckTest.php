@@ -102,6 +102,7 @@ class SpecialCrossCheckTest extends SpecialPageTestBase {
 
         list( $output, ) = $this->executeSpecialPage( $sub, $request, $userLanguage );
         foreach( $matchers as $key => $matcher ) {
+            echo $output;
             $this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}'" );
         }
     }
