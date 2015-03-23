@@ -188,30 +188,21 @@ class CrossCheckTest extends WikibaseApiTestcase
 
             $dataValue = new StringValue( 'foo' );
             $snak = new PropertyValueSnak( self::$idMap[ 'P1' ], $dataValue );
-            $claim = new Claim( $snak );
             $claimGuid = $claimGuidGenerator->newGuid( self::$idMap[ 'Q1' ] );
             self::$claimGuids[ 'P1' ] = $claimGuid;
-            $claim->setGuid( $claimGuid );
-            $statement = new Statement( $claim );
-            $itemQ1->addClaim( $statement );
+            $itemQ1->getStatements()->addNewStatement( $snak, null, null, $claimGuid );
 
             $dataValue = new StringValue( 'baz' );
             $snak = new PropertyValueSnak( self::$idMap[ 'P2' ], $dataValue );
-            $claim = new Claim( $snak );
             $claimGuid = $claimGuidGenerator->newGuid( self::$idMap[ 'Q1' ] );
             self::$claimGuids[ 'P2' ] = $claimGuid;
-            $claim->setGuid( $claimGuid );
-            $statement = new Statement( $claim );
-            $itemQ1->addClaim( $statement );
+            $itemQ1->getStatements()->addNewStatement( $snak, null, null, $claimGuid );
 
             $dataValue = new StringValue( '1234' );
             $snak = new PropertyValueSnak( self::$idMap[ 'P3' ], $dataValue );
-            $claim = new Claim( $snak );
             $claimGuid = $claimGuidGenerator->newGuid( self::$idMap[ 'Q1' ] );
             self::$claimGuids[ 'P3' ] = $claimGuid;
-            $claim->setGuid( $claimGuid );
-            $statement = new Statement( $claim );
-            $itemQ1->addClaim( $statement );
+            $itemQ1->getStatements()->addNewStatement( $snak, null, null, $claimGuid );
 
             $store->saveEntity( $itemQ1, 'TestEntityQ1', $GLOBALS[ 'wgUser' ], EDIT_UPDATE );
 
