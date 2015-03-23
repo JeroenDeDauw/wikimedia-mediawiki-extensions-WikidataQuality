@@ -84,7 +84,7 @@ class SpecialCrossCheckTest extends SpecialPageTestBase {
             'content' => 'Item does not exist!'
         );
 
-        $cases['valid input'] = array( 'Q2', array(), 'en', $matchers );
+        $cases['valid input - not existing item'] = array( 'Q99999999', array(), 'en', $matchers );
 
         return $cases;
     }
@@ -102,7 +102,6 @@ class SpecialCrossCheckTest extends SpecialPageTestBase {
 
         list( $output, ) = $this->executeSpecialPage( $sub, $request, $userLanguage );
         foreach( $matchers as $key => $matcher ) {
-            echo $output;
             $this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}'" );
         }
     }
