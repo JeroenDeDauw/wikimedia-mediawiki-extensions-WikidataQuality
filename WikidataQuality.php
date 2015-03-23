@@ -41,7 +41,12 @@ $wgSpecialPages['ExternalDbs'] = 'WikidataQuality\ExternalValidation\Specials\Sp
 
 // Define modules
 $wgResourceModules['SpecialCrossCheck'] = array(
-	'styles' => 'external-validation/modules/SpecialCrossCheck.css',
+	'styles' =>'external-validation/modules/SpecialCrossCheck.css',
+	'localBasePath' => __DIR__,
+	'remoteExtPath' => 'WikidataQuality'
+);
+$wgResourceModules['SpecialConstraintReport'] = array(
+	'styles' => 'constraint-report/modules/Tooltip.css',
 	'localBasePath' => __DIR__,
 	'remoteExtPath' => 'WikidataQuality'
 );

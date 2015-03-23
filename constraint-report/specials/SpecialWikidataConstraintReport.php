@@ -75,7 +75,7 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
         $out = $this->getOutput();
 
         // add tooltip style
-        $out->addModuleStyles( 'Tooltip' );
+        $out->addModuleStyles( 'SpecialConstraintReport' );
 
         $this->setHeaders();
 
@@ -171,6 +171,8 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
 
         $tooltipIndicator = '<span style="color:#CCC; font-weight:600">[?]</span>';
 
+        $namespace = ( $this->entity instanceof \Wikibase\DataModel\Entity\Item ) ? 'Item' : 'Property';
+
         foreach ( $results as $result ) {
             switch( $result->getStatus() ) {
                 case 'compliance':  // constraint has been checked, result is positive
@@ -198,7 +200,6 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
 
             $property = $this->entityIdHtmlLinkFormatter->formatEntityId( $result->getPropertyId() );
             $value = $this->formatValue( $result->getDataValue() );
-            $namespace = ( $this->entity instanceof \Wikibase\DataModel\Entity\Item ) ? 'Item' : 'Property';
             $claimUrl = './' . $namespace . ':' . $this->entity->getId()->getSerialization() . '#' . $result->getPropertyId()->getSerialization();
             $claimColumn = $property . ': ' . $value . ' (<a href="' . $claimUrl . '" target="_blank">go to claim</a>)';
 
