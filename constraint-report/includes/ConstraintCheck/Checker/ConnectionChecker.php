@@ -255,9 +255,10 @@ class ConnectionChecker {
      * Checks 'Symmetric' constraint.
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
+     * @param string $entityIdSerialization
      * @return CheckResult
      */
-    public function checkSymmetricConstraint( $propertyId, $dataValue ) {
+    public function checkSymmetricConstraint( $propertyId, $dataValue, $entityIdSerialization ) {
         $parameters = array();
 
         /*
@@ -276,7 +277,7 @@ class ConnectionChecker {
         }
         $targetItemStatementsArray = $targetItem->getStatements()->toArray();
 
-        if( $this->hasProperty( $targetItemStatementsArray, $propertyId ) ) {
+        if( $this->hasClaim( $targetItemStatementsArray, $propertyId->getSerialization(), $entityIdSerialization ) ) {
             $message = '';
             $status = 'compliance';
         } else {
@@ -291,10 +292,11 @@ class ConnectionChecker {
      * Checks 'Inverse' constraint.
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
+     * @param string $entityIdSerialization
      * @param string $property
      * @return CheckResult
      */
-    public function checkInverseConstraint( $propertyId, $dataValue, $property ) {
+    public function checkInverseConstraint( $propertyId, $dataValue, $entityIdSerialization, $property ) {
         $parameters = array();
 
         if( $property === null ) {
@@ -324,7 +326,7 @@ class ConnectionChecker {
         }
         $targetItemStatementsArray = $targetItem->getStatements()->toArray();
 
-        if( $this->hasProperty( $targetItemStatementsArray, $propertyId ) ) {
+        if( $this->hasClaim( $targetItemStatementsArray, $propertyId->getSerialization(), $entityIdSerialization ) ) {
             $message = '';
             $status = 'compliance';
         } else {

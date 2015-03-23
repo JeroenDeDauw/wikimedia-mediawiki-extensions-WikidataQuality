@@ -158,15 +158,14 @@ class ConstraintChecker {
                 $itemArray = $this->helper->stringToArray( $row->item );
                 $propertyArray = $this->helper->stringToArray( $row->property );
 
-                $result[] = $this->getCheckResultFor( $propertyId, $dataValue, $row, $classArray, $itemArray, $propertyArray, $statement );
-
+                $result[] = $this->getCheckResultFor( $propertyId, $dataValue, $row, $classArray, $itemArray, $propertyArray, $entity, $statement );
             }
 
         }
         return $result;
     }
 
-    private function getCheckResultFor( $propertyId, $dataValue, $row, $classArray, $itemArray, $propertyArray, $statement ) {
+    private function getCheckResultFor( $propertyId, $dataValue, $row, $classArray, $itemArray, $propertyArray, $entity, $statement ) {
         switch( $row->constraint_name ) {
             // Switch over every constraint, check them accordingly.
             // Return value should be a CheckResult, which should be inserted in an array of CheckResults ($results)
@@ -193,11 +192,11 @@ class ConstraintChecker {
                 break;
             case "Symmetric":
                 return $this->getConnectionChecker()
-                    ->checkSymmetricConstraint( $propertyId, $dataValue );
+                    ->checkSymmetricConstraint( $propertyId, $dataValue, $entity->getId()->getSerialization() );
                 break;
             case "Inverse":
                 return $this->getConnectionChecker()
-                    ->checkInverseConstraint( $propertyId, $dataValue, $row->property );
+                    ->checkInverseConstraint( $propertyId, $dataValue, $entity->getId()->getSerialization(), $row->property );
                 break;
             case "Conflicts with":
                 return $this->getConnectionChecker()
@@ -254,7 +253,7 @@ class ConstraintChecker {
 
             // error case, should not be invoked
             default:
-                return new CheckResult( $propertyId, $dataValue, $row->constraint_name, array(), 'error' );
+                return new CheckResult( $propertyId, $dataValue, $row->constraint_name );
                 break;
         }
     }

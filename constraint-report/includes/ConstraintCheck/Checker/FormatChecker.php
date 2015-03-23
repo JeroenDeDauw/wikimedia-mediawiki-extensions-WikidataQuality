@@ -47,15 +47,26 @@ class FormatChecker {
          *   type of $dataValue for properties with 'Format' constraint has to be 'string'
          *   parameter $pattern must not be null
          */
-        if( $dataValue->getType() !== 'string' || $pattern === null ) {
-            return new CheckResult( $propertyId, $dataValue, 'Format', $parameters, 'error' );
+        if( $dataValue->getType() !== 'string' ) {
+            $message = 'Properties with \'Format\' constraint need to have values of type \'string\'.';
+            return new CheckResult( $propertyId, $dataValue, 'Format', $parameters, 'violation', $message );
+        }
+        if( $pattern === null ) {
+            $message = 'Properties with \'Inverse\' constraint need a parameter \'pattern\'.';
+            return new CheckResult( $propertyId, $dataValue, 'Format', $parameters, 'violation', $message );
         }
 
         $comparativeString = $dataValue->getValue();
 
-        $status = preg_match( '/^' . str_replace( '/', '\/', $pattern ) . '$/', $comparativeString  ) ? 'compliance' : 'violation';
+        if( preg_match( '/^' . str_replace( '/', '\/', $pattern ) . '$/', $comparativeString  ) ) {
+            $message = '';
+            $status = 'compliance';
+        } else {
+            $message = 'The property\'s value must match the pattern defined in the parameters.';
+            $status = 'violation';
+        }
 
-        return new CheckResult( $propertyId, $dataValue, 'Format', $parameters, $status );
+        return new CheckResult( $propertyId, $dataValue, 'Format', $parameters, $status, $message );
     }
 
 }
