@@ -20,7 +20,7 @@ class DumpMetaInformationSerializer extends SerializerObject
     public function getSerialized( $dumpMetaInformation )
     {
         $serialization = array(
-            'sourceItemId' => $dumpMetaInformation->getSourceItemId()->getNumericId(),
+            'sourceItemId' => $dumpMetaInformation->getSourceItemId()->getSerialization(),
             'language' => $dumpMetaInformation->getLanguage(),
             'sourceUrl' => $dumpMetaInformation->getSourceUrl(),
             'size' => $dumpMetaInformation->getSize(),
