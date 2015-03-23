@@ -53,9 +53,9 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
      */
     private static $hasSetup;
 
-    protected function setup()
+    protected function setUp()
     {
-        parent::setup();
+        parent::setUp();
         $this->tablesUsed[ ] = DUMP_META_TABLE;
         $this->tablesUsed[ ] = DUMP_DATA_TABLE;
     }
@@ -235,7 +235,7 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
 
         unset( $matchers['error'] );
 
-        $cases['valid input - existing item with statements'] = array( 'Q1', array(), 'en', $matchers );
+        $cases['valid input - existing item with statements'] = array( (string)self::$idMap[ 'Q1' ], array(), 'en', $matchers );
         #$cases['valid input - existing item without statements'] = array( 'Q3', array(), 'en', $matchers );
 
         return $cases;
