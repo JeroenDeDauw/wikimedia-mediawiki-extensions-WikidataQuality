@@ -181,15 +181,24 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
                 default:            // error case, should not happen
                     $color = '#404040';
             }
-            $status_tooltip = $result->getMessage();
-            $status = '<div tooltip="' . $status_tooltip . '"><span style="color:' . $color . '">' . $result->getStatus() . '</span> ' . $tooltipIndicator . '</div>';
+
+            if( $result->getMessage() !== '' ) {
+                $status_tooltip = $result->getMessage();
+                $status = '<div tooltip="' . $status_tooltip . '"><span style="color:' . $color . '">' . $result->getStatus() . '</span> ' . $tooltipIndicator . '</div>';
+            } else {
+                $status = '<span style="color:' . $color . '">' . $result->getStatus() . '</span>';
+            }
 
             $property = $this->entityIdHtmlLinkFormatter->formatEntityId( $result->getPropertyId() );
             $value = $this->formatValue( $result->getDataValue() );
             $claim = '<a href="#">Claim</a> states ' . $property . ': ' . $value;
 
-            $constraint_tooltip = 'foo bar';
-            $constraint = '<div tooltip="' . $constraint_tooltip . '">' . $result->getConstraintName() . ' ' . $tooltipIndicator . '</div> ';
+            if( count( $result->getParameters() ) !== 0 ) {
+                $constraint_tooltip = $this->formatParameters($result->getParameters());
+                $constraint = '<div tooltip="' . $constraint_tooltip . '">' . $result->getConstraintName() . ' ' . $tooltipIndicator . '</div> ';
+            } else {
+                $constraint = $result->getConstraintName();
+            }
 
             // Body of table
             $table->appendRow(
@@ -223,6 +232,20 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
     }
 
     /**
+     * @param mixed string|ItemId|PropertyId|DataValues\DataValue $dataValue
+     * @return string
+     */
+    private function formatValueForTooltip( $dataValue ) {
+        if( is_string( $dataValue ) ) { // cases like 'Format' 'pattern' or 'minimum'/'maximum' values, which we have stored as strings
+            return ( $dataValue );
+        } else if( get_class( $dataValue ) === 'Wikibase\DataModel\Entity\ItemId' || get_class( $dataValue ) === 'Wikibase\DataModel\Entity\PropertyId' ) { // cases like 'Conflicts with' 'property', to which we can link
+            return $this->entityIdLabelFormatter->formatEntityId( $dataValue );
+        } else { // other DataValues, which can be formatted
+            return $this->dataValueFormatter->format( $dataValue );
+        }
+    }
+
+    /**
      * @param array $parameters
      * @return string
      */
@@ -234,9 +257,11 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
             $formattedParameters .= ( $parameterName . ': ' );
             $parameterValue = $parameters[$parameterName];
 
-            $formattedParameters .= implode( ', ', $this->limitArrayLength( array_map( array( 'self', 'formatValue' ), $parameterValue ) ) );
+            $formattedParameters .= implode( ', ', $this->limitArrayLength( array_map( array( 'self', 'formatValueForTooltip' ), $parameterValue ) ) );
 
-            $formattedParameters .= '<br />';
+            if( $parameterName !== end( $parameterNames ) ) {
+                $formattedParameters .= ', ';
+            }
         }
 
         return $formattedParameters;

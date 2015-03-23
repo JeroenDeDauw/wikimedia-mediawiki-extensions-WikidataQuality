@@ -4,6 +4,7 @@ namespace WikidataQuality\Specials;
 
 use SpecialPage;
 use ValueFormatters\FormatterOptions;
+use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\HtmlUrlFormatter;
@@ -33,6 +34,11 @@ abstract class SpecialWikidataQualityPage extends SpecialPage {
      * @var \ValueFormatters\ValueFormatter
      */
     protected $dataValueFormatter;
+
+    /**
+     * @var EntityIdLabelFormatter
+     */
+    protected $entityIdLabelFormatter;
 
     /**
      * @var EntityIdLinkFormatter
@@ -76,6 +82,7 @@ abstract class SpecialWikidataQualityPage extends SpecialPage {
         // Get entity id link formatters
         $entityTitleLookup = $repo->getEntityTitleLookup();
         $labelLookup = new LanguageLabelLookup( $repo->getTermLookup(), $this->getLanguage()->getCode() );
+        $this->entityIdLabelFormatter = new EntityIdLabelFormatter( $labelLookup );
         $this->entityIdLinkFormatter = new EntityIdLinkFormatter( $entityTitleLookup );
         $this->entityIdHtmlLinkFormatter = new EntityIdHtmlLinkFormatter(
             $labelLookup,
