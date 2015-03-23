@@ -43,26 +43,10 @@ class HtmlTableHeader {
     }
 
     /**
-     * @param $text
-     */
-    public function setText( $text )
-    {
-        $this->text = $text;
-    }
-
-    /**
      * @return bool
      */
     public function getIsSortable()
     {
         return $this->isSortable;
-    }
-
-    /**
-     * @param $isSortable
-     */
-    public function setIsSortable( $isSortable )
-    {
-        $this->isSortable = $isSortable;
     }
 }

@@ -33,10 +33,10 @@ class HtmlTable {
     private $columnsCount;
 
     /**
-     * Determines, if the table is sortable.
+     * Determines, whether the table is sortable.
      * @var bool
      */
-    private $isSortable;
+    private $isSortable = false;
 
 
     /**
@@ -55,20 +55,49 @@ class HtmlTable {
                 elseif ( $header instanceof HtmlTableHeader )
                 {
                     $this->headers[] = $header;
+
+                    if ( $header->getIsSortable() )
+                    {
+                        $this->isSortable = true;
+                    }
                 }
                 else
                 {
-                    new InvalidArgumentException('$headers must be an array of strings or HtmlTableHeader elements.');
+                    throw new InvalidArgumentException('$headers must be an array of strings or HtmlTableHeader elements.');
                 }
             }
         }
         else
         {
-            new InvalidArgumentException('$headers must be an array of strings or HtmlTableHeader elements.');
+            throw new InvalidArgumentException('$headers must be an array of strings or HtmlTableHeader elements.');
         }
 
         $this->columnsCount = count($headers);
-        $this->isSortable = $isSortable;
+    }
+
+
+    /**
+     * @return HtmlTableHeader
+     */
+    public function getHeaders()
+    {
+        return $this->headers;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRows()
+    {
+        return $this->rows;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsSortable()
+    {
+        return $this->isSortable;
     }
 
 
@@ -81,11 +110,17 @@ class HtmlTable {
         // Check cells
         if( !is_array( $cells ) )
         {
-            throw new InvalidArgumentException('$cells must be array.');
+            throw new InvalidArgumentException('$cells must be array of strings.');
         }
         if( count( $cells ) != $this->columnsCount )
         {
             throw new InvalidArgumentException('$cells must contain ' . $this->columnsCount . ' cells.');
+        }
+        foreach ( $cells as $cell ) {
+            if( !is_string( $cell ))
+            {
+                throw new InvalidArgumentException('$cells must be array of strings.');
+            }
         }
 
         // Add cells into new row
@@ -119,7 +154,7 @@ class HtmlTable {
                 'th',
                 array(
                     'role' => 'columnheader button',
-                    'class' => $header->getIsSortable() ?: 'unsortable'
+                    'class' => $this->isSortable && !$header->getIsSortable() ? 'unsortable' : ''
                 )
             )
             . $header->getText()
