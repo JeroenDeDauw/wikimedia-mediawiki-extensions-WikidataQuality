@@ -21,12 +21,6 @@ class ImportContext
     private $targetTableName = '';
 
     /**
-     * table name of the table with dump meta information
-     * @var string
-     */
-    private $metaTableName = '';
-
-    /**
      * Path of the entities file to be imported.
      * @var string
      */
@@ -60,11 +54,10 @@ class ImportContext
      * @param int $batchSize
      * @param boolean $quiet
      */
-    function __construct( $loadBalancer, $targetTableName, $metaTableName, $batchSize, $quiet, $entitiesFilePath, $metaInformationFilePath )
+    function __construct( $loadBalancer, $targetTableName, $batchSize, $quiet, $entitiesFilePath, $metaInformationFilePath )
     {
         $this->setLoadBalancer( $loadBalancer );
         $this->setTargetTableName( $targetTableName );
-        $this->setMetaTableName( $metaTableName );
         $this->setBatchSize( $batchSize );
         $this->setQuiet( $quiet );
         $this->setEntitiesFilePath( $entitiesFilePath );
@@ -118,22 +111,6 @@ class ImportContext
     public function setTargetTableName( $tableName )
     {
         $this->targetTableName = $tableName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMetaTableName()
-    {
-        return $this->metaTableName;
-    }
-
-    /**
-     * @param string $tableName
-     */
-    public function setMetaTableName( $tableName )
-    {
-        $this->metaTableName = $tableName;
     }
 
     /**

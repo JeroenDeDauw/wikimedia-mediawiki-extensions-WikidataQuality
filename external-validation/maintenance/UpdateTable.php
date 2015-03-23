@@ -7,9 +7,10 @@ use WikidataQuality\ExternalValidation\UpdateTable\ImportContext;
 use WikidataQuality\ExternalValidation\UpdateTable\Importer;
 
 
-// TODO: Is this neccessary?
-/*$basePath = getenv( "MW_INSTALL_PATH" ) !== false ? getenv( "MW_INSTALL_PATH" ) : __DIR__ . "/../../../..";
-require_once $basePath . "/maintenance/Maintenance.php";*/
+// @codeCoverageIgnoreStart
+$basePath = getenv( "MW_INSTALL_PATH" ) !== false ? getenv( "MW_INSTALL_PATH" ) : __DIR__ . "/../../../..";
+require_once $basePath . "/maintenance/Maintenance.php";
+// @codeCoverageIgnoreEnd
 
 
 class UpdateTable extends Maintenance
@@ -34,7 +35,6 @@ class UpdateTable extends Maintenance
         $context = new ImportContext(
             $loadBalancer,
             DUMP_DATA_TABLE,
-            DUMP_META_TABLE,
             $this->mBatchSize,
             $this->isQuiet(),
             $this->getOption( 'entities-file' ),
@@ -46,5 +46,7 @@ class UpdateTable extends Maintenance
 }
 
 
+// @codeCoverageIgnoreStart
 $maintClass = 'WikidataQuality\ExternalValidation\Maintenance\UpdateTable';
 require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreEnd

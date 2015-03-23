@@ -20,8 +20,9 @@ use WikidataQuality\ExternalValidation\Maintenance\UpdateTable;
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class UpdateTableTestTest extends \MediaWikiTestCase
+class UpdateTableTest extends \MediaWikiTestCase
 {
+
     protected function setup()
     {
         parent::setup();
@@ -74,35 +75,22 @@ class UpdateTableTestTest extends \MediaWikiTestCase
         $args = array(
             'entities-file' => __DIR__ . '/testdata/entities.csv',
             'meta-information-file' => __DIR__ . '/testdata/meta.csv',
+            'batch-size' => 2,
             'quiet' => true
         );
         $maintenanceScript->loadParamsAndArgs( null, $args, null );
         $maintenanceScript->execute();
 
-        // Run assertions
-        $this->assertSelect(
-            DUMP_META_TABLE,
-            array(
-                'source_item_id',
-                'import_date',
-                'language',
-                'source_url',
-                'size',
-                'license'
-            ),
-            array( 'row_id=1' ),
-            array(
-                array(
-                    '36578',
-                    '2015-03-17 20:53:56',
-                    'de',
-                    'http://www.foo.bar',
-                    '590798465',
-                    'CC0 1.0'
-                )
-            )
-        );
+        // Run assertions on meta information
+        $dumpMetaInformation = DumpMetaInformation::get( $this->db, '1' );
+        $this->assertEquals( '36578', $dumpMetaInformation->getSourceItemId()->getNumericId() );
+        $this->assertEquals( new \DateTime('2015-03-17 20:53:56'), $dumpMetaInformation->getImportDate() );
+        $this->assertEquals( 'de', $dumpMetaInformation->getLanguage() );
+        $this->assertEquals( 'http://www.foo.bar', $dumpMetaInformation->getSourceUrl() );
+        $this->assertEquals( 590798465, $dumpMetaInformation->getSize() );
+        $this->assertEquals( 'CC0 1.0', $dumpMetaInformation->getLicense() );
 
+        // Run assertions on external data
         $this->assertSelect(
             DUMP_DATA_TABLE,
             array(

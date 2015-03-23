@@ -59,6 +59,7 @@ class Importer
             if ( !$this->importContext->isQuiet() ) {
                 print "$tableName table does not exist.\nExecuting core/maintenance/update.php may help.\n";
             }
+            return;
         }
 
         // Delete all entries
