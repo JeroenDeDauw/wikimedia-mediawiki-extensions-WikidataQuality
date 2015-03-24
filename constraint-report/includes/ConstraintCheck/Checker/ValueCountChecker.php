@@ -45,15 +45,18 @@ class ValueCountChecker {
      */
     public function checkSingleValueConstraint( $propertyId, $dataValue ) {
         $parameters = array();
-        $propertyCountArray = $this->getPropertyCount( $this->statements );
-        if( $propertyCountArray[$propertyId->getNumericId()] > 1 ) {
 
+        $propertyCountArray = $this->getPropertyCount( $this->statements );
+
+        if( $propertyCountArray[$propertyId->getNumericId()] > 1 ) {
+            $message = 'This property must only have a single value, that is there must only be one claim using this property.';
             $status = 'violation';
         } else {
+            $message = '';
             $status = 'compliance';
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'Single value', $parameters, $status );
+        return new CheckResult( $propertyId, $dataValue, 'Single value', $parameters, $status, $message );
     }
 
     /**
@@ -64,17 +67,21 @@ class ValueCountChecker {
      */
     public function checkMultiValueConstraint( $propertyId, $dataValue ) {
         $parameters = array();
+
         $propertyCountArray = $this->getPropertyCount( $this->statements );
+
         if( $propertyCountArray[$propertyId->getNumericId()] <= 1 ) {
+            $message = 'This property must have a multiple values, that is there must be more than one claim using this property.';
             $status = 'violation';
         } else {
+            $message = '';
             $status = 'compliance';
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'Multi value', $parameters, $status );
+        return new CheckResult( $propertyId, $dataValue, 'Multi value', $parameters, $status, $message );
     }
 
-    // TODO: implement when index exists that makes it possible in real-time
+    // todo: implement when index exists that makes it possible in real-time
     /**
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
@@ -83,7 +90,8 @@ class ValueCountChecker {
     public function checkUniqueValueConstraint( $propertyId, $dataValue ) {
         $parameters = array();
 
-        return new CheckResult( $propertyId, $dataValue, 'Unique value', $parameters, 'todo' );
+        $message = 'For technical reasons, the check for this constraint has not yet been implemented.';
+        return new CheckResult( $propertyId, $dataValue, 'Unique value', $parameters, 'todo', $message );
     }
 
     private function getPropertyCount( $statements )

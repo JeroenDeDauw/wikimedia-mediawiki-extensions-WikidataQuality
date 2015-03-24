@@ -150,7 +150,8 @@ class ConstraintChecker {
 
             foreach( $res as $row ) {
                 if( in_array( $entity->getId()->getSerialization(), $this->helper->stringToArray( $row->known_exception ) ) ) {
-                    $result[] = new CheckResult( $propertyId, $dataValue, $row->constraint_name, array(), 'exception' ); // todo: display parameters anyway
+                    $message = 'This entity is a known exception for this constraint and has been marked as such.';
+                    $result[] = new CheckResult( $propertyId, $dataValue, $row->constraint_name, array(), 'exception', $message ); // todo: display parameters anyway
                     continue;
                 }
 

@@ -218,12 +218,12 @@ class ConnectionChecker {
             return new CheckResult( $propertyId, $dataValue, 'Target required claim', $parameters, 'violation', $message );
         }
 
-        $targetItem = $this->entityLookup->getEntity( $dataValue->getEntityId() );
-        if( $targetItem === null ) {
-            $message = 'Target item does not exist.';
+        $targetEntity = $this->entityLookup->getEntity( $dataValue->getEntityId() );
+        if( $targetEntity === null ) {
+            $message = 'Target entity does not exist.';
             return new CheckResult( $propertyId, $dataValue, 'Target required claim', $parameters, 'violation', $message );
         }
-        $targetItemStatementsArray = $targetItem->getStatements()->toArray();
+        $targetEntityStatementsArray = $targetEntity->getStatements()->toArray();
 
         /*
          * 'Target required claim' can be defined with
@@ -231,7 +231,7 @@ class ConnectionChecker {
          *   b) a property and a number of items (each combination forming an individual claim)
          */
         if( $itemArray[0] === '' ) {
-            if( $this->hasProperty( $targetItemStatementsArray, $property ) ) {
+            if( $this->hasProperty( $targetEntityStatementsArray, $property ) ) {
                 $message = '';
                 $status = 'compliance';
             } else {
@@ -239,7 +239,7 @@ class ConnectionChecker {
                 $status = 'violation';
             }
         } else {
-            if( $this->hasClaim( $targetItemStatementsArray, $property, $itemArray ) ) {
+            if( $this->hasClaim( $targetEntityStatementsArray, $property, $itemArray ) ) {
                 $message = '';
                 $status = 'compliance';
             } else {
