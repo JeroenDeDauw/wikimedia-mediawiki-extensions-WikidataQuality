@@ -154,27 +154,6 @@ class CrossCheckerTest extends \MediaWikiTestCase
     }
 
 
-    public function testConstruct()
-    {
-        // Check private fields using reflection
-        $crossCheckerReflection = new \ReflectionClass( 'WikidataQuality\ExternalValidation\CrossCheck\CrossChecker' );
-        $loadBalancerProperty = $crossCheckerReflection->getProperty( 'loadBalancer' );
-        $loadBalancerProperty->setAccessible( true );
-        $dbProperty = $crossCheckerReflection->getProperty( 'db' );
-        $dbProperty->setAccessible( true );
-
-        // Create CrossChecker with implicit database connection
-        $crossChecker = new CrossChecker();
-        $this->assertNotNull( $loadBalancerProperty->getValue( $crossChecker ) );
-        $this->assertNotNull( $dbProperty->getValue( $crossChecker ) );
-
-        // Create CrossChecker with explicit database connection
-        $crossChecker = new CrossChecker( $this->db );
-        $this->assertNull( $loadBalancerProperty->getValue( $crossChecker ) );
-        $this->assertNotNull( $dbProperty->getValue( $crossChecker ) );
-    }
-
-
     /**
      * @dataProvider crossCheckEntityDataProvider
      */
@@ -186,7 +165,7 @@ class CrossCheckerTest extends \MediaWikiTestCase
         }
 
         // Run cross-check
-        $crossChecker = $this->getTestCrossChecker();
+        $crossChecker = new CrossChecker();
         $results = $crossChecker->crossCheckEntity( $entity, $propertyIds );
 
         $this->runResultAssertions( $results, $expectedResults );
@@ -380,7 +359,7 @@ class CrossCheckerTest extends \MediaWikiTestCase
         }
 
         // Run cross-check
-        $crossChecker = $this->getTestCrossChecker();
+        $crossChecker = new CrossChecker();
         $results = $crossChecker->crossCheckStatements( $entity, $statements );
 
         $this->runResultAssertions( $results, $expectedResults );
@@ -475,17 +454,5 @@ class CrossCheckerTest extends \MediaWikiTestCase
         } else {
             $this->assertEquals( $expectedResults, $results );
         }
-    }
-
-
-    /**
-     * Returns new CrossChecker instance with temporary database connection.
-     * @return CrossChecker
-     */
-    private function getTestCrossChecker()
-    {
-        $crossChecker = new CrossChecker( $this->db );
-
-        return $crossChecker;
     }
 }
