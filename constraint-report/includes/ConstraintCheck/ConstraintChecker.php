@@ -124,7 +124,7 @@ class ConstraintChecker {
 
             $dbr = wfGetDB( DB_SLAVE );
 
-            return $this->checkEveryStatement( $entity, $dbr );
+            return $this->sortResult( $this->checkEveryStatement( $entity, $dbr ) );
 
         }
         return null;
@@ -163,6 +163,7 @@ class ConstraintChecker {
             }
 
         }
+
         return $result;
     }
 
@@ -270,6 +271,28 @@ class ConstraintChecker {
             __METHOD__,													// $fname = 'Database::select',
             array( '' )													// $options = array()
         );
+    }
+
+    private function sortResult( $result ) {
+        $sortFunction = function( $a, $b ) {
+            $order = array( 'compliance' => 0, 'exception' => 1, 'todo' => 2, 'violation' => 3 );
+
+            $statusA = $a->getStatus();
+            $statusB = $b->getStatus();
+
+            $orderA = array_key_exists( $statusA, $order ) ? $order[$statusA] : 4;
+            $orderB = array_key_exists( $statusB, $order ) ? $order[$statusB] : 4;
+
+            if( $orderA === $orderB ) {
+                return 0;
+            } else {
+                return ( $orderA < $orderB ) ? 1 : -1;
+            }
+        };
+
+        uasort( $result, $sortFunction );
+
+        return $result;
     }
 
     /**
