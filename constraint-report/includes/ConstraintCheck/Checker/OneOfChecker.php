@@ -30,7 +30,7 @@ class OneOfChecker {
     /**
      * Checks 'One of' constraint.
      * @param PropertyId $propertyId
-     * @param Data $dataValue
+     * @param DataValue $dataValue
      * @param array $itemArray
      * @return CheckResult
      */
@@ -55,17 +55,24 @@ class OneOfChecker {
          *   type of $dataValue for properties with 'One of' constraint has to be 'wikibase-entityid'
          *   parameter $itemArray must not be null
          */
-        if( $dataValue->getType() !== 'wikibase-entityid' || $itemArray === null) {
-            return new CheckResult( $propertyId, $dataValue, 'Format', $parameters, 'error' );
+        if( $dataValue->getType() !== 'wikibase-entityid' ) {
+            $message = 'Properties with \'One of\' constraint need to have values of type \'wikibase-entityid\'.';
+            return new CheckResult( $propertyId, $dataValue, 'Format', $parameters, 'violation', $message );
+        }
+        if( $itemArray[0] === '' ) {
+            $message = 'Properties with \'One of\' constraint need a parameter \'item\'.';
+            return new CheckResult( $propertyId, $dataValue, 'One of', $parameters, 'violation', $message );
         }
 
-        if( !in_array( $dataValue->getEntityId()->getSerialization(), $itemArray ) ) {
-            $status = 'violation';
-        } else {
+        if( in_array( $dataValue->getEntityId()->getSerialization(), $itemArray ) ) {
+            $message = '';
             $status = 'compliance';
+        } else {
+            $message = 'The property\'s value must be one of the items defined in the parameters.';
+            $status = 'violation';
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'One of', $parameters, $status );
+        return new CheckResult( $propertyId, $dataValue, 'One of', $parameters, $status, $message );
     }
 
 }

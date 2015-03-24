@@ -52,13 +52,13 @@ class FormatChecker {
             return new CheckResult( $propertyId, $dataValue, 'Format', $parameters, 'violation', $message );
         }
         if( $pattern === null ) {
-            $message = 'Properties with \'Inverse\' constraint need a parameter \'pattern\'.';
+            $message = 'Properties with \'Format\' constraint need a parameter \'pattern\'.';
             return new CheckResult( $propertyId, $dataValue, 'Format', $parameters, 'violation', $message );
         }
 
         $comparativeString = $dataValue->getValue();
 
-        if( preg_match( '/^' . str_replace( '/', '\/', $pattern ) . '$/', $comparativeString  ) ) {
+        if( preg_match( '/^' . str_replace( '/', '\/', $pattern ) . '$/', $comparativeString ) ) {
             $message = '';
             $status = 'compliance';
         } else {

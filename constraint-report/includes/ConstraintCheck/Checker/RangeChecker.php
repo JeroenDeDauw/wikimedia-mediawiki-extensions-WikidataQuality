@@ -54,29 +54,42 @@ class RangeChecker {
          *   type of $dataValue for properties with 'Range' constraint has to be 'quantity' or 'time' (also 'number' and 'decimal' could work)
          *   parameters ($minimum_quantity and $maximum_quantity) or ($minimum_date and $maximum_date) must not be null
          */
-        if( $dataValue->getType() === 'quantity' && ( $minimum_quantity !== null && $maximum_quantity !== null && $minimum_date === null && $maximum_date === null ) ) {
-            $min = $minimum_quantity;
-            $max = $maximum_quantity;
-            $parameters['minimum_quantity'] = array( $minimum_quantity );
-            $parameters['maximum_quantity'] = array( $maximum_quantity );
-        } else if( $dataValue->getType() === 'time' && ( $minimum_quantity === null && $maximum_quantity === null && $minimum_date !== null && $maximum_date !== null ) ) {
-            $min = $minimum_date->getTime();
-            $max = $maximum_date->getTime();
-            $parameters['minimum_date'] = array( $minimum_date );
-            $parameters['maximum_date'] = array( $maximum_date );
+        if( $dataValue->getType() === 'quantity' ) {
+            if( $minimum_quantity !== null && $maximum_quantity !== null && $minimum_date === null && $maximum_date === null ) {
+                $min = $minimum_quantity;
+                $max = $maximum_quantity;
+                $parameters['minimum_quantity'] = array( $minimum_quantity );
+                $parameters['maximum_quantity'] = array( $maximum_quantity );
+            } else {
+                $message = 'Properties with values of type \'quantity\' with \'Range\' constraint need the parameters \'minimum quantity\' and \'maximum quantity\'.';
+            }
+        } else if( $dataValue->getType() === 'time' ) {
+            if( $minimum_quantity === null && $maximum_quantity === null && $minimum_date !== null && $maximum_date !== null ) {
+                $min = $minimum_date->getTime();
+                $max = $maximum_date->getTime();
+                $parameters['minimum_date'] = array( $minimum_date );
+                $parameters['maximum_date'] = array( $maximum_date );
+            } else {
+                $message = 'Properties with values of type \'time\' with \'Range\' constraint need the parameters \'minimum date\' and \'maximum date\'.';
+            }
         } else {
-            return new CheckResult( $propertyId, $dataValue, 'Range', array(), 'error' );
+            $message = 'Properties with \'Range\' constraint need to have values of type \'quantity\' or \'time\'.';
+        }
+        if( isset( $message ) ) {
+            return new CheckResult( $propertyId, $dataValue, 'Range', $parameters, 'violation', $message );
         }
 
         $comparativeValue = $this->getComparativeValue( $dataValue );
 
         if( $comparativeValue < $min || $comparativeValue > $max ) {
+            $message = 'The property\'s value must neither be smaller than the minimum nor larger than the maximum defined in the parameters.';
             $status = 'violation';
         } else {
+            $message = '';
             $status = 'compliance';
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'Range', $parameters, $status );
+        return new CheckResult( $propertyId, $dataValue, 'Range', $parameters, $status, $message );
     }
 
     /**
@@ -101,20 +114,28 @@ class RangeChecker {
          *   type of $dataValue for properties with 'Diff within range' constraint has to be 'quantity' or 'time' (also 'number' and 'decimal' could work)
          *   parameters $property, $minimum_quantity and $maximum_quantity must not be null
          */
-        if( ( $dataValue->getType() === 'quantity' || $dataValue->getType() === 'time' ) && ( $property !== null && $minimum_quantity !== null && $maximum_quantity !== null ) ) {
-            $min = $minimum_quantity;
-            $max = $maximum_quantity;
-            $parameters['minimum_quantity'] = array( $minimum_quantity );
-            $parameters['maximum_quantity'] = array( $maximum_quantity );
+        if( $dataValue->getType() === 'quantity' || $dataValue->getType() === 'time' ) {
+            if( $property !== null && $minimum_quantity !== null && $maximum_quantity !== null ) {
+                $min = $minimum_quantity;
+                $max = $maximum_quantity;
+                $parameters['property'] = array( new PropertyId( $property ) );
+                $parameters['minimum_quantity'] = array( $minimum_quantity );
+                $parameters['maximum_quantity'] = array( $maximum_quantity );
+            } else {
+                $message = 'Properties with \'Diff within range\' constraint need the parameters \'property\', \'minimum quantity\' and \'maximum quantity\'.';
+            }
         } else {
-            return new CheckResult( $propertyId, $dataValue, 'Diff within range', array(), 'error' );
+            $message = 'Properties with \'Diff within range\' constraint need to have values of type \'quantity\' or \'time\'.';
+        }
+        if( isset( $message ) ) {
+            return new CheckResult( $propertyId, $dataValue, 'Diff within range', $parameters, 'violation', $message );
         }
 
         $thisValue = $this->getComparativeValue( $dataValue );
 
         // checks only the first occurence of the referenced property (this constraint implies a single value constraint on that property)
         foreach( $this->statements as $statement ) {
-            if( $property == $statement->getClaim()->getPropertyId()->getSerialization() ) {
+            if( $property === $statement->getClaim()->getPropertyId()->getSerialization() ) {
                 $mainSnak = $statement->getClaim()->getMainSnak();
 
                 /*
@@ -129,15 +150,18 @@ class RangeChecker {
                     $diff = $thisValue-$thatValue;
 
                     if( $diff < $min || $diff > $max ) {
+                        $message = 'The difference between this property\'s value and the value of the property defined in the parameters must neither be smaller than the minimum nor larger than the maximum defined in the parameters.';
                         $status = 'violation';
                     } else {
+                        $message = '';
                         $status = 'compliance';
                     }
                 } else {
+                    $message = 'The property defined in the parameters must have a value of the same type as this property.';
                     $status = 'violation';
                 }
 
-                return new CheckResult( $propertyId, $dataValue, 'Diff within range', $parameters, $status );
+                return new CheckResult( $propertyId, $dataValue, 'Diff within range', $parameters, $status, $message );
             }
         }
     }

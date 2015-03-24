@@ -43,7 +43,8 @@ class QualifierChecker {
      * @return CheckResult
      */
     public function checkQualifierConstraint( $propertyId, $dataValue ) {
-        return new CheckResult( $propertyId, $dataValue, 'Qualifier', array(), 'violation' );
+        $message = 'The property must only be used as a qualifier.';
+        return new CheckResult( $propertyId, $dataValue, 'Qualifier', array(), 'violation', $message );
     }
 
     /**
@@ -71,17 +72,19 @@ class QualifierChecker {
          *  parameter $propertyArray can be null, meaning that there are explicitly no qualifiers allowed
          */
 
+        $message = '';
         $status = 'compliance';
 
         foreach( $statement->getQualifiers() as $qualifier ) {
             $pid = $qualifier->getPropertyId()->getSerialization();
             if( !in_array( $pid, $propertyArray ) ){
+                $message = 'The property must only be used with (no other than) the qualifiers defined in the parameters.';
                 $status = 'violation';
                 break;
             }
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'Qualifiers', $parameters, $status );
+        return new CheckResult( $propertyId, $dataValue, 'Qualifiers', $parameters, $status, $message );
     }
 
 }
