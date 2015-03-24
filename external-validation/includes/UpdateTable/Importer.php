@@ -2,8 +2,10 @@
 
 namespace WikidataQuality\ExternalValidation\UpdateTable;
 
+
+use DateTime;
+use DateTimeZone;
 use WikidataQuality\ExternalValidation\DumpMetaInformation;
-use WikidataQuality\ExternalValidation\UpdateTable\ImportContext;
 
 
 /**
@@ -116,11 +118,11 @@ class Importer
         $csvFile = fopen( $this->importContext->getMetaInformationFilePath(), 'rb' );
         $data = fgetcsv( $csvFile );
 
-        // Write meta information to databsae
+        // Write meta information to database
         $metaInformation = new DumpMetaInformation(
             $data[ 0 ],
             $data[ 1 ],
-            new \DateTime( $data[ 2 ] ),
+            new DateTime( $data[ 2 ], new DateTimeZone( 'UTC' ) ),
             $data[ 3 ],
             $data[ 4 ],
             $data[ 5 ],

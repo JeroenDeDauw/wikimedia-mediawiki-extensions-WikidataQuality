@@ -5,7 +5,9 @@ namespace WikidataQuality\ExternalValidation\Specials;
 
 use Html;
 use Language;
-use DataValues\StringValue;
+use DateTime;
+use DateTimeZone;
+use DateInterval;
 use WikidataQuality\ExternalValidation\DumpMetaInformation;
 use WikidataQuality\Html\HtmlTable;
 use WikidataQuality\Specials\SpecialWikidataQualityPage;
@@ -39,7 +41,7 @@ class SpecialExternalDbs extends SpecialWikidataQualityPage
         // Get output
         $out = $this->getOutput();
 
-        // Build externaldbs form
+        // Build external dbs form
         $this->setHeaders();
 
         $out->addHTML(
@@ -65,26 +67,32 @@ class SpecialExternalDbs extends SpecialWikidataQualityPage
 
         wfWaitForSlaves();
         $loadBalancer = wfGetLB();
-        $db_connection = $loadBalancer->getConnection( DB_SLAVE );
+        $db = $loadBalancer->getConnection( DB_SLAVE );
 
-        $result_db_ids = $db_connection->select(
+        $resultDbIds = $db->select(
             DUMP_META_TABLE,
             array( 'row_id' ) );
 
-        if ( $result_db_ids ){
-            foreach ( $result_db_ids as $row ) {
-                $db_id = $row->row_id;
-
-                $db_meta_information = DumpMetaInformation::get( $db_connection, $db_id );
+        if ( $resultDbIds ) {
+            foreach ( $resultDbIds as $row ) {
+                $dbId = $row->row_id;
+                $metaInformation = DumpMetaInformation::get( $db, $dbId );
 
                 $table->appendRow(
                     array(
-                        $this->entityIdHtmlLinkFormatter->formatEntityId( $db_meta_information->getSourceItemId() ),
-                        $db_meta_information->getImportDate()->format('Y-m-d H:i:s'),
-                        Language::fetchLanguageName( $db_meta_information->getLanguage(), $this->getLanguage()->getCode() ),
-                        $this->htmlUrlFormatter->format( new StringValue( $db_meta_information->getSourceUrl() ) ),
-                        $this->getLanguage()->formatSize( $db_meta_information->getSize() ),
-                        $db_meta_information->getLicense()
+                        $this->entityIdHtmlLinkFormatter->formatEntityId( $metaInformation->getSourceItemId() ),
+                        $this->formatDateTime( $metaInformation->getImportDate() ),
+                        Language::fetchLanguageName(
+                            $metaInformation->getLanguage(),
+                            $this->getLanguage()->getCode()
+                        ),
+                        Html::element(
+                            'a',
+                            array( 'class' => 'external free', 'href' => $metaInformation->getSourceUrl() ),
+                            $metaInformation->getSourceUrl()
+                        ),
+                        $this->getLanguage()->formatSize( $metaInformation->getSize() ),
+                        $metaInformation->getLicense()
                     )
                 );
             }
@@ -97,5 +105,67 @@ class SpecialExternalDbs extends SpecialWikidataQualityPage
                 . Html::closeElement( 'p' )
             );
         }
+    }
+
+    /**
+     * Formats given date time to string depending on user preferences.
+     * @param DateTiem $dateTime
+     * @return string
+     */
+    private function formatDateTime( $dateTime )
+    {
+        global $wgLocaltimezone;
+
+        // Apply time correction
+        $timeCorrection = $this->getUser()->getOption( 'timecorrection' );
+        if ( $timeCorrection ) {
+            $splitTimeCorrection = explode( '|', $timeCorrection );
+            switch( $splitTimeCorrection[ 0 ] )
+            {
+                case 'System':
+                case 'Offset':
+                    $offset = $splitTimeCorrection[ 1 ];
+                    $interval = new DateInterval( sprintf( 'PT%dM', $offset ) );
+                    $dateTime->sub( $interval );
+                    break;
+
+                case 'TimeZone':
+                    $timeZone = new DateTimeZone( $splitTimeCorrection[ 2 ] );
+                    $dateTime->setTimezone( $timeZone );
+                    break;
+            }
+        }
+        else
+        {
+            $dateTime->setTimezone( new DateTimeZone( $wgLocaltimezone ) );
+        }
+
+        // Get date format
+        $dateFormatPreference = $this->getUser()->getDatePreference();
+        switch( $dateFormatPreference )
+        {
+            case 'mdy';
+                $dateFormat = 'H:i, F d, Y';
+                break;
+
+            case 'dmy':
+                $dateFormat = 'H:i, d F, Y';
+                break;
+
+            case 'ymd':
+                $dateFormat = 'H:i, Y F d';
+                break;
+
+            case 'ISO 8601':
+                $dateFormat = 'Y-m-d\TH:i:s';
+                break;
+
+            default:
+            case 'default':
+                $dateFormat = 'Y-m-d H:i:s';
+                break;
+        }
+
+        return $dateTime->format( $dateFormat );
     }
 }

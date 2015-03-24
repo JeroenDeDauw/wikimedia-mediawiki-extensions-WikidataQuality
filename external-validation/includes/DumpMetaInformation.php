@@ -3,6 +3,7 @@
 namespace WikidataQuality\ExternalValidation;
 
 use DateTime;
+use DateTimeZone;
 use Wikibase\DataModel\Entity\ItemId;
 use Doctrine\Instantiator\Exception\InvalidArgumentException;
 
@@ -168,7 +169,7 @@ class DumpMetaInformation
         $accumulator = array(
             'row_id' => $this->getDumpId(),
             'source_item_id' => $this->getSourceItemId()->getNumericId(),
-            'import_date' => $this->getImportDate()->format(DateTime::ISO8601),
+            'import_date' => $this->getImportDate()->format( DateTime::ISO8601 ),
             'language' => $this->getLanguage(),
             'source_url' => $this->getSourceUrl(),
             'size' => $this->getSize(),
@@ -221,7 +222,7 @@ class DumpMetaInformation
 
         // Create DumpMetaInformation instance
         $dataSource = new ItemId( 'Q' . $result->source_item_id );
-        $import_date = new DateTime( $result->import_date );
+        $import_date = new DateTime( $result->import_date, new DateTimeZone( 'UTC' ) );
         $language = $result->language;
         $sourceUrl = $result->source_url;
         $size = (int)$result->size;
