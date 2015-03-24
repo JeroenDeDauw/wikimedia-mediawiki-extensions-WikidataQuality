@@ -16,17 +16,21 @@ class ConstraintReportHelper {
      * @return string
      */
     public function removeBrackets( $templateString ) {
-        $toReplace = array( "{", "}", "|", "[", "]" );
-        return str_replace( $toReplace, "", $templateString );
+        $toReplace = array( '{', '}', '|', '[', ']' );
+        return str_replace( $toReplace, '', $templateString );
     }
 
     /**
-     * Used to convert a string containing a comma-separated list (as one gets out of the constraints table) to array
+     * Used to convert a string containing a comma-separated list (as one gets out of the constraints table) to an array.
      * @param string $templateString
      * @return array
      */
     public function stringToArray( $templateString ) {
-        return $templateString === "" ? array() : explode( ",", $this->removeBrackets( str_replace( " ", "", $templateString ) ) );
+        if ( is_null( $templateString ) or $templateString === '' ) {
+            return array( '' );
+        } else {
+            return explode( ',', $this->removeBrackets( str_replace( ' ', '', $templateString) ) );
+        }
     }
 
 }
