@@ -252,7 +252,9 @@ class DumpMetaInformation
 
         if( count( $dumpMetaInformation ) > 0 ) {
             if ( $dumpIds && count( $dumpIds ) == 1 ) {
-                return array_values( $dumpMetaInformation )[ 0 ];
+                $dumpMetaInformation = array_values( $dumpMetaInformation );
+
+                return $dumpMetaInformation[ 0 ];
             } else {
                 return $dumpMetaInformation;
             }
