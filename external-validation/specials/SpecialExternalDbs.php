@@ -68,31 +68,25 @@ class SpecialExternalDbs extends SpecialWikidataQualityPage
         wfWaitForSlaves();
         $loadBalancer = wfGetLB();
         $db = $loadBalancer->getConnection( DB_SLAVE );
+        $dumps = DumpMetaInformation::get( $db );
 
-        $resultDbIds = $db->select(
-            DUMP_META_TABLE,
-            array( 'row_id' ) );
-
-        if ( $resultDbIds ) {
-            foreach ( $resultDbIds as $row ) {
-                $dbId = $row->row_id;
-                $metaInformation = DumpMetaInformation::get( $db, $dbId );
-
+        if ( $dumps ) {
+            foreach ( $dumps as $dumpMetaInformation  ) {
                 $table->appendRow(
                     array(
-                        $this->entityIdHtmlLinkFormatter->formatEntityId( $metaInformation->getSourceItemId() ),
-                        $this->formatDateTime( $metaInformation->getImportDate() ),
+                        $this->entityIdHtmlLinkFormatter->formatEntityId( $dumpMetaInformation->getSourceItemId() ),
+                        $this->formatDateTime( $dumpMetaInformation->getImportDate() ),
                         Language::fetchLanguageName(
-                            $metaInformation->getLanguage(),
+                            $dumpMetaInformation->getLanguage(),
                             $this->getLanguage()->getCode()
                         ),
                         Html::element(
                             'a',
-                            array( 'class' => 'external free', 'href' => $metaInformation->getSourceUrl() ),
-                            $metaInformation->getSourceUrl()
+                            array( 'class' => 'external free', 'href' => $dumpMetaInformation->getSourceUrl() ),
+                            $dumpMetaInformation->getSourceUrl()
                         ),
-                        $this->getLanguage()->formatSize( $metaInformation->getSize() ),
-                        $metaInformation->getLicense()
+                        $this->getLanguage()->formatSize( $dumpMetaInformation->getSize() ),
+                        $dumpMetaInformation->getLicense()
                     )
                 );
             }
