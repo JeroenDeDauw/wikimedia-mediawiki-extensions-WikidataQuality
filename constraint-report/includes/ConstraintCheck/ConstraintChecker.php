@@ -275,13 +275,13 @@ class ConstraintChecker {
 
     private function sortResult( $result ) {
         $sortFunction = function( $a, $b ) {
-            $order = array( 'compliance' => 0, 'exception' => 1, 'todo' => 2, 'violation' => 3 );
+            $order = array( 'compliance' => 0, 'exception' => 1, 'todo' => 2, 'violation' => 3, 'other' => 4 );
 
             $statusA = $a->getStatus();
             $statusB = $b->getStatus();
 
-            $orderA = array_key_exists( $statusA, $order ) ? $order[$statusA] : 4;
-            $orderB = array_key_exists( $statusB, $order ) ? $order[$statusB] : 4;
+            $orderA = array_key_exists( $statusA, $order ) ? $order[$statusA] : $order['other'];
+            $orderB = array_key_exists( $statusB, $order ) ? $order[$statusB] : $order['other'];
 
             if( $orderA === $orderB ) {
                 return 0;

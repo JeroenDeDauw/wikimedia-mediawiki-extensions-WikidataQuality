@@ -35,12 +35,13 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
     private $entity;
 
     /**
-     * Variable to collect output before adding it to $out.
-     * @var string
+     * Defines which colors the different status are displayed.
+     * @var array
      */
-    private $output = '';
+    private $colors = array( 'compliance' => '#088A08', 'exception' => '#D2D20C', 'todo' => '#808080', 'violation' => '#BA0000', 'other' => '#404040' );
 
     /**
+     * Maximum number of displayed values for parameters with multiple ones.
      * @var int
      */
     private $maxParameterArrayLength = 5;
@@ -91,13 +92,22 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
         }
 
         if( $results ) {
-            $out->addHTML( Html::openElement( 'br' ) . Html::openElement( 'h3' )
+            $out->addHTML(
+                Html::openElement( 'br' ) . Html::openElement( 'h3' )
                 . $this->msg( 'wikidataquality-constraint-result-headline' )->text()
                 . $this->entityIdHtmlLinkFormatter->formatEntityId( $entityId )
-                . ' (<nowiki>' . $entityId . '</nowiki>)'
-                . Html::closeElement( 'h3' ) );
+                . ' ('. $entityId . ')'
+                . Html::closeElement( 'h3' ) . Html::openElement( 'br' )
+            );
 
-            $out->addHTML( $this->buildResultTable( $results )->toHtml() );
+            $out->addHTML(
+                $this->buildSummary( $results ) . Html::openElement( 'br' )
+            );
+
+            $out->addHTML(
+                $this->buildResultTable( $results )->toHtml()
+            );
+
             return;
         } else {
             $out->addHTML( Html::openElement( 'p' )
@@ -107,6 +117,10 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
 
     }
 
+    /**
+     * Builds the HTML form via which the entity id is submitted.
+     * @return string
+     */
     private function getHtmlForm() {
         return Html::openElement( 'p' )
             . $this->msg( 'wikidataquality-constraint-instructions' )->text()
@@ -174,28 +188,11 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
         $namespace = ( $this->entity instanceof \Wikibase\DataModel\Entity\Item ) ? 'Item' : 'Property';
 
         foreach ( $results as $result ) {
-            switch( $result->getStatus() ) {
-                case 'compliance':  // constraint has been checked, result is positive
-                    $color = '#088A08';
-                    break;
-                case 'exception':   // the statement violates the constraint, but is a known exception
-                    $color = '#D2D20C';
-                    break;
-                case 'todo':        // the constraint check has not yet been implemented
-                    $color = '#808080';
-                    break;
-                case 'violation':   // constraint has been checked, result is negative
-                    $color = '#BA0000';
-                    break;
-                default:            // error case, should not happen
-                    $color = '#404040';
-            }
-
             if( $result->getMessage() !== '' ) {
                 $status_tooltip = $result->getMessage();
-                $statusColumn = '<div tooltip="' . $status_tooltip . '"><span style="color:' . $color . '">' . $result->getStatus() . '</span> ' . $tooltipIndicator . '</div>';
+                $statusColumn = '<div tooltip="' . $status_tooltip . '">' . $this->formatStatus( $result->getStatus() ) . ' ' . $tooltipIndicator . '</div>';
             } else {
-                $statusColumn = '<span style="color:' . $color . '">' . $result->getStatus() . '</span>';
+                $statusColumn = $this->formatStatus( $result->getStatus() );
             }
 
             $property = $this->entityIdHtmlLinkFormatter->formatEntityId( $result->getPropertyId() );
@@ -224,6 +221,15 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
         }
 
         return $table;
+    }
+
+    /**
+     * @param string $status
+     * @return string
+     */
+    private function formatStatus( $status ) {
+        $color = array_key_exists( $status, $this->colors ) ? $this->colors[$status] : $this->colors['other'];
+        return '<span style="color:' . $color . '">' . $status . '</span> ';
     }
 
     /**
@@ -280,12 +286,42 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
         return $formattedParameters;
     }
 
+    /**
+     * Cuts an array after n values and appends dots if needed.
+     * @param array $array
+     * @return array
+     */
     private function limitArrayLength( $array ) {
         if( count( $array ) > $this->maxParameterArrayLength ) {
             $array = array_slice( $array, 0, $this->maxParameterArrayLength );
             array_push( $array, '...' );
         }
         return $array;
+    }
+
+    /**
+     * @param array $results
+     * @return string
+     */
+    private function buildSummary( $results ) {
+        $statusCount = array( 'compliance' => 0, 'exception' => 0, 'todo' => 0, 'violation' => 0, 'other' => 0 );
+
+        foreach( $results as $result ) {
+            $status = $result->getStatus();
+            if( $status === 'compliance' || $status === 'exception' || $status === 'todo' || $status === 'violation' ) {
+                $statusCount[$status]++;
+            } else {
+                $statusCount['other']++;
+            }
+        }
+
+        $formattedStatusCount = array();
+        $statusNames = array_keys( $statusCount );
+        foreach( $statusNames as $statusName ) {
+            $formattedStatusCount[] = $this->formatStatus( $statusName ) . ': ' . $statusCount[$statusName];
+        }
+
+        return implode( ', ', $formattedStatusCount );
     }
 
 }
