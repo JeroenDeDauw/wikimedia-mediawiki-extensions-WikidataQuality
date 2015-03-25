@@ -14,6 +14,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
 use WikidataQuality\ExternalValidation\DumpMetaInformation;
+use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * @covers WikidataQuality\ExternalValidation\Specials\SpecialCrossCheck
@@ -235,7 +236,8 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
 
         unset( $matchers['error'] );
 
-        $qid = 'Q' . (self::$idMap[ 'Q1' ]->getNumericId());
+        $qidNumeric = self::$idMap[ 'Q1' ]->getSerialization();
+        $qid = 'Q' . $qidNumeric;
         $cases['valid input - existing item with statements'] = array( $qid, array(), 'en', $matchers );
         #$cases['valid input - existing item without statements'] = array( 'Q3', array(), 'en', $matchers );
 

@@ -130,7 +130,7 @@ class CrossCheckTest extends WikibaseApiTestcase
     {
         $params = array(
             'action' => 'wdqcrosscheck',
-            'claims' => self::$claimGuids[ 'P1' ],
+            'claims' => self::$claimGuids[ 'P1' ]
         );
         $result = $this->doApiRequest( $params );
         $entityIdQ1 = self::$idMap[ 'Q1' ]->getSerialization();
