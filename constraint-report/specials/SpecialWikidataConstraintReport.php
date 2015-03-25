@@ -229,7 +229,7 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
      */
     private function formatStatus( $status ) {
         $color = array_key_exists( $status, $this->colors ) ? $this->colors[$status] : $this->colors['other'];
-        return '<span style="color:' . $color . '">' . $status . '</span> ';
+        return '<span style="color:' . $color . '; font-weight:600">' . $status . '</span> ';
     }
 
     /**
@@ -318,7 +318,9 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
         $formattedStatusCount = array();
         $statusNames = array_keys( $statusCount );
         foreach( $statusNames as $statusName ) {
-            $formattedStatusCount[] = $this->formatStatus( $statusName ) . ': ' . $statusCount[$statusName];
+            if( $statusCount[$statusName] > 0 ) {
+                $formattedStatusCount[] = $this->formatStatus($statusName) . ': ' . $statusCount[$statusName];
+            }
         }
 
         return implode( ', ', $formattedStatusCount );

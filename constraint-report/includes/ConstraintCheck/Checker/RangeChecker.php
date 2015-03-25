@@ -133,7 +133,7 @@ class RangeChecker {
 
         $thisValue = $this->getComparativeValue( $dataValue );
 
-        // checks only the first occurence of the referenced property (this constraint implies a single value constraint on that property)
+        // checks only the first occurrence of the referenced property (this constraint implies a single value constraint on that property)
         foreach( $this->statements as $statement ) {
             if( $property === $statement->getClaim()->getPropertyId()->getSerialization() ) {
                 $mainSnak = $statement->getClaim()->getMainSnak();
