@@ -236,7 +236,7 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
 
         unset( $matchers['error'] );
 
-        $qidNumeric = self::$idMap[ 'Q1' ]->getSerialization();
+        $qidNumeric = self::$idMap[ 'Q1' ]->getNumericId();
         $qid = 'Q' . $qidNumeric;
         $cases['valid input - existing item with statements'] = array( $qid, array(), 'en', $matchers );
         #$cases['valid input - existing item without statements'] = array( 'Q3', array(), 'en', $matchers );
