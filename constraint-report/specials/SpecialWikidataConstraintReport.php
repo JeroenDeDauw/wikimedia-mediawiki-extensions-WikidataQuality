@@ -11,6 +11,7 @@ use Wikibase\Repo\WikibaseRepo;
 use WikidataQuality\ConstraintReport\ConstraintCheck\ConstraintChecker;
 use WikidataQuality\Specials\SpecialWikidataQualityPage;
 use WikidataQuality\Html\HtmlTable;
+use InvalidArgumentException;
 
 /**
  * Class SpecialWikidataConstraintReport
@@ -83,20 +84,40 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
         $out->addHTML( $this->getHtmlForm() );
 
         if( !empty( $_POST['entityID'] ) ) {
-            $constraintChecker = new ConstraintChecker();
-            $entityId = $this->getEntityID( $_POST['entityID'] );
-            $this->entity = $this->entityLookup->getEntity( $entityId );
-            $results = $constraintChecker->execute( $this->entity );
-        } else {
-            return;
-        }
+            // is string a valid entity id? if yes, get entity id.
+            try {
+                $entityId = $this->getEntityID( $_POST['entityID'] );
+            } catch ( InvalidArgumentException $ex ) {
+                $out->addHTML(
+                    Html::openElement( 'p' )
+                    . $this->msg( 'wikidataquality-constraint-result-invalid-entity-id' )->text()
+                    . ' (' . $_POST['entityID'] . ')'
+                    . Html::closeElement( 'p' )
+                );
+                return;
+            }
 
-        if( $results ) {
+            // get entity and check if it exists.
+            $this->entity = $this->entityLookup->getEntity( $entityId );
+            if( is_null( $this->entity ) ) {
+                $out->addHTML(
+                    Html::openElement( 'p' )
+                    . $this->msg( 'wikidataquality-constraint-result-entity-not-existent' )->text()
+                    . ' (' . $_POST['entityID'] . ')'
+                    . Html::closeElement( 'p' )
+                );
+                return;
+            }
+
+            // check constraints and display results.
+            $constraintChecker = new ConstraintChecker();
+            $results = $constraintChecker->execute( $this->entity );
+
             $out->addHTML(
                 Html::openElement( 'br' ) . Html::openElement( 'h3' )
                 . $this->msg( 'wikidataquality-constraint-result-headline' )->text()
-                . $this->entityIdHtmlLinkFormatter->formatEntityId( $entityId )
-                . ' ('. $entityId . ')'
+                . ' ' . $this->entityIdHtmlLinkFormatter->formatEntityId( $entityId )
+                . ' (' . $entityId . ')'
                 . Html::closeElement( 'h3' ) . Html::openElement( 'br' )
             );
 
@@ -107,14 +128,9 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
             $out->addHTML(
                 $this->buildResultTable( $results )->toHtml()
             );
-
-            return;
-        } else {
-            $out->addHTML( Html::openElement( 'p' )
-                . $this->msg( 'wikidataquality-constraint-result-entity-not-existent' )->text()
-                . Html::closeElement( 'p' ) );
         }
 
+        return;
     }
 
     /**
@@ -130,7 +146,7 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
             . Html::openElement(
                 'form',
                 array(
-                    'action' => $_SERVER[ 'PHP_SELF' ],
+                    'action' => $_SERVER['PHP_SELF'],
                     'method' => 'post'
                 )
             )
@@ -210,7 +226,7 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
                 $constraintColumn = $result->getConstraintName() . ' (' . $constraintLink . ') ';
             }
 
-            // Body of table
+            // body of table
             $table->appendRow(
                 array(
                     $statusColumn,
@@ -319,7 +335,7 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
         $statusNames = array_keys( $statusCount );
         foreach( $statusNames as $statusName ) {
             if( $statusCount[$statusName] > 0 ) {
-                $formattedStatusCount[] = $this->formatStatus($statusName) . ': ' . $statusCount[$statusName];
+                $formattedStatusCount[] = $this->formatStatus( $statusName ) . ': ' . $statusCount[$statusName];
             }
         }
 
