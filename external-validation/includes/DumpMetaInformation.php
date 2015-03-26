@@ -3,8 +3,9 @@
 namespace WikidataQuality\ExternalValidation;
 
 use DateTime;
-use Wikibase\DataModel\Entity\ItemId;
+use DateTimeZone;
 use Doctrine\Instantiator\Exception\InvalidArgumentException;
+use Wikibase\DataModel\Entity\ItemId;
 
 
 /**
@@ -70,9 +71,14 @@ class DumpMetaInformation
      */
     public function __construct( $dumpId, $sourceItemId, $importDate, $language, $sourceUrl, $size, $license )
     {
-        $this->dumpId = $dumpId;
+        if ( is_int( $dumpId ) ) {
+            $this->dumpId = $dumpId;
+        } else {
+            throw new InvalidArgumentException( '$dumpId must be integer.' );
+        }
+
         if ( is_string( $sourceItemId ) ) {
-            if ($sourceItemId[0] !== 'Q') {
+            if ( $sourceItemId[ 0 ] !== 'Q' ) {
                 $sourceItemId = 'Q' . $sourceItemId;
             }
             $this->sourceItemId = new ItemId( $sourceItemId );
@@ -166,9 +172,9 @@ class DumpMetaInformation
     {
         // Set accumulator
         $accumulator = array(
-            'row_id' => $this->getDumpId(),
+            'dump_id' => $this->getDumpId(),
             'source_item_id' => $this->getSourceItemId()->getNumericId(),
-            'import_date' => $this->getImportDate()->format(DateTime::ISO8601),
+            'import_date' => $this->getImportDate()->format( DateTime::ISO8601 ),
             'language' => $this->getLanguage(),
             'source_url' => $this->getSourceUrl(),
             'size' => $this->getSize(),
@@ -176,15 +182,12 @@ class DumpMetaInformation
         );
 
         // Check, whether to create new row or update existing one
-        $existing = false;
-        if ( isset( $this->dumpId ) ) {
-            $dumpId = $this->dumpId;
-            $existing = $db->selectRow(
-                DUMP_META_TABLE,
-                array( 'row_id' ),
-                array( "row_id=$dumpId" )
-            );
-        }
+        $dumpId = $this->dumpId;
+        $existing = $db->selectRow(
+            DUMP_META_TABLE,
+            array( 'dump_id' ),
+            array( "dump_id=$dumpId" )
+        );
 
         // Perform database operation
         if ( $existing ) {
@@ -192,7 +195,7 @@ class DumpMetaInformation
             $result = $db->update(
                 DUMP_META_TABLE,
                 $accumulator,
-                array( "row_id=$dumpId" )
+                array( "dump_id=$dumpId" )
             );
         } else {
             // Insert new row
@@ -206,27 +209,57 @@ class DumpMetaInformation
     }
 
     /**
-     * Gets DumpMetaInformation for specific dump id from database.
-     * @param $db
-     * @param $dumpId
-     * @return null|DumpMetaInformation
+     * Gets DumpMetaInformation for specific dump ids from database.
+     * @param DatabaseBase $db
+     * @param string|array $dumpIds
+     * @return array|DumpMetaInformation
      */
-    public static function get( $db, $dumpId )
+    public static function get( $db, $dumpIds = null )
     {
+        // Check arguments
+        if ( $dumpIds ) {
+            if ( is_int( $dumpIds ) ) {
+                $dumpIds = array( $dumpIds );
+            } elseif ( !is_array( $dumpIds ) ) {
+                throw new InvalidArgumentException( '$dumpIds must be array of integers.' );
+            }
+        }
+
+        // Build condition
+        $conditions = array();
+        if ( $dumpIds ) {
+            $conditions[ ] = sprintf( 'dump_id IN (%s)', implode( ',', $dumpIds ) );
+        }
+
         // Run query
-        $result = $db->selectRow(
+        $result = $db->select(
             DUMP_META_TABLE,
-            array( 'source_item_id', 'import_date', 'language', 'source_url', 'size', 'license' ),
-            array( "row_id=$dumpId" ) );
+            array( 'dump_id', 'source_item_id', 'import_date', 'language', 'source_url', 'size', 'license' ),
+            $conditions
+        );
 
-        // Create DumpMetaInformation instance
-        $dataSource = new ItemId( 'Q' . $result->source_item_id );
-        $import_date = new DateTime( $result->import_date );
-        $language = $result->language;
-        $sourceUrl = $result->source_url;
-        $size = (int)$result->size;
-        $license = $result->license;
+        // Create DumpMetaInformation instances
+        $dumpMetaInformation = array();
+        foreach ( $result as $row ) {
+            $dumpId = (int)$row->dump_id;
+            $dataSource = new ItemId( 'Q' . $row->source_item_id );
+            $import_date = new DateTime( $row->import_date, new DateTimeZone( 'UTC' ) );
+            $language = $row->language;
+            $sourceUrl = $row->source_url;
+            $size = (int)$row->size;
+            $license = $row->license;
 
-        return new DumpMetaInformation( $dumpId, $dataSource, $import_date, $language, $sourceUrl, $size, $license );
+            $dumpMetaInformation[ $dumpId ] = new DumpMetaInformation( $dumpId, $dataSource, $import_date, $language, $sourceUrl, $size, $license );
+        }
+
+        if ( count( $dumpMetaInformation ) > 0 ) {
+            if ( $dumpIds && count( $dumpIds ) == 1 ) {
+                $dumpMetaInformation = array_values( $dumpMetaInformation );
+
+                return $dumpMetaInformation[ 0 ];
+            } else {
+                return $dumpMetaInformation;
+            }
+        }
     }
 }

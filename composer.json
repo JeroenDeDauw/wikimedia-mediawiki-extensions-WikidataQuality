@@ -23,7 +23,7 @@
     "psr-4": {
       "WikidataQuality\\": "includes/",
       "WikidataQuality\\Specials\\": "specials",
-      "WikidataQuality\\Tests\\": "tests",
+      "WikidataQuality\\Tests\\": "tests/phpunit",
 
       "WikidataQuality\\ConstraintReport\\": "constraint-report/includes/",
       "WikidataQuality\\ConstraintReport\\Specials\\": "constraint-report/specials/",

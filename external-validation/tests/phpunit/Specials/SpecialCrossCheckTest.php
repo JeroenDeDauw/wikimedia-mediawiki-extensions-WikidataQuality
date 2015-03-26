@@ -301,7 +301,6 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
 
         # Q3 is the added item Q1; problem: provider executed before test
         $cases['valid input - existing item with statements'] = array( 'Q3', array(), 'en', $matchers );
-        #$cases['valid input - existing item with statements'] = array( 'Q1', array(), 'en', $matchers );
 
         #$cases['valid input - existing item without statements'] = array( 'Q3', array(), 'en', $matchers );
 
@@ -319,12 +318,11 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
     public function testExecute( $sub, $request, $userLanguage, $matchers ) {
         $request = new \FauxRequest( $request );
 
-        if ( in_array( $sub, self::$idMap, true ) ){
+        /*if ( in_array( $sub, self::$idMap, true ) ){
             $sub = 'Q' . self::$idMap[ $sub ]->getNumericId();
-        }
+        }*/
 
         list( $output, ) = $this->executeSpecialPage( $sub, $request, $userLanguage );
-        echo '######' . $output;
         foreach( $matchers as $key => $matcher ) {
             $this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}'" );
         }

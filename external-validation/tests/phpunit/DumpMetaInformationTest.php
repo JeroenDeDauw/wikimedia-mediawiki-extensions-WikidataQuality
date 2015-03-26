@@ -15,7 +15,39 @@ use DateTime;
  * @author BP2014N1
  * @license GNU GPL v2+exte
  */
-class DumpMetaInformationTest extends \MediaWikiTestCase {
+class DumpMetaInformationTest extends \MediaWikiTestCase
+{
+    /**
+     * @var array
+     */
+    private $dumpMetaInformation  = array();
+
+
+    public function __construct( $name = null, $data = array(), $dataName = null )
+    {
+        parent::__construct( $name, $data, $dataName );
+
+        // Create example dump meta information
+        $this->dumpMetaInformation[ 1 ] = new DumpMetaInformation(
+            1,
+            new ItemId( 'Q36578' ),
+            new DateTime( '2015-01-01 00:00:00' ),
+            'en',
+            'http://www.foo.bar',
+            42,
+            'CC0'
+        );
+        $this->dumpMetaInformation[ 2 ] = new DumpMetaInformation(
+            2,
+            new ItemId( 'Q23213' ),
+            new DateTime( '2020-01-01 12:12:12' ),
+            'de',
+            'http://www.fu.bar',
+            4242,
+            'CC0'
+        );
+    }
+
 
     public function setUp()
     {
@@ -38,21 +70,22 @@ class DumpMetaInformationTest extends \MediaWikiTestCase {
         );
 
         // Insert example dump meta information
-        $this->db->insert(
-            DUMP_META_TABLE,
-            array(
+        foreach ( $this->dumpMetaInformation as $dumpMetaInformation ) {
+            $this->db->insert(
+                DUMP_META_TABLE,
                 array(
-                    'row_id' => 1,
-                    'source_item_id' => 36578,
-                    'import_date' => '2015-01-01 00:00:00',
-                    'language' => 'en',
-                    'source_url' => 'http://www.foo.bar',
-                    'size' => 42,
-                    'license' =>  'CC0'
+                    'dump_id' => $dumpMetaInformation->getDumpId(),
+                    'source_item_id' => $dumpMetaInformation->getSourceItemId()->getNumericId(),
+                    'import_date' => $dumpMetaInformation->getImportDate()->format( DateTime::ISO8601 ),
+                    'language' => $dumpMetaInformation->getLanguage(),
+                    'source_url' => $dumpMetaInformation->getSourceUrl(),
+                    'size' => $dumpMetaInformation->getSize(),
+                    'license' =>  $dumpMetaInformation->getLicense()
                 )
-            )
-        );
+            );
+        }
     }
+
 
     /**
      * @dataProvider constructValidArgumentsDataProvider
@@ -77,6 +110,7 @@ class DumpMetaInformationTest extends \MediaWikiTestCase {
     public function constructValidArgumentsDataProvider()
     {
         $dumpId = 123;
+        $itemId = new ItemId( 'Q123' );
         $importDate = new DateTime( '30-11-2015' );
         $language = 'de';
         $sourceUrl = 'http://randomurl.tld';
@@ -86,7 +120,7 @@ class DumpMetaInformationTest extends \MediaWikiTestCase {
         return array(
             array(
                 $dumpId,
-                new ItemId( 'Q123' ),
+                $itemId,
                 $importDate,
                 $language,
                 $sourceUrl,
@@ -95,7 +129,16 @@ class DumpMetaInformationTest extends \MediaWikiTestCase {
             ),
             array(
                 $dumpId,
-                '123',
+                $itemId->getSerialization(),
+                $importDate,
+                $language,
+                $sourceUrl,
+                $size,
+                $license
+            ),
+            array(
+                $dumpId,
+                (string)$itemId->getNumericId(),
                 $importDate,
                 $language,
                 $sourceUrl,
@@ -104,6 +147,7 @@ class DumpMetaInformationTest extends \MediaWikiTestCase {
             )
         );
     }
+
 
     /**
      * @dataProvider constructInvalidArgumentsDataProvider
@@ -121,7 +165,7 @@ class DumpMetaInformationTest extends \MediaWikiTestCase {
      */
     public function constructInvalidArgumentsDataProvider()
     {
-        $dumpId = 123;
+        $dumpId = '123';
         $importDate = new DateTime( '2015-03-17' );
         $language = 'de';
         $sourceUrl = 'http://randomurl.tld';
@@ -150,27 +194,62 @@ class DumpMetaInformationTest extends \MediaWikiTestCase {
         );
     }
 
-    public function testGetDumpMetaInformation(){
 
-        $dumpMetaInformation = new DumpMetaInformation(
-            1,
-            '36578',
-            new DateTime( '2015-01-01 00:00:00' ),
-            'en',
-            'http://www.foo.bar',
-            42,
-            'CC0' );
+    /**
+     * @dataProvider getDumpMetaInformationDataProvider
+     */
+    public function testGetDumpMetaInformation( $dumpIds, $expectedDumpMetaInformation, $expectedException )
+    {
+        $this->setExpectedException( $expectedException );
 
-        $metaInformationFromDatabase = DumpMetaInformation::get( $this->db, 1 );
-
-        $this->assertEquals( $metaInformationFromDatabase->getDumpId(), $dumpMetaInformation->getDumpId() );
-        $this->assertEquals( $metaInformationFromDatabase->getSourceItemId(), $dumpMetaInformation->getSourceItemId() );
-        $this->assertEquals( $metaInformationFromDatabase->getImportDate()->format(DateTime::ISO8601), $dumpMetaInformation->getImportDate()->format(DateTime::ISO8601) );
-        $this->assertEquals( $metaInformationFromDatabase->getLanguage(), $dumpMetaInformation->getLanguage() );
-        $this->assertEquals( $metaInformationFromDatabase->getSourceUrl(), $dumpMetaInformation->getSourceUrl() );
-        $this->assertEquals( $metaInformationFromDatabase->getSize(), $dumpMetaInformation->getSize() );
-        $this->assertEquals( $metaInformationFromDatabase->getLicense(), $dumpMetaInformation->getLicense() );
+        $this->assertEquals( $expectedDumpMetaInformation, DumpMetaInformation::get( $this->db, $dumpIds ) );
     }
+
+    /**
+     * @return array
+     */
+    public function getDumpMetaInformationDataProvider()
+    {
+        return array(
+            // Single id
+            array (
+                1,
+                $this->dumpMetaInformation[ 1 ],
+                null
+            ),
+            // Multiple ids
+            array(
+                array( 1, 2 ),
+                array(
+                    1 => $this->dumpMetaInformation[ 1 ],
+                    2 => $this->dumpMetaInformation[ 2 ]
+                ),
+                null
+            ),
+            // No specific ids
+            array(
+                null,
+                array(
+                    1 => $this->dumpMetaInformation[ 1 ],
+                    2 => $this->dumpMetaInformation[ 2 ]
+                ),
+                null
+            ),
+            // Non-existent id
+            array(
+                3,
+                null,
+                null
+            ),
+            // Invalid id
+            array(
+                'broken',
+                null,
+                'InvalidArgumentException'
+            )
+        );
+    }
+
 
     /**
      * @dataProvider saveDumpMetaInformationDataProvider
@@ -182,13 +261,7 @@ class DumpMetaInformationTest extends \MediaWikiTestCase {
 
         $metaInformationFromDatabase = DumpMetaInformation::get( $this->db, $dumpId );
 
-        $this->assertEquals( $metaInformationFromDatabase->getDumpId(), $dumpMetaInformation->getDumpId() );
-        $this->assertEquals( $metaInformationFromDatabase->getSourceItemId(), $dumpMetaInformation->getSourceItemId() );
-        $this->assertEquals( $metaInformationFromDatabase->getImportDate()->format(DateTime::ISO8601), $dumpMetaInformation->getImportDate()->format(DateTime::ISO8601) );
-        $this->assertEquals( $metaInformationFromDatabase->getLanguage(), $dumpMetaInformation->getLanguage() );
-        $this->assertEquals( $metaInformationFromDatabase->getSourceUrl(), $dumpMetaInformation->getSourceUrl() );
-        $this->assertEquals( $metaInformationFromDatabase->getSize(), $dumpMetaInformation->getSize() );
-        $this->assertEquals( $metaInformationFromDatabase->getLicense(), $dumpMetaInformation->getLicense() );
+        $this->assertEquals( $dumpMetaInformation, $metaInformationFromDatabase );
     }
 
 
@@ -199,6 +272,7 @@ class DumpMetaInformationTest extends \MediaWikiTestCase {
     {
 
         return array(
+            // Update existing one
             array(
                 1,
                 '36578',
@@ -208,8 +282,9 @@ class DumpMetaInformationTest extends \MediaWikiTestCase {
                 42,
                 'CC0'
             ),
+            // Insert new one
             array(
-                2,
+                3,
                 '36578',
                 new DateTime( '2015-01-01 00:00:00' ),
                 'en',

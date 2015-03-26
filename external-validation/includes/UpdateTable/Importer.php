@@ -1,14 +1,16 @@
 <?php
 
-namespace WikidataQuality\ExternalValidation\UpdateTable\Importer;
+namespace WikidataQuality\ExternalValidation\UpdateTable;
 
+
+use DateTime;
+use DateTimeZone;
 use WikidataQuality\ExternalValidation\DumpMetaInformation;
-use WikidataQuality\ExternalValidation\UpdateTable\ImportContext;
 
 
 /**
  * Class Importer
- * @package WikidataQuality\ExternalValidation\UpdateTable\Importer
+ * @package WikidataQuality\ExternalValidation\UpdateTable
  * @author BP2014N1
  * @license GNU GPL v2+
  */
@@ -45,8 +47,8 @@ class Importer
         // Insert external values
         $this->insertExternalValues( $db, $metaInformation->getDumpId() );
 
-        // Close database connection
-        $this->closeDbConnection( $db );
+        // Reuse database connection
+        $this->reuseDbConnection( $db );
     }
 
     protected function deleteOldDatabaseEntries( $db, $dumpId )
@@ -59,6 +61,7 @@ class Importer
             if ( !$this->importContext->isQuiet() ) {
                 print "$tableName table does not exist.\nExecuting core/maintenance/update.php may help.\n";
             }
+            return;
         }
 
         // Delete all entries
@@ -96,13 +99,13 @@ class Importer
     }
 
     /**
-     * Close database connection
+     * Mark databsae connection as being available for reuse
      * @param \DatabaseBase $db
      */
-    protected function closeDbConnection( $db )
+    protected function reuseDbConnection( $db )
     {
         $loadBalancer = $this->importContext->getLoadBalancer();
-        $loadBalancer->closeConnection( $db );
+        $loadBalancer->reuseConnection( $db );
     }
 
     /**
@@ -115,11 +118,11 @@ class Importer
         $csvFile = fopen( $this->importContext->getMetaInformationFilePath(), 'rb' );
         $data = fgetcsv( $csvFile );
 
-        // Write meta information to databsae
+        // Write meta information to database
         $metaInformation = new DumpMetaInformation(
-            $data[ 0 ],
+            (int)$data[ 0 ],
             $data[ 1 ],
-            $data[ 2 ],
+            new DateTime( $data[ 2 ], new DateTimeZone( 'UTC' ) ),
             $data[ 3 ],
             $data[ 4 ],
             $data[ 5 ],
