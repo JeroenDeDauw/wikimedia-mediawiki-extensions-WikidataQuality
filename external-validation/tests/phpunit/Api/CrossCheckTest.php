@@ -56,12 +56,7 @@ class CrossCheckTest extends WikibaseApiTestcase
      */
     private static $hasSetup;
 
-<<<<<<< HEAD
     protected function setUp()
-=======
-
-    protected function setup()
->>>>>>> master
     {
         parent::setUp();
         $this->tablesUsed[ ] = DUMP_META_TABLE;
