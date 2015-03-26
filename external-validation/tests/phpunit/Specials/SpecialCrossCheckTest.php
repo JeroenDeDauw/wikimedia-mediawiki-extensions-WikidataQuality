@@ -236,7 +236,73 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
 
         unset( $matchers['error'] );
 
-        $cases['valid input - existing item with statements'] = array( 'Q1', array(), 'en', $matchers );
+        $matchers['result table'] = array(
+            'tag' => 'table',
+            'attributes' => array(
+                'class' => 'wikitable sortable jquery-tablesort'
+            )
+        );
+
+        $matchers['column property'] = array(
+            'tag' => 'th',
+            'attributes' => array(
+                'role' => 'columnheader button'
+            ),
+            'content' => 'Property'
+        );
+
+        $matchers['column value'] = array(
+            'tag' => 'th',
+            'attributes' => array(
+                'role' => 'columnheader button'
+            ),
+            'content' => 'Value'
+        );
+
+        $matchers['column comparative value'] = array(
+            'tag' => 'th',
+            'attributes' => array(
+                'role' => 'columnheader button'
+            ),
+            'content' => 'Comparative Value'
+        );
+
+        $matchers['column external source'] = array(
+            'tag' => 'th',
+            'attributes' => array(
+                'role' => 'columnheader button'
+            ),
+            'content' => 'External Source'
+        );
+
+        $matchers['column status'] = array(
+            'tag' => 'th',
+            'attributes' => array(
+                'role' => 'columnheader button'
+            ),
+            'content' => 'Status'
+        );
+
+        $matchers['match'] = array(
+            'tag' => 'th',
+            'attributes' => array(
+                'class' => 'wdq-crosscheck-success'
+            ),
+            'content' => 'Match'
+        );
+
+        $matchers['mismatch'] = array(
+            'tag' => 'th',
+            'attributes' => array(
+                'class' => 'wdq-crosscheck-error'
+            ),
+            'content' => 'Mismatch'
+        );
+
+        # Q3 is the added item Q1; problem: provider executed before test
+        $cases['valid input - existing item with statements'] = array( 'Q3', array(), 'en', $matchers );
+        #$cases['valid input - existing item with statements'] = array( 'Q1', array(), 'en', $matchers );
+
         #$cases['valid input - existing item without statements'] = array( 'Q3', array(), 'en', $matchers );
 
         return $cases;
