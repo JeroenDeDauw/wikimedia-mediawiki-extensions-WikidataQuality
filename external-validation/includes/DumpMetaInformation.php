@@ -71,7 +71,12 @@ class DumpMetaInformation
      */
     public function __construct( $dumpId, $sourceItemId, $importDate, $language, $sourceUrl, $size, $license )
     {
-        $this->dumpId = $dumpId;
+        if ( is_int( $dumpId ) ) {
+            $this->dumpId = $dumpId;
+        } else {
+            throw new InvalidArgumentException( '$dumpId must be integer.' );
+        }
+
         if ( is_string( $sourceItemId ) ) {
             if ( $sourceItemId[ 0 ] !== 'Q' ) {
                 $sourceItemId = 'Q' . $sourceItemId;
@@ -97,7 +102,7 @@ class DumpMetaInformation
 
     /**
      * Returns id of dump meta information in database.
-     * @return string
+     * @return int
      */
     public function getDumpId()
     {
@@ -177,15 +182,12 @@ class DumpMetaInformation
         );
 
         // Check, whether to create new row or update existing one
-        $existing = false;
-        if ( isset( $this->dumpId ) ) {
-            $dumpId = $this->dumpId;
-            $existing = $db->selectRow(
-                DUMP_META_TABLE,
-                array( 'dump_id' ),
-                array( "dump_id=$dumpId" )
-            );
-        }
+        $dumpId = $this->dumpId;
+        $existing = $db->selectRow(
+            DUMP_META_TABLE,
+            array( 'dump_id' ),
+            array( "dump_id=$dumpId" )
+        );
 
         // Perform database operation
         if ( $existing ) {
@@ -216,10 +218,10 @@ class DumpMetaInformation
     {
         // Check arguments
         if ( $dumpIds ) {
-            if ( is_string( $dumpIds ) ) {
+            if ( is_int( $dumpIds ) ) {
                 $dumpIds = array( $dumpIds );
             } elseif ( !is_array( $dumpIds ) ) {
-                throw new InvalidArgumentException( '$dumpIds must be array of strings.' );
+                throw new InvalidArgumentException( '$dumpIds must be array of integers.' );
             }
         }
 
@@ -239,7 +241,7 @@ class DumpMetaInformation
         // Create DumpMetaInformation instances
         $dumpMetaInformation = array();
         foreach ( $result as $row ) {
-            $dumpId = $row->dump_id;
+            $dumpId = (int)$row->dump_id;
             $dataSource = new ItemId( 'Q' . $row->source_item_id );
             $import_date = new DateTime( $row->import_date, new DateTimeZone( 'UTC' ) );
             $language = $row->language;
@@ -250,7 +252,7 @@ class DumpMetaInformation
             $dumpMetaInformation[ $dumpId ] = new DumpMetaInformation( $dumpId, $dataSource, $import_date, $language, $sourceUrl, $size, $license );
         }
 
-        if( count( $dumpMetaInformation ) > 0 ) {
+        if ( count( $dumpMetaInformation ) > 0 ) {
             if ( $dumpIds && count( $dumpIds ) == 1 ) {
                 $dumpMetaInformation = array_values( $dumpMetaInformation );
 

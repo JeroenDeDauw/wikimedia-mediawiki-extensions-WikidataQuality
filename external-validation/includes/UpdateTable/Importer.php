@@ -120,7 +120,7 @@ class Importer
 
         // Write meta information to database
         $metaInformation = new DumpMetaInformation(
-            $data[ 0 ],
+            (int)$data[ 0 ],
             $data[ 1 ],
             new DateTime( $data[ 2 ], new DateTimeZone( 'UTC' ) ),
             $data[ 3 ],

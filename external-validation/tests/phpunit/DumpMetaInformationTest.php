@@ -27,8 +27,8 @@ class DumpMetaInformationTest extends \MediaWikiTestCase
         parent::__construct( $name, $data, $dataName );
 
         // Create example dump meta information
-        $this->dumpMetaInformation[ '1' ] = new DumpMetaInformation(
-            '1',
+        $this->dumpMetaInformation[ 1 ] = new DumpMetaInformation(
+            1,
             new ItemId( 'Q36578' ),
             new DateTime( '2015-01-01 00:00:00' ),
             'en',
@@ -36,8 +36,8 @@ class DumpMetaInformationTest extends \MediaWikiTestCase
             42,
             'CC0'
         );
-        $this->dumpMetaInformation[ '2' ] = new DumpMetaInformation(
-            '2',
+        $this->dumpMetaInformation[ 2 ] = new DumpMetaInformation(
+            2,
             new ItemId( 'Q23213' ),
             new DateTime( '2020-01-01 12:12:12' ),
             'de',
@@ -108,7 +108,7 @@ class DumpMetaInformationTest extends \MediaWikiTestCase
      */
     public function constructValidArgumentsDataProvider()
     {
-        $dumpId = '123';
+        $dumpId = 123;
         $itemId = new ItemId( 'Q123' );
         $importDate = new DateTime( '30-11-2015' );
         $language = 'de';
@@ -212,16 +212,16 @@ class DumpMetaInformationTest extends \MediaWikiTestCase
         return array(
             // Single id
             array (
-                '1',
-                $this->dumpMetaInformation[ '1' ],
+                1,
+                $this->dumpMetaInformation[ 1 ],
                 null
             ),
             // Multiple ids
             array(
-                array( '1', '2' ),
+                array( 1, 2 ),
                 array(
-                    '1' => $this->dumpMetaInformation[ '1' ],
-                    '2' => $this->dumpMetaInformation[ '2' ]
+                    1 => $this->dumpMetaInformation[ 1 ],
+                    2 => $this->dumpMetaInformation[ 2 ]
                 ),
                 null
             ),
@@ -229,20 +229,20 @@ class DumpMetaInformationTest extends \MediaWikiTestCase
             array(
                 null,
                 array(
-                    '1' => $this->dumpMetaInformation[ '1' ],
-                    '2' => $this->dumpMetaInformation[ '2' ]
+                    1 => $this->dumpMetaInformation[ 1 ],
+                    2 => $this->dumpMetaInformation[ 2 ]
                 ),
                 null
             ),
             // Non-existent id
             array(
-                '3',
+                3,
                 null,
                 null
             ),
             // Invalid id
             array(
-                1,
+                'broken',
                 null,
                 'InvalidArgumentException'
             )
@@ -273,7 +273,7 @@ class DumpMetaInformationTest extends \MediaWikiTestCase
         return array(
             // Update existing one
             array(
-                '1',
+                1,
                 '36578',
                 new DateTime( '2015-01-01 00:00:00' ),
                 'de',
@@ -283,7 +283,7 @@ class DumpMetaInformationTest extends \MediaWikiTestCase
             ),
             // Insert new one
             array(
-                '3',
+                3,
                 '36578',
                 new DateTime( '2015-01-01 00:00:00' ),
                 'en',

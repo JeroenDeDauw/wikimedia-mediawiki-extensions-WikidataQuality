@@ -220,7 +220,7 @@ class CrossChecker
         $externalValues = array();
         foreach ( $result as $row ) {
             $externalValues[ ] = $row->external_value;
-            $dumpId = $row->dump_id;
+            $dumpId = (int)$row->dump_id;
         }
         // TODO: Maybe there are multiple dumps per identifier property
         if ( isset( $dumpId ) ) {

@@ -71,7 +71,7 @@ class CompareResultSerializerTest extends \MediaWikiTestCase
     public function getSerializedDataProvider()
     {
         $dumpMetaInformation = new DumpMetaInformation(
-            '1',
+            1,
             '36578',
             new \DateTime( '2015-01-01 00:00:00' ),
             'en',

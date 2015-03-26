@@ -34,7 +34,7 @@ class UpdateTableTest extends \MediaWikiTestCase
     {
         // Create dump meta information
         $dumpMetaInformation = new DumpMetaInformation(
-            '1',
+            1,
             '36578',
             new \DateTime( '2015-01-01 00:00:00' ),
             'en',
@@ -50,14 +50,14 @@ class UpdateTableTest extends \MediaWikiTestCase
             DUMP_DATA_TABLE,
             array(
                 array(
-                    'dump_id' => '1',
+                    'dump_id' => 1,
                     'identifier_pid' => '227',
                     'external_id' => '1234',
                     'pid' => '31',
                     'external_value' => 'foo'
                 ),
                 array(
-                    'dump_id' => '1',
+                    'dump_id' => 1,
                     'identifier_pid' => '227',
                     'external_id' => '1234',
                     'pid' => '35',
@@ -82,7 +82,7 @@ class UpdateTableTest extends \MediaWikiTestCase
         $maintenanceScript->execute();
 
         // Run assertions on meta information
-        $dumpMetaInformation = DumpMetaInformation::get( $this->db, '1' );
+        $dumpMetaInformation = DumpMetaInformation::get( $this->db, 1 );
         $this->assertEquals( '36578', $dumpMetaInformation->getSourceItemId()->getNumericId() );
         $this->assertEquals( new \DateTime('2015-03-17 20:53:56'), $dumpMetaInformation->getImportDate() );
         $this->assertEquals( 'de', $dumpMetaInformation->getLanguage() );
