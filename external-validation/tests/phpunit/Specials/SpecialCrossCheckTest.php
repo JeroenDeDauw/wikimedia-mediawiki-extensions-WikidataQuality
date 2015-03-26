@@ -253,7 +253,7 @@ class SpecialCrossCheckTest extends SpecialPageTestBase
     public function testExecute( $sub, $request, $userLanguage, $matchers ) {
         $request = new \FauxRequest( $request );
 
-        if ( self::$idMap[ $sub ] ){
+        if ( in_array( $sub, self::$idMap, true ) ){
             $sub = 'Q' . self::$idMap[ $sub ]->getNumericId();
         }
 
