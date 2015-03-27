@@ -221,8 +221,7 @@ class CrossCheckTest extends WikibaseApiTestcase
 
         // Create dump meta information
         $dumpMetaInformation = new DumpMetaInformation(
-            1,
-            '36578',
+            new ItemId( 'Q36578' ),
             new \DateTime( '2015-01-01 00:00:00' ),
             'en',
             'http://www.foo.bar',
@@ -236,14 +235,14 @@ class CrossCheckTest extends WikibaseApiTestcase
             DUMP_DATA_TABLE,
             array(
                 array(
-                    'dump_id' => '1',
+                    'dump_item_id' => '36578',
                     'identifier_pid' => self::$idMap[ 'P3' ]->getNumericId(),
                     'external_id' => '1234',
                     'pid' => self::$idMap[ 'P1' ]->getNumericId(),
                     'external_value' => 'foo'
                 ),
                 array(
-                    'dump_id' => '1',
+                    'dump_item_id' => '36578',
                     'identifier_pid' => self::$idMap[ 'P3' ]->getNumericId(),
                     'external_id' => '1234',
                     'pid' => self::$idMap[ 'P2' ]->getNumericId(),

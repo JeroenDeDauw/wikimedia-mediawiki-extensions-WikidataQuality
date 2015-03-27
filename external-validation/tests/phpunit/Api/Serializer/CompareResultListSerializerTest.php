@@ -4,6 +4,7 @@ namespace WikidataQuality\ExternalValidation\Tests\Api\Serializer;
 
 
 use DataValues\StringValue;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use DataValues\Serializers\DataValueSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -41,8 +42,7 @@ class CompareResultListSerializerTest extends \MediaWikiTestCase
 
         // Create test compare result list
         $dumpMetaInformation = new DumpMetaInformation(
-            1,
-            '36578',
+            new ItemId( 'Q36578' ),
             new \DateTime( '2015-01-01 00:00:00' ),
             'en',
             'http://www.foo.bar',

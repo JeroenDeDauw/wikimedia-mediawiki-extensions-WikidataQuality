@@ -4,6 +4,7 @@ namespace WikidataQuality\ExternalValidation\CrossCheck;
 
 
 use Doctrine\Instantiator\Exception\InvalidArgumentException;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -120,7 +121,6 @@ class CrossChecker
                 }
             }
 
-
             // Get validatable properties
             $validatableProperties = $this->getValidatablePropertyIds();
 
@@ -209,7 +209,7 @@ class CrossChecker
         $numericPropertyId = $propertyId->getNumericId();
         $result = $this->db->select(
             DUMP_DATA_TABLE,
-            array( 'dump_id', 'external_value' ),
+            array( 'dump_item_id', 'external_value' ),
             array(
                 "identifier_pid=$numericIdentifierPropertyId",
                 "pid=$numericPropertyId",
@@ -220,11 +220,11 @@ class CrossChecker
         $externalValues = array();
         foreach ( $result as $row ) {
             $externalValues[ ] = $row->external_value;
-            $dumpId = (int)$row->dump_id;
+            $dumpItemId = new ItemId( 'Q' . $row->dump_item_id );
         }
         // TODO: Maybe there are multiple dumps per identifier property
-        if ( isset( $dumpId ) ) {
-            $this->dumpMetaInformation = DumpMetaInformation::get( $this->db, $dumpId );
+        if ( isset( $dumpItemId ) ) {
+            $this->dumpMetaInformation = DumpMetaInformation::get( $this->db, $dumpItemId );
         }
         return $externalValues;
     }

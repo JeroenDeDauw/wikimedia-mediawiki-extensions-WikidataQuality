@@ -3,6 +3,7 @@
 namespace WikidataQuality\ExternalValidation\Tests\UpdateTable;
 
 
+use Wikibase\DataModel\Entity\ItemId;
 use WikidataQuality\ExternalValidation\DumpMetaInformation;
 use WikidataQuality\ExternalValidation\Maintenance\UpdateTable;
 
@@ -34,8 +35,7 @@ class UpdateTableTest extends \MediaWikiTestCase
     {
         // Create dump meta information
         $dumpMetaInformation = new DumpMetaInformation(
-            1,
-            '36578',
+            new ItemId( 'Q36578' ),
             new \DateTime( '2015-01-01 00:00:00' ),
             'en',
             'http://www.foo.bar',
@@ -50,14 +50,14 @@ class UpdateTableTest extends \MediaWikiTestCase
             DUMP_DATA_TABLE,
             array(
                 array(
-                    'dump_id' => 1,
+                    'dump_item_id' => 36578,
                     'identifier_pid' => '227',
                     'external_id' => '1234',
                     'pid' => '31',
                     'external_value' => 'foo'
                 ),
                 array(
-                    'dump_id' => 1,
+                    'dump_item_id' => 36578,
                     'identifier_pid' => '227',
                     'external_id' => '1234',
                     'pid' => '35',
@@ -82,7 +82,7 @@ class UpdateTableTest extends \MediaWikiTestCase
         $maintenanceScript->execute();
 
         // Run assertions on meta information
-        $dumpMetaInformation = DumpMetaInformation::get( $this->db, 1 );
+        $dumpMetaInformation = DumpMetaInformation::get( $this->db, new ItemId( 'Q36578' ) );
         $this->assertEquals( '36578', $dumpMetaInformation->getSourceItemId()->getNumericId() );
         $this->assertEquals( new \DateTime('2015-03-17 20:53:56'), $dumpMetaInformation->getImportDate() );
         $this->assertEquals( 'de', $dumpMetaInformation->getLanguage() );
@@ -104,7 +104,7 @@ class UpdateTableTest extends \MediaWikiTestCase
         $this->assertSelect(
             DUMP_DATA_TABLE,
             array(
-                'dump_id',
+                'dump_item_id',
                 'identifier_pid',
                 'pid',
                 'external_id',
@@ -113,21 +113,21 @@ class UpdateTableTest extends \MediaWikiTestCase
             array(),
             array(
                 array(
-                    '1',
+                    '36578',
                     '227',
                     '19',
                     '100001718',
                     'Parma'
                 ),
                 array(
-                    '1',
+                    '36578',
                     '227',
                     '20',
                     '100001718',
                     'Paris'
                 ),
                 array(
-                    '1',
+                    '36578',
                     '227',
                     '569',
                     '100001718',
