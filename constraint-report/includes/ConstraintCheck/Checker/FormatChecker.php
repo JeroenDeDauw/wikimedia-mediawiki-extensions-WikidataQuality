@@ -28,12 +28,13 @@ class FormatChecker {
 
     /**
      * Checks 'Format' constraint.
+     * @param string $claimGuid
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param string $pattern
      * @return CheckResult
      */
-    public function checkFormatConstraint( $propertyId, $dataValue, $pattern ) {
+    public function checkFormatConstraint( $claimGuid, $propertyId, $dataValue, $pattern ) {
         $parameters = array();
 
         if( $pattern === null ) {
@@ -49,11 +50,11 @@ class FormatChecker {
          */
         if( $dataValue->getType() !== 'string' ) {
             $message = 'Properties with \'Format\' constraint need to have values of type \'string\'.';
-            return new CheckResult( $propertyId, $dataValue, 'Format', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Format', $parameters, 'violation', $message );
         }
         if( $pattern === null ) {
             $message = 'Properties with \'Format\' constraint need a parameter \'pattern\'.';
-            return new CheckResult( $propertyId, $dataValue, 'Format', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Format', $parameters, 'violation', $message );
         }
 
         $comparativeString = $dataValue->getValue();
@@ -66,7 +67,7 @@ class FormatChecker {
             $status = 'violation';
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'Format', $parameters, $status, $message );
+        return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Format', $parameters, $status, $message );
     }
 
 }

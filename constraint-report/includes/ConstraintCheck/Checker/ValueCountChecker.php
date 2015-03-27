@@ -39,11 +39,12 @@ class ValueCountChecker {
 
     /**
      * Checks 'Single value' constraint.
+     * @param string $claimGuid
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @return CheckResult
      */
-    public function checkSingleValueConstraint( $propertyId, $dataValue ) {
+    public function checkSingleValueConstraint( $claimGuid, $propertyId, $dataValue ) {
         $parameters = array();
 
         $propertyCountArray = $this->getPropertyCount( $this->statements );
@@ -56,16 +57,17 @@ class ValueCountChecker {
             $status = 'compliance';
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'Single value', $parameters, $status, $message );
+        return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Single value', $parameters, $status, $message );
     }
 
     /**
      * Checks Multi value constraint
+     * @param string $claimGuid
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @return CheckResult
      */
-    public function checkMultiValueConstraint( $propertyId, $dataValue ) {
+    public function checkMultiValueConstraint( $claimGuid, $propertyId, $dataValue ) {
         $parameters = array();
 
         $propertyCountArray = $this->getPropertyCount( $this->statements );
@@ -78,20 +80,21 @@ class ValueCountChecker {
             $status = 'compliance';
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'Multi value', $parameters, $status, $message );
+        return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Multi value', $parameters, $status, $message );
     }
 
     // todo: implement when index exists that makes it possible in real-time
     /**
+     * @param string $claimGuid
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @return CheckResult
      */
-    public function checkUniqueValueConstraint( $propertyId, $dataValue ) {
+    public function checkUniqueValueConstraint( $claimGuid, $propertyId, $dataValue ) {
         $parameters = array();
 
         $message = 'For technical reasons, the check for this constraint has not yet been implemented.';
-        return new CheckResult( $propertyId, $dataValue, 'Unique value', $parameters, 'todo', $message );
+        return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Unique value', $parameters, 'todo', $message );
     }
 
     private function getPropertyCount( $statements )

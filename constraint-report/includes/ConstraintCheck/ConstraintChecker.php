@@ -124,8 +124,9 @@ class ConstraintChecker {
 
             $dbr = wfGetDB( DB_SLAVE );
 
-            return $this->sortResult( $this->checkEveryStatement( $entity, $dbr ) );
-
+            $result = $this->sortResult( $this->checkEveryStatement( $entity, $dbr ) );
+            $this->writeIntoViolationsTable( $dbr, $entity, $result );
+            return $result;
         }
         return null;
     }
@@ -145,13 +146,13 @@ class ConstraintChecker {
 
             $propertyId = $claim->getPropertyId();
             $numericPropertyId = $propertyId->getNumericId();
-
+            $claimGuid = $claim->getGuid();
             $res = $this->queryConstraintsForProperty( $dbr, $numericPropertyId );
 
             foreach( $res as $row ) {
                 if( in_array( $entity->getId()->getSerialization(), $this->helper->stringToArray( $row->known_exception ) ) ) {
                     $message = 'This entity is a known exception for this constraint and has been marked as such.';
-                    $result[] = new CheckResult( $propertyId, $dataValue, $row->constraint_name, array(), 'exception', $message ); // todo: display parameters anyway
+                    $result[] = new CheckResult( $claimGuid, $propertyId, $dataValue, $row->constraint_name, array(), 'exception', $message ); // todo: display parameters anyway
                     continue;
                 }
 
@@ -159,7 +160,7 @@ class ConstraintChecker {
                 $itemArray = $this->helper->stringToArray( $row->item );
                 $propertyArray = $this->helper->stringToArray( $row->property );
 
-                $result[] = $this->getCheckResultFor( $propertyId, $dataValue, $row, $classArray, $itemArray, $propertyArray, $entity, $statement );
+                $result[] = $this->getCheckResultFor( $claimGuid, $propertyId, $dataValue, $row, $classArray, $itemArray, $propertyArray, $entity, $statement );
             }
 
         }
@@ -167,7 +168,7 @@ class ConstraintChecker {
         return $result;
     }
 
-    private function getCheckResultFor( $propertyId, $dataValue, $row, $classArray, $itemArray, $propertyArray, $entity, $statement ) {
+    private function getCheckResultFor( $claimGuid, $propertyId, $dataValue, $row, $classArray, $itemArray, $propertyArray, $entity, $statement ) {
         switch( $row->constraint_name ) {
             // Switch over every constraint, check them accordingly.
             // Return value should be a CheckResult, which should be inserted in an array of CheckResults ($results)
@@ -176,81 +177,81 @@ class ConstraintChecker {
             // ValueCountCheckers
             case "Single value":
                 return $this->getValueCountChecker()
-                    ->checkSingleValueConstraint( $propertyId, $dataValue );
+                    ->checkSingleValueConstraint( $claimGuid, $propertyId, $dataValue );
                 break;
             case "Multi value":
                 return $this->getValueCountChecker()
-                    ->checkMultiValueConstraint( $propertyId, $dataValue );
+                    ->checkMultiValueConstraint( $claimGuid, $propertyId, $dataValue );
                 break;
             case "Unique value":
                 return $this->getValueCountChecker()
-                    ->checkUniqueValueConstraint( $propertyId, $dataValue );
+                    ->checkUniqueValueConstraint( $claimGuid, $propertyId, $dataValue );
                 break;
 
             // ConnectionCheckers
             case "Target required claim":
                 return $this->getConnectionChecker()
-                    ->checkTargetRequiredClaimConstraint( $propertyId, $dataValue, $row->property, $itemArray );
+                    ->checkTargetRequiredClaimConstraint( $claimGuid, $propertyId, $dataValue, $row->property, $itemArray );
                 break;
             case "Symmetric":
                 return $this->getConnectionChecker()
-                    ->checkSymmetricConstraint( $propertyId, $dataValue, $entity->getId()->getSerialization() );
+                    ->checkSymmetricConstraint( $claimGuid, $propertyId, $dataValue, $entity->getId()->getSerialization() );
                 break;
             case "Inverse":
                 return $this->getConnectionChecker()
-                    ->checkInverseConstraint( $propertyId, $dataValue, $entity->getId()->getSerialization(), $row->property );
+                    ->checkInverseConstraint( $claimGuid, $propertyId, $dataValue, $entity->getId()->getSerialization(), $row->property );
                 break;
             case "Conflicts with":
                 return $this->getConnectionChecker()
-                    ->checkConflictsWithConstraint( $propertyId, $dataValue, $row->property, $itemArray );
+                    ->checkConflictsWithConstraint( $claimGuid, $propertyId, $dataValue, $row->property, $itemArray );
                 break;
             case "Item":
                 return $this->getConnectionChecker()
-                    ->checkItemConstraint( $propertyId, $dataValue, $row->property, $itemArray );
+                    ->checkItemConstraint( $claimGuid, $propertyId, $dataValue, $row->property, $itemArray );
                 break;
 
             // QualifierCheckers
             case "Qualifier":
                 return $this->getQualifierChecker()
-                    ->checkQualifierConstraint( $propertyId, $dataValue );
+                    ->checkQualifierConstraint( $claimGuid, $propertyId, $dataValue );
                 break;
             case "Qualifiers":
                 return $this->getQualifierChecker()
-                    ->checkQualifiersConstraint( $propertyId, $dataValue, $statement, $propertyArray );
+                    ->checkQualifiersConstraint( $claimGuid, $propertyId, $dataValue, $statement, $propertyArray );
                 break;
 
             // RangeCheckers
             case "Range":
                 return $this->getRangeChecker()
-                    ->checkRangeConstraint( $propertyId, $dataValue, $row->minimum_quantity, $row->maximum_quantity, $row->minimum_date, $row->maximum_date );
+                    ->checkRangeConstraint( $claimGuid, $propertyId, $dataValue, $row->minimum_quantity, $row->maximum_quantity, $row->minimum_date, $row->maximum_date );
                 break;
             case "Diff within range":
                 return $this->getRangeChecker()
-                    ->checkDiffWithinRangeConstraint( $propertyId, $dataValue, $row->property, $row->minimum_quantity, $row->maximum_quantity );
+                    ->checkDiffWithinRangeConstraint( $claimGuid, $propertyId, $dataValue, $row->property, $row->minimum_quantity, $row->maximum_quantity );
                 break;
 
             // Type Checkers
             case "Type":
                 return $this->getTypeChecker()
-                    ->checkTypeConstraint( $propertyId, $dataValue, $this->statements, $classArray, $row->relation );
+                    ->checkTypeConstraint( $claimGuid, $propertyId, $dataValue, $this->statements, $classArray, $row->relation );
                 break;
             case "Value type":
                 return $this->getTypeChecker()
-                    ->checkValueTypeConstraint( $propertyId, $dataValue, $classArray, $row->relation );
+                    ->checkValueTypeConstraint( $claimGuid, $propertyId, $dataValue, $classArray, $row->relation );
                 break;
 
             // Rest
             case "Format":
                 return $this->getFormatChecker()
-                    ->checkFormatConstraint( $propertyId, $dataValue, $row->pattern );
+                    ->checkFormatConstraint( $claimGuid, $propertyId, $dataValue, $row->pattern );
                 break;
             case "Commons link":
                 return $this->getCommonsLinkChecker()
-                    ->checkCommonsLinkConstraint( $propertyId, $dataValue, $row->namespace );
+                    ->checkCommonsLinkConstraint( $claimGuid, $propertyId, $dataValue, $row->namespace );
                 break;
             case "One of":
                 return $this->getOneOfChecker()
-                    ->checkOneOfConstraint( $propertyId, $dataValue, $itemArray );
+                    ->checkOneOfConstraint( $claimGuid, $propertyId, $dataValue, $itemArray );
                 break;
 
             // error case, should not be invoked
@@ -373,6 +374,76 @@ class ConstraintChecker {
             $this->formatChecker = new FormatChecker( $this->helper );
         }
         return $this->formatChecker;
+    }
+
+    /**
+     * Takes array of CheckResults, checks, if they already exist in violations table
+     * if they do not, write them into it
+     * if they do, update the entry
+     * @param array $result
+     */
+    private function writeIntoViolationsTable( $dbr, $entity, $result ) {
+        return;
+        foreach( $result as $res ) {
+            if( $res->getStatus() !== 'violation' ){
+                continue;
+            }
+
+            if( $this->entryExists( $dbr, $res ) ) {
+         //       $this->updateEntry( $dbr, $res );
+            } else {
+          //      $this->writeEntry( $dbr, $entity, $res );
+            }
+        }
+    }
+
+    /**
+     * Checks if entry in violations table already exists
+     * @param $db
+     * @param $res
+     * @return bool
+     */
+    /* private function entryExists( $db, $res ) {
+         $claimGuid = $res->getClaimGuid();
+         return !empty(
+           /*$db->select(
+                 'wdq_violations',
+                 array( 'id' ),
+                 "claim_guid = $claimGuid"
+             )
+             $db->select(
+                 'wdq_violations',						    // $table
+                 array('claim_guid', 'constraint_name' ),		// $vars (columns of the table)
+                 ("claim_guid => '$claimGuid'" ),							    // $conds
+                 __METHOD__,													// $fname = 'Database::select',
+                 array('')													// $options = array()
+             )
+
+         );
+     }
+ */
+    /**
+     * Inserts row in violation table
+     * @param $db
+     * @param $entity
+     * @param $res
+     */
+    private function writeEntry( $db, $entity, $res ) {
+        $db->insert(
+            'wdq_violations',
+            array(
+                'qid' => $entity->getId()->getSerialization(),
+                'pid' => $res->getPropertyId(),
+                'claim_guid' => $res->getClaimGuid(),
+                'constraint_type_qid' => $res->getConstraintName(),
+                'additional_information' => $res->getMessage(),
+                'status' => 'violation'
+            )
+        );
+    }
+
+    private function updateEntry( $db, $res ) {
+        //todo
     }
 
 }

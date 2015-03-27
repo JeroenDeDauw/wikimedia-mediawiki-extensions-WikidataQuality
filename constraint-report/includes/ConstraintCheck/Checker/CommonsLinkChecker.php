@@ -28,12 +28,13 @@ class CommonsLinkChecker {
 
     /**
      * Checks if data value is well-formed and links to an existing page.
+     * @param string $claimGuid
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param string $namespace
      * @return CheckResult
      */
-    public function checkCommonsLinkConstraint( $propertyId, $dataValue, $namespace ) {
+    public function checkCommonsLinkConstraint( $claimGuid, $propertyId, $dataValue, $namespace ) {
         $parameters = array();
 
         if( $namespace == null ) {
@@ -49,7 +50,7 @@ class CommonsLinkChecker {
          */
         if( $dataValue->getType() !== 'string' ) {
             $message = 'Properties with \'Commons link\' constraint need to have values of type \'string\'.';
-            return new CheckResult( $propertyId, $dataValue, 'Commons link', $parameters, 'violation', $message );
+            return new checkResult( $claimGuid, $propertyId, $dataValue, 'Commons link', $parameters, 'violation', $message );
         }
 
         $commonsLink = $dataValue->getValue();
@@ -67,7 +68,7 @@ class CommonsLinkChecker {
             $status = 'violation';
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'Commons link', $parameters, $status, $message );
+        return new checkResult( $claimGuid, $propertyId, $dataValue, 'Commons link', $parameters, $status, $message );
     }
 
     /**

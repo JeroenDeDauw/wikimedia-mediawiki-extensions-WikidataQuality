@@ -29,19 +29,20 @@ class OneOfChecker {
 
     /**
      * Checks 'One of' constraint.
+     * @param string $claimGuid
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param array $itemArray
      * @return CheckResult
      */
-    public function checkOneOfConstraint( $propertyId, $dataValue, $itemArray ) {
+    public function checkOneOfConstraint( $claimGuid, $propertyId, $dataValue, $itemArray ) {
         $parameters = array();
 
         if( $itemArray[0] === '' ) {
             $parameters['item'] = array( 'null' );
         } else {
             $func = function( $item ) {
-                if( $item !== 'novalue' && $item !== 'somevalue' ) {
+                if( strtoupper( $item[0] ) === 'Q') {
                     return new ItemId( $item );
                 } else {
                     return $item;
@@ -57,11 +58,11 @@ class OneOfChecker {
          */
         if( $dataValue->getType() !== 'wikibase-entityid' ) {
             $message = 'Properties with \'One of\' constraint need to have values of type \'wikibase-entityid\'.';
-            return new CheckResult( $propertyId, $dataValue, 'Format', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Format', $parameters, 'violation', $message );
         }
         if( $itemArray[0] === '' ) {
             $message = 'Properties with \'One of\' constraint need a parameter \'item\'.';
-            return new CheckResult( $propertyId, $dataValue, 'One of', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'One of', $parameters, 'violation', $message );
         }
 
         if( in_array( $dataValue->getEntityId()->getSerialization(), $itemArray ) ) {
@@ -72,7 +73,7 @@ class OneOfChecker {
             $status = 'violation';
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'One of', $parameters, $status, $message );
+        return new CheckResult( $claimGuid, $propertyId, $dataValue, 'One of', $parameters, $status, $message );
     }
 
 }

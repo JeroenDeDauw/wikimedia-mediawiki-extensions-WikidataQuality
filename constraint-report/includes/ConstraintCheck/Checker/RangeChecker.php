@@ -38,6 +38,7 @@ class RangeChecker {
 
     /**
      * Checks 'Range' constraint.
+     * @param string $claimGuid
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param string $minimum_quantity
@@ -46,7 +47,7 @@ class RangeChecker {
      * @param string $maximum_date
      * @return CheckResult
      */
-    public function checkRangeConstraint( $propertyId, $dataValue, $minimum_quantity, $maximum_quantity, $minimum_date, $maximum_date ) {
+    public function checkRangeConstraint( $claimGuid, $propertyId, $dataValue, $minimum_quantity, $maximum_quantity, $minimum_date, $maximum_date ) {
         $parameters = array();
 
         /*
@@ -76,7 +77,7 @@ class RangeChecker {
             $message = 'Properties with \'Range\' constraint need to have values of type \'quantity\' or \'time\'.';
         }
         if( isset( $message ) ) {
-            return new CheckResult( $propertyId, $dataValue, 'Range', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Range', $parameters, 'violation', $message );
         }
 
         $comparativeValue = $this->getComparativeValue( $dataValue );
@@ -89,10 +90,11 @@ class RangeChecker {
             $status = 'compliance';
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'Range', $parameters, $status, $message );
+        return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Range', $parameters, $status, $message );
     }
 
     /**
+     * @param string $claimGuid
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param string $property
@@ -100,7 +102,7 @@ class RangeChecker {
      * @param string $maximum_quantity
      * @return CheckResult
      */
-    public function checkDiffWithinRangeConstraint( $propertyId, $dataValue, $property, $minimum_quantity, $maximum_quantity ) {
+    public function checkDiffWithinRangeConstraint( $claimGuid, $propertyId, $dataValue, $property, $minimum_quantity, $maximum_quantity ) {
         $parameters = array();
 
         if( $property == null ) {
@@ -128,7 +130,7 @@ class RangeChecker {
             $message = 'Properties with \'Diff within range\' constraint need to have values of type \'quantity\' or \'time\'.';
         }
         if( isset( $message ) ) {
-            return new CheckResult( $propertyId, $dataValue, 'Diff within range', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Diff within range', $parameters, 'violation', $message );
         }
 
         $thisValue = $this->getComparativeValue( $dataValue );
@@ -161,7 +163,7 @@ class RangeChecker {
                     $status = 'violation';
                 }
 
-                return new CheckResult( $propertyId, $dataValue, 'Diff within range', $parameters, $status, $message );
+                return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Diff within range', $parameters, $status, $message );
             }
         }
     }

@@ -1,7 +1,7 @@
 <?php
 
 namespace WikidataQuality\ConstraintReport\Specials;
-
+ini_set('max_execution_time', 300); //300 seconds = 5 minutes
 use Html;
 use Wikibase\DataModel;
 use Wikibase\DataModel\Entity\ItemId;

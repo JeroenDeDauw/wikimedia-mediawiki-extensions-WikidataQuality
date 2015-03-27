@@ -46,13 +46,14 @@ class ConnectionChecker {
 
     /**
      * Checks 'Conflicts with' constraint.
+     * @param string $claimGuid
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param string $property
      * @param array $itemArray
      * @return CheckResult
      */
-    public function checkConflictsWithConstraint( $propertyId, $dataValue, $property, $itemArray ) {
+    public function checkConflictsWithConstraint( $claimGuid, $propertyId, $dataValue, $property, $itemArray ) {
         $parameters = array();
 
         if( $property === null ) {
@@ -80,7 +81,7 @@ class ConnectionChecker {
          */
         if( $property === null ) {
             $message = 'Properties with \'Conflicts with\' constraint need a parameter \'property\'.';
-            return new CheckResult( $propertyId, $dataValue, 'Conflicts with', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Conflicts with', $parameters, 'violation', $message );
         }
 
         /*
@@ -106,18 +107,19 @@ class ConnectionChecker {
             }
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'Conflicts with', $parameters, $status, $message );
+        return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Conflicts with', $parameters, $status, $message );
     }
 
     /**
      * Checks 'Item' constraint.
+     * @param string $claimGuid
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param string $property
      * @param array $itemArray
      * @return CheckResult
      */
-    public function checkItemConstraint( $propertyId, $dataValue, $property, $itemArray ) {
+    public function checkItemConstraint( $claimGuid, $propertyId, $dataValue, $property, $itemArray ) {
         $parameters = array();
 
         if( $property === null ) {
@@ -145,7 +147,7 @@ class ConnectionChecker {
          */
         if( $property === null ) {
             $message = 'Properties with \'Item\' constraint need a parameter \'property\'.';
-            return new CheckResult( $propertyId, $dataValue, 'Item', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Item', $parameters, 'violation', $message );
         }
 
         /*
@@ -171,18 +173,19 @@ class ConnectionChecker {
             }
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'Item', $parameters, $status, $message );
+        return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Item', $parameters, $status, $message );
     }
 
     /**
      * Checks 'Target required claim' constraint.
+     * @param string $claimGuid
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param string $property
      * @param array $itemArray
      * @return CheckResult
      */
-    public function checkTargetRequiredClaimConstraint( $propertyId, $dataValue, $property, $itemArray ) {
+    public function checkTargetRequiredClaimConstraint( $claimGuid, $propertyId, $dataValue, $property, $itemArray ) {
         $parameters = array();
 
         if( $property === null ) {
@@ -211,17 +214,17 @@ class ConnectionChecker {
          */
         if( $dataValue->getType() !== 'wikibase-entityid' ) {
             $message = 'Properties with \'Target required claim\' constraint need to have values of type \'wikibase-entityid\'.';
-            return new CheckResult( $propertyId, $dataValue, 'Target required claim', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Target required claim', $parameters, 'violation', $message );
         }
         if( $property === null ) {
             $message = 'Properties with \'Target required claim\' constraint need a parameter \'property\'.';
-            return new CheckResult( $propertyId, $dataValue, 'Target required claim', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Target required claim', $parameters, 'violation', $message );
         }
 
         $targetEntity = $this->entityLookup->getEntity( $dataValue->getEntityId() );
         if( $targetEntity === null ) {
             $message = 'Target entity does not exist.';
-            return new CheckResult( $propertyId, $dataValue, 'Target required claim', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Target required claim', $parameters, 'violation', $message );
         }
         $targetEntityStatementsArray = $targetEntity->getStatements()->toArray();
 
@@ -248,17 +251,18 @@ class ConnectionChecker {
             }
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'Target required claim', $parameters, $status, $message );
+        return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Target required claim', $parameters, $status, $message );
     }
 
     /**
      * Checks 'Symmetric' constraint.
+     * @param string $claimGuid
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param string $entityIdSerialization
      * @return CheckResult
      */
-    public function checkSymmetricConstraint( $propertyId, $dataValue, $entityIdSerialization ) {
+    public function checkSymmetricConstraint( $claimGuid, $propertyId, $dataValue, $entityIdSerialization ) {
         $parameters = array();
 
         /*
@@ -267,15 +271,15 @@ class ConnectionChecker {
          */
         if( $dataValue->getType() !== 'wikibase-entityid' ) {
             $message = 'Properties with \'Symmetric\' constraint need to have values of type \'wikibase-entityid\'.';
-            return new CheckResult( $propertyId, $dataValue, 'Symmetric', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Symmetric', $parameters, 'violation', $message );
         }
 
         $targetItem = $this->entityLookup->getEntity( $dataValue->getEntityId() );
         if( $targetItem === null ) {
             $message = 'Target item does not exist.';
-            return new CheckResult( $propertyId, $dataValue, 'Symmetric', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Symmetric', $parameters, 'violation', $message );
         }
-        $targetItemStatementsArray = $targetItem->getStatements()->toArray();
+        $targetItemStatementsArray = $targetItem->getStatements();
 
         if( $this->hasClaim( $targetItemStatementsArray, $propertyId->getSerialization(), $entityIdSerialization ) ) {
             $message = '';
@@ -285,18 +289,19 @@ class ConnectionChecker {
             $status = 'violation';
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'Symmetric', $parameters, $status, $message );
+        return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Symmetric', $parameters, $status, $message );
     }
 
     /**
      * Checks 'Inverse' constraint.
+     * @param string $claimGuid
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param string $entityIdSerialization
      * @param string $property
      * @return CheckResult
      */
-    public function checkInverseConstraint( $propertyId, $dataValue, $entityIdSerialization, $property ) {
+    public function checkInverseConstraint( $claimGuid, $propertyId, $dataValue, $entityIdSerialization, $property ) {
         $parameters = array();
 
         if( $property === null ) {
@@ -312,17 +317,17 @@ class ConnectionChecker {
          */
         if( $dataValue->getType() !== 'wikibase-entityid' ) {
             $message = 'Properties with \'Inverse\' constraint need to have values of type \'wikibase-entityid\'.';
-            return new CheckResult( $propertyId, $dataValue, 'Inverse', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Inverse', $parameters, 'violation', $message );
         }
         if( $property === null ) {
             $message = 'Properties with \'Inverse\' constraint need a parameter \'property\'.';
-            return new CheckResult( $propertyId, $dataValue, 'Inverse', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Inverse', $parameters, 'violation', $message );
         }
 
         $targetItem = $this->entityLookup->getEntity( $dataValue->getEntityId() );
         if( $targetItem === null ) {
             $message = 'Target item does not exist.';
-            return new CheckResult( $propertyId, $dataValue, 'Inverse', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Inverse', $parameters, 'violation', $message );
         }
         $targetItemStatementsArray = $targetItem->getStatements()->toArray();
 
@@ -334,7 +339,7 @@ class ConnectionChecker {
             $status = 'violation';
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'Inverse', $parameters, $status, $message );
+        return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Inverse', $parameters, $status, $message );
     }
 
     /**

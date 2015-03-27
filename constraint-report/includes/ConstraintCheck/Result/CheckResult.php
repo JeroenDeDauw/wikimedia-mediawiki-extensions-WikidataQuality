@@ -12,6 +12,11 @@ namespace WikidataQuality\ConstraintReport\ConstraintCheck\Result;
 class CheckResult {
 
     /**
+     * @var string
+     */
+    private $claimGuid;
+
+    /**
      * @var PropertyId
      */
     private $propertyId;
@@ -42,13 +47,21 @@ class CheckResult {
      */
     private $message;
 
-    public function __construct( $propertyId, $dataValue, $constraintName, $parameters = array(), $status = 'error', $message = '' ) {
+    public function __construct( $claimGuid, $propertyId, $dataValue, $constraintName, $parameters = array(), $status = 'error', $message = '' ) {
+        $this->claimGuid = $claimGuid;
         $this->propertyId = $propertyId;
         $this->dataValue = $dataValue;
         $this->constraintName = $constraintName;
         $this->parameters = $parameters;
         $this->status = $status;
         $this->message = $message;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClaimGuid() {
+        return $this->claimGuid;
     }
 
     /**

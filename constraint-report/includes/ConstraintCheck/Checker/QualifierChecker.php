@@ -38,24 +38,26 @@ class QualifierChecker {
     /**
      * If this method gets invoked, it is automatically a violation since this method only gets invoked
      * for properties used in statements.
+     * @param string $claimGuid
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @return CheckResult
      */
-    public function checkQualifierConstraint( $propertyId, $dataValue ) {
+    public function checkQualifierConstraint( $claimGuid, $propertyId, $dataValue ) {
         $message = 'The property must only be used as a qualifier.';
-        return new CheckResult( $propertyId, $dataValue, 'Qualifier', array(), 'violation', $message );
+        return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Qualifier', array(), 'violation', $message );
     }
 
     /**
      * Checks 'Qualifiers' constraint.
+     * @param string $claimGuid
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param Statement $statement
      * @param array $propertyArray
      * @return CheckResult
      */
-    public function checkQualifiersConstraint( $propertyId, $dataValue, $statement, $propertyArray ) {
+    public function checkQualifiersConstraint( $claimGuid, $propertyId, $dataValue, $statement, $propertyArray ) {
         $parameters = array();
 
         if( $propertyArray[0] === '' ) {
@@ -84,7 +86,7 @@ class QualifierChecker {
             }
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'Qualifiers', $parameters, $status, $message );
+        return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Qualifiers', $parameters, $status, $message );
     }
 
 }

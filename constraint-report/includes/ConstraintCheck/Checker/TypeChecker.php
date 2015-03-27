@@ -35,13 +35,14 @@ class TypeChecker {
 
     /**
      * Checks 'Value type' constraint.
+     * @param string $claimGuid
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param array $classArray
      * @param string $relation
      * @return CheckResult
      */
-    public function checkValueTypeConstraint( $propertyId, $dataValue, $classArray, $relation ) {
+    public function checkValueTypeConstraint( $claimGuid, $propertyId, $dataValue, $classArray, $relation ) {
         $parameters = array();
 
         if( $classArray[0] === '' ) {
@@ -70,11 +71,11 @@ class TypeChecker {
          */
         if( $dataValue->getType() !== 'wikibase-entityid' ) {
             $message = 'Properties with \'Value type\' constraint need to have values of type \'wikibase-entityid\'.';
-            return new CheckResult( $propertyId, $dataValue, 'Value type', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Value type', $parameters, 'violation', $message );
         }
         if( $classArray[0] === '' ) {
             $message = 'Properties with \'Value type\' constraint need the parameter \'class\'.';
-            return new CheckResult( $propertyId, $dataValue, 'Value type', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Value type', $parameters, 'violation', $message );
         }
 
         /*
@@ -87,18 +88,18 @@ class TypeChecker {
             $relationId = self::subclassId;
         } else {
             $message = 'Parameter \'relation\' must be either \'instance\' or \'subclass\'.';
-            return new CheckResult( $propertyId, $dataValue, 'Value type', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Value type', $parameters, 'violation', $message );
         }
 
         try {
             $item = $this->entityLookup->getEntity( $dataValue->getEntityId() );
         } catch( Exception $ex ) {
             $message = 'Could not load this property\'s value entity.';
-            return new CheckResult( $propertyId, $dataValue, 'Value type', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Value type', $parameters, 'violation', $message );
         }
         if( !$item ) {
             $message = 'This property\'s value entity does not exist.';
-            return new CheckResult( $propertyId, $dataValue, 'Value type', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Value type', $parameters, 'violation', $message );
         }
 
         $statements = $this->entityLookup->getEntity( $dataValue->getEntityId() )->getStatements();
@@ -111,11 +112,12 @@ class TypeChecker {
             $status = 'violation';
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'Value type', $parameters, $status, $message );
+        return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Value type', $parameters, $status, $message );
     }
 
     /**
      * Checks 'Value type' constraint.
+     * @param string $claimGuid
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param StatementList $statements
@@ -123,7 +125,7 @@ class TypeChecker {
      * @param string $relation
      * @return CheckResult
      */
-    public function checkTypeConstraint( $propertyId, $dataValue, $statements, $classArray, $relation ) {
+    public function checkTypeConstraint( $claimGuid, $propertyId, $dataValue, $statements, $classArray, $relation ) {
         $parameters = array();
 
         if( $classArray[0] === '' ) {
@@ -151,7 +153,7 @@ class TypeChecker {
          */
         if ( $classArray[0] === '' ) {
             $message = 'Properties with \'Type\' constraint need the parameter \'class\'.';
-            return new CheckResult( $propertyId, $dataValue, 'Type', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Type', $parameters, 'violation', $message );
         }
 
         /*
@@ -164,7 +166,7 @@ class TypeChecker {
             $relationId = self::subclassId;
         } else {
             $message = 'Parameter \'relation\' must be either \'instance\' or \'subclass\'.';
-            return new CheckResult( $propertyId, $dataValue, 'Type', $parameters, 'violation', $message );
+            return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Type', $parameters, 'violation', $message );
         }
 
         if( $this->hasClassInRelation( $statements, $relationId, $classArray ) ) {
@@ -175,7 +177,7 @@ class TypeChecker {
             $status = 'violation';
         }
 
-        return new CheckResult( $propertyId, $dataValue, 'Type', $parameters, $status, $message );
+        return new CheckResult( $claimGuid, $propertyId, $dataValue, 'Type', $parameters, $status, $message );
     }
 
     private function isSubclassOf( $comparativeClass, $classesToCheck ) {
