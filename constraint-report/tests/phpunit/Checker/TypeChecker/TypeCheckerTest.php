@@ -16,7 +16,7 @@ class TypeCheckerTest extends \PHPUnit_Framework_TestCase {
     protected function setUp() {
         parent::setUp();
         $this->helper = new ConstraintReportHelper();
-        $this->lookup = new JsonFileEntityLookup(  __DIR__ );
+        $this->lookup = new JsonFileEntityLookup( __DIR__ );
         $this->typeChecker = new TypeChecker( $this->lookup, $this->helper );
     }
 

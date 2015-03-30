@@ -2,6 +2,7 @@
 
 namespace WikidataQuality\ConstraintReport\Test\CommonsLinkChecker;
 
+use DataValues\StringValue;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\CommonsLinkChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
 
@@ -23,22 +24,22 @@ class CommonsLinkCheckerTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testCheckCommonsLinkConstraintValid() {
-        $value = 'President Barack Obama.jpg';
-        $this->assertEquals('compliance', $this->commonsLinkChecker->checkCommonsLinkConstraint( $value )->getStatus(), 'check should comply');
+        $value = new StringValue( 'President Barack Obama.jpg' );
+        $this->assertEquals('compliance', $this->commonsLinkChecker->checkCommonsLinkConstraint( 1, $value, 'File' )->getStatus(), 'check should comply');
     }
 
     public function testCheckCommonsLinkConstraintNotValid() {
-        $value1 = 'President_Barack_Obama.jpg';
-        $value2 = 'President%20Barack%20Obama.jpg';
-        $value3 = 'File:President Barack Obama.jpg';
-        $this->assertEquals( 'violation', $this->commonsLinkChecker->checkCommonsLinkConstraint( $value1 )->getStatus(), 'check should not comply' );
-        $this->assertEquals( 'violation', $this->commonsLinkChecker->checkCommonsLinkConstraint( $value2 )->getStatus(), 'check should not comply' );
-        $this->assertEquals( 'violation', $this->commonsLinkChecker->checkCommonsLinkConstraint( $value3 )->getStatus(), 'check should not comply' );
+        $value1 = new StringValue( 'President_Barack_Obama.jpg' );
+        $value2 = new StringValue( 'President%20Barack%20Obama.jpg' );
+        $value3 = new StringValue( 'File:President Barack Obama.jpg' );
+        $this->assertEquals( 'violation', $this->commonsLinkChecker->checkCommonsLinkConstraint( 1, $value1, 'File' )->getStatus(), 'check should not comply' );
+        $this->assertEquals( 'violation', $this->commonsLinkChecker->checkCommonsLinkConstraint( 1, $value2, 'File' )->getStatus(), 'check should not comply' );
+        $this->assertEquals( 'violation', $this->commonsLinkChecker->checkCommonsLinkConstraint( 1, $value3, 'File' )->getStatus(), 'check should not comply' );
     }
 
     public function testCheckCommonsLinkConstraintNotExistent() {
-        $value = 'Qwertz Asdfg Yxcv.jpg';
-        $this->assertEquals('violation', $this->commonsLinkChecker->checkCommonsLinkConstraint( $value )->getStatus(), 'check should not comply' );
+        $value = new StringValue( 'Qwertz Asdfg Yxcv.jpg' );
+        $this->assertEquals('violation', $this->commonsLinkChecker->checkCommonsLinkConstraint( 1, $value, 'File' )->getStatus(), 'check should not comply' );
     }
 
 }

@@ -324,7 +324,7 @@ class ConnectionChecker {
             $message = 'Target item does not exist.';
             return new CheckResult( $propertyId, $dataValue, 'Inverse', $parameters, 'violation', $message );
         }
-        $targetItemStatementsArray = $targetItem->getStatements()->toArray();
+        $targetItemStatementsArray = $targetItem->getStatements();
 
         if( $this->hasClaim( $targetItemStatementsArray, $propertyId->getSerialization(), $entityIdSerialization ) ) {
             $message = '';
@@ -367,21 +367,23 @@ class ConnectionChecker {
                 } else { // array
                     $itemIdSerializationArray = $itemIdSerializationOrArray;
                 }
-                return $this->arrayHasClaim( $statement, $itemIdSerializationArray );
+                if( $this->arrayHasClaim( $statement, $itemIdSerializationArray ) ) {
+                    return true;
+                }
             }
         }
         return false;
     }
 
     private function arrayHasClaim( $statement, $itemIdSerializationArray ) {
+        $mainSnak = $statement->getMainSnak();
+        if( $mainSnak->getType() !== 'value' || $mainSnak->getDataValue()->getType() !== 'wikibase-entityid' ) {
+            return false;
+        }
+
         foreach( $itemIdSerializationArray as $itemIdSerialization ) {
-            $mainSnak = $statement->getMainSnak();
-            if( $mainSnak->getType() === 'value' ) {
-                if( $mainSnak->getDataValue() === 'wikibase-entityid' ) {
-                    if( $mainSnak->getDataValue()->getEntityId()->getSerialization() === $itemIdSerialization ) {
-                        return true;
-                    }
-                }
+            if( $mainSnak->getDataValue()->getEntityId()->getSerialization() === $itemIdSerialization ) {
+                return true;
             }
         }
         return false;

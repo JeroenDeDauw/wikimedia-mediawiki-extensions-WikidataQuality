@@ -41,7 +41,7 @@ class OneOfChecker {
             $parameters['item'] = array( 'null' );
         } else {
             $func = function( $item ) {
-                if( $item !== 'novalue' && $item !== 'somevalue' ) {
+                if( $item[0] === 'Q' ) {
                     return new ItemId( $item );
                 } else {
                     return $item;
