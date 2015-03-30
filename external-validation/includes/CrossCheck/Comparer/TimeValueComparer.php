@@ -5,10 +5,12 @@ namespace WikidataQuality\ExternalValidation\CrossCheck\Comparer;
 
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use ValueParsers\CalendarModelParser;
+use ValueParsers\TimeParser;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 use Wikibase\Lib\MwTimeIsoFormatter;
-use Wikibase\Lib\Parsers\TimeParser;
+use Wikibase\Lib\Parsers\TimeParserFactory;
 
 
 /**
@@ -64,7 +66,8 @@ class TimeValueComparer extends DataValueComparer
     {
         $parserOptions = new ParserOptions();
         $parserOptions->setOption( ValueParser::OPT_LANG, $this->dumpMetaInformation->getLanguage() );
+        $timeParserFactory = new TimeParserFactory( $parserOptions );
 
-        return new TimeParser( $parserOptions );
+        return $timeParserFactory->getTimeParser();
     }
 }
