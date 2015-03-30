@@ -4,15 +4,15 @@ namespace WikidataQuality\ExternalValidation\CrossCheck;
 
 
 use Doctrine\Instantiator\Exception\InvalidArgumentException;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Repo\WikibaseRepo;
-use WikidataQuality\ExternalValidation\DumpMetaInformation;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResultList;
+use WikidataQuality\ExternalValidation\DumpMetaInformation;
 
 
 /**
@@ -30,12 +30,6 @@ class CrossChecker
     private $db;
 
     /**
-     * Wikibase entity id parser.
-     * @var \Wikibase\DataModel\Entity\EntityIdParser
-     */
-    private $entityIdParser;
-
-    /**
      * Wikibase load balancer for database connections.
      * If existing connection was passed to constructor, $loadBalancer is null.
      * @var \LoadBalancer
@@ -49,30 +43,20 @@ class CrossChecker
     private $dumpMetaInformation;
 
 
-    public function __construct( $db = null )
+    public function __construct()
     {
-        // Get database connection
-        if( $db )
-        {
-            $this->db = $db;
-        }
-        else
-        {
-            // Get load balancer
-            wfWaitForSlaves();
-            $this->loadBalancer = wfGetLB();
+        // Get load balancer
+        wfWaitForSlaves();
+        $this->loadBalancer = wfGetLB();
 
-            // Establish new connection
-            $this->db = $this->loadBalancer->getConnection( DB_SLAVE );
-        }
+        // Establish new connection
+        $this->db = $this->loadBalancer->getConnection( DB_SLAVE );
     }
 
     public function __destruct()
     {
-        // Reuse database connection, if it was opened in constructor
-        if( $this->loadBalancer ) {
-            $this->loadBalancer->reuseConnection( $this->db );
-        }
+        // Reuse database connection
+        $this->loadBalancer->reuseConnection( $this->db );
     }
 
 
@@ -123,7 +107,7 @@ class CrossChecker
      */
     public function crossCheckStatements( $entity, $statements )
     {
-        if( $entity ) {
+        if ( $entity ) {
             // Check $statements argument
             if ( $statements instanceof Statement ) {
                 $statements = new StatementList( $statements );
@@ -132,12 +116,10 @@ class CrossChecker
             }
             $statementsOfEntity = $entity->getStatements()->toArray();
             foreach ( $statements as $statement ) {
-                if( !in_array( $statement, $statementsOfEntity ) )
-                {
+                if ( !in_array( $statement, $statementsOfEntity ) ) {
                     throw new InvalidArgumentException( 'All statements in $statements must belong to $entity.' );
                 }
             }
-
 
             // Get validatable properties
             $validatableProperties = $this->getValidatablePropertyIds();
@@ -181,8 +163,7 @@ class CrossChecker
         $results = new CompareResultList();
         foreach ( $statements as $statement ) {
             // Check, if statements is validatable with current external database
-            if( in_array( $statement->getClaim()->getPropertyId()->getNumericId(), $validatablePropertyIds ))
-            {
+            if ( in_array( $statement->getClaim()->getPropertyId()->getNumericId(), $validatablePropertyIds ) ) {
                 // Get claim with guid
                 $claim = $statement->getClaim();
                 $claimGuid = $claim->getGuid();
@@ -220,7 +201,7 @@ class CrossChecker
         // Build external ids conditions
         $externalIdsConditions = array();
         foreach ( $externalIds as $externalId ) {
-            $externalIdsConditions[] = "external_id=\"$externalId\"";
+            $externalIdsConditions[ ] = "external_id=\"$externalId\"";
         }
 
         // Run query
@@ -228,7 +209,7 @@ class CrossChecker
         $numericPropertyId = $propertyId->getNumericId();
         $result = $this->db->select(
             DUMP_DATA_TABLE,
-            array( 'dump_id', 'external_value' ),
+            array( 'dump_item_id', 'external_value' ),
             array(
                 "identifier_pid=$numericIdentifierPropertyId",
                 "pid=$numericPropertyId",
@@ -237,13 +218,13 @@ class CrossChecker
         );
 
         $externalValues = array();
-        foreach ($result as $row) {
-            $externalValues[] = $row->external_value;
-            $dumpId = $row->dump_id;
+        foreach ( $result as $row ) {
+            $externalValues[ ] = $row->external_value;
+            $dumpItemId = new ItemId( 'Q' . $row->dump_item_id );
         }
         // TODO: Maybe there are multiple dumps per identifier property
-        if( isset( $dumpId ) ) {
-            $this->dumpMetaInformation = DumpMetaInformation::get( $this->db, $dumpId );
+        if ( isset( $dumpItemId ) ) {
+            $this->dumpMetaInformation = DumpMetaInformation::get( $this->db, $dumpItemId );
         }
         return $externalValues;
     }
@@ -285,7 +266,7 @@ class CrossChecker
 
         $validatableProperties = array();
         foreach ( $result as $row ) {
-            $validatableProperties[ $row->identifier_pid ][] = $row->pid;
+            $validatableProperties[ $row->identifier_pid ][ ] = $row->pid;
         }
 
         return $validatableProperties;

@@ -66,7 +66,6 @@ class CrossCheckerTest extends \MediaWikiTestCase
 
         // Create dump meta information
         $this->dumpMetaInformation = new DumpMetaInformation(
-            1,
             '36578',
             new DateTime( '2015-01-01 00:00:00' ),
             'en',
@@ -115,35 +114,35 @@ class CrossCheckerTest extends \MediaWikiTestCase
             DUMP_DATA_TABLE,
             array(
                 array(
-                    'dump_id' => 1,
+                    'dump_item_id' => 36578,
                     'identifier_pid' => 227,
                     'external_id' => '119033364',
                     'pid' => 1,
                     'external_value' => 'foo'
                 ),
                 array(
-                    'dump_id' => 1,
+                    'dump_item_id' => 36578,
                     'identifier_pid' => 227,
                     'external_id' => '119033364',
                     'pid' => 2,
                     'external_value' => 'baz'
                 ),
                 array(
-                    'dump_id' => 1,
+                    'dump_item_id' => 36578,
                     'identifier_pid' => 227,
                     'external_id' => '119033364',
                     'pid' => 3,
                     'external_value' => 'foobar'
                 ),
                 array(
-                    'dump_id' => 1,
+                    'dump_item_id' => 36578,
                     'identifier_pid' => 227,
                     'external_id' => '121649091',
                     'pid' => 1,
                     'external_value' => 'bar'
                 ),
                 array(
-                    'dump_id' => 2,
+                    'dump_item_id' => 47328,
                     'identifier_pid' => 434,
                     'external_id' => 'e9ed318d-8cc5-4cf8-ab77-505e39ab6ea4',
                     'pid' => 1,
@@ -151,27 +150,6 @@ class CrossCheckerTest extends \MediaWikiTestCase
                 )
             )
         );
-    }
-
-
-    public function testConstruct()
-    {
-        // Check private fields using reflection
-        $crossCheckerReflection = new \ReflectionClass( 'WikidataQuality\ExternalValidation\CrossCheck\CrossChecker' );
-        $loadBalancerProperty = $crossCheckerReflection->getProperty( 'loadBalancer' );
-        $loadBalancerProperty->setAccessible( true );
-        $dbProperty = $crossCheckerReflection->getProperty( 'db' );
-        $dbProperty->setAccessible( true );
-
-        // Create CrossChecker with implicit database connection
-        $crossChecker = new CrossChecker();
-        $this->assertNotNull( $loadBalancerProperty->getValue( $crossChecker ) );
-        $this->assertNotNull( $dbProperty->getValue( $crossChecker ) );
-
-        // Create CrossChecker with explicit database connection
-        $crossChecker = new CrossChecker( $this->db );
-        $this->assertNull( $loadBalancerProperty->getValue( $crossChecker ) );
-        $this->assertNotNull( $dbProperty->getValue( $crossChecker ) );
     }
 
 
@@ -186,7 +164,7 @@ class CrossCheckerTest extends \MediaWikiTestCase
         }
 
         // Run cross-check
-        $crossChecker = $this->getTestCrossChecker();
+        $crossChecker = new CrossChecker();
         $results = $crossChecker->crossCheckEntity( $entity, $propertyIds );
 
         $this->runResultAssertions( $results, $expectedResults );
@@ -380,7 +358,7 @@ class CrossCheckerTest extends \MediaWikiTestCase
         }
 
         // Run cross-check
-        $crossChecker = $this->getTestCrossChecker();
+        $crossChecker = new CrossChecker();
         $results = $crossChecker->crossCheckStatements( $entity, $statements );
 
         $this->runResultAssertions( $results, $expectedResults );
@@ -475,17 +453,5 @@ class CrossCheckerTest extends \MediaWikiTestCase
         } else {
             $this->assertEquals( $expectedResults, $results );
         }
-    }
-
-
-    /**
-     * Returns new CrossChecker instance with temporary database connection.
-     * @return CrossChecker
-     */
-    private function getTestCrossChecker()
-    {
-        $crossChecker = new CrossChecker( $this->db );
-
-        return $crossChecker;
     }
 }

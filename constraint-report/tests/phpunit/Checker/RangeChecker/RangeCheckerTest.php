@@ -11,7 +11,16 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\RangeChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
 use WikidataQuality\Tests\Helper\JsonFileEntityLookup;
 
-class RangeCheckerTest extends \PHPUnit_Framework_TestCase {
+
+/**
+ * @covers WikidataQuality\ConstraintReport\ConstraintCheck\Checker\RangeChecker
+ *
+ * @uses WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult
+ *
+ * @author BP2014N1
+ * @license GNU GPL v2+
+ */
+class RangeCheckerTest extends \MediaWikiTestCase {
 
     private $helper;
     private $lookup;

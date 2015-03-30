@@ -1,14 +1,17 @@
 <?php
 
-namespace WikidataQuality\ExternalValidation\UpdateTable\Importer;
+namespace WikidataQuality\ExternalValidation\UpdateTable;
 
+
+use DateTime;
+use DateTimeZone;
+use Wikibase\DataModel\Entity\ItemId;
 use WikidataQuality\ExternalValidation\DumpMetaInformation;
-use WikidataQuality\ExternalValidation\UpdateTable\ImportContext;
 
 
 /**
  * Class Importer
- * @package WikidataQuality\ExternalValidation\UpdateTable\Importer
+ * @package WikidataQuality\ExternalValidation\UpdateTable
  * @author BP2014N1
  * @license GNU GPL v2+
  */
@@ -37,19 +40,19 @@ class Importer
         $db = $this->establishDbConnection();
 
         // Insert meta data information
-        $metaInformation = $this->insertMetaInformation( $db );
+        $dumpItemIds = $this->insertMetaInformation( $db );
 
         // Remove old database entries
-        $this->deleteOldDatabaseEntries( $db, $metaInformation->getDumpId() );
+        $this->deleteOldDatabaseEntries( $db, $dumpItemIds );
 
         // Insert external values
-        $this->insertExternalValues( $db, $metaInformation->getDumpId() );
+        $this->insertExternalValues( $db );
 
-        // Close database connection
-        $this->closeDbConnection( $db );
+        // Reuse database connection
+        $this->reuseDbConnection( $db );
     }
 
-    protected function deleteOldDatabaseEntries( $db, $dumpId )
+    protected function deleteOldDatabaseEntries( $db, $dumpItemIds )
     {
         global $wgDBtype;
         $tableName = $this->importContext->getTargetTableName();
@@ -59,6 +62,7 @@ class Importer
             if ( !$this->importContext->isQuiet() ) {
                 print "$tableName table does not exist.\nExecuting core/maintenance/update.php may help.\n";
             }
+            return;
         }
 
         // Delete all entries
@@ -66,19 +70,21 @@ class Importer
             print "Removing old entries\n";
         }
 
-        if ( $wgDBtype === 'sqlite' ) {
-            $db->delete( $tableName, 'dump_id=' . $dumpId );
-        } else {
-            do {
-                $db->commit( __METHOD__, 'flush' );
-                wfWaitForSlaves();
-                if ( !$this->importContext->isQuiet() ) {
-                    print "Deleting a batch\n";
-                }
-                $table = $db->tableName( $tableName );
-                $batchSize = $this->importContext->getBatchSize();
-                $db->query( "DELETE FROM $table WHERE dump_id=$dumpId LIMIT $batchSize" );
-            } while ( $db->affectedRows() > 0 );
+        foreach ( $dumpItemIds as $dumpItemId ) {
+            if ( $wgDBtype === 'sqlite' ) {
+                $db->delete( $tableName, 'dump_id=' . $dumpItemId->getNumericId() );
+            } else {
+                do {
+                    $db->commit( __METHOD__, 'flush' );
+                    wfWaitForSlaves();
+                    if ( !$this->importContext->isQuiet() ) {
+                        print "Deleting a batch\n";
+                    }
+                    $table = $db->tableName( $tableName );
+                    $batchSize = $this->importContext->getBatchSize();
+                    $db->query( "DELETE FROM $table WHERE dump_item_id=" . $dumpItemId->getNumericId() . " LIMIT $batchSize" );
+                } while ( $db->affectedRows() > 0 );
+            }
         }
     }
 
@@ -96,41 +102,44 @@ class Importer
     }
 
     /**
-     * Close database connection
+     * Mark databsae connection as being available for reuse
      * @param \DatabaseBase $db
      */
-    protected function closeDbConnection( $db )
+    protected function reuseDbConnection( $db )
     {
         $loadBalancer = $this->importContext->getLoadBalancer();
-        $loadBalancer->closeConnection( $db );
+        $loadBalancer->reuseConnection( $db );
     }
 
     /**
      * Inserts meta information stored in csv file into database.
      * @param \DatabaseBase $db
+     * @return array
      */
     protected function insertMetaInformation( $db )
     {
-        // Open csv file and get first line
+        // Open csv file
         $csvFile = fopen( $this->importContext->getMetaInformationFilePath(), 'rb' );
-        $data = fgetcsv( $csvFile );
 
-        // Write meta information to databsae
-        $metaInformation = new DumpMetaInformation(
-            $data[ 0 ],
-            $data[ 1 ],
-            $data[ 2 ],
-            $data[ 3 ],
-            $data[ 4 ],
-            $data[ 5 ],
-            $data[ 6 ]
-        );
-        $metaInformation->save( $db );
+        $dumpItemIds = array();
+        while ( $data = fgetcsv( $csvFile ) ) {
+            $metaInformation = new DumpMetaInformation(
+                new ItemId( 'Q' . $data[ 0 ] ),
+                new DateTime( $data[ 1 ], new DateTimeZone( 'UTC' ) ),
+                $data[ 2 ],
+                $data[ 3 ],
+                $data[ 4 ],
+                $data[ 5 ]
+            );
+            $metaInformation->save( $db );
+
+            $dumpItemIds[] = $metaInformation->getSourceItemId();
+        }
 
         // Close csv file
         fclose( $csvFile );
 
-        return $metaInformation;
+        return $dumpItemIds;
     }
 
     /**
@@ -138,7 +147,7 @@ class Importer
      * @param \DatabaseBase $db
      * @param string $dumpId
      */
-    protected function insertExternalValues( $db, $dumpId )
+    protected function insertExternalValues( $db )
     {
         // Open csv file
         $csvFile = fopen( $this->importContext->getEntitiesFilePath(), 'rb' );
@@ -167,11 +176,11 @@ class Importer
 
             // Add data of read row to accumulator
             $accumulator[ ] = array(
-                'dump_id' => $dumpId,
-                'identifier_pid' => $data[ 0 ],
-                'external_id' => $data[ 1 ],
-                'pid' => $data[ 2 ],
-                'external_value' => $data[ 3 ],
+                'dump_item_id' => $data[ 0 ],
+                'identifier_pid' => $data[ 1 ],
+                'external_id' => $data[ 2 ],
+                'pid' => $data[ 3 ],
+                'external_value' => $data[ 4 ],
             );
         }
 

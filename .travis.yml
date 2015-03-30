@@ -11,8 +11,8 @@ matrix:
       php: 5.5
     - env: DBTYPE=sqlite
       php: 5.5
-    #- env: DBTYPE=mysql
-    #  php: hhvm-nightly
+    - env: DBTYPE=mysql
+      php: hhvm-nightly
     - env: DBTYPE=sqlite
       php: hhvm-nightly
 

@@ -6,7 +6,15 @@ use DataValues\StringValue;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\FormatChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
 
-class FormatCheckerTest extends \PHPUnit_Framework_TestCase {
+/**
+ * @covers WikidataQuality\ConstraintReport\ConstraintCheck\Checker\FormatChecker
+ *
+ * @uses WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult
+ *
+ * @author BP2014N1
+ * @license GNU GPL v2+
+ */
+class FormatCheckerTest extends \MediaWikiTestCase {
     
     private $helper;
     private $formatChecker;

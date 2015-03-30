@@ -1,4 +1,4 @@
-# WikidataQuality  [![Build Status](https://travis-ci.org/WikidataQuality/wikimedia-mediawiki-extensions-WikidataQuality.svg)](https://travis-ci.org/WikidataQuality/wikimedia-mediawiki-extensions-WikidataQuality)  [![Coverage Status](https://coveralls.io/repos/WikidataQuality/wikimedia-mediawiki-extensions-WikidataQuality/badge.svg)](https://coveralls.io/r/WikidataQuality/wikimedia-mediawiki-extensions-WikidataQuality)
+# WikidataQuality  [![Build Status](https://travis-ci.org/WikidataQuality/wikimedia-mediawiki-extensions-WikidataQuality.svg?branch=master)](https://travis-ci.org/WikidataQuality/wikimedia-mediawiki-extensions-WikidataQuality)  [![Coverage Status](https://coveralls.io/repos/WikidataQuality/wikimedia-mediawiki-extensions-WikidataQuality/badge.svg?branch=master)](https://coveralls.io/r/WikidataQuality/wikimedia-mediawiki-extensions-WikidataQuality)
 
 ## Installation
 

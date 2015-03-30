@@ -6,7 +6,15 @@ use DataValues\StringValue;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\CommonsLinkChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
 
-class CommonsLinkCheckerTest extends \PHPUnit_Framework_TestCase {
+/**
+ * @covers WikidataQuality\ConstraintReport\ConstraintCheck\Checker\CommonsLinkChecker
+ *
+ * @uses WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult
+ *
+ * @author BP2014N1
+ * @license GNU GPL v2+
+ */
+class CommonsLinkCheckerTest extends \MediaWikiTestCase {
 
     private $helper;
     private $commonsLinkChecker;

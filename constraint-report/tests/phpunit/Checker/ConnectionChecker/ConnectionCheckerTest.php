@@ -10,7 +10,15 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelp
 use WikidataQuality\Tests\Helper\JsonFileEntityLookup;
 
 
-class ConnectionCheckerTest extends \PHPUnit_Framework_TestCase {
+/**
+ * @covers WikidataQuality\ConstraintReport\ConstraintCheck\Checker\ConnectionChecker
+ *
+ * @uses WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult
+ *
+ * @author BP2014N1
+ * @license GNU GPL v2+
+ */
+class ConnectionCheckerTest extends \MediaWikiTestCase {
 
     private $lookup;
     private $helper;

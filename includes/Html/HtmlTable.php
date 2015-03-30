@@ -16,15 +16,15 @@ use Html;
 class HtmlTable {
     /**
      * Headers of the table.
-     * @var array
+     * @var HtmlTableHeader
      */
-    private $headers;
+    private $headers = array();
 
     /**
      * Rows of the table.
      * @var array
      */
-    private $rows;
+    private $rows = array();
 
     /**
      * Number of columns of the table.
@@ -33,10 +33,10 @@ class HtmlTable {
     private $columnsCount;
 
     /**
-     * Determines, if the table is sortable.
+     * Determines, whether the table is sortable.
      * @var bool
      */
-    private $isSortable;
+    private $isSortable = false;
 
 
     /**
@@ -45,10 +45,59 @@ class HtmlTable {
      */
     public function __construct( $headers, $isSortable = false )
     {
-        $this->headers = $headers;
-        $this->rows = array();
+        if( is_array( $headers ) )
+        {
+            foreach ( $headers as $header ) {
+                if( is_string( $header ) )
+                {
+                    $this->headers[] = new HtmlTableHeader( $header );
+                }
+                elseif ( $header instanceof HtmlTableHeader )
+                {
+                    $this->headers[] = $header;
+
+                    if ( $header->getIsSortable() )
+                    {
+                        $this->isSortable = true;
+                    }
+                }
+                else
+                {
+                    throw new InvalidArgumentException('$headers must be an array of strings or HtmlTableHeader elements.');
+                }
+            }
+        }
+        else
+        {
+            throw new InvalidArgumentException('$headers must be an array of strings or HtmlTableHeader elements.');
+        }
+
         $this->columnsCount = count($headers);
-        $this->isSortable = $isSortable;
+    }
+
+
+    /**
+     * @return HtmlTableHeader
+     */
+    public function getHeaders()
+    {
+        return $this->headers;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRows()
+    {
+        return $this->rows;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsSortable()
+    {
+        return $this->isSortable;
     }
 
 
@@ -61,11 +110,17 @@ class HtmlTable {
         // Check cells
         if( !is_array( $cells ) )
         {
-            throw new InvalidArgumentException('$cells must be array.');
+            throw new InvalidArgumentException('$cells must be array of strings.');
         }
         if( count( $cells ) != $this->columnsCount )
         {
             throw new InvalidArgumentException('$cells must contain ' . $this->columnsCount . ' cells.');
+        }
+        foreach ( $cells as $cell ) {
+            if( !is_string( $cell ))
+            {
+                throw new InvalidArgumentException('$cells must be array of strings.');
+            }
         }
 
         // Add cells into new row
@@ -98,10 +153,11 @@ class HtmlTable {
             $html .= Html::openElement(
                 'th',
                 array(
-                    'role' => 'columnheader button'
+                    'role' => 'columnheader button',
+                    'class' => $this->isSortable && !$header->getIsSortable() ? 'unsortable' : ''
                 )
             )
-            . $header
+            . $header->getText()
             . Html::closeElement( 'th' );
         }
         $html .= Html::closeElement( 'tr' );
