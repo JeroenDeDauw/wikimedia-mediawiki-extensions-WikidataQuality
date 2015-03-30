@@ -2,6 +2,7 @@
 
 namespace WikidataQuality\ConstraintReport\Test\OneOfChecker;
 
+use DataValues\StringValue;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\OneOfChecker;
@@ -32,12 +33,34 @@ class OneOfCheckerTest extends \MediaWikiTestCase {
         parent::tearDown();
     }
 
-    public function testCheckOneOfConstraint() {
+    public function testCheckOneOfConstraint()
+    {
         $valueIn = new EntityIdValue( new ItemId( 'Q1' ) );
         $valueNotIn = new EntityIdValue( new ItemId( 'Q9' ) );
         $values = array( 'Q1', 'Q2', 'Q3' );
         $this->assertEquals( 'compliance', $this->oneOfChecker->checkOneOfConstraint( 123, $valueIn, $values )->getStatus(), 'check should comply' );
         $this->assertEquals( 'violation', $this->oneOfChecker->checkOneOfConstraint( 123, $valueNotIn, $values )->getStatus(), 'check should not comply' );
+    }
+
+    public function testCheckOneOfConstraintWrongType()
+    {
+        $value = new StringValue( 'Q1' );
+        $values = array( 'Q1', 'Q2', 'Q3' );
+        $this->assertEquals( 'violation', $this->oneOfChecker->checkOneOfConstraint( 123, $value, $values )->getStatus(), 'check should not comply' );
+    }
+
+    public function testCheckOneOfConstraintEmptyArray()
+    {
+        $value = new EntityIdValue( new ItemId( 'Q1' ) );
+        $values = array( '' );
+        $this->assertEquals( 'violation', $this->oneOfChecker->checkOneOfConstraint( 123, $value, $values )->getStatus(), 'check should not comply' );
+    }
+
+    public function testCheckOneOfConstraintArrayWithSomevalue()
+    {
+        $value = new EntityIdValue( new ItemId( 'Q1' ) );
+        $values = array( 'Q1', 'Q2', 'Q3', 'somevalue' );
+        $this->assertEquals( 'compliance', $this->oneOfChecker->checkOneOfConstraint( 123, $value, $values )->getStatus(), 'check should comply' );
     }
 
 }
