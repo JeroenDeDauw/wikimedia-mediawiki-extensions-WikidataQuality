@@ -94,14 +94,14 @@ class ConstraintChecker {
     private $commonsLinkChecker;
 
     /**
-     * List of all statemtens of given entity.
+     * List of all statements of given entity.
      * @var StatementList
      */
     private $statements;
 
-    public function __construct() {
+    public function __construct( $lookup ) {
         // Get entity lookup
-        $this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+        $this->entityLookup = $lookup;
 
         // Get load balancer
         wfWaitForSlaves();

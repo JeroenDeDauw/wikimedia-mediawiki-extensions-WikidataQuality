@@ -110,7 +110,7 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
             }
 
             // check constraints and display results.
-            $constraintChecker = new ConstraintChecker();
+            $constraintChecker = new ConstraintChecker( $this->entityLookup );
             $results = $constraintChecker->execute( $this->entity );
 
             $out->addHTML(
