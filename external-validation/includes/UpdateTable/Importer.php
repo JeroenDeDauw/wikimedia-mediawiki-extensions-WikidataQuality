@@ -72,7 +72,7 @@ class Importer
 
         foreach ( $dumpItemIds as $dumpItemId ) {
             if ( $wgDBtype === 'sqlite' ) {
-                $db->delete( $tableName, 'dump_id=' . $dumpItemId->getNumericId() );
+                $db->delete( $tableName, 'dump_item_id=' . $dumpItemId->getNumericId() );
             } else {
                 do {
                     $db->commit( __METHOD__, 'flush' );
