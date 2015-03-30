@@ -3,6 +3,8 @@
 namespace WikidataQuality\ConstraintReport\Test\CommonsLinkChecker;
 
 use DataValues\StringValue;
+use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\ItemId;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\CommonsLinkChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
 
@@ -33,7 +35,12 @@ class CommonsLinkCheckerTest extends \MediaWikiTestCase {
 
     public function testCheckCommonsLinkConstraintValid() {
         $value = new StringValue( 'President Barack Obama.jpg' );
-        $this->assertEquals('compliance', $this->commonsLinkChecker->checkCommonsLinkConstraint( 1, $value, 'File' )->getStatus(), 'check should comply');
+        $this->assertEquals( 'compliance', $this->commonsLinkChecker->checkCommonsLinkConstraint( 1, $value, 'File' )->getStatus(), 'check should comply' );
+    }
+
+    public function testCheckCommonsLinkConstraintWithoutNamespace() {
+        $value = new StringValue( 'President Barack Obama.jpg' );
+        $this->assertEquals( 'violation', $this->commonsLinkChecker->checkCommonsLinkConstraint( 1, $value, null )->getStatus(), 'check should not comply' );
     }
 
     public function testCheckCommonsLinkConstraintNotValid() {
@@ -47,7 +54,12 @@ class CommonsLinkCheckerTest extends \MediaWikiTestCase {
 
     public function testCheckCommonsLinkConstraintNotExistent() {
         $value = new StringValue( 'Qwertz Asdfg Yxcv.jpg' );
-        $this->assertEquals('violation', $this->commonsLinkChecker->checkCommonsLinkConstraint( 1, $value, 'File' )->getStatus(), 'check should not comply' );
+        $this->assertEquals( 'violation', $this->commonsLinkChecker->checkCommonsLinkConstraint( 1, $value, 'File' )->getStatus(), 'check should not comply' );
+    }
+
+    public function testCheckCommonsLinkConstraintNoStringValue() {
+        $value = new EntityIdValue( new ItemId( 'Q1' ) );
+        $this->assertEquals( 'violation', $this->commonsLinkChecker->checkCommonsLinkConstraint( 1, $value, 'File' )->getStatus(), 'check should not comply' );
     }
 
 }

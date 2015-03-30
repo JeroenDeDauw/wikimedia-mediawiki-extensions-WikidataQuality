@@ -65,4 +65,12 @@ class QualifierCheckerTest extends \MediaWikiTestCase {
         $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
     }
 
+    public function testQualifiersConstraintNoQualifiers() {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q4' ) );
+        $qualifierChecker = new QualifierChecker( $entity->getStatements(), $this->helper );
+
+        $checkResult = $qualifierChecker->checkQualifiersConstraint( 'P39', 'Q344', $this->getFirstStatement( $entity ),  array( '' ) );
+        $this->assertEquals( 'compliance', $checkResult->getStatus(), 'check should comply' );
+    }
+
 }

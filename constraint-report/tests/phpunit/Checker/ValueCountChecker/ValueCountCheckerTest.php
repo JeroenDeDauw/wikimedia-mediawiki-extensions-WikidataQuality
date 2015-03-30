@@ -29,6 +29,7 @@ class ValueCountCheckerTest extends \MediaWikiTestCase {
         $this->helper = new ConstraintReportHelper();
         $this->singlePropertyId = new PropertyId( 'P36' );
         $this->multiPropertyId = new PropertyId( 'P161' );
+        $this->uniquePropertyId = new PropertyId( 'P227' );
         $this->lookup = new JsonFileEntityLookup( __DIR__ );
     }
 
@@ -93,4 +94,13 @@ class ValueCountCheckerTest extends \MediaWikiTestCase {
         $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
     }
 
+    // todo; it is currently only testing that 'todo' comes back
+    public function testCheckUniqueValueConstraint()
+    {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
+        $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
+
+        $checkResult = $valueCountChecker->checkUniqueValueConstraint( $this->uniquePropertyId, 'Q404' );
+        $this->assertEquals( 'todo', $checkResult->getStatus(), 'check should point out that it should be implemented soon' );
+    }
 }
