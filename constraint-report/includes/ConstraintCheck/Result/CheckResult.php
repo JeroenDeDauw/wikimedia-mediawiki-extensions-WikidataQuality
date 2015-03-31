@@ -45,7 +45,7 @@ class CheckResult {
      */
     private $message;
 
-    public function __construct( $propertyId, $dataValue, $constraintName, $parameters = array(), $status = 'error', $message = '' ) {
+    public function __construct( $propertyId, $dataValue, $constraintName, $parameters = array(), $status = 'todo', $message = '' ) {
         $this->propertyId = $propertyId;
         $this->dataValue = $dataValue;
         $this->constraintName = $constraintName;

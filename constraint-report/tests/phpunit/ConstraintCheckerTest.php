@@ -36,7 +36,7 @@ class ConstraintCheckerTest extends \MediaWikiTestCase {
         $this->constraintChecker = new ConstraintChecker( $this->lookup );
 
         // Specify database tables used by this test
-        $this->tablesUsed[ ] = 'constraints_ready_for_migration';
+        $this->tablesUsed[ ] = CONSTRAINT_TABLE;
     }
 
     protected function tearDown() {
@@ -52,25 +52,26 @@ class ConstraintCheckerTest extends \MediaWikiTestCase {
     public function addDBData()
     {
         $this->db->delete(
-            'constraints_ready_for_migration',
+            CONSTRAINT_TABLE,
             '*'
         );
 
         // adds every type of constraint once to constraints table
         // each constraint belonging to the same property
         $this->db->insert(
-            'constraints_ready_for_migration',
+            CONSTRAINT_TABLE,
             array(
                 array(
                     'pid' => 1,
                     'constraint_name' => 'Commons link',
-                    'namespace' => 'File'
+                    'namespace' => 'File',
+                    'known_exception' => 'Q5'
                 )
             )
         );
 
         $this->db->insert(
-            'constraints_ready_for_migration',
+            CONSTRAINT_TABLE,
             array(
                 array(
                     'pid' => 1,
@@ -91,7 +92,7 @@ class ConstraintCheckerTest extends \MediaWikiTestCase {
         );
 
         $this->db->insert(
-            'constraints_ready_for_migration',
+            CONSTRAINT_TABLE,
             array(
                 array(
                     'pid' => 1,
@@ -104,7 +105,7 @@ class ConstraintCheckerTest extends \MediaWikiTestCase {
         );
 
         $this->db->insert(
-            'constraints_ready_for_migration',
+            CONSTRAINT_TABLE,
             array(
                 array(
                     'pid' => 1,
@@ -115,7 +116,7 @@ class ConstraintCheckerTest extends \MediaWikiTestCase {
         );
 
         $this->db->insert(
-            'constraints_ready_for_migration',
+            CONSTRAINT_TABLE,
             array(
                 array(
                     'pid' => 1,
@@ -141,7 +142,7 @@ class ConstraintCheckerTest extends \MediaWikiTestCase {
         );
 
         $this->db->insert(
-            'constraints_ready_for_migration',
+            CONSTRAINT_TABLE,
             array(
                 array(
                     'pid' => 1,
@@ -152,7 +153,7 @@ class ConstraintCheckerTest extends \MediaWikiTestCase {
         );
 
         $this->db->insert(
-            'constraints_ready_for_migration',
+            CONSTRAINT_TABLE,
             array(
                 array(
                     'pid' => 1,
@@ -164,7 +165,7 @@ class ConstraintCheckerTest extends \MediaWikiTestCase {
         );
 
         $this->db->insert(
-            'constraints_ready_for_migration',
+            CONSTRAINT_TABLE,
             array(
                 array(
                     'pid' => 1,
@@ -182,7 +183,7 @@ class ConstraintCheckerTest extends \MediaWikiTestCase {
         );
 
         $this->db->insert(
-            'constraints_ready_for_migration',
+            CONSTRAINT_TABLE,
             array(
                 array(
                     'pid' => 1,
@@ -198,12 +199,52 @@ class ConstraintCheckerTest extends \MediaWikiTestCase {
                 )
             )
         );
+
+        $this->db->insert(
+            CONSTRAINT_TABLE,
+            array(
+                array(
+                    'pid' => 3,
+                    'constraint_name' => 'Is not inside'
+                )
+            )
+        );
     }
 
-    public function testExecuteNoViolations() {
-        //Checks for Item with only statement: Date of birth which has 8 constraints defined
+    public function testExecute() {
         $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
         $result = $this->constraintChecker->execute( $entity );
-        $this->assertEquals( 17, count( $result ), 'Only one result' );
+        $this->assertEquals( 17, count( $result ), 'Every constraint should be represented by one result' );
     }
+
+    public function testExecuteWithoutEntity() {
+        $result = $this->constraintChecker->execute( null );
+        $this->assertEquals( null, $result, 'Should return null' );
+    }
+
+    public function testExecuteDoesNotCrashWhenResultIsEmpty() {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q2' ) );
+        $result = $this->constraintChecker->execute( $entity );
+        $this->assertEquals( 0, count( $result ), 'Should be empty' );
+    }
+
+    public function testExecuteWithConstraintThatDoesNotBelongToCheckedConstraints() {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q3' ) );
+        $result = $this->constraintChecker->execute( $entity );
+        $this->assertEquals( 1, count( $result ), 'Should be one result' );
+        $this->assertEquals( 'todo', $result[0]->getStatus(), 'Should be marked as a todo' );
+    }
+
+    public function testExecuteDoesNotCrashWhenStatementHasNovalue() {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q4' ) );
+        $result = $this->constraintChecker->execute( $entity );
+        $this->assertEquals( 0, count( $result ), 'Should be empty' );
+    }
+
+    public function testExecuteWithKnownException() {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q5' ) );
+        $result = $this->constraintChecker->execute( $entity );
+        $this->assertEquals( 'exception', $result[0]->getStatus(), 'Should be an exception' );
+    }
+
 }
