@@ -56,5 +56,6 @@ global $wgAPIModules;
 $wgAPIModules['wdqcrosscheck'] = 'WikidataQuality\ExternalValidation\Api\CrossCheck';
 
 // Define database table names
+define("CONSTRAINT_TABLE", "wdq_constraints");
 define("DUMP_DATA_TABLE", "wdq_external_data");
 define("DUMP_META_TABLE", "wdq_dump_information");

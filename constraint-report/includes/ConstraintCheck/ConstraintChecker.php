@@ -124,7 +124,13 @@ class ConstraintChecker {
 
             $dbr = wfGetDB( DB_SLAVE );
 
-            return $this->sortResult( $this->checkEveryStatement( $entity, $dbr ) );
+            $result = $this->checkEveryStatement( $entity, $dbr );
+
+            if( count( $result ) > 1 ) {
+                return $this->sortResult( $result );
+            } else {
+                return $result;
+            }
 
         }
         return null;
@@ -262,14 +268,14 @@ class ConstraintChecker {
 
     private function queryConstraintsForProperty( $dbr, $prop ) {
         return $dbr->select(
-            'constraints_ready_for_migration',						    // $table
+            'constraints_ready_for_migration',						            // $table
             array( 'pid', 'constraint_name',
                 'class', 'constraint_status', 'comment', 'group_by', 'item', 'known_exception',
                 'maximum_date', 'maximum_quantity', 'minimum_date', 'minimum_quantity',
-                'namespace', 'pattern', 'property', 'relation' ),		// $vars (columns of the table)
-            ( "pid = $prop" ),							                // $conds
-            __METHOD__,													// $fname = 'Database::select',
-            array( '' )													// $options = array()
+                'namespace', 'pattern', 'property', 'relation', 'snak' ),		// $vars (columns of the table)
+            ( "pid = $prop" ),							                        // $conds
+            __METHOD__,													        // $fname = 'Database::select',
+            array( '' )													        // $options = array()
         );
     }
 
