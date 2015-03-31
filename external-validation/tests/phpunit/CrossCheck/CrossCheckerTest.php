@@ -19,7 +19,7 @@ use Wikibase\Lib\Store\EntityLookup;
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\CrossChecker
  *
- * @group Database
+ * @group  Database
  *
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer
