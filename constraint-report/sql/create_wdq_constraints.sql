@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS wdq_conastraints (
+CREATE TABLE IF NOT EXISTS wdq_constraints (
   ID                INT(11)       PRIMARY KEY AUTO_INCREMENT,
   pid               INT(11)       DEFAULT NULL,
   constraint_name   VARCHAR(255)  DEFAULT NULL,
