@@ -2,6 +2,9 @@
 
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Result;
 
+use Wikibase\DataModel\Entity\PropertyId;
+use DataValues\DataValue;
+
 /**
  * Class CheckResult
  * Used for getting information about the result of a constraint check

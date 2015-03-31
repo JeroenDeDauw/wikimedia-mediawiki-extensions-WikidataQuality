@@ -1,6 +1,7 @@
 <?php
 
 namespace WikidataQuality\ConstraintReport\Test\ConstraintChecker;
+
 use Wikibase\DataModel\Entity\ItemId;
 use WikidataQuality\ConstraintReport\ConstraintCheck\ConstraintChecker;
 use WikidataQuality\Tests\Helper\JsonFileEntityLookup;
@@ -25,6 +26,7 @@ class ConstraintCheckerTest extends \MediaWikiTestCase {
 
     protected function tearDown() {
         unset( $this->lookup );
+        unset( $this->constraintChecker );
         parent::tearDown();
     }
 
