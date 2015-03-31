@@ -268,7 +268,7 @@ class ConstraintChecker {
 
     private function queryConstraintsForProperty( $dbr, $prop ) {
         return $dbr->select(
-            'constraints_ready_for_migration',						            // $table
+            CONSTRAINT_TABLE,						                            // $table
             array( 'pid', 'constraint_name',
                 'class', 'constraint_status', 'comment', 'group_by', 'item', 'known_exception',
                 'maximum_date', 'maximum_quantity', 'minimum_date', 'minimum_quantity',
