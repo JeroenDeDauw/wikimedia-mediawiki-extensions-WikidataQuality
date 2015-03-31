@@ -47,12 +47,6 @@ class CompareResult
     private $dataMismatch;
 
     /**
-     * Determines, whether references are missing.
-     * @var bool
-     */
-    private $referencesMissing;
-
-    /**
      * Meta information about the data source.
      * @var DumpMetaInformation
      */
@@ -65,11 +59,10 @@ class CompareResult
      * @param DataValue $localValue
      * @param array $externalValues
      * @param bool $dataMismatch
-     * @param bool $referencesMissing
      * @param DumpMetaInformation $dumpMetaInformation
      * @throws InvalidArgumentException
      */
-    public function __construct( $propertyId, $claimGuid, $localValue, $externalValues, $dataMismatch, $referencesMissing, $dumpMetaInformation )
+    public function __construct( $propertyId, $claimGuid, $localValue, $externalValues, $dataMismatch, $dumpMetaInformation )
     {
         if ( $propertyId instanceof PropertyId ) {
             $this->propertyId = $propertyId;
@@ -99,7 +92,6 @@ class CompareResult
         }
 
         $this->dataMismatch = $dataMismatch;
-        $this->referencesMissing = $referencesMissing;
         $this->dumpMetaInformation = $dumpMetaInformation;
     }
 
@@ -143,13 +135,6 @@ class CompareResult
         return $this->dataMismatch;
     }
 
-    /**
-     * @return bool
-     */
-    public function areReferencesMissing()
-    {
-        return $this->referencesMissing;
-    }
 
     /**
      * @return DumpMetaInformation

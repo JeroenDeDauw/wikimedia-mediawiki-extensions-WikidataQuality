@@ -7,12 +7,12 @@ use Wikibase\Lib\Serializers\SerializerObject;
 
 
 /**
- * Class CompareResultListSerializer
+ * Class CrossCheckResultListSerializer
  * @package WikidataQuality\ExternalValidation\Api\Serializer
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class CompareResultListSerializer extends SerializerObject
+class CrossCheckResultListSerializer extends SerializerObject
 {
     private $compareResultSerializer;
 
@@ -22,12 +22,12 @@ class CompareResultListSerializer extends SerializerObject
         parent::__construct( $options );
 
         // Get compare result serializer
-        $this->compareResultSerializer = new CompareResultSerializer( $options );
+        $this->compareResultSerializer = new CrossCheckResultSerializer( $options );
     }
 
 
     /**
-     * @param \CompareResultList $resultList
+     * @param \CrossCheckResultList $resultList
      */
     public function getSerialized( $resultList )
     {
@@ -43,7 +43,7 @@ class CompareResultListSerializer extends SerializerObject
                 $index = (string)$propertyId;
             }
 
-            // Serialize single CompareResults
+            // Serialize single CrossCheckResults
             foreach ( $resultList->getWithPropertyId( $propertyId ) as $result ) {
                 $serialization[ $index ][ ] = $this->compareResultSerializer->getSerialized( $result );
             }

@@ -8,12 +8,12 @@ use Wikibase\Lib\Serializers\SerializerObject;
 
 
 /**
- * Class CompareResultSerializer
+ * Class CrossCheckResultSerializer
  * @package WikidataQuality\ExternalValidation\Api\Serializer
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class CompareResultSerializer extends SerializerObject
+class CrossCheckResultSerializer extends SerializerObject
 {
     /**
      * @var DataValueSerializer
@@ -39,7 +39,7 @@ class CompareResultSerializer extends SerializerObject
 
 
     /**
-     * @param \CompareResult $resultList
+     * @param \CrossCheckResult $resultList
      */
     public function getSerialized( $result )
     {
@@ -55,7 +55,7 @@ class CompareResultSerializer extends SerializerObject
             $this->setIndexedTagName( $externalValues, 'dataValue' );
         }
 
-        // Serialize whole CompareResult object
+        // Serialize whole CrossCheckResult object
         if ( $result->hasDataMismatchOccurred() ) {
             $dataMismatch = "mismatch";
         } else {

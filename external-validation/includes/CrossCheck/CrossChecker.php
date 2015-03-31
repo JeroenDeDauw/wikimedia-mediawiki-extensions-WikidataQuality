@@ -12,6 +12,9 @@ use Wikibase\DataModel\Statement\StatementList;
 use WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResultList;
+use WikidataQuality\ExternalValidation\CrossCheck\Result\CrossCheckResult;
+use WikidataQuality\ExternalValidation\CrossCheck\Result\CrossCheckResultList;
+use WikidataQuality\ExternalValidation\CrossCheck\Result\ReferenceResultList;
 use WikidataQuality\ExternalValidation\DumpMetaInformation;
 
 
@@ -125,7 +128,7 @@ class CrossChecker
             $validatableProperties = $this->getValidatablePropertyIds();
 
             // Run cross-check for each external id
-            $resultList = new CompareResultList();
+            $resultList = new CrossCheckResultList();
             foreach ( $validatableProperties as $identifierPropertyId => $validatablePropertyIds ) {
                 // Parse property id from array key
                 $identifierPropertyId = new PropertyId( 'P' . $identifierPropertyId );
@@ -160,7 +163,7 @@ class CrossChecker
     private function crossCheckStatementsWithDatabase( $statements, $identifierPropertyId, $validatablePropertyIds, $externalIds )
     {
         // Cross-check validatable statements
-        $results = new CompareResultList();
+        $results = new CrossCheckResultList();
         foreach ( $statements as $statement ) {
             // Check, if statements is validatable with current external database
             if ( in_array( $statement->getClaim()->getPropertyId()->getNumericId(), $validatablePropertyIds ) ) {
@@ -178,9 +181,16 @@ class CrossChecker
                     $externalValues = $this->getExternalValues( $identifierPropertyId, $externalIds, $propertyId );
 
                     // Compare data value
-                    $result = $this->compareDataValues( $propertyId, $claimGuid, $dataValue, $externalValues );
-                    if ( $result ) {
-                        $results->add( $result );
+                    $compareResult = $this->compareDataValues( $propertyId, $claimGuid, $dataValue, $externalValues );
+                    if ( $compareResult ) {
+
+                        // Check for missing or addable references
+                        $referenceHandler = new ReferenceHandler( $statement, $compareResult, $externalIds, $identifierPropertyId );
+                        $referenceResult = $referenceHandler->execute();
+                        if ( $referenceResult ) {
+                            $result = new CrossCheckResult( $compareResult, $referenceResult );
+                            $results->add( $result );
+                        }
                     }
                 }
             }
@@ -245,7 +255,7 @@ class CrossChecker
             if ( $comparer ) {
                 $result = $comparer->execute();
 
-                return new CompareResult( $propertyId, $claimGuid, $comparer->getLocalValue(), $comparer->getExternalValues(), !$result, null, $this->dumpMetaInformation );
+                return new CompareResult( $propertyId, $claimGuid, $comparer->getLocalValue(), $comparer->getExternalValues(), !$result, $this->dumpMetaInformation );
             }
         }
     }

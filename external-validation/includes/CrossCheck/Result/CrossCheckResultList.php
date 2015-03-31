@@ -8,12 +8,12 @@ use IteratorAggregate;
 
 
 /**
- * Class CompareResultList
+ * Class CrossCheckResultList
  * @package WikidataQuality\ExternalValidation\CrossCheck\Result
  * @author BP2014N1
  * @license GNU GPL v2+
  */
-class CompareResultList implements IteratorAggregate, Countable
+class CrossCheckResultList implements IteratorAggregate, Countable
 {
     private $results;
 
@@ -28,19 +28,19 @@ class CompareResultList implements IteratorAggregate, Countable
 
 
     /**
-     * Adds a given CompareResult to the list.
-     * @param CompareResult $result
+     * Adds a given CrossCheckResult to the list.
+     * @param CrossCheckResult $result
      */
-    public function add( CompareResult $result )
+    public function add( CrossCheckResult $result )
     {
         $this->results[ ] = $result;
     }
 
     /**
-     * Merges another CompareResultList to the current one.
-     * @param CompareResultList $list
+     * Merges another CrossCheckResultList to the current one.
+     * @param CrossCheckResultList $list
      */
-    public function merge( CompareResultList $resultList )
+    public function merge( CrossCheckResultList $resultList )
     {
         $this->results = array_merge( $this->results, $resultList->results );
     }
@@ -62,22 +62,7 @@ class CompareResultList implements IteratorAggregate, Countable
     }
 
     /**
-     * Specifies, whether at least one reference is missing.
-     * @return bool
-     */
-    public function areReferencesMissing()
-    {
-        foreach ( $this->results as $result ) {
-            if ( $result->areReferencesMissing() ) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Returns the property ids used by compare results.
+     * Returns the property ids used by crosscheck results.
      * @return array
      */
     function getPropertyIds()
@@ -95,9 +80,9 @@ class CompareResultList implements IteratorAggregate, Countable
     }
 
     /**
-     * Returns all compare results using given property id.
+     * Returns all crosscheck results using given property id.
      * @param $propertyId
-     * @return CompareResultList
+     * @return CrossCheckResultList
      */
     function getWithPropertyId( $propertyId )
     {

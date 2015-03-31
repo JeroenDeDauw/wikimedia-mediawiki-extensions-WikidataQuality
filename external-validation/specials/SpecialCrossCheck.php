@@ -61,10 +61,11 @@ class SpecialCrossCheck extends SpecialWikidataQualityPage
             . Html::input(
                 'entityId',
                 '',
-                'text',
+                'autocompleteselect',
                 array(
                     'id' => 'wdq-crosscheck-entityid',
-                    'placeholder' => $this->msg( 'wikidataquality-crosscheck-form-entityid-placeholder' )->text()
+                    'placeholder' => $this->msg( 'wikidataquality-crosscheck-form-entityid-placeholder' )->text(),
+
                 )
             )
             . Html::input(

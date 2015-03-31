@@ -171,7 +171,7 @@ class CrossCheck extends ApiWikibase
         $serializationOptions = array(
             SerializationOptions::OPT_INDEX_TAGS => $this->getResult()->getIsRawMode()
         );
-        $serializer = new CompareResultListSerializer( new SerializationOptions( $serializationOptions ) );
+        $serializer = new CrossCheckResultListSerializer( new SerializationOptions( $serializationOptions ) );
 
         // Write output array
         $output = array();
