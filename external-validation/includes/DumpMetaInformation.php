@@ -35,10 +35,10 @@ class DumpMetaInformation
     private $language;
 
     /**
-     * Source url of the downloaded dump.
+     * Array of source url of the downloaded dump.
      * @var string
      */
-    private $sourceUrl;
+    private $sourceUrls;
 
     /**
      * Size of the imported dump.
@@ -57,12 +57,12 @@ class DumpMetaInformation
      * @param $sourceItemId
      * @param $importDate
      * @param $language
-     * @param $sourceUrl
+     * @param $sourceUrls
      * @param $size
      * @param $license
      * @throws InvalidArgumentException
      */
-    public function __construct( $sourceItemId, $importDate, $language, $sourceUrl, $size, $license )
+    public function __construct( $sourceItemId, $importDate, $language, $sourceUrls, $size, $license )
     {
         if ( is_string( $sourceItemId ) ) {
             if ( $sourceItemId[ 0 ] !== 'Q' ) {
@@ -81,8 +81,16 @@ class DumpMetaInformation
             throw new InvalidArgumentException( '$importDate must be an instance of DateTime.' );
         }
 
+        if ( is_string( $sourceUrls ) ) {
+            $sourceUrls = array( $sourceUrls );
+        }
+        if ( is_array( $sourceUrls ) ) {
+            $this->sourceUrls = $sourceUrls;
+        } else {
+            throw new InvalidArgumentException( '$sourceUrls must be array of strings.' );
+        }
+
         $this->language = $language;
-        $this->sourceUrl = $sourceUrl;
         $this->size = $size;
         $this->license = $license;
     }
@@ -118,9 +126,9 @@ class DumpMetaInformation
      * Returns url of imported dump.
      * @return string
      */
-    public function getSourceUrl()
+    public function getSourceUrls()
     {
-        return $this->sourceUrl;
+        return $this->sourceUrls;
     }
 
     /**
@@ -153,7 +161,7 @@ class DumpMetaInformation
             'source_item_id' => $this->getSourceItemId()->getNumericId(),
             'import_date' => $this->getImportDate()->format( DateTime::ISO8601 ),
             'language' => $this->getLanguage(),
-            'source_url' => $this->getSourceUrl(),
+            'source_url' => json_encode( $this->getSourceUrls() ),
             'size' => $this->getSize(),
             'license' => $this->getLicense()
         );
@@ -195,16 +203,13 @@ class DumpMetaInformation
     {
         // Check arguments
         if ( $sourceItemIds ) {
-            if (  $sourceItemIds instanceof ItemId ) {
+            if ( $sourceItemIds instanceof ItemId ) {
                 $sourceItemIds = array( $sourceItemIds );
             } elseif ( !is_array( $sourceItemIds ) ) {
                 throw new InvalidArgumentException( '$sourceItemIds must be array of ItemIds.' );
-            }
-            else {
-                foreach( $sourceItemIds as $sourceItemId )
-                {
-                    if ( !$sourceItemId instanceof ItemId )
-                    {
+            } else {
+                foreach ( $sourceItemIds as $sourceItemId ) {
+                    if ( !$sourceItemId instanceof ItemId ) {
                         throw new InvalidArgumentException( '$sourceItemIds must be array of ItemIds.' );
                     }
                 }
@@ -213,8 +218,7 @@ class DumpMetaInformation
 
         // Build condition
         $conditions = array();
-        $mapFunction = function( $itemId )
-        {
+        $mapFunction = function ( $itemId ) {
             return $itemId->getNumericId();
         };
         if ( $sourceItemIds ) {
@@ -234,7 +238,7 @@ class DumpMetaInformation
             $sourceItemId = new ItemId( 'Q' . $row->source_item_id );
             $import_date = new DateTime( $row->import_date, new DateTimeZone( 'UTC' ) );
             $language = $row->language;
-            $sourceUrl = $row->source_url;
+            $sourceUrl = json_decode( $row->source_url );
             $size = (int)$row->size;
             $license = $row->license;
 

@@ -75,7 +75,7 @@ class DumpMetaInformationTest extends \MediaWikiTestCase
                     'source_item_id' => $dumpMetaInformation->getSourceItemId()->getNumericId(),
                     'import_date' => $dumpMetaInformation->getImportDate()->format( DateTime::ISO8601 ),
                     'language' => $dumpMetaInformation->getLanguage(),
-                    'source_url' => $dumpMetaInformation->getSourceUrl(),
+                    'source_url' => json_encode( $dumpMetaInformation->getSourceUrls() ),
                     'size' => $dumpMetaInformation->getSize(),
                     'license' =>  $dumpMetaInformation->getLicense()
                 )
@@ -94,7 +94,7 @@ class DumpMetaInformationTest extends \MediaWikiTestCase
         $this->assertEquals( $expectedSourceItemId, $metaInformation->getSourceItemId() );
         $this->assertEquals( $importDate, $metaInformation->getImportDate() );
         $this->assertEquals( $language, $metaInformation->getLanguage() );
-        $this->assertEquals( $sourceUrl, $metaInformation->getSourceUrl() );
+        $this->assertEquals( $sourceUrl, $metaInformation->getSourceUrls() );
         $this->assertEquals( $size, $metaInformation->getSize() );
         $this->assertEquals( $license, $metaInformation->getLicense() );
     }
@@ -108,7 +108,7 @@ class DumpMetaInformationTest extends \MediaWikiTestCase
         $itemId = new ItemId( 'Q123' );
         $importDate = new DateTime( '30-11-2015' );
         $language = 'de';
-        $sourceUrl = 'http://randomurl.tld';
+        $sourceUrl = array( 'http://randomurl.tld' );
         $size = 42;
         $license = 'CC0';
 

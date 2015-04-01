@@ -127,7 +127,7 @@ class Importer
                 new ItemId( 'Q' . $data[ 0 ] ),
                 new DateTime( $data[ 1 ], new DateTimeZone( 'UTC' ) ),
                 $data[ 2 ],
-                $data[ 3 ],
+                json_decode( $data[ 3 ] ),
                 $data[ 4 ],
                 $data[ 5 ]
             );
@@ -162,6 +162,7 @@ class Importer
                 wfWaitForSlaves();
                 $db->insert( $this->importContext->getTargetTableName(), $accumulator );
                 if ( !$this->importContext->isQuiet() ) {
+                    print "\r\033[K";
                     print "$i rows inserted\n";
                 }
 
@@ -182,6 +183,10 @@ class Importer
                 'pid' => $data[ 3 ],
                 'external_value' => $data[ 4 ],
             );
+        }
+
+        if ( !$this->importContext->isQuiet() ) {
+            print "\n";
         }
 
         // Close csv file
