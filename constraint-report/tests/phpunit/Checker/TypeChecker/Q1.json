@@ -1,10 +1,10 @@
 {
 
-    "pageid": 3709,
-    "ns": 120,
-    "title": "Item:Q1",
-    "lastrevid": 3803,
-    "modified": "2015-02-21T12:18:51Z",
+    "pageid": 2076,
+    "ns": 0,
+    "title": "Q1",
+    "lastrevid": 11029,
+    "modified": "2015-04-01T13:51:03Z",
     "id": "Q1",
     "type": "item",
     "labels": 
@@ -39,7 +39,7 @@
 
 {
 
-    "id": "Q1$74e0e826-4455-b07e-1cf3-300d50cf5af0",
+    "id": "Q1$56e6a474-4431-fb24-cc15-1d580e467559",
     "mainsnak": 
 
 {
@@ -55,7 +55,7 @@
 
                 {
                     "entity-type": "item",
-                    "numeric-id": 215627
+                    "numeric-id": 2
                 },
                 "type": "wikibase-entityid"
             }
@@ -65,19 +65,19 @@
     }
 
 ],
-"P569":
+"P1":
 [
 
 {
 
-    "id": "Q1$b101ae0e-4e05-8325-58ad-d54b4d0ee7ca",
+    "id": "Q1$e35707be-4a84-61fe-9b52-623784a316a7",
     "mainsnak": 
 
 {
 
     "snaktype": "value",
-    "property": "P569",
-    "datatype": "time",
+    "property": "P1",
+    "datatype": "wikibase-item",
     "datavalue": 
 
 {
@@ -85,14 +85,10 @@
     "value": 
 
                         {
-                            "time": "+00000001970-01-01T00:00:00Z",
-                            "timezone": 0,
-                            "before": 0,
-                            "after": 0,
-                            "precision": 11,
-                            "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                            "entity-type": "item",
+                            "numeric-id": 42
                         },
-                        "type": "time"
+                        "type": "wikibase-entityid"
                     }
                 },
                 "type": "statement",
