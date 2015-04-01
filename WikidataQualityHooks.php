@@ -17,7 +17,11 @@ final class WikidataQualityHooks
 
     public static function onUnitTestsList( &$files )
     {
-        $files = array_merge( $files, glob( __DIR__ . '/external-validation/tests/phpunit/*Test.php' ), glob( __DIR__ . '/constraint-report/tests/phpunit/*Test.php' ) );
+        $files = array_merge(
+            $files,
+            glob( __DIR__ . '/tests/phpunit/*Test.php' ),
+            glob( __DIR__ . '/constraint-report/tests/phpunit/*Test.php' ),
+            glob( __DIR__ . '/external-validation/tests/phpunit/*Test.php' ) );
         return true;
     }
 }

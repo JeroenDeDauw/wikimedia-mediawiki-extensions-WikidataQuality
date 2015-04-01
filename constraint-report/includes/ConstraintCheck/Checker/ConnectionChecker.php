@@ -292,7 +292,7 @@ class ConnectionChecker {
         }
         $targetItemStatementsArray = $targetItem->getStatements();
 
-        if( $this->hasClaim( $targetItemStatementsArray, $propertyId->getSerialization(), $entityIdSerialization ) ) {
+        if( $this->hasClaim( $targetItemStatementsArray, $property, $entityIdSerialization ) ) {
             $message = '';
             $status = 'compliance';
         } else {
