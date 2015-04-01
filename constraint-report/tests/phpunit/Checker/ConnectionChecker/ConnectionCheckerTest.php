@@ -161,4 +161,64 @@ class ConnectionCheckerTest extends \MediaWikiTestCase {
         $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
     }
 
+
+    /**
+     * Following tests are testing the target required claim constraint
+     */
+
+    public function testTargetRequiredClaimConstraintValid()
+    {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
+        $connectionChecker = new ConnectionChecker( $entity->getStatements(), $this->lookup, $this->helper );
+        $checkResult = $connectionChecker->checkTargetRequiredClaimConstraint( new PropertyId( 'P188' ), new EntityIdValue( new ItemId( 'Q5' ) ), 'P2', array('Q42') );
+        $this->assertEquals( 'compliance', $checkResult->getStatus(), 'check should comply' );
+    }
+
+    public function testTargetRequiredClaimConstraintWrongItem()
+    {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
+        $connectionChecker = new ConnectionChecker( $entity->getStatements(), $this->lookup, $this->helper );
+        $checkResult = $connectionChecker->checkTargetRequiredClaimConstraint( new PropertyId( 'P188' ), new EntityIdValue( new ItemId( 'Q5' ) ), 'P2', array('Q2') );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
+    }
+
+    public function testTargetRequiredClaimConstraintOnlyProperty()
+    {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
+        $connectionChecker = new ConnectionChecker( $entity->getStatements(), $this->lookup, $this->helper );
+        $checkResult = $connectionChecker->checkTargetRequiredClaimConstraint( new PropertyId( 'P188' ), new EntityIdValue( new ItemId( 'Q5' ) ), 'P2', array('') );
+        $this->assertEquals( 'compliance', $checkResult->getStatus(), 'check should comply' );
+    }
+
+    public function testTargetRequiredClaimConstraintOnlyPropertyButDoesNotExist()
+    {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
+        $connectionChecker = new ConnectionChecker( $entity->getStatements(), $this->lookup, $this->helper );
+        $checkResult = $connectionChecker->checkTargetRequiredClaimConstraint( new PropertyId( 'P188' ), new EntityIdValue( new ItemId( 'Q5' ) ), 'P3', array('') );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
+    }
+
+    public function testTargetRequiredClaimConstraintWithoutProperty()
+    {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
+        $connectionChecker = new ConnectionChecker( $entity->getStatements(), $this->lookup, $this->helper );
+        $checkResult = $connectionChecker->checkTargetRequiredClaimConstraint( new PropertyId( 'P188' ), new EntityIdValue( new ItemId( 'Q5' ) ), null, array('') );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
+    }
+
+    public function testTargetRequiredClaimConstraintWrongDataTypeForItem()
+    {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
+        $connectionChecker = new ConnectionChecker( $entity->getStatements(), $this->lookup, $this->helper );
+        $checkResult = $connectionChecker->checkTargetRequiredClaimConstraint( new PropertyId( 'P188' ), new StringValue( 'Q5' ), 'P2', array('') );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
+    }
+
+    public function testTargetRequiredClaimConstraintItemDoesNotExist()
+    {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
+        $connectionChecker = new ConnectionChecker( $entity->getStatements(), $this->lookup, $this->helper );
+        $checkResult = $connectionChecker->checkTargetRequiredClaimConstraint( new PropertyId( 'P188' ), new EntityIdValue( new ItemId( 'Q100' ) ), 'P2', array('') );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
+    }
 }
