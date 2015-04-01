@@ -44,13 +44,8 @@ class TypeChecker {
     public function checkValueTypeConstraint( $propertyId, $dataValue, $classArray, $relation ) {
         $parameters = array();
 
-        $parameters['class'] = $this->helper->parseParameterArray( $classArray, 'Class' );
-
-        if( $relation === null ) {
-            $parameters['relation'] = array( 'null' );
-        } else {
-            $parameters['relation'] = array( $relation );
-        }
+        $parameters['class'] = $this->helper->parseParameterArray( $classArray, 'ItemId' );
+        $parameters['relation'] = $this->helper->parseSingleParameter( $relation );
 
         /*
          * error handling:
@@ -115,13 +110,8 @@ class TypeChecker {
     public function checkTypeConstraint( $propertyId, $dataValue, $statements, $classArray, $relation ) {
         $parameters = array();
 
-        $parameters['class'] = $this->helper->parseParameterArray( $classArray, 'Class' );
-
-        if( $relation === null ) {
-            $parameters['relation'] = array( 'null' );
-        } else {
-            $parameters['relation'] = array( $relation );
-        }
+        $parameters['class'] = $this->helper->parseParameterArray( $classArray, 'ItemId' );
+        $parameters['relation'] = $this->helper->parseSingleParameter( $relation );
 
         /*
          * error handling:

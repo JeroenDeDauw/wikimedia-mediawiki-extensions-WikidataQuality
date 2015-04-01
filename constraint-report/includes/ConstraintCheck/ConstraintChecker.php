@@ -366,7 +366,7 @@ class ConstraintChecker {
      */
     private function getCommonsLinkChecker() {
         if( !isset( $this->commonsLinkChecker ) ) {
-            $this->commonsLinkChecker = new CommonsLinkChecker( $this->statements, $this->helper );
+            $this->commonsLinkChecker = new CommonsLinkChecker( $this->helper );
         }
         return $this->commonsLinkChecker;
     }
