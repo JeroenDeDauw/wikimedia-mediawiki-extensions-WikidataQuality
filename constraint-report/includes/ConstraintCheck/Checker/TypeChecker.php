@@ -44,18 +44,7 @@ class TypeChecker {
     public function checkValueTypeConstraint( $propertyId, $dataValue, $classArray, $relation ) {
         $parameters = array();
 
-        if( $classArray[0] === '' ) {
-            $parameters['class'] = array( 'null' );
-        } else {
-            $func = function( $class ) {
-                if( $class !== 'novalue' && $class !== 'somevalue' ) {
-                    return new ItemId( $class );
-                } else {
-                    return $class;
-                }
-            };
-            $parameters['class'] = array_map( $func, $classArray );
-        }
+        $parameters['class'] = $this->helper->parseParameterArray( $classArray, 'Class' );
 
         if( $relation === null ) {
             $parameters['relation'] = array( 'null' );
@@ -126,18 +115,7 @@ class TypeChecker {
     public function checkTypeConstraint( $propertyId, $dataValue, $statements, $classArray, $relation ) {
         $parameters = array();
 
-        if( $classArray[0] === '' ) {
-            $parameters['item'] = array( 'null' );
-        } else {
-            $func = function( $class ) {
-                if( $class !== 'novalue' && $class !== 'somevalue' ) {
-                    return new ItemId( $class );
-                } else {
-                    return $class;
-                }
-            };
-            $parameters['item'] = array_map( $func, $classArray );
-        }
+        $parameters['class'] = $this->helper->parseParameterArray( $classArray, 'Class' );
 
         if( $relation === null ) {
             $parameters['relation'] = array( 'null' );

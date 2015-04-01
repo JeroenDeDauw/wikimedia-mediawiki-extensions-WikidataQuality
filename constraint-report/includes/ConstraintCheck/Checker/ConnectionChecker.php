@@ -3,7 +3,6 @@
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -16,7 +15,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 class ConnectionChecker {
 
     /**
-     * List of all statemtens of given entity.
+     * List of all statements of given entity.
      * @var StatementList
      */
     private $statements;
@@ -61,18 +60,7 @@ class ConnectionChecker {
             $parameters['property'] = array( new PropertyId( $property ) );
         }
 
-        if( $itemArray[0] === '' ) {
-            $parameters['item'] = array( 'null' );
-        } else {
-            $func = function( $item ) {
-                if( $item !== 'novalue' && $item !== 'somevalue' && $item !== '' ) {
-                    return new ItemId( $item );
-                } else {
-                    return $item;
-                }
-            };
-            $parameters['item'] = array_map( $func, $itemArray );
-        }
+        $parameters['item'] = $this->helper->parseParameterArray( $itemArray, 'Item' );
 
         /*
          * error handling:
@@ -126,18 +114,7 @@ class ConnectionChecker {
             $parameters['property'] = array( new PropertyId( $property ) );
         }
 
-        if( $itemArray[0] === '' ) {
-            $parameters['item'] = array( 'null' );
-        } else {
-            $func = function( $item ) {
-                if( $item !== 'novalue' && $item !== 'somevalue' && $item !== '' ) {
-                    return new ItemId( $item );
-                } else {
-                    return $item;
-                }
-            };
-            $parameters['item'] = array_map( $func, $itemArray );
-        }
+        $parameters['item'] = $this->helper->parseParameterArray( $itemArray, 'Item' );
 
         /*
          * error handling:
@@ -191,18 +168,7 @@ class ConnectionChecker {
             $parameters['property'] = array( new PropertyId( $property ) );
         }
 
-        if( $itemArray[0] === '' ) {
-            $parameters['item'] = array( 'null' );
-        } else {
-            $func = function( $item ) {
-                if( $item !== 'novalue' && $item !== 'somevalue' && $item !== '' ) {
-                    return new ItemId( $item );
-                } else {
-                    return $item;
-                }
-            };
-            $parameters['item'] = array_map( $func, $itemArray );
-        }
+        $parameters['item'] = $this->helper->parseParameterArray( $itemArray, 'Item' );
 
         /*
          * error handling:

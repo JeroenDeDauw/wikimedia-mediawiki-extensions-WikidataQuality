@@ -103,7 +103,7 @@ class RangeChecker {
     public function checkDiffWithinRangeConstraint( $propertyId, $dataValue, $property, $minimum_quantity, $maximum_quantity ) {
         $parameters = array();
 
-        if( $property == null ) {
+        if( $property === null ) {
             $parameters['property'] = array( 'null' );
         } else {
             $parameters['property'] = array( new PropertyId( $property ) );

@@ -18,4 +18,5 @@ CREATE TABLE IF NOT EXISTS wdq_constraints (
   pattern           VARCHAR(255)  DEFAULT NULL,
   property          VARCHAR(255)  DEFAULT NULL,
   relation          VARCHAR(255)  DEFAULT NULL,
-  snak              VARCHAR(255)  DEFAULT NULL );
+  snak              VARCHAR(255)  DEFAULT NULL
+);

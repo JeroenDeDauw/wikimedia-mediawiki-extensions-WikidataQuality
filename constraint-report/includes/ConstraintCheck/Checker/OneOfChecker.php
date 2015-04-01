@@ -37,18 +37,7 @@ class OneOfChecker {
     public function checkOneOfConstraint( $propertyId, $dataValue, $itemArray ) {
         $parameters = array();
 
-        if( $itemArray[0] === '' ) {
-            $parameters['item'] = array( 'null' );
-        } else {
-            $func = function( $item ) {
-                if( $item[0] === 'Q' ) {
-                    return new ItemId( $item );
-                } else {
-                    return $item;
-                }
-            };
-            $parameters['item'] = array_map( $func, $itemArray );
-        }
+        $parameters['item'] = $this->helper->parseParameterArray( $itemArray, 'Item' );
 
         /*
          * error handling:
