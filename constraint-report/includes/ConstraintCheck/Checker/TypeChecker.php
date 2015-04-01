@@ -170,17 +170,23 @@ class TypeChecker {
             if( $numericPropertyId === self::subclassId ) {
                 $mainSnak = $claim->getMainSnak();
 
-                if( $mainSnak->getType() === 'value' && $mainSnak->getDataValue()->getType() === 'wikibase-entityid' ) {
+                if ($mainSnak->getType() === 'value' && $mainSnak->getDataValue()->getType() === 'wikibase-entityid') {
                     $comparativeClass = $mainSnak->getDataValue()->getEntityId();
                 } else {
                     // error case
                 }
 
-                foreach( $classesToCheck as $class ) {
-                    if( $class === $comparativeClass->getSerialization() ) {
+                foreach ($classesToCheck as $class) {
+                    if ($class === $comparativeClass->getSerialization()) {
                         return true;
                     }
                 }
+
+                $compliance = $this->isSubclassOf($comparativeClass, $classesToCheck);
+
+            }
+            if( $compliance === true ) {
+                return true;
             }
         }
         return false;
