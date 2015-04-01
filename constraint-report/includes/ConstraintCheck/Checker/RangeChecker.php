@@ -163,8 +163,7 @@ class RangeChecker {
 
                 return new CheckResult( $propertyId, $dataValue, 'Diff within range', $parameters, $status, $message );
             }
-        }
-    }
+        } }
 
     private function getComparativeValue( $dataValue ) {
         if( $dataValue->getType() === 'time' ) {
