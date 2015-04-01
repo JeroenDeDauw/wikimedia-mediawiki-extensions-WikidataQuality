@@ -86,7 +86,7 @@ class UpdateTableTest extends \MediaWikiTestCase
         $this->assertEquals( '36578', $dumpMetaInformation->getSourceItemId()->getNumericId() );
         $this->assertEquals( new \DateTime('2015-03-17 20:53:56'), $dumpMetaInformation->getImportDate() );
         $this->assertEquals( 'de', $dumpMetaInformation->getLanguage() );
-        $this->assertEquals( 'http://www.foo.bar', $dumpMetaInformation->getSourceUrl() );
+        $this->assertEquals( array( 'http://www.foo.bar' ), $dumpMetaInformation->getSourceUrls() );
         $this->assertEquals( 590798465, $dumpMetaInformation->getSize() );
         $this->assertEquals( 'CC0 1.0', $dumpMetaInformation->getLicense() );
 

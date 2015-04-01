@@ -55,10 +55,10 @@ class SpecialExternalDbs extends SpecialWikidataQualityPage
 
         $table = new HtmlTable(
             array(
-                $this->msg( 'wikidataquality-externaldbs-source-item-id' )->text(),
+                $this->msg( 'wikidataquality-externaldbs-name' )->text(),
                 $this->msg( 'wikidataquality-externaldbs-import-date' )->text(),
                 $this->msg( 'wikidataquality-externaldbs-language' )->text(),
-                $this->msg( 'wikidataquality-externaldbs-source-url' )->text(),
+                $this->msg( 'wikidataquality-externaldbs-source-urls' )->text(),
                 $this->msg( 'wikidataquality-externaldbs-size' )->text(),
                 $this->msg( 'wikidataquality-externaldbs-license' )->text()
             ),
@@ -80,10 +80,9 @@ class SpecialExternalDbs extends SpecialWikidataQualityPage
                             $dumpMetaInformation->getLanguage(),
                             $this->getLanguage()->getCode()
                         ),
-                        Html::element(
-                            'a',
-                            array( 'class' => 'external free', 'href' => $dumpMetaInformation->getSourceUrl() ),
-                            $dumpMetaInformation->getSourceUrl()
+                        $this->formatSourceUrls(
+                            $dumpMetaInformation->getSourceUrls(),
+                            Html::element( 'br' )
                         ),
                         $this->getLanguage()->formatSize( $dumpMetaInformation->getSize() ),
                         $dumpMetaInformation->getLicense()
@@ -161,5 +160,27 @@ class SpecialExternalDbs extends SpecialWikidataQualityPage
         }
 
         return $dateTime->format( $dateFormat );
+    }
+
+    /**
+     * Formats given array of urls to links, optionally separated by given string
+     * @param array $sourceUrls
+     * @return string
+     */
+    private function formatSourceUrls( $sourceUrls, $separator = '' )
+    {
+        $urlFormatter = function( $url )
+        {
+            return
+                Html::element(
+                    'a',
+                    array( 'class' => 'external free', 'href' => $url ),
+                    $url
+                );
+        };
+        $sourceUrlLinks = array_map( $urlFormatter, $sourceUrls );
+        $output = implode( $separator, $sourceUrlLinks );
+
+        return $output;
     }
 }

@@ -19,10 +19,13 @@ class DumpMetaInformationSerializer extends SerializerObject
      */
     public function getSerialized( $dumpMetaInformation )
     {
+        $sourceUrls = $dumpMetaInformation->getSourceUrls();
+        $this->setIndexedTagName( $sourceUrls, 'url' );
+
         $serialization = array(
             'sourceItemId' => $dumpMetaInformation->getSourceItemId()->getSerialization(),
             'language' => $dumpMetaInformation->getLanguage(),
-            'sourceUrl' => $dumpMetaInformation->getSourceUrl(),
+            'sourceUrls' => $sourceUrls,
             'size' => $dumpMetaInformation->getSize(),
             'license' => $dumpMetaInformation->getLicense()
         );

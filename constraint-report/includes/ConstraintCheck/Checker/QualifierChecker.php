@@ -58,7 +58,7 @@ class QualifierChecker {
     public function checkQualifiersConstraint( $propertyId, $dataValue, $statement, $propertyArray ) {
         $parameters = array();
 
-        $parameters['property'] = $this->helper->parseParameterArray( $propertyArray, 'Property' );
+        $parameters['property'] = $this->helper->parseParameterArray( $propertyArray, 'PropertyId' );
 
         /*
          * error handling:

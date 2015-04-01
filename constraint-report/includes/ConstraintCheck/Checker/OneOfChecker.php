@@ -37,7 +37,7 @@ class OneOfChecker {
     public function checkOneOfConstraint( $propertyId, $dataValue, $itemArray ) {
         $parameters = array();
 
-        $parameters['item'] = $this->helper->parseParameterArray( $itemArray, 'Item' );
+        $parameters['item'] = $this->helper->parseParameterArray( $itemArray, 'ItemId' );
 
         /*
          * error handling:
