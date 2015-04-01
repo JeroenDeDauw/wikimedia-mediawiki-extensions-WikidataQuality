@@ -4,6 +4,7 @@ namespace WikidataQuality\ExternalValidation\Specials;
 
 
 use Html;
+use Linker;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use WikidataQuality\ExternalValidation\CrossCheck\CrossChecker;
 use WikidataQuality\Html\HtmlTable;
@@ -107,7 +108,7 @@ class SpecialCrossCheck extends SpecialWikidataQualityPage
                             $this->msg( 'wikidataquality-crosscheck-comparative-value' )->text()
                         ),
                         new HtmlTableHeader(
-                            $this->msg( 'wikidataquality-crosscheck-external-source' )->text(),
+                            Linker::specialLink('ExternalDbs', 'wikidataquality-crosscheck-external-source'),
                             true
                         ),
                         new HtmlTableHeader(
