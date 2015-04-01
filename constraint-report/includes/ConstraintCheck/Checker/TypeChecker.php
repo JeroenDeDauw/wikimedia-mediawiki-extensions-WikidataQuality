@@ -108,8 +108,6 @@ class TypeChecker {
      * @return CheckResult
      */
     public function checkTypeConstraint( $propertyId, $dataValue, $statements, $classArray, $relation ) {
-        $compliance = null;
-
         $parameters = array();
 
         $parameters['class'] = $this->helper->parseParameterArray( $classArray, 'ItemId' );
@@ -149,6 +147,7 @@ class TypeChecker {
     }
 
     private function isSubclassOf( $comparativeClass, $classesToCheck ) {
+        $compliance = null;
         $item = $this->entityLookup->getEntity( $comparativeClass );
         if( !$item ) {
             return false; // lookup failed, probably because item doesn't exist
