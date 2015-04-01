@@ -36,37 +36,49 @@ class ConstraintReportHelper {
         }
     }
 
+    private function parseParameter( $parameter, $type = 'String' ) {
+        if( $parameter === null ) {
+            return 'null';
+        } else {
+            if( $type === 'String' ) {
+                return "$parameter";
+            } else { // ItemId, PropertyId
+                $startsWith = strtoupper( substr( $parameter, 0, 1 ) );
+                if( $startsWith === 'Q' || $startsWith === 'P' ) {
+                    $type = 'Wikibase\\DataModel\\Entity\\' . $type;
+                    return new $type( $parameter );
+                } else {
+                    return '' ;
+                }
+            }
+        }
+    }
+
     /**
-     * Helps set the item/class/property parameter according to what is given in the database.
-     * @param array $entityArray
+     * Helps set/format a single parameter depending on its type.
+     * @param array $parameter
      * @param string $type
      * @return array
      */
-    public function parseParameterArray( $entityArray, $type ) {
-        $itemAndClassFunc = function( $entity ) {
-            if( $entity !== 'novalue' && $entity !== 'somevalue' && $entity !== '' ) { // exclude special cases
-                return new ItemId( $entity );
-            } else {
-                return $entity;
-            }
-        };
+    public function parseSingleParameter( $parameter, $type = 'String' ) {
+        return array( $this->parseParameter( $parameter, $type ) );
+    }
 
-        $propertyFunc = function( $entity ) {
-            if( $entity !== '' ) { // exclude special cases
-                return new PropertyId( $entity );
-            } else {
-                return $entity;
-            }
-        };
-
-        if( $entityArray[0] === '' ) { // parameter not given
+    /**
+     * Helps set/format the item/class/property parameter arrays according to their respective type.
+     * @param array $parameterArray
+     * @param string $type
+     * @return array
+     */
+    public function parseParameterArray( $parameterArray, $type = 'String' ) {
+        if( $parameterArray[0] === '' ) { // parameter not given
             return array( 'null' );
         } else {
-            if( $type === 'Item' || $type === 'Class' ) {
-                return array_map( $itemAndClassFunc, $entityArray );
-            } else if( $type = 'Property' ) {
-                return array_map( $propertyFunc, $entityArray );
+            $array = array();
+            foreach( $parameterArray as $parameter ) {
+                $array[] = $this->parseParameter( $parameter, $type );
             }
+            return $array;
         }
     }
 

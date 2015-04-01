@@ -54,13 +54,8 @@ class ConnectionChecker {
     public function checkConflictsWithConstraint( $propertyId, $dataValue, $property, $itemArray ) {
         $parameters = array();
 
-        if( $property === null ) {
-            $parameters['property'] = array( 'null' );
-        } else {
-            $parameters['property'] = array( new PropertyId( $property ) );
-        }
-
-        $parameters['item'] = $this->helper->parseParameterArray( $itemArray, 'Item' );
+        $parameters['property'] = $this->helper->parseSingleParameter( $property, 'PropertyId' );
+        $parameters['item'] = $this->helper->parseParameterArray( $itemArray, 'ItemId' );
 
         /*
          * error handling:
@@ -108,13 +103,8 @@ class ConnectionChecker {
     public function checkItemConstraint( $propertyId, $dataValue, $property, $itemArray ) {
         $parameters = array();
 
-        if( $property === null ) {
-            $parameters['property'] = array( 'null' );
-        } else {
-            $parameters['property'] = array( new PropertyId( $property ) );
-        }
-
-        $parameters['item'] = $this->helper->parseParameterArray( $itemArray, 'Item' );
+        $parameters['property'] = $this->helper->parseSingleParameter( $property, 'PropertyId' );
+        $parameters['item'] = $this->helper->parseParameterArray( $itemArray, 'ItemId' );
 
         /*
          * error handling:
@@ -162,13 +152,8 @@ class ConnectionChecker {
     public function checkTargetRequiredClaimConstraint( $propertyId, $dataValue, $property, $itemArray ) {
         $parameters = array();
 
-        if( $property === null ) {
-            $parameters['property'] = array( 'null' );
-        } else {
-            $parameters['property'] = array( new PropertyId( $property ) );
-        }
-
-        $parameters['item'] = $this->helper->parseParameterArray( $itemArray, 'Item' );
+        $parameters['property'] = $this->helper->parseSingleParameter( $property, 'PropertyId' );
+        $parameters['item'] = $this->helper->parseParameterArray( $itemArray, 'ItemId' );
 
         /*
          * error handling:
@@ -265,11 +250,7 @@ class ConnectionChecker {
     public function checkInverseConstraint( $propertyId, $dataValue, $entityIdSerialization, $property ) {
         $parameters = array();
 
-        if( $property === null ) {
-            $parameters['property'] = array( 'null' );
-        } else {
-            $parameters['property'] = array( new PropertyId( $property ) );
-        }
+        $parameters['property'] = $this->helper->parseSingleParameter( $property, 'PropertyId' );
 
         /*
          * error handling:

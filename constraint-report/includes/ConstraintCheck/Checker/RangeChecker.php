@@ -58,8 +58,8 @@ class RangeChecker {
             if( $minimum_quantity !== null && $maximum_quantity !== null && $minimum_date === null && $maximum_date === null ) {
                 $min = $minimum_quantity;
                 $max = $maximum_quantity;
-                $parameters['minimum_quantity'] = array( $minimum_quantity );
-                $parameters['maximum_quantity'] = array( $maximum_quantity );
+                $parameters['minimum_quantity'] = $this->helper->parseSingleParameter( $minimum_quantity );
+                $parameters['maximum_quantity'] = $this->helper->parseSingleParameter( $maximum_quantity );
             } else {
                 $message = 'Properties with values of type \'quantity\' with \'Range\' constraint need the parameters \'minimum quantity\' and \'maximum quantity\'.';
             }
@@ -67,8 +67,8 @@ class RangeChecker {
             if( $minimum_quantity === null && $maximum_quantity === null && $minimum_date !== null && $maximum_date !== null ) {
                 $min = $minimum_date->getTime();
                 $max = $maximum_date->getTime();
-                $parameters['minimum_date'] = array( $minimum_date );
-                $parameters['maximum_date'] = array( $maximum_date );
+                $parameters['minimum_date'] = $this->helper->parseSingleParameter( $minimum_date );
+                $parameters['maximum_date'] = $this->helper->parseSingleParameter( $maximum_date );
             } else {
                 $message = 'Properties with values of type \'time\' with \'Range\' constraint need the parameters \'minimum date\' and \'maximum date\'.';
             }
@@ -103,11 +103,7 @@ class RangeChecker {
     public function checkDiffWithinRangeConstraint( $propertyId, $dataValue, $property, $minimum_quantity, $maximum_quantity ) {
         $parameters = array();
 
-        if( $property === null ) {
-            $parameters['property'] = array( 'null' );
-        } else {
-            $parameters['property'] = array( new PropertyId( $property ) );
-        }
+        $parameters['property'] = $this->helper->parseSingleParameter( $property, 'PropertyId' );
 
         /*
          * error handling:
@@ -118,9 +114,8 @@ class RangeChecker {
             if( $property !== null && $minimum_quantity !== null && $maximum_quantity !== null ) {
                 $min = $minimum_quantity;
                 $max = $maximum_quantity;
-                $parameters['property'] = array( new PropertyId( $property ) );
-                $parameters['minimum_quantity'] = array( $minimum_quantity );
-                $parameters['maximum_quantity'] = array( $maximum_quantity );
+                $parameters['minimum_quantity'] = $this->helper->parseSingleParameter( $minimum_quantity );
+                $parameters['maximum_quantity'] = $this->helper->parseSingleParameter( $maximum_quantity );
             } else {
                 $message = 'Properties with \'Diff within range\' constraint need the parameters \'property\', \'minimum quantity\' and \'maximum quantity\'.';
             }

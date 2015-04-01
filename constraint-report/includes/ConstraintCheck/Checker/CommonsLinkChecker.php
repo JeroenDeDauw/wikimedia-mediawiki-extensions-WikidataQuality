@@ -36,11 +36,7 @@ class CommonsLinkChecker {
     public function checkCommonsLinkConstraint( $propertyId, $dataValue, $namespace ) {
         $parameters = array();
 
-        if( $namespace == null ) {
-            $parameters['namespace'] = array( 'null' );
-        } else {
-            $parameters['namespace'] = array( $namespace );
-        }
+        $parameters['namespace'] = $this->helper->parseSingleParameter( $namespace );
 
         /*
          * error handling:
