@@ -12,6 +12,7 @@ use WikidataQuality\Tests\Helper\JsonFileEntityLookup;
  * @covers WikidataQuality\ConstraintReport\ConstraintCheck\Checker\TypeChecker
  *
  * @uses WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult
+ * @uses WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper
  *
  * @author BP2014N1
  * @license GNU GPL v2+
