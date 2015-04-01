@@ -221,4 +221,48 @@ class ConnectionCheckerTest extends \MediaWikiTestCase {
         $checkResult = $connectionChecker->checkTargetRequiredClaimConstraint( new PropertyId( 'P188' ), new EntityIdValue( new ItemId( 'Q100' ) ), 'P2', array('') );
         $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
     }
+
+
+    /**
+     * Following tests are testing the inverse constraint
+     */
+    public function testInverseConstraintValid()
+    {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
+        $connectionChecker = new ConnectionChecker( $entity->getStatements(), $this->lookup, $this->helper );
+        $checkResult = $connectionChecker->checkInverseConstraint( new PropertyId( 'P188' ), new EntityIdValue( new ItemId( 'Q7' ) ), 'Q1', 'P1' );
+        $this->assertEquals( 'compliance', $checkResult->getStatus(), 'check should comply' );
+    }
+
+    public function testInverseConstraintWrongItem()
+    {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
+        $connectionChecker = new ConnectionChecker( $entity->getStatements(), $this->lookup, $this->helper );
+        $checkResult = $connectionChecker->checkInverseConstraint( new PropertyId( 'P188' ), new EntityIdValue( new ItemId( 'Q8' ) ), 'Q1', 'P1' );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
+    }
+
+    public function testInverseConstraintWithoutProperty()
+    {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
+        $connectionChecker = new ConnectionChecker( $entity->getStatements(), $this->lookup, $this->helper );
+        $checkResult = $connectionChecker->checkInverseConstraint( new PropertyId( 'P188' ), new EntityIdValue( new ItemId( 'Q7' ) ), 'Q1', null );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
+    }
+
+    public function testInverseConstraintWrongDataTypeForItem()
+    {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
+        $connectionChecker = new ConnectionChecker( $entity->getStatements(), $this->lookup, $this->helper );
+        $checkResult = $connectionChecker->checkInverseConstraint( new PropertyId( 'P188' ), new StringValue( 'Q7' ), 'Q1', 'P1' );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
+    }
+
+    public function testInverseConstraintItemDoesNotExist()
+    {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
+        $connectionChecker = new ConnectionChecker( $entity->getStatements(), $this->lookup, $this->helper );
+        $checkResult = $connectionChecker->checkInverseConstraint( new PropertyId( 'P188' ), new EntityIdValue( new ItemId( 'Q100' ) ), 'Q1', 'P1' );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
+    }
 }
