@@ -8,7 +8,6 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\ValueCountChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
 use WikidataQuality\Tests\Helper\JsonFileEntityLookup;
 
-
 /**
  * @covers WikidataQuality\ConstraintReport\ConstraintCheck\Checker\ValueCountChecker
  *
@@ -40,67 +39,54 @@ class ValueCountCheckerTest extends \MediaWikiTestCase {
         parent::tearDown();
     }
 
-    public function testCheckSingleValueConstraintOne()
-    {
+    public function testCheckSingleValueConstraintOne() {
         $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
         $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
-
         $checkResult = $valueCountChecker->checkSingleValueConstraint( $this->singlePropertyId, 'Q1384' );
         $this->assertEquals( 'compliance', $checkResult->getStatus(), 'check should comply' );
     }
 
-    public function testCheckSingleValueConstraintTwo()
-    {
+    public function testCheckSingleValueConstraintTwo() {
         $entity = $this->lookup->getEntity( new ItemId( 'Q2' ) );
         $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
-
         $checkResult = $valueCountChecker->checkSingleValueConstraint( $this->singlePropertyId, 'Q1384' );
         $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
     }
 
-    public function testCheckSingleValueConstraintTwoButOneDeprecated()
-    {
+    public function testCheckSingleValueConstraintTwoButOneDeprecated() {
         $entity = $this->lookup->getEntity( new ItemId( 'Q3' ) );
         $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
-
         $checkResult = $valueCountChecker->checkSingleValueConstraint( $this->singlePropertyId, 'Q1384' );
         $this->assertEquals( 'compliance', $checkResult->getStatus(), 'check should comply' );
     }
 
-    public function testCheckMultiValueConstraintOne()
-    {
+    public function testCheckMultiValueConstraintOne() {
         $entity = $this->lookup->getEntity( new ItemId( 'Q4' ) );
         $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
-
         $checkResult = $valueCountChecker->checkMultiValueConstraint( $this->multiPropertyId, 'Q207' );
         $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
     }
 
-    public function testCheckMultiValueConstraintTwo()
-    {
+    public function testCheckMultiValueConstraintTwo() {
         $entity = $this->lookup->getEntity( new ItemId( 'Q5' ) );
         $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
-
         $checkResult = $valueCountChecker->checkMultiValueConstraint( $this->multiPropertyId, 'Q207' );
         $this->assertEquals( 'compliance', $checkResult->getStatus(), 'check should comply' );
     }
 
-    public function testCheckMultiValueConstraintTwoButOneDeprecated()
-    {
+    public function testCheckMultiValueConstraintTwoButOneDeprecated() {
         $entity = $this->lookup->getEntity( new ItemId( 'Q6' ) );
         $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
-
         $checkResult = $valueCountChecker->checkMultiValueConstraint( $this->multiPropertyId, 'Q409' );
         $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
     }
 
-    // todo; it is currently only testing that 'todo' comes back
-    public function testCheckUniqueValueConstraint()
-    {
+    // todo: it is currently only testing that 'todo' comes back
+    public function testCheckUniqueValueConstraint() {
         $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
         $valueCountChecker = new ValueCountChecker( $entity->getStatements(), $this->helper );
-
         $checkResult = $valueCountChecker->checkUniqueValueConstraint( $this->uniquePropertyId, 'Q404' );
         $this->assertEquals( 'todo', $checkResult->getStatus(), 'check should point out that it should be implemented soon' );
     }
+
 }

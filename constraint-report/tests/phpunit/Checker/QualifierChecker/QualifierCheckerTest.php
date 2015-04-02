@@ -7,7 +7,6 @@ use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\QualifierChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
 use WikidataQuality\Tests\Helper\JsonFileEntityLookup;
 
-
 /**
  * @covers WikidataQuality\ConstraintReport\ConstraintCheck\Checker\QualifierChecker
  *
@@ -45,7 +44,6 @@ class QualifierCheckerTest extends \MediaWikiTestCase {
     public function testQualifierConstraintQualifierProperty() {
         $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
         $qualifierChecker = new QualifierChecker( $entity->getStatements(), $this->helper );
-
         $checkResult = $qualifierChecker->checkQualifierConstraint( 'P580', 'Q1384' );
         $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
     }
@@ -53,7 +51,6 @@ class QualifierCheckerTest extends \MediaWikiTestCase {
     public function testQualifiersConstraint() {
         $entity = $this->lookup->getEntity( new ItemId( 'Q2' ) );
         $qualifierChecker = new QualifierChecker( $entity->getStatements(), $this->helper );
-
         $checkResult = $qualifierChecker->checkQualifiersConstraint( 'P39', 'Q11696', $this->getFirstStatement( $entity ),  $this->qualifiersList );
         $this->assertEquals( 'compliance', $checkResult->getStatus(), 'check should comply' );
     }
@@ -61,7 +58,6 @@ class QualifierCheckerTest extends \MediaWikiTestCase {
     public function testQualifiersConstraintToManyQualifiers() {
         $entity = $this->lookup->getEntity( new ItemId( 'Q3' ) );
         $qualifierChecker = new QualifierChecker( $entity->getStatements(), $this->helper );
-
         $checkResult = $qualifierChecker->checkQualifiersConstraint( 'P39', 'Q11696', $this->getFirstStatement( $entity ),  $this->qualifiersList );
         $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
     }
@@ -69,7 +65,6 @@ class QualifierCheckerTest extends \MediaWikiTestCase {
     public function testQualifiersConstraintNoQualifiers() {
         $entity = $this->lookup->getEntity( new ItemId( 'Q4' ) );
         $qualifierChecker = new QualifierChecker( $entity->getStatements(), $this->helper );
-
         $checkResult = $qualifierChecker->checkQualifiersConstraint( 'P39', 'Q344', $this->getFirstStatement( $entity ),  array( '' ) );
         $this->assertEquals( 'compliance', $checkResult->getStatus(), 'check should comply' );
     }

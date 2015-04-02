@@ -1,6 +1,7 @@
 <?php
 
 namespace WikidataQuality\ConstraintReport\Test\Helper;
+
 use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
 
 /**
@@ -23,24 +24,22 @@ class ConstraintReportHelperTest extends \MediaWikiTestCase {
         unset( $this->helper );
     }
 
-    public function testRemoveBrackets()
-    {
+    public function testRemoveBrackets() {
         $templateString = '{{Q|1234}}, {{Q|42}}';
         $expected = 'Q1234, Q42';
         $this->assertEquals( $expected, $this->helper->removeBrackets( $templateString ) );
     }
 
-    public function testStringToArray()
-    {
+    public function testStringToArray() {
         $templateString = '{{Q|1234}}, {{Q|42}}';
         $expected = array( 'Q1234', 'Q42' );
         $this->assertEquals( $expected, $this->helper->stringToArray( $templateString ) );
     }
 
-    public function testEmptyStringToArray()
-    {
+    public function testEmptyStringToArray() {
         $templateString = '';
         $expected = array( '' );
         $this->assertEquals( $expected, $this->helper->stringToArray( $templateString ) );
     }
+
 }
