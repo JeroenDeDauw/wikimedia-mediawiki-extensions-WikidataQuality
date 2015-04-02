@@ -6,10 +6,10 @@ use DataValues\QuantityValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\ClaimGuidGenerator;
-use WikidataQuality\ExternalValidation\CrossCheck\Result\CrossCheckResultList;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CrossCheckResult;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\ReferenceResult;
+use WikidataQuality\ExternalValidation\CrossCheck\Result\CrossCheckResultList;
 
 
 /**
@@ -142,8 +142,8 @@ class CrossCheckResultListTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Generates CrossCheckResult
-     * @return CrossCheckResult
+     * Generates CompareResult
+     * @return CompareResult
      */
     private function buildCrossCheckResult( $propertyId, $dataMismatch, $referencesMissing )
     {

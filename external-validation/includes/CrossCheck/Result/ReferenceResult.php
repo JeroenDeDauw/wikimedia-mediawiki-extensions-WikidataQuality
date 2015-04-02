@@ -31,7 +31,11 @@ class ReferenceResult
 
     public function __construct( $referenceMissing, Reference $addableReference )
     {
-        $this->referenceMissing = $referenceMissing;
+        if ( is_bool( $referenceMissing ) ) {
+            $this->referenceMissing = $referenceMissing;
+        } else {
+            throw new InvalidArgumentException( '$referenceMissing has to be boolean' );
+        }
         $this->addableReference = $addableReference;
     }
 

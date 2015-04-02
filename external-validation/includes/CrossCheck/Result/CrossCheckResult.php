@@ -30,6 +30,8 @@ class CrossCheckResult
         return $this->referenceResult;
     }
 
+    // @codeCoverageIgnoreStart
+
     /**
      * @return PropertyId
      */
@@ -94,4 +96,5 @@ class CrossCheckResult
     {
         return $this->referenceResult->getAddableReference();
     }
+    // @codeCoverageIgnoreEnd
 }

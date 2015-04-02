@@ -9,6 +9,7 @@ use DataValues\MonolingualTextValue;
 
 /**
  * @covers WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult
+ * @covers WikidataQuality\ExternalValidation\CrossCheck\Result\CrossCheckResult
  *
  * @author BP2014N1
  * @license GNU GPL v2+exte
