@@ -20,6 +20,16 @@ class CrossCheckResult
         $this->referenceResult = $referenceResult;
     }
 
+    public function getCompareResult()
+    {
+        return $this->compareResult;
+    }
+
+    public function getReferenceResult()
+    {
+        return $this->referenceResult;
+    }
+
     /**
      * @return PropertyId
      */

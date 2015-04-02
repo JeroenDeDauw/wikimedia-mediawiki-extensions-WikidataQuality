@@ -11,6 +11,7 @@ use Wikibase\DataModel\Statement\StatementList;
 use WikidataQuality\ExternalValidation\CrossCheck\CrossChecker;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResultList;
+use WikidataQuality\ExternalValidation\CrossCheck\Result\CrossCheckResult;
 use WikidataQuality\ExternalValidation\DumpMetaInformation;
 use WikidataQuality\Tests\Helper\JsonFileEntityLookup;
 use Wikibase\Lib\Store\EntityLookup;
@@ -23,9 +24,12 @@ use Wikibase\Lib\Store\EntityLookup;
  *
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\Result\CrossCheckResultList
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult
- * @uses   WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResultList
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\Result\CrossCheckResult
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\Result\ReferenceResult
  * @uses   WikidataQuality\ExternalValidation\DumpMetaInformation
+ * @uses   WikidataQuality\ExternalValidation\CrossCheck\ReferenceHandler
  *
  * @author BP2014N1
  * @license GNU GPL v2+
@@ -184,41 +188,49 @@ class CrossCheckerTest extends \MediaWikiTestCase
                 $this->items[ 'Q1' ],
                 null,
                 array(
-                    'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b' => new CompareResult(
-                        new PropertyId( 'P1' ),
-                        'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b',
-                        new StringValue( 'foo' ),
-                        array( new MonolingualTextValue( $language, 'foo' ) ),
-                        false,
-                        null,
-                        $this->dumpMetaInformation
+                    'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b' => new CrossCheckResult(
+                        new CompareResult(
+                            new PropertyId( 'P1' ),
+                            'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b',
+                            new StringValue( 'foo' ),
+                            array( new MonolingualTextValue( $language, 'foo' ) ),
+                            false,
+                            $this->dumpMetaInformation
+                        ),
+                        $this->getReferenceResultMock()
                     ),
-                    'Q1$dd6dcfc9-55e2-4be6-b70c-d22f20f398b7' => new CompareResult(
-                        new PropertyId( 'P1' ),
-                        'Q1$dd6dcfc9-55e2-4be6-b70c-d22f20f398b7',
-                        new StringValue( 'bar' ),
-                        array( new MonolingualTextValue( $language, 'foo' ) ),
-                        true,
-                        null,
-                        $this->dumpMetaInformation
+                    'Q1$dd6dcfc9-55e2-4be6-b70c-d22f20f398b7' => new CrossCheckResult(
+                        new CompareResult(
+                            new PropertyId( 'P1' ),
+                            'Q1$dd6dcfc9-55e2-4be6-b70c-d22f20f398b7',
+                            new StringValue( 'bar' ),
+                            array( new MonolingualTextValue( $language, 'foo' ) ),
+                            true,
+                            $this->dumpMetaInformation
+                        ),
+                        $this->getReferenceResultMock()
                     ),
-                    'Q1$01636a9a-97a5-478e-bf55-5d9a569c7ce5' => new CompareResult(
-                        new PropertyId( 'P2' ),
-                        'Q1$01636a9a-97a5-478e-bf55-5d9a569c7ce5',
-                        new StringValue( 'foobar' ),
-                        array( new MonolingualTextValue( $language, 'baz' ) ),
-                        true,
-                        null,
-                        $this->dumpMetaInformation
+                    'Q1$01636a9a-97a5-478e-bf55-5d9a569c7ce5' => new CrossCheckResult(
+                        new CompareResult(
+                            new PropertyId( 'P2' ),
+                            'Q1$01636a9a-97a5-478e-bf55-5d9a569c7ce5',
+                            new StringValue( 'foobar' ),
+                            array( new MonolingualTextValue( $language, 'baz' ) ),
+                            true,
+                            $this->dumpMetaInformation
+                        ),
+                        $this->getReferenceResultMock()
                     ),
-                    'Q1$27ba9958-7151-4673-8956-f8f1d8648d1e' => new CompareResult(
-                        new PropertyId( 'P3' ),
-                        'Q1$27ba9958-7151-4673-8956-f8f1d8648d1e',
-                        new StringValue( 'fubar' ),
-                        array( new MonolingualTextValue( $language, 'foobar' ) ),
-                        true,
-                        null,
-                        $this->dumpMetaInformation
+                    'Q1$27ba9958-7151-4673-8956-f8f1d8648d1e' => new CrossCheckResult(
+                        new CompareResult(
+                            new PropertyId( 'P3' ),
+                            'Q1$27ba9958-7151-4673-8956-f8f1d8648d1e',
+                            new StringValue( 'fubar' ),
+                            array( new MonolingualTextValue( $language, 'foobar' ) ),
+                            true,
+                            $this->dumpMetaInformation
+                        ),
+                        $this->getReferenceResultMock()
                     )
                 )
             ),
@@ -227,23 +239,27 @@ class CrossCheckerTest extends \MediaWikiTestCase
                 $this->items[ 'Q1' ],
                 new PropertyId( 'P1' ),
                 array(
-                    'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b' => new CompareResult(
-                        new PropertyId( 'P1' ),
-                        'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b',
-                        new StringValue( 'foo' ),
-                        array( new MonolingualTextValue( $language, 'foo' ) ),
-                        false,
-                        null,
-                        $this->dumpMetaInformation
+                    'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b' => new CrossCheckResult(
+                        new CompareResult(
+                            new PropertyId( 'P1' ),
+                            'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b',
+                            new StringValue( 'foo' ),
+                            array( new MonolingualTextValue( $language, 'foo' ) ),
+                            false,
+                            $this->dumpMetaInformation
+                        ),
+                        $this->getReferenceResultMock()
                     ),
-                    'Q1$dd6dcfc9-55e2-4be6-b70c-d22f20f398b7' => new CompareResult(
-                        new PropertyId( 'P1' ),
-                        'Q1$dd6dcfc9-55e2-4be6-b70c-d22f20f398b7',
-                        new StringValue( 'bar' ),
-                        array( new MonolingualTextValue( $language, 'foo' ) ),
-                        true,
-                        null,
-                        $this->dumpMetaInformation
+                    'Q1$dd6dcfc9-55e2-4be6-b70c-d22f20f398b7' => new CrossCheckResult(
+                        new CompareResult(
+                            new PropertyId( 'P1' ),
+                            'Q1$dd6dcfc9-55e2-4be6-b70c-d22f20f398b7',
+                            new StringValue( 'bar' ),
+                            array( new MonolingualTextValue( $language, 'foo' ) ),
+                            true,
+                            $this->dumpMetaInformation
+                        ),
+                        $this->getReferenceResultMock()
                     )
                 )
             ),
@@ -255,32 +271,38 @@ class CrossCheckerTest extends \MediaWikiTestCase
                     new PropertyId( 'P3' )
                 ),
                 array(
-                    'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b' => new CompareResult(
-                        new PropertyId( 'P1' ),
-                        'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b',
-                        new StringValue( 'foo' ),
-                        array( new MonolingualTextValue( $language, 'foo' ) ),
-                        false,
-                        null,
-                        $this->dumpMetaInformation
+                    'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b' => new CrossCheckResult(
+                        new CompareResult(
+                            new PropertyId( 'P1' ),
+                            'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b',
+                            new StringValue( 'foo' ),
+                            array( new MonolingualTextValue( $language, 'foo' ) ),
+                            false,
+                            $this->dumpMetaInformation
+                        ),
+                        $this->getReferenceResultMock()
                     ),
-                    'Q1$dd6dcfc9-55e2-4be6-b70c-d22f20f398b7' => new CompareResult(
-                        new PropertyId( 'P1' ),
-                        'Q1$dd6dcfc9-55e2-4be6-b70c-d22f20f398b7',
-                        new StringValue( 'bar' ),
-                        array( new MonolingualTextValue( $language, 'foo' ) ),
-                        true,
-                        null,
-                        $this->dumpMetaInformation
+                    'Q1$dd6dcfc9-55e2-4be6-b70c-d22f20f398b7' => new CrossCheckResult(
+                        new CompareResult(
+                            new PropertyId( 'P1' ),
+                            'Q1$dd6dcfc9-55e2-4be6-b70c-d22f20f398b7',
+                            new StringValue( 'bar' ),
+                            array( new MonolingualTextValue( $language, 'foo' ) ),
+                            true,
+                            $this->dumpMetaInformation
+                        ),
+                        $this->getReferenceResultMock()
                     ),
-                    'Q1$27ba9958-7151-4673-8956-f8f1d8648d1e' => new CompareResult(
-                        new PropertyId( 'P3' ),
-                        'Q1$27ba9958-7151-4673-8956-f8f1d8648d1e',
-                        new StringValue( 'fubar' ),
-                        array( new MonolingualTextValue( $language, 'foobar' ) ),
-                        true,
-                        null,
-                        $this->dumpMetaInformation
+                    'Q1$27ba9958-7151-4673-8956-f8f1d8648d1e' => new CrossCheckResult(
+                        new CompareResult(
+                            new PropertyId( 'P3' ),
+                            'Q1$27ba9958-7151-4673-8956-f8f1d8648d1e',
+                            new StringValue( 'fubar' ),
+                            array( new MonolingualTextValue( $language, 'foobar' ) ),
+                            true,
+                            $this->dumpMetaInformation
+                        ),
+                        $this->getReferenceResultMock()
                     )
                 )
             ),
@@ -289,29 +311,33 @@ class CrossCheckerTest extends \MediaWikiTestCase
                 $this->items[ 'Q2' ],
                 null,
                 array(
-                    'Q1$0adcfe9e-cda1-4f74-bc98-433150e49b53' => new CompareResult(
-                        new PropertyId( 'P1' ),
-                        'Q1$0adcfe9e-cda1-4f74-bc98-433150e49b53',
-                        new StringValue( 'foobar' ),
-                        array(
-                            new MonolingualTextValue( $language, 'foo' ),
-                            new MonolingualTextValue( $language, 'bar' )
+                    'Q1$0adcfe9e-cda1-4f74-bc98-433150e49b53' => new CrossCheckResult(
+                        new CompareResult(
+                            new PropertyId( 'P1' ),
+                            'Q1$0adcfe9e-cda1-4f74-bc98-433150e49b53',
+                            new StringValue( 'foobar' ),
+                            array(
+                                new MonolingualTextValue( $language, 'foo' ),
+                                new MonolingualTextValue( $language, 'bar' )
+                            ),
+                            true,
+                            $this->dumpMetaInformation
                         ),
-                        true,
-                        null,
-                        $this->dumpMetaInformation
+                        $this->getReferenceResultMock()
                     ),
-                    'Q1$07c00375-1be7-43a6-ac97-32770f2bb5ac' => new CompareResult(
-                        new PropertyId( 'P1' ),
-                        'Q1$07c00375-1be7-43a6-ac97-32770f2bb5ac',
-                        new StringValue( 'bar' ),
-                        array(
-                            new MonolingualTextValue( $language, 'foo' ),
-                            new MonolingualTextValue( $language, 'bar' )
+                    'Q1$07c00375-1be7-43a6-ac97-32770f2bb5ac' => new CrossCheckResult(
+                        new CompareResult(
+                            new PropertyId( 'P1' ),
+                            'Q1$07c00375-1be7-43a6-ac97-32770f2bb5ac',
+                            new StringValue( 'bar' ),
+                            array(
+                                new MonolingualTextValue( $language, 'foo' ),
+                                new MonolingualTextValue( $language, 'bar' )
+                            ),
+                            false,
+                            $this->dumpMetaInformation
                         ),
-                        false,
-                        null,
-                        $this->dumpMetaInformation
+                        $this->getReferenceResultMock()
                     ),
                 )
             ),
@@ -378,14 +404,16 @@ class CrossCheckerTest extends \MediaWikiTestCase
                 $this->items[ 'Q1' ],
                 $statementsP1[ 0 ],
                 array(
-                    'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b' => new CompareResult(
-                        new PropertyId( 'P1' ),
-                        'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b',
-                        new StringValue( 'foo' ),
-                        array( new MonolingualTextValue( $language, 'foo' ) ),
-                        false,
-                        null,
-                        $this->dumpMetaInformation
+                    'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b' => new CrossCheckResult(
+                        new CompareResult(
+                            new PropertyId( 'P1' ),
+                            'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b',
+                            new StringValue( 'foo' ),
+                            array( new MonolingualTextValue( $language, 'foo' ) ),
+                            false,
+                            $this->dumpMetaInformation
+                        ),
+                        $this->getReferenceResultMock()
                     )
                 )
             ),
@@ -394,23 +422,27 @@ class CrossCheckerTest extends \MediaWikiTestCase
                 $this->items[ 'Q1' ],
                 $this->items[ 'Q1' ]->getStatements()->getWithPropertyId( new PropertyId( 'P1' ) ),
                 array(
-                    'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b' => new CompareResult(
-                        new PropertyId( 'P1' ),
-                        'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b',
-                        new StringValue( 'foo' ),
-                        array( new MonolingualTextValue( $language, 'foo' ) ),
-                        false,
-                        null,
-                        $this->dumpMetaInformation
+                    'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b' => new CrossCheckResult(
+                        new CompareResult(
+                            new PropertyId( 'P1' ),
+                            'Q1$c0f25a6f-9e33-41c8-be34-c86a730ff30b',
+                            new StringValue( 'foo' ),
+                            array( new MonolingualTextValue( $language, 'foo' ) ),
+                            false,
+                            $this->dumpMetaInformation
+                        ),
+                        $this->getReferenceResultMock()
                     ),
-                    'Q1$dd6dcfc9-55e2-4be6-b70c-d22f20f398b7' => new CompareResult(
-                        new PropertyId( 'P1' ),
-                        'Q1$dd6dcfc9-55e2-4be6-b70c-d22f20f398b7',
-                        new StringValue( 'bar' ),
-                        array( new MonolingualTextValue( $language, 'foo' ) ),
-                        true,
-                        null,
-                        $this->dumpMetaInformation
+                    'Q1$dd6dcfc9-55e2-4be6-b70c-d22f20f398b7' => new CrossCheckResult(
+                        new CompareResult(
+                            new PropertyId( 'P1' ),
+                            'Q1$dd6dcfc9-55e2-4be6-b70c-d22f20f398b7',
+                            new StringValue( 'bar' ),
+                            array( new MonolingualTextValue( $language, 'foo' ) ),
+                            true,
+                            $this->dumpMetaInformation
+                        ),
+                        $this->getReferenceResultMock()
                     )
                 )
             ),
@@ -439,7 +471,7 @@ class CrossCheckerTest extends \MediaWikiTestCase
 
     /**
      * Runs assertions on compare result list.
-     * @param CompareResultList $results
+     * @param CrossCheckResultList $results
      * @param array $expectedResults
      */
     private function runResultAssertions( $results, $expectedResults )
@@ -447,11 +479,20 @@ class CrossCheckerTest extends \MediaWikiTestCase
         if ( $results ) {
             foreach ( $results as $result ) {
                 $this->assertArrayHasKey( $result->getClaimGuid(), $expectedResults );
-                $this->assertEquals( $expectedResults[ $result->getClaimGuid() ], $result );
+                $expectedResult = $expectedResults[ $result->getClaimGuid() ];
+                $this->assertEquals( $expectedResult->getCompareResult(), $result->getCompareResult() );
             }
             $this->assertEquals( count( $expectedResults ), count( $results ) );
         } else {
             $this->assertEquals( $expectedResults, $results );
         }
+    }
+
+    private function getReferenceResultMock()
+    {
+        $mock = $this->getMockBuilder( 'WikidataQuality\ExternalValidation\CrossCheck\Result\ReferenceResult' )
+            ->disableOriginalConstructor()
+            ->getMock();
+        return $mock;
     }
 }

@@ -62,6 +62,19 @@ class CrossCheckResultList implements IteratorAggregate, Countable
     }
 
     /**
+     * Specifies, whether at least one reference is missing.
+     * @return bool
+     */
+    public function areReferencesMissing()
+    {
+        foreach ( $this->results as $result ) {
+            if ( $result->areReferencesMissing() ) {
+                return true;
+            }
+        }
+    }
+
+    /**
      * Returns the property ids used by crosscheck results.
      * @return array
      */

@@ -18,16 +18,16 @@ class CompareResultTest extends \MediaWikiTestCase {
     /**
      * @dataProvider constructValidArgumentsDataProvider
      */
-    public function testConstructValidArguments( $propertyId, $claimGuid, $localValue, $externalValues, $dataMismatch, $referencesMissing, $dumpMetaInformation )
+    public function testConstructValidArguments( $propertyId, $claimGuid, $localValue, $externalValues, $dataMismatch, $dumpMetaInformation )
     {
-        $compareResult = new CompareResult( $propertyId, $claimGuid, $localValue, $externalValues, $dataMismatch, $referencesMissing, $dumpMetaInformation );
+        $compareResult = new CompareResult( $propertyId, $claimGuid, $localValue, $externalValues, $dataMismatch, $dumpMetaInformation );
 
         $this->assertEquals( $propertyId, $compareResult->getPropertyId() );
         $this->assertEquals( $claimGuid, $compareResult->getClaimGuid() );
         $this->assertEquals( $localValue, $compareResult->getLocalValue() );
         $this->assertEquals( $externalValues, $compareResult->getExternalValues() );
         $this->assertEquals( $dataMismatch, $compareResult->hasDataMismatchOccurred() );
-        $this->assertEquals( $referencesMissing, $compareResult->areReferencesMissing() );
+        $this->assertEquals( $dataMismatch, $compareResult->hasDataMismatchOccurred() );
         $this->assertEquals( $dumpMetaInformation, $compareResult->getDumpMetaInformation() );
     }
 
@@ -49,7 +49,6 @@ class CompareResultTest extends \MediaWikiTestCase {
                 $monolingualTextValue,
                 array( $monolingualTextValue ),
                 true,
-                null,
                 $dumpInformation
             ),
             array(
@@ -58,7 +57,6 @@ class CompareResultTest extends \MediaWikiTestCase {
                 $monolingualTextValue,
                 array( $monolingualTextValue ),
                 false,
-                null,
                 $dumpInformation
             ),
             array(
@@ -67,7 +65,6 @@ class CompareResultTest extends \MediaWikiTestCase {
                 $monolingualTextValue,
                 array( $monolingualTextValue, $monolingualTextValue ),
                 true,
-                null,
                 $dumpInformation
             )
         );
@@ -76,11 +73,11 @@ class CompareResultTest extends \MediaWikiTestCase {
     /**
      * @dataProvider constructInvalidArgumentsDataProvider
      */
-    public function testConstructInvalidArguments( $propertyId, $claimGuid, $localValue, $externalValues, $dataMismatch, $referencesMissing, $dumpMetaInformation )
+    public function testConstructInvalidArguments( $propertyId, $claimGuid, $localValue, $externalValues, $dataMismatch, $dumpMetaInformation )
     {
         $this->setExpectedException( 'InvalidArgumentException' );
 
-        new CompareResult( $propertyId, $claimGuid, $localValue, $externalValues, $dataMismatch, $referencesMissing, $dumpMetaInformation );
+        new CompareResult( $propertyId, $claimGuid, $localValue, $externalValues, $dataMismatch, $dumpMetaInformation );
     }
 
     /**
@@ -102,7 +99,6 @@ class CompareResultTest extends \MediaWikiTestCase {
                 $monolingualTextValue,
                 array( $monolingualTextValue ),
                 true,
-                null,
                 $dumpInformation
             ),
             array(
@@ -111,7 +107,6 @@ class CompareResultTest extends \MediaWikiTestCase {
                 $stringValue,
                 array( $monolingualTextValue ),
                 true,
-                null,
                 $dumpInformation
             ),
             array(
@@ -120,7 +115,6 @@ class CompareResultTest extends \MediaWikiTestCase {
                 $monolingualTextValue,
                 array( $stringValue ),
                 true,
-                null,
                 $dumpInformation
             ),
             array(
@@ -129,7 +123,6 @@ class CompareResultTest extends \MediaWikiTestCase {
                 $monolingualTextValue,
                 $monolingualTextValue,
                 true,
-                null,
                 $dumpInformation
             ),
             array(
@@ -138,7 +131,6 @@ class CompareResultTest extends \MediaWikiTestCase {
                 $monolingualTextValue,
                 array( $monolingualTextValue, $stringValue ),
                 true,
-                null,
                 $dumpInformation
             )
         );

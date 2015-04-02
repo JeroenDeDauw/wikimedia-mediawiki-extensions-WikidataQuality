@@ -10,6 +10,7 @@ use Wikibase\Lib\Serializers\SerializationOptions;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\ReferenceResult;
 use WikidataQuality\ExternalValidation\DumpMetaInformation;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CrossCheckResult;
+use WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult;
 use WikidataQuality\ExternalValidation\CrossCheck\Result\CrossCheckResultList;
 use WikidataQuality\ExternalValidation\Api\Serializer\CrossCheckResultSerializer;
 use WikidataQuality\ExternalValidation\Api\Serializer\CrossCheckResultListSerializer;
@@ -65,7 +66,7 @@ class CrossCheckResultListSerializerTest extends \MediaWikiTestCase
                     ),
                     new ReferenceResult(
                         true,
-                        null
+                        $this->getMock( 'Wikibase\DataModel\Reference' )
                     )
                 ),
                 new CrossCheckResult(
@@ -79,7 +80,7 @@ class CrossCheckResultListSerializerTest extends \MediaWikiTestCase
                     ),
                     new ReferenceResult(
                         true,
-                        null
+                        $this->getMock( 'Wikibase\DataModel\Reference' )
                     )
                 ),
                 new CrossCheckResult(
@@ -93,7 +94,7 @@ class CrossCheckResultListSerializerTest extends \MediaWikiTestCase
                     ),
                     new ReferenceResult(
                         true,
-                        null
+                        $this->getMock( 'Wikibase\DataModel\Reference' )
                     )
                 )
             )
