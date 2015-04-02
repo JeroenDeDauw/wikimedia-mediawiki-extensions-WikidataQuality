@@ -41,9 +41,8 @@ class CheckResultTest extends \MediaWikiTestCase {
         unset( $this->message );
     }
 
-    public function testConstructAndGetters()
-    {
-        $checkResult = new CheckResult( $this->propertyId, $this->dataValue, $this->constraintName, $this->parameters, $this->status, $this->message);
+    public function testConstructAndGetters() {
+        $checkResult = new CheckResult( $this->propertyId, $this->dataValue, $this->constraintName, $this->parameters, $this->status, $this->message );
         $this->assertEquals( $this->propertyId, $checkResult->getPropertyId() );
         $this->assertEquals( $this->dataValue, $checkResult->getDataValue() );
         $this->assertEquals( $this->constraintName, $checkResult->getConstraintName() );

@@ -4,8 +4,8 @@ namespace WikidataQuality\ConstraintReport\Test\FormatChecker;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\FormatChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
 
@@ -49,16 +49,16 @@ class FormatCheckerTest extends \MediaWikiTestCase {
         $value9 = new StringValue( 'nm000139' );
         $value10 = new StringValue( 'nmnm0001398' );
 
-        $this->assertEquals( 'compliance', $this->formatChecker->checkFormatConstraint( 345, $value1, $pattern )->getStatus(), 'check should comply' );
-        $this->assertEquals( 'compliance', $this->formatChecker->checkFormatConstraint( 345, $value2, $pattern )->getStatus(), 'check should comply' );
-        $this->assertEquals( 'compliance', $this->formatChecker->checkFormatConstraint( 345, $value3, $pattern )->getStatus(), 'check should comply' );
-        $this->assertEquals( 'compliance', $this->formatChecker->checkFormatConstraint( 345, $value4, $pattern )->getStatus(), 'check should comply' );
-        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( 345, $value5, $pattern )->getStatus(), 'check should not comply' );
-        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( 345, $value6, $pattern )->getStatus(), 'check should not comply' );
-        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( 345, $value7, $pattern )->getStatus(), 'check should not comply' );
-        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( 345, $value8, $pattern )->getStatus(), 'check should not comply' );
-        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( 345, $value9, $pattern )->getStatus(), 'check should not comply' );
-        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( 345, $value10, $pattern )->getStatus(), 'check should not comply' );
+        $this->assertEquals( 'compliance', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value1, $pattern )->getStatus(), 'check should comply' );
+        $this->assertEquals( 'compliance', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value2, $pattern )->getStatus(), 'check should comply' );
+        $this->assertEquals( 'compliance', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value3, $pattern )->getStatus(), 'check should comply' );
+        $this->assertEquals( 'compliance', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value4, $pattern )->getStatus(), 'check should comply' );
+        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value5, $pattern )->getStatus(), 'check should not comply' );
+        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value6, $pattern )->getStatus(), 'check should not comply' );
+        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value7, $pattern )->getStatus(), 'check should not comply' );
+        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value8, $pattern )->getStatus(), 'check should not comply' );
+        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value9, $pattern )->getStatus(), 'check should not comply' );
+        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value10, $pattern )->getStatus(), 'check should not comply' );
     }
 
     public function testFormatConstraintTaxonName() {
@@ -75,30 +75,28 @@ class FormatCheckerTest extends \MediaWikiTestCase {
         $value9 = new StringValue( 'Deinococcus-Thermus' );
         $value10 = new StringValue( 'Escherichia coli O157:H7' );
 
-        $this->assertEquals( 'compliance', $this->formatChecker->checkFormatConstraint( 345, $value1, $pattern )->getStatus(), 'check should comply' );
-        $this->assertEquals( 'compliance', $this->formatChecker->checkFormatConstraint( 345, $value2, $pattern )->getStatus(), 'check should comply' );
-        $this->assertEquals( 'compliance', $this->formatChecker->checkFormatConstraint( 345, $value3, $pattern )->getStatus(), 'check should comply' );
-        $this->assertEquals( 'compliance', $this->formatChecker->checkFormatConstraint( 345, $value4, $pattern )->getStatus(), 'check should comply' );
-        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( 345, $value5, $pattern )->getStatus(), 'check should not comply' );
-        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( 345, $value6, $pattern )->getStatus(), 'check should not comply' );
-        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( 345, $value7, $pattern )->getStatus(), 'check should not comply' );
-        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( 345, $value8, $pattern )->getStatus(), 'check should not comply' );
-        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( 345, $value9, $pattern )->getStatus(), 'check should not comply' );
-        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( 345, $value10, $pattern )->getStatus(), 'check should not comply' );
+        $this->assertEquals( 'compliance', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value1, $pattern )->getStatus(), 'check should comply' );
+        $this->assertEquals( 'compliance', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value2, $pattern )->getStatus(), 'check should comply' );
+        $this->assertEquals( 'compliance', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value3, $pattern )->getStatus(), 'check should comply' );
+        $this->assertEquals( 'compliance', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value4, $pattern )->getStatus(), 'check should comply' );
+        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value5, $pattern )->getStatus(), 'check should not comply' );
+        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value6, $pattern )->getStatus(), 'check should not comply' );
+        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value7, $pattern )->getStatus(), 'check should not comply' );
+        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value8, $pattern )->getStatus(), 'check should not comply' );
+        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value9, $pattern )->getStatus(), 'check should not comply' );
+        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value10, $pattern )->getStatus(), 'check should not comply' );
     }
 
-    public function testFormatConstraintEmptyPattern()
-    {
+    public function testFormatConstraintEmptyPattern() {
         $pattern = null;
         $value = new StringValue( 'Populus × canescens' );
-        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( 345, $value, $pattern )->getStatus(), 'check should not comply' );
+        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value, $pattern )->getStatus(), 'check should not comply' );
     }
 
-    public function testFormatConstraintNoStringValue()
-    {
+    public function testFormatConstraintNoStringValue() {
         $pattern = "(|somevalue|novalue|.*virus.*|.*viroid.*|.*phage.*|((×)?[A-Z]([a-z]+-)?[a-z]+(( [A-Z]?[a-z]+)|( ([a-z]+-)?([a-z]+-)?[a-z]+)|( ×([a-z]+-)?([a-z]+-)?([a-z]+-)?([a-z]+-)?[a-z]+)|( \([A-Z][a-z]+\) [a-z]+)|( (‘|')[A-Z][a-z]+(('|’)s)?( de)?( [A-Z][a-z]+(-([A-Z])?[a-z]+)*)*('|’)*)|( ×| Group| (sub)?sp\.| (con)?(sub)?(notho)?var\.| (sub)?ser\.| (sub)?sect\.| subg\.| (sub)?f\.))*))";
         $value = new EntityIdValue( new ItemId( 'Q1' ) );
-        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( 345, $value, $pattern )->getStatus(), 'check should not comply' );
+        $this->assertEquals( 'violation', $this->formatChecker->checkFormatConstraint( new PropertyID( 'P345' ), $value, $pattern )->getStatus(), 'check should not comply' );
     }
 
 }

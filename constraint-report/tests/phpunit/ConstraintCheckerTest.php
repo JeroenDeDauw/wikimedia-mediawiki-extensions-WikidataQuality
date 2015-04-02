@@ -35,7 +35,7 @@ class ConstraintCheckerTest extends \MediaWikiTestCase {
         $this->lookup = new JsonFileEntityLookup( __DIR__ );
         $this->constraintChecker = new ConstraintChecker( $this->lookup );
 
-        // Specify database tables used by this test
+        // specify database tables used by this test
         $this->tablesUsed[ ] = CONSTRAINT_TABLE;
     }
 
@@ -46,18 +46,17 @@ class ConstraintCheckerTest extends \MediaWikiTestCase {
     }
 
     /**
-     * Adds temporary test data to database
+     * Adds temporary test data to database.
      * @throws \DBUnexpectedError
      */
-    public function addDBData()
-    {
+    public function addDBData() {
         $this->db->delete(
             CONSTRAINT_TABLE,
             '*'
         );
 
-        // adds every type of constraint once to constraints table
-        // each constraint belonging to the same property
+        // Adds every type of constraint once to constraints table.
+        // Each constraint belongs to the same property.
         $this->db->insert(
             CONSTRAINT_TABLE,
             array(

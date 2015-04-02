@@ -3,7 +3,6 @@
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
-use Wikibase\DataModel\Entity\ItemId;
 use Exception;
 
 /**
@@ -85,7 +84,7 @@ class TypeChecker {
             return new CheckResult( $propertyId, $dataValue, 'Value type', $parameters, 'violation', $message );
         }
 
-        $statements = $this->entityLookup->getEntity( $dataValue->getEntityId() )->getStatements();
+        $statements = $item->getStatements();
 
         if( $this->hasClassInRelation( $statements, $relationId, $classArray ) ) {
             $message = '';
@@ -99,7 +98,7 @@ class TypeChecker {
     }
 
     /**
-     * Checks 'Value type' constraint.
+     * Checks 'Type' constraint.
      * @param PropertyId $propertyId
      * @param DataValue $dataValue
      * @param StatementList $statements
@@ -161,19 +160,19 @@ class TypeChecker {
             if( $numericPropertyId === self::subclassId ) {
                 $mainSnak = $claim->getMainSnak();
 
-                if ($mainSnak->getType() === 'value' && $mainSnak->getDataValue()->getType() === 'wikibase-entityid') {
+                if ( $mainSnak->getType() === 'value' && $mainSnak->getDataValue()->getType() === 'wikibase-entityid' ) {
                     $comparativeClass = $mainSnak->getDataValue()->getEntityId();
                 } else {
                     // error case
                 }
 
-                foreach ($classesToCheck as $class) {
-                    if ($class === $comparativeClass->getSerialization()) {
+                foreach ( $classesToCheck as $class ) {
+                    if ( $class === $comparativeClass->getSerialization() ) {
                         return true;
                     }
                 }
 
-                $compliance = $this->isSubclassOf($comparativeClass, $classesToCheck);
+                $compliance = $this->isSubclassOf( $comparativeClass, $classesToCheck );
 
             }
             if( $compliance === true ) {

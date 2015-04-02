@@ -55,7 +55,7 @@
 
                 {
                     "entity-type": "item",
-                    "numeric-id": 42
+                    "numeric-id": 4
                 },
                 "type": "wikibase-entityid"
             }
