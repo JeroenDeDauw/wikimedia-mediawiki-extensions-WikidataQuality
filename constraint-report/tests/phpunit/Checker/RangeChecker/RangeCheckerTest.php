@@ -41,6 +41,10 @@ class RangeCheckerTest extends \MediaWikiTestCase {
         parent::tearDown();
     }
 
+    /*
+     * Following tests are testing the 'Range' constraint.
+     */
+
     public function testCheckRangeConstraintWithinRange() {
         $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
         $rangeChecker = new RangeChecker( $entity->getStatements(), $this->helper );
@@ -62,27 +66,6 @@ class RangeCheckerTest extends \MediaWikiTestCase {
         $this->rangeChecker = new RangeChecker( $entity->getStatements(), $this->helper );
         $value = new DecimalValue( 3.141592 );
         $checkResult = $this->rangeChecker->checkRangeConstraint( new PropertyId( 'P1457' ), new QuantityValue( $value, '1', $value, $value ), 0, 1, null, null );
-        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
-    }
-
-    public function testCheckDiffWithinRangeConstraintWithinRange() {
-        $entity = $this->lookup->getEntity( new ItemId( 'Q4' ) );
-        $this->rangeChecker = new RangeChecker( $entity->getStatements(), $this->helper );
-        $checkResult = $this->rangeChecker->checkDiffWithinRangeConstraint( new PropertyId( 'P570' ), $this->timeValue, 'P569', 0, 150 );
-        $this->assertEquals( 'compliance', $checkResult->getStatus(), 'check should comply' );
-    }
-
-    public function testCheckDiffWithinRangeConstraintTooSmall() {
-        $entity = $this->lookup->getEntity( new ItemId( 'Q5' ) );
-        $this->rangeChecker = new RangeChecker( $entity->getStatements(), $this->helper );
-        $checkResult = $this->rangeChecker->checkDiffWithinRangeConstraint( new PropertyId( 'P570' ), $this->timeValue, 'P569', 50, 150 );
-        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
-    }
-
-    public function testCheckDiffWithinRangeConstraintTooBig() {
-        $entity = $this->lookup->getEntity( new ItemId( 'Q6' ) );
-        $this->rangeChecker = new RangeChecker( $entity->getStatements(), $this->helper );
-        $checkResult = $this->rangeChecker->checkDiffWithinRangeConstraint( new PropertyId( 'P570' ), $this->timeValue, 'P569', 0, 150 );
         $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
     }
 
@@ -137,6 +120,31 @@ class RangeCheckerTest extends \MediaWikiTestCase {
         $min = new TimeValue( '+00000001960-01-01T00:00:00Z', 0, 0, 0, 11, 'http://www.wikidata.org/entity/Q1985727' );
         $max = new TimeValue( '+00000001965-01-01T00:00:00Z', 0, 0, 0, 11, 'http://www.wikidata.org/entity/Q1985727' );
         $checkResult = $rangeChecker->checkRangeConstraint( new PropertyId( 'P1457' ), new StringValue( '1.1.1970' ), null, null, $min, $max );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
+    }
+
+    /*
+     * Following tests are testing the 'Diff within range' constraint.
+     */
+
+    public function testCheckDiffWithinRangeConstraintWithinRange() {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q4' ) );
+        $this->rangeChecker = new RangeChecker( $entity->getStatements(), $this->helper );
+        $checkResult = $this->rangeChecker->checkDiffWithinRangeConstraint( new PropertyId( 'P570' ), $this->timeValue, 'P569', 0, 150 );
+        $this->assertEquals( 'compliance', $checkResult->getStatus(), 'check should comply' );
+    }
+
+    public function testCheckDiffWithinRangeConstraintTooSmall() {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q5' ) );
+        $this->rangeChecker = new RangeChecker( $entity->getStatements(), $this->helper );
+        $checkResult = $this->rangeChecker->checkDiffWithinRangeConstraint( new PropertyId( 'P570' ), $this->timeValue, 'P569', 50, 150 );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
+    }
+
+    public function testCheckDiffWithinRangeConstraintTooBig() {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q6' ) );
+        $this->rangeChecker = new RangeChecker( $entity->getStatements(), $this->helper );
+        $checkResult = $this->rangeChecker->checkDiffWithinRangeConstraint( new PropertyId( 'P570' ), $this->timeValue, 'P569', 0, 150 );
         $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
     }
 

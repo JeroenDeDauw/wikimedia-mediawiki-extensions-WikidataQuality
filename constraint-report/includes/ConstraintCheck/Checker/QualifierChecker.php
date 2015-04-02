@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 class QualifierChecker {
 
     /**
-     * List of all statemtens of given entity.
+     * List of all statements of given entity.
      * @var StatementList
      */
     private $statements;

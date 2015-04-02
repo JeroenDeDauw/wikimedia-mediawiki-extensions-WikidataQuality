@@ -33,7 +33,7 @@
 "claims":
 {
 
-    "P279": 
+    "P31": 
 
 [
 
@@ -45,7 +45,7 @@
 {
 
     "snaktype": "value",
-    "property": "P279",
+    "property": "P31",
     "datatype": "wikibase-item",
     "datavalue": 
 
@@ -55,7 +55,7 @@
 
                 {
                     "entity-type": "item",
-                    "numeric-id": 2
+                    "numeric-id": 5
                 },
                 "type": "wikibase-entityid"
             }

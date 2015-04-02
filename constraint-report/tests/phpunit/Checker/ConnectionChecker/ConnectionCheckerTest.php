@@ -37,20 +37,21 @@ class ConnectionCheckerTest extends \MediaWikiTestCase {
     }
 
     /**
-     * Following tests are testing the symmetric constraint.
+     * Following tests are testing the 'Symmetric' constraint.
      */
-    public function testCheckSymmetricConstraintWithWrongSpouse() {
-        $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
-        $connectionChecker = new ConnectionChecker( $entity->getStatements(), $this->lookup, $this->helper );
-        $checkResult = $connectionChecker->checkSymmetricConstraint( new PropertyId( 'P188' ), new EntityIdValue( new ItemId( 'Q2' ) ), 'Q1' );
-        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
-    }
 
     public function testCheckSymmetricConstraintWithCorrectSpouse() {
         $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
         $connectionChecker = new ConnectionChecker( $entity->getStatements(), $this->lookup, $this->helper );
         $checkResult = $connectionChecker->checkSymmetricConstraint( new PropertyId( 'P188' ), new EntityIdValue( new ItemId( 'Q3' ) ), 'Q1' );
         $this->assertEquals( 'compliance', $checkResult->getStatus(), 'check should comply' );
+    }
+
+    public function testCheckSymmetricConstraintWithWrongSpouse() {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
+        $connectionChecker = new ConnectionChecker( $entity->getStatements(), $this->lookup, $this->helper );
+        $checkResult = $connectionChecker->checkSymmetricConstraint( new PropertyId( 'P188' ), new EntityIdValue( new ItemId( 'Q2' ) ), 'Q1' );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
     }
 
     public function testCheckSymmetricConstraintWithWrongDataValue() {
@@ -60,7 +61,7 @@ class ConnectionCheckerTest extends \MediaWikiTestCase {
         $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
     }
 
-    public function testCheckSymmetricConstraintWithNonexistingEntity() {
+    public function testCheckSymmetricConstraintWithNonExistentEntity() {
         $entity = $this->lookup->getEntity( new ItemId( 'Q1' ) );
         $connectionChecker = new ConnectionChecker( $entity->getStatements(), $this->lookup, $this->helper );
         $checkResult = $connectionChecker->checkSymmetricConstraint( new PropertyId( 'P188' ), new EntityIdValue( new ItemId( 'Q100' ) ), 'Q1' );
@@ -68,7 +69,7 @@ class ConnectionCheckerTest extends \MediaWikiTestCase {
     }
 
     /*
-     * Following tests are testing the conflicts with constraint.
+     * Following tests are testing the 'Conflicts with' constraint.
      */
 
     public function testConflictsWithConstraintValid() {
@@ -152,9 +153,8 @@ class ConnectionCheckerTest extends \MediaWikiTestCase {
         $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
     }
 
-
     /*
-     * Following tests are testing the target required claim constraint.
+     * Following tests are testing the 'Target required claim' constraint.
      */
 
     public function testTargetRequiredClaimConstraintValid() {
@@ -206,9 +206,8 @@ class ConnectionCheckerTest extends \MediaWikiTestCase {
         $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
     }
 
-
     /*
-     * Following tests are testing the inverse constraint.
+     * Following tests are testing the 'Inverse' constraint.
      */
 
     public function testInverseConstraintValid() {
