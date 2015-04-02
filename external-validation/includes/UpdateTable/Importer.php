@@ -74,16 +74,24 @@ class Importer
             if ( $wgDBtype === 'sqlite' ) {
                 $db->delete( $tableName, 'dump_item_id=' . $dumpItemId->getNumericId() );
             } else {
+                $i = 0;
                 do {
                     $db->commit( __METHOD__, 'flush' );
                     wfWaitForSlaves();
-                    if ( !$this->importContext->isQuiet() ) {
-                        print "Deleting a batch\n";
-                    }
                     $table = $db->tableName( $tableName );
                     $batchSize = $this->importContext->getBatchSize();
                     $db->query( "DELETE FROM $table WHERE dump_item_id=" . $dumpItemId->getNumericId() . " LIMIT $batchSize" );
+
+                    $i++;
+                    if ( !$this->importContext->isQuiet() ) {
+                        print "\r\033[K";
+                        print "$i batches deleted";
+                    }
                 } while ( $db->affectedRows() > 0 );
+
+                if ( !$this->importContext->isQuiet() ) {
+                    print "\n";
+                }
             }
         }
     }
@@ -149,6 +157,10 @@ class Importer
      */
     protected function insertExternalValues( $db )
     {
+        if ( !$this->importContext->isQuiet() ) {
+            print "Insert new entries\n";
+        }
+
         // Open csv file
         $csvFile = fopen( $this->importContext->getEntitiesFilePath(), 'rb' );
 
@@ -157,13 +169,13 @@ class Importer
         while ( true ) {
             $data = fgetcsv( $csvFile );
             if ( $data == false || ++$i % $this->importContext->getBatchSize() == 0 ) {
-                // Write batch into datbase
+                // Write batch into database
                 $db->commit( __METHOD__, 'flush' );
                 wfWaitForSlaves();
                 $db->insert( $this->importContext->getTargetTableName(), $accumulator );
                 if ( !$this->importContext->isQuiet() ) {
                     print "\r\033[K";
-                    print "$i rows inserted\n";
+                    print "$i rows inserted";
                 }
 
                 // Clear accumulator

@@ -91,6 +91,10 @@ class DumpMetaInformationTest extends \MediaWikiTestCase
     {
         $metaInformation = new DumpMetaInformation( $sourceItemId, $importDate, $language, $sourceUrl, $size, $license );
 
+        if( !is_array( $sourceUrl ) ) {
+            $sourceUrl = array( $sourceUrl );
+        }
+
         $this->assertEquals( $expectedSourceItemId, $metaInformation->getSourceItemId() );
         $this->assertEquals( $importDate, $metaInformation->getImportDate() );
         $this->assertEquals( $language, $metaInformation->getLanguage() );
@@ -108,7 +112,7 @@ class DumpMetaInformationTest extends \MediaWikiTestCase
         $itemId = new ItemId( 'Q123' );
         $importDate = new DateTime( '30-11-2015' );
         $language = 'de';
-        $sourceUrl = array( 'http://randomurl.tld' );
+        $sourceUrl = 'http://randomurl.tld';
         $size = 42;
         $license = 'CC0';
 
@@ -136,6 +140,15 @@ class DumpMetaInformationTest extends \MediaWikiTestCase
                 $importDate,
                 $language,
                 $sourceUrl,
+                $size,
+                $license,
+                $itemId
+            ),
+            array(
+                (string)$itemId->getNumericId(),
+                $importDate,
+                $language,
+                array( $sourceUrl ),
                 $size,
                 $license,
                 $itemId
@@ -180,6 +193,14 @@ class DumpMetaInformationTest extends \MediaWikiTestCase
                 '2015-03-17',
                 $language,
                 $sourceUrl,
+                $size,
+                $license
+            ),
+            array(
+                new ItemId( 'Q123' ),
+                $importDate,
+                $language,
+                42,
                 $size,
                 $license
             )
@@ -236,9 +257,14 @@ class DumpMetaInformationTest extends \MediaWikiTestCase
                 null,
                 null
             ),
-            // Invalid id
+            // Invalid ids
             array(
                 'broken',
+                null,
+                'InvalidArgumentException'
+            ),
+            array(
+                array( 'broken' ),
                 null,
                 'InvalidArgumentException'
             )
