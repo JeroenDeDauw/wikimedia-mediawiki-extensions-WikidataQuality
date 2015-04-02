@@ -2,10 +2,10 @@
 
     "pageid": 2076,
     "ns": 0,
-    "title": "Q6",
+    "title": "Q16",
     "lastrevid": 11029,
     "modified": "2015-04-01T13:51:03Z",
-    "id": "Q6",
+    "id": "Q16",
     "type": "item",
     "labels": 
 
@@ -33,19 +33,19 @@
 "claims":
 {
 
-    "P279":
+    "P1234":
 
 [
 
 {
 
-    "id": "Q6$56e6a474-4431-fb24-cc15-1d580e467559",
+    "id": "Q16$56e6a474-4431-fb24-cc15-1d580e467559",
     "mainsnak": 
 
 {
 
     "snaktype": "value",
-    "property": "P279",
+    "property": "P1234",
     "datatype": "wikibase-item",
     "datavalue": 
 
@@ -55,7 +55,7 @@
 
                 {
                     "entity-type": "item",
-                    "numeric-id": 5
+                    "numeric-id": 6
                 },
                 "type": "wikibase-entityid"
             }
@@ -70,7 +70,7 @@
 
 {
 
-    "id": "Q6$e35707be-4a84-61fe-9b52-623784a316a7",
+    "id": "Q16$e35707be-4a84-61fe-9b52-623784a316a7",
     "mainsnak": 
 
 {
