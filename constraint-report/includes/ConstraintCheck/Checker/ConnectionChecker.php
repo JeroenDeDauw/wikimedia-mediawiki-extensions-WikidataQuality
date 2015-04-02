@@ -3,7 +3,6 @@
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Checker;
 
 use WikidataQuality\ConstraintReport\ConstraintCheck\Result\CheckResult;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -16,7 +15,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 class ConnectionChecker {
 
     /**
-     * List of all statemtens of given entity.
+     * List of all statements of given entity.
      * @var StatementList
      */
     private $statements;
@@ -55,24 +54,8 @@ class ConnectionChecker {
     public function checkConflictsWithConstraint( $propertyId, $dataValue, $property, $itemArray ) {
         $parameters = array();
 
-        if( $property === null ) {
-            $parameters['property'] = array( 'null' );
-        } else {
-            $parameters['property'] = array( new PropertyId( $property ) );
-        }
-
-        if( $itemArray[0] === '' ) {
-            $parameters['item'] = array( 'null' );
-        } else {
-            $func = function( $item ) {
-                if( $item !== 'novalue' && $item !== 'somevalue' && $item !== '' ) {
-                    return new ItemId( $item );
-                } else {
-                    return $item;
-                }
-            };
-            $parameters['item'] = array_map( $func, $itemArray );
-        }
+        $parameters['property'] = $this->helper->parseSingleParameter( $property, 'PropertyId' );
+        $parameters['item'] = $this->helper->parseParameterArray( $itemArray, 'ItemId' );
 
         /*
          * error handling:
@@ -120,24 +103,8 @@ class ConnectionChecker {
     public function checkItemConstraint( $propertyId, $dataValue, $property, $itemArray ) {
         $parameters = array();
 
-        if( $property === null ) {
-            $parameters['property'] = array( 'null' );
-        } else {
-            $parameters['property'] = array( new PropertyId( $property ) );
-        }
-
-        if( $itemArray[0] === '' ) {
-            $parameters['item'] = array( 'null' );
-        } else {
-            $func = function( $item ) {
-                if( $item !== 'novalue' && $item !== 'somevalue' && $item !== '' ) {
-                    return new ItemId( $item );
-                } else {
-                    return $item;
-                }
-            };
-            $parameters['item'] = array_map( $func, $itemArray );
-        }
+        $parameters['property'] = $this->helper->parseSingleParameter( $property, 'PropertyId' );
+        $parameters['item'] = $this->helper->parseParameterArray( $itemArray, 'ItemId' );
 
         /*
          * error handling:
@@ -185,24 +152,8 @@ class ConnectionChecker {
     public function checkTargetRequiredClaimConstraint( $propertyId, $dataValue, $property, $itemArray ) {
         $parameters = array();
 
-        if( $property === null ) {
-            $parameters['property'] = array( 'null' );
-        } else {
-            $parameters['property'] = array( new PropertyId( $property ) );
-        }
-
-        if( $itemArray[0] === '' ) {
-            $parameters['item'] = array( 'null' );
-        } else {
-            $func = function( $item ) {
-                if( $item !== 'novalue' && $item !== 'somevalue' && $item !== '' ) {
-                    return new ItemId( $item );
-                } else {
-                    return $item;
-                }
-            };
-            $parameters['item'] = array_map( $func, $itemArray );
-        }
+        $parameters['property'] = $this->helper->parseSingleParameter( $property, 'PropertyId' );
+        $parameters['item'] = $this->helper->parseParameterArray( $itemArray, 'ItemId' );
 
         /*
          * error handling:
@@ -299,11 +250,7 @@ class ConnectionChecker {
     public function checkInverseConstraint( $propertyId, $dataValue, $entityIdSerialization, $property ) {
         $parameters = array();
 
-        if( $property === null ) {
-            $parameters['property'] = array( 'null' );
-        } else {
-            $parameters['property'] = array( new PropertyId( $property ) );
-        }
+        $parameters['property'] = $this->helper->parseSingleParameter( $property, 'PropertyId' );
 
         /*
          * error handling:
@@ -326,7 +273,7 @@ class ConnectionChecker {
         }
         $targetItemStatementsArray = $targetItem->getStatements();
 
-        if( $this->hasClaim( $targetItemStatementsArray, $propertyId->getSerialization(), $entityIdSerialization ) ) {
+        if( $this->hasClaim( $targetItemStatementsArray, $property, $entityIdSerialization ) ) {
             $message = '';
             $status = 'compliance';
         } else {

@@ -44,24 +44,8 @@ class TypeChecker {
     public function checkValueTypeConstraint( $propertyId, $dataValue, $classArray, $relation ) {
         $parameters = array();
 
-        if( $classArray[0] === '' ) {
-            $parameters['class'] = array( 'null' );
-        } else {
-            $func = function( $class ) {
-                if( $class !== 'novalue' && $class !== 'somevalue' ) {
-                    return new ItemId( $class );
-                } else {
-                    return $class;
-                }
-            };
-            $parameters['class'] = array_map( $func, $classArray );
-        }
-
-        if( $relation === null ) {
-            $parameters['relation'] = array( 'null' );
-        } else {
-            $parameters['relation'] = array( $relation );
-        }
+        $parameters['class'] = $this->helper->parseParameterArray( $classArray, 'ItemId' );
+        $parameters['relation'] = $this->helper->parseSingleParameter( $relation );
 
         /*
          * error handling:
@@ -126,24 +110,8 @@ class TypeChecker {
     public function checkTypeConstraint( $propertyId, $dataValue, $statements, $classArray, $relation ) {
         $parameters = array();
 
-        if( $classArray[0] === '' ) {
-            $parameters['item'] = array( 'null' );
-        } else {
-            $func = function( $class ) {
-                if( $class !== 'novalue' && $class !== 'somevalue' ) {
-                    return new ItemId( $class );
-                } else {
-                    return $class;
-                }
-            };
-            $parameters['item'] = array_map( $func, $classArray );
-        }
-
-        if( $relation === null ) {
-            $parameters['relation'] = array( 'null' );
-        } else {
-            $parameters['relation'] = array( $relation );
-        }
+        $parameters['class'] = $this->helper->parseParameterArray( $classArray, 'ItemId' );
+        $parameters['relation'] = $this->helper->parseSingleParameter( $relation );
 
         /*
          * error handling:
@@ -179,6 +147,7 @@ class TypeChecker {
     }
 
     private function isSubclassOf( $comparativeClass, $classesToCheck ) {
+        $compliance = null;
         $item = $this->entityLookup->getEntity( $comparativeClass );
         if( !$item ) {
             return false; // lookup failed, probably because item doesn't exist
@@ -192,17 +161,23 @@ class TypeChecker {
             if( $numericPropertyId === self::subclassId ) {
                 $mainSnak = $claim->getMainSnak();
 
-                if( $mainSnak->getType() === 'value' && $mainSnak->getDataValue()->getType() === 'wikibase-entityid' ) {
+                if ($mainSnak->getType() === 'value' && $mainSnak->getDataValue()->getType() === 'wikibase-entityid') {
                     $comparativeClass = $mainSnak->getDataValue()->getEntityId();
                 } else {
                     // error case
                 }
 
-                foreach( $classesToCheck as $class ) {
-                    if( $class === $comparativeClass->getSerialization() ) {
+                foreach ($classesToCheck as $class) {
+                    if ($class === $comparativeClass->getSerialization()) {
                         return true;
                     }
                 }
+
+                $compliance = $this->isSubclassOf($comparativeClass, $classesToCheck);
+
+            }
+            if( $compliance === true ) {
+                return true;
             }
         }
         return false;

@@ -1,11 +1,11 @@
 {
 
-    "pageid": 2076,
+    "pageid": 2067,
     "ns": 0,
-    "title": "Q2",
-    "lastrevid": 11029,
-    "modified": "2015-04-01T13:51:03Z",
-    "id": "Q2",
+    "title": "Q5",
+    "lastrevid": 10995,
+    "modified": "2015-04-01T08:36:40Z",
+    "id": "Q5",
     "type": "item",
     "labels": 
 
@@ -15,7 +15,7 @@
 
     {
         "language": "en",
-        "value": "TestItemType"
+        "value": "ConflictsWithTestItem"
     }
 
 },
@@ -33,19 +33,19 @@
 "claims":
 {
 
-    "P31": 
+    "P1": 
 
 [
 
 {
 
-    "id": "Q2$56e6a474-4431-fb24-cc15-1d580e467559",
+    "id": "Q5$dbf5a0bd-4954-da3f-39a6-e9a034de5ca5",
     "mainsnak": 
 
 {
 
     "snaktype": "value",
-    "property": "P31",
+    "property": "P1",
     "datatype": "wikibase-item",
     "datavalue": 
 
@@ -65,18 +65,18 @@
     }
 
 ],
-"P1":
+"P2":
 [
 
 {
 
-    "id": "Q2$e35707be-4a84-61fe-9b52-623784a316a7",
+    "id": "Q5$69de0802-4db2-b894-e9fe-fb731f9ca0cb",
     "mainsnak": 
 
 {
 
     "snaktype": "value",
-    "property": "P1",
+    "property": "P2",
     "datatype": "wikibase-item",
     "datavalue": 
 

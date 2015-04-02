@@ -2,6 +2,9 @@
 
 namespace WikidataQuality\ConstraintReport\ConstraintCheck\Helper;
 
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
+
 /**
  * Class ConstraintReportHelper
  * Class for helper functions for constraint checkers.
@@ -26,10 +29,56 @@ class ConstraintReportHelper {
      * @return array
      */
     public function stringToArray( $templateString ) {
-        if ( is_null( $templateString ) or $templateString === '' ) {
+        if( is_null( $templateString ) or $templateString === '' ) {
             return array( '' );
         } else {
             return explode( ',', $this->removeBrackets( str_replace( ' ', '', $templateString) ) );
+        }
+    }
+
+    private function parseParameter( $parameter, $type = 'String' ) {
+        if( $parameter === null ) {
+            return 'null';
+        } else {
+            if( $type === 'String' ) {
+                return "$parameter";
+            } else { // ItemId, PropertyId
+                $startsWith = strtoupper( substr( $parameter, 0, 1 ) );
+                if( $startsWith === 'Q' || $startsWith === 'P' ) {
+                    $type = 'Wikibase\\DataModel\\Entity\\' . $type;
+                    return new $type( $parameter );
+                } else {
+                    return '' ;
+                }
+            }
+        }
+    }
+
+    /**
+     * Helps set/format a single parameter depending on its type.
+     * @param array $parameter
+     * @param string $type
+     * @return array
+     */
+    public function parseSingleParameter( $parameter, $type = 'String' ) {
+        return array( $this->parseParameter( $parameter, $type ) );
+    }
+
+    /**
+     * Helps set/format the item/class/property parameter arrays according to their respective type.
+     * @param array $parameterArray
+     * @param string $type
+     * @return array
+     */
+    public function parseParameterArray( $parameterArray, $type = 'String' ) {
+        if( $parameterArray[0] === '' ) { // parameter not given
+            return array( 'null' );
+        } else {
+            $array = array();
+            foreach( $parameterArray as $parameter ) {
+                $array[] = $this->parseParameter( $parameter, $type );
+            }
+            return $array;
         }
     }
 

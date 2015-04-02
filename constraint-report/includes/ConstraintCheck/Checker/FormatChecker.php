@@ -36,11 +36,7 @@ class FormatChecker {
     public function checkFormatConstraint( $propertyId, $dataValue, $pattern ) {
         $parameters = array();
 
-        if( $pattern === null ) {
-            $parameters['pattern'] = array( 'null' );
-        } else {
-            $parameters['pattern'] = array( $pattern );
-        }
+        $parameters['pattern'] = $this->helper->parseSingleParameter( $pattern );
 
         /*
          * error handling:

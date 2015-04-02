@@ -58,14 +58,7 @@ class QualifierChecker {
     public function checkQualifiersConstraint( $propertyId, $dataValue, $statement, $propertyArray ) {
         $parameters = array();
 
-        if( $propertyArray[0] === '' ) {
-            $parameters['property'] = array( 'null' );
-        } else {
-            $func = function( $property ) {
-                return new PropertyId( $property );
-            };
-            $parameters['property'] = array_map( $func, $propertyArray );
-        }
+        $parameters['property'] = $this->helper->parseParameterArray( $propertyArray, 'PropertyId' );
 
         /*
          * error handling:

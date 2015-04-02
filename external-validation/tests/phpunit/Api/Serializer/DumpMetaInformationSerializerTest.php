@@ -44,7 +44,7 @@ class DumpMetaInformationSerializerTest extends \MediaWikiTestCase {
 
         $this->assertEquals($this->dumpMetaInformation->getSourceItemId()->getSerialization(), $result['sourceItemId']);
         $this->assertEquals($this->dumpMetaInformation->getLanguage(), $result['language']);
-        $this->assertEquals($this->dumpMetaInformation->getSourceUrl(), $result['sourceUrl']);
+        $this->assertArrayEquals($this->dumpMetaInformation->getSourceUrls(), $result['sourceUrls']);
         $this->assertEquals($this->dumpMetaInformation->getSize(), $result['size']);
         $this->assertEquals($this->dumpMetaInformation->getLicense(), $result['license']);
     }
