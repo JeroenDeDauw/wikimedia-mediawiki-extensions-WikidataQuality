@@ -181,4 +181,13 @@ class RangeCheckerTest extends \MediaWikiTestCase {
         $checkResult = $this->rangeChecker->checkDiffWithinRangeConstraint( new PropertyId( 'P570' ), new QuantityValue( $value, "1", $value, $value ), 'P569', 0, 150 );
         $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
     }
+
+    public function testCheckDiffWithinRangeConstraintWithoutBaseProperty()
+    {
+        $entity = $this->lookup->getEntity( new ItemId( 'Q4' ) );
+        $this->rangeChecker = new RangeChecker( $entity->getStatements(), $this->helper );
+
+        $checkResult = $this->rangeChecker->checkDiffWithinRangeConstraint( new PropertyId( 'P570' ), $this->timeValue, 'P1000', 0, 150 );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
+    }
 }

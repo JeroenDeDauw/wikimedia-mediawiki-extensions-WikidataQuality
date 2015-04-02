@@ -158,7 +158,11 @@ class RangeChecker {
 
                 return new CheckResult( $propertyId, $dataValue, 'Diff within range', $parameters, $status, $message );
             }
-        } }
+        }
+        $message = 'The property defined in the parameters must exist.';
+        $status = 'violation';
+        return new CheckResult( $propertyId, $dataValue, 'Diff within range', $parameters, $status, $message );
+    }
 
     private function getComparativeValue( $dataValue ) {
         if( $dataValue->getType() === 'time' ) {
