@@ -3,13 +3,10 @@
 namespace WikidataQuality\ExternalValidation\Tests\Api;
 
 use DataValues\StringValue;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\Api\WikibaseApiTestCase;
@@ -28,7 +25,6 @@ use WikidataQuality\ExternalValidation\DumpMetaInformation;
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult
- * @uses   WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResultList
  * @uses   WikidataQuality\ExternalValidation\Api\Serializer\CompareResultSerializer
  * @uses   WikidataQuality\ExternalValidation\Api\Serializer\CompareResultListSerializer
  * @uses   WikidataQuality\ExternalValidation\Api\Serializer\DumpMetaInformationSerializer
