@@ -8,7 +8,7 @@ use Wikibase\Api\ApiWikibase;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Repo\WikibaseRepo;
-use WikidataQuality\ExternalValidation\Api\Serializer\CompareResultListSerializer;
+use WikidataQuality\ExternalValidation\Api\Serializer\CrossCheckResultListSerializer;
 use WikidataQuality\ExternalValidation\CrossCheck\CrossChecker;
 
 
@@ -161,7 +161,7 @@ class CrossCheck extends ApiWikibase
     }
 
     /**
-     * Writes output for CompareResultList
+     * Writes output for CrossCheckResultList
      * @param $resultLists
      * @return array
      */
@@ -177,7 +177,7 @@ class CrossCheck extends ApiWikibase
         $output = array();
         foreach ( $resultLists as $entityId => $resultList ) {
             if ( $resultList ) {
-                // Serialize CompareResultList
+                // Serialize CrossCheckResultList
                 $serializedResultList = $serializer->getSerialized( $resultList );
 
                 // Add entity id depending on raw mode
