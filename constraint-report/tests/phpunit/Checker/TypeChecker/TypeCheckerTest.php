@@ -5,6 +5,7 @@ namespace WikidataQuality\ConstraintReport\Test\TypeChecker;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use DataValues\StringValue;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Checker\TypeChecker;
 use WikidataQuality\ConstraintReport\ConstraintCheck\Helper\ConstraintReportHelper;
 use WikidataQuality\Tests\Helper\JsonFileEntityLookup;
@@ -228,6 +229,19 @@ class TypeCheckerTest extends \MediaWikiTestCase {
 
     // edge cases
 
-    // todo
+    public function testCheckValueTypeConstraintMissingRelation() {
+        $checkResult = $this->typeChecker->checkValueTypeConstraint( $this->valueTypePropertyId, new EntityIdValue( new ItemId( 'Q1' ) ), array( 'Q100', 'Q101' ), null );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
+    }
+
+    public function testCheckValueTypeConstraintMissingClass() {
+        $checkResult = $this->typeChecker->checkValueTypeConstraint( $this->valueTypePropertyId, new EntityIdValue( new ItemId( 'Q1' ) ), array( '' ), 'subclass' );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
+    }
+
+    public function testCheckValueTypeConstraintWrongType() {
+        $checkResult = $this->typeChecker->checkValueTypeConstraint( $this->valueTypePropertyId, new StringValue( 'foo bar baz' ), array( 'Q100', 'Q101' ), 'instance' );
+        $this->assertEquals( 'violation', $checkResult->getStatus(), 'check should not comply' );
+    }
 
 }
