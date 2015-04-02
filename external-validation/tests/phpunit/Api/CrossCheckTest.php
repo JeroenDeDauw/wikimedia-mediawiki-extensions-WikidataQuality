@@ -25,8 +25,8 @@ use WikidataQuality\ExternalValidation\DumpMetaInformation;
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\DataValueComparer
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Comparer\StringValueComparer
  * @uses   WikidataQuality\ExternalValidation\CrossCheck\Result\CompareResult
- * @uses   WikidataQuality\ExternalValidation\Api\Serializer\CompareResultSerializer
- * @uses   WikidataQuality\ExternalValidation\Api\Serializer\CompareResultListSerializer
+ * @uses   WikidataQuality\ExternalValidation\Api\Serializer\CrossCheckResultSerializer
+ * @uses   WikidataQuality\ExternalValidation\Api\Serializer\CrossCheckResultListSerializer
  * @uses   WikidataQuality\ExternalValidation\Api\Serializer\DumpMetaInformationSerializer
  *
  * @author BP2014N1

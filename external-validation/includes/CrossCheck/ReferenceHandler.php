@@ -64,11 +64,13 @@ class ReferenceHandler
         }
 
         // TODO: test if working (probably not) ...
+        // TODO: think about implementation: currently only adds first reference (maybe ranks of refs?)
         if ( count( $references ) == 0 ) {
             if ( $this->addReferencesAutomatically ) {
-                if ( !$this->compareResult->hasDataMismatchOccurred() )
-                    $this->statement->addNewReference( $statedInSnak );
-                $this->statement->addNewReference( $withIdSnak );
+                if ( !$this->compareResult->hasDataMismatchOccurred() ) {
+                    // $this->statement->addNewReference( $statedInSnak );
+                    // $this->statement->addNewReference( $withIdSnak );
+                }
             }
             $referenceMissing = true;
         } else {
