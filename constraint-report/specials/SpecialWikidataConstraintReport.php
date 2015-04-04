@@ -82,21 +82,21 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
         $this->setHeaders();
 
         $out->addHTML( $this->getHtmlForm() );
+        $entityToCheck = $this->entityToCheck( $par );
+        try {
+            $entityId = $this->getEntityID( $entityToCheck );
+        } catch ( InvalidArgumentException $ex ) {
+            $out->addHTML(
+                Html::openElement( 'p' )
+                . $this->msg( 'wikidataquality-constraint-result-invalid-entity-id' )->text()
+                . ' (' . $entityToCheck . ')'
+                . Html::closeElement( 'p' )
+            );
+            return;
 
-        if( !empty( $_POST['entityID'] ) ) {
-            // is string a valid entity id? if yes, get entity id.
-            try {
-                $entityId = $this->getEntityID( $_POST['entityID'] );
-            } catch ( InvalidArgumentException $ex ) {
-                $out->addHTML(
-                    Html::openElement( 'p' )
-                    . $this->msg( 'wikidataquality-constraint-result-invalid-entity-id' )->text()
-                    . ' (' . $_POST['entityID'] . ')'
-                    . Html::closeElement( 'p' )
-                );
-                return;
-            }
+        }
 
+        if( $entityId !== null ) {
             // get entity and check if it exists.
             $this->entity = $this->entityLookup->getEntity( $entityId );
             if( is_null( $this->entity ) ) {
@@ -237,6 +237,16 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
         }
 
         return $table;
+    }
+
+    private function entityToCheck( $par ) {
+        if( !empty( $_POST['entityID'] ) ) {
+            return $_POST['entityID'];
+        } elseif( !empty( $par ) ) {
+            return $par;
+        } else {
+            return null;
+        }
     }
 
     /**
