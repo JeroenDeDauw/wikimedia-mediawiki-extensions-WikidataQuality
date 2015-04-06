@@ -22,6 +22,7 @@ class TypeChecker {
 
     const instanceId = 31;
     const subclassId = 279;
+    const MAX_DEPTH = 20;
 
     /**
      * @param StatementList $statements
@@ -145,7 +146,7 @@ class TypeChecker {
         return new CheckResult( $propertyId, $dataValue, 'Type', $parameters, $status, $message );
     }
 
-    private function isSubclassOf( $comparativeClass, $classesToCheck ) {
+    private function isSubclassOf( $comparativeClass, $classesToCheck, $depth ) {
         $compliance = null;
         $item = $this->entityLookup->getEntity( $comparativeClass );
         if( !$item ) {
@@ -171,8 +172,11 @@ class TypeChecker {
                         return true;
                     }
                 }
+                if( $depth > self::MAX_DEPTH ){
+                    return false;
+                }
 
-                $compliance = $this->isSubclassOf( $comparativeClass, $classesToCheck );
+                $compliance = $this->isSubclassOf( $comparativeClass, $classesToCheck, $depth+1 );
 
             }
             if( $compliance === true ) {
@@ -204,7 +208,7 @@ class TypeChecker {
                     }
                 }
 
-                $compliance = $this->isSubclassOf( $comparativeClass, $classesToCheck );
+                $compliance = $this->isSubclassOf( $comparativeClass, $classesToCheck, 1 );
             }
             if( $compliance === true ) {
                 return true;
