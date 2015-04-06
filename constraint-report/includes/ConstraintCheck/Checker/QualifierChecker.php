@@ -15,23 +15,15 @@ use Wikibase\DataModel\Entity\PropertyId;
 class QualifierChecker {
 
     /**
-     * List of all statements of given entity.
-     * @var StatementList
-     */
-    private $statements;
-
-    /**
      * Class for helper functions for constraint checkers.
      * @var ConstraintReportHelper
      */
     private $helper;
 
     /**
-     * @param StatementList $statements
      * @param ConstraintReportHelper $helper
      */
-    public function __construct( $statements, $helper ) {
-        $this->statements = $statements;
+    public function __construct( $helper ) {
         $this->helper = $helper;
     }
 
@@ -80,4 +72,35 @@ class QualifierChecker {
         return new CheckResult( $propertyId, $dataValue, 'Qualifiers', $parameters, $status, $message );
     }
 
+    /**
+     * @param PropertyId $propertyId
+     * @param DataValue $dataValue
+     * @param Statement $statement
+     * @param array $propertyArray
+     * @return CheckResult
+     */
+    public function checkMandatoryQualifiersConstraint( $propertyId, $dataValue, $statement, $propertyArray ) {
+        $parameters = array();
+
+        $parameters['property'] = $this->helper->parseParameterArray( $propertyArray, 'PropertyId' );
+        $qualifiersList = $statement->getQualifiers();
+        $qualifiers = array();
+
+        foreach( $qualifiersList as $qualifier ) {
+            $qualifiers[$qualifier->getPropertyId()->getSerialization()] = true;
+        }
+
+        $message = '';
+        $status = 'compliance';
+
+        foreach( $propertyArray as $property ) {
+            if( !array_key_exists( $property, $qualifiers ) ) {
+                $message = 'The properties defined in the parameters have to be used as qualifiers on this statement.';
+                $status = 'violation';
+                break;
+            }
+        }
+
+        return new CheckResult( $propertyId, $dataValue, 'Mandatory Qualifiers', $parameters, $status, $message );
+    }
 }

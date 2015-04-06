@@ -103,7 +103,7 @@ class SpecialWikidataConstraintReport extends SpecialWikidataQualityPage {
                 $out->addHTML(
                     Html::openElement( 'p' )
                     . $this->msg( 'wikidataquality-constraint-result-entity-not-existent' )->text()
-                    . ' (' . $_POST['entityID'] . ')'
+                    . ' (' . $entityToCheck . ')'
                     . Html::closeElement( 'p' )
                 );
                 return;

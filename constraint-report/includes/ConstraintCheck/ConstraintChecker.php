@@ -224,6 +224,9 @@ class ConstraintChecker {
                 return $this->getQualifierChecker()
                     ->checkQualifiersConstraint( $propertyId, $dataValue, $statement, $propertyArray );
                 break;
+            case "Mandatory qalifiers":
+                return $this->getQualifierChecker()
+                    ->checkMandatoryQualifiersConstraint( $propertyId, $dataValue, $statement, $propertyArray );
 
             // RangeCheckers
             case "Range":
@@ -326,7 +329,7 @@ class ConstraintChecker {
      */
     private function getQualifierChecker() {
         if( !isset( $this->qualifierChecker ) ) {
-            $this->qualifierChecker = new QualifierChecker( $this->statements, $this->helper );
+            $this->qualifierChecker = new QualifierChecker( $this->helper );
         }
         return $this->qualifierChecker;
     }
